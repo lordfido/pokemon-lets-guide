@@ -42,28 +42,16 @@ export const setInstallationData = () => {
 
 export interface InstallationData {
   installationId: string;
-  token?: string;
-  p256dh?: string;
-  auth?: string;
 }
 
 /**
  * Get installation data:
  * - Installation id
- * - Push subscription token
- * - Push subscription keys
  */
 export const getInstallationData = () => {
   const data: InstallationData = {
     installationId: getInstallationId(),
   };
-
-  const subscription = getPushSubscription();
-  if (typeof subscription !== 'undefined') {
-    data.token = subscription.endpoint;
-    data.p256dh = subscription.keys.p256dh;
-    data.auth = subscription.keys.auth;
-  }
 
   return data;
 };

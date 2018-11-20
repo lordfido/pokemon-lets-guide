@@ -1,5 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import * as TextArea from 'react-textarea-autosize';
+
 import { FieldProps } from './field';
 
 interface Options extends FieldProps {

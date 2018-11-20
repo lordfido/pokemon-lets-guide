@@ -33,19 +33,3 @@ export interface PersistedForm {
   picture?: FormPicture;
   errors: Array<any>;
 }
-
-export interface FormState {
-  [index: string]: any;
-  register: PersistedForm;
-  login: PersistedForm;
-  resetPassword: PersistedForm;
-  account: PersistedForm;
-  resetEmail: PersistedForm;
-  contact: PersistedForm;
-  feedback: PersistedForm;
-  newCompany: PersistedForm;
-  companySettings: PersistedForm;
-  userNotifications: PersistedForm;
-  newRole: PersistedForm;
-  role: PersistedForm;
-}
