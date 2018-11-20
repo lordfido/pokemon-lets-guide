@@ -1,0 +1,9 @@
+.Header {
+  $header-height: 56px;
+
+  color: #000;
+  // color: blue;
+  height: $header-height;
+  width: 100%;
+  z-index: 200;
+}

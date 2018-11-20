@@ -1,0 +1,62 @@
+.Switch {
+  color: #666;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  margin-top: 10px;
+  padding: 5px;
+  width: calc(100% - 10px);
+
+  &-field {
+    display: none;
+  }
+
+  &-switch {
+    background-color: #ccc;
+    border-radius: $border-radius;
+    border: 1px solid transparent;
+    display: inline-block;
+    height: 16px;
+    margin-top: -2px;
+    padding: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 28px;
+
+    &:after {
+      background-color: white;
+      border-radius: $border-radius;
+      border-bottom: 1px solid $brand-color;
+      content: ' ';
+      display: inline-block;
+      height: 11px;
+      left: 1px;
+      position: absolute;
+      top: 1px;
+      width: 12px;
+
+      transition: background-color 0.2s, border-color 0.2s, left 0.2s;
+    }
+
+    &.is-on::after {
+      background-color: $brand-color;
+      border-bottom-color: darken($brand-color, 20);
+      left: 13px;
+    }
+  }
+
+  &-field:disabled + &-label {
+    cursor: not-allowed;
+
+    .Switch-switch {
+      background-color: white;
+      border-color: #ccc;
+    }
+
+    .Switch-switch::after,
+    .Switch-switch.is-on::after {
+      background-color: #ccc;
+      border-color: #ccc;
+    }
+  }
+}

@@ -1,0 +1,144 @@
+.Buttons {
+  font-size: 16px;
+  margin: 10px 5px;
+  text-align: right;
+  width: calc(100% - 10px);
+
+  &.is-left {
+    text-align: left;
+  }
+
+  &.is-center {
+    text-align: center;
+  }
+
+  .Button {
+    border-radius: 0;
+    margin: 5px 0;
+
+    &:first-of-type {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+
+    &.is-individual {
+      border-radius: $border-radius;
+      margin: 5px;
+    }
+  }
+}
+
+.Button {
+  background-color: lightgrey;
+  border-radius: $border-radius;
+  border: none;
+  border-bottom: 1px solid $brand-color;
+  border-top: 1px solid transparent;
+  color: black;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.3em;
+  margin: 5px;
+  max-width: calc(100% - 10px);
+  overflow: hidden;
+  padding: 5px 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: background-color 0.3s, border 0.3s, width 0.3s;
+
+  &:active,
+  &.is-active {
+    border-bottom-width: 0px;
+    padding-bottom: 6px;
+  }
+
+  .Loading {
+    margin: 0 auto;
+    width: auto;
+  }
+
+  // Colors
+  &--primary {
+    background-color: $brand-color;
+    border-bottom-color: darken($brand-color, 20);
+    color: white;
+  }
+
+  &--success {
+    background-color: $success;
+    border-bottom-color: darken($success, 20);
+    color: white;
+  }
+
+  &--warning {
+    background-color: $warning;
+    border-bottom-color: darken($warning, 20);
+    color: white;
+  }
+
+  &--danger {
+    background-color: $danger;
+    border-bottom-color: darken($danger, 20);
+    color: white;
+  }
+
+  // Shapes
+  &--link {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    color: $brand-color;
+    cursor: pointer;
+  }
+
+  &--link.Button--success {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    color: $success;
+    cursor: pointer;
+  }
+
+  &--link.Button--warning {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    color: $warning;
+    cursor: pointer;
+  }
+
+  &--link.Button--danger {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    color: $danger;
+    cursor: pointer;
+  }
+
+  // Sizes
+  &--icon,
+  &--icon > * {
+    min-width: 36px;
+    overflow: initial;
+    text-overflow: initial;
+    white-space: normal;
+  }
+
+  &--large {
+    padding: 15px 25px;
+    font-size: 22px;
+  }
+
+  // Statuses
+  &:disabled,
+  &.is-disabled {
+    background-color: lightgray !important;
+    border-bottom-color: darkgray !important;
+    color: gray !important;
+    cursor: not-allowed !important;
+  }
+}

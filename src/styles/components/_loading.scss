@@ -1,0 +1,91 @@
+.Loading {
+  $size: 48px;
+
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 20px auto;
+  text-align: center;
+
+  &-spinner {
+    display: inline-block;
+    width: $size;
+    height: $size;
+  }
+
+  &-spinner:after {
+    content: ' ';
+    display: block;
+    width: $size - ($size / 4);
+    height: $size - ($size / 4);
+    margin: 1px;
+    border-radius: 50%;
+    border: #{$size/16} solid $brand-color;
+    border-color: $brand-color transparent $brand-color transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &--xs &-spinner {
+    height: $size / 4;
+    width: $size / 4;
+
+    &:after {
+      border-width: #{$size / 16 / 2};
+      height: #{($size - ($size / 4)) / 4};
+      width: #{($size - ($size / 4)) / 4};
+    }
+  }
+
+  &--sm &-spinner {
+    height: $size / 2;
+    width: $size / 2;
+
+    &:after {
+      border-width: #{$size / 16 / 1.5};
+      height: #{($size - ($size / 4)) / 2};
+      width: #{($size - ($size / 4)) / 2};
+    }
+  }
+
+  &--md &-spinner {
+    height: $size;
+    width: $size;
+
+    &:after {
+      border-width: #{$size / 16};
+      height: #{($size - ($size / 4))};
+      width: #{($size - ($size / 4))};
+    }
+  }
+
+  &--lg &-spinner {
+    height: $size * 2;
+    width: $size * 2;
+
+    &:after {
+      border-width: #{$size / 16 * 2};
+      height: #{($size - ($size / 4)) * 2};
+      width: #{($size - ($size / 4)) * 2};
+    }
+  }
+
+  &--xl &-spinner {
+    height: $size * 4;
+    width: $size * 4;
+
+    &:after {
+      border-width: #{$size / 16 * 3};
+      height: #{($size - ($size / 4)) * 3};
+      width: #{($size - ($size / 4)) * 3};
+    }
+  }
+}

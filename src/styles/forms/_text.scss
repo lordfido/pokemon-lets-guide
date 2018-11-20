@@ -1,0 +1,74 @@
+.Text {
+  color: #666;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  margin-top: 10px;
+  width: calc(100% - 10px);
+
+  &-label,
+  &-field,
+  &-error {
+    display: block;
+    width: 100%;
+  }
+
+  &-field {
+    background-color: white;
+    border-radius: $border-radius;
+    border: none;
+    border-bottom: 1px solid $brand-color;
+    border-top: 1px solid transparent;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.3em;
+    padding: 5px 10px;
+
+    user-select: initial;
+    -webkit-touch-callout: initial;
+    -webkit-user-select: initial;
+    -khtml-user-select: initial;
+    -moz-user-select: initial;
+    -ms-user-select: initial;
+
+    // Statuses
+    &:disabled,
+    &.disabled {
+      background-color: $disabled-background !important;
+      border-bottom-color: darkgray !important;
+      color: $disabled-color !important;
+      cursor: not-allowed !important;
+    }
+  }
+
+  &-field.is-area {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  &-error {
+    display: none;
+  }
+
+  &.is-submitted &-field.ng-invalid,
+  &.is-submitted &-field.has-errors,
+  &-field.ng-dirty.ng-invalid,
+  &-field.ng-dirty.has-errors {
+    border: 1px solid $red;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: $red;
+    border-bottom: 0;
+
+    & + .Text-error {
+      background: rgba($red, 0.1);
+      border: 1px solid $red;
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      border-top: 0;
+      color: $red;
+      display: block;
+      padding: 5px 10px;
+    }
+  }
+}
