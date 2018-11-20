@@ -1,19 +1,19 @@
-import { Pokemon } from '../../app/modules/pokemon/pokemon.types';
+import { Pokemon } from '../../app/modules/pokemon-list/pokemon-list.types';
 
 const initialPokemon: Array<Pokemon> = [
   {
-    id: 150,
-    name: 'Mewtwo',
+    id: 151,
+    name: 'Mew',
     avatar: '',
     types: ['psychic'],
 
     stats: {
-      attack: 110,
-      spAttack: 154,
-      defense: 90,
-      spDefense: 90,
-      hp: 106,
-      speed: 130,
+      attack: 100,
+      spAttack: 100,
+      defense: 100,
+      spDefense: 100,
+      hp: 100,
+      speed: 100,
     },
   },
   {
@@ -44,21 +44,6 @@ const initialPokemon: Array<Pokemon> = [
       spDefense: 85,
       hp: 90,
       speed: 55,
-    },
-  },
-  {
-    id: 99,
-    name: 'Kingler',
-    avatar: '',
-    types: ['water'],
-
-    stats: {
-      attack: 130,
-      spAttack: 50,
-      defense: 115,
-      spDefense: 50,
-      hp: 55,
-      speed: 75,
     },
   },
   {
@@ -134,6 +119,21 @@ const initialPokemon: Array<Pokemon> = [
       spDefense: 75,
       hp: 95,
       speed: 55,
+    },
+  },
+  {
+    id: 131,
+    name: 'Lapras',
+    avatar: '',
+    types: ['water', 'ice'],
+
+    stats: {
+      attack: 85,
+      spAttack: 85,
+      defense: 80,
+      spDefense: 95,
+      hp: 130,
+      speed: 60,
     },
   },
 ];

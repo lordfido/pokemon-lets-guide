@@ -2,7 +2,7 @@ import { combineReducers, Reducer } from 'redux';
 import { RootState } from './root.types';
 
 // Import reducers
-import pokemonReducer from './modules/pokemon/pokemon.reducer';
+import pokemonReducer from './modules/pokemon-list/pokemon-list.reducer';
 
 // Declare root reducer
 const rootReducer: Reducer<RootState> = combineReducers({

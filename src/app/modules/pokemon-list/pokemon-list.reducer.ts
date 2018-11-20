@@ -1,8 +1,8 @@
 import { AnyAction } from 'redux';
 
-import { PokemonState } from './pokemon.types';
+import { PokemonListState } from './pokemon-list.types';
 
-const initialState: PokemonState = {
+const initialState: PokemonListState = {
   collection: [],
 };
 

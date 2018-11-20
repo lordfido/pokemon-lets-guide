@@ -1,6 +1,6 @@
 import initialPokemon from '../../../common/apis/mocks';
 
-import { createPokemonFromServer } from './pokemon.models';
+import { createPokemonFromServer } from './pokemon-list.models';
 
 import { ActionCreator } from '../../../definitions/action-creator';
 

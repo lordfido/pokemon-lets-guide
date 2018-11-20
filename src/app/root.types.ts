@@ -1,4 +1,4 @@
-import { PokemonState } from './modules/pokemon/pokemon.types';
+import { PokemonListState } from './modules/pokemon-list/pokemon-list.types';
 
 export interface DefaultAction {
   type: string;
@@ -6,5 +6,5 @@ export interface DefaultAction {
 }
 
 export interface RootState {
-  pokemon: PokemonState;
+  pokemon: PokemonListState;
 }

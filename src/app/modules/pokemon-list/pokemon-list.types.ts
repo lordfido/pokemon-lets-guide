@@ -19,6 +19,6 @@ export interface Pokemon {
   stats: PokemonStats;
 }
 
-export interface PokemonState {
+export interface PokemonListState {
   collection: Array<Pokemon>;
 }

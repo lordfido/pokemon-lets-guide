@@ -9,7 +9,7 @@ import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
 import AppView from './app-view';
-import PokemonListWrapper from './modules/pokemon/pokemon-list-wrapper';
+import PokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
 
 import { RootState } from './root.types';
 import { setLastSession, setStore } from '../common/utils/idb';
