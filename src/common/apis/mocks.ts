@@ -2,7 +2,7 @@ import { Pokemon } from '../../app/modules/pokemon/pokemon.types';
 
 const initialPokemon: Array<Pokemon> = [
   {
-    id: 1,
+    id: 150,
     name: 'Mewtwo',
     avatar: '',
     types: ['psychic'],
@@ -17,7 +17,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 2,
+    id: 149,
     name: 'Dragonite',
     avatar: '',
     types: ['dragon', 'flying'],
@@ -32,7 +32,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 3,
+    id: 68,
     name: 'Machamp',
     avatar: '',
     types: ['fighting'],
@@ -47,7 +47,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 4,
+    id: 99,
     name: 'Kingler',
     avatar: '',
     types: ['water'],
@@ -62,7 +62,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 5,
+    id: 112,
     name: 'Rhydon',
     avatar: '',
     types: ['rock', 'ground'],
@@ -77,7 +77,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 6,
+    id: 130,
     name: 'Gyarados',
     avatar: '',
     types: ['water', 'flying'],
@@ -92,7 +92,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 7,
+    id: 94,
     name: 'Gengar',
     avatar: '',
     types: ['ghost', 'poison'],
@@ -107,7 +107,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 8,
+    id: 59,
     name: 'Arcanine',
     avatar: '',
     types: ['fire'],
@@ -122,7 +122,7 @@ const initialPokemon: Array<Pokemon> = [
     },
   },
   {
-    id: 9,
+    id: 103,
     name: 'Exeggutor',
     avatar: '',
     types: ['grass', 'psychic'],

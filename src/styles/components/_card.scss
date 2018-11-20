@@ -1,15 +1,18 @@
+.CardsWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+  margin: 10px;
+}
+
 .Card {
   background-color: #fff;
   border-radius: $border-radius;
   display: inline-block;
-  margin: 5px;
   padding: 10px;
-  text-align: left;
-  width: calc(100% - 10px);
+  text-align: center;
 
   @media screen and (min-width: 720px) {
-    margin: 10px;
     padding: 20px;
-    width: calc(100% - 20px);
   }
 }

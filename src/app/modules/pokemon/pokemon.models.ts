@@ -1,5 +1,6 @@
 import { Pokemon } from './pokemon.types';
 import { getPokemonType } from '../../../constants/pokemon-types';
+import { sortBy } from '../../utils/arrays';
 
 const getStatRatio = (value: number): number => value / 300;
 
@@ -24,4 +25,5 @@ export const createPokemonFromServer = (collection: Array<any>): Array<Pokemon> 
         spDefense: getStatRatio(pokemon.stats.spDefense) || 0,
         spAttack: getStatRatio(pokemon.stats.spAttack) || 0,
       },
-    }));
+    }))
+    .sort(sortBy('id', 'asc'));

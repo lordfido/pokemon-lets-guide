@@ -27,7 +27,7 @@ class PokemonListView extends React.Component<OwnProps> {
 
     return (
       <div className="PokemonList">
-        <ul>
+        <ul className="CardsWrapper">
           {collection.map(pokemon => {
             const chartData = [
               {
@@ -39,9 +39,11 @@ class PokemonListView extends React.Component<OwnProps> {
             ];
 
             return (
-              <li key={pokemon.id}>
-                <p>{pokemon.name}</p>
-                <RadarChart captions={chartLegend} data={chartData} size={250} />
+              <li key={pokemon.id} className="Card">
+                <p>
+                  #{pokemon.id} {pokemon.name}
+                </p>
+                <RadarChart captions={chartLegend} data={chartData} size={260} />
               </li>
             );
           })}
