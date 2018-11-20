@@ -9,7 +9,7 @@ import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
 import AppView from './app-view';
-import LandingWrapper from './modules/landing/landing-wrapper';
+import PokemonListWrapper from './modules/pokemon/pokemon-list-wrapper';
 
 import { RootState } from './root.types';
 import { setLastSession, setStore } from '../common/utils/idb';
@@ -96,7 +96,7 @@ class AppWrapper extends React.Component<Props> {
     return (
       <AppView>
         <Switch>
-          <Route path={routes.HOME} component={LandingWrapper} />
+          <Route path={routes.HOME} component={PokemonListWrapper} />
         </Switch>
       </AppView>
     );
