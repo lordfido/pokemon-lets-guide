@@ -1,0 +1,22 @@
+.Table {
+  &,
+  &-head,
+  &-body {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  &-tr {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  &-th,
+  &-td {
+    display: inline-block;
+    margin: 0;
+    text-align: left;
+  }
+}

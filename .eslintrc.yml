@@ -1,0 +1,68 @@
+root: true
+parser: babel-eslint
+extends: ['prettier', 'plugin:react/recommended']
+settings:
+  react:
+    version: '16.4.1'
+env:
+  browser: false
+globals:
+  window: false
+  document: false
+  navigator: false
+plugins:
+    - import
+    - react
+    - class-property
+rules:
+  import/no-named-default: error
+  import/no-useless-path-segments: error
+  import/no-self-import: error
+  import/no-cycle: error
+
+  class-property/class-property-semicolon: error
+
+  react/display-name: error
+  react/no-unused-prop-types: error
+  react/no-did-update-set-state: error
+  # TODO 2: Enable this rule
+  react/prop-types: [off, {ignore: [children]}]
+  # TODO 1: Enable this rule
+  react/no-deprecated: off
+
+  no-param-reassign: error
+  no-console: error
+  no-unused-vars: error
+  no-restricted-imports: [
+    error,
+    {
+      patterns: [
+        # disable custom form fields imports (use Field component)
+        '**/forms/form-checkbox*',
+        '**/forms/form-date*',
+        '**/forms/form-dropdown*',
+        '**/forms/form-picture*',
+        '**/forms/form-switch*',
+        '**/forms/form-text*',
+      ]
+    }
+  ]
+
+  valid-jsdoc: [error, {
+    prefer: {
+      arg: param,
+      argument: param,
+      return: returns,
+    },
+    preferType: {
+      Boolean: boolean,
+      Number: number,
+      String: string,
+      object: Object,
+    },
+    requireReturn: false,
+    requireReturnType: false,
+    requireReturnDescription: false,
+    matchDescription: .*,
+    requireParamDescription: false
+  }]
