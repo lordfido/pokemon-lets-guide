@@ -382,7 +382,7 @@ const initialPokemon: Array<Pokemon> = [
       'Apparently, it appears only to those people who are pure of heart and have a strong desire to see it.',
   },
   {
-    id: 891,
+    id: 808,
     name: 'Meltan',
     description: '',
     avatar: '',
@@ -400,7 +400,7 @@ const initialPokemon: Array<Pokemon> = [
     pokedexEntry: '',
   },
   {
-    id: 892,
+    id: 809,
     name: 'Melmetal',
     description: '',
     avatar: '',
