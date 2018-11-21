@@ -4,6 +4,7 @@ const initialPokemon: Array<Pokemon> = [
   {
     id: 25,
     name: 'Pikachu',
+    description: '',
     avatar: '',
     types: ['electric'],
 
@@ -15,10 +16,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 35,
       speed: 90,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 26,
     name: 'Raichu',
+    description: '',
     avatar: '',
     types: ['electric'],
 
@@ -30,10 +34,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 60,
       speed: 110,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 58,
     name: 'Growlithe',
+    description: '',
     avatar: '',
     types: ['fire'],
 
@@ -45,10 +52,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 55,
       speed: 60,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 59,
     name: 'Arcanine',
+    description: '',
     avatar: '',
     types: ['fire'],
 
@@ -60,10 +70,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 90,
       speed: 95,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 66,
     name: 'Machop',
+    description: '',
     avatar: '',
     types: ['fighting'],
 
@@ -75,10 +88,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 70,
       speed: 35,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 67,
     name: 'Machoke',
+    description: '',
     avatar: '',
     types: ['fighting'],
 
@@ -90,10 +106,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 80,
       speed: 45,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 68,
     name: 'Machamp',
+    description: '',
     avatar: '',
     types: ['fighting'],
 
@@ -105,10 +124,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 90,
       speed: 55,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 92,
     name: 'Gastly',
+    description: '',
     avatar: '',
     types: ['ghost', 'poison'],
 
@@ -120,10 +142,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 30,
       speed: 80,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 93,
     name: 'Haunter',
+    description: 'Funny ghost',
     avatar: '',
     types: ['ghost', 'poison'],
 
@@ -135,10 +160,14 @@ const initialPokemon: Array<Pokemon> = [
       hp: 45,
       speed: 95,
     },
+
+    pokedexEntry:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: 94,
     name: 'Gengar',
+    description: '',
     avatar: '',
     types: ['ghost', 'poison'],
 
@@ -150,10 +179,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 60,
       speed: 110,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 102,
     name: 'Exeggcute',
+    description: '',
     avatar: '',
     types: ['grass', 'psychic'],
 
@@ -165,10 +197,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 60,
       speed: 40,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 103,
     name: 'Exeggutor',
+    description: '',
     avatar: '',
     types: ['grass', 'psychic'],
 
@@ -180,10 +215,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 95,
       speed: 55,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 111,
     name: 'Rhyhorn',
+    description: '',
     avatar: '',
     types: ['rock', 'ground'],
 
@@ -195,10 +233,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 80,
       speed: 25,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 112,
     name: 'Rhydon',
+    description: '',
     avatar: '',
     types: ['rock', 'ground'],
 
@@ -210,10 +251,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 105,
       speed: 40,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 129,
     name: 'Magikarp',
+    description: '',
     avatar: '',
     types: ['water'],
 
@@ -225,10 +269,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 20,
       speed: 80,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 130,
     name: 'Gyarados',
+    description: '',
     avatar: '',
     types: ['water', 'flying'],
 
@@ -240,10 +287,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 95,
       speed: 81,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 131,
     name: 'Lapras',
+    description: '',
     avatar: '',
     types: ['water', 'ice'],
 
@@ -255,10 +305,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 130,
       speed: 60,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 147,
     name: 'Dratini',
+    description: '',
     avatar: '',
     types: ['dragon'],
 
@@ -270,10 +323,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 41,
       speed: 50,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 148,
     name: 'Dragonair',
+    description: '',
     avatar: '',
     types: ['dragon'],
 
@@ -285,10 +341,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 61,
       speed: 70,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 149,
     name: 'Dragonite',
+    description: '',
     avatar: '',
     types: ['dragon', 'flying'],
 
@@ -300,10 +359,13 @@ const initialPokemon: Array<Pokemon> = [
       hp: 91,
       speed: 80,
     },
+
+    pokedexEntry: '',
   },
   {
     id: 151,
     name: 'Mew',
+    description: '',
     avatar: '',
     types: ['psychic'],
 
@@ -315,6 +377,45 @@ const initialPokemon: Array<Pokemon> = [
       hp: 100,
       speed: 100,
     },
+
+    pokedexEntry:
+      'Apparently, it appears only to those people who are pure of heart and have a strong desire to see it.',
+  },
+  {
+    id: 891,
+    name: 'Meltan',
+    description: '',
+    avatar: '',
+    types: ['steel'],
+
+    stats: {
+      attack: 65,
+      spAttack: 55,
+      defense: 65,
+      spDefense: 35,
+      hp: 46,
+      speed: 34,
+    },
+
+    pokedexEntry: '',
+  },
+  {
+    id: 892,
+    name: 'Melmetal',
+    description: '',
+    avatar: '',
+    types: ['steel'],
+
+    stats: {
+      attack: 143,
+      spAttack: 80,
+      defense: 143,
+      spDefense: 65,
+      hp: 135,
+      speed: 34,
+    },
+
+    pokedexEntry: '',
   },
 ];
 

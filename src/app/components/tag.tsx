@@ -1,41 +1,31 @@
 import * as React from 'react';
 import classnames from 'classnames';
 
-import TouchableContent from './touchable-content';
-
 export interface TagProps {
-  id: string;
-  className?: string;
-  label?: string;
-  icon?: string | React.ReactElement<{}>;
-  iconLast?: boolean;
-}
-
-interface OwnProps {
-  options: TagProps;
+  label: string;
+  icon?: string;
   backgroundColor: string;
-  color?: string;
+  className?: string;
 }
 
-class Tag extends React.Component<OwnProps> {
+class Tag extends React.Component<TagProps> {
   static displayName = 'Tag';
 
   render() {
-    const { options, backgroundColor, color = 'white' } = this.props;
+    const { className, label, icon, backgroundColor } = this.props;
 
     const classes = {
-      wrapper: classnames('Tag', options.className),
-    };
-
-    const touchable = {
-      label: options.label,
-      icon: options.icon,
-      iconLast: options.iconLast,
+      wrapper: classnames('Tag', className),
+      icon: 'Tag-icon',
+      label: 'Tag-label',
     };
 
     return (
-      <span className={classes.wrapper} style={{ backgroundColor, color }}>
-        <TouchableContent options={touchable} />
+      <span className={classes.wrapper}>
+        {icon && <img className={classes.icon} src={icon} />}
+        <span className={classes.label} style={{ backgroundColor }}>
+          {label}
+        </span>
       </span>
     );
   }

@@ -12,13 +12,22 @@ export interface PokemonStats {
 export interface Pokemon {
   id: number;
   name: string;
-  avatar: string;
-  description?: string;
   types: Array<PokemonType>;
+  description?: string;
+
+  avatar: string;
 
   stats: PokemonStats;
+  suggested?: Array<PokemonStats>;
+
+  pokedexEntry: string;
 }
 
 export interface PokemonListState {
   collection: Array<Pokemon>;
+}
+
+export interface PokemonPagination {
+  next: Pokemon;
+  prev: Pokemon;
 }

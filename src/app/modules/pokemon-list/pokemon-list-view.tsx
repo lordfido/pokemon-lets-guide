@@ -1,6 +1,5 @@
 import * as React from 'react';
-// @ts-ignore
-import RadarChart from 'react-svg-radar-chart';
+import { Link } from 'react-router-dom';
 import { capitalize } from '../../utils/strings';
 
 import Tag from '../../components/tag';
@@ -9,50 +8,34 @@ import Card from '../../components/card';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 
 import { Pokemon } from './pokemon-list.types';
-
-const chartLegend = {
-  // columns
-  hp: 'HP',
-  attack: 'Attack',
-  defense: 'Defense',
-  speed: 'Speed',
-  spDefense: 'Sp Defense',
-  spAttack: 'Sp Attack',
-};
+import { POKEMON } from '../../../constants/appRoutes';
+import { getTypeIcon } from '../../../constants/pokemon-types';
+import PokemonDetailsView from '../pokemon-details/pokemon-details-view';
 
 interface PokemonListItemProps {
   pokemon: Pokemon;
 }
 
-const PokemonListItem = ({ pokemon }: PokemonListItemProps) => {
-  const chartData = [
-    {
-      data: pokemon.stats,
-      meta: {
-        color: getTypeColor(pokemon.types[0]),
-      },
-    },
-  ];
-
-  return (
-    <Card title={`#${pokemon.id} ${pokemon.name}`} image={pokemon.avatar}>
-      <p>
+const PokemonListItem = ({ pokemon }: PokemonListItemProps) => (
+  <Link
+    to={{
+      pathname: `${POKEMON.replace(':id', String(pokemon.id))}`,
+    }}
+  >
+    <Card title={pokemon.name} image={pokemon.avatar} className="PokemonList-item">
+      <div className="PokemonList-types TagsWrapper">
         {pokemon.types.map(type => (
           <Tag
             key={type}
-            options={{
-              id: type,
-              label: capitalize(type),
-            }}
+            label={capitalize(type)}
+            icon={pokemon.types.length === 1 ? getTypeIcon(type) : undefined}
             backgroundColor={getTypeColor(type)}
           />
         ))}
-      </p>
-
-      <RadarChart captions={chartLegend} data={chartData} size={260} />
+      </div>
     </Card>
-  );
-};
+  </Link>
+);
 
 type OwnProps = {
   collection: Array<Pokemon>;

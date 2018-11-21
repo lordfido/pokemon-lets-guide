@@ -37,7 +37,7 @@ export const ROCK: PokemonType = 'rock';
 export const STEEL: PokemonType = 'steel';
 export const WATER: PokemonType = 'water';
 
-export const getPokemonType = (pokemonType: string): PokemonType | void => {
+export const getType = (pokemonType: string): PokemonType | void => {
   const types = [
     BUG,
     DARK,
@@ -61,3 +61,26 @@ export const getPokemonType = (pokemonType: string): PokemonType | void => {
 
   return types.find(type => type === String(pokemonType).toLowerCase());
 };
+
+const typeIcons = {
+  [BUG]: require('../assets/images/type-icons/bug.png'),
+  [DARK]: require('../assets/images/type-icons/dark.png'),
+  [DRAGON]: require('../assets/images/type-icons/dragon.png'),
+  [ELECTRIC]: require('../assets/images/type-icons/electric.png'),
+  [FAIRY]: require('../assets/images/type-icons/fairy.png'),
+  [FIGHTING]: require('../assets/images/type-icons/fighting.png'),
+  [FIRE]: require('../assets/images/type-icons/fire.png'),
+  [FLYING]: require('../assets/images/type-icons/flying.png'),
+  [GRASS]: require('../assets/images/type-icons/grass.png'),
+  [GHOST]: require('../assets/images/type-icons/ghost.png'),
+  [GROUND]: require('../assets/images/type-icons/ground.png'),
+  [ICE]: require('../assets/images/type-icons/ice.png'),
+  [NORMAL]: require('../assets/images/type-icons/normal.png'),
+  [POISON]: require('../assets/images/type-icons/poison.png'),
+  [PSYCHIC]: require('../assets/images/type-icons/psychic.png'),
+  [ROCK]: require('../assets/images/type-icons/rock.png'),
+  [STEEL]: require('../assets/images/type-icons/steel.png'),
+  [WATER]: require('../assets/images/type-icons/water.png'),
+};
+
+export const getTypeIcon = (pokemonType: PokemonType): string => typeIcons[pokemonType];

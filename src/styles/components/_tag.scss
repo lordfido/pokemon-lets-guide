@@ -1,6 +1,48 @@
+.TagsWrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+
 .Tag {
-  border-radius: $border-radius;
-  font-size: 14px;
-  margin: 0 5px;
-  padding: 4px 8px;
+  color: $white;
+  display: inline-block;
+  flex-grow: 1;
+  font-size: 12px;
+  letter-spacing: -0.6px;
+  margin-left: 4px;
+  position: relative;
+  text-transform: uppercase;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &-icon,
+  &-label {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+  }
+
+  &-icon {
+    height: 24px;
+    width: 24px;
+    z-index: 2;
+  }
+
+  &-label {
+    border-radius: $border-radius;
+    height: 22px;
+    line-height: 16px;
+    padding: 3px 6px;
+    z-index: 1;
+  }
+
+  &-icon + &-label {
+    height: 16px;
+    margin-left: -6px;
+    padding: 0px 4px;
+    padding-left: 8px;
+  }
 }

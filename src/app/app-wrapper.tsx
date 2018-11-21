@@ -2,17 +2,20 @@ import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
+import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
 import registerServiceWorker from './utils/service-worker';
+
+import AppView from './app-view';
+import pokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
+import pokemonDetailsWrapper from './modules/pokemon-details/pokemon-details-wrapper';
+
+import { getPokemon } from './modules/pokemon-list/pokemon-list.actions';
 
 import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
-import AppView from './app-view';
-import PokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
-
 import { RootState } from './root.types';
-import { setLastSession, setStore } from '../common/utils/idb';
 
 const packageJson = require('../../package.json');
 const appVersion = packageJson.version;
@@ -34,7 +37,11 @@ interface StateProps {
   store: CustomStore;
 }
 
-type Props = OwnProps & RouteProps & StateProps;
+type DispatchProps = {
+  getPokemon: () => void;
+};
+
+type Props = OwnProps & RouteProps & StateProps & DispatchProps;
 
 class AppWrapper extends React.Component<Props> {
   static displayName = 'AppWrapper';
@@ -42,7 +49,7 @@ class AppWrapper extends React.Component<Props> {
   state = {};
 
   componentDidMount() {
-    const { lastRoute, history } = this.props;
+    const { getPokemon, lastRoute, history } = this.props;
 
     if (restoreLastRoute && lastRoute) {
       history.push({
@@ -56,12 +63,15 @@ class AppWrapper extends React.Component<Props> {
 
     // Init the service worker
     registerServiceWorker(history);
+
+    // Get pokedex
+    getPokemon();
   }
 
   componentDidUpdate(prevProps: Props) {
     const { location } = this.props;
 
-    this.persistStore();
+    // this.persistStore();
 
     // On URL change, update lastSession.route
     if (prevProps.location.pathname !== location.pathname) {
@@ -96,7 +106,8 @@ class AppWrapper extends React.Component<Props> {
     return (
       <AppView>
         <Switch>
-          <Route path={routes.HOME} component={PokemonListWrapper} />
+          <Route exact path={routes.POKEMON} component={pokemonDetailsWrapper} />
+          <Route exact path={routes.HOME} component={pokemonListWrapper} />
         </Switch>
       </AppView>
     );
@@ -111,6 +122,15 @@ const mapStateToProps = (state: RootState): StateProps => {
   };
 };
 
-const connectedApp = withRouter(connect(mapStateToProps)(AppWrapper));
+const mapDispatchToProps = {
+  getPokemon,
+};
+
+const connectedApp = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AppWrapper)
+);
 
 export default hot(module)(connectedApp);

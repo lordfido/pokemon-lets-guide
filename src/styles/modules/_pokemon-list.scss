@@ -1,0 +1,15 @@
+.PokemonList {
+  &-item {
+    opacity: 0.7;
+
+    &:active,
+    &:focus,
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-types {
+    margin-top: 10px;
+  }
+}

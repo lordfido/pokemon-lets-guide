@@ -1,13 +1,10 @@
 .CardsWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   grid-gap: 10px;
-  margin: 10px;
-  max-width: 1880px;
-
-  @media screen and (min-width: 1920px) {
-    margin: 10px auto;
-  }
+  margin: 0 auto;
+  max-width: 1920px;
+  padding: 10px;
 }
 
 .Card {
@@ -24,5 +21,9 @@
   &-image {
     display: block;
     margin: 0 auto;
+    margin-top: 10px;
+    max-width: 100%;
+    min-height: 100px;
+    min-width: 100px;
   }
 }
