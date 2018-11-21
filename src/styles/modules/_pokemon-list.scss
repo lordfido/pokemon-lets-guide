@@ -1,12 +1,15 @@
 .PokemonList {
   &-item {
     color: $dark;
+    height: 230px;
     opacity: 0.7;
+    transition: opacity 0.3s, transform 0.3s;
 
     &:active,
     &:focus,
     &:hover {
       opacity: 1;
+      transform: scale(1.04);
     }
   }
 

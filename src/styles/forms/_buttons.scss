@@ -34,20 +34,19 @@
 }
 
 .Button {
-  background-color: lightgrey;
-  border-radius: $border-radius;
-  border: none;
-  border-bottom: 1px solid $brand-color;
-  border-top: 1px solid transparent;
-  color: black;
+  background-color: $light-green;
+  border: 1px solid $white;
+  border-radius: $border-radius * 2 $border-radius $border-radius * 2 $border-radius;
+  color: $black;
+  cursor: pointer;
   display: inline-block;
   font-family: inherit;
   font-size: 14px;
   line-height: 1.3em;
-  margin: 5px;
+  padding: 5px 10px;
+  margin: 4px 2px;
   max-width: calc(100% - 10px);
   overflow: hidden;
-  padding: 5px 10px;
   text-align: center;
   text-overflow: ellipsis;
   vertical-align: middle;
@@ -63,13 +62,6 @@
   .Loading {
     margin: 0 auto;
     width: auto;
-  }
-
-  // Colors
-  &--primary {
-    background-color: $brand-color;
-    border-bottom-color: darken($brand-color, 20);
-    color: white;
   }
 
   &--success {

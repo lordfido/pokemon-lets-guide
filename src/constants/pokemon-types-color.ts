@@ -63,4 +63,4 @@ const colors: {
   [WATER]: '#5ea7da',
 };
 
-export const getTypeColor = (pokemonType: PokemonType): PokemonTypeColor => colors[pokemonType];
+export const getTypeColor = (pokemonType: PokemonType): PokemonTypeColor => colors[pokemonType] || colors[BUG];

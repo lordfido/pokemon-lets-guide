@@ -19,10 +19,10 @@
   }
 
   &-tab {
-    background-color: $disabled-background;
-    border: none;
-    border-bottom: 1px solid $brand-color;
-    border-top: 1px solid transparent;
+    background-color: $light-green;
+    border-top: 1px solid $white;
+    border-bottom: 1px solid $white;
+    color: $black;
     cursor: pointer;
     display: inline-block;
     font-family: inherit;
@@ -40,23 +40,19 @@
     &:hover,
     &:focus,
     &.is-active {
-      background-color: white;
-    }
-
-    &:active,
-    &.is-active {
-      border-bottom-width: 0px;
-      padding-bottom: 6px;
+      background-color: $yellow;
     }
 
     &:first-of-type {
-      border-top-left-radius: $border-radius;
+      border-left: 1px solid $white;
+      border-top-left-radius: $border-radius * 2;
       border-bottom-left-radius: $border-radius;
     }
 
     &:last-of-type {
+      border-right: 1px solid $white;
       border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius * 2;
     }
   }
 }

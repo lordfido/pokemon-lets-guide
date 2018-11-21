@@ -17,6 +17,8 @@ import { PokemonStats } from '../modules/pokemon-list/pokemon-list.types';
 
 export const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
 
+export const getStatAbsolute = (ratio: number, max: number = MAX_STAT_VALUE): number => ratio * max;
+
 export const filterUnknownTypes = (pokemonType: string): boolean => !!getType(pokemonType);
 
 export const getPaddedId = (pokemonId: number): string => {
