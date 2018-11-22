@@ -19,7 +19,7 @@ export const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): numbe
 
 export const getStatAbsolute = (ratio: number, max: number = MAX_STAT_VALUE): number => ratio * max;
 
-export const filterUnknownTypes = (pokemonType: string): boolean => !!getType(pokemonType);
+export const filterUnknownTypes = (pokemonType: string): boolean => !!pokemonType && !!getType(pokemonType);
 
 export const getPaddedId = (pokemonId: number): string => {
   let number = String(pokemonId);

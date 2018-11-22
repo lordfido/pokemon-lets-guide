@@ -59,7 +59,7 @@ export const getType = (pokemonType: string): PokemonType | void => {
     WATER,
   ];
 
-  return types.find(type => type === String(pokemonType).toLowerCase());
+  return types.find(type => type === String(pokemonType).toLowerCase()) || undefined;
 };
 
 const typeIcons = {

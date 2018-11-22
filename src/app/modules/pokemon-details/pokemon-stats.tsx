@@ -70,19 +70,18 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
           )}
 
           {viewMode === BARS && (
-            <div className="PokemonStats-stats">
+            <div className="PokemonStats-bars">
               {// @ts-ignore
               Object.keys(pokemon.stats).map((statId: StatId) => {
                 return (
                   <p className="PokemonStats-individual">
-                    {getStatName(statId)}:{' '}
+                    {getStatName(statId)}: {this.getStatAbsoluteValue(statId)}
                     <Line
                       percent={pokemon.stats[statId] * 100}
                       strokeColor={getTypeColor(pokemon.types[0])}
                       strokeWidth="4"
                       trailWidth="4"
                     />
-                    {/* this.getStatAbsoluteValue(statId) */}
                   </p>
                 );
               })}

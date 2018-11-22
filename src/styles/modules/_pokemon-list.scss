@@ -1,7 +1,7 @@
 .PokemonList {
   &-item {
     color: $dark;
-    height: 230px;
+    min-height: 230px;
     opacity: 0.7;
     transition: opacity 0.3s, transform 0.3s;
 
