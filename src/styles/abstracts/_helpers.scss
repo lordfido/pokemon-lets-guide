@@ -1,3 +1,7 @@
 .is-muted {
   color: $disabled-color !important;
 }
+
+.is-clickable {
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
+import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
 import { setLastSession, setStore } from '../common/utils/idb';
@@ -9,6 +10,7 @@ import registerServiceWorker from './utils/service-worker';
 import AppView from './app-view';
 import pokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
 import pokemonDetailsWrapper from './modules/pokemon-details/pokemon-details-wrapper';
+import searchWrapper from './modules/search/search-wrapper';
 
 import { getPokemon } from './modules/pokemon-list/pokemon-list.actions';
 
@@ -106,6 +108,7 @@ class AppWrapper extends React.Component<Props> {
     return (
       <AppView>
         <Switch>
+          <Route path={routes.SEARCH} component={searchWrapper} />
           <Route exact path={routes.POKEMON} component={pokemonDetailsWrapper} />
           <Route exact path={routes.HOME} component={pokemonListWrapper} />
         </Switch>
@@ -130,6 +133,7 @@ const connectedApp = withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
+    // @ts-ignore
   )(AppWrapper)
 );
 

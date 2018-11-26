@@ -28,7 +28,7 @@ class PokemonDetailsWrapper extends React.Component<Props> {
   render() {
     const { pokemon, pagination } = this.props;
 
-    if (!pokemon || !pokemon.stats) return null;
+    if (!pokemon) return null;
     return <PokemonDetailsView pokemon={pokemon} pagination={pagination} />;
   }
 }

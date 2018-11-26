@@ -39,10 +39,10 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
 
   getStatAbsoluteValue(statId: StatId) {
     const {
-      pokemon: { stats },
+      pokemon: { baseStats },
     } = this.props;
 
-    const statGrossValue = getStatAbsolute(stats[statId], INITIAL_MAX_STAT_VALUE);
+    const statGrossValue = getStatAbsolute(baseStats[statId], INITIAL_MAX_STAT_VALUE);
     const integerValue = parseInt(statGrossValue.toString(), 10);
 
     return integerValue;
@@ -54,8 +54,52 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     });
   }
 
-  render() {
+  getStatsTabs() {
+    return [
+      {
+        id: CHART,
+        label: 'Chart',
+        icon: 'search',
+        onClick: () => {
+          this.toggleViewMode(CHART);
+        },
+      },
+      {
+        id: BARS,
+        label: 'Bars',
+        onClick: () => {
+          this.toggleViewMode(BARS);
+        },
+      },
+    ];
+  }
+
+  renderChart() {
     const { pokemon } = this.props;
+
+    return <StatsChart stats={pokemon.relativeStats} color={getTypeColor(pokemon.types[0])} size={272} />;
+  }
+
+  renderBars() {
+    const { pokemon } = this.props;
+
+    // @ts-ignore
+    return Object.keys(pokemon.relativeStats).map((statId: StatId) => {
+      return (
+        <p key={statId} className="PokemonStats-individual">
+          {getStatName(statId)}: {this.getStatAbsoluteValue(statId)}
+          <Line
+            percent={pokemon.relativeStats[statId] * 100}
+            strokeColor={getTypeColor(pokemon.types[0])}
+            strokeWidth="4"
+            trailWidth="4"
+          />
+        </p>
+      );
+    });
+  }
+
+  render() {
     const { viewMode } = this.state;
 
     return (
@@ -63,50 +107,11 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
         <div className="PokemonStats-wrapper">
           <p className="PokemonStats-line PokemonStats-title">Base Stats</p>
 
-          {viewMode === CHART && (
-            <div className="PokemonStats-chart">
-              <StatsChart stats={pokemon.stats} color={getTypeColor(pokemon.types[0])} size={272} />
-            </div>
-          )}
+          {viewMode === CHART && <div className="PokemonStats-chart">{this.renderChart()}</div>}
 
-          {viewMode === BARS && (
-            <div className="PokemonStats-bars">
-              {// @ts-ignore
-              Object.keys(pokemon.stats).map((statId: StatId) => {
-                return (
-                  <p className="PokemonStats-individual">
-                    {getStatName(statId)}: {this.getStatAbsoluteValue(statId)}
-                    <Line
-                      percent={pokemon.stats[statId] * 100}
-                      strokeColor={getTypeColor(pokemon.types[0])}
-                      strokeWidth="4"
-                      trailWidth="4"
-                    />
-                  </p>
-                );
-              })}
-            </div>
-          )}
+          {viewMode === BARS && <div className="PokemonStats-bars">{this.renderBars()}</div>}
 
-          <Tabs
-            options={[
-              {
-                id: CHART,
-                label: 'Chart',
-                onClick: () => {
-                  this.toggleViewMode(CHART);
-                },
-              },
-              {
-                id: BARS,
-                label: 'Bars',
-                onClick: () => {
-                  this.toggleViewMode(BARS);
-                },
-              },
-            ]}
-            activeTab={viewMode}
-          />
+          <Tabs options={this.getStatsTabs()} activeTab={viewMode} />
         </div>
       </div>
     );

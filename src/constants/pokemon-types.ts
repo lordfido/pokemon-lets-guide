@@ -1,3 +1,5 @@
+import { capitalize } from '../app/utils/strings';
+
 export type PokemonType =
   | 'bug'
   | 'dark'
@@ -37,30 +39,32 @@ export const ROCK: PokemonType = 'rock';
 export const STEEL: PokemonType = 'steel';
 export const WATER: PokemonType = 'water';
 
-export const getType = (pokemonType: string): PokemonType | void => {
-  const types = [
-    BUG,
-    DARK,
-    DRAGON,
-    ELECTRIC,
-    FAIRY,
-    FIGHTING,
-    FIRE,
-    FLYING,
-    GRASS,
-    GHOST,
-    GROUND,
-    ICE,
-    NORMAL,
-    POISON,
-    PSYCHIC,
-    ROCK,
-    STEEL,
-    WATER,
-  ];
+const types = [
+  BUG,
+  DARK,
+  DRAGON,
+  ELECTRIC,
+  FAIRY,
+  FIGHTING,
+  FIRE,
+  FLYING,
+  GRASS,
+  GHOST,
+  GROUND,
+  ICE,
+  NORMAL,
+  POISON,
+  PSYCHIC,
+  ROCK,
+  STEEL,
+  WATER,
+];
 
-  return types.find(type => type === String(pokemonType).toLowerCase()) || undefined;
-};
+export const getType = (pokemonType: string): PokemonType | void =>
+  types.find(type => type === String(pokemonType).toLowerCase()) || undefined;
+
+export const getTypes = (): Array<{ id: PokemonType; name: string }> =>
+  types.map(type => ({ id: type, name: capitalize(type) }));
 
 const typeIcons = {
   [BUG]: require('../assets/images/type-icons/bug.png'),

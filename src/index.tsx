@@ -17,6 +17,7 @@ import { RootState } from './app/root.types';
 import buildStore from './common/utils/buildStore';
 
 const packageJson = require('../package.json');
+const backgroundImage = require('./assets/images/switch.jpg');
 
 /**
  * Read persisted store and start a React application with persisted data
@@ -49,6 +50,11 @@ const initReactApplication = async () => {
 
   const store = await buildStore(persistedStore);
 
+  const mountPoint = document.getElementById('app-wrapper');
+  if (!!mountPoint) {
+    mountPoint.style.backgroundImage = `url(${backgroundImage})`;
+  }
+
   render(
     <Provider store={store}>
       <BrowserRouter>
@@ -57,7 +63,7 @@ const initReactApplication = async () => {
         </ScrollToTop>
       </BrowserRouter>
     </Provider>,
-    document.querySelector('#app-wrapper')
+    mountPoint
   );
 };
 

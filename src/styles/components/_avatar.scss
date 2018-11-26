@@ -12,5 +12,7 @@
 
   &-picture {
     max-width: 100%;
+    min-height: $size;
+    min-width: $size;
   }
 }

@@ -1,0 +1,23 @@
+.Search {
+  &-filters {
+    padding: 10px;
+  }
+
+  @media screen and (min-width: 720px) {
+    &-filters,
+    &-results {
+      display: inline-block;
+      height: 100%;
+      vertical-align: top;
+    }
+
+    &-filters {
+      padding: 20px;
+      width: 320px;
+    }
+
+    &-results {
+      width: calc(100% - 320px);
+    }
+  }
+}

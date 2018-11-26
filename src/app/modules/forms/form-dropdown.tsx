@@ -1,14 +1,16 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import Select from 'react-select';
+
 import { FieldProps } from './field';
 
 interface Options extends FieldProps {}
 
 interface OwnProps {
   options: Options;
-  onClick: (event: React.MouseEvent<HTMLSelectElement>) => void;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  onFocus: (event: React.FocusEvent<HTMLSelectElement>) => void;
+  onClick: any;
+  onChange: any;
+  onFocus: any;
 }
 
 class Dropdown extends React.Component<OwnProps> {
@@ -16,6 +18,10 @@ class Dropdown extends React.Component<OwnProps> {
 
   render() {
     const { options, onClick, onChange, onFocus } = this.props;
+
+    if (options.isMulti) {
+      return <Select onChange={onChange} options={options.options} isMulti />;
+    }
 
     return (
       <label

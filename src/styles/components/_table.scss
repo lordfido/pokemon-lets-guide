@@ -1,22 +1,33 @@
 .Table {
-  &,
-  &-head,
-  &-body {
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
+  // display: block;
+  width: 100%;
+
+  @media screen and (min-width: 1024px) {
+    display: table;
   }
 
-  &-tr {
-    display: block;
+  &-row {
+    background-color: $white;
+    // display: block;
+    // margin: 5px;
+    padding: 5px;
+
+    @media screen and (min-width: 1024px) {
+      display: table-row;
+    }
+  }
+
+  &-cell {
+    // display: inline-block;
+    padding: 4px;
+    // width: 50%;
+
+    @media screen and (min-width: 1024px) {
+      display: table-cell;
+    }
+  }
+
+  &--center {
     text-align: center;
-    width: 100%;
-  }
-
-  &-th,
-  &-td {
-    display: inline-block;
-    margin: 0;
-    text-align: left;
   }
 }

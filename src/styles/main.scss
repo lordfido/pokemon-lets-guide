@@ -14,7 +14,7 @@
 @import 'components/avatar', 'components/card', 'components/link', 'components/list', 'components/loading',
   'components/message', 'components/table', 'components/tag';
 
-@import 'modules/pokemon-details', 'modules/pokemon-list';
+@import 'modules/pokemon-details', 'modules/pokemon-list', 'modules/search';
 
 // react-svg-radar-chart
 .scale {
@@ -51,12 +51,6 @@
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-}
-
-html,
-body,
-#app-wrapper {
-  background-color: #efefef;
 }
 
 body {
@@ -106,8 +100,30 @@ a:active {
   color: inherit;
 }
 
+#app-wrapper {
+  background-color: #fff;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 2220px;
+  height: 100vh;
+}
+
 .App {
+  background-color: #efefef;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  overflow-y: auto;
   width: 100%;
+  transition: height 0.3s, width 0.3s;
+
+  @media screen and (min-width: 1921px) and (min-height: 720px) {
+    max-height: 720px;
+    max-width: 1280px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
   &-content {
     margin: 0;

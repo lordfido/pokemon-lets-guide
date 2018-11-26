@@ -18,6 +18,7 @@ interface Option {
   type: string;
   label: string;
   value: string;
+  icon?: string;
 }
 
 export interface FieldProps {
@@ -40,6 +41,7 @@ export interface FieldProps {
   isDisabled?: boolean;
   isAlwaysDisabled?: boolean;
   isAlwaysEnabled?: boolean;
+  isMulti?: boolean;
 
   error?: string;
 
@@ -146,6 +148,16 @@ class Field extends React.Component<OwnProps> {
       case 'dropdown':
         return this.renderWrappedField(
           <Dropdown options={options} onClick={this.onClick} onChange={this.onChange} onFocus={this.onFocus} />
+        );
+
+      case 'multi':
+        return this.renderWrappedField(
+          <Dropdown
+            options={{ ...options, isMulti: true }}
+            onClick={this.onClick}
+            onChange={this.onChange}
+            onFocus={this.onFocus}
+          />
         );
 
       case 'date':

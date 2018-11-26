@@ -13,7 +13,7 @@ class PokemonPreview extends React.Component<OwnProps> {
 
     return (
       <div className="PokemonPreview">
-        <CustomImage src={previewUrl} />
+        <CustomImage className="PokemonPreview-image" src={previewUrl} />
       </div>
     );
   }

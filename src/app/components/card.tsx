@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import CustomImage from './image';
 
 interface OwnProps {
   className?: string;
@@ -20,7 +21,7 @@ class Card extends React.Component<OwnProps> {
     return (
       <div className={classes.wrapper}>
         {!!title && <span className="Card-title">{title}</span>}
-        {!!image && <img className="Card-image" src={image} />}
+        {!!image && <CustomImage className="Card-image" src={image} />}
         {children}
       </div>
     );

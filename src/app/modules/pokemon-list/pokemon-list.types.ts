@@ -17,8 +17,10 @@ export interface Pokemon {
 
   avatar: string;
 
-  stats: PokemonStats;
-  suggested?: Array<PokemonStats>;
+  baseCP: number;
+  baseStats: PokemonStats;
+  relativeStats: PokemonStats;
+  suggestedStats?: Array<PokemonStats>;
 
   pokedexEntry: string;
 }

@@ -19,6 +19,21 @@ interface OwnProps {
 class PokemonDetailsView extends React.Component<OwnProps> {
   displayName = 'PokemonDetailsView';
 
+  renderSuggestedStats() {
+    const { pokemon } = this.props;
+
+    if (pokemon.suggestedStats) {
+      return pokemon.suggestedStats.map((suggestion, index) => (
+        <React.Fragment>
+          <p key={`title-${index}`}>Recommended capture with {index + 1} perfect IVs</p>
+          <StatsChart key={`suggested-${index}`} stats={suggestion} color={getTypeColor(pokemon.types[0])} />
+        </React.Fragment>
+      ));
+    }
+
+    return null;
+  }
+
   render() {
     const { pokemon, pagination } = this.props;
 
@@ -29,16 +44,9 @@ class PokemonDetailsView extends React.Component<OwnProps> {
         <PokemonStats pokemon={pokemon} />
         <PokemonPokedexEntry text={pokemon.pokedexEntry} />
 
-        {false &&
-          pokemon.suggested &&
-          pokemon.suggested.map((suggestion, index) => (
-            <React.Fragment>
-              <p key={`title-${index}`}>Recommended capture with {index + 1} perfect IVs</p>
-              <StatsChart key={`suggested-${index}`} stats={suggestion} color={getTypeColor(pokemon.types[0])} />
-            </React.Fragment>
-          ))}
+        {false && this.renderSuggestedStats()}
 
-        <PokemonPagination pagination={pagination} />
+        <PokemonPagination currentPokemon={pokemon.id} pagination={pagination} />
       </div>
     );
   }

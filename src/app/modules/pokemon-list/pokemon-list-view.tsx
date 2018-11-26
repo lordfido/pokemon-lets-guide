@@ -1,58 +1,88 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { capitalize } from '../../utils/strings';
 
-import Tag from '../../components/tag';
-import Card from '../../components/card';
+import PokemonListItem from './pokemon-list-item';
 
-import { getTypeColor } from '../../../constants/pokemon-types-color';
+import Table from '../../components/table';
+
+import {
+  ATTACK_ID,
+  SPECIAL_ATTACK_ID,
+  DEFENSE_ID,
+  SPECIAL_DEFENSE_ID,
+  HP_ID,
+  SPEED_ID,
+  getStatName,
+} from '../../../constants/pokemon-stats';
 
 import { Pokemon } from './pokemon-list.types';
-import { POKEMON } from '../../../constants/appRoutes';
-import { getTypeIcon } from '../../../constants/pokemon-types';
-import PokemonDetailsView from '../pokemon-details/pokemon-details-view';
-
-interface PokemonListItemProps {
-  pokemon: Pokemon;
-}
-
-const PokemonListItem = ({ pokemon }: PokemonListItemProps) => (
-  <Link
-    to={{
-      pathname: `${POKEMON.replace(':id', String(pokemon.id))}`,
-    }}
-  >
-    <Card title={pokemon.name} image={pokemon.avatar} className="PokemonList-item">
-      <div className="PokemonList-types TagsWrapper">
-        {pokemon.types.map(type => (
-          <Tag
-            key={type}
-            label={capitalize(type)}
-            icon={pokemon.types.length === 1 ? getTypeIcon(type) : undefined}
-            backgroundColor={getTypeColor(type)}
-          />
-        ))}
-      </div>
-    </Card>
-  </Link>
-);
 
 type OwnProps = {
   collection: Array<Pokemon>;
+  sort: (key: string) => void;
 };
 
 class PokemonListView extends React.Component<OwnProps> {
   static displayName = 'PokemonListView';
 
   render() {
-    const { collection } = this.props;
+    const { collection, sort } = this.props;
 
     return (
-      <div className="PokemonList CardsWrapper">
-        {collection.map(pokemon => (
-          <PokemonListItem key={pokemon.id} pokemon={pokemon} />
+      <Table
+        className="PokemonList"
+        headings={[
+          {
+            label: '#',
+            onClick: () => sort('id'),
+          },
+          {
+            label: 'Avatar',
+          },
+          {
+            label: 'Name',
+            onClick: () => sort('name'),
+          },
+          {
+            label: 'Type 1',
+          },
+          {
+            label: 'Type 2',
+          },
+          {
+            label: 'Base CP',
+            onClick: () => sort('baseCP'),
+          },
+          {
+            label: getStatName(HP_ID),
+            onClick: () => sort(`baseStats.${HP_ID}`),
+          },
+          {
+            label: getStatName(ATTACK_ID),
+            onClick: () => sort(`baseStats.${ATTACK_ID}`),
+          },
+          {
+            label: getStatName(DEFENSE_ID),
+            onClick: () => sort(`baseStats.${DEFENSE_ID}`),
+          },
+          {
+            label: getStatName(SPEED_ID),
+            onClick: () => sort(`baseStats.${SPEED_ID}`),
+          },
+          {
+            label: getStatName(SPECIAL_DEFENSE_ID),
+            onClick: () => sort(`baseStats.${SPECIAL_DEFENSE_ID}`),
+          },
+          {
+            label: getStatName(SPECIAL_ATTACK_ID),
+            onClick: () => sort(`baseStats.${SPECIAL_ATTACK_ID}`),
+          },
+          { label: '' },
+        ]}
+      >
+        {collection.map((pokemon, index) => (
+          <PokemonListItem key={index} pokemon={pokemon} />
         ))}
-      </div>
+      </Table>
     );
   }
 }

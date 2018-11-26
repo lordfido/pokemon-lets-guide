@@ -1,4 +1,4 @@
-import { Stats } from 'pokelab-lets-go';
+import { Pokedex, Stats } from 'pokelab-lets-go';
 import pokemonExtraInfoList from '../../../common/apis/mocks';
 import { sortBy } from '../../utils/arrays';
 import { getAvatarFromId, filterUnknownTypes, getStatRatio, getSuggestedIVs } from '../../utils/pokemon-stats';
@@ -17,30 +17,42 @@ import {
 import { Pokemon, PokemonStats } from './pokemon-list.types';
 
 export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
-  // Get a List of Pokemon IDs
-  Stats.getNationalIds()
-    // Add stats to each pokemon
-    .map(id => {
-      const rawStats = Stats.getStats(id);
+  Pokedex.all
+    .filter(pokemon => /Mega\ /.test(pokemon.name) === false)
+    .map(pokemon => {
+      const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats, ...others } = pokemon;
+
+      const id = Number(nationalNumber);
+      const name = String(pName);
+      const types = pTypes.map(type => String(type).toLowerCase());
 
       // @ts-ignore
-      const stats: PokemonStats = {
-        [HP_ID]: rawStats[Stats.HP],
-        [ATTACK_ID]: rawStats[Stats.ATTACK],
-        [DEFENSE_ID]: rawStats[Stats.DEFENSE],
-        [SPECIAL_ATTACK_ID]: rawStats[Stats.SPECIAL_ATTACK],
-        [SPECIAL_DEFENSE_ID]: rawStats[Stats.SPECIAL_DEFENSE],
-        [SPEED_ID]: rawStats[Stats.SPEED],
+      const baseStats: PokemonStats = {
+        [HP_ID]: pBaseStats[Stats.HP],
+        [ATTACK_ID]: pBaseStats[Stats.Attack],
+        [DEFENSE_ID]: pBaseStats[Stats.Defense],
+        [SPECIAL_ATTACK_ID]: pBaseStats[Stats.SpecialAttack],
+        [SPECIAL_DEFENSE_ID]: pBaseStats[Stats.SpecialDefense],
+        [SPEED_ID]: pBaseStats[Stats.Speed],
       };
+
+      const baseCP =
+        baseStats[ATTACK_ID] +
+        baseStats[SPECIAL_ATTACK_ID] +
+        baseStats[DEFENSE_ID] +
+        baseStats[SPECIAL_DEFENSE_ID] +
+        baseStats[HP_ID] +
+        baseStats[SPEED_ID];
 
       return {
         id,
-        stats,
+        name,
+        types,
+        baseStats,
+        baseCP,
+        others,
       };
     })
-
-    // Remove pokemon without id or stats
-    .filter(pokemon => pokemon.id && pokemon.stats)
 
     // Create final Pokemon model
     .map(basePokemon => {
@@ -49,23 +61,22 @@ export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
       /**
        * Mandatory data (always present, it came from PokeLab)
        */
-
       const id = Number(basePokemon.id);
       // @ts-ignore
-      const stats: PokemonStats = {
-        [HP_ID]: getStatRatio(basePokemon.stats.hp, INITIAL_MAX_STAT_VALUE) || 0,
-        [ATTACK_ID]: getStatRatio(basePokemon.stats.attack, INITIAL_MAX_STAT_VALUE) || 0,
-        [DEFENSE_ID]: getStatRatio(basePokemon.stats.defense, INITIAL_MAX_STAT_VALUE) || 0,
-        [SPEED_ID]: getStatRatio(basePokemon.stats.speed, INITIAL_MAX_STAT_VALUE) || 0,
-        [SPECIAL_DEFENSE_ID]: getStatRatio(basePokemon.stats.spDefense, INITIAL_MAX_STAT_VALUE) || 0,
-        [SPECIAL_ATTACK_ID]: getStatRatio(basePokemon.stats.spAttack, INITIAL_MAX_STAT_VALUE) || 0,
+      const relativeStats: PokemonStats = {
+        [HP_ID]: getStatRatio(basePokemon.baseStats[HP_ID], INITIAL_MAX_STAT_VALUE) || 0,
+        [ATTACK_ID]: getStatRatio(basePokemon.baseStats[ATTACK_ID], INITIAL_MAX_STAT_VALUE) || 0,
+        [DEFENSE_ID]: getStatRatio(basePokemon.baseStats[DEFENSE_ID], INITIAL_MAX_STAT_VALUE) || 0,
+        [SPEED_ID]: getStatRatio(basePokemon.baseStats[SPEED_ID], INITIAL_MAX_STAT_VALUE) || 0,
+        [SPECIAL_DEFENSE_ID]: getStatRatio(basePokemon.baseStats[SPECIAL_DEFENSE_ID], INITIAL_MAX_STAT_VALUE) || 0,
+        [SPECIAL_ATTACK_ID]: getStatRatio(basePokemon.baseStats[SPECIAL_ATTACK_ID], INITIAL_MAX_STAT_VALUE) || 0,
       };
-      const suggested = getSuggestedIVs(basePokemon.stats);
+      const suggestedStats = getSuggestedIVs(basePokemon.baseStats);
 
       /**
        * Additional data provided by other service
        */
-      const name = String(pokemonExtraInfo ? pokemonExtraInfo.name : '');
+      const name = basePokemon.name || String(pokemonExtraInfo ? pokemonExtraInfo.name : '');
       const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');
       const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
       const avatar =
@@ -73,7 +84,9 @@ export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
 
       // @ts-ignore
       const types: Array<PokemonType> =
-        pokemonExtraInfo && pokemonExtraInfo.types
+        basePokemon.types && basePokemon.types.length
+          ? basePokemon.types
+          : pokemonExtraInfo && pokemonExtraInfo.types
           ? pokemonExtraInfo.types.filter(filterUnknownTypes).map(getType)
           : [];
 
@@ -83,9 +96,12 @@ export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
         types,
         description,
         avatar,
-        stats,
-        suggested,
+        baseStats: basePokemon.baseStats,
+        baseCP: basePokemon.baseCP,
+        relativeStats,
+        suggestedStats,
         pokedexEntry,
+        others: basePokemon.others,
       };
     })
 

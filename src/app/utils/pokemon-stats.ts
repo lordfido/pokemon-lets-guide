@@ -33,8 +33,8 @@ export const getPaddedId = (pokemonId: number): string => {
 export const getAvatarFromId = (pokemonId: number): string =>
   `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPaddedId(pokemonId)}.png`;
 
-const getSortedStats = (stats: [{ name: StatId; value: number }]): Array<StatId> =>
-  stats.sort(sortBy('value', 'desc')).map(stat => stat.name);
+export const getSortedStats = (stats: [{ name: StatId; value: number }], order = 'desc'): Array<StatId> =>
+  stats.sort(sortBy('value', order)).map(stat => stat.name);
 
 const generateSuggestedIVSample = (perfectIVs: number, order: Array<StatId>): PokemonStats => {
   const stats = {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import CustomImage from './image';
 
 export interface TagProps {
   label: string;
@@ -22,7 +23,7 @@ class Tag extends React.Component<TagProps> {
 
     return (
       <span className={classes.wrapper}>
-        {icon && <img className={classes.icon} src={icon} />}
+        {icon && <CustomImage className={classes.icon} src={icon} />}
         <span className={classes.label} style={{ backgroundColor }}>
           {label}
         </span>
