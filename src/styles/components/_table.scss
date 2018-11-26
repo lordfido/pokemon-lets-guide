@@ -1,33 +1,75 @@
 .Table {
-  // display: block;
   width: 100%;
 
-  @media screen and (min-width: 1024px) {
-    display: table;
+  &-card {
+    margin-bottom: 10px;
+    width: 100%;
+
+    @media screen and (min-width: 720px) {
+      width: calc(50% - 5px);
+
+      &:nth-child(even) {
+        margin-left: 10px;
+      }
+    }
   }
 
   &-row {
     background-color: $white;
-    // display: block;
-    // margin: 5px;
     padding: 5px;
-
-    @media screen and (min-width: 1024px) {
-      display: table-row;
-    }
   }
 
   &-cell {
-    // display: inline-block;
     padding: 4px;
-    // width: 50%;
+  }
+
+  &--mobile {
+    table {
+      display: block;
+      width: 100%;
+    }
+
+    thead,
+    tbody {
+      display: inline-block;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    thead {
+      width: 130px;
+    }
+
+    tbody {
+      width: calc(100% - 130px);
+    }
+
+    tr,
+    th,
+    td {
+      display: block;
+      width: 100%;
+    }
+
+    .Table {
+      &-cell {
+        height: 32px;
+        vertical-align: top;
+      }
+    }
 
     @media screen and (min-width: 1024px) {
-      display: table-cell;
+      display: none;
     }
   }
 
-  &--center {
-    text-align: center;
+  &--desktop {
+    @media screen and (max-width: 1023px) {
+      display: none;
+    }
+
+    .Table--center {
+      text-align: center;
+    }
   }
 }

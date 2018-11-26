@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import Card from './card';
 
 type TableCellProps = { className?: string; center?: boolean; children: any };
 export const TableCell = ({ className, center, children }: TableCellProps) => (
@@ -23,31 +24,55 @@ interface OwnProps {
 class Table extends React.Component<OwnProps> {
   static displayName = 'Table';
 
+  renderHeads() {
+    const { headings } = this.props;
+
+    return (
+      <thead>
+        <tr className="Table-row">
+          {headings &&
+            headings.map((heading, index) => (
+              <th
+                key={index}
+                className={classnames('Table-cell', { 'is-clickable': heading.onClick })}
+                onClick={heading.onClick}
+              >
+                {heading.label}
+              </th>
+            ))}
+        </tr>
+      </thead>
+    );
+  }
+
   render() {
     const { headings, children, className } = this.props;
 
     const classes = {
-      wrapper: classnames('Table', className),
+      mobile: classnames('Table Table--mobile', className),
+      desktop: classnames('Table Table--desktop', className),
     };
 
     return (
-      <table className={classes.wrapper}>
-        <thead>
-          <tr>
-            {headings &&
-              headings.map((heading, index) => (
-                <th
-                  key={index}
-                  className={classnames('Table-cell', { 'is-clickable': heading.onClick })}
-                  onClick={heading.onClick}
-                >
-                  {heading.label}
-                </th>
-              ))}
-          </tr>
-        </thead>
-        <tbody>{children}</tbody>
-      </table>
+      <React.Fragment>
+        <div className={classes.mobile}>
+          {React.Children.map(children, child => {
+            return (
+              <Card className="Table-card">
+                <table>
+                  {this.renderHeads()}
+                  <tbody>{child}</tbody>
+                </table>
+              </Card>
+            );
+          })}
+        </div>
+
+        <table className={classes.desktop}>
+          {this.renderHeads()}
+          <tbody>{children}</tbody>
+        </table>
+      </React.Fragment>
     );
   }
 }
