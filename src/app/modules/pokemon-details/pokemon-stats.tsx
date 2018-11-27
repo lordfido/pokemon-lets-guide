@@ -37,17 +37,6 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     };
   }
 
-  getStatAbsoluteValue(statId: StatId) {
-    const {
-      pokemon: { baseStats },
-    } = this.props;
-
-    const statGrossValue = getStatAbsolute(baseStats[statId], INITIAL_MAX_STAT_VALUE);
-    const integerValue = parseInt(statGrossValue.toString(), 10);
-
-    return integerValue;
-  }
-
   toggleViewMode(viewMode: ViewMode) {
     this.setState({
       viewMode,
@@ -87,7 +76,7 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     return Object.keys(pokemon.relativeStats).map((statId: StatId) => {
       return (
         <p key={statId} className="PokemonStats-individual">
-          {getStatName(statId)}: {this.getStatAbsoluteValue(statId)}
+          {getStatName(statId)}: {pokemon.baseStats[statId]}
           <Line
             percent={pokemon.relativeStats[statId] * 100}
             strokeColor={getTypeColor(pokemon.types[0])}

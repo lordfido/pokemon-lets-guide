@@ -117,7 +117,7 @@ a:active {
   width: 100%;
   transition: height 0.3s, width 0.3s;
 
-  @media screen and (min-width: 1921px) and (min-height: 720px) {
+  @media screen and (min-width: 1921px) {
     max-height: 720px;
     max-width: 1280px;
     position: relative;

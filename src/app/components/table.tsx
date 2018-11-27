@@ -1,5 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import Media from 'react-media';
+
 import Card from './card';
 
 type TableCellProps = { className?: string; center?: boolean; children: any };
@@ -46,7 +48,7 @@ class Table extends React.Component<OwnProps> {
   }
 
   render() {
-    const { headings, children, className } = this.props;
+    const { children, className } = this.props;
 
     const classes = {
       mobile: classnames('Table Table--mobile', className),
@@ -54,25 +56,29 @@ class Table extends React.Component<OwnProps> {
     };
 
     return (
-      <React.Fragment>
-        <div className={classes.mobile}>
-          {React.Children.map(children, child => {
-            return (
-              <Card className="Table-card">
-                <table>
-                  {this.renderHeads()}
-                  <tbody>{child}</tbody>
-                </table>
-              </Card>
-            );
-          })}
-        </div>
-
-        <table className={classes.desktop}>
-          {this.renderHeads()}
-          <tbody>{children}</tbody>
-        </table>
-      </React.Fragment>
+      <Media query="(max-width: 1023px)">
+        {(matches: boolean) =>
+          matches ? (
+            <div className={classes.mobile}>
+              {React.Children.map(children, child => {
+                return (
+                  <Card className="Table-card">
+                    <table>
+                      {this.renderHeads()}
+                      <tbody>{child}</tbody>
+                    </table>
+                  </Card>
+                );
+              })}
+            </div>
+          ) : (
+            <table className={classes.desktop}>
+              {this.renderHeads()}
+              <tbody>{children}</tbody>
+            </table>
+          )
+        }
+      </Media>
     );
   }
 }

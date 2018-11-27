@@ -37,7 +37,7 @@ class StatsChart extends React.Component<OwnProps> {
     const { stats, color, size } = this.props;
     const chartData = [{ data: stats, meta: { color } }];
 
-    return <RadarChart captions={chartLegend} data={chartData} size={size} options={{ scales: 1 }} />;
+    return <RadarChart captions={chartLegend} data={chartData} size={size} options={{ scales: 1, dots: true }} />;
   }
 }
 
