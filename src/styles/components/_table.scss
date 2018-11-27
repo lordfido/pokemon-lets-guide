@@ -24,6 +24,10 @@
   }
 
   &--mobile {
+    @media screen and (min-width: 1024px) {
+      display: none;
+    }
+
     table {
       display: block;
       width: 100%;
@@ -57,10 +61,6 @@
         vertical-align: top;
       }
     }
-
-    @media screen and (min-width: 1024px) {
-      display: none;
-    }
   }
 
   &--desktop {
@@ -68,8 +68,14 @@
       display: none;
     }
 
-    .Table--center {
-      text-align: center;
+    .Table {
+      &-cell {
+        vertical-align: middle;
+      }
+
+      &--center {
+        text-align: center;
+      }
     }
   }
 }

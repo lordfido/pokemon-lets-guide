@@ -9,4 +9,20 @@
   left: 0;
   width: 100%;
   z-index: 200;
+
+  & > * {
+    vertical-align: top;
+  }
+
+  &-item {
+    display: inline-block;
+    height: $header-height;
+    min-width: $header-height;
+    padding: 5px;
+  }
+
+  &-logo {
+    height: $header-height - 10px;
+    width: $header-height - 10px;
+  }
 }
