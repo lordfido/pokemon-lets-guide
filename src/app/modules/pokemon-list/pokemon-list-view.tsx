@@ -40,7 +40,6 @@ class PokemonListView extends React.Component<OwnProps> {
           },
           {
             label: 'Name',
-            onClick: () => sort('name'),
           },
           {
             label: 'Type 1',

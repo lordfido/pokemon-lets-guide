@@ -26,6 +26,7 @@
   }
 
   &-icon {
+    border-radius: 50%;
     border: none;
     height: 24px;
     width: 24px;
@@ -34,9 +35,11 @@
 
   &-label {
     border-radius: $border-radius;
-    height: 22px;
+    height: 24px;
     line-height: 16px;
-    padding: 3px 6px;
+    padding: 4px 8px;
+    width: 64px;
+    text-align: center;
     z-index: 1;
   }
 

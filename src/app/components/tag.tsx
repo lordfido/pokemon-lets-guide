@@ -23,7 +23,7 @@ class Tag extends React.Component<TagProps> {
 
     return (
       <span className={classes.wrapper}>
-        {icon && <CustomImage className={classes.icon} src={icon} />}
+        {icon && <CustomImage className={classes.icon} style={{ backgroundColor, opacity: 1 }} src={icon} />}
         <span className={classes.label} style={{ backgroundColor }}>
           {label}
         </span>

@@ -49,7 +49,7 @@ class CustomImage extends React.Component<OwnProps, OwnState> {
     const { src, ...props } = this.props;
     const { preview } = this.state;
 
-    if (!preview) return <span {...props} style={{ backgroundColor: '#dedede', opacity: 0.2 }} />;
+    if (!preview) return <span {...props} style={{ backgroundColor: '#dedede', opacity: 0.2, ...props.style }} />;
 
     return <img {...props} src={preview} />;
   }
