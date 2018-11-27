@@ -17,7 +17,7 @@ import { RootState } from './app/root.types';
 import buildStore from './common/utils/buildStore';
 
 const packageJson = require('../package.json');
-const backgroundImage = require('./assets/images/switch.jpg');
+const backgroundImage = require('./assets/images/switch.png');
 
 /**
  * Read persisted store and start a React application with persisted data
