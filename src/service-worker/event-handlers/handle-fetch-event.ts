@@ -1,19 +1,21 @@
 import { log } from '../../common/utils/logger';
-import { cacheOnDemand } from '../../constants/features';
+import { isDev } from '../../common/utils/platforms';
+
 import { cacheName } from '../constants';
 import { APP_DOMAIN } from '../../constants/branding';
+import { cacheOnDemand } from '../../constants/features';
 
 const handler = async (event: any) => {
   var requestUrl = new URL(event.request.url);
 
-  log('New request', requestUrl);
+  log('New request', { isDev: isDev() }, requestUrl);
   if (
     // Cache is not enabled
     !cacheOnDemand ||
     // Chrome extension script
     requestUrl.protocol.indexOf('chrome-extension') >= 0 ||
     // Not a local resource
-    new RegExp(`.${APP_DOMAIN}`).test(requestUrl.href) === false
+    (!isDev() && new RegExp(`.${APP_DOMAIN}`).test(requestUrl.href) === false)
   ) {
     log('File is not going to be cached', requestUrl);
     return await fetch(event.request);
