@@ -50,6 +50,14 @@ $pokemon-stats-width: 300px;
   &-wrapper {
     border-radius: $big-radius $small-radius $big-radius $small-radius;
   }
+
+  &-strengths,
+  &-weaknesses {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    vertical-align: top;
+  }
 }
 
 .PokemonStats {

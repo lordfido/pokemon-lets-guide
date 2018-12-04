@@ -1,43 +1,44 @@
+import { Types } from 'pokelab-lets-go';
 import { capitalize } from '../app/utils/strings';
 
 export type PokemonType =
-  | 'bug'
-  | 'dark'
-  | 'dragon'
-  | 'electric'
-  | 'fairy'
-  | 'fighting'
-  | 'fire'
-  | 'flying'
-  | 'grass'
-  | 'ghost'
-  | 'ground'
-  | 'ice'
-  | 'normal'
-  | 'poison'
-  | 'psychic'
-  | 'rock'
-  | 'steel'
-  | 'water';
+  | 'Bug'
+  | 'Dark'
+  | 'Dragon'
+  | 'Electric'
+  | 'Fairy'
+  | 'Fighting'
+  | 'Fire'
+  | 'Flying'
+  | 'Grass'
+  | 'Ghost'
+  | 'Ground'
+  | 'Ice'
+  | 'Normal'
+  | 'Poison'
+  | 'Psychic'
+  | 'Rock'
+  | 'Steel'
+  | 'Water';
 
-export const BUG: PokemonType = 'bug';
-export const DARK: PokemonType = 'dark';
-export const DRAGON: PokemonType = 'dragon';
-export const ELECTRIC: PokemonType = 'electric';
-export const FAIRY: PokemonType = 'fairy';
-export const FIGHTING: PokemonType = 'fighting';
-export const FIRE: PokemonType = 'fire';
-export const FLYING: PokemonType = 'flying';
-export const GRASS: PokemonType = 'grass';
-export const GHOST: PokemonType = 'ghost';
-export const GROUND: PokemonType = 'ground';
-export const ICE: PokemonType = 'ice';
-export const NORMAL: PokemonType = 'normal';
-export const POISON: PokemonType = 'poison';
-export const PSYCHIC: PokemonType = 'psychic';
-export const ROCK: PokemonType = 'rock';
-export const STEEL: PokemonType = 'steel';
-export const WATER: PokemonType = 'water';
+export const BUG: PokemonType = Types.Bug;
+export const DARK: PokemonType = Types.Dark;
+export const DRAGON: PokemonType = Types.Dragon;
+export const ELECTRIC: PokemonType = Types.Electric;
+export const FAIRY: PokemonType = Types.Fairy;
+export const FIGHTING: PokemonType = Types.Fighting;
+export const FIRE: PokemonType = Types.Fire;
+export const FLYING: PokemonType = Types.Flying;
+export const GRASS: PokemonType = Types.Grass;
+export const GHOST: PokemonType = Types.Ghost;
+export const GROUND: PokemonType = Types.Ground;
+export const ICE: PokemonType = Types.Ice;
+export const NORMAL: PokemonType = Types.Normal;
+export const POISON: PokemonType = Types.Poison;
+export const PSYCHIC: PokemonType = Types.Psychic;
+export const ROCK: PokemonType = Types.Rock;
+export const STEEL: PokemonType = Types.Steel;
+export const WATER: PokemonType = Types.Water;
 
 const types = [
   BUG,
@@ -61,7 +62,7 @@ const types = [
 ];
 
 export const getType = (pokemonType: string): PokemonType | void =>
-  types.find(type => type === String(pokemonType).toLowerCase()) || undefined;
+  types.find(type => type === pokemonType) || undefined;
 
 export const getTypes = (): Array<{ id: PokemonType; name: string }> =>
   types.map(type => ({ id: type, name: capitalize(type) }));

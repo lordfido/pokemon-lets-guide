@@ -1,5 +1,15 @@
 import { PokemonType } from '../../../constants/pokemon-types';
 
+export interface TypeRelations {
+  id: PokemonType;
+  effectiveness: number;
+}
+
+export interface PokemonTypeData {
+  ownTypes: Array<PokemonType>;
+  relations: Array<TypeRelations>;
+}
+
 export interface PokemonStats {
   attack: number;
   spAttack: number;
@@ -12,7 +22,7 @@ export interface PokemonStats {
 export interface Pokemon {
   id: number;
   name: string;
-  types: Array<PokemonType>;
+  types: PokemonTypeData;
   description?: string;
 
   avatar: string;

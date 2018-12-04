@@ -1,7 +1,7 @@
-import { Pokedex, Stats } from 'pokelab-lets-go';
+import { Pokedex, Stats, Types } from 'pokelab-lets-go';
 import pokemonExtraInfoList from '../../../common/apis/mocks';
 import { sortBy } from '../../utils/arrays';
-import { getAvatarFromId, filterUnknownTypes, getStatRatio, getSuggestedIVs } from '../../utils/pokemon-stats';
+import { getAvatarFromId, getStatRatio, getSuggestedIVs } from '../../utils/pokemon-stats';
 
 import { getType, PokemonType } from '../../../constants/pokemon-types';
 import {
@@ -14,18 +14,34 @@ import {
   SPECIAL_ATTACK_ID,
 } from '../../../constants/pokemon-stats';
 
-import { Pokemon, PokemonStats } from './pokemon-list.types';
+import { Pokemon, PokemonStats, TypeRelations } from './pokemon-list.types';
 
 export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
-  Pokedex.all
-    .filter(pokemon => /Mega\ /.test(pokemon.name) === false)
+  Pokedex.All.filter(pokemon => /Mega\ /.test(pokemon.name) === false)
     .map(pokemon => {
       const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats, ...others } = pokemon;
 
+      // Get the ID
       const id = Number(nationalNumber);
-      const name = String(pName);
-      const types = pTypes.map(type => String(type).toLowerCase());
 
+      // Get the name
+      const name = String(pName);
+
+      // Get pokemon types
+      const pokemonTypes: Array<PokemonType> = [];
+      pTypes.forEach(type => {
+        if (type && getType(type)) {
+          pokemonTypes.push(type);
+        }
+      });
+
+      const types = {
+        ownTypes: pokemonTypes,
+        strengths: [] as Array<TypeRelations>,
+        weaknesses: [] as Array<TypeRelations>,
+      };
+
+      // Get base stats
       // @ts-ignore
       const baseStats: PokemonStats = {
         [HP_ID]: pBaseStats[Stats.HP],
@@ -36,6 +52,7 @@ export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
         [SPEED_ID]: pBaseStats[Stats.Speed],
       };
 
+      // Get base CP
       const baseCP =
         baseStats[ATTACK_ID] +
         baseStats[SPECIAL_ATTACK_ID] +
@@ -54,14 +71,62 @@ export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
       };
     })
 
-    // Create final Pokemon model
+    // Add additional data not provided by PokeLab
     .map(basePokemon => {
+      // Get some hardcoded data
       const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => pokemon.id === basePokemon.id);
 
-      /**
-       * Mandatory data (always present, it came from PokeLab)
-       */
+      // Get the ID
       const id = Number(basePokemon.id);
+
+      // Get pokemon short description
+      const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');
+
+      // Get pokedex entry (text)
+      const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
+
+      // Get an avatar
+      const avatar =
+        pokemonExtraInfo && pokemonExtraInfo.avatar ? String(pokemonExtraInfo.avatar) : getAvatarFromId(basePokemon.id);
+
+      // Get pokemon type strengths and weaknesses
+      const relations: Array<TypeRelations> = [];
+
+      // Loop through each one of current pokemon's types
+      basePokemon.types.ownTypes.forEach(defendingType => {
+        // Loop through all available pokemon types
+        Types.All.forEach(attackingType => {
+          // Get the effectiveness of this combination
+          const effectiveness = Types.getEffectiveness(attackingType, defendingType);
+
+          // If relation is 1:1, go to the next one
+          if (effectiveness === 1) {
+            return;
+          }
+
+          // If the relation is not 1:1, check if that relation already exists
+          const relationIndex = relations.findIndex(r => r.id === attackingType);
+
+          // If relation exists, update it
+          if (relationIndex >= 0) {
+            relations[relationIndex].effectiveness = relations[relationIndex].effectiveness * effectiveness;
+
+            // If it doesn't exist, create it
+          } else {
+            relations.push({
+              id: attackingType,
+              effectiveness,
+            });
+          }
+        });
+      });
+
+      const types = {
+        ...basePokemon.types,
+        relations: relations.filter(r => r.effectiveness !== 1).sort(sortBy('effectiveness')),
+      };
+
+      // Get relative stats (for charts)
       // @ts-ignore
       const relativeStats: PokemonStats = {
         [HP_ID]: getStatRatio(basePokemon.baseStats[HP_ID], INITIAL_MAX_STAT_VALUE) || 0,
@@ -71,37 +136,19 @@ export const CreatePokemonCollectionFromPokeLab = (): Array<Pokemon> =>
         [SPECIAL_DEFENSE_ID]: getStatRatio(basePokemon.baseStats[SPECIAL_DEFENSE_ID], INITIAL_MAX_STAT_VALUE) || 0,
         [SPECIAL_ATTACK_ID]: getStatRatio(basePokemon.baseStats[SPECIAL_ATTACK_ID], INITIAL_MAX_STAT_VALUE) || 0,
       };
+
+      // Get suggested stats
       const suggestedStats = getSuggestedIVs(basePokemon.baseStats);
 
-      /**
-       * Additional data provided by other service
-       */
-      const name = basePokemon.name || String(pokemonExtraInfo ? pokemonExtraInfo.name : '');
-      const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');
-      const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
-      const avatar =
-        pokemonExtraInfo && pokemonExtraInfo.avatar ? String(pokemonExtraInfo.avatar) : getAvatarFromId(basePokemon.id);
-
-      // @ts-ignore
-      const types: Array<PokemonType> =
-        basePokemon.types && basePokemon.types.length
-          ? basePokemon.types
-          : pokemonExtraInfo && pokemonExtraInfo.types
-          ? pokemonExtraInfo.types.filter(filterUnknownTypes).map(getType)
-          : [];
-
       return {
+        ...basePokemon,
         id,
-        name,
-        types,
         description,
+        pokedexEntry,
         avatar,
-        baseStats: basePokemon.baseStats,
-        baseCP: basePokemon.baseCP,
+        types,
         relativeStats,
         suggestedStats,
-        pokedexEntry,
-        others: basePokemon.others,
       };
     })
 

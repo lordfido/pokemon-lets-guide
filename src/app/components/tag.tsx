@@ -7,16 +7,17 @@ export interface TagProps {
   icon?: string;
   backgroundColor: string;
   className?: string;
+  large?: boolean;
 }
 
 class Tag extends React.Component<TagProps> {
   static displayName = 'Tag';
 
   render() {
-    const { className, label, icon, backgroundColor } = this.props;
+    const { className, label, icon, backgroundColor, large } = this.props;
 
     const classes = {
-      wrapper: classnames('Tag', className),
+      wrapper: classnames('Tag', className, { 'Tag--large': large }),
       icon: 'Tag-icon',
       label: 'Tag-label',
     };

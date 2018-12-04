@@ -66,7 +66,7 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
   renderChart() {
     const { pokemon } = this.props;
 
-    return <StatsChart stats={pokemon.relativeStats} color={getTypeColor(pokemon.types[0])} size={272} />;
+    return <StatsChart stats={pokemon.relativeStats} color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />;
   }
 
   renderBars() {
@@ -79,7 +79,7 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
           {getStatName(statId)}: {pokemon.baseStats[statId]}
           <Line
             percent={pokemon.relativeStats[statId] * 100}
-            strokeColor={getTypeColor(pokemon.types[0])}
+            strokeColor={getTypeColor(pokemon.types.ownTypes[0])}
             strokeWidth="4"
             trailWidth="4"
           />

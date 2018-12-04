@@ -38,22 +38,22 @@ class PokemonListItem extends React.Component<OwnProps> {
         </TableCell>
         <TableCell>{pokemon.name}</TableCell>
         <TableCell center>
-          {pokemon.types[0] && (
+          {pokemon.types.ownTypes[0] && (
             <Tag
-              key={pokemon.types[0]}
-              label={capitalize(pokemon.types[0])}
-              icon={getTypeIcon(pokemon.types[0])}
-              backgroundColor={getTypeColor(pokemon.types[0])}
+              key={pokemon.types.ownTypes[0]}
+              label={capitalize(pokemon.types.ownTypes[0])}
+              icon={getTypeIcon(pokemon.types.ownTypes[0])}
+              backgroundColor={getTypeColor(pokemon.types.ownTypes[0])}
             />
           )}
         </TableCell>
         <TableCell center>
-          {pokemon.types[1] && (
+          {pokemon.types.ownTypes[1] && (
             <Tag
-              key={pokemon.types[1]}
-              label={capitalize(pokemon.types[1])}
-              icon={getTypeIcon(pokemon.types[1])}
-              backgroundColor={getTypeColor(pokemon.types[1])}
+              key={pokemon.types.ownTypes[1]}
+              label={capitalize(pokemon.types.ownTypes[1])}
+              icon={getTypeIcon(pokemon.types.ownTypes[1])}
+              backgroundColor={getTypeColor(pokemon.types.ownTypes[1])}
             />
           )}
         </TableCell>

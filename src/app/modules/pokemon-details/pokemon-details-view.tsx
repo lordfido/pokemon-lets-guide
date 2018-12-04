@@ -26,7 +26,7 @@ class PokemonDetailsView extends React.Component<OwnProps> {
       return pokemon.suggestedStats.map((suggestion, index) => (
         <React.Fragment>
           <p key={`title-${index}`}>Recommended capture with {index + 1} perfect IVs</p>
-          <StatsChart key={`suggested-${index}`} stats={suggestion} color={getTypeColor(pokemon.types[0])} />
+          <StatsChart key={`suggested-${index}`} stats={suggestion} color={getTypeColor(pokemon.types.ownTypes[0])} />
         </React.Fragment>
       ));
     }
