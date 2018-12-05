@@ -11,3 +11,9 @@ export const getPokemon: ActionCreator = () => dispatch => {
     },
   });
 };
+
+export const loadMore: ActionCreator = () => dispatch => {
+  dispatch({
+    type: 'LOAD_MORE',
+  });
+};

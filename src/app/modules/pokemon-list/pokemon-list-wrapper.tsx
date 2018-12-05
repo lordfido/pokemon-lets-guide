@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { sortBy } from '../../utils/arrays';
 
 import PokemonListView from './pokemon-list-view';
+import { loadMore } from './pokemon-list.actions';
 import { getPokemonList } from '../../root.reducer';
 
 import { RootState } from '../../root.types';
@@ -12,15 +13,21 @@ type StateProps = {
   collection: Array<Pokemon>;
 };
 
+type DispatchProps = {
+  loadMore: Function;
+};
+
+type Props = StateProps & DispatchProps;
+
 interface OwnState {
   sortBy: string;
   reverse: boolean;
 }
 
-class PokemonListWrapper extends React.Component<StateProps, OwnState> {
+class PokemonListWrapper extends React.Component<Props, OwnState> {
   static displayName = 'PokemonListWrapper';
 
-  constructor(props: StateProps) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -50,10 +57,22 @@ class PokemonListWrapper extends React.Component<StateProps, OwnState> {
     return collection.sort(sortBy(sortOrder, reverse ? 'asc' : 'desc'));
   }
 
-  render() {
-    const { collection } = this.props;
+  handleLoadMore() {
+    const { loadMore } = this.props;
 
-    return <PokemonListView collection={this.getSortedCollection()} sort={this.sortBy} />;
+    loadMore();
+  }
+
+  render() {
+    return (
+      <PokemonListView
+        collection={this.getSortedCollection()}
+        sort={this.sortBy}
+        handleLoadMore={() => {
+          this.handleLoadMore();
+        }}
+      />
+    );
   }
 }
 
@@ -61,4 +80,11 @@ const mapStateToProps = (state: RootState) => ({
   collection: getPokemonList(state),
 });
 
-export default connect(mapStateToProps)(PokemonListWrapper);
+const mapDispatchToProps = {
+  loadMore,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PokemonListWrapper);

@@ -6,9 +6,14 @@ import { StatId } from '../../../constants/pokemon-stats';
 import { PokemonListState, Pokemon } from './pokemon-list.types';
 import { SearchState } from '../search/search.types';
 import { Type } from 'pokelab-lets-go/dist/cjs/types';
+import { paginationSize } from '../../../constants/features';
 
 const initialState: PokemonListState = {
   collection: [],
+  pagination: {
+    first: 0,
+    last: paginationSize,
+  },
 };
 
 const reducer = (state = initialState, action: AnyAction) => {
@@ -17,6 +22,15 @@ const reducer = (state = initialState, action: AnyAction) => {
       return {
         ...state,
         collection: action.payload.collection,
+      };
+
+    case 'LOAD_MORE':
+      return {
+        ...state,
+        pagination: {
+          first: 0,
+          last: state.pagination.last + paginationSize,
+        },
       };
 
     default:
@@ -29,75 +43,79 @@ export const getSelectedPokemon = (state: PokemonListState) => (pokemonId: numbe
 
 // Get a list of pokemon (already filtered)
 export const getPokemonList = (state: PokemonListState, search: SearchState) => {
-  return state.collection.filter(pokemon => {
-    // Filter list by number
-    if (typeof search.number !== 'undefined') {
-      if (!new RegExp(String(search.number)).test(String(pokemon.id))) {
-        return false;
+  const { collection, pagination } = state;
+
+  return collection
+    .filter(pokemon => {
+      // Filter list by number
+      if (typeof search.number !== 'undefined') {
+        if (!new RegExp(String(search.number)).test(String(pokemon.id))) {
+          return false;
+        }
       }
-    }
 
-    // Filter list by name
-    if (search.name && search.name.length) {
-      if (!new RegExp(search.name).test(pokemon.name.toLowerCase())) {
-        return false;
+      // Filter list by name
+      if (search.name && search.name.length) {
+        if (!new RegExp(search.name).test(pokemon.name.toLowerCase())) {
+          return false;
+        }
       }
-    }
 
-    // Filter list by type
-    if (search.type && search.type.length) {
-      let typeMatches = false;
-      search.type.forEach(type => {
-        if (pokemon.types.ownTypes.findIndex((t: Type) => t === type) >= 0) {
-          typeMatches = true;
-        }
-      });
+      // Filter list by type
+      if (search.type && search.type.length) {
+        let typeMatches = false;
+        search.type.forEach(type => {
+          if (pokemon.types.ownTypes.findIndex((t: Type) => t === type) >= 0) {
+            typeMatches = true;
+          }
+        });
 
-      if (!typeMatches) return false;
-    }
+        if (!typeMatches) return false;
+      }
 
-    // Filter list by the best stats
-    if (search.bestStats && search.bestStats.length) {
-      // @ts-ignore
-      const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
-        name,
-        value: pokemon.baseStats[name],
-      }));
+      // Filter list by the best stats
+      if (search.bestStats && search.bestStats.length) {
+        // @ts-ignore
+        const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
+          name,
+          value: pokemon.baseStats[name],
+        }));
 
-      const orderedStats = getSortedStats(parsedStats);
+        const orderedStats = getSortedStats(parsedStats);
 
-      let statMatches = true;
-      search.bestStats.forEach((stat: StatId) => {
-        if (orderedStats.slice(0, search.bestStats.length).findIndex(s => s === stat) < 0) {
-          statMatches = false;
-        }
-      });
+        let statMatches = true;
+        search.bestStats.forEach((stat: StatId) => {
+          if (orderedStats.slice(0, search.bestStats.length).findIndex(s => s === stat) < 0) {
+            statMatches = false;
+          }
+        });
 
-      if (!statMatches) return false;
-    }
+        if (!statMatches) return false;
+      }
 
-    // Filter list by the worst stats
-    if (search.worstStats && search.worstStats.length) {
-      // @ts-ignore
-      const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
-        name,
-        value: pokemon.baseStats[name],
-      }));
+      // Filter list by the worst stats
+      if (search.worstStats && search.worstStats.length) {
+        // @ts-ignore
+        const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
+          name,
+          value: pokemon.baseStats[name],
+        }));
 
-      const orderedStats = getSortedStats(parsedStats, 'asc');
+        const orderedStats = getSortedStats(parsedStats, 'asc');
 
-      let statMatches = true;
-      search.worstStats.forEach((stat: StatId) => {
-        if (orderedStats.slice(0, search.worstStats.length).findIndex(s => s === stat) < 0) {
-          statMatches = false;
-        }
-      });
+        let statMatches = true;
+        search.worstStats.forEach((stat: StatId) => {
+          if (orderedStats.slice(0, search.worstStats.length).findIndex(s => s === stat) < 0) {
+            statMatches = false;
+          }
+        });
 
-      if (!statMatches) return false;
-    }
+        if (!statMatches) return false;
+      }
 
-    return true;
-  });
+      return true;
+    })
+    .slice(pagination.first, pagination.last);
 };
 
 // Get pagination data for a particular pokemon (already filtered)

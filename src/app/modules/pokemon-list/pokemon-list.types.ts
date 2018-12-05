@@ -43,6 +43,10 @@ export interface RichPokemon extends Pokemon {
 
 export interface PokemonListState {
   collection: Array<Pokemon>;
+  pagination: {
+    first: number;
+    last: number;
+  };
 }
 
 export interface PokemonPagination {
