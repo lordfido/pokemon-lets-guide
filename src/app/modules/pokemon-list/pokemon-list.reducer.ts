@@ -1,10 +1,11 @@
 import { AnyAction } from 'redux';
-import { getSortedStats } from '../../utils/pokemon-stats';
+import { getSortedStats } from '../../utils/pokemon';
 
 import { StatId } from '../../../constants/pokemon-stats';
 
 import { PokemonListState, Pokemon } from './pokemon-list.types';
 import { SearchState } from '../search/search.types';
+import { Type } from 'pokelab-lets-go/dist/cjs/types';
 
 const initialState: PokemonListState = {
   collection: [],
@@ -47,7 +48,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
     if (search.type && search.type.length) {
       let typeMatches = false;
       search.type.forEach(type => {
-        if (pokemon.types.findIndex(t => t === type) >= 0) {
+        if (pokemon.types.ownTypes.findIndex((t: Type) => t === type) >= 0) {
           typeMatches = true;
         }
       });
@@ -60,7 +61,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       // @ts-ignore
       const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
         name,
-        value: pokemon.stats[name],
+        value: pokemon.baseStats[name],
       }));
 
       const orderedStats = getSortedStats(parsedStats);
@@ -75,12 +76,12 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       if (!statMatches) return false;
     }
 
-    // Filter list by the worststats
+    // Filter list by the worst stats
     if (search.worstStats && search.worstStats.length) {
       // @ts-ignore
       const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
         name,
-        value: pokemon.stats[name],
+        value: pokemon.baseStats[name],
       }));
 
       const orderedStats = getSortedStats(parsedStats, 'asc');

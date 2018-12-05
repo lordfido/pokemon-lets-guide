@@ -6,7 +6,7 @@ export interface TypeRelations {
 }
 
 export interface PokemonTypeData {
-  ownTypes: Array<PokemonType>;
+  ownTypes: ReadonlyArray<PokemonType>;
   relations: Array<TypeRelations>;
 }
 
@@ -23,15 +23,21 @@ export interface Pokemon {
   id: number;
   name: string;
   types: PokemonTypeData;
-  description?: string;
-
-  avatar: string;
-
-  baseCP: number;
   baseStats: PokemonStats;
+}
+
+export interface AdditionalPokemonInfo {
+  id: number;
+  description: string;
+  pokedexEntry: string;
+}
+
+export interface RichPokemon extends Pokemon {
+  description: string;
+  avatar: string;
+  baseCP: number;
   relativeStats: PokemonStats;
   suggestedStats?: Array<PokemonStats>;
-
   pokedexEntry: string;
 }
 

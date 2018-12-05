@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
+import { getRichPokemon } from '../../utils/pokemon';
 
 import { getSelectedPokemon, getPokemonPagination } from '../../root.reducer';
 
 import PokemonDetailsView from './pokemon-details-view';
 
 import { RootState } from '../../root.types';
-import { Pokemon, PokemonPagination } from '../pokemon-list/pokemon-list.types';
+import { RichPokemon, PokemonPagination } from '../pokemon-list/pokemon-list.types';
 
 interface MatchParams {
   id: string;
@@ -16,7 +17,7 @@ interface MatchParams {
 interface LocationProps extends RouteComponentProps<MatchParams> {}
 
 interface StateProps {
-  pokemon: Pokemon | void;
+  pokemon: RichPokemon | void;
   pagination: PokemonPagination;
 }
 
@@ -29,13 +30,19 @@ class PokemonDetailsWrapper extends React.Component<Props> {
     const { pokemon, pagination } = this.props;
 
     if (!pokemon) return null;
+
     return <PokemonDetailsView pokemon={pokemon} pagination={pagination} />;
   }
 }
 
-const mapStateToProps = (state: RootState, props: Props): StateProps => ({
-  pokemon: getSelectedPokemon(state)(Number(props.match.params.id)),
-  pagination: getPokemonPagination(state)(Number(props.match.params.id)),
-});
+const mapStateToProps = (state: RootState, props: Props): StateProps => {
+  const selectedPokemon = getSelectedPokemon(state)(Number(props.match.params.id));
+  const pokemon = selectedPokemon ? getRichPokemon(selectedPokemon) : undefined;
+
+  return {
+    pokemon,
+    pagination: getPokemonPagination(state)(Number(props.match.params.id)),
+  };
+};
 
 export default connect(mapStateToProps)(PokemonDetailsWrapper);

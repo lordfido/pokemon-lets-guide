@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { POKEMON } from '../../../constants/appRoutes';
 
 import { PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
+import { getAvatarFromId } from '../../utils/pokemon';
 
 interface OwnProps {
   currentPokemon: number;
@@ -30,7 +31,7 @@ class PokemonPagination extends React.Component<OwnProps> {
             to={{ pathname: `${POKEMON.replace(':id', String(prev.id))}` }}
           >
             <span className="PokemonPagination-content">
-              <span className="PokemonPagination-label">{prev.name}</span> <Avatar pokemon={prev} />
+              <span className="PokemonPagination-label">{prev.name}</span> <Avatar picture={getAvatarFromId(prev.id)} />
             </span>
           </Link>
         )}
@@ -41,7 +42,7 @@ class PokemonPagination extends React.Component<OwnProps> {
             to={{ pathname: `${POKEMON.replace(':id', String(next.id))}` }}
           >
             <span className="PokemonPagination-content">
-              <Avatar pokemon={next} /> <span className="PokemonPagination-label">{next.name}</span>
+              <Avatar picture={getAvatarFromId(next.id)} /> <span className="PokemonPagination-label">{next.name}</span>
             </span>
           </Link>
         )}

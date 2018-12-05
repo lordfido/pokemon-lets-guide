@@ -9,10 +9,10 @@ import PokemonPagination from './pokemon-pagination';
 
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 
-import { Pokemon, PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
+import { RichPokemon, PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
 
 interface OwnProps {
-  pokemon: Pokemon;
+  pokemon: RichPokemon;
   pagination: PokemonPaginationModel;
 }
 

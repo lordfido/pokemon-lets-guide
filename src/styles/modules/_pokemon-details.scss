@@ -84,19 +84,31 @@ $pokemon-stats-width: 300px;
 }
 
 .PokemonPreview {
-  height: 221px;
   text-align: center;
 
-  @media screen and (min-width: 1024px) {
-    height: 421px;
-    padding-top: 200px;
-    width: calc(100% - #{$pokemon-info-width + $pokemon-stats-width});
+  &-image {
+    height: 216px;
+    margin: 0 auto;
+    width: 216px;
   }
 
-  &-image {
-    height: 215px;
-    margin: 0 auto;
-    width: 215px;
+  @media screen and (min-width: 1024px) {
+    padding-top: 200px;
+    width: calc(100% - #{$pokemon-info-width + $pokemon-stats-width});
+
+    &-image {
+      height: 352px;
+      width: 352px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 96px;
+
+    &-image {
+      height: 560px;
+      width: 560px;
+    }
   }
 }
 

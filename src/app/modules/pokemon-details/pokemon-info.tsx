@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { sortBy } from '../../utils/arrays';
-import { getPaddedId } from '../../utils/pokemon-stats';
+import { getPaddedId } from '../../utils/pokemon';
 
 import Tag from '../../components/tag';
 
 import { getTypeIcon } from '../../../constants/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 
-import { Pokemon } from '../pokemon-list/pokemon-list.types';
+import { RichPokemon } from '../pokemon-list/pokemon-list.types';
+import { Type } from 'pokelab-lets-go/dist/cjs/types';
 
 interface OwnProps {
-  pokemon: Pokemon;
+  pokemon: RichPokemon;
 }
 
 class PokemonInfo extends React.Component<OwnProps> {
@@ -30,7 +30,7 @@ class PokemonInfo extends React.Component<OwnProps> {
           <p className="PokemonInfo-line PokemonInfo-number">Pokédex No. {getPaddedId(pokemon.id)}</p>
           <p className="PokemonInfo-line PokemonInfo-name">{pokemon.name}</p>
           <span className="PokemonInfo-line PokemonInfo-types">
-            {pokemon.types.ownTypes.map(type => (
+            {pokemon.types.ownTypes.map((type: Type) => (
               <Tag key={type} label={type} icon={getTypeIcon(type)} backgroundColor={getTypeColor(type)} />
             ))}
           </span>

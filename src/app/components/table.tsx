@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
+// @ts-ignore
 import Media from 'react-media';
 
 import Card from './card';

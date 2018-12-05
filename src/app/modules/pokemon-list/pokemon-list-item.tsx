@@ -19,6 +19,7 @@ import {
   SPEED_ID,
 } from '../../../constants/pokemon-stats';
 import { Link } from 'react-router-dom';
+import { getAvatarFromId, getBaseCP } from '../../utils/pokemon';
 
 interface OwnProps {
   pokemon: Pokemon;
@@ -30,11 +31,14 @@ class PokemonListItem extends React.Component<OwnProps> {
   render() {
     const { pokemon } = this.props;
 
+    const avatar = getAvatarFromId(pokemon.id);
+    const baseCP = getBaseCP(pokemon.baseStats);
+
     return (
       <TableRow className="PokemonList-item">
         <TableCell center>{pokemon.id}</TableCell>
         <TableCell center>
-          <CustomImage className="PokemonList-image" src={pokemon.avatar} />
+          <CustomImage className="PokemonList-image" src={avatar} />
         </TableCell>
         <TableCell>{pokemon.name}</TableCell>
         <TableCell center>
@@ -57,7 +61,7 @@ class PokemonListItem extends React.Component<OwnProps> {
             />
           )}
         </TableCell>
-        <TableCell center>{pokemon.baseCP}</TableCell>
+        <TableCell center>{baseCP}</TableCell>
         <TableCell center>{pokemon.baseStats[HP_ID]}</TableCell>
         <TableCell center>{pokemon.baseStats[ATTACK_ID]}</TableCell>
         <TableCell center>{pokemon.baseStats[DEFENSE_ID]}</TableCell>

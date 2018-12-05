@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Line } from 'rc-progress';
 
 import StatsChart from '../../components/stats-chart';
+import Tabs from '../../components/tabs';
 
+import { StatId, getStatName } from '../../../constants/pokemon-stats';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 
-import { Pokemon } from '../pokemon-list/pokemon-list.types';
-import { StatId, INITIAL_MAX_STAT_VALUE, getStatName } from '../../../constants/pokemon-stats';
-import { getStatAbsolute } from '../../utils/pokemon-stats';
-import Tabs from '../../components/tabs';
+import { RichPokemon } from '../pokemon-list/pokemon-list.types';
 
 type Bars = 'bars';
 const BARS: Bars = 'bars';
@@ -19,7 +18,7 @@ const CHART: Chart = 'chart';
 type ViewMode = Bars | Chart;
 
 interface OwnProps {
-  pokemon: Pokemon;
+  pokemon: RichPokemon;
 }
 
 interface OwnState {

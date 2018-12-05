@@ -1,22 +1,19 @@
 import * as React from 'react';
-import classnames from 'classnames';
-
-import { Pokemon } from '../modules/pokemon-list/pokemon-list.types';
 import CustomImage from './image';
 
 interface OwnProps {
-  pokemon: Pokemon;
+  picture: string;
 }
 
 class Avatar extends React.Component<OwnProps> {
   static displayName = 'Avatar';
 
   render() {
-    const { pokemon } = this.props;
+    const { picture } = this.props;
 
     return (
       <div className="Avatar">
-        <CustomImage className="Avatar-picture" src={pokemon.avatar} />
+        <CustomImage className="Avatar-picture" src={picture} />
       </div>
     );
   }
