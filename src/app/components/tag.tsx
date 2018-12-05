@@ -8,13 +8,14 @@ export interface TagProps {
   backgroundColor: string;
   className?: string;
   large?: boolean;
+  style?: React.CSSProperties;
 }
 
 class Tag extends React.Component<TagProps> {
   static displayName = 'Tag';
 
   render() {
-    const { className, label, icon, backgroundColor, large } = this.props;
+    const { className, label, icon, backgroundColor, large, style } = this.props;
 
     const classes = {
       wrapper: classnames('Tag', className, { 'Tag--large': large }),
@@ -23,7 +24,7 @@ class Tag extends React.Component<TagProps> {
     };
 
     return (
-      <span className={classes.wrapper}>
+      <span className={classes.wrapper} style={style}>
         {icon && <CustomImage className={classes.icon} style={{ backgroundColor, opacity: 1 }} src={icon} />}
         <span className={classes.label} style={{ backgroundColor }}>
           {label}

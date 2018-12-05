@@ -5,9 +5,11 @@ import Media from 'react-media';
 
 import Card from './card';
 
-type TableCellProps = { className?: string; center?: boolean; children: any };
-export const TableCell = ({ className, center, children }: TableCellProps) => (
-  <td className={classnames('Table-cell', className, { 'Table--center': center })}>{children}</td>
+type TableCellProps = { className?: string; center?: boolean; style?: React.CSSProperties; children: any };
+export const TableCell = ({ className, center, style, children }: TableCellProps) => (
+  <td className={classnames('Table-cell', className, { 'Table--center': center })} style={style}>
+    {children}
+  </td>
 );
 
 type TableRowProps = { className?: string; children: Array<JSX.Element> };

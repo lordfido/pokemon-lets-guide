@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Line } from 'rc-progress';
 
 import StatsChart from '../../components/stats-chart';
-import Tabs from '../../components/tabs';
+import Buttons from '../../components/buttons';
 
 import { StatId, getStatName } from '../../../constants/pokemon-stats';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
@@ -46,14 +46,15 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     return [
       {
         id: CHART,
+        type: 'button',
         label: 'Chart',
-        icon: 'search',
         onClick: () => {
           this.toggleViewMode(CHART);
         },
       },
       {
         id: BARS,
+        type: 'button',
         label: 'Bars',
         onClick: () => {
           this.toggleViewMode(BARS);
@@ -99,7 +100,7 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
 
           {viewMode === BARS && <div className="PokemonStats-bars">{this.renderBars()}</div>}
 
-          <Tabs options={this.getStatsTabs()} activeTab={viewMode} />
+          <Buttons align="center" options={this.getStatsTabs()} />
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router-dom';
 
-import Link from './link';
 import TouchableContent from './touchable-content';
 import { FieldProps } from '../modules/forms/field';
 
@@ -23,22 +23,28 @@ export class Button extends React.Component<{ options: ButtonProps }> {
   render() {
     const { options } = this.props;
 
-    const classes = classnames('Button', options.className, {
-      'Button--icon': options.icon && !options.label,
-      'is-disabled': options.isDisabled || options.isAlwaysDisabled,
-    });
+    const classes = {
+      wrapper: classnames('Button', options.className, {
+        'Button--icon': options.icon && !options.label,
+        'is-disabled': options.isDisabled || options.isAlwaysDisabled,
+      }),
+      button: 'Button-wrapper',
+    };
 
     if (options.to) {
-      const link = {
-        id: options.id,
-        className: `Button ${options.className}`,
-        label: options.label,
-        icon: options.icon,
-        iconLast: options.iconLast,
-        to: options.to,
-        onClick: options.onClick,
-      };
-      return <Link isTransparent options={link} />;
+      return (
+        <Link id={options.id} className={classes.wrapper} to={{ pathname: options.to }}>
+          <span className={classes.button}>
+            <TouchableContent
+              options={{
+                label: options.label,
+                icon: options.icon,
+                iconLast: options.iconLast,
+              }}
+            />
+          </span>
+        </Link>
+      );
     }
 
     const touchable = {
@@ -49,8 +55,10 @@ export class Button extends React.Component<{ options: ButtonProps }> {
 
     if (options.type === 'picture') {
       return (
-        <span id={options.id} className={classes}>
-          <TouchableContent options={touchable} />
+        <span className={classes.wrapper}>
+          <span id={options.id} className={classes.button}>
+            <TouchableContent options={touchable} />
+          </span>
         </span>
       );
     }
@@ -59,11 +67,13 @@ export class Button extends React.Component<{ options: ButtonProps }> {
       <button
         id={options.id}
         type={options.type}
-        className={classes}
+        className={classes.wrapper}
         onClick={this.onClick}
         disabled={(options.type !== 'submit' && !options.onClick) || options.isDisabled || options.isAlwaysDisabled}
       >
-        <TouchableContent options={touchable} />
+        <span className={classes.button}>
+          <TouchableContent options={touchable} />
+        </span>
       </button>
     );
   }

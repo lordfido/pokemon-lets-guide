@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { capitalize } from '../../utils/strings';
+import { getAvatarFromId, getBaseCP } from '../../utils/pokemon';
 
+import { Button } from '../../components/buttons';
+import CustomImage from '../../components/image';
 import Tag from '../../components/tag';
 import { TableRow, TableCell } from '../../components/table';
 
 import { POKEMON } from '../../../constants/appRoutes';
 import { getTypeIcon } from '../../../constants/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
-
-import { Pokemon } from './pokemon-list.types';
-import CustomImage from '../../components/image';
 import {
   ATTACK_ID,
   SPECIAL_ATTACK_ID,
@@ -18,8 +18,8 @@ import {
   HP_ID,
   SPEED_ID,
 } from '../../../constants/pokemon-stats';
-import { Link } from 'react-router-dom';
-import { getAvatarFromId, getBaseCP } from '../../utils/pokemon';
+
+import { Pokemon } from './pokemon-list.types';
 
 interface OwnProps {
   pokemon: Pokemon;
@@ -68,10 +68,15 @@ class PokemonListItem extends React.Component<OwnProps> {
         <TableCell center>{pokemon.baseStats[SPEED_ID]}</TableCell>
         <TableCell center>{pokemon.baseStats[SPECIAL_DEFENSE_ID]}</TableCell>
         <TableCell center>{pokemon.baseStats[SPECIAL_ATTACK_ID]}</TableCell>
-        <TableCell>
-          <Link className="Button" to={{ pathname: POKEMON.replace(':id', String(pokemon.id)) }}>
-            Details
-          </Link>
+        <TableCell style={{ height: 'auto' }}>
+          <Button
+            options={{
+              id: pokemon.id.toString(),
+              type: 'button',
+              label: 'Details',
+              to: POKEMON.replace(':id', String(pokemon.id)),
+            }}
+          />
         </TableCell>
       </TableRow>
     );

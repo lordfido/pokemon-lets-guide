@@ -1,5 +1,4 @@
 .Buttons {
-  font-size: 16px;
   margin: 10px 5px;
   text-align: right;
   width: calc(100% - 10px);
@@ -11,52 +10,45 @@
   &.is-center {
     text-align: center;
   }
-
-  .Button {
-    border-radius: 0;
-    margin: 5px 0;
-
-    &:first-of-type {
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
-    }
-
-    &:last-of-type {
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-
-    &.is-individual {
-      border-radius: $border-radius;
-      margin: 5px;
-    }
-  }
 }
 
 .Button {
-  background-color: $light-green;
-  border: 1px solid $white;
-  border-radius: $border-radius * 2 $border-radius $border-radius * 2 $border-radius;
+  background-color: $button-background;
+  border: 2px solid $button-background;
+  border-radius: $border-radius;
   color: $black;
   cursor: pointer;
   display: inline-block;
   font-family: inherit;
-  font-size: 14px;
-  line-height: 1.3em;
-  padding: 5px 10px;
+  font-weight: 700;
   margin: 4px 2px;
   max-width: calc(100% - 10px);
-  overflow: hidden;
   text-align: center;
-  text-overflow: ellipsis;
   vertical-align: middle;
-  white-space: nowrap;
-  transition: background-color 0.3s, border 0.3s, width 0.3s;
+
+  &-wrapper {
+    background-color: $button-background;
+    border-radius: $border-radius;
+    border: 2px solid $button-border;
+    color: $black;
+    cursor: inherit;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.3em;
+    padding: 4px 16px;
+  }
 
   &:active,
+  &:focus,
+  &:hover,
   &.is-active {
-    border-bottom-width: 0px;
-    padding-bottom: 6px;
+    background-color: $button-border;
+    border-color: $button-border;
+
+    .Button-wrapper {
+      background-color: $button-border;
+      border-color: $button-background;
+    }
   }
 
   .Loading {
@@ -66,47 +58,56 @@
 
   &--success {
     background-color: $success;
-    border-bottom-color: darken($success, 20);
     color: white;
+
+    .Button-wrapper {
+      border-color: darken($success, 20);
+    }
   }
 
   &--warning {
     background-color: $warning;
-    border-bottom-color: darken($warning, 20);
     color: white;
+
+    .Button-wrapper {
+      border-color: darken($warning, 20);
+    }
   }
 
   &--danger {
     background-color: $danger;
-    border-bottom-color: darken($danger, 20);
     color: white;
+
+    .Button-wrapper {
+      border-color: darken($danger, 20);
+    }
   }
 
   // Shapes
   &--link {
     background-color: transparent;
-    border-bottom-color: transparent;
+    border-color: transparent;
     color: $brand-color;
     cursor: pointer;
   }
 
   &--link.Button--success {
     background-color: transparent;
-    border-bottom-color: transparent;
+    border-color: transparent;
     color: $success;
     cursor: pointer;
   }
 
   &--link.Button--warning {
     background-color: transparent;
-    border-bottom-color: transparent;
+    border-color: transparent;
     color: $warning;
     cursor: pointer;
   }
 
   &--link.Button--danger {
     background-color: transparent;
-    border-bottom-color: transparent;
+    border-color: transparent;
     color: $danger;
     cursor: pointer;
   }
@@ -121,15 +122,17 @@
   }
 
   &--large {
-    padding: 15px 25px;
     font-size: 22px;
+    .Button-wrapper {
+      padding: 15px 25px;
+    }
   }
 
   // Statuses
   &:disabled,
   &.is-disabled {
     background-color: lightgray !important;
-    border-bottom-color: darkgray !important;
+    border-color: darkgray !important;
     color: gray !important;
     cursor: not-allowed !important;
   }
