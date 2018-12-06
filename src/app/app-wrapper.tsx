@@ -18,6 +18,7 @@ import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
 import { RootState } from './root.types';
+import { isProduction, isPre } from '../common/utils/platforms';
 
 const packageJson = require('../../package.json');
 const appVersion = packageJson.version;
@@ -137,4 +138,5 @@ const connectedApp = withRouter(
   )(AppWrapper)
 );
 
-export default hot(module)(connectedApp);
+const defaultModule = !isProduction() && !isPre() ? connectedApp : hot(module)(connectedApp);
+export default defaultModule;
