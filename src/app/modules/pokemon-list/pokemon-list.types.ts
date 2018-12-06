@@ -26,6 +26,10 @@ export interface Pokemon {
   baseStats: PokemonStats;
 }
 
+export interface PokemonWithBaseCP extends Pokemon {
+  baseCP: number;
+}
+
 export interface AdditionalPokemonInfo {
   id: number;
   description: string;

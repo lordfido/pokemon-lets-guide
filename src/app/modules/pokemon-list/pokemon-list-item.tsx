@@ -19,10 +19,10 @@ import {
   SPEED_ID,
 } from '../../../constants/pokemon-stats';
 
-import { Pokemon } from './pokemon-list.types';
+import { PokemonWithBaseCP } from './pokemon-list.types';
 
 interface OwnProps {
-  pokemon: Pokemon;
+  pokemon: PokemonWithBaseCP;
 }
 
 class PokemonListItem extends React.Component<OwnProps> {

@@ -8,6 +8,7 @@ import { getPokemonList } from '../../root.reducer';
 
 import { RootState } from '../../root.types';
 import { Pokemon } from './pokemon-list.types';
+import { getBaseCP } from '../../utils/pokemon';
 
 type StateProps = {
   collection: Array<Pokemon>;
@@ -50,11 +51,13 @@ class PokemonListWrapper extends React.Component<Props, OwnState> {
     const { collection } = this.props;
     const { sortBy: sortOrder, reverse } = this.state;
 
+    const collectionWithCP = collection.map(p => ({ ...p, baseCP: getBaseCP(p.baseStats) }));
+
     if (sortOrder === 'id' || sortOrder === 'name') {
-      return collection.sort(sortBy(sortOrder, reverse ? 'desc' : 'asc'));
+      return collectionWithCP.sort(sortBy(sortOrder, reverse ? 'desc' : 'asc'));
     }
 
-    return collection.sort(sortBy(sortOrder, reverse ? 'asc' : 'desc'));
+    return collectionWithCP.sort(sortBy(sortOrder, reverse ? 'asc' : 'desc'));
   }
 
   handleLoadMore() {

@@ -15,10 +15,10 @@ import {
   getStatName,
 } from '../../../constants/pokemon-stats';
 
-import { Pokemon } from './pokemon-list.types';
+import { PokemonWithBaseCP } from './pokemon-list.types';
 
 type OwnProps = {
-  collection: Array<Pokemon>;
+  collection: Array<PokemonWithBaseCP>;
   sort: (key: string) => void;
   handleLoadMore: () => void;
 };

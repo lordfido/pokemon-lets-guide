@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
-import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
 import { setLastSession, setStore } from '../common/utils/idb';
@@ -18,7 +17,6 @@ import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
 import { RootState } from './root.types';
-import { isProduction, isPre } from '../common/utils/platforms';
 
 const packageJson = require('../../package.json');
 const appVersion = packageJson.version;
@@ -138,5 +136,4 @@ const connectedApp = withRouter(
   )(AppWrapper)
 );
 
-const defaultModule = !isProduction() && !isPre() ? hot(module)(connectedApp) : connectedApp;
-export default defaultModule;
+export default hot(module)(connectedApp);
