@@ -1,5 +1,14 @@
 import { PokemonType } from '../../../constants/pokemon-types';
 
+interface AlolanForm {
+  name: string;
+  avatar?: string;
+}
+
+interface MegaEvolution extends AlolanForm {
+  evolvesWith: string;
+}
+
 export interface TypeRelations {
   id: PokemonType;
   effectiveness: number;
@@ -24,6 +33,8 @@ export interface Pokemon {
   name: string;
   types: PokemonTypeData;
   baseStats: PokemonStats;
+  alolanForm?: AlolanForm;
+  megaEvolution?: MegaEvolution;
 }
 
 export interface PokemonWithBaseCP extends Pokemon {

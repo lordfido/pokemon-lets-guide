@@ -47,30 +47,35 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
 
   return collection
     .filter(pokemon => {
-      // Filter list by number
-      if (typeof search.number !== 'undefined') {
-        if (!new RegExp(String(search.number)).test(String(pokemon.id))) {
+      // Filter list by name or number
+      if (typeof search.nameOrNumber !== 'undefined') {
+        if (
+          !new RegExp(String(search.nameOrNumber)).test(String(pokemon.id)) &&
+          !new RegExp(search.nameOrNumber).test(pokemon.name.toLowerCase())
+        ) {
           return false;
         }
       }
 
-      // Filter list by name
-      if (search.name && search.name.length) {
-        if (!new RegExp(search.name).test(pokemon.name.toLowerCase())) {
-          return false;
-        }
-      }
-
-      // Filter list by type
-      if (search.type && search.type.length) {
+      // Filter list by included types
+      if (search.includedTypes && search.includedTypes.length) {
         let typeMatches = false;
-        search.type.forEach(type => {
-          if (pokemon.types.ownTypes.findIndex((t: Type) => t === type) >= 0) {
+        search.includedTypes.forEach(type => {
+          if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
             typeMatches = true;
           }
         });
 
         if (!typeMatches) return false;
+      }
+
+      // Filter list by excluded types
+      if (search.excludedTypes && search.excludedTypes.length) {
+        search.includedTypes.forEach(type => {
+          if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
+            return false;
+          }
+        });
       }
 
       // Filter list by the best stats
@@ -112,6 +117,10 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
 
         if (!statMatches) return false;
       }
+
+      if (!search.showMegaevolutions && pokemon.megaEvolution) return false;
+
+      if (!search.showAlolanForms && pokemon.alolanForm) return false;
 
       return true;
     })

@@ -110,11 +110,28 @@ export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon
     speed: pBaseStats[Stats.Speed],
   };
 
+  const alolanForm = pokemon.isAlolan
+    ? {
+        name: pokemon.name,
+        avatar: '',
+      }
+    : undefined;
+
+  const megaEvolution = pokemon.megaEvolvedWith
+    ? {
+        name: pokemon.name,
+        avatar: '',
+        evolvesWith: pokemon.megaEvolvedWith,
+      }
+    : undefined;
+
   return {
     id,
     name,
     types,
     baseStats,
+    alolanForm,
+    megaEvolution,
   };
 };
 

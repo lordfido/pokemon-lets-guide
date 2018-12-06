@@ -20,7 +20,26 @@ class Dropdown extends React.Component<OwnProps> {
     const { options, onClick, onChange, onFocus } = this.props;
 
     if (options.isMulti) {
-      return <Select onChange={onChange} options={options.options} isMulti />;
+      return (
+        <label
+          className={classnames('Dropdown', options.className, {
+            'is-submitted': options.isSubmitted || options.error,
+          })}
+        >
+          <span className="Dropdown-label">
+            {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
+            {options.label}
+          </span>
+
+          <Select
+            placeholder={options.placeholder}
+            options={options.options}
+            onChange={onChange}
+            isMulti
+            isDisabled={(options.isDisabled && !options.isAlwaysEnabled) || options.isAlwaysDisabled}
+          />
+        </label>
+      );
     }
 
     return (

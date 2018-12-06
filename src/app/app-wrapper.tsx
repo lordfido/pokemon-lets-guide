@@ -7,7 +7,7 @@ import { log } from '../common/utils/logger';
 import registerServiceWorker from './utils/service-worker';
 
 import AppView from './app-view';
-import pokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
+// import pokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
 import pokemonDetailsWrapper from './modules/pokemon-details/pokemon-details-wrapper';
 import searchWrapper from './modules/search/search-wrapper';
 
@@ -109,7 +109,7 @@ class AppWrapper extends React.Component<Props> {
         <Switch>
           <Route path={routes.SEARCH} component={searchWrapper} />
           <Route exact path={routes.POKEMON} component={pokemonDetailsWrapper} />
-          <Route exact path={routes.HOME} component={pokemonListWrapper} />
+          <Route exact path={routes.HOME} component={searchWrapper} />
         </Switch>
       </AppView>
     );

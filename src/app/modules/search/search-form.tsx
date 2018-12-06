@@ -1,9 +1,19 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter, Redirect } from 'react-router';
-import Dropdown from '../forms/form-dropdown';
-import { getTypes, getTypeIcon, PokemonType } from '../../../constants/pokemon-types';
+
 import Field from '../forms/field';
+
 import { SEARCH, HOME } from '../../../constants/appRoutes';
+import { getTypes, getTypeIcon } from '../../../constants/pokemon-types';
+import {
+  HP_ID,
+  ATTACK_ID,
+  DEFENSE_ID,
+  SPECIAL_ATTACK_ID,
+  SPECIAL_DEFENSE_ID,
+  SPEED_ID,
+  getStatName,
+} from '../../../constants/pokemon-stats';
 
 const typeFilterOptions = getTypes().map(option => ({
   type: 'option',
@@ -12,6 +22,15 @@ const typeFilterOptions = getTypes().map(option => ({
   value: option.id,
   icon: getTypeIcon(option.id),
 }));
+
+const statsFilterOptions = [HP_ID, ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID].map(
+  stat => ({
+    type: 'option',
+    id: stat,
+    label: getStatName(stat),
+    value: stat,
+  })
+);
 
 interface MatchParams {
   query: string;
@@ -34,13 +53,8 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
     };
   }
 
-  filterByType(selection: Array<any>) {
-    // @ts-ignore
-    console.log('Selected', selection);
-
-    this.setState({
-      type: selection.map(option => option.value).join(','),
-    });
+  filterByType(filter: string, selection: any) {
+    console.log({ filter, selection });
   }
 
   getCurrentQuery() {
@@ -62,14 +76,72 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
   }
 
   render() {
-    const options = {
-      type: 'multi',
-      id: 'type',
-      form: 'search',
-      label: 'Types',
-      options: typeFilterOptions,
-      onChange: (selection: Array<any>) => this.filterByType(selection),
-    };
+    const fields = [
+      {
+        type: 'text',
+        id: 'nameOrNumber',
+        form: 'search',
+        label: 'Name or number',
+        onChange: (selection: Array<any>) => this.filterByType('nameOrNumber', selection),
+        isDisabled: true,
+      },
+      {
+        type: 'multi',
+        id: 'includedTypes',
+        form: 'search',
+        label: 'Include types',
+        placeholder: 'Select some types',
+        options: typeFilterOptions,
+        onChange: (selection: Array<any>) => this.filterByType('includedTypes', selection),
+        isDisabled: true,
+      },
+      {
+        type: 'multi',
+        id: 'excludedTypes',
+        form: 'search',
+        label: 'Exclude types',
+        placeholder: 'Select some types',
+        options: statsFilterOptions,
+        onChange: (selection: Array<any>) => this.filterByType('excludedTypes', selection),
+        isDisabled: true,
+      },
+      {
+        type: 'multi',
+        id: 'bestStats',
+        form: 'search',
+        label: 'Best stats',
+        placeholder: 'Select some stats',
+        options: statsFilterOptions,
+        onChange: (selection: Array<any>) => this.filterByType('bestStats', selection),
+        isDisabled: true,
+      },
+      {
+        type: 'multi',
+        id: 'worstStats',
+        form: 'search',
+        label: 'Worst stats',
+        placeholder: 'Select some stats',
+        options: statsFilterOptions,
+        onChange: (selection: Array<any>) => this.filterByType('worstStats', selection),
+        isDisabled: true,
+      },
+      {
+        type: 'switch',
+        id: 'showMegaevolutions',
+        form: 'search',
+        label: 'Show megaevolutions',
+        onChange: (selection: Array<any>) => this.filterByType('showMegaevolutions', selection),
+        isDisabled: true,
+      },
+      {
+        type: 'switch',
+        id: 'showAlolanForms',
+        form: 'search',
+        label: 'Show alolan forms',
+        onChange: (selection: Array<any>) => this.filterByType('showAlolanForms', selection),
+        isDisabled: true,
+      },
+    ];
 
     const currentQuery = this.getCurrentQuery();
     const nextQuery = this.getNextQuery();
@@ -79,7 +151,9 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
 
     return (
       <form noValidate>
-        <Field options={options} />
+        {fields.map(field => (
+          <Field key={field.id} options={field} />
+        ))}
       </form>
     );
   }

@@ -3,15 +3,17 @@ import { AnyAction } from 'redux';
 import { SearchState } from './search.types';
 
 const initialState: SearchState = {
-  number: undefined,
-  name: '',
-  type: [],
+  nameOrNumber: undefined,
+  includedTypes: [],
+  excludedTypes: [],
   bestStats: [],
   worstStats: [],
-  canLearnSkills: [],
-  canLearnMTs: [],
-  dropsCandies: [],
-  needsCandies: [],
+  showMegaevolutions: false,
+  showAlolanForms: false,
+  // canLearnSkills: [],
+  // canLearnMTs: [],
+  // dropsCandies: [],
+  // needsCandies: [],
 };
 
 const reducer = (state = initialState, action: AnyAction) => {
