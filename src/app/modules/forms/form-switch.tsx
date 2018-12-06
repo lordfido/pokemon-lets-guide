@@ -27,7 +27,7 @@ class Switch extends React.Component<OwnProps> {
           className="Switch-field"
           type="checkbox"
           required={options.isRequired}
-          disabled={options.isDisabled && (typeof options.isDiactivatable === 'undefined' || options.isDiactivatable)}
+          disabled={options.isDisabled}
           defaultChecked={options.isChecked}
           onClick={onClick}
           onChange={onChange}

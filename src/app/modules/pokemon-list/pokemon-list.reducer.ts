@@ -48,10 +48,10 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
   return collection
     .filter(pokemon => {
       // Filter list by name or number
-      if (typeof search.nameOrNumber !== 'undefined') {
+      if (search.nameOrNumber) {
         if (
-          !new RegExp(String(search.nameOrNumber)).test(String(pokemon.id)) &&
-          !new RegExp(search.nameOrNumber).test(pokemon.name.toLowerCase())
+          new RegExp(search.nameOrNumber.toLowerCase()).test(String(pokemon.id)) === false &&
+          new RegExp(search.nameOrNumber.toLowerCase()).test(pokemon.name.toLowerCase()) === false
         ) {
           return false;
         }
@@ -59,29 +59,32 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
 
       // Filter list by included types
       if (search.includedTypes && search.includedTypes.length) {
-        let typeMatches = false;
+        let shouldShow = false;
         search.includedTypes.forEach(type => {
           if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
-            typeMatches = true;
+            shouldShow = true;
           }
         });
 
-        if (!typeMatches) return false;
+        if (!shouldShow) return false;
       }
 
       // Filter list by excluded types
       if (search.excludedTypes && search.excludedTypes.length) {
-        search.includedTypes.forEach(type => {
+        let shouldSkip = false;
+        search.excludedTypes.forEach(type => {
           if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
-            return false;
+            shouldSkip = true;
           }
         });
+
+        if (shouldSkip) return false;
       }
 
       // Filter list by the best stats
       if (search.bestStats && search.bestStats.length) {
         // @ts-ignore
-        const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
+        const parsedStats = Object.keys(pokemon.baseStats).map((name: StatId) => ({
           name,
           value: pokemon.baseStats[name],
         }));
@@ -101,7 +104,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       // Filter list by the worst stats
       if (search.worstStats && search.worstStats.length) {
         // @ts-ignore
-        const parsedStats = Object.keys(pokemon.stats).map((name: StatId) => ({
+        const parsedStats = Object.keys(pokemon.baseStats).map((name: StatId) => ({
           name,
           value: pokemon.baseStats[name],
         }));

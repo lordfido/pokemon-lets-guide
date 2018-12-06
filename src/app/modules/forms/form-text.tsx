@@ -36,7 +36,7 @@ class Text extends React.Component<OwnProps> {
             type={options.type}
             className={classnames('Text-field', options.className, { 'has-errors': options.error })}
             placeholder={options.placeholder}
-            disabled={options.isDisabled && (typeof options.isDiactivatable === 'undefined' || options.isDiactivatable)}
+            disabled={options.isDisabled}
             required={options.isRequired}
             defaultValue={options.model || ''}
             onClick={onClick}
@@ -51,7 +51,7 @@ class Text extends React.Component<OwnProps> {
             name={options.id}
             className={classnames('Text-field', 'is-area', options.className, { 'has-errors': options.error })}
             placeholder={options.placeholder}
-            disabled={options.isDisabled && (typeof options.isDiactivatable === 'undefined' || options.isDiactivatable)}
+            disabled={options.isDisabled}
             required={options.isRequired}
             defaultValue={options.model || ''}
             onClick={onClick}

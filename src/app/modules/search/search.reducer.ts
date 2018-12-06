@@ -18,6 +18,17 @@ const initialState: SearchState = {
 
 const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
+    case 'UPDATE_FILTER':
+      return {
+        ...state,
+        [action.payload.filter]: action.payload.value,
+      };
+
+    case 'RESET_FILTERS':
+      return {
+        ...initialState,
+      };
+
     default:
       return state;
   }

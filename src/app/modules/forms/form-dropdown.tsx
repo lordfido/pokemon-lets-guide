@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Select from 'react-select';
 
 import { FieldProps } from './field';
+import TouchableContent from '../../components/touchable-content';
 
 interface Options extends FieldProps {}
 
@@ -27,8 +28,7 @@ class Dropdown extends React.Component<OwnProps> {
           })}
         >
           <span className="Dropdown-label">
-            {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
-            {options.label}
+            <TouchableContent options={options} />
           </span>
 
           <Select
@@ -36,7 +36,7 @@ class Dropdown extends React.Component<OwnProps> {
             options={options.options}
             onChange={onChange}
             isMulti
-            isDisabled={(options.isDisabled && !options.isAlwaysEnabled) || options.isAlwaysDisabled}
+            isDisabled={options.isDisabled}
           />
         </label>
       );
@@ -49,8 +49,7 @@ class Dropdown extends React.Component<OwnProps> {
         })}
       >
         <span className="Dropdown-label">
-          {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
-          {options.label}
+          <TouchableContent options={options} />
         </span>
 
         <select
@@ -61,6 +60,7 @@ class Dropdown extends React.Component<OwnProps> {
           onClick={onClick}
           onChange={onChange}
           onFocus={onFocus}
+          disabled={options.isDisabled}
         >
           {options.options &&
             options.options.map(option => (

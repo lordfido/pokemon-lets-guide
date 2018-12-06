@@ -57,6 +57,10 @@ export interface FieldProps {
   onUpload?: (result: string, response: any) => void;
 }
 
+const checkIsDisabled = (options: FieldProps) =>
+  (typeof options.isDiactivatable === 'undefined' || options.isDiactivatable) &&
+  ((options.isDisabled && !options.isAlwaysEnabled) || options.isAlwaysDisabled);
+
 interface OwnProps {
   options: FieldProps;
 }
@@ -96,7 +100,11 @@ class Field extends React.Component<OwnProps> {
     log(`onChange() of <${options.id}>`, this.props);
 
     if (options.onChange) {
-      options.onChange(event);
+      if (typeof event.currentTarget !== 'undefined' && typeof event.currentTarget.value !== 'undefined') {
+        options.onChange(event.currentTarget.value);
+      } else {
+        options.onChange(event);
+      }
     }
   };
 
@@ -122,7 +130,7 @@ class Field extends React.Component<OwnProps> {
 
     const options = {
       ...defaultOptions,
-      isDisabled: (!defaultOptions.isAlwaysEnabled && defaultOptions.isDisabled) || defaultOptions.isAlwaysDisabled,
+      isDisabled: checkIsDisabled(defaultOptions),
     };
 
     switch (options.type) {

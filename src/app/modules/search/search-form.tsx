@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter, Redirect } from 'react-router';
+import { connect } from 'react-redux';
 
 import Field from '../forms/field';
+import Buttons from '../../components/buttons';
+
+import { updateFilters, resetFilters } from './search.actions';
 
 import { SEARCH, HOME } from '../../../constants/appRoutes';
 import { getTypes, getTypeIcon } from '../../../constants/pokemon-types';
@@ -38,23 +42,20 @@ interface MatchParams {
 
 type RouteProps = RouteComponentProps<MatchParams>;
 
-interface OwnState {
-  type: string | void;
+interface DispatchProps {
+  updateFilters: Function;
+  resetFilters: Function;
 }
 
-class SearchForm extends React.Component<RouteProps, OwnState> {
+type Props = RouteProps & DispatchProps;
+
+class SearchForm extends React.Component<Props> {
   static displayName = 'SearchForm';
 
-  constructor(props: RouteProps) {
-    super(props);
-
-    this.state = {
-      type: undefined,
-    };
-  }
-
   filterByType(filter: string, selection: any) {
-    console.log({ filter, selection });
+    const { updateFilters } = this.props;
+
+    updateFilters({ filter, value: selection.map ? selection.map((s: any) => s.value) : selection });
   }
 
   getCurrentQuery() {
@@ -67,15 +68,18 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
   }
 
   getNextQuery() {
-    const { type } = this.state;
-    let query = '';
+    // const { type } = this.state;
+    // let query = '';
 
-    if (type) query += `type=${type};`;
+    // if (type) query += `type=${type};`;
 
-    return query;
+    // return query;
+    return '';
   }
 
   render() {
+    const { resetFilters } = this.props;
+
     const fields = [
       {
         type: 'text',
@@ -101,7 +105,7 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
         form: 'search',
         label: 'Exclude types',
         placeholder: 'Select some types',
-        options: statsFilterOptions,
+        options: typeFilterOptions,
         onChange: (selection: Array<any>) => this.filterByType('excludedTypes', selection),
         isDisabled: true,
       },
@@ -145,7 +149,7 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
 
     const currentQuery = this.getCurrentQuery();
     const nextQuery = this.getNextQuery();
-    if (currentQuery !== nextQuery) {
+    if (false && currentQuery !== nextQuery) {
       return <Redirect to={{ pathname: SEARCH.replace(':query', nextQuery) }} />;
     }
 
@@ -154,9 +158,32 @@ class SearchForm extends React.Component<RouteProps, OwnState> {
         {fields.map(field => (
           <Field key={field.id} options={field} />
         ))}
+
+        <Buttons
+          options={[
+            {
+              id: 'reset',
+              type: 'button',
+              label: 'Reset',
+              onClick: () => {
+                resetFilters();
+              },
+            },
+          ]}
+        />
       </form>
     );
   }
 }
 
-export default withRouter(SearchForm);
+const mapDispatchToProps = {
+  updateFilters,
+  resetFilters,
+};
+
+export default withRouter(
+  connect(
+    undefined,
+    mapDispatchToProps
+  )(SearchForm)
+);
