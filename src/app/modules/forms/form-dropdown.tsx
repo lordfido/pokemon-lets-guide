@@ -5,7 +5,9 @@ import Select from 'react-select';
 import { FieldProps } from './field';
 import TouchableContent from '../../components/touchable-content';
 
-interface Options extends FieldProps {}
+interface Options extends FieldProps {
+  colourStyles?: any;
+}
 
 interface OwnProps {
   options: Options;
@@ -37,6 +39,7 @@ class Dropdown extends React.Component<OwnProps> {
             onChange={onChange}
             isMulti
             isDisabled={options.isDisabled}
+            styles={options.colourStyles}
           />
         </label>
       );

@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chroma-js": "^1.4.1",
     "classnames": "^2.2.6",
     "compare-versions": "^3.4.0",
     "history": "^4.7.2",
@@ -69,6 +70,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.0.0",
+    "@types/chroma-js": "^1.4.0",
     "@types/classnames": "^2.2.6",
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/node": "^10.12.12",
