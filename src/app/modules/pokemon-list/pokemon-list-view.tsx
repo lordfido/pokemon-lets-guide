@@ -20,7 +20,7 @@ import { PokemonWithBaseCP } from './pokemon-list.types';
 type OwnProps = {
   collection: Array<PokemonWithBaseCP>;
   sort: (key: string) => void;
-  handleLoadMore: () => void;
+  handleLoadMore?: () => void;
 };
 
 class PokemonListView extends React.Component<OwnProps> {
@@ -38,11 +38,12 @@ class PokemonListView extends React.Component<OwnProps> {
               label: '#',
               onClick: () => sort('id'),
             },
-            {
-              label: 'Avatar',
-            },
+            // {
+            //   label: 'Avatar',
+            // },
             {
               label: 'Name',
+              onClick: () => sort('name'),
             },
             {
               label: 'Type 1',
@@ -86,17 +87,19 @@ class PokemonListView extends React.Component<OwnProps> {
           ))}
         </Table>
 
-        <Buttons
-          align="center"
-          options={[
-            {
-              id: 'load-more',
-              type: 'button',
-              label: 'Load more',
-              onClick: handleLoadMore,
-            },
-          ]}
-        />
+        {handleLoadMore && (
+          <Buttons
+            align="center"
+            options={[
+              {
+                id: 'load-more',
+                type: 'button',
+                label: 'Load more',
+                onClick: handleLoadMore,
+              },
+            ]}
+          />
+        )}
       </React.Fragment>
     );
   }

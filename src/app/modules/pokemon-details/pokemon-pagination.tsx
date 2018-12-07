@@ -8,7 +8,7 @@ import { PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pok
 import { getAvatarFromId } from '../../utils/pokemon';
 
 interface OwnProps {
-  currentPokemon: number;
+  currentPokemon: string;
   pagination: PokemonPaginationModel;
 }
 

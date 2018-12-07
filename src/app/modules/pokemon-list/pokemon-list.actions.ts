@@ -12,6 +12,19 @@ export const getPokemon: ActionCreator = () => dispatch => {
   });
 };
 
+interface Sort {
+  sortBy: string;
+  order: string;
+}
+export const sortPokemonList: ActionCreator = (sort: Sort) => dispatch => {
+  dispatch({
+    type: 'SORT_POKEMON_LIST',
+    payload: {
+      sort,
+    },
+  });
+};
+
 export const loadMore: ActionCreator = () => dispatch => {
   dispatch({
     type: 'LOAD_MORE',

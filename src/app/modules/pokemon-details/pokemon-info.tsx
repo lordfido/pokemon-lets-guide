@@ -29,7 +29,9 @@ class PokemonInfo extends React.Component<OwnProps> {
       <React.Fragment>
         <div className="PokemonInfo">
           <div className="PokemonInfo-wrapper">
-            <p className="PokemonInfo-line PokemonInfo-number">Pokédex No. {getPaddedId(pokemon.id)}</p>
+            <p className="PokemonInfo-line PokemonInfo-number">
+              Pokédex No. {getPaddedId(String(pokemon.nationalNumber))}
+            </p>
             <p className="PokemonInfo-line PokemonInfo-name">{pokemon.name}</p>
             <span className="PokemonInfo-line PokemonInfo-types">
               {pokemon.types.ownTypes.map((type: Type) => (

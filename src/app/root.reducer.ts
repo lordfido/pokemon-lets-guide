@@ -13,8 +13,13 @@ const rootReducer: Reducer<RootState> = combineReducers({
 });
 
 // Custom selectors
-export const getSelectedPokemon = ({ pokemon }: RootState) => pokemonSelectors.getSelectedPokemon(pokemon);
+// Pokemon List
 export const getPokemonList = ({ pokemon, search }: RootState) => pokemonSelectors.getPokemonList(pokemon, search);
+export const getPokemonListPagination = ({ pokemon }: RootState) => pokemonSelectors.getPokemonListPagination(pokemon);
+export const getPokemonSortOptions = ({ pokemon }: RootState) => pokemonSelectors.getPokemonSortOptions(pokemon);
+
+// Pokemon details
+export const getSelectedPokemon = ({ pokemon }: RootState) => pokemonSelectors.getSelectedPokemon(pokemon);
 export const getPokemonPagination = ({ pokemon, search }: RootState) =>
   pokemonSelectors.getPokemonPagination(pokemon, search);
 

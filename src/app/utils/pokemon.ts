@@ -1,4 +1,6 @@
 import { Pokedex, Stats, Types } from 'pokelab-lets-go';
+import { Type } from 'pokelab-lets-go/dist/cjs/types';
+import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
 import { sortBy } from './arrays';
 import pokemonExtraInfoList from '../../common/apis/mocks';
 
@@ -15,21 +17,68 @@ import {
   MAX_IV_VALUE,
 } from '../../constants/pokemon-stats';
 
-import { PokemonStats, Pokemon, RichPokemon, TypeRelations } from '../modules/pokemon-list/pokemon-list.types';
-import { Type } from 'pokelab-lets-go/dist/cjs/types';
+import {
+  PokemonStats,
+  Pokemon,
+  RichPokemon,
+  TypeRelations,
+  PokemonWithBaseCP,
+} from '../modules/pokemon-list/pokemon-list.types';
 
 const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
 
-export const getPaddedId = (pokemonId: number): string => {
+export const getPaddedId = (pokemonId: string): string => {
   let number = String(pokemonId);
 
-  if (pokemonId < 10) number = `00${pokemonId}`;
-  else if (pokemonId < 100) number = `0${pokemonId}`;
+  if (pokemonId.length === 1) number = `00${pokemonId}`;
+  else if (pokemonId.length === 2) number = `0${pokemonId}`;
 
   return number;
 };
 
-export const getAvatarFromId = (pokemonId: number): string =>
+const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
+  if (!evolvesWith) return id;
+
+  const megaOptions = [
+    {
+      name: 'X',
+      form: 'f2',
+    },
+    {
+      name: 'Y',
+      form: 'f3',
+    },
+    {
+      name: 'Z',
+      form: 'f4',
+    },
+  ];
+
+  for (const index in megaOptions) {
+    const option = megaOptions[index];
+    if (new RegExp(option.name).test(evolvesWith)) {
+      return `${id}_${option.form}`;
+    }
+  }
+
+  return `${id}_${megaOptions[0].form}`;
+};
+
+export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
+  if (!evolvesWith || new RegExp('Mega ').test(name)) return name;
+
+  const megaOptions = ['X', 'Y', 'Z'];
+  for (const index in megaOptions) {
+    const option = megaOptions[index];
+    if (new RegExp(option).test(evolvesWith)) {
+      return `Mega ${name} ${option}`;
+    }
+  }
+
+  return `Mega ${name}`;
+};
+
+export const getAvatarFromId = (pokemonId: string): string =>
   `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPaddedId(pokemonId)}.png`;
 
 export const getBaseCP = (stats: PokemonStats): number =>
@@ -85,14 +134,8 @@ export const getSuggestedIVs = (stats: PokemonStats): Array<PokemonStats> => {
 export const removeSpecialForms = (pokemon: Pokedex.PokemonSheet) =>
   /Mega\ /.test(pokemon.name) === false && /Alolan/.test(pokemon.name) === false;
 
-export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon => {
+export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): PokemonWithBaseCP => {
   const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats } = pokemon;
-
-  // Get the ID
-  const id = Number(nationalNumber);
-
-  // Get the name
-  const name = String(pName);
 
   // Get pokemon types
   const types = {
@@ -110,52 +153,44 @@ export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon
     speed: pBaseStats[Stats.Speed],
   };
 
-  const alolanForm = pokemon.isAlolan
-    ? {
-        name: pokemon.name,
-        avatar: '',
-      }
-    : undefined;
+  // Get baseCP
+  const baseCP = getBaseCP(baseStats);
 
+  // Get alolan form flag
+  const alolanForm = !!pokemon.isAlolan;
+
+  // Get megaevolution data
   const megaEvolution = pokemon.megaEvolvedWith
     ? {
-        name: pokemon.name,
-        avatar: '',
         evolvesWith: pokemon.megaEvolvedWith,
       }
     : undefined;
 
+  // Get the ID
+  const rawId = getPaddedId(String(nationalNumber));
+  const id = alolanForm ? `${rawId}_f2` : getMegaevolutionId(rawId, pokemon.megaEvolvedWith);
+
+  // Get the name
+  const rawName = String(pName);
+  const name = alolanForm ? `${rawName} Alolan` : getMegaevolutionName(rawName, pokemon.megaEvolvedWith);
+
   return {
     id,
+    nationalNumber,
     name,
     types,
     baseStats,
+    baseCP,
     alolanForm,
     megaEvolution,
   };
 };
 
-export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
-  // Get some hardcoded data
-  const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => pokemon.id === basePokemon.id);
-
-  // Get the ID
-  const id = Number(basePokemon.id);
-
-  // Get pokemon short description
-  const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');
-
-  // Get pokedex entry (text)
-  const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
-
-  // Get an avatar
-  const avatar = getAvatarFromId(basePokemon.id);
-
-  // Get pokemon type strengths and weaknesses
+export const getTypeRelations = (types: ReadonlyArray<Type>) => {
   const relations: Array<TypeRelations> = [];
 
   // Loop through each one of current pokemon's types
-  basePokemon.types.ownTypes.forEach((defendingType: Type) => {
+  types.forEach((defendingType: Type) => {
     // Loop through all available pokemon types
     Types.All.forEach(attackingType => {
       // Get the effectiveness of this combination
@@ -183,9 +218,28 @@ export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
     });
   });
 
+  return relations.filter(r => r.effectiveness !== 1).sort(sortBy('effectiveness'));
+};
+
+export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
+  // Get some hardcoded data
+  const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
+
+  // Get pokemon short description
+  const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');
+
+  // Get pokedex entry (text)
+  const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
+
+  // Get an avatar
+  const avatar = getAvatarFromId(basePokemon.id);
+
+  // Get pokemon type strengths and weaknesses
+  const relations = getTypeRelations(basePokemon.types.ownTypes);
+
   const types = {
     ...basePokemon.types,
-    relations: relations.filter(r => r.effectiveness !== 1).sort(sortBy('effectiveness')),
+    relations,
   };
 
   // Get base CP
@@ -207,7 +261,6 @@ export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
 
   return {
     ...basePokemon,
-    id,
     description,
     pokedexEntry,
     avatar,

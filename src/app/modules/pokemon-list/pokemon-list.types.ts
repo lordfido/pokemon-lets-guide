@@ -1,11 +1,6 @@
 import { PokemonType } from '../../../constants/pokemon-types';
 
-interface AlolanForm {
-  name: string;
-  avatar?: string;
-}
-
-interface MegaEvolution extends AlolanForm {
+export interface MegaEvolution {
   evolvesWith: string;
 }
 
@@ -29,11 +24,12 @@ export interface PokemonStats {
 }
 
 export interface Pokemon {
-  id: number;
+  id: string;
+  nationalNumber: number;
   name: string;
   types: PokemonTypeData;
   baseStats: PokemonStats;
-  alolanForm?: AlolanForm;
+  alolanForm: boolean;
   megaEvolution?: MegaEvolution;
 }
 
@@ -42,7 +38,7 @@ export interface PokemonWithBaseCP extends Pokemon {
 }
 
 export interface AdditionalPokemonInfo {
-  id: number;
+  id: string;
   description: string;
   pokedexEntry: string;
 }
@@ -57,11 +53,17 @@ export interface RichPokemon extends Pokemon {
 }
 
 export interface PokemonListState {
-  collection: Array<Pokemon>;
-  pagination: {
-    first: number;
-    last: number;
+  collection: Array<PokemonWithBaseCP>;
+  pagination: PokemonListPagination;
+  sort: {
+    sortBy: string;
+    order: string;
   };
+}
+
+export interface PokemonListPagination {
+  first: number;
+  last: number;
 }
 
 export interface PokemonPagination {

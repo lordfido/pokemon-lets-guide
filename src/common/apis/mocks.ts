@@ -2,119 +2,119 @@ import { AdditionalPokemonInfo } from '../../app/modules/pokemon-list/pokemon-li
 
 const initialPokemon: Array<AdditionalPokemonInfo> = [
   {
-    id: 25,
+    id: '25',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 26,
+    id: '26',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 58,
+    id: '58',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 59,
+    id: '59',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 66,
+    id: '66',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 67,
+    id: '67',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 68,
+    id: '68',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 92,
+    id: '92',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 93,
+    id: '93',
     description: 'Funny ghost',
     pokedexEntry:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
-    id: 94,
+    id: '94',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 102,
+    id: '102',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 103,
+    id: '103',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 111,
+    id: '111',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 112,
+    id: '112',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 129,
+    id: '129',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 130,
+    id: '130',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 131,
+    id: '131',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 147,
+    id: '147',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 148,
+    id: '148',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 149,
+    id: '149',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 151,
+    id: '151',
     description: '',
     pokedexEntry:
       'Apparently, it appears only to those people who are pure of heart and have a strong desire to see it.',
   },
   {
-    id: 808,
+    id: '808',
     description: '',
     pokedexEntry: '',
   },
   {
-    id: 809,
+    id: '809',
     description: '',
     pokedexEntry: '',
   },

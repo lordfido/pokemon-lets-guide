@@ -87,9 +87,9 @@ $pokemon-stats-width: 300px;
   text-align: center;
 
   &-image {
-    height: 216px;
+    max-height: 216px;
     margin: 0 auto;
-    width: 216px;
+    max-width: 216px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -97,8 +97,8 @@ $pokemon-stats-width: 300px;
     width: calc(100% - #{$pokemon-info-width + $pokemon-stats-width});
 
     &-image {
-      height: 352px;
-      width: 352px;
+      max-height: 352px;
+      max-width: 352px;
     }
   }
 
@@ -106,8 +106,8 @@ $pokemon-stats-width: 300px;
     padding-top: 96px;
 
     &-image {
-      height: 560px;
-      width: 560px;
+      max-height: 560px;
+      max-width: 560px;
     }
   }
 }

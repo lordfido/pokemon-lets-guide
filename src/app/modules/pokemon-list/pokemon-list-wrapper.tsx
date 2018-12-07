@@ -1,64 +1,50 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { sortBy } from '../../utils/arrays';
 
 import PokemonListView from './pokemon-list-view';
-import { loadMore } from './pokemon-list.actions';
-import { getPokemonList } from '../../root.reducer';
+import { sortPokemonList, loadMore } from './pokemon-list.actions';
+import { getPokemonList, getPokemonSortOptions, getPokemonListPagination } from '../../root.reducer';
 
 import { RootState } from '../../root.types';
-import { Pokemon } from './pokemon-list.types';
-import { getBaseCP } from '../../utils/pokemon';
+import { PokemonWithBaseCP, PokemonListPagination } from './pokemon-list.types';
 
 type StateProps = {
-  collection: Array<Pokemon>;
+  collection: Array<PokemonWithBaseCP>;
+  pagination: PokemonListPagination;
+  sort: {
+    sortBy: string;
+    order: string;
+  };
 };
 
 type DispatchProps = {
+  sortPokemonList: Function;
   loadMore: Function;
 };
 
 type Props = StateProps & DispatchProps;
 
-interface OwnState {
-  sortBy: string;
-  reverse: boolean;
-}
-
-class PokemonListWrapper extends React.Component<Props, OwnState> {
+class PokemonListWrapper extends React.Component<Props> {
   static displayName = 'PokemonListWrapper';
 
-  constructor(props: Props) {
-    super(props);
+  sortBy = (sortBy: string) => {
+    const { sortPokemonList, sort } = this.props;
 
-    this.state = {
-      sortBy: 'id',
-      reverse: false,
-    };
-  }
+    const reverse = sortBy === sort.sortBy;
+    let order = 'asc';
 
-  sortBy = (key: string) => {
-    const sortBy = key;
-    const reverse = sortBy === this.state.sortBy ? !this.state.reverse : false;
-
-    this.setState({
-      sortBy,
-      reverse,
-    });
-  };
-
-  getSortedCollection() {
-    const { collection } = this.props;
-    const { sortBy: sortOrder, reverse } = this.state;
-
-    const collectionWithCP = collection.map(p => ({ ...p, baseCP: getBaseCP(p.baseStats) }));
-
-    if (sortOrder === 'id' || sortOrder === 'name') {
-      return collectionWithCP.sort(sortBy(sortOrder, reverse ? 'desc' : 'asc'));
+    if (sortBy === 'id' || sortBy === 'name') {
+      if (reverse) {
+        order = 'desc';
+      }
+    } else {
+      if (!reverse) {
+        order = 'desc';
+      }
     }
 
-    return collectionWithCP.sort(sortBy(sortOrder, reverse ? 'asc' : 'desc'));
-  }
+    sortPokemonList({ sortBy, order });
+  };
 
   handleLoadMore() {
     const { loadMore } = this.props;
@@ -67,13 +53,19 @@ class PokemonListWrapper extends React.Component<Props, OwnState> {
   }
 
   render() {
+    const { collection, pagination } = this.props;
+
     return (
       <PokemonListView
-        collection={this.getSortedCollection()}
+        collection={collection}
         sort={this.sortBy}
-        handleLoadMore={() => {
-          this.handleLoadMore();
-        }}
+        handleLoadMore={
+          collection.length >= pagination.last
+            ? () => {
+                this.handleLoadMore();
+              }
+            : undefined
+        }
       />
     );
   }
@@ -81,9 +73,12 @@ class PokemonListWrapper extends React.Component<Props, OwnState> {
 
 const mapStateToProps = (state: RootState) => ({
   collection: getPokemonList(state),
+  pagination: getPokemonListPagination(state),
+  sort: getPokemonSortOptions(state),
 });
 
 const mapDispatchToProps = {
+  sortPokemonList,
   loadMore,
 };
 

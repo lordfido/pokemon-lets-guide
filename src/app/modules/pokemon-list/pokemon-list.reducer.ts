@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { getSortedStats } from '../../utils/pokemon';
+import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
 
 import { StatId } from '../../../constants/pokemon-stats';
 
@@ -7,12 +7,17 @@ import { PokemonListState, Pokemon } from './pokemon-list.types';
 import { SearchState } from '../search/search.types';
 import { Type } from 'pokelab-lets-go/dist/cjs/types';
 import { paginationSize } from '../../../constants/features';
+import { sortBy } from '../../utils/arrays';
 
 const initialState: PokemonListState = {
   collection: [],
   pagination: {
     first: 0,
     last: paginationSize,
+  },
+  sort: {
+    sortBy: 'id',
+    order: 'asc',
   },
 };
 
@@ -22,6 +27,12 @@ const reducer = (state = initialState, action: AnyAction) => {
       return {
         ...state,
         collection: action.payload.collection,
+      };
+
+    case 'SORT_POKEMON_LIST':
+      return {
+        ...state,
+        sort: action.payload.sort,
       };
 
     case 'LOAD_MORE':
@@ -38,9 +49,7 @@ const reducer = (state = initialState, action: AnyAction) => {
   }
 };
 
-export const getSelectedPokemon = (state: PokemonListState) => (pokemonId: number) =>
-  state.collection.find(pokemon => pokemon.id === pokemonId);
-
+// Pokemon List
 // Get a list of pokemon (already filtered)
 export const getPokemonList = (state: PokemonListState, search: SearchState) => {
   const { collection, pagination } = state;
@@ -50,7 +59,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       // Filter list by name or number
       if (search.nameOrNumber) {
         if (
-          new RegExp(search.nameOrNumber.toLowerCase()).test(String(pokemon.id)) === false &&
+          search.nameOrNumber !== String(pokemon.nationalNumber) &&
           new RegExp(search.nameOrNumber.toLowerCase()).test(pokemon.name.toLowerCase()) === false
         ) {
           return false;
@@ -58,7 +67,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       }
 
       // Filter list by included types
-      if (search.includedTypes && search.includedTypes.length) {
+      if (search.includedTypes.length) {
         let shouldShow = false;
         search.includedTypes.forEach(type => {
           if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
@@ -70,7 +79,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       }
 
       // Filter list by excluded types
-      if (search.excludedTypes && search.excludedTypes.length) {
+      if (search.excludedTypes.length) {
         let shouldSkip = false;
         search.excludedTypes.forEach(type => {
           if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
@@ -81,8 +90,38 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
         if (shouldSkip) return false;
       }
 
+      // Filter list by strong against
+      if (search.strongAgainst.length) {
+        const relations = getTypeRelations(pokemon.types.ownTypes);
+
+        let shouldSkip = true;
+        search.strongAgainst.forEach(type => {
+          const strongAgainst = relations.filter(relation => relation.id === type && relation.effectiveness < 1);
+          if (strongAgainst.length) {
+            shouldSkip = false;
+          }
+        });
+
+        if (shouldSkip) return false;
+      }
+
+      // Filter list by weak against
+      if (search.weakAgainst.length) {
+        const relations = getTypeRelations(pokemon.types.ownTypes);
+
+        let shouldSkip = true;
+        search.weakAgainst.forEach(type => {
+          const weakAgainst = relations.filter(relation => relation.id === type && relation.effectiveness > 1);
+          if (weakAgainst.length) {
+            shouldSkip = false;
+          }
+        });
+
+        if (shouldSkip) return false;
+      }
+
       // Filter list by the best stats
-      if (search.bestStats && search.bestStats.length) {
+      if (search.bestStats.length) {
         // @ts-ignore
         const parsedStats = Object.keys(pokemon.baseStats).map((name: StatId) => ({
           name,
@@ -93,7 +132,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
 
         let statMatches = true;
         search.bestStats.forEach((stat: StatId) => {
-          if (orderedStats.slice(0, search.bestStats.length).findIndex(s => s === stat) < 0) {
+          if (orderedStats.slice(0, 3).findIndex(s => s === stat) < 0) {
             statMatches = false;
           }
         });
@@ -102,7 +141,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
       }
 
       // Filter list by the worst stats
-      if (search.worstStats && search.worstStats.length) {
+      if (search.worstStats.length) {
         // @ts-ignore
         const parsedStats = Object.keys(pokemon.baseStats).map((name: StatId) => ({
           name,
@@ -113,7 +152,7 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
 
         let statMatches = true;
         search.worstStats.forEach((stat: StatId) => {
-          if (orderedStats.slice(0, search.worstStats.length).findIndex(s => s === stat) < 0) {
+          if (orderedStats.slice(0, 3).findIndex(s => s === stat) < 0) {
             statMatches = false;
           }
         });
@@ -121,17 +160,41 @@ export const getPokemonList = (state: PokemonListState, search: SearchState) => 
         if (!statMatches) return false;
       }
 
+      // Filter by minimum CP
+      if (typeof search.minBaseCP !== 'undefined' && search.minBaseCP.length) {
+        if (pokemon.baseCP < parseInt(search.minBaseCP)) return false;
+      }
+
+      // Filter by maximum CP
+      if (typeof search.maxBaseCP !== 'undefined' && search.maxBaseCP.length) {
+        if (pokemon.baseCP > parseInt(search.maxBaseCP)) return false;
+      }
+
+      // Filter mega evolutions
       if (!search.showMegaevolutions && pokemon.megaEvolution) return false;
 
+      // Filter alolan forms
       if (!search.showAlolanForms && pokemon.alolanForm) return false;
 
       return true;
     })
+    .sort(sortBy(state.sort.sortBy, state.sort.order))
     .slice(pagination.first, pagination.last);
 };
 
+// Get pagination data for pokemon list
+export const getPokemonListPagination = (state: PokemonListState) => state.pagination;
+
+// Get sorting options for pokemon list
+export const getPokemonSortOptions = (state: PokemonListState) => state.sort;
+
+// Pokemon Details
+// Get details of selected pokemon
+export const getSelectedPokemon = (state: PokemonListState) => (pokemonId: string) =>
+  state.collection.find(pokemon => pokemon.id === pokemonId);
+
 // Get pagination data for a particular pokemon (already filtered)
-export const getPokemonPagination = (state: PokemonListState, search: SearchState) => (pokemonId: number) => {
+export const getPokemonPagination = (state: PokemonListState, search: SearchState) => (pokemonId: string) => {
   const samePokemon = (pokemon: Pokemon) => pokemon.id === pokemonId;
 
   // Select filtered collection or complete collection

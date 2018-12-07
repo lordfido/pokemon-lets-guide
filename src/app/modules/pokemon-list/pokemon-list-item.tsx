@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { capitalize } from '../../utils/strings';
-import { getAvatarFromId, getBaseCP } from '../../utils/pokemon';
+import { getAvatarFromId, getPaddedId } from '../../utils/pokemon';
 
 import { Button } from '../../components/buttons';
-import CustomImage from '../../components/image';
+// import CustomImage from '../../components/image';
 import Tag from '../../components/tag';
 import { TableRow, TableCell } from '../../components/table';
 
@@ -32,14 +32,13 @@ class PokemonListItem extends React.Component<OwnProps> {
     const { pokemon } = this.props;
 
     const avatar = getAvatarFromId(pokemon.id);
-    const baseCP = getBaseCP(pokemon.baseStats);
 
     return (
       <TableRow className="PokemonList-item">
-        <TableCell center>{pokemon.id}</TableCell>
-        <TableCell center>
+        <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
+        {/* <TableCell center>
           <CustomImage className="PokemonList-image" src={avatar} />
-        </TableCell>
+        </TableCell> */}
         <TableCell>{pokemon.name}</TableCell>
         <TableCell center>
           {pokemon.types.ownTypes[0] && (
@@ -61,7 +60,7 @@ class PokemonListItem extends React.Component<OwnProps> {
             />
           )}
         </TableCell>
-        <TableCell center>{baseCP}</TableCell>
+        <TableCell center>{pokemon.baseCP}</TableCell>
         <TableCell center>{pokemon.baseStats[HP_ID]}</TableCell>
         <TableCell center>{pokemon.baseStats[ATTACK_ID]}</TableCell>
         <TableCell center>{pokemon.baseStats[DEFENSE_ID]}</TableCell>

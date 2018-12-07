@@ -5,8 +5,12 @@ export interface SearchState {
   nameOrNumber: string | void;
   includedTypes: Array<PokemonType>;
   excludedTypes: Array<PokemonType>;
+  strongAgainst: Array<PokemonType>;
+  weakAgainst: Array<PokemonType>;
   bestStats: Array<StatId>;
   worstStats: Array<StatId>;
+  minBaseCP?: string;
+  maxBaseCP?: string;
   showMegaevolutions: boolean;
   showAlolanForms: boolean;
   // canLearnSkills: Array<StatId>;

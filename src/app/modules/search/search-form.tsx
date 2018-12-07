@@ -18,6 +18,7 @@ import {
   SPEED_ID,
   getStatName,
 } from '../../../constants/pokemon-stats';
+import { filtersEnabled } from '../../../constants/features';
 
 const typeFilterOptions = getTypes().map(option => ({
   type: 'option',
@@ -87,7 +88,7 @@ class SearchForm extends React.Component<Props> {
         form: 'search',
         label: 'Name or number',
         onChange: (selection: Array<any>) => this.filterByType('nameOrNumber', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
       },
       {
         type: 'multi',
@@ -97,7 +98,7 @@ class SearchForm extends React.Component<Props> {
         placeholder: 'Select some types',
         options: typeFilterOptions,
         onChange: (selection: Array<any>) => this.filterByType('includedTypes', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
       },
       {
         type: 'multi',
@@ -107,7 +108,27 @@ class SearchForm extends React.Component<Props> {
         placeholder: 'Select some types',
         options: typeFilterOptions,
         onChange: (selection: Array<any>) => this.filterByType('excludedTypes', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
+      },
+      {
+        type: 'multi',
+        id: 'strongAgainst',
+        form: 'search',
+        label: 'Strong against',
+        placeholder: 'Select some types',
+        options: typeFilterOptions,
+        onChange: (selection: Array<any>) => this.filterByType('strongAgainst', selection),
+        isDisabled: !filtersEnabled,
+      },
+      {
+        type: 'multi',
+        id: 'weakAgainst',
+        form: 'search',
+        label: 'Weak against',
+        placeholder: 'Select some types',
+        options: typeFilterOptions,
+        onChange: (selection: Array<any>) => this.filterByType('weakAgainst', selection),
+        isDisabled: !filtersEnabled,
       },
       {
         type: 'multi',
@@ -117,7 +138,7 @@ class SearchForm extends React.Component<Props> {
         placeholder: 'Select some stats',
         options: statsFilterOptions,
         onChange: (selection: Array<any>) => this.filterByType('bestStats', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
       },
       {
         type: 'multi',
@@ -127,7 +148,23 @@ class SearchForm extends React.Component<Props> {
         placeholder: 'Select some stats',
         options: statsFilterOptions,
         onChange: (selection: Array<any>) => this.filterByType('worstStats', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
+      },
+      {
+        type: 'number',
+        id: 'minBaseCP',
+        form: 'search',
+        label: 'Min. Base CP',
+        onChange: (selection: Array<any>) => this.filterByType('minBaseCP', selection),
+        isDisabled: !filtersEnabled,
+      },
+      {
+        type: 'number',
+        id: 'maxBaseCP',
+        form: 'search',
+        label: 'Max. Base CP',
+        onChange: (selection: Array<any>) => this.filterByType('maxBaseCP', selection),
+        isDisabled: !filtersEnabled,
       },
       {
         type: 'switch',
@@ -135,7 +172,7 @@ class SearchForm extends React.Component<Props> {
         form: 'search',
         label: 'Show megaevolutions',
         onChange: (selection: Array<any>) => this.filterByType('showMegaevolutions', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
       },
       {
         type: 'switch',
@@ -143,7 +180,7 @@ class SearchForm extends React.Component<Props> {
         form: 'search',
         label: 'Show alolan forms',
         onChange: (selection: Array<any>) => this.filterByType('showAlolanForms', selection),
-        isDisabled: true,
+        isDisabled: !filtersEnabled,
       },
     ];
 

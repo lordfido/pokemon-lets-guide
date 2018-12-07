@@ -36,12 +36,12 @@ class PokemonDetailsWrapper extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState, props: Props): StateProps => {
-  const selectedPokemon = getSelectedPokemon(state)(Number(props.match.params.id));
+  const selectedPokemon = getSelectedPokemon(state)(props.match.params.id);
   const pokemon = selectedPokemon ? getRichPokemon(selectedPokemon) : undefined;
 
   return {
     pokemon,
-    pagination: getPokemonPagination(state)(Number(props.match.params.id)),
+    pagination: getPokemonPagination(state)(props.match.params.id),
   };
 };
 
