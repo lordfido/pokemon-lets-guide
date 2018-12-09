@@ -3,8 +3,9 @@ import { getTranslation } from '../app/utils/translations';
 
 export type PokemonType = Types.Type;
 
-export const getType = (pokemonType: string): PokemonType | void =>
-  Types.All.find(type => type === pokemonType) || undefined;
-
-export const getTypes = (): Array<{ id: PokemonType; name: string }> =>
+interface ParsedType {
+  id: PokemonType;
+  name: string;
+}
+export const getTypes = (): Array<ParsedType> =>
   Types.All.map(type => ({ id: type, name: getTranslation(`type-${type}`) }));

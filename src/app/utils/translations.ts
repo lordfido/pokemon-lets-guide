@@ -46,6 +46,11 @@ export const setLocale = (iso: string) => {
 };
 
 /**
+ * Get selected locale
+ */
+export const getLocale = () => selectedLocale;
+
+/**
  * This method will get copies in the default or specified language
  * @example getTranslation('demo-token');
  * @example getTranslation('demo-token-with-variable', 'My variable value'); // Replace a variable located in the token with 'My variable value'
