@@ -41,7 +41,7 @@
     height: 24px;
     line-height: 16px;
     padding: 4px 8px;
-    width: #{4 * 16}px;
+    // width: #{4 * 16}px;
     text-align: center;
     z-index: 1;
   }
@@ -50,11 +50,13 @@
   &-icon + &-label {
     height: 16px;
     margin-left: -6px;
-    padding: 0px 4px;
-    padding-left: 8px;
+    padding: 0px 8px;
+    padding-left: 10px;
   }
 
   &--large &-label {
-    width: #{4 * 22}px;
+    // width: #{4 * 22}px;
+    padding: 0px 12px;
+    padding-left: 14px;
   }
 }
