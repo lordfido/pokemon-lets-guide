@@ -39,7 +39,7 @@ interface StateProps {
 }
 
 type DispatchProps = {
-  getPokemon: () => void;
+  getPokemon: Function;
 };
 
 type Props = OwnProps & RouteProps & StateProps & DispatchProps;
@@ -132,7 +132,6 @@ const connectedApp = withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-    // @ts-ignore
   )(AppWrapper)
 );
 
