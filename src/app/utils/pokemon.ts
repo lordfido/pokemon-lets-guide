@@ -5,7 +5,7 @@ import { sortBy } from './arrays';
 import pokemonExtraInfoList from '../../common/apis/mocks';
 
 import {
-  INITIAL_MAX_STAT_VALUE,
+  MAX_INITIAL_STAT_VALUE,
   MAX_STAT_VALUE,
   StatId,
   ATTACK_ID,
@@ -81,13 +81,20 @@ export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
 export const getAvatarFromId = (pokemonId: string): string =>
   `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPaddedId(pokemonId)}.png`;
 
-export const getBaseCP = (stats: PokemonStats): number =>
-  stats[ATTACK_ID] +
-  stats[SPECIAL_ATTACK_ID] +
-  stats[DEFENSE_ID] +
-  stats[SPECIAL_DEFENSE_ID] +
-  stats[HP_ID] +
-  stats[SPEED_ID];
+export const getBaseCP = (stats: PokemonStats, level: number = 1, totalAVs: number = 1): number => {
+  // floor(((HP+Atk+Def+SAtk+SDef+Spd) * Level * 6 / 100) + (TotalAVs * ((Level / 4) / 100 + 2)))
+
+  const allStats =
+    stats[ATTACK_ID] +
+    stats[SPECIAL_ATTACK_ID] +
+    stats[DEFENSE_ID] +
+    stats[SPECIAL_DEFENSE_ID] +
+    stats[HP_ID] +
+    stats[SPEED_ID];
+
+  // return Math.floor((allStats * level * 6) / 100 + totalAVs * (level / 4 / 100 + 2));
+  return allStats;
+};
 
 export const getSortedStats = (stats: [{ name: StatId; value: number }], order = 'desc'): Array<StatId> =>
   stats.sort(sortBy('value', order)).map(stat => stat.name);
@@ -247,12 +254,12 @@ export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
 
   // Get relative stats (for charts)
   const relativeStats: PokemonStats = {
-    hp: getStatRatio(basePokemon.baseStats[HP_ID], INITIAL_MAX_STAT_VALUE) || 0,
-    attack: getStatRatio(basePokemon.baseStats[ATTACK_ID], INITIAL_MAX_STAT_VALUE) || 0,
-    defense: getStatRatio(basePokemon.baseStats[DEFENSE_ID], INITIAL_MAX_STAT_VALUE) || 0,
-    spAttack: getStatRatio(basePokemon.baseStats[SPECIAL_ATTACK_ID], INITIAL_MAX_STAT_VALUE) || 0,
-    spDefense: getStatRatio(basePokemon.baseStats[SPECIAL_DEFENSE_ID], INITIAL_MAX_STAT_VALUE) || 0,
-    speed: getStatRatio(basePokemon.baseStats[SPEED_ID], INITIAL_MAX_STAT_VALUE) || 0,
+    hp: getStatRatio(basePokemon.baseStats[HP_ID], MAX_INITIAL_STAT_VALUE) || 0,
+    attack: getStatRatio(basePokemon.baseStats[ATTACK_ID], MAX_INITIAL_STAT_VALUE) || 0,
+    defense: getStatRatio(basePokemon.baseStats[DEFENSE_ID], MAX_INITIAL_STAT_VALUE) || 0,
+    spAttack: getStatRatio(basePokemon.baseStats[SPECIAL_ATTACK_ID], MAX_INITIAL_STAT_VALUE) || 0,
+    spDefense: getStatRatio(basePokemon.baseStats[SPECIAL_DEFENSE_ID], MAX_INITIAL_STAT_VALUE) || 0,
+    speed: getStatRatio(basePokemon.baseStats[SPEED_ID], MAX_INITIAL_STAT_VALUE) || 0,
   };
 
   // Get suggested stats

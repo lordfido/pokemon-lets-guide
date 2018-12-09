@@ -20,7 +20,7 @@ class Switch extends React.Component<OwnProps> {
     const { options, onClick, onChange, onFocus } = this.props;
 
     return (
-      <label className={classnames('Switch', options.className)}>
+      <label htmlFor={options.id} className={classnames('Switch', options.className)}>
         <input
           id={options.id}
           name={options.id}

@@ -4,4 +4,4 @@ export const restoreLastRoute = false;
 export const cacheOnDemand = isProduction() || isPre();
 
 export const paginationSize = 24;
-export const filtersEnabled = false;
+export const filtersEnabled = true;

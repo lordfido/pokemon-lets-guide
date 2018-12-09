@@ -18,7 +18,7 @@ class Checkbox extends React.Component<OwnProps> {
     const { options, onClick, onChange, onFocus } = this.props;
 
     return (
-      <label className={classnames('Checkbox', options.className)}>
+      <label htmlFor={options.id} className={classnames('Checkbox', options.className)}>
         <input
           id={options.id}
           name={options.id}

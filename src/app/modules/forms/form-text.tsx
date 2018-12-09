@@ -23,7 +23,10 @@ class Text extends React.Component<OwnProps> {
     const { options, onClick, onChange, onFocus } = this.props;
 
     return (
-      <label className={classnames('Text', { 'is-submitted': options.isSubmitted || options.error })}>
+      <label
+        htmlFor={options.id}
+        className={classnames('Text', { 'is-submitted': options.isSubmitted || options.error })}
+      >
         <span className="Text-label">
           {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
           <span>{options.label}</span>
@@ -42,6 +45,7 @@ class Text extends React.Component<OwnProps> {
             onClick={onClick}
             onChange={onChange}
             onFocus={onFocus}
+            autoComplete="off"
           />
         )}
 
@@ -57,6 +61,7 @@ class Text extends React.Component<OwnProps> {
             onClick={onClick}
             onChange={onChange}
             onFocus={onFocus}
+            autoComplete="off"
           />
         )}
 

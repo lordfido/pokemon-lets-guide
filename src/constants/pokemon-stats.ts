@@ -77,7 +77,7 @@ export const getIndividualJudgementIdBasedOnRangeValue = (value: number): Indivi
 };
 
 // Stat values
-export const INITIAL_MAX_STAT_VALUE = 255;
-export const MAX_STAT_VALUE = 300;
+export const MAX_INITIAL_STAT_VALUE = 255;
+export const MAX_STAT_VALUE = 557;
 
 export const MAX_IV_VALUE = 31;

@@ -25,6 +25,7 @@ class Dropdown extends React.Component<OwnProps> {
     if (options.isMulti) {
       return (
         <label
+          htmlFor={options.id}
           className={classnames('Dropdown', options.className, {
             'is-submitted': options.isSubmitted || options.error,
           })}
