@@ -13,11 +13,12 @@
 
     &-filters {
       padding: 20px;
-      width: 320px;
+      padding-right: 0;
+      width: 240px;
     }
 
     &-results {
-      width: calc(100% - 320px);
+      width: calc(100% - 240px);
     }
   }
 }

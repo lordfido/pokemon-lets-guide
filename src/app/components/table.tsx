@@ -21,6 +21,7 @@ interface OwnProps {
   readonly headings: Array<{
     label: string;
     onClick?: (event: React.MouseEvent<HTMLTableHeaderCellElement>) => void;
+    style?: React.CSSProperties;
   }>;
   className?: string;
   children: Array<JSX.Element>;
@@ -41,6 +42,7 @@ class Table extends React.Component<OwnProps> {
                 key={index}
                 className={classnames('Table-cell', { 'is-clickable': heading.onClick })}
                 onClick={heading.onClick}
+                style={heading.style}
               >
                 {heading.label}
               </th>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { capitalize } from '../../utils/strings';
-import { getAvatarFromId, getPaddedId } from '../../utils/pokemon';
+import chroma from 'chroma-js';
+import { getPaddedId } from '../../utils/pokemon';
 
 import { Button } from '../../components/buttons';
 // import CustomImage from '../../components/image';
@@ -21,6 +21,7 @@ import {
 import { getTranslation } from '../../utils/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
 
 interface OwnProps {
   pokemon: PokemonWithBaseCP;
@@ -32,7 +33,7 @@ class PokemonListItem extends React.Component<OwnProps> {
   render() {
     const { pokemon } = this.props;
 
-    const avatar = getAvatarFromId(pokemon.id);
+    // const avatar = getAvatarFromId(pokemon.id);
 
     return (
       <TableRow className="PokemonList-item">
@@ -62,12 +63,72 @@ class PokemonListItem extends React.Component<OwnProps> {
           )}
         </TableCell>
         <TableCell center>{pokemon.baseCP}</TableCell>
-        <TableCell center>{pokemon.baseStats[HP_ID]}</TableCell>
-        <TableCell center>{pokemon.baseStats[ATTACK_ID]}</TableCell>
-        <TableCell center>{pokemon.baseStats[DEFENSE_ID]}</TableCell>
-        <TableCell center>{pokemon.baseStats[SPEED_ID]}</TableCell>
-        <TableCell center>{pokemon.baseStats[SPECIAL_DEFENSE_ID]}</TableCell>
-        <TableCell center>{pokemon.baseStats[SPECIAL_ATTACK_ID]}</TableCell>
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(HP_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[HP_ID]}
+        </TableCell>
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(ATTACK_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[ATTACK_ID]}
+        </TableCell>
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(DEFENSE_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[DEFENSE_ID]}
+        </TableCell>
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(SPEED_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[SPEED_ID]}
+        </TableCell>
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[SPECIAL_DEFENSE_ID]}
+        </TableCell>
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[SPECIAL_ATTACK_ID]}
+        </TableCell>
         <TableCell style={{ height: 'auto' }}>
           <Button
             options={{

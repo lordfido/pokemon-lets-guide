@@ -1,4 +1,5 @@
 import * as React from 'react';
+import chroma from 'chroma-js';
 
 import PokemonListItem from './pokemon-list-item';
 
@@ -17,6 +18,7 @@ import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTranslation } from '../../utils/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
 
 type OwnProps = {
   collection: Array<PokemonWithBaseCP>;
@@ -59,26 +61,56 @@ class PokemonListView extends React.Component<OwnProps> {
             {
               label: getStatName(HP_ID),
               onClick: () => sort(`baseStats.${HP_ID}`),
+              style: {
+                backgroundColor: chroma(getStatColor(HP_ID))
+                  .alpha(0.3)
+                  .css(),
+              },
             },
             {
               label: getStatName(ATTACK_ID),
               onClick: () => sort(`baseStats.${ATTACK_ID}`),
+              style: {
+                backgroundColor: chroma(getStatColor(ATTACK_ID))
+                  .alpha(0.3)
+                  .css(),
+              },
             },
             {
               label: getStatName(DEFENSE_ID),
               onClick: () => sort(`baseStats.${DEFENSE_ID}`),
+              style: {
+                backgroundColor: chroma(getStatColor(DEFENSE_ID))
+                  .alpha(0.3)
+                  .css(),
+              },
             },
             {
               label: getStatName(SPEED_ID),
               onClick: () => sort(`baseStats.${SPEED_ID}`),
+              style: {
+                backgroundColor: chroma(getStatColor(SPEED_ID))
+                  .alpha(0.3)
+                  .css(),
+              },
             },
             {
               label: getStatName(SPECIAL_DEFENSE_ID),
               onClick: () => sort(`baseStats.${SPECIAL_DEFENSE_ID}`),
+              style: {
+                backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
+                  .alpha(0.3)
+                  .css(),
+              },
             },
             {
               label: getStatName(SPECIAL_ATTACK_ID),
               onClick: () => sort(`baseStats.${SPECIAL_ATTACK_ID}`),
+              style: {
+                backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
+                  .alpha(0.3)
+                  .css(),
+              },
             },
             { label: '' },
           ]}
