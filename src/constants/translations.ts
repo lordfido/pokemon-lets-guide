@@ -35,12 +35,12 @@ const translations: TranslationsCollection = {
   'stat-speed': ['', 'Speed', '', 'Velocidad', '', '', '', ''],
 
   // IV Ranges
-  'iv-best': ['', 'Best', '', 'Perfecto', '', '', '', ''],
+  'iv-best': ['', 'Best', '', 'Inmejorable', '', '', '', ''],
   'iv-fantastic': ['', 'Fantastic', '', 'Espectacular', '', '', '', ''],
   'iv-veryGood': ['', 'Very good', '', 'Genial', '', '', '', ''],
-  'iv-prettyGood': ['', 'Pretty good', '', 'Bien', '', '', '', ''],
-  'iv-decent': ['', 'Decent', '', 'Decente?', '', '', '', ''],
-  'iv-noGood': ['', 'Not good', '', 'Malo?', '', '', '', ''],
+  'iv-prettyGood': ['', 'Pretty good', '', 'Notable', '', '', '', ''],
+  'iv-decent': ['', 'Decent', '', 'No está mal', '', '', '', ''],
+  'iv-noGood': ['', 'Not good', '', 'Cojea un poco', '', '', '', ''],
 
   // Forms
   'forms-alolan': ['', 'Alolan', '', 'Alola', '', '', '', ''],
