@@ -23,4 +23,7 @@ export const getSelectedPokemon = ({ pokemon }: RootState) => pokemonSelectors.g
 export const getPokemonPagination = ({ pokemon, search }: RootState) =>
   pokemonSelectors.getPokemonPagination(pokemon, search);
 
+// Search filters
+export const getFilters = ({ search }: RootState) => searchSelectors.getFilters(search);
+
 export default rootReducer;

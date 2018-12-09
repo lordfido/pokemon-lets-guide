@@ -38,4 +38,6 @@ const reducer = (state = initialState, action: AnyAction) => {
   }
 };
 
+export const getFilters = (state: SearchState) => state;
+
 export default reducer;
