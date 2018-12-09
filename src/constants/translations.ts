@@ -108,6 +108,21 @@ const translations: TranslationsCollection = {
     '',
     '',
   ],
+  'pokemon-details-pokedex-number': ['', 'Pokédex No.', '', 'Nº en la Pokédex:', '', '', '', ''],
+  'pokemon-details-preview': ['', ':var: preview', '', 'Imagen de :var:', '', '', '', ''],
+  'pokemon-details-chart': ['', 'Chart', '', 'Gráfica', '', '', '', ''],
+  'pokemon-details-bars': ['', 'Bars', '', 'Barras', '', '', '', ''],
+  'pokemon-details-base-stats': ['', 'Base Stats', '', 'Estadísticas base', '', '', '', ''],
+  'pokemon-details-no-pokedex-entry': [
+    '',
+    'There is no data about this pokemon yet.',
+    '',
+    'Todavía no hay datos acerca de este pokémon',
+    '',
+    '',
+    '',
+    '',
+  ],
 };
 
 export const getTranslation = (token: string, variable?: string, locale?: number) => {

@@ -10,6 +10,9 @@ import PokemonPagination from './pokemon-pagination';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 
 import { RichPokemon, PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
+import { getTranslation } from '../../../constants/translations';
+import { getSuggestedIVs } from '../../utils/pokemon';
+import { MAX_IV_VALUE } from '../../../constants/pokemon-stats';
 
 interface OwnProps {
   pokemon: RichPokemon;
@@ -21,17 +24,14 @@ class PokemonDetailsView extends React.Component<OwnProps> {
 
   renderSuggestedStats() {
     const { pokemon } = this.props;
+    const suggestedIVs = getSuggestedIVs(pokemon.baseStats);
 
-    if (pokemon.suggestedStats) {
-      return pokemon.suggestedStats.map((suggestion, index) => (
-        <React.Fragment>
-          <p key={`title-${index}`}>Recommended capture with {index + 1} perfect IVs</p>
-          <StatsChart key={`suggested-${index}`} stats={suggestion} color={getTypeColor(pokemon.types.ownTypes[0])} />
-        </React.Fragment>
-      ));
-    }
-
-    return null;
+    return suggestedIVs.map((suggestion, index) => (
+      <React.Fragment key={`suggested-${index}`}>
+        <p>{getTranslation('pokemon-details-recommended', (index + 1).toString())}</p>
+        <StatsChart stats={suggestion} color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />
+      </React.Fragment>
+    ));
   }
 
   render() {
@@ -40,7 +40,7 @@ class PokemonDetailsView extends React.Component<OwnProps> {
     return (
       <div className="PokemonDetails">
         <PokemonInfo pokemon={pokemon} />
-        <PokemonPreview previewUrl={pokemon.avatar} />
+        <PokemonPreview src={pokemon.avatar} alt={getTranslation('pokemon-details-preview', pokemon.name)} />
         <PokemonStats pokemon={pokemon} />
         <PokemonPokedexEntry text={pokemon.pokedexEntry} />
 

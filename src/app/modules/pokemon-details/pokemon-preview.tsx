@@ -1,19 +1,23 @@
 import * as React from 'react';
+
 import CustomImage from '../../components/image';
 
+import { getTranslation } from '../../../constants/translations';
+
 interface OwnProps {
-  previewUrl: string;
+  src: string;
+  alt?: string;
 }
 
 class PokemonPreview extends React.Component<OwnProps> {
   static displayName = 'PokemonPreview';
 
   render() {
-    const { previewUrl } = this.props;
+    const { src, alt } = this.props;
 
     return (
       <div className="PokemonPreview">
-        <CustomImage className="PokemonPreview-image" src={previewUrl} />
+        <CustomImage className="PokemonPreview-image" src={src} alt={alt} />
       </div>
     );
   }
