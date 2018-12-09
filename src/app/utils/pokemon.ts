@@ -1,33 +1,42 @@
 import { Pokedex, Stats, Types } from 'pokelab-lets-go';
-import { Type } from 'pokelab-lets-go/dist/cjs/types';
 import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
 import { sortBy } from './arrays';
+import { getTranslation } from './translations';
+
 import pokemonExtraInfoList from '../../common/apis/mocks';
 
+import { PokemonType } from '../../constants/pokemon-types';
+
 import {
-  MAX_INITIAL_STAT_VALUE,
-  MAX_STAT_VALUE,
-  StatId,
   ATTACK_ID,
   DEFENSE_ID,
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   HP_ID,
   SPEED_ID,
-  MAX_IV_VALUE,
+  StatId,
+  MAX_INITIAL_STAT_VALUE,
+  MAX_STAT_VALUE,
 } from '../../constants/pokemon-stats';
+import { MAX_IV_VALUE } from '../../constants/pokemon-ivs';
 
 import {
   PokemonStats,
-  Pokemon,
   RichPokemon,
   TypeRelations,
   PokemonWithBaseCP,
 } from '../modules/pokemon-list/pokemon-list.types';
-import { getTranslation } from './translations';
 
+/**
+ * Based on a value and a max value, returns a number between 0 and 1
+ * @example getStatRatio(150, 300); // Will return 0.5
+ */
 const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
 
+/**
+ * Based on a pokemon national ID, this will return a string with 3 digits
+ * @example getPaddedId('10'); Will return '010'
+ */
 export const getPaddedId = (pokemonId: string): string => {
   let number = String(pokemonId);
 
@@ -37,6 +46,14 @@ export const getPaddedId = (pokemonId: string): string => {
   return number;
 };
 
+/**
+ * Based in a pokemon ID, and an object that makes that pokemon evolve,
+ * generates a new ID matching www.pokemon.com patterns, so we can fetch
+ * its avatar
+ *
+ * @example getMegaevolutionId('006'); // Will return '006'
+ * @example getMegaevolutionId('006', 'CharizarditeY'); // Will return '006_f3'
+ */
 const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
   if (!evolvesWith) return id;
 
@@ -65,7 +82,16 @@ const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
   return `${id}_${megaOptions[0].form}`;
 };
 
-export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
+/**
+ * Based in a pokemon name, and an object that makes that pokemon evolve,
+ * generates a new ID matching www.pokemon.com patterns, so we can fetch
+ * its avatar
+ *
+ * @example getMegaevolutionName('Charizard'); // Will return 'Charizard'
+ * @example getMegaevolutionName('Venusaur', 'Venusaurite'); // Will return 'Mega Venusaur'
+ * @example getMegaevolutionName('Charizard', 'CharizarditeY'); // Will return 'Mega Charizard Y'
+ */
+const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
   if (!evolvesWith) return name;
 
   const megaOptions = ['X', 'Y'];
@@ -79,10 +105,21 @@ export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
   return `Mega ${name}`;
 };
 
+/**
+ * Fetch the avatar of selected pokemon from www.pokemon.com
+ */
 export const getAvatarFromId = (pokemonId: string): string =>
   `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPaddedId(pokemonId)}.png`;
 
-export const getBaseCP = (stats: PokemonStats, level: number = 1, totalAVs: number = 1): number => {
+interface GetCPArguments {
+  level?: number;
+  stats: PokemonStats;
+  avs?: number;
+}
+/**
+ * This formula calculates the CP of a pokemon, based on its Level, Stats and AVs
+ */
+const getCombatPoints = ({ level = 1, stats, avs = 0 }: GetCPArguments): number => {
   // floor(((HP+Atk+Def+SAtk+SDef+Spd) * Level * 6 / 100) + (TotalAVs * ((Level / 4) / 100 + 2)))
 
   const allStats =
@@ -97,9 +134,18 @@ export const getBaseCP = (stats: PokemonStats, level: number = 1, totalAVs: numb
   return allStats;
 };
 
-export const getSortedStats = (stats: [{ name: StatId; value: number }], order = 'desc'): Array<StatId> =>
+type GetSortedStatsStats = Array<{ name: StatId; value: number }>;
+type GetSortedStatsOrder = 'asc' | 'desc';
+/**
+ * Returns ordered stats
+ */
+export const getSortedStats = (stats: GetSortedStatsStats, order: GetSortedStatsOrder = 'desc'): Array<StatId> =>
   stats.sort(sortBy('value', order)).map(stat => stat.name);
 
+/**
+ * Given a number of `perfectIVs` desired, and the `stats` ordered, will generate a map with
+ * the ones that should be perfect when capturing the pokemon
+ */
 const generateSuggestedIVSample = (perfectIVs: number, order: Array<StatId>): PokemonStats => {
   const stats = {
     [ATTACK_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
@@ -119,6 +165,11 @@ const generateSuggestedIVSample = (perfectIVs: number, order: Array<StatId>): Po
   return stats;
 };
 
+/**
+ * Given a pokemon `stats`, will generate an array with 5 cases, each one with
+ * that number of perfect IVs, so you can know wich IVs are more important to
+ * selected pokemon
+ */
 export const getSuggestedIVs = (stats: PokemonStats): Array<PokemonStats> => {
   // @ts-ignore
   const parsedStats = Object.keys(stats).map((name: StatId) => ({
@@ -139,6 +190,9 @@ export const getSuggestedIVs = (stats: PokemonStats): Array<PokemonStats> => {
   return suggestedIVs;
 };
 
+/**
+ * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
+ */
 export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): PokemonWithBaseCP => {
   const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats } = pokemon;
 
@@ -159,7 +213,7 @@ export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon
   };
 
   // Get baseCP
-  const baseCP = getBaseCP(baseStats);
+  const baseCP = getCombatPoints({ stats: baseStats });
 
   // Get alolan form flag
   const alolanForm = !!pokemon.isAlolan;
@@ -193,11 +247,14 @@ export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon
   };
 };
 
-export const getTypeRelations = (types: ReadonlyArray<Type>) => {
+/**
+ * Given an array of pokemon `Types`, will generate a map with all relations based on those types
+ */
+export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
   const relations: Array<TypeRelations> = [];
 
   // Loop through each one of current pokemon's types
-  types.forEach((defendingType: Type) => {
+  types.forEach(defendingType => {
     // Loop through all available pokemon types
     Types.All.forEach(attackingType => {
       // Get the effectiveness of this combination
@@ -228,7 +285,10 @@ export const getTypeRelations = (types: ReadonlyArray<Type>) => {
   return relations.filter(r => r.effectiveness !== 1).sort(sortBy('effectiveness'));
 };
 
-export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
+/**
+ * Add some mocked information to a PokemonModel
+ */
+export const getRichPokemon = (basePokemon: PokemonWithBaseCP): RichPokemon => {
   // Get some hardcoded data
   const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
 
@@ -250,7 +310,7 @@ export const getRichPokemon = (basePokemon: Pokemon): RichPokemon => {
   };
 
   // Get base CP
-  const baseCP = getBaseCP(basePokemon.baseStats);
+  const baseCP = getCombatPoints({ stats: basePokemon.baseStats });
 
   // Get relative stats (for charts)
   const relativeStats: PokemonStats = {

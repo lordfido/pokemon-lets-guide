@@ -12,7 +12,6 @@ import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { RichPokemon, PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
 import { getTranslation } from '../../utils/translations';
 import { getSuggestedIVs } from '../../utils/pokemon';
-import { MAX_IV_VALUE } from '../../../constants/pokemon-stats';
 
 interface OwnProps {
   pokemon: RichPokemon;

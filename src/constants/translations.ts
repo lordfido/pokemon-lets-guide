@@ -34,6 +34,14 @@ const translations: TranslationsCollection = {
   'stat-hp': ['', 'HP', '', 'PS', '', '', '', ''],
   'stat-speed': ['', 'Speed', '', 'Velocidad', '', '', '', ''],
 
+  // IV Ranges
+  'iv-best': ['', 'Best', '', 'Perfecto', '', '', '', ''],
+  'iv-fantastic': ['', 'Fantastic', '', 'Espectacular', '', '', '', ''],
+  'iv-veryGood': ['', 'Very good', '', 'Genial', '', '', '', ''],
+  'iv-prettyGood': ['', 'Pretty good', '', 'Bien', '', '', '', ''],
+  'iv-decent': ['', 'Decent', '', 'Decente?', '', '', '', ''],
+  'iv-noGood': ['', 'Not good', '', 'Malo?', '', '', '', ''],
+
   // Forms
   'forms-alolan': ['', 'Alolan', '', 'Alola', '', '', '', ''],
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import chroma from 'chroma-js';
+import { getTranslation } from '../../utils/translations';
 
 import Field from '../forms/field';
 import Buttons from '../../components/buttons';
@@ -10,8 +11,10 @@ import { updateFilters, resetFilters } from './search.actions';
 
 import { SEARCH, HOME } from '../../../constants/appRoutes';
 import { filtersEnabled } from '../../../constants/features';
-import { getTypes, getTypeIcon } from '../../../constants/pokemon-types';
+import { getTypes, PokemonType } from '../../../constants/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon-types-icons';
+
 import {
   HP_ID,
   ATTACK_ID,
@@ -19,13 +22,10 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-  getStatName,
-  getStatColor,
   StatId,
 } from '../../../constants/pokemon-stats';
-
-import { Type } from 'pokelab-lets-go/dist/cjs/types';
-import { getTranslation } from '../../utils/translations';
+import { getStatName } from '../../../constants/pokemon-stats-name';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
 
 interface DropdownReadableData {
   data: any;
@@ -42,7 +42,7 @@ const typeFilterOptions = getTypes().map(option => ({
   icon: getTypeIcon(option.id),
 }));
 
-const getTypeDropdownColors = (type: Type) => {
+const getTypeDropdownColors = (type: PokemonType) => {
   const color = chroma(getTypeColor(type));
 
   const colors = {

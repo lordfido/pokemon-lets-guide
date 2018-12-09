@@ -12,8 +12,8 @@ import {
   SPECIAL_DEFENSE_ID,
   HP_ID,
   SPEED_ID,
-  getStatName,
 } from '../../../constants/pokemon-stats';
+import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTranslation } from '../../utils/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';

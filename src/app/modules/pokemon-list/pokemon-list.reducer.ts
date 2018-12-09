@@ -1,13 +1,12 @@
 import { AnyAction } from 'redux';
+import { sortBy } from '../../utils/arrays';
 import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
 
+import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon-stats';
 
 import { PokemonListState, Pokemon } from './pokemon-list.types';
 import { SearchState } from '../search/search.types';
-import { Type } from 'pokelab-lets-go/dist/cjs/types';
-import { paginationSize } from '../../../constants/features';
-import { sortBy } from '../../utils/arrays';
 
 const initialState: PokemonListState = {
   collection: [],

@@ -8,8 +8,8 @@ import Tag from '../../components/tag';
 import { TableRow, TableCell } from '../../components/table';
 
 import { POKEMON } from '../../../constants/appRoutes';
-import { getTypeIcon } from '../../../constants/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon-types-icons';
 import {
   ATTACK_ID,
   SPECIAL_ATTACK_ID,

@@ -2,7 +2,6 @@ import * as React from 'react';
 // @ts-ignore
 import RadarChart from 'react-svg-radar-chart';
 
-import { PokemonTypeColor } from '../../constants/pokemon-types-color';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -10,8 +9,8 @@ import {
   SPECIAL_DEFENSE_ID,
   HP_ID,
   SPEED_ID,
-  getStatName,
 } from '../../constants/pokemon-stats';
+import { getStatName } from '../../constants/pokemon-stats-name';
 
 import { PokemonStats } from '../modules/pokemon-list/pokemon-list.types';
 
@@ -26,7 +25,7 @@ const chartLegend = {
 
 interface OwnProps {
   stats: PokemonStats;
-  color: PokemonTypeColor;
+  color: string;
   size?: number;
 }
 

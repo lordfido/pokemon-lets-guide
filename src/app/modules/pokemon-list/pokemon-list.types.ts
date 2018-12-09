@@ -1,7 +1,8 @@
 import { PokemonType } from '../../../constants/pokemon-types';
+import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
 
 export interface MegaEvolution {
-  evolvesWith: string;
+  evolvesWith: MegaStone;
 }
 
 export interface TypeRelations {
@@ -23,6 +24,12 @@ export interface PokemonStats {
   speed: number;
 }
 
+export interface AdditionalPokemonInfo {
+  id: string;
+  description: string;
+  pokedexEntry: string;
+}
+
 export interface Pokemon {
   id: string;
   nationalNumber: number;
@@ -37,16 +44,9 @@ export interface PokemonWithBaseCP extends Pokemon {
   baseCP: number;
 }
 
-export interface AdditionalPokemonInfo {
-  id: string;
-  description: string;
-  pokedexEntry: string;
-}
-
-export interface RichPokemon extends Pokemon {
+export interface RichPokemon extends PokemonWithBaseCP {
   description: string;
   avatar: string;
-  baseCP: number;
   relativeStats: PokemonStats;
   suggestedStats?: Array<PokemonStats>;
   pokedexEntry: string;

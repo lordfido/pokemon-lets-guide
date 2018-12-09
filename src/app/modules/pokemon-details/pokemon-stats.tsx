@@ -4,7 +4,8 @@ import { Line } from 'rc-progress';
 import StatsChart from '../../components/stats-chart';
 import Buttons from '../../components/buttons';
 
-import { StatId, getStatName } from '../../../constants/pokemon-stats';
+import { StatId } from '../../../constants/pokemon-stats';
+import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { getTranslation } from '../../utils/translations';
 
