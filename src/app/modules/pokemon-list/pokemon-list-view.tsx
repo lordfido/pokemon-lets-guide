@@ -14,6 +14,7 @@ import {
   SPEED_ID,
   getStatName,
 } from '../../../constants/pokemon-stats';
+import { getTranslation } from '../../../constants/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';
 
@@ -39,20 +40,20 @@ class PokemonListView extends React.Component<OwnProps> {
               onClick: () => sort('id'),
             },
             // {
-            //   label: 'Avatar',
+            //   label: getTranslation('pokemon-avatar'),
             // },
             {
-              label: 'Name',
+              label: getTranslation('pokemon-name'),
               onClick: () => sort('name'),
             },
             {
-              label: 'Type 1',
+              label: getTranslation('pokemon-type-1'),
             },
             {
-              label: 'Type 2',
+              label: getTranslation('pokemon-type-2'),
             },
             {
-              label: 'Base CP',
+              label: getTranslation('pokemon-base-cp'),
               onClick: () => sort('baseCP'),
             },
             {
@@ -94,7 +95,7 @@ class PokemonListView extends React.Component<OwnProps> {
               {
                 id: 'load-more',
                 type: 'button',
-                label: 'Load more',
+                label: getTranslation('pokemon-load-more'),
                 onClick: handleLoadMore,
               },
             ]}

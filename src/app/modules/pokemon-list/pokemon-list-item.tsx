@@ -18,6 +18,7 @@ import {
   HP_ID,
   SPEED_ID,
 } from '../../../constants/pokemon-stats';
+import { getTranslation } from '../../../constants/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';
 
@@ -44,7 +45,7 @@ class PokemonListItem extends React.Component<OwnProps> {
           {pokemon.types.ownTypes[0] && (
             <Tag
               key={pokemon.types.ownTypes[0]}
-              label={capitalize(pokemon.types.ownTypes[0])}
+              label={getTranslation(`type-${pokemon.types.ownTypes[0]}`)}
               icon={getTypeIcon(pokemon.types.ownTypes[0])}
               backgroundColor={getTypeColor(pokemon.types.ownTypes[0])}
             />
@@ -54,7 +55,7 @@ class PokemonListItem extends React.Component<OwnProps> {
           {pokemon.types.ownTypes[1] && (
             <Tag
               key={pokemon.types.ownTypes[1]}
-              label={capitalize(pokemon.types.ownTypes[1])}
+              label={getTranslation(`type-${pokemon.types.ownTypes[1]}`)}
               icon={getTypeIcon(pokemon.types.ownTypes[1])}
               backgroundColor={getTypeColor(pokemon.types.ownTypes[1])}
             />
@@ -72,7 +73,7 @@ class PokemonListItem extends React.Component<OwnProps> {
             options={{
               id: pokemon.id.toString(),
               type: 'button',
-              label: 'Details',
+              label: getTranslation('pokemon-details'),
               to: POKEMON.replace(':id', String(pokemon.id)),
             }}
           />
