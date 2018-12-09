@@ -100,8 +100,16 @@ class Field extends React.Component<OwnProps> {
     log(`onChange() of <${options.id}>`, this.props);
 
     if (options.onChange) {
-      if (typeof event.currentTarget !== 'undefined' && typeof event.currentTarget.value !== 'undefined') {
-        options.onChange(event.currentTarget.value);
+      if (event.target) {
+        switch (event.target.type) {
+          case 'checkbox':
+            // @ts-ignore
+            options.onChange(event.target.checked);
+            break;
+
+          default:
+            options.onChange(event.target.value);
+        }
       } else {
         options.onChange(event);
       }
