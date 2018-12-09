@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import CustomImage from '../../components/image';
 
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 interface OwnProps {
   src: string;

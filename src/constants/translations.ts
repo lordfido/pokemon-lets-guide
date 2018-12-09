@@ -1,49 +1,3 @@
-import { Languages } from 'pokelab-lets-go';
-import { getInstallationData } from '../app/utils/installation';
-import { warn } from '../common/utils/logger';
-
-export const languages = [
-  // { name: Languages.Japanese, iso: 'jp-JP' },
-  { name: Languages.English, iso: 'en-GB' },
-  // { name: Languages.German, iso: 'de-DE' },
-  { name: Languages.Spanish, iso: 'es-ES' },
-  // { name: Languages.French, iso: 'fr-FR' },
-  // { name: Languages.Italian, iso: 'it-IT' },
-  // { name: Languages.Korean, iso: 'kr-KR' },
-  // { name: Languages.Chinese, iso: 'ch-CH' },
-];
-
-const japanese = Languages.All.findIndex(l => l === Languages.Japanese); // 0
-const english = Languages.All.findIndex(l => l === Languages.English); // 1
-const german = Languages.All.findIndex(l => l === Languages.German); // 2
-const spanish = Languages.All.findIndex(l => l === Languages.Spanish); // 3
-const french = Languages.All.findIndex(l => l === Languages.French); // 4
-const italian = Languages.All.findIndex(l => l === Languages.Italian); // 5
-const korean = Languages.All.findIndex(l => l === Languages.Korean); // 6
-const chinese = Languages.All.findIndex(l => l === Languages.Chinese); // 7
-
-let selectedLocale = 1;
-export const setLocale = (iso: string) => {
-  switch (iso) {
-    case 'en-EN':
-    case 'en-GB':
-      selectedLocale = english;
-      break;
-
-    case 'es-AR':
-    case 'es-EC':
-    case 'es-ES':
-    case 'es-MX':
-      selectedLocale = spanish;
-      break;
-
-    default:
-      selectedLocale = english;
-  }
-};
-
-setLocale(getInstallationData().language);
-
 interface TranslationsCollection {
   [token: string]: [string, string, string, string, string, string, string, string];
 }
@@ -139,36 +93,4 @@ const translations: TranslationsCollection = {
   ],
 };
 
-export const getTranslation = (token: string, variable?: string, locale?: number) => {
-  // Token doesn't exists
-  if (!translations[token]) {
-    warn(`No translation for <${token}>`);
-    return `No translation for <${token}>`;
-  }
-
-  // Specified locale
-  if (locale) {
-    // Specified locale translation doesn't exists
-    if (!translations[token][locale]) {
-      warn(`No <${Languages.All[locale]}> translation for <${token}>`);
-      return (
-        translations[token][english].replace(':var:', variable || '') ||
-        `No <${Languages.All[locale]}> translation for <${token}>`
-      );
-    }
-
-    return translations[token][locale].replace(':var:', variable || '');
-  }
-
-  // Default locale
-  if (!translations[token][selectedLocale]) {
-    // Default locale translation doesn't exists
-    warn(`No <${Languages.All[selectedLocale]}> translation for <${token}>`);
-    return (
-      translations[token][english].replace(':var:', variable || '') ||
-      `No <${Languages.All[selectedLocale]}> translation for <${token}>`
-    );
-  }
-
-  return translations[token][selectedLocale].replace(':var:', variable || '');
-};
+export default translations;

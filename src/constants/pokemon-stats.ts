@@ -1,4 +1,4 @@
-import { getTranslation } from './translations';
+import { getTranslation } from '../app/utils/translations';
 
 export type StatId = 'attack' | 'defense' | 'spAttack' | 'spDefense' | 'hp' | 'speed';
 export const ATTACK_ID: StatId = 'attack';

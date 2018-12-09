@@ -6,7 +6,7 @@ import Spacer from '../../components/spacer';
 
 import { getTypeIcon } from '../../../constants/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 import { RichPokemon } from '../pokemon-list/pokemon-list.types';
 import { Type } from 'pokelab-lets-go/dist/cjs/types';

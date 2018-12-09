@@ -1,5 +1,5 @@
 import { Types } from 'pokelab-lets-go';
-import { getTranslation } from './translations';
+import { getTranslation } from '../app/utils/translations';
 
 export type PokemonType =
   | 'Bug'

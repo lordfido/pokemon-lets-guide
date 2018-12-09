@@ -18,7 +18,7 @@ import {
   HP_ID,
   SPEED_ID,
 } from '../../../constants/pokemon-stats';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';
 

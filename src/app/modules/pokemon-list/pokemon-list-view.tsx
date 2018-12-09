@@ -14,7 +14,7 @@ import {
   SPEED_ID,
   getStatName,
 } from '../../../constants/pokemon-stats';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 import { PokemonWithBaseCP } from './pokemon-list.types';
 

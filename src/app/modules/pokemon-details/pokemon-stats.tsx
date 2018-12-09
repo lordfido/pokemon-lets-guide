@@ -6,7 +6,7 @@ import Buttons from '../../components/buttons';
 
 import { StatId, getStatName } from '../../../constants/pokemon-stats';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 import { RichPokemon } from '../pokemon-list/pokemon-list.types';
 

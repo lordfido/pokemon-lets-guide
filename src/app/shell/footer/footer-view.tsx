@@ -2,8 +2,7 @@ import * as React from 'react';
 import { isProduction } from '../../../common/utils/platforms';
 
 import { APP_NAME } from '../../../constants/branding';
-import { languages } from '../../../constants/translations';
-import { Button } from '../../components/buttons';
+import { languageISOs } from '../../utils/translations';
 
 const packageJson = require('../../../../package.json');
 const APP_VERSION = packageJson.version;
@@ -25,7 +24,7 @@ class FooterView extends React.Component<OwnProps> {
             {APP_NAME} {!isProduction() && `v${APP_VERSION}`} | {new Date().getFullYear()}{' '}
           </p>
           <p className="Footer-text">
-            {languages.map((language, index) => (
+            {languageISOs.map((language, index) => (
               <React.Fragment key={`language-${language.name}`}>
                 {index > 0 && ' | '}
                 <button

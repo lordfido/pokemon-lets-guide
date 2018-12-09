@@ -24,7 +24,7 @@ import {
   TypeRelations,
   PokemonWithBaseCP,
 } from '../modules/pokemon-list/pokemon-list.types';
-import { getTranslation } from '../../constants/translations';
+import { getTranslation } from './translations';
 
 const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
 

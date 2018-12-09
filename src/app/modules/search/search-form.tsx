@@ -25,7 +25,7 @@ import {
 } from '../../../constants/pokemon-stats';
 
 import { Type } from 'pokelab-lets-go/dist/cjs/types';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 interface DropdownReadableData {
   data: any;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { HOME } from '../../../constants/appRoutes';
 import CustomImage from '../../components/image';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 class HeaderView extends React.Component {
   static displayName = 'HeaderView';

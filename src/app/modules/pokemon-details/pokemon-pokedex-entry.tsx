@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getTranslation } from '../../../constants/translations';
+import { getTranslation } from '../../utils/translations';
 
 interface OwnProps {
   text: string;
