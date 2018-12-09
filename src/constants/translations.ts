@@ -1,6 +1,17 @@
 import { Languages } from 'pokelab-lets-go';
 import { getInstallationData } from '../app/utils/installation';
-import { log, warn } from '../common/utils/logger';
+import { warn } from '../common/utils/logger';
+
+export const languages = [
+  // { name: Languages.Japanese, iso: 'jp-JP' },
+  { name: Languages.English, iso: 'en-GB' },
+  // { name: Languages.German, iso: 'de-DE' },
+  { name: Languages.Spanish, iso: 'es-ES' },
+  // { name: Languages.French, iso: 'fr-FR' },
+  // { name: Languages.Italian, iso: 'it-IT' },
+  // { name: Languages.Korean, iso: 'kr-KR' },
+  // { name: Languages.Chinese, iso: 'ch-CH' },
+];
 
 const japanese = Languages.All.findIndex(l => l === Languages.Japanese); // 0
 const english = Languages.All.findIndex(l => l === Languages.English); // 1

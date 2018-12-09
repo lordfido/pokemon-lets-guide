@@ -63,7 +63,10 @@ const getLanguageCookie = () => {
 };
 
 interface InstallationDataParameters {
-  language: string;
+  language: {
+    value: string;
+    override?: boolean;
+  };
 }
 
 /**
@@ -73,7 +76,7 @@ interface InstallationDataParameters {
  */
 export const setInstallationData = ({ language }: InstallationDataParameters) => {
   setInstallationId();
-  setLanguageCookie(language);
+  setLanguageCookie(language.value, language.override);
 };
 
 export interface InstallationData {
