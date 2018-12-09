@@ -24,6 +24,7 @@ import {
   TypeRelations,
   PokemonWithBaseCP,
 } from '../modules/pokemon-list/pokemon-list.types';
+import { getTranslation } from '../../constants/translations';
 
 const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
 
@@ -65,9 +66,9 @@ const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
 };
 
 export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
-  if (!evolvesWith || new RegExp('Mega ').test(name)) return name;
+  if (!evolvesWith) return name;
 
-  const megaOptions = ['X', 'Y', 'Z'];
+  const megaOptions = ['X', 'Y'];
   for (const index in megaOptions) {
     const option = megaOptions[index];
     if (new RegExp(option).test(evolvesWith)) {
@@ -138,9 +139,6 @@ export const getSuggestedIVs = (stats: PokemonStats): Array<PokemonStats> => {
   return suggestedIVs;
 };
 
-export const removeSpecialForms = (pokemon: Pokedex.PokemonSheet) =>
-  /Mega\ /.test(pokemon.name) === false && /Alolan/.test(pokemon.name) === false;
-
 export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): PokemonWithBaseCP => {
   const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats } = pokemon;
 
@@ -179,7 +177,9 @@ export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon
 
   // Get the name
   const rawName = String(pName);
-  const name = alolanForm ? `${rawName} Alolan` : getMegaevolutionName(rawName, pokemon.megaEvolvedWith);
+  const name = alolanForm
+    ? `${rawName} ${getTranslation('forms-alolan')}`
+    : getMegaevolutionName(rawName, pokemon.megaEvolvedWith);
 
   return {
     id,

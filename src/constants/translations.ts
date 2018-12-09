@@ -80,6 +80,9 @@ const translations: TranslationsCollection = {
   'stat-hp': ['', 'HP', '', 'PS', '', '', '', ''],
   'stat-speed': ['', 'Speed', '', 'Velocidad', '', '', '', ''],
 
+  // Forms
+  'forms-alolan': ['', 'Alolan', '', 'Alola', '', '', '', ''],
+
   // Header
   'header-go-home': ['', 'Go to Home screen', '', 'Ir a la página de inicio', '', '', '', ''],
 
