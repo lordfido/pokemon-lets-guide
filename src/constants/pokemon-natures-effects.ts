@@ -1,5 +1,5 @@
 import { Stats, Natures } from 'pokelab-lets-go';
-import { PokemonNature, getNature } from './pokemon-natures';
+import { PokemonNature } from './pokemon-natures';
 import { StatId, ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID } from './pokemon-stats';
 
 interface StatIndex {
