@@ -6,7 +6,6 @@ import { getTranslation } from './translations';
 import pokemonExtraInfoList from '../../common/apis/mocks';
 
 import { MAX_IV_VALUE } from '../../constants/pokemon-ivs';
-import { PokemonNature } from '../../constants/pokemon-natures';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -116,14 +115,26 @@ interface GetCPArguments {
   level?: number;
   ivs?: PokemonStats;
   avs?: number;
-  nature?: PokemonNature;
 }
 /**
  * This formula calculates the CP of a pokemon, based on its Level, Stats and AVs
  */
-const getCombatPoints = ({ stats, level = 1, ivs, avs = 0, nature }: GetCPArguments): number => {
-  // floor(((HP+Atk+Def+SAtk+SDef+Spd) * Level * 6 / 100) + (TotalAVs * ((Level / 4) / 100 + 2)))
+const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: GetCPArguments): number => {
+  const keepItSimple = true;
 
+  if (keepItSimple) {
+    const allStats =
+      stats[ATTACK_ID] +
+      stats[SPECIAL_ATTACK_ID] +
+      stats[DEFENSE_ID] +
+      stats[SPECIAL_DEFENSE_ID] +
+      stats[HP_ID] +
+      stats[SPEED_ID];
+
+    return allStats;
+  }
+
+  // floor(((HP+Atk+Def+SAtk+SDef+Spd) * Level * 6 / 100) + (TotalAVs * ((Level / 4) / 100 + 2)))
   const allStats =
     stats[ATTACK_ID] +
     stats[SPECIAL_ATTACK_ID] +
@@ -132,8 +143,7 @@ const getCombatPoints = ({ stats, level = 1, ivs, avs = 0, nature }: GetCPArgume
     stats[HP_ID] +
     stats[SPEED_ID];
 
-  // return Math.floor((allStats * level * 6) / 100 + avs * (level / 4 / 100 + 2));
-  return allStats;
+  return Math.floor((allStats * level * 6) / 100 + avs * (level / 4 / 100 + 2));
 };
 
 type GetSortedStatsStats = Array<{ name: StatId; value: number }>;
