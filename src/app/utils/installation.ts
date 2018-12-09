@@ -1,6 +1,6 @@
 import { v1 as uuid } from 'uuid';
 import { log } from '../../common/utils/logger';
-import { INSTALLATION_ID } from '../../constants/cookies';
+import { INSTALLATION_ID, LANGUAGE } from '../../constants/cookies';
 
 /**
  * If no installation ID available, create it
@@ -33,24 +33,66 @@ const getInstallationId = () => {
 };
 
 /**
+ * If no language available, create it
+ */
+const setLanguageCookie = (value: string, override: boolean = false) => {
+  if (!getLanguageCookie() || override) {
+    log(`Setting Language: <${value}>`);
+
+    document.cookie = `${LANGUAGE}=${value}`;
+    location.reload();
+  }
+};
+
+/**
+ * Get language
+ */
+const getLanguageCookie = () => {
+  const allCookies = document.cookie.split(';').map(c => {
+    const cookie = c.split('=');
+    return {
+      name: cookie[0] ? cookie[0].trim() : '',
+      value: cookie[1] ? cookie[1].trim() : '',
+    };
+  });
+
+  const language = allCookies.find(c => c.name === LANGUAGE) || { name: LANGUAGE, value: '' };
+
+  log(`Current Language: ${language && language.value}`);
+  return language.value;
+};
+
+interface InstallationDataParameters {
+  language: {
+    value: string;
+    override?: boolean;
+  };
+}
+
+/**
  * Set installation data:
  * - Installation id
+ * - Language
  */
-export const setInstallationData = () => {
+export const setInstallationData = ({ language }: InstallationDataParameters) => {
   setInstallationId();
+  setLanguageCookie(language.value, language.override);
 };
 
 export interface InstallationData {
   installationId: string;
+  language: string;
 }
 
 /**
  * Get installation data:
  * - Installation id
+ * - Language
  */
 export const getInstallationData = () => {
   const data: InstallationData = {
     installationId: getInstallationId(),
+    language: getLanguageCookie(),
   };
 
   return data;

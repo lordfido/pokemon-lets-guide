@@ -85,7 +85,10 @@
   }
 
   // Shapes
-  &--link {
+  &--link,
+  &--link:active,
+  &--link:focus,
+  &--link:hover {
     background-color: transparent;
     border-color: transparent;
     color: $brand-color;

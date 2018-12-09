@@ -1,5 +1,5 @@
 import { Types } from 'pokelab-lets-go';
-import { capitalize } from '../app/utils/strings';
+import { getTranslation } from './translations';
 
 export type PokemonType =
   | 'Bug'
@@ -65,7 +65,7 @@ export const getType = (pokemonType: string): PokemonType | void =>
   types.find(type => type === pokemonType) || undefined;
 
 export const getTypes = (): Array<{ id: PokemonType; name: string }> =>
-  types.map(type => ({ id: type, name: capitalize(type) }));
+  types.map(type => ({ id: type, name: getTranslation(`type-${type}`) }));
 
 const typeIcons = {
   [BUG]: require('../assets/images/type-icons/bug.png'),

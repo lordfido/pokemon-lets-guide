@@ -24,7 +24,11 @@ const backgroundImage = require('./assets/images/switch.png');
  */
 const initReactApplication = async () => {
   // Set installation data (installationId)
-  setInstallationData();
+  setInstallationData({
+    language: {
+      value: navigator && navigator.language ? navigator.language : '',
+    },
+  });
 
   // Get last session data
   const lastSession = await getLastSession();

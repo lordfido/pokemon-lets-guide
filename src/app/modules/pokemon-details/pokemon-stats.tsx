@@ -6,6 +6,7 @@ import Buttons from '../../components/buttons';
 
 import { StatId, getStatName } from '../../../constants/pokemon-stats';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTranslation } from '../../../constants/translations';
 
 import { RichPokemon } from '../pokemon-list/pokemon-list.types';
 
@@ -43,11 +44,14 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
   }
 
   getStatsTabs() {
+    const { viewMode } = this.state;
+
     return [
       {
         id: CHART,
         type: 'button',
-        label: 'Chart',
+        className: viewMode === CHART ? 'is-active' : '',
+        label: getTranslation('pokemon-details-chart'),
         onClick: () => {
           this.toggleViewMode(CHART);
         },
@@ -55,7 +59,8 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
       {
         id: BARS,
         type: 'button',
-        label: 'Bars',
+        className: viewMode === BARS ? 'is-active' : '',
+        label: getTranslation('pokemon-details-bars'),
         onClick: () => {
           this.toggleViewMode(BARS);
         },
@@ -94,7 +99,7 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     return (
       <div className="PokemonStats">
         <div className="PokemonStats-wrapper">
-          <p className="PokemonStats-line PokemonStats-title">Base Stats</p>
+          <p className="PokemonStats-line PokemonStats-title">{getTranslation('pokemon-details-base-stats')}</p>
 
           {viewMode === CHART && <div className="PokemonStats-chart">{this.renderChart()}</div>}
 

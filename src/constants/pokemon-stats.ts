@@ -1,3 +1,5 @@
+import { getTranslation } from './translations';
+
 export type StatId = 'attack' | 'defense' | 'spAttack' | 'spDefense' | 'hp' | 'speed';
 export const ATTACK_ID: StatId = 'attack';
 export const DEFENSE_ID: StatId = 'defense';
@@ -6,16 +8,7 @@ export const SPECIAL_DEFENSE_ID: StatId = 'spDefense';
 export const HP_ID: StatId = 'hp';
 export const SPEED_ID: StatId = 'speed';
 
-type StatName = 'Attack' | 'Defense' | 'Sp. At.' | 'Sp. Def.' | 'HP' | 'Speed';
-const statNames: { [key: string]: StatName } = {
-  [ATTACK_ID]: 'Attack',
-  [DEFENSE_ID]: 'Defense',
-  [SPECIAL_ATTACK_ID]: 'Sp. At.',
-  [SPECIAL_DEFENSE_ID]: 'Sp. Def.',
-  [HP_ID]: 'HP',
-  [SPEED_ID]: 'Speed',
-};
-export const getStatName = (id: StatId): StatName => statNames[id];
+export const getStatName = (id: StatId): string => getTranslation(`stat-${id}`);
 
 type StatColor = 'blue' | 'green' | 'orange' | 'pink' | 'red' | 'yellow';
 const statColors: { [key: string]: StatColor } = {
