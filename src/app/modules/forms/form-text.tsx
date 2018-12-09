@@ -41,7 +41,7 @@ class Text extends React.Component<OwnProps> {
             placeholder={options.placeholder}
             disabled={options.isDisabled}
             required={options.isRequired}
-            defaultValue={options.model || ''}
+            defaultValue={typeof options.defaultValue === 'string' ? options.defaultValue : undefined}
             onClick={onClick}
             onChange={onChange}
             onFocus={onFocus}

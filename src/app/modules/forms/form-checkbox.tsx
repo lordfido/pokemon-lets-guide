@@ -26,7 +26,7 @@ class Checkbox extends React.Component<OwnProps> {
           type="checkbox"
           required={options.isRequired}
           disabled={options.isDisabled}
-          defaultChecked={options.isChecked}
+          defaultChecked={typeof options.defaultValue === 'boolean' ? options.defaultValue : undefined}
           onClick={onClick}
           onChange={onChange}
           onFocus={onFocus}

@@ -37,6 +37,21 @@ class Dropdown extends React.Component<OwnProps> {
           <Select
             placeholder={options.placeholder}
             options={options.options}
+            defaultValue={
+              options.options
+                ? options.options.filter(option => {
+                    if (options.defaultValue) {
+                      if (typeof options.defaultValue !== 'string' && typeof options.defaultValue !== 'boolean') {
+                        return options.defaultValue.findIndex(o => o === option.value) >= 0;
+                      }
+
+                      return options.defaultValue === option.value;
+                    }
+
+                    return false;
+                  })
+                : null
+            }
             onChange={onChange}
             isMulti
             isDisabled={options.isDisabled}
@@ -68,7 +83,12 @@ class Dropdown extends React.Component<OwnProps> {
         >
           {options.options &&
             options.options.map(option => (
-              <option key={option.id} className="Dropdown-options" value={option.value}>
+              <option
+                key={option.id}
+                className="Dropdown-options"
+                value={option.value}
+                selected={!!(options.defaultValue && options.defaultValue === option.value)}
+              >
                 {option.label}
               </option>
             ))}

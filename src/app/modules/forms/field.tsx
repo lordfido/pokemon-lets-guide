@@ -27,6 +27,7 @@ export interface FieldProps {
   updateId?: string;
   model?: string | void;
   form?: string;
+  defaultValue?: string | boolean | Array<string> | void;
 
   className?: string;
   label?: string;
