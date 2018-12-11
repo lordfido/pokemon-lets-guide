@@ -10,7 +10,7 @@ class HeaderView extends React.Component {
   public render() {
     return (
       <header className="Header">
-        <HeaderItem image={require('../../../assets/images/pokeball.png')} to={HOME} />
+        <HeaderItem image={require('../../../assets/images/home.png')} to={HOME} />
         <HeaderItem
           image={require('../../../assets/images/pokedex.png')}
           text={getTranslation('header-pokedex')}

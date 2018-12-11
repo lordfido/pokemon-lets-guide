@@ -74,62 +74,62 @@ export const manifestPlugin = new ManifestPlugin({
   background_color: APP_COLOR,
   description: APP_DESC,
   icons: [
-    // {
-    //   size: '512x512',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-512.png'),
-    // },
-    // {
-    //   size: '256x256',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-256.png'),
-    // },
-    // {
-    //   size: '192x192',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-192.png'),
-    // },
-    // {
-    //   size: '180x180',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-180.png'),
-    // },
-    // {
-    //   size: '167x167',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-167.png'),
-    // },
-    // {
-    //   size: '152x152',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-152.png'),
-    // },
-    // {
-    //   size: '144x144',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-144.png'),
-    // },
-    // {
-    //   size: '128x128',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-128.png'),
-    // },
-    // {
-    //   size: '120x120',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-120.png'),
-    // },
-    // {
-    //   size: '96x96',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-096.png'),
-    // },
-    // {
-    //   size: '76x76',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-076.png'),
-    // },
-    // {
-    //   size: '72x72',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-072.png'),
-    // },
-    // {
-    //   size: '48x48',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-048.png'),
-    // },
-    // {
-    //   size: '36x36',
-    //   src: path.resolve(paths.src, 'images/favicons/icon-036.png'),
-    // },
+    {
+      size: '512x512',
+      src: path.resolve(paths.src, 'images/favicons/icon-512.png'),
+    },
+    {
+      size: '256x256',
+      src: path.resolve(paths.src, 'images/favicons/icon-256.png'),
+    },
+    {
+      size: '192x192',
+      src: path.resolve(paths.src, 'images/favicons/icon-192.png'),
+    },
+    {
+      size: '180x180',
+      src: path.resolve(paths.src, 'images/favicons/icon-180.png'),
+    },
+    {
+      size: '167x167',
+      src: path.resolve(paths.src, 'images/favicons/icon-167.png'),
+    },
+    {
+      size: '152x152',
+      src: path.resolve(paths.src, 'images/favicons/icon-152.png'),
+    },
+    {
+      size: '144x144',
+      src: path.resolve(paths.src, 'images/favicons/icon-144.png'),
+    },
+    {
+      size: '128x128',
+      src: path.resolve(paths.src, 'images/favicons/icon-128.png'),
+    },
+    {
+      size: '120x120',
+      src: path.resolve(paths.src, 'images/favicons/icon-120.png'),
+    },
+    {
+      size: '96x96',
+      src: path.resolve(paths.src, 'images/favicons/icon-096.png'),
+    },
+    {
+      size: '76x76',
+      src: path.resolve(paths.src, 'images/favicons/icon-076.png'),
+    },
+    {
+      size: '72x72',
+      src: path.resolve(paths.src, 'images/favicons/icon-072.png'),
+    },
+    {
+      size: '48x48',
+      src: path.resolve(paths.src, 'images/favicons/icon-048.png'),
+    },
+    {
+      size: '36x36',
+      src: path.resolve(paths.src, 'images/favicons/icon-036.png'),
+    },
   ],
   name: APP_NAME,
   orientation: 'any',

@@ -19,6 +19,7 @@ import { IRootState } from './app/root.types';
 
 const packageJson = require('../package.json');
 const backgroundImage = require('./assets/images/switch.png');
+const htmlLogo = require('./images/logo.png');
 
 /**
  * Read persisted store and start a React application with persisted data
