@@ -5,10 +5,7 @@
   "description": "A Pokedex based in Pokémon Let's Go games",
   "main": "index.js",
   "repository": "git@github.com:lordfido/pokemon-lets-guide.git",
-  "authors": [
-    "Rafael Pérez García <rafael.perez@imperdiblesoft.com.com>",
-    "Sergio Morchón Poveda<sergio.morchon@outlook.com>"
-  ],
+  "author": "Rafael Pérez García <rafael.perez@imperdiblesoft.com.com>",
   "license": "MIT",
   "lint-staged": {
     "linters": {

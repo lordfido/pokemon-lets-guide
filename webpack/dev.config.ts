@@ -7,18 +7,18 @@ import baseConfig, { loaderImages, loaderPostCSS, loaderSass, manifestPlugin, pa
 export const appConfig: webpack.Configuration = {
   ...baseConfig,
 
+  target: 'web',
+
+  mode: 'development',
+
+  devtool: 'source-map',
+
   entry: [
     baseConfig.entry[0],
     'webpack-dev-server/client?https://0.0.0.0:8080/',
     'webpack/hot/dev-server',
     baseConfig.entry[1],
   ],
-
-  target: 'web',
-
-  mode: 'development',
-
-  devtool: 'source-map',
 
   module: {
     rules: [

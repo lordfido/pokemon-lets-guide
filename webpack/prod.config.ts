@@ -7,13 +7,13 @@ import { appConfig as devAppConfig, swConfig as devSwConfig } from './dev.config
 const appConfig: webpack.Configuration = {
   ...devAppConfig,
 
-  entry: baseConfig.entry,
-
   target: 'web',
 
   mode: 'production',
 
   devtool: false,
+
+  entry: baseConfig.entry,
 
   plugins: [
     new webpack.DefinePlugin({

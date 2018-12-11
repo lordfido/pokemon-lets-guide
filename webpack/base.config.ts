@@ -1,8 +1,7 @@
 import path from 'path';
 // import jsonImporter from 'node-sass-json-importer';
 // @ts-ignore
-import TerserPlugin from 'terser-webpack-plugin';
-import webpack from 'webpack';
+import UglifyPlugin from 'terser-webpack-plugin';
 import ManifestPlugin from 'webpack-pwa-manifest';
 
 import postcssConfig from '../postcss.config';
@@ -139,7 +138,7 @@ export const manifestPlugin = new ManifestPlugin({
   theme_color: APP_COLOR,
 });
 
-export const uglifyPlugin = new TerserPlugin();
+export const uglifyPlugin = new UglifyPlugin();
 
 const baseConfig = {
   entry: ['babel-polyfill', path.resolve(paths.src, 'index.tsx')],
@@ -156,7 +155,7 @@ const baseConfig = {
       {
         exclude: /node_modules/,
         include: paths.src,
-        test: /\.(ts|tsx|js)$/,
+        test: /\.(tsx?|js)$/,
         use: [
           {
             loader: 'babel-loader',
@@ -170,7 +169,7 @@ const baseConfig = {
   },
 
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
 };
 
