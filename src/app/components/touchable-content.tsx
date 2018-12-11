@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Space from './space';
 
-interface OwnProps {
+interface IOwnProps {
   options: {
     icon?: string | React.ReactElement<{}>;
     iconLast?: boolean;
@@ -10,8 +10,8 @@ interface OwnProps {
   };
 }
 
-class TouchableContent extends React.Component<OwnProps> {
-  render() {
+class TouchableContent extends React.Component<IOwnProps> {
+  public render() {
     const {
       options: { icon, iconLast, label },
     } = this.props;

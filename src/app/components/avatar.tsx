@@ -1,14 +1,14 @@
 import * as React from 'react';
 import CustomImage from './image';
 
-interface OwnProps {
+interface IOwnProps {
   picture: string;
 }
 
-class Avatar extends React.Component<OwnProps> {
-  static displayName = 'Avatar';
+class Avatar extends React.Component<IOwnProps> {
+  public static displayName = 'Avatar';
 
-  render() {
+  public render() {
     const { picture } = this.props;
 
     return (

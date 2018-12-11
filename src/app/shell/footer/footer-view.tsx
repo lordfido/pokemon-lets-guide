@@ -7,14 +7,14 @@ import { languageISOs } from '../../utils/translations';
 const packageJson = require('../../../../package.json');
 const APP_VERSION = packageJson.version;
 
-interface OwnProps {
+interface IOwnProps {
   handleLanguageSelection: (language: string) => void;
 }
 
-class FooterView extends React.Component<OwnProps> {
-  static displayName = 'FooterView';
+class FooterView extends React.Component<IOwnProps> {
+  public static displayName = 'FooterView';
 
-  render() {
+  public render() {
     const { handleLanguageSelection } = this.props;
 
     return (

@@ -1,25 +1,25 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 import TextArea from 'react-textarea-autosize';
 
-import { FieldProps } from './field';
+import { IFieldProps } from './field';
 
-interface Options extends FieldProps {
+interface IOptions extends IFieldProps {
   minLength?: number;
   maxLength?: number;
 }
 
-interface OwnProps {
-  options: Options;
+interface IOwnProps {
+  options: IOptions;
   onClick: (event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onFocus: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-class Text extends React.Component<OwnProps> {
-  static displayName = 'Text';
+class Text extends React.Component<IOwnProps> {
+  public static displayName = 'Text';
 
-  render() {
+  public render() {
     const { options, onClick, onChange, onFocus } = this.props;
 
     return (

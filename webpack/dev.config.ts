@@ -1,7 +1,8 @@
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import baseConfig, { paths, regex, loaderPostCSS, loaderSass, loaderImages, manifestPlugin } from './base.config';
+
+import baseConfig, { loaderImages, loaderPostCSS, loaderSass, manifestPlugin, paths, regex } from './base.config';
 
 export const appConfig: webpack.Configuration = {
   ...baseConfig,
@@ -16,9 +17,9 @@ export const appConfig: webpack.Configuration = {
     rules: [
       // Images
       {
-        test: regex.img,
-        include: paths.src,
         exclude: /node_modules/,
+        include: paths.src,
+        test: regex.img,
         use: [
           {
             loader: 'file-loader',
@@ -32,19 +33,19 @@ export const appConfig: webpack.Configuration = {
 
       // Fonts
       {
-        test: regex.fonts,
         include: paths.root,
         loader: 'file-loader',
         options: {
           name: '[path][name]_[hash].[ext]',
         },
+        test: regex.fonts,
       },
 
       // CSS
       {
-        test: regex.css,
-        include: paths.src,
         exclude: /node_modules/,
+        include: paths.src,
+        test: regex.css,
         use: [
           {
             loader: 'style-loader',
@@ -61,21 +62,21 @@ export const appConfig: webpack.Configuration = {
 
       // JSON
       {
-        test: regex.json,
-        include: paths.src,
         exclude: /node_modules/,
+        include: paths.src,
         loader: 'file-loader',
         options: {
           sourceMap: true,
         },
+        test: regex.json,
       },
 
       // HTML
       {
-        test: regex.html,
-        include: paths.src,
         exclude: /node_modules/,
+        include: paths.src,
         loader: 'html-loader',
+        test: regex.html,
       },
 
       // @ts-ignore
@@ -122,9 +123,9 @@ export const swConfig: webpack.Configuration = {
     rules: [
       // Images
       {
-        test: regex.img,
-        include: paths.src,
         exclude: /node_modules/,
+        include: paths.src,
+        test: regex.img,
         use: [
           {
             loader: 'file-loader',

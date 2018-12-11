@@ -6,9 +6,9 @@ import CustomImage from '../../components/image';
 import { getTranslation } from '../../utils/translations';
 
 class HeaderView extends React.Component {
-  static displayName = 'HeaderView';
+  public static displayName = 'HeaderView';
 
-  render() {
+  public render() {
     return (
       <header className="Header">
         <Link className="Header-item" to={{ pathname: HOME }}>

@@ -1,17 +1,18 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
+
 import CustomImage from './image';
 
-interface OwnProps {
+interface IOwnProps {
   className?: string;
   title?: string;
   image?: string;
 }
 
-class Card extends React.Component<OwnProps> {
-  static displayName = 'Card';
+class Card extends React.Component<IOwnProps> {
+  public static displayName = 'Card';
 
-  render() {
+  public render() {
     const { className, title, image, children } = this.props;
 
     const classes = {

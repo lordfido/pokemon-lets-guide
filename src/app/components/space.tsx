@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 class Space extends React.Component {
-  static displayName = 'Space';
+  public static displayName = 'Space';
 
-  render() {
+  public render() {
     return <span>&nbsp;&nbsp;</span>;
   }
 }

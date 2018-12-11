@@ -1,27 +1,27 @@
 import * as React from 'react';
-import StatsChart from '../../components/stats-chart';
+import { getSuggestedIVs } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
+import StatsChart from '../../components/stats-chart';
 import PokemonInfo from './pokemon-info';
+import PokemonPagination from './pokemon-pagination';
+import PokemonPokedexEntry from './pokemon-pokedex-entry';
 import PokemonPreview from './pokemon-preview';
 import PokemonStats from './pokemon-stats';
-import PokemonPokedexEntry from './pokemon-pokedex-entry';
-import PokemonPagination from './pokemon-pagination';
 
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 
-import { RichPokemon, PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
-import { getTranslation } from '../../utils/translations';
-import { getSuggestedIVs } from '../../utils/pokemon';
+import { IPokemonPagination as IPokemonPaginationModel, IRichPokemon } from '../pokemon-list/pokemon-list.types';
 
-interface OwnProps {
-  pokemon: RichPokemon;
-  pagination: PokemonPaginationModel;
+interface IOwnProps {
+  pokemon: IRichPokemon;
+  pagination: IPokemonPaginationModel;
 }
 
-class PokemonDetailsView extends React.Component<OwnProps> {
-  displayName = 'PokemonDetailsView';
+class PokemonDetailsView extends React.Component<IOwnProps> {
+  public displayName = 'PokemonDetailsView';
 
-  renderSuggestedStats() {
+  public renderSuggestedStats() {
     const { pokemon } = this.props;
     const suggestedIVs = getSuggestedIVs(pokemon.baseStats);
 
@@ -33,7 +33,7 @@ class PokemonDetailsView extends React.Component<OwnProps> {
     ));
   }
 
-  render() {
+  public render() {
     const { pokemon, pagination } = this.props;
 
     return (

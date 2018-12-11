@@ -1,36 +1,36 @@
-import * as React from 'react';
 import chroma from 'chroma-js';
+import * as React from 'react';
 import { getPaddedId } from '../../utils/pokemon';
-
-import { Button } from '../../components/buttons';
-// import CustomImage from '../../components/image';
-import Tag from '../../components/tag';
-import { TableRow, TableCell } from '../../components/table';
-
-import { POKEMON } from '../../../constants/appRoutes';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../constants/pokemon-types-icons';
-import {
-  ATTACK_ID,
-  SPECIAL_ATTACK_ID,
-  DEFENSE_ID,
-  SPECIAL_DEFENSE_ID,
-  HP_ID,
-  SPEED_ID,
-} from '../../../constants/pokemon-stats';
 import { getTranslation } from '../../utils/translations';
 
-import { PokemonWithBaseCP } from './pokemon-list.types';
-import { getStatColor } from '../../../constants/pokemon-stats-color';
+import Button from '../../components/button';
+import { TableCell, TableRow } from '../../components/table';
+// import CustomImage from '../../components/image';
+import Tag from '../../components/tag';
 
-interface OwnProps {
-  pokemon: PokemonWithBaseCP;
+import { POKEMON } from '../../../constants/appRoutes';
+import {
+  ATTACK_ID,
+  DEFENSE_ID,
+  HP_ID,
+  SPECIAL_ATTACK_ID,
+  SPECIAL_DEFENSE_ID,
+  SPEED_ID,
+} from '../../../constants/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
+import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon-types-icons';
+
+import { IPokemonWithBaseCP } from './pokemon-list.types';
+
+interface IOwnProps {
+  pokemon: IPokemonWithBaseCP;
 }
 
-class PokemonListItem extends React.Component<OwnProps> {
-  static displayName = 'PokemonListItem';
+class PokemonListItem extends React.Component<IOwnProps> {
+  public static displayName = 'PokemonListItem';
 
-  render() {
+  public render() {
     const { pokemon } = this.props;
 
     // const avatar = getAvatarFromId(pokemon.id);
@@ -133,9 +133,9 @@ class PokemonListItem extends React.Component<OwnProps> {
           <Button
             options={{
               id: pokemon.id.toString(),
-              type: 'button',
               label: getTranslation('pokemon-details'),
               to: POKEMON.replace(':id', String(pokemon.id)),
+              type: 'button',
             }}
           />
         </TableCell>

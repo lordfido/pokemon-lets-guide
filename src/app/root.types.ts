@@ -1,12 +1,12 @@
-import { PokemonListState } from './modules/pokemon-list/pokemon-list.types';
-import { SearchState } from './modules/search/search.types';
+import { IPokemonListState } from './modules/pokemon-list/pokemon-list.types';
+import { ISearchState } from './modules/search/search.types';
 
-export interface DefaultAction {
+export interface IDefaultAction {
   type: string;
   payload?: any;
 }
 
-export interface RootState {
-  pokemon: PokemonListState;
-  search: SearchState;
+export interface IRootState {
+  pokemon: IPokemonListState;
+  search: ISearchState;
 }

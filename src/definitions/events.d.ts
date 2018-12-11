@@ -4,14 +4,14 @@
  *
  * @deprecated Only supported on Chrome and Android Webview.
  */
-interface BeforeInstallPromptEvent extends Event {
+interface IBeforeInstallPromptEvent extends Event {
   /**
    * Returns an array of DOMString items containing the platforms on which the event was dispatched.
    * This is provided for user agents that want to present a choice of versions to the user such as,
    * for example, "web" or "play" which would allow the user to chose between a web version or
    * an Android version.
    */
-  readonly platforms: Array<string>;
+  readonly platforms: string[];
 
   /**
    * Returns a Promise that resolves to a DOMString containing either "accepted" or "dismissed".

@@ -1,10 +1,10 @@
+import classnames from 'classnames';
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import classnames from 'classnames';
 
 import TouchableContent from './touchable-content';
 
-export interface LinkProps {
+export interface ILinkProps {
   id: string;
   className?: string;
   label?: string;
@@ -12,30 +12,30 @@ export interface LinkProps {
   iconLast?: boolean;
   isExternal?: boolean;
   to?: any;
-  onClick?: Function;
+  onClick?: (params?: any) => void;
 }
 
-interface OwnProps {
-  options: LinkProps;
+interface IOwnProps {
+  options: ILinkProps;
   isTransparent?: boolean;
   shouldInherit?: boolean;
 }
 
-class Link extends React.Component<OwnProps> {
-  static displayName = 'Link';
+class Link extends React.Component<IOwnProps> {
+  public static displayName = 'Link';
 
-  onClick = (link?: LinkProps) => {
+  public onClick = (link?: ILinkProps) => {
     if (link && link.onClick) {
       link.onClick();
     }
   };
 
-  render() {
+  public render() {
     const { options, isTransparent, shouldInherit } = this.props;
 
     const classes = {
-      wrapper: '',
       element: '',
+      wrapper: '',
     };
 
     // If component should inherit color properties
@@ -53,23 +53,25 @@ class Link extends React.Component<OwnProps> {
     }
 
     const touchable = {
-      label: options.label,
       icon: options.icon,
       iconLast: options.iconLast,
+      label: options.label,
     };
 
     if (options.onClick) {
-      <span className={classes.wrapper}>
-        <button
-          id={options.id}
-          className={classes.element}
-          onClick={() => {
-            this.onClick(options);
-          }}
-        >
-          <TouchableContent options={touchable} />
-        </button>
-      </span>;
+      return (
+        <span className={classes.wrapper}>
+          <button
+            id={options.id}
+            className={classes.element}
+            onClick={() => {
+              this.onClick(options);
+            }}
+          >
+            <TouchableContent options={touchable} />
+          </button>
+        </span>
+      );
     }
 
     if (options.isExternal) {

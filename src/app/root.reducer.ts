@@ -4,26 +4,26 @@ import { combineReducers, Reducer } from 'redux';
 import pokemonReducer, * as pokemonSelectors from './modules/pokemon-list/pokemon-list.reducer';
 import searchReducer, * as searchSelectors from './modules/search/search.reducer';
 
-import { RootState } from './root.types';
+import { IRootState } from './root.types';
 
 // Declare root reducer
-const rootReducer: Reducer<RootState> = combineReducers({
+const rootReducer: Reducer<IRootState> = combineReducers({
   pokemon: pokemonReducer,
   search: searchReducer,
 });
 
 // Custom selectors
 // Pokemon List
-export const getPokemonList = ({ pokemon, search }: RootState) => pokemonSelectors.getPokemonList(pokemon, search);
-export const getPokemonListPagination = ({ pokemon }: RootState) => pokemonSelectors.getPokemonListPagination(pokemon);
-export const getPokemonSortOptions = ({ pokemon }: RootState) => pokemonSelectors.getPokemonSortOptions(pokemon);
+export const getPokemonList = ({ pokemon, search }: IRootState) => pokemonSelectors.getPokemonList(pokemon, search);
+export const getPokemonListPagination = ({ pokemon }: IRootState) => pokemonSelectors.getPokemonListPagination(pokemon);
+export const getPokemonSortOptions = ({ pokemon }: IRootState) => pokemonSelectors.getPokemonSortOptions(pokemon);
 
 // Pokemon details
-export const getSelectedPokemon = ({ pokemon }: RootState) => pokemonSelectors.getSelectedPokemon(pokemon);
-export const getPokemonPagination = ({ pokemon, search }: RootState) =>
+export const getSelectedPokemon = ({ pokemon }: IRootState) => pokemonSelectors.getSelectedPokemon(pokemon);
+export const getPokemonPagination = ({ pokemon, search }: IRootState) =>
   pokemonSelectors.getPokemonPagination(pokemon, search);
 
 // Search filters
-export const getFilters = ({ search }: RootState) => searchSelectors.getFilters(search);
+export const getFilters = ({ search }: IRootState) => searchSelectors.getFilters(search);
 
 export default rootReducer;

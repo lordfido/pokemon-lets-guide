@@ -1,23 +1,23 @@
 import { AnyAction } from 'redux';
 
-import { SearchState } from './search.types';
+import { ISearchState } from './search.types';
 
-const initialState: SearchState = {
-  nameOrNumber: undefined,
-  includedTypes: [],
+const initialState: ISearchState = {
+  bestStats: [],
+  // canLearnMTs: [],
+  // canLearnSkills: [],
+  // dropsCandies: [],
   excludedTypes: [],
+  includedTypes: [],
+  maxBaseCP: undefined,
+  minBaseCP: undefined,
+  nameOrNumber: undefined,
+  // needsCandies: [],
+  showAlolanForms: false,
+  showMegaevolutions: false,
   strongAgainst: [],
   weakAgainst: [],
-  bestStats: [],
   worstStats: [],
-  minBaseCP: undefined,
-  maxBaseCP: undefined,
-  showMegaevolutions: false,
-  showAlolanForms: false,
-  // canLearnSkills: [],
-  // canLearnMTs: [],
-  // dropsCandies: [],
-  // needsCandies: [],
 };
 
 const reducer = (state = initialState, action: AnyAction) => {
@@ -38,6 +38,6 @@ const reducer = (state = initialState, action: AnyAction) => {
   }
 };
 
-export const getFilters = (state: SearchState) => state;
+export const getFilters = (state: ISearchState) => state;
 
 export default reducer;

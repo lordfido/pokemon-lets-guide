@@ -1,22 +1,23 @@
-import * as React from 'react';
 import classnames from 'classnames';
-import { FieldProps } from './field';
+import * as React from 'react';
 
-interface Options extends FieldProps {
+import { IFieldProps } from './field';
+
+interface IOptions extends IFieldProps {
   isChecked?: boolean;
 }
 
-interface OwnProps {
-  options: Options;
+interface IOwnProps {
+  options: IOptions;
   onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-class Checkbox extends React.Component<OwnProps> {
-  static displayName = 'Checkbox';
+class Checkbox extends React.Component<IOwnProps> {
+  public static displayName = 'Checkbox';
 
-  render() {
+  public render() {
     const { options, onClick, onChange, onFocus } = this.props;
 
     // TODO: Add a React date-picker

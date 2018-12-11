@@ -1,9 +1,9 @@
-export interface LastSession {
+export interface ILastSession {
   route: string;
   version: string;
 }
 
-export interface WorkerConfig {
+export interface IWorkerConfig {
   defaultBadgeUrl: string;
   defaultIconUrl: string;
 }

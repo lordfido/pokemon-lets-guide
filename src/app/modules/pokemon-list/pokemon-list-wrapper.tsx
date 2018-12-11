@@ -2,33 +2,34 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import PokemonListView from './pokemon-list-view';
-import { sortPokemonList, loadMore } from './pokemon-list.actions';
-import { getPokemonList, getPokemonSortOptions, getPokemonListPagination } from '../../root.reducer';
 
-import { RootState } from '../../root.types';
-import { PokemonWithBaseCP, PokemonListPagination } from './pokemon-list.types';
+import { getPokemonList, getPokemonListPagination, getPokemonSortOptions } from '../../root.reducer';
+import { loadMore, sortPokemonList } from './pokemon-list.actions';
 
-type StateProps = {
-  collection: Array<PokemonWithBaseCP>;
-  pagination: PokemonListPagination;
+import { IRootState } from '../../root.types';
+import { IPokemonListPagination, IPokemonWithBaseCP } from './pokemon-list.types';
+
+interface IStateProps {
+  collection: IPokemonWithBaseCP[];
+  pagination: IPokemonListPagination;
   sort: {
     sortBy: string;
     order: string;
   };
-};
+}
 
-type DispatchProps = {
-  sortPokemonList: Function;
-  loadMore: Function;
-};
+interface IDispatchProps {
+  LoadMore: () => void;
+  SortPokemonList: (parameters: any) => void;
+}
 
-type Props = StateProps & DispatchProps;
+type Props = IStateProps & IDispatchProps;
 
 class PokemonListWrapper extends React.Component<Props> {
-  static displayName = 'PokemonListWrapper';
+  public static displayName = 'PokemonListWrapper';
 
-  sortBy = (sortBy: string) => {
-    const { sortPokemonList, sort } = this.props;
+  public sortBy = (sortBy: string) => {
+    const { SortPokemonList, sort } = this.props;
 
     const reverse = sortBy === sort.sortBy;
     let order = 'asc';
@@ -43,16 +44,16 @@ class PokemonListWrapper extends React.Component<Props> {
       }
     }
 
-    sortPokemonList({ sortBy, order });
+    SortPokemonList({ sortBy, order });
   };
 
-  handleLoadMore() {
-    const { loadMore } = this.props;
+  public handleLoadMore() {
+    const { LoadMore } = this.props;
 
-    loadMore();
+    LoadMore();
   }
 
-  render() {
+  public render() {
     const { collection, pagination } = this.props;
 
     return (
@@ -71,15 +72,15 @@ class PokemonListWrapper extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: IRootState) => ({
   collection: getPokemonList(state),
   pagination: getPokemonListPagination(state),
   sort: getPokemonSortOptions(state),
 });
 
 const mapDispatchToProps = {
-  sortPokemonList,
-  loadMore,
+  LoadMore: loadMore,
+  SortPokemonList: sortPokemonList,
 };
 
 export default connect(

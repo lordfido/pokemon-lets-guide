@@ -1,25 +1,25 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 import Select from 'react-select';
 
-import { FieldProps } from './field';
 import TouchableContent from '../../components/touchable-content';
+import { IFieldProps } from './field';
 
-interface Options extends FieldProps {
+interface IOptions extends IFieldProps {
   colourStyles?: any;
 }
 
-interface OwnProps {
-  options: Options;
+interface IOwnProps {
+  options: IOptions;
   onClick: any;
   onChange: any;
   onFocus: any;
 }
 
-class Dropdown extends React.Component<OwnProps> {
-  static displayName = 'Dropdown';
+class Dropdown extends React.Component<IOwnProps> {
+  public static displayName = 'Dropdown';
 
-  render() {
+  public render() {
     const { options, onClick, onChange, onFocus } = this.props;
 
     if (options.isMulti) {

@@ -1,15 +1,15 @@
-import * as React from 'react';
 import { Line } from 'rc-progress';
+import * as React from 'react';
 
-import StatsChart from '../../components/stats-chart';
 import Buttons from '../../components/buttons';
+import StatsChart from '../../components/stats-chart';
 
 import { StatId } from '../../../constants/pokemon-stats';
 import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { getTranslation } from '../../utils/translations';
 
-import { RichPokemon } from '../pokemon-list/pokemon-list.types';
+import { IRichPokemon } from '../pokemon-list/pokemon-list.types';
 
 type Bars = 'bars';
 const BARS: Bars = 'bars';
@@ -19,18 +19,18 @@ const CHART: Chart = 'chart';
 
 type ViewMode = Bars | Chart;
 
-interface OwnProps {
-  pokemon: RichPokemon;
+interface IOwnProps {
+  pokemon: IRichPokemon;
 }
 
-interface OwnState {
+interface IOwnState {
   viewMode: ViewMode;
 }
 
-class PokemonStats extends React.Component<OwnProps, OwnState> {
-  static displayName = 'PokemonStats';
+class PokemonStats extends React.Component<IOwnProps, IOwnState> {
+  public static displayName = 'PokemonStats';
 
-  constructor(props: OwnProps) {
+  constructor(props: IOwnProps) {
     super(props);
 
     this.state = {
@@ -38,44 +38,44 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     };
   }
 
-  toggleViewMode(viewMode: ViewMode) {
+  public toggleViewMode(viewMode: ViewMode) {
     this.setState({
       viewMode,
     });
   }
 
-  getStatsTabs() {
+  public getStatsTabs() {
     const { viewMode } = this.state;
 
     return [
       {
-        id: CHART,
-        type: 'button',
         className: viewMode === CHART ? 'is-active' : '',
+        id: CHART,
         label: getTranslation('pokemon-details-chart'),
         onClick: () => {
           this.toggleViewMode(CHART);
         },
+        type: 'button',
       },
       {
-        id: BARS,
-        type: 'button',
         className: viewMode === BARS ? 'is-active' : '',
+        id: BARS,
         label: getTranslation('pokemon-details-bars'),
         onClick: () => {
           this.toggleViewMode(BARS);
         },
+        type: 'button',
       },
     ];
   }
 
-  renderChart() {
+  public renderChart() {
     const { pokemon } = this.props;
 
     return <StatsChart stats={pokemon.relativeStats} color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />;
   }
 
-  renderBars() {
+  public renderBars() {
     const { pokemon } = this.props;
 
     // @ts-ignore
@@ -94,7 +94,7 @@ class PokemonStats extends React.Component<OwnProps, OwnState> {
     });
   }
 
-  render() {
+  public render() {
     const { viewMode } = this.state;
 
     return (

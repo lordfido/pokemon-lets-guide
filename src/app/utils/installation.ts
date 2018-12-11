@@ -62,7 +62,7 @@ const getLanguageCookie = () => {
   return language.value;
 };
 
-interface InstallationDataParameters {
+interface IInstallationDataParameters {
   language: {
     value: string;
     override?: boolean;
@@ -74,12 +74,12 @@ interface InstallationDataParameters {
  * - Installation id
  * - Language
  */
-export const setInstallationData = ({ language }: InstallationDataParameters) => {
+export const setInstallationData = ({ language }: IInstallationDataParameters) => {
   setInstallationId();
   setLanguageCookie(language.value, language.override);
 };
 
-export interface InstallationData {
+export interface IInstallationData {
   installationId: string;
   language: string;
 }
@@ -90,7 +90,7 @@ export interface InstallationData {
  * - Language
  */
 export const getInstallationData = () => {
-  const data: InstallationData = {
+  const data: IInstallationData = {
     installationId: getInstallationId(),
     language: getLanguageCookie(),
   };

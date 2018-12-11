@@ -2,17 +2,15 @@ import * as React from 'react';
 
 import CustomImage from '../../components/image';
 
-import { getTranslation } from '../../utils/translations';
-
-interface OwnProps {
+interface IOwnProps {
   src: string;
   alt?: string;
 }
 
-class PokemonPreview extends React.Component<OwnProps> {
-  static displayName = 'PokemonPreview';
+class PokemonPreview extends React.Component<IOwnProps> {
+  public static displayName = 'PokemonPreview';
 
-  render() {
+  public render() {
     const { src, alt } = this.props;
 
     return (

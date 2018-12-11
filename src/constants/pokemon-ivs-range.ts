@@ -1,11 +1,11 @@
 import {
-  IVID,
   BEST_IV_ID,
-  FANTASTIC_IV_ID,
-  VERY_GOOD_IV_ID,
-  PRETTY_GOOD_IV_ID,
   DECENT_IV_ID,
+  FANTASTIC_IV_ID,
+  IVID,
   NO_GOOD_IV_ID,
+  PRETTY_GOOD_IV_ID,
+  VERY_GOOD_IV_ID,
 } from './pokemon-ivs';
 
 type IVRange = [number, number];
@@ -25,7 +25,7 @@ const iVRanges: { [key: string]: IVRange } = {
  */
 export const getIVRangeId = (value: number): IVID => {
   // @ts-ignore
-  const ids: Array<IVID> = Object.keys(iVRanges);
+  const ids: IVID[] = Object.keys(iVRanges);
 
   for (let x = 0; x <= ids.length - 1; x++) {
     const id = ids[x];

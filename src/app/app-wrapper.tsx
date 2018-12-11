@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
 import registerServiceWorker from './utils/service-worker';
@@ -16,16 +16,16 @@ import { getPokemon } from './modules/pokemon-list/pokemon-list.actions';
 import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
-import { RootState } from './root.types';
+import { IRootState } from './root.types';
 
 const packageJson = require('../../package.json');
 const appVersion = packageJson.version;
 
-interface CustomStore extends RootState {
+interface ICustomStore extends IRootState {
   [index: string]: any;
 }
 
-interface OwnProps {
+interface IOwnProps {
   lastRoute: string;
   isNewRelease: boolean;
 }
@@ -34,23 +34,21 @@ type RouteProps = RouteComponentProps<{
   location: any;
 }>;
 
-interface StateProps {
-  store: CustomStore;
+interface IStateProps {
+  store: ICustomStore;
 }
 
-type DispatchProps = {
-  getPokemon: Function;
-};
+interface IDispatchProps {
+  GetPokemon: () => void;
+}
 
-type Props = OwnProps & RouteProps & StateProps & DispatchProps;
+type Props = IOwnProps & RouteProps & IStateProps & IDispatchProps;
 
 class AppWrapper extends React.Component<Props> {
-  static displayName = 'AppWrapper';
+  public static displayName = 'AppWrapper';
 
-  state = {};
-
-  componentDidMount() {
-    const { getPokemon, lastRoute, history } = this.props;
+  public componentDidMount() {
+    const { GetPokemon, lastRoute, history } = this.props;
 
     if (restoreLastRoute && lastRoute) {
       history.push({
@@ -66,10 +64,10 @@ class AppWrapper extends React.Component<Props> {
     registerServiceWorker(history);
 
     // Get pokedex
-    getPokemon();
+    GetPokemon();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: Props) {
     const { location } = this.props;
 
     // this.persistStore();
@@ -77,13 +75,13 @@ class AppWrapper extends React.Component<Props> {
     // On URL change, update lastSession.route
     if (prevProps.location.pathname !== location.pathname) {
       setLastSession({
-        version: appVersion,
         route: location.pathname,
+        version: appVersion,
       });
     }
   }
 
-  persistStore = () => {
+  public persistStore = () => {
     const { store } = this.props;
 
     const ignoredStates = ['account', 'contact', 'feedback', 'form', 'notifier', 'uploader'];
@@ -94,8 +92,8 @@ class AppWrapper extends React.Component<Props> {
       if (ignoredStates.indexOf(key) < 0) {
         cleanState[key] = {
           ...store[key],
-          isFetching: undefined,
           filters: undefined,
+          isFetching: undefined,
         };
       }
     });
@@ -103,7 +101,7 @@ class AppWrapper extends React.Component<Props> {
     setStore(JSON.parse(JSON.stringify(cleanState)));
   };
 
-  render() {
+  public render() {
     return (
       <AppView>
         <Switch>
@@ -116,8 +114,8 @@ class AppWrapper extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const store = state as CustomStore;
+const mapStateToProps = (state: IRootState): IStateProps => {
+  const store = state as ICustomStore;
 
   return {
     store,
@@ -125,7 +123,7 @@ const mapStateToProps = (state: RootState): StateProps => {
 };
 
 const mapDispatchToProps = {
-  getPokemon,
+  GetPokemon: getPokemon,
 };
 
 const connectedApp = withRouter(

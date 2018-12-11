@@ -1,35 +1,34 @@
-import * as React from 'react';
 import chroma from 'chroma-js';
-
-import PokemonListItem from './pokemon-list-item';
+import * as React from 'react';
+import { getTranslation } from '../../utils/translations';
 
 import Buttons from '../../components/buttons';
 import Table from '../../components/table';
+import PokemonListItem from './pokemon-list-item';
 
 import {
   ATTACK_ID,
-  SPECIAL_ATTACK_ID,
   DEFENSE_ID,
-  SPECIAL_DEFENSE_ID,
   HP_ID,
+  SPECIAL_ATTACK_ID,
+  SPECIAL_DEFENSE_ID,
   SPEED_ID,
 } from '../../../constants/pokemon-stats';
-import { getStatName } from '../../../constants/pokemon-stats-name';
-import { getTranslation } from '../../utils/translations';
-
-import { PokemonWithBaseCP } from './pokemon-list.types';
 import { getStatColor } from '../../../constants/pokemon-stats-color';
+import { getStatName } from '../../../constants/pokemon-stats-name';
 
-type OwnProps = {
-  collection: Array<PokemonWithBaseCP>;
+import { IPokemonWithBaseCP } from './pokemon-list.types';
+
+interface IOwnProps {
+  collection: IPokemonWithBaseCP[];
   sort: (key: string) => void;
   handleLoadMore?: () => void;
-};
+}
 
-class PokemonListView extends React.Component<OwnProps> {
-  static displayName = 'PokemonListView';
+class PokemonListView extends React.Component<IOwnProps> {
+  public static displayName = 'PokemonListView';
 
-  render() {
+  public render() {
     const { handleLoadMore, collection, sort } = this.props;
 
     return (
@@ -126,9 +125,9 @@ class PokemonListView extends React.Component<OwnProps> {
             options={[
               {
                 id: 'load-more',
-                type: 'button',
                 label: getTranslation('pokemon-load-more'),
                 onClick: handleLoadMore,
+                type: 'button',
               },
             ]}
           />

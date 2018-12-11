@@ -1,75 +1,30 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 
-import Link from './link';
-import TouchableContent from './touchable-content';
+import Tab, { ITabOptions } from './tab';
 
-export interface TabOptions {
-  id: string;
-  label?: string;
-  icon?: string;
-  iconLast?: boolean;
-  to?: string;
-  onClick?: (id: string) => void;
-}
-
-interface OwnSingleProps {
-  options: TabOptions;
-  isActive: boolean;
-  handleClick: Function;
-  reference: any;
-}
-
-class Tab extends React.Component<OwnSingleProps> {
-  static displayName = 'Tab';
-
-  render() {
-    const { options, isActive, handleClick, reference } = this.props;
-
-    const classes = classnames('Tabs-tab', { 'is-active': isActive });
-
-    if (options.to) {
-      return (
-        <li id={options.id} role="button" className={classes} ref={reference}>
-          <Link options={options} isTransparent shouldInherit />
-        </li>
-      );
-    }
-
-    return (
-      <li
-        id={options.id}
-        role="button"
-        className={classes}
-        onClick={() => {
-          handleClick(options);
-        }}
-        ref={reference}
-      >
-        <TouchableContent options={options} />
-      </li>
-    );
-  }
-}
-
-interface OwnProps {
-  options: TabOptions[];
+interface IOwnProps {
+  options: ITabOptions[];
   activeTab: string;
   className?: string;
 }
 
-class Tabs extends React.Component<OwnProps> {
-  static displayName = 'Tabs';
+interface IOwnState {
+  width: number;
+}
 
-  state = {
+class Tabs extends React.Component<IOwnProps, IOwnState> {
+  public static displayName = 'Tabs';
+
+  public state = {
     width: 0,
   };
 
-  componentDidMount() {
+  public componentDidMount() {
     this.calculateWidth();
   }
 
-  calculateWidth() {
+  public calculateWidth() {
     // Get all elements
     const tabs = Object.keys(this)
       .filter(key => /tab/.test(key))
@@ -88,13 +43,13 @@ class Tabs extends React.Component<OwnProps> {
     });
   }
 
-  onClick = (tab: TabOptions) => {
+  public onClick = (tab: ITabOptions) => {
     if (tab.onClick) {
       tab.onClick(tab.id);
     }
   };
 
-  render() {
+  public render() {
     const { className, options, activeTab } = this.props;
     const { width } = this.state;
 

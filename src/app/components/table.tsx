@@ -1,36 +1,46 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 // @ts-ignore
 import Media from 'react-media';
 
 import Card from './card';
 
-type TableCellProps = { className?: string; center?: boolean; style?: React.CSSProperties; children: any };
-export const TableCell = ({ className, center, style, children }: TableCellProps) => (
+interface ITableCellProps {
+  className?: string;
+  center?: boolean;
+  style?: React.CSSProperties;
+  children: any;
+}
+
+export const TableCell = ({ className, center, style, children }: ITableCellProps) => (
   <td className={classnames('Table-cell', className, { 'Table--center': center })} style={style}>
     {children}
   </td>
 );
 
-type TableRowProps = { className?: string; children: Array<JSX.Element> };
-export const TableRow = ({ className, children }: TableRowProps) => (
+interface ITableRowProps {
+  className?: string;
+  children: JSX.Element[];
+}
+
+export const TableRow = ({ className, children }: ITableRowProps) => (
   <tr className={classnames('Table-row', className)}>{children}</tr>
 );
 
-interface OwnProps {
+interface IOwnProps {
   readonly headings: Array<{
     label: string;
     onClick?: (event: React.MouseEvent<HTMLTableHeaderCellElement>) => void;
     style?: React.CSSProperties;
   }>;
   className?: string;
-  children: Array<JSX.Element>;
+  children: JSX.Element[];
 }
 
-class Table extends React.Component<OwnProps> {
-  static displayName = 'Table';
+class Table extends React.Component<IOwnProps> {
+  public static displayName = 'Table';
 
-  renderHeads() {
+  public renderHeads() {
     const { headings } = this.props;
 
     return (
@@ -52,12 +62,12 @@ class Table extends React.Component<OwnProps> {
     );
   }
 
-  render() {
+  public render() {
     const { children, className } = this.props;
 
     const classes = {
-      mobile: classnames('Table Table--mobile', className),
       desktop: classnames('Table Table--desktop', className),
+      mobile: classnames('Table Table--mobile', className),
     };
 
     return (

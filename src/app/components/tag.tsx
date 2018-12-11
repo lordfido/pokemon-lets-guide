@@ -1,8 +1,9 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
+
 import CustomImage from './image';
 
-export interface TagProps {
+export interface ITagProps {
   label: string;
   icon?: string;
   backgroundColor: string;
@@ -11,16 +12,16 @@ export interface TagProps {
   style?: React.CSSProperties;
 }
 
-class Tag extends React.Component<TagProps> {
-  static displayName = 'Tag';
+class Tag extends React.Component<ITagProps> {
+  public static displayName = 'Tag';
 
-  render() {
+  public render() {
     const { className, label, icon, backgroundColor, large, style } = this.props;
 
     const classes = {
-      wrapper: classnames('Tag', className, { 'Tag--large': large }),
       icon: 'Tag-icon',
       label: 'Tag-label',
+      wrapper: classnames('Tag', className, { 'Tag--large': large }),
     };
 
     return (

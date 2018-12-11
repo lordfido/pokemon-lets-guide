@@ -5,14 +5,14 @@ import RadarChart from 'react-svg-radar-chart';
 import {
   ATTACK_ID,
   DEFENSE_ID,
+  HP_ID,
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
-  HP_ID,
   SPEED_ID,
 } from '../../constants/pokemon-stats';
 import { getStatName } from '../../constants/pokemon-stats-name';
 
-import { PokemonStats } from '../modules/pokemon-list/pokemon-list.types';
+import { IPokemonStats } from '../modules/pokemon-list/pokemon-list.types';
 
 const chartLegend = {
   [HP_ID]: getStatName(HP_ID),
@@ -23,16 +23,16 @@ const chartLegend = {
   [SPECIAL_ATTACK_ID]: getStatName(SPECIAL_ATTACK_ID),
 };
 
-interface OwnProps {
-  stats: PokemonStats;
+interface IOwnProps {
+  stats: IPokemonStats;
   color: string;
   size?: number;
 }
 
-class StatsChart extends React.Component<OwnProps> {
-  static displayName = 'StatsChart';
+class StatsChart extends React.Component<IOwnProps> {
+  public static displayName = 'StatsChart';
 
-  render() {
+  public render() {
     const { stats, color, size } = this.props;
     const chartData = [{ data: stats, meta: { color } }];
 

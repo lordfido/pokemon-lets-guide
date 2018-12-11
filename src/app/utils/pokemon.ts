@@ -9,21 +9,21 @@ import { MAX_IV_VALUE } from '../../constants/pokemon-ivs';
 import {
   ATTACK_ID,
   DEFENSE_ID,
-  SPECIAL_ATTACK_ID,
-  SPECIAL_DEFENSE_ID,
   HP_ID,
-  SPEED_ID,
-  StatId,
   MAX_INITIAL_STAT_VALUE,
   MAX_STAT_VALUE,
+  SPECIAL_ATTACK_ID,
+  SPECIAL_DEFENSE_ID,
+  SPEED_ID,
+  StatId,
 } from '../../constants/pokemon-stats';
-import { PokemonType } from '../../constants/pokemon-types';
 
+import { PokemonType } from '../../constants/pokemon-types';
 import {
-  PokemonStats,
-  RichPokemon,
-  TypeRelations,
-  PokemonWithBaseCP,
+  IPokemonStats,
+  IPokemonWithBaseCP,
+  IRichPokemon,
+  ITypeRelations,
 } from '../modules/pokemon-list/pokemon-list.types';
 
 /**
@@ -37,12 +37,15 @@ const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => va
  * @example getPaddedId('10'); Will return '010'
  */
 export const getPaddedId = (pokemonId: string): string => {
-  let number = String(pokemonId);
+  let id = String(pokemonId);
 
-  if (pokemonId.length === 1) number = `00${pokemonId}`;
-  else if (pokemonId.length === 2) number = `0${pokemonId}`;
+  if (pokemonId.length === 1) {
+    id = `00${pokemonId}`;
+  } else if (pokemonId.length === 2) {
+    id = `0${pokemonId}`;
+  }
 
-  return number;
+  return id;
 };
 
 /**
@@ -54,27 +57,27 @@ export const getPaddedId = (pokemonId: string): string => {
  * @example getMegaevolutionId('006', 'CharizarditeY'); // Will return '006_f3'
  */
 const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
-  if (!evolvesWith) return id;
+  if (!evolvesWith) {
+    return id;
+  }
 
   const megaOptions = [
     {
-      name: 'X',
       form: 'f2',
+      name: 'X',
     },
     {
-      name: 'Y',
       form: 'f3',
-    },
-    {
-      name: 'Z',
-      form: 'f4',
+      name: 'Y',
     },
   ];
 
   for (const index in megaOptions) {
-    const option = megaOptions[index];
-    if (new RegExp(option.name).test(evolvesWith)) {
-      return `${id}_${option.form}`;
+    if (megaOptions[index]) {
+      const option = megaOptions[index];
+      if (new RegExp(option.name).test(evolvesWith)) {
+        return `${id}_${option.form}`;
+      }
     }
   }
 
@@ -91,13 +94,17 @@ const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
  * @example getMegaevolutionName('Charizard', 'CharizarditeY'); // Will return 'Mega Charizard Y'
  */
 const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
-  if (!evolvesWith) return name;
+  if (!evolvesWith) {
+    return name;
+  }
 
   const megaOptions = ['X', 'Y'];
   for (const index in megaOptions) {
-    const option = megaOptions[index];
-    if (new RegExp(option).test(evolvesWith)) {
-      return `Mega ${name} ${option}`;
+    if (megaOptions[index]) {
+      const option = megaOptions[index];
+      if (new RegExp(option).test(evolvesWith)) {
+        return `Mega ${name} ${option}`;
+      }
     }
   }
 
@@ -110,20 +117,20 @@ const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
 export const getAvatarFromId = (pokemonId: string): string =>
   `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPaddedId(pokemonId)}.png`;
 
-interface GetCPArguments {
-  stats: PokemonStats;
+interface IGetCPArguments {
+  stats: IPokemonStats;
   level?: number;
-  ivs?: PokemonStats;
+  ivs?: IPokemonStats;
   avs?: number;
 }
 /**
  * This formula calculates the CP of a pokemon, based on its Level, Stats and AVs
  */
-const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: GetCPArguments): number => {
+const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: IGetCPArguments): number => {
   const keepItSimple = true;
 
   if (keepItSimple) {
-    const allStats =
+    const simpleCP =
       stats[ATTACK_ID] +
       stats[SPECIAL_ATTACK_ID] +
       stats[DEFENSE_ID] +
@@ -131,7 +138,7 @@ const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: GetCPArguments): 
       stats[HP_ID] +
       stats[SPEED_ID];
 
-    return allStats;
+    return simpleCP;
   }
 
   // floor(((HP+Atk+Def+SAtk+SDef+Spd) * Level * 6 / 100) + (TotalAVs * ((Level / 4) / 100 + 2)))
@@ -148,24 +155,25 @@ const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: GetCPArguments): 
 
 type GetSortedStatsStats = Array<{ name: StatId; value: number }>;
 type GetSortedStatsOrder = 'asc' | 'desc';
+
 /**
  * Returns ordered stats
  */
-export const getSortedStats = (stats: GetSortedStatsStats, order: GetSortedStatsOrder = 'desc'): Array<StatId> =>
+export const getSortedStats = (stats: GetSortedStatsStats, order: GetSortedStatsOrder = 'desc'): StatId[] =>
   stats.sort(sortBy('value', order)).map(stat => stat.name);
 
 /**
  * Given a number of `perfectIVs` desired, and the `stats` ordered, will generate a map with
  * the ones that should be perfect when capturing the pokemon
  */
-const generateSuggestedIVSample = (perfectIVs: number, order: Array<StatId>): PokemonStats => {
+const generateSuggestedIVSample = (perfectIVs: number, order: StatId[]): IPokemonStats => {
   const stats = {
-    [ATTACK_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
-    [DEFENSE_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
-    [SPECIAL_ATTACK_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
-    [SPECIAL_DEFENSE_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
-    [HP_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
-    [SPEED_ID]: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
+    attack: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
+    defense: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
+    hp: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
+    spAttack: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
+    spDefense: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
+    speed: getStatRatio(MAX_IV_VALUE / 2, MAX_IV_VALUE),
   };
 
   const statsToOverwrite = order.slice(0, perfectIVs);
@@ -173,7 +181,6 @@ const generateSuggestedIVSample = (perfectIVs: number, order: Array<StatId>): Po
     stats[stat] = getStatRatio(MAX_IV_VALUE, MAX_IV_VALUE);
   });
 
-  // @ts-ignore
   return stats;
 };
 
@@ -182,7 +189,7 @@ const generateSuggestedIVSample = (perfectIVs: number, order: Array<StatId>): Po
  * that number of perfect IVs, so you can know wich IVs are more important to
  * selected pokemon
  */
-export const getSuggestedIVs = (stats: PokemonStats): Array<PokemonStats> => {
+export const getSuggestedIVs = (stats: IPokemonStats): IPokemonStats[] => {
   // @ts-ignore
   const parsedStats = Object.keys(stats).map((name: StatId) => ({
     name,
@@ -205,20 +212,20 @@ export const getSuggestedIVs = (stats: PokemonStats): Array<PokemonStats> => {
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
  */
-export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): PokemonWithBaseCP => {
+export const createPokemonFromPokeLab = (pokemon: Pokedex.IPokemonSheet): IPokemonWithBaseCP => {
   const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats } = pokemon;
 
   // Get pokemon types
   const types = {
     ownTypes: pTypes,
-    relations: [] as Array<TypeRelations>,
+    relations: [] as ITypeRelations[],
   };
 
   // Get base stats
-  const baseStats: PokemonStats = {
-    hp: pBaseStats[Stats.HP],
+  const baseStats: IPokemonStats = {
     attack: pBaseStats[Stats.Attack],
     defense: pBaseStats[Stats.Defense],
+    hp: pBaseStats[Stats.HP],
     spAttack: pBaseStats[Stats.SpecialAttack],
     spDefense: pBaseStats[Stats.SpecialDefense],
     speed: pBaseStats[Stats.Speed],
@@ -248,22 +255,23 @@ export const createPokemonFromPokeLab = (pokemon: Pokedex.PokemonSheet): Pokemon
     : getMegaevolutionName(rawName, pokemon.megaEvolvedWith);
 
   return {
-    id,
-    nationalNumber,
-    name,
-    types,
-    baseStats,
-    baseCP,
     alolanForm,
+    baseCP,
+    baseStats,
+    id,
     megaEvolution,
+    name,
+    nationalNumber,
+    // @ts-ignore
+    types,
   };
 };
 
 /**
  * Given an array of pokemon `Types`, will generate a map with all relations based on those types
  */
-export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
-  const relations: Array<TypeRelations> = [];
+export const getTypeRelations = (types: PokemonType[]) => {
+  const relations: ITypeRelations[] = [];
 
   // Loop through each one of current pokemon's types
   types.forEach(defendingType => {
@@ -287,8 +295,8 @@ export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
         // If it doesn't exist, create it
       } else {
         relations.push({
-          id: attackingType,
           effectiveness,
+          id: attackingType,
         });
       }
     });
@@ -300,7 +308,7 @@ export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
 /**
  * Add some mocked information to a PokemonModel
  */
-export const getRichPokemon = (basePokemon: PokemonWithBaseCP): RichPokemon => {
+export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon => {
   // Get some hardcoded data
   const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
 
@@ -325,27 +333,27 @@ export const getRichPokemon = (basePokemon: PokemonWithBaseCP): RichPokemon => {
   const baseCP = getCombatPoints({ stats: basePokemon.baseStats });
 
   // Get relative stats (for charts)
-  const relativeStats: PokemonStats = {
-    hp: getStatRatio(basePokemon.baseStats[HP_ID], MAX_INITIAL_STAT_VALUE) || 0,
+  const relativeStats: IPokemonStats = {
     attack: getStatRatio(basePokemon.baseStats[ATTACK_ID], MAX_INITIAL_STAT_VALUE) || 0,
     defense: getStatRatio(basePokemon.baseStats[DEFENSE_ID], MAX_INITIAL_STAT_VALUE) || 0,
+    hp: getStatRatio(basePokemon.baseStats[HP_ID], MAX_INITIAL_STAT_VALUE) || 0,
     spAttack: getStatRatio(basePokemon.baseStats[SPECIAL_ATTACK_ID], MAX_INITIAL_STAT_VALUE) || 0,
     spDefense: getStatRatio(basePokemon.baseStats[SPECIAL_DEFENSE_ID], MAX_INITIAL_STAT_VALUE) || 0,
     speed: getStatRatio(basePokemon.baseStats[SPEED_ID], MAX_INITIAL_STAT_VALUE) || 0,
   };
 
   // Get suggested stats
-  const suggestedStats: Array<PokemonStats> = [];
+  const suggestedStats: IPokemonStats[] = [];
   // const suggestedStats = getSuggestedIVs(basePokemon.baseStats);
 
   return {
     ...basePokemon,
+    avatar,
+    baseCP,
     description,
     pokedexEntry,
-    avatar,
-    types,
-    baseCP,
     relativeStats,
     suggestedStats,
+    types,
   };
 };

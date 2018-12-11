@@ -1,6 +1,6 @@
 import { Languages } from 'pokelab-lets-go';
-import { getInstallationData } from './installation';
 import { warn } from '../../common/utils/logger';
+import { getInstallationData } from './installation';
 
 import Translations from '../../constants/translations';
 
@@ -8,14 +8,14 @@ import Translations from '../../constants/translations';
  * A map with the index of each language in our Translations object
  */
 const languagesIndex = {
-  japanese: Languages.All.findIndex(l => l === Languages.Japanese), // 0
-  english: Languages.All.findIndex(l => l === Languages.English), // 1
-  german: Languages.All.findIndex(l => l === Languages.German), // 2
-  spanish: Languages.All.findIndex(l => l === Languages.Spanish), // 3
-  french: Languages.All.findIndex(l => l === Languages.French), // 4
-  italian: Languages.All.findIndex(l => l === Languages.Italian), // 5
-  korean: Languages.All.findIndex(l => l === Languages.Korean), // 6
   chinese: Languages.All.findIndex(l => l === Languages.Chinese), // 7
+  english: Languages.All.findIndex(l => l === Languages.English), // 1
+  french: Languages.All.findIndex(l => l === Languages.French), // 4
+  german: Languages.All.findIndex(l => l === Languages.German), // 2
+  italian: Languages.All.findIndex(l => l === Languages.Italian), // 5
+  japanese: Languages.All.findIndex(l => l === Languages.Japanese), // 0
+  korean: Languages.All.findIndex(l => l === Languages.Korean), // 6
+  spanish: Languages.All.findIndex(l => l === Languages.Spanish), // 3
 };
 
 // Set default locale
