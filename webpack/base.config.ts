@@ -141,13 +141,8 @@ export const manifestPlugin = new ManifestPlugin({
 
 export const uglifyPlugin = new TerserPlugin();
 
-const baseConfig: webpack.Configuration = {
-  entry: [
-    'babel-polyfill',
-    'webpack-dev-server/client?https://0.0.0.0:8080/',
-    'webpack/hot/dev-server',
-    path.resolve(paths.src, 'index.tsx'),
-  ],
+const baseConfig = {
+  entry: ['babel-polyfill', path.resolve(paths.src, 'index.tsx')],
 
   output: {
     filename: '[name]-[hash].js',

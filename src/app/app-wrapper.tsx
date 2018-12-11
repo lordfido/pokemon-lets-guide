@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
+import { isPre, isProduction } from '../common/utils/platforms';
 import registerServiceWorker from './utils/service-worker';
 
 import AppView from './app-view';
@@ -133,4 +134,12 @@ const connectedApp = withRouter(
   )(AppWrapper)
 );
 
-export default hot(module)(connectedApp);
+const getAppModule = () => {
+  if (isProduction() || isPre()) {
+    return connectedApp;
+  }
+
+  return hot(module)(connectedApp);
+};
+
+export default getAppModule();

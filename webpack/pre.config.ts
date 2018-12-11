@@ -1,11 +1,13 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 
-import { manifestPlugin } from './base.config';
+import baseConfig, { manifestPlugin } from './base.config';
 import { appConfig as devAppConfig, swConfig as devSwConfig } from './dev.config';
 
 const appConfig: webpack.Configuration = {
   ...devAppConfig,
+
+  entry: baseConfig.entry,
 
   target: 'web',
 
