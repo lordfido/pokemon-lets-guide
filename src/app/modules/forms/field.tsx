@@ -128,7 +128,7 @@ class Field extends React.Component<IOwnProps> {
     };
 
     return (
-      <span key={options.updateId || options.id} style={styles.wrapper}>
+      <span key={options.updateId || options.id} style={styles.wrapper} data-type={options.type}>
         {field}
       </span>
     );

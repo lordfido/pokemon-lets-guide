@@ -111,7 +111,12 @@ class PokemonListView extends React.Component<IOwnProps> {
                   .css(),
               },
             },
-            { label: '' },
+            {
+              label: '',
+              style: {
+                backgroundColor: 'transparent',
+              },
+            },
           ]}
         >
           {collection.map((pokemon, index) => (

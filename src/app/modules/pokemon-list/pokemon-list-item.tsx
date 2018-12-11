@@ -129,7 +129,7 @@ class PokemonListItem extends React.Component<IOwnProps> {
         >
           {pokemon.baseStats[SPECIAL_ATTACK_ID]}
         </TableCell>
-        <TableCell style={{ height: 'auto' }}>
+        <TableCell center>
           <Button
             options={{
               id: pokemon.id.toString(),
