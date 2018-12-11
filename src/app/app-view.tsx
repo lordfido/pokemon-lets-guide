@@ -24,8 +24,12 @@ class AppView extends React.Component {
           })}
         >
           <HeaderWrapper />
-          <div className="App-content">{children}</div>
-          <FooterWrapper />
+          <div className="App-content">
+            <React.Fragment>
+              {children}
+              <FooterWrapper />
+            </React.Fragment>
+          </div>
         </div>
       </React.Fragment>
     );

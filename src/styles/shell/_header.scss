@@ -3,12 +3,9 @@
 
   background-color: $black;
   color: $white;
+  flex-shrink: 0;
   height: $header-height;
-  position: sticky;
-  top: 0;
-  left: 0;
   width: 100%;
-  z-index: 200;
 
   & > * {
     vertical-align: top;

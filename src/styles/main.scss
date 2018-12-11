@@ -16,6 +16,8 @@
 
 @import 'modules/pokemon-details', 'modules/pokemon-list', 'modules/search';
 
+@import './app';
+
 // react-svg-radar-chart
 .scale {
   fill: #95bec4;
@@ -53,6 +55,12 @@
   -ms-user-select: none;
 }
 
+html,
+body,
+#app-wrapper {
+  height: 100%;
+}
+
 body {
   color: #303030;
   font-family: 'Open Sans', sans-serif;
@@ -60,7 +68,7 @@ body {
   font-weight: 400;
   line-height: 1.5em;
   min-width: 320px;
-  position: relative;
+  overflow: hidden;
   /* Disables pull-to-refresh but allows overscroll glow effects. */
   overscroll-behavior-y: contain;
 }
@@ -105,34 +113,9 @@ a:active {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 2220px;
-  height: 100vh;
 
   @media screen and (max-width: 1920px) {
     background-image: none !important;
-  }
-}
-
-.App {
-  background-color: #efefef;
-  height: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  overflow-y: auto;
-  width: 100%;
-  transition: height 0.3s, width 0.3s;
-
-  @media screen and (min-width: 1921px) {
-    max-height: 720px;
-    max-width: 1280px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &-content {
-    margin: 0;
-    width: 100%;
-    z-index: 100;
   }
 }
 
