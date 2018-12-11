@@ -1,27 +1,30 @@
 import * as React from 'react';
-
-import Avatar from '../../components/avatar';
 import { Link } from 'react-router-dom';
-import { POKEMON } from '../../../constants/appRoutes';
-
-import { PokemonPagination as PokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
 import { getAvatarFromId } from '../../utils/pokemon';
 
-interface OwnProps {
+import Avatar from '../../components/avatar';
+
+import { POKEMON } from '../../../constants/appRoutes';
+
+import { IPokemonPagination as IPokemonPaginationModel } from '../pokemon-list/pokemon-list.types';
+
+interface IOwnProps {
   currentPokemon: string;
-  pagination: PokemonPaginationModel;
+  pagination: IPokemonPaginationModel;
 }
 
-class PokemonPagination extends React.Component<OwnProps> {
-  static displayName = 'PokemonPagination';
+class PokemonPagination extends React.Component<IOwnProps> {
+  public static displayName = 'PokemonPagination';
 
-  render() {
+  public render() {
     const {
       currentPokemon,
       pagination: { prev, next },
     } = this.props;
 
-    if (currentPokemon === prev.id && currentPokemon === next.id) return null;
+    if (currentPokemon === prev.id && currentPokemon === next.id) {
+      return null;
+    }
 
     return (
       <div className="PokemonPagination">

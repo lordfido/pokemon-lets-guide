@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { getTranslation } from '../../utils/translations';
 
-interface OwnProps {
+interface IOwnProps {
   text: string;
 }
 
-class PokemonPokedexEntry extends React.Component<OwnProps> {
-  static displayName = 'PokemonPokedexEntry';
+class PokemonPokedexEntry extends React.Component<IOwnProps> {
+  public static displayName = 'PokemonPokedexEntry';
 
-  render() {
+  public render() {
     const { text } = this.props;
 
     return (

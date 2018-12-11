@@ -1,5 +1,6 @@
 import { log } from '../../common/utils/logger';
-import { cacheName, cachedAssets } from '../constants';
+
+import { cachedAssets, cacheName } from '../constants';
 
 const handler = async () => {
   log('SW Installed');

@@ -1,23 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 
 import SearchView from './search-view';
 
-interface DispatchProps {}
+class SearchWrapper extends React.Component {
+  public static displayName = 'SearchWrapper';
 
-class SearchWrapper extends React.Component<DispatchProps> {
-  static displayName = 'SearchWrapper';
-
-  render() {
+  public render() {
     return <SearchView />;
   }
 }
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchWrapper);
+export default SearchWrapper;

@@ -1,22 +1,21 @@
-import * as React from 'react';
 import classnames from 'classnames';
-import { FieldProps } from './field';
+import * as React from 'react';
+
+import { IFieldProps } from './field';
 
 import Space from '../../components/space';
 
-interface Options extends FieldProps {}
-
-interface OwnProps {
-  options: Options;
+interface IOwnProps {
+  options: IFieldProps;
   onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-class Switch extends React.Component<OwnProps> {
-  static displayName = 'Switch';
+class Switch extends React.Component<IOwnProps> {
+  public static displayName = 'Switch';
 
-  render() {
+  public render() {
     const { options, onClick, onChange, onFocus } = this.props;
 
     return (

@@ -1,16 +1,16 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 
 const basicClassName = 'Spacer';
 
-interface OwnProps {
-  size?: string;
+interface IOwnProps {
+  size?: 'xs' | 'sm' | 'md';
 }
 
-class Spacer extends React.Component<OwnProps> {
-  static displayName = 'Space';
+class Spacer extends React.Component<IOwnProps> {
+  public static displayName = 'Space';
 
-  render() {
+  public render() {
     const { size } = this.props;
 
     const classes = size

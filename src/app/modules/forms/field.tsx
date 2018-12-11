@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { log } from '../../../common/utils/logger';
 
-import Text from './form-text';
-import Switch from './form-switch';
+import { Button } from '../../components/button';
 import Checkbox from './form-checkbox';
-import Dropdown from './form-dropdown';
 import Date from './form-date';
-import { Button } from '../../components/buttons';
+import Dropdown from './form-dropdown';
+import Switch from './form-switch';
+import Text from './form-text';
 
-interface Resource {
+interface IResource {
   type: string;
   id: number | void;
 }
 
-interface Option {
+interface IOption {
   id: string;
   type: string;
   label: string;
@@ -21,13 +21,13 @@ interface Option {
   icon?: string;
 }
 
-export interface FieldProps {
+export interface IFieldProps {
   type: string;
   id: string;
   updateId?: string;
   model?: string | void;
   form?: string;
-  defaultValue?: string | boolean | Array<string> | void;
+  defaultValue?: string | boolean | string[] | void;
 
   className?: string;
   label?: string;
@@ -48,28 +48,28 @@ export interface FieldProps {
 
   minLength?: number;
   maxLength?: number;
-  options?: Array<Option>;
-  fields?: Array<FieldProps>;
-  resource?: Resource;
+  options?: IOption[];
+  fields?: IFieldProps[];
+  resource?: IResource;
 
-  onClick?: Function;
-  onChange?: Function;
-  onFocus?: Function;
+  onClick?: (params?: any) => void;
+  onChange?: (params?: any) => void;
+  onFocus?: (params?: any) => void;
   onUpload?: (result: string, response: any) => void;
 }
 
-const checkIsDisabled = (options: FieldProps) =>
+const checkIsDisabled = (options: IFieldProps) =>
   (typeof options.isDiactivatable === 'undefined' || options.isDiactivatable) &&
   ((options.isDisabled && !options.isAlwaysEnabled) || options.isAlwaysDisabled);
 
-interface OwnProps {
-  options: FieldProps;
+interface IOwnProps {
+  options: IFieldProps;
 }
 
-class Field extends React.Component<OwnProps> {
-  static displayName = 'Field';
+class Field extends React.Component<IOwnProps> {
+  public static displayName = 'Field';
 
-  onClick = (
+  public onClick = (
     event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
     const { options } = this.props;
@@ -81,7 +81,7 @@ class Field extends React.Component<OwnProps> {
     }
   };
 
-  onFocus = (
+  public onFocus = (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
     const { options } = this.props;
@@ -93,7 +93,7 @@ class Field extends React.Component<OwnProps> {
     }
   };
 
-  onChange = (
+  public onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
     const { options } = this.props;
@@ -117,7 +117,7 @@ class Field extends React.Component<OwnProps> {
     }
   };
 
-  renderWrappedField(field: React.ReactElement<{}>) {
+  public renderWrappedField(field: React.ReactElement<{}>) {
     const { options } = this.props;
 
     const styles = {
@@ -134,7 +134,7 @@ class Field extends React.Component<OwnProps> {
     );
   }
 
-  render() {
+  public render() {
     const { options: defaultOptions } = this.props;
 
     const options = {

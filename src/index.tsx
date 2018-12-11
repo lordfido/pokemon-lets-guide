@@ -1,20 +1,21 @@
 import 'pwacompat';
 import * as React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { setInstallationData } from './app/utils/installation';
+import buildStore from './common/utils/buildStore';
 
+import { clearStore, clearWorkerConfig, getLastSession, getStore, setLastSession } from './common/utils/idb';
 import { error } from './common/utils/logger';
-import { getStore, getLastSession, clearStore, setLastSession, clearWorkerConfig } from './common/utils/idb';
 
 // Import the CSS
 import './styles/main.scss';
 
 import AppWrapper from './app/app-wrapper';
 import ScrollToTop from './app/components/scroll-to-top';
-import { RootState } from './app/root.types';
-import buildStore from './common/utils/buildStore';
+
+import { IRootState } from './app/root.types';
 
 const packageJson = require('../package.json');
 const backgroundImage = require('./assets/images/switch.png');
@@ -33,7 +34,7 @@ const initReactApplication = async () => {
   // Get last session data
   const lastSession = await getLastSession();
   const isNewRelease = packageJson.version !== lastSession.version;
-  let persistedStore: RootState | void;
+  let persistedStore: IRootState | void;
 
   // If this is the firs time visiting application, or it's a different version
   if (isNewRelease) {
@@ -48,8 +49,8 @@ const initReactApplication = async () => {
 
   // Update last session data
   setLastSession({
-    version: packageJson.version,
     route: location.pathname,
+    version: packageJson.version,
   });
 
   const store = await buildStore(persistedStore);

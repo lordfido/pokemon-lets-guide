@@ -5,23 +5,24 @@ import { ActionCreator } from '../../../definitions/action-creator';
 export const getPokemon: ActionCreator = () => dispatch => {
   // Send them to the store
   dispatch({
-    type: 'FETCH_POKEMON_SUCCESS',
     payload: {
       collection: CreatePokemonCollectionFromPokeLab(),
     },
+    type: 'FETCH_POKEMON_SUCCESS',
   });
 };
 
-interface Sort {
+interface ISort {
   sortBy: string;
   order: string;
 }
-export const sortPokemonList: ActionCreator = (sort: Sort) => dispatch => {
+
+export const sortPokemonList: ActionCreator = (sort: ISort) => dispatch => {
   dispatch({
-    type: 'SORT_POKEMON_LIST',
     payload: {
       sort,
     },
+    type: 'SORT_POKEMON_LIST',
   });
 };
 

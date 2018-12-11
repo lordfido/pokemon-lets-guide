@@ -1,50 +1,53 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 import { connect } from 'react-redux';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import { getTranslation } from '../../utils/translations';
 
-import Field from '../forms/field';
 import Buttons from '../../components/buttons';
-
-import { updateFilters, resetFilters } from './search.actions';
-
-import { SEARCH, HOME } from '../../../constants/appRoutes';
-import { filtersEnabled } from '../../../constants/features';
-import typesDropdown from './types-dropdown';
+import Field from '../forms/field';
 import statsDropdown from './stats-dropdown';
+import typesDropdown from './types-dropdown';
 
-interface MatchParams {
+import { resetFilters, updateFilters } from './search.actions';
+
+import { HOME, SEARCH } from '../../../constants/appRoutes';
+import { filtersEnabled } from '../../../constants/features';
+
+interface IMatchParams {
   query: string;
 }
 
-type RouteProps = RouteComponentProps<MatchParams>;
+type RouteProps = RouteComponentProps<IMatchParams>;
 
-interface DispatchProps {
-  updateFilters: Function;
-  resetFilters: Function;
+interface IDispatchProps {
+  ResetFilters: () => void;
+  UpdateFilters: (parameters: any) => void;
 }
 
-type Props = RouteProps & DispatchProps;
+type Props = RouteProps & IDispatchProps;
 
 class SearchForm extends React.Component<Props> {
-  static displayName = 'SearchForm';
+  public static displayName = 'SearchForm';
 
-  filterByType(filter: string, selection: any) {
-    const { updateFilters } = this.props;
+  public filterByType(filter: string, selection: any) {
+    const { UpdateFilters } = this.props;
 
-    updateFilters({ filter, value: selection.map ? selection.map((s: any) => s.value) : selection });
+    UpdateFilters({ filter, value: selection.map ? selection.map((s: any) => s.value) : selection });
   }
 
-  getCurrentQuery() {
+  public getCurrentQuery() {
     const {
       location: { pathname },
     } = this.props;
 
-    if (pathname === HOME) return '';
+    if (pathname === HOME) {
+      return '';
+    }
+
     return pathname.replace(SEARCH.replace(':query', ''), '');
   }
 
-  getNextQuery() {
+  public getNextQuery() {
     // const { type } = this.state;
     // let query = '';
 
@@ -54,91 +57,91 @@ class SearchForm extends React.Component<Props> {
     return '';
   }
 
-  render() {
-    const { resetFilters } = this.props;
+  public render() {
+    const { ResetFilters } = this.props;
 
     const fields = [
       {
-        type: 'text',
-        id: 'nameOrNumber',
         form: 'search',
-        label: getTranslation('search-name-or-number'),
-        onChange: (selection: Array<any>) => this.filterByType('nameOrNumber', selection),
+        id: 'nameOrNumber',
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-name-or-number'),
+        onChange: (selection: any[]) => this.filterByType('nameOrNumber', selection),
+        type: 'text',
       },
       {
         ...typesDropdown,
         id: 'includedTypes',
-        label: getTranslation('search-include-types'),
-        onChange: (selection: Array<any>) => this.filterByType('includedTypes', selection),
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-include-types'),
+        onChange: (selection: any[]) => this.filterByType('includedTypes', selection),
       },
       {
         ...typesDropdown,
         id: 'excludedTypes',
-        label: getTranslation('search-exclude-types'),
-        onChange: (selection: Array<any>) => this.filterByType('excludedTypes', selection),
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-exclude-types'),
+        onChange: (selection: any[]) => this.filterByType('excludedTypes', selection),
       },
       {
         ...typesDropdown,
         id: 'strongAgainst',
-        label: getTranslation('search-strong-against'),
-        onChange: (selection: Array<any>) => this.filterByType('strongAgainst', selection),
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-strong-against'),
+        onChange: (selection: any[]) => this.filterByType('strongAgainst', selection),
       },
       {
         ...typesDropdown,
         id: 'weakAgainst',
-        label: getTranslation('search-weak-against'),
-        onChange: (selection: Array<any>) => this.filterByType('weakAgainst', selection),
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-weak-against'),
+        onChange: (selection: any[]) => this.filterByType('weakAgainst', selection),
       },
       {
         ...statsDropdown,
         id: 'bestStats',
-        label: getTranslation('search-best-stats'),
-        onChange: (selection: Array<any>) => this.filterByType('bestStats', selection),
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-best-stats'),
+        onChange: (selection: any[]) => this.filterByType('bestStats', selection),
       },
       {
         ...statsDropdown,
         id: 'worstStats',
+        isDisabled: !filtersEnabled,
         label: getTranslation('search-worst-stats'),
-        onChange: (selection: Array<any>) => this.filterByType('worstStats', selection),
-        isDisabled: !filtersEnabled,
+        onChange: (selection: any[]) => this.filterByType('worstStats', selection),
       },
       {
-        type: 'number',
+        form: 'search',
         id: 'minBaseCP',
-        form: 'search',
+        isDisabled: !filtersEnabled,
         label: getTranslation('search-min-cp'),
-        onChange: (selection: Array<any>) => this.filterByType('minBaseCP', selection),
-        isDisabled: !filtersEnabled,
-      },
-      {
+        onChange: (selection: any[]) => this.filterByType('minBaseCP', selection),
         type: 'number',
+      },
+      {
+        form: 'search',
         id: 'maxBaseCP',
-        form: 'search',
+        isDisabled: !filtersEnabled,
         label: getTranslation('search-max-cp'),
-        onChange: (selection: Array<any>) => this.filterByType('maxBaseCP', selection),
-        isDisabled: !filtersEnabled,
+        onChange: (selection: any[]) => this.filterByType('maxBaseCP', selection),
+        type: 'number',
       },
       {
-        type: 'switch',
+        form: 'search',
         id: 'showMegaevolutions',
-        form: 'search',
-        label: getTranslation('search-show-megaevolutions'),
-        onChange: (selection: Array<any>) => this.filterByType('showMegaevolutions', selection),
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-show-megaevolutions'),
+        onChange: (selection: any[]) => this.filterByType('showMegaevolutions', selection),
+        type: 'switch',
       },
       {
-        type: 'switch',
-        id: 'showAlolanForms',
         form: 'search',
-        label: getTranslation('search-show-alolan-forms'),
-        onChange: (selection: Array<any>) => this.filterByType('showAlolanForms', selection),
+        id: 'showAlolanForms',
         isDisabled: !filtersEnabled,
+        label: getTranslation('search-show-alolan-forms'),
+        onChange: (selection: any[]) => this.filterByType('showAlolanForms', selection),
+        type: 'switch',
       },
     ];
 
@@ -158,11 +161,11 @@ class SearchForm extends React.Component<Props> {
           options={[
             {
               id: 'reset',
-              type: 'button',
               label: getTranslation('search-reset-filters'),
               onClick: () => {
-                resetFilters();
+                ResetFilters();
               },
+              type: 'button',
             },
           ]}
         />
@@ -172,8 +175,8 @@ class SearchForm extends React.Component<Props> {
 }
 
 const mapDispatchToProps = {
-  updateFilters,
-  resetFilters,
+  ResetFilters: resetFilters,
+  UpdateFilters: updateFilters,
 };
 
 export default withRouter(

@@ -30,7 +30,7 @@ export const scrollTo = (elem: HTMLElement, target: HTMLElement, customGap?: num
   }
 };
 
-interface Resource {
+interface IResource {
   me: number | void;
   user: number;
   type: string;

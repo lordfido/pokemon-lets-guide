@@ -4,9 +4,9 @@ import PokemonListWrapper from '../pokemon-list/pokemon-list-wrapper';
 import SearchForm from './search-form';
 
 class SearchView extends React.Component {
-  static displayName = 'SearchView';
+  public static displayName = 'SearchView';
 
-  render() {
+  public render() {
     return (
       <div className="Search">
         <div className="Search-filters">

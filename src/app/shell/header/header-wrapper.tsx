@@ -3,9 +3,9 @@ import * as React from 'react';
 import HeaderView from './header-view';
 
 class HeaderWrapper extends React.Component {
-  static displayName = 'HeaderWrapper';
+  public static displayName = 'HeaderWrapper';
 
-  render() {
+  public render() {
     return <HeaderView />;
   }
 }

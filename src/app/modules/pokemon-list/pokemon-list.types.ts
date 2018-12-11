@@ -1,21 +1,22 @@
-import { PokemonType } from '../../../constants/pokemon-types';
 import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
 
-export interface MegaEvolution {
+import { PokemonType } from '../../../constants/pokemon-types';
+
+export interface IMegaEvolution {
   evolvesWith: MegaStone;
 }
 
-export interface TypeRelations {
+export interface ITypeRelations {
   id: PokemonType;
   effectiveness: number;
 }
 
-export interface PokemonTypeData {
-  ownTypes: ReadonlyArray<PokemonType>;
-  relations: Array<TypeRelations>;
+export interface IPokemonTypeData {
+  readonly ownTypes: PokemonType[];
+  relations: ITypeRelations[];
 }
 
-export interface PokemonStats {
+export interface IPokemonStats {
   attack: number;
   spAttack: number;
   defense: number;
@@ -24,49 +25,49 @@ export interface PokemonStats {
   speed: number;
 }
 
-export interface AdditionalPokemonInfo {
+export interface IAdditionalPokemonInfo {
   id: string;
   description: string;
   pokedexEntry: string;
 }
 
-export interface Pokemon {
+export interface IPokemon {
   id: string;
   nationalNumber: number;
   name: string;
-  types: PokemonTypeData;
-  baseStats: PokemonStats;
+  types: IPokemonTypeData;
+  baseStats: IPokemonStats;
   alolanForm: boolean;
-  megaEvolution?: MegaEvolution;
+  megaEvolution?: IMegaEvolution;
 }
 
-export interface PokemonWithBaseCP extends Pokemon {
+export interface IPokemonWithBaseCP extends IPokemon {
   baseCP: number;
 }
 
-export interface RichPokemon extends PokemonWithBaseCP {
+export interface IRichPokemon extends IPokemonWithBaseCP {
   description: string;
   avatar: string;
-  relativeStats: PokemonStats;
-  suggestedStats?: Array<PokemonStats>;
+  relativeStats: IPokemonStats;
+  suggestedStats?: IPokemonStats[];
   pokedexEntry: string;
 }
 
-export interface PokemonListState {
-  collection: Array<PokemonWithBaseCP>;
-  pagination: PokemonListPagination;
+export interface IPokemonListState {
+  collection: IPokemonWithBaseCP[];
+  pagination: IPokemonListPagination;
   sort: {
     sortBy: string;
     order: string;
   };
 }
 
-export interface PokemonListPagination {
+export interface IPokemonListPagination {
   first: number;
   last: number;
 }
 
-export interface PokemonPagination {
-  next: Pokemon;
-  prev: Pokemon;
+export interface IPokemonPagination {
+  next: IPokemon;
+  prev: IPokemon;
 }

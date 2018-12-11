@@ -1,7 +1,7 @@
-import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
 
-import { manifestPlugin, uglifyPlugin } from './base.config';
+import baseConfig, { manifestPlugin, uglifyPlugin } from './base.config';
 import { appConfig as devAppConfig, swConfig as devSwConfig } from './dev.config';
 
 const appConfig: webpack.Configuration = {
@@ -12,6 +12,8 @@ const appConfig: webpack.Configuration = {
   mode: 'production',
 
   devtool: false,
+
+  entry: baseConfig.entry,
 
   plugins: [
     new webpack.DefinePlugin({

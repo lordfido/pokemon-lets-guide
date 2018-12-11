@@ -1,8 +1,8 @@
 import { log } from './common/utils/logger';
 
-import handleInstallEvent from './service-worker/event-handlers/handle-install-event';
 import handleActivateEvent from './service-worker/event-handlers/handle-activate-event';
 import handleFetchEvent from './service-worker/event-handlers/handle-fetch-event';
+import handleInstallEvent from './service-worker/event-handlers/handle-install-event';
 
 log('Setting up listener for <install>');
 self.addEventListener('install', handleInstallEvent);

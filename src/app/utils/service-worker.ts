@@ -1,5 +1,5 @@
 import { History } from 'history';
-import { log, error } from '../../common/utils/logger';
+import { error, log } from '../../common/utils/logger';
 
 const serviceWorkerUrl = './sw.js';
 

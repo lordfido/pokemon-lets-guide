@@ -1,14 +1,14 @@
-import { Natures, Languages } from 'pokelab-lets-go';
+import { Languages, Natures } from 'pokelab-lets-go';
 import { getLocale } from '../app/utils/translations';
 
 export type PokemonNature = Natures.Nature;
 
-interface ParsedNature {
+interface IParsedNature {
   id: PokemonNature;
   name: string;
 }
 
-export const getNatures = (): Array<ParsedNature> =>
+export const getNatures = (): IParsedNature[] =>
   Natures.All.map(nature => ({
     id: nature,
     name: Natures.getName(nature, Languages.All[getLocale()]),

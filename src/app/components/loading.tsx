@@ -1,14 +1,14 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 
-interface OwnProps {
+interface IOwnProps {
   size?: string;
 }
 
-class Loading extends React.Component<OwnProps> {
-  static displayName = 'Loading';
+class Loading extends React.Component<IOwnProps> {
+  public static displayName = 'Loading';
 
-  render() {
+  public render() {
     const { size = 'md' } = this.props;
     const classes = classnames('Loading', classnames, { [`Loading--${size}`]: true });
 

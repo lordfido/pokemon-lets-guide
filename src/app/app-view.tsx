@@ -1,17 +1,17 @@
-import * as React from 'react';
 import classnames from 'classnames';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { isInstalledPWA } from '../common/utils/platforms';
 
-import HeaderWrapper from './shell/header/header-wrapper';
 import FooterWrapper from './shell/footer/footer-wrapper';
+import HeaderWrapper from './shell/header/header-wrapper';
 
 import { HOME } from '../constants/appRoutes';
 
 class AppView extends React.Component {
-  static displayName = 'AppView';
+  public static displayName = 'AppView';
 
-  render() {
+  public render() {
     const { children } = this.props;
 
     return (

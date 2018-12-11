@@ -1,20 +1,20 @@
-import { PokemonType } from '../../../constants/pokemon-types';
 import { StatId } from '../../../constants/pokemon-stats';
+import { PokemonType } from '../../../constants/pokemon-types';
 
-export interface SearchState {
-  nameOrNumber: string | void;
-  includedTypes: Array<PokemonType>;
-  excludedTypes: Array<PokemonType>;
-  strongAgainst: Array<PokemonType>;
-  weakAgainst: Array<PokemonType>;
-  bestStats: Array<StatId>;
-  worstStats: Array<StatId>;
-  minBaseCP?: string;
+export interface ISearchState {
+  bestStats: StatId[];
+  // canLearnSkills: StatId[];
+  // canLearnMTs: StatId[];
+  // dropsCandies: StatId[];
+  excludedTypes: PokemonType[];
+  includedTypes: PokemonType[];
   maxBaseCP?: string;
-  showMegaevolutions: boolean;
+  minBaseCP?: string;
+  nameOrNumber: string | void;
+  // needsCandies: StatId[];
   showAlolanForms: boolean;
-  // canLearnSkills: Array<StatId>;
-  // canLearnMTs: Array<StatId>;
-  // dropsCandies: Array<StatId>;
-  // needsCandies: Array<StatId>;
+  showMegaevolutions: boolean;
+  strongAgainst: PokemonType[];
+  weakAgainst: PokemonType[];
+  worstStats: StatId[];
 }

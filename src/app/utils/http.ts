@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { error } from '../../common/utils/logger';
 
-interface CustomRequest {
+interface ICustomRequest {
   url: string;
   method?: string;
   payload?: any;
@@ -20,42 +20,42 @@ const http = ({
   onUploadProgress,
   onDownloadProgress,
   withCredentials = true,
-}: CustomRequest) => {
+}: ICustomRequest) => {
   // Enable CORS credentials
   axios.defaults.withCredentials = withCredentials;
 
   // Some interceptors to parse response or error
   axios.interceptors.response.use(
     response => response.data || response,
-    error => {
+    requestError => {
       // Already parsed error
-      if (error.errors) {
-        return Promise.reject(error);
+      if (requestError.errors) {
+        return Promise.reject(requestError);
       }
 
       // Network error
-      if (error.request && error.request.readyState === 4 && !error.response) {
+      if (requestError.request && requestError.request.readyState === 4 && !requestError.response) {
         return Promise.reject({
           errors: [
             {
-              channel: 'web',
-              reason: 'connection',
               body: 'Offline mode',
-              tag: 'offline-banner',
+              channel: 'web',
               data: {
                 isPermanent: true,
               },
+              reason: 'connection',
+              tag: 'offline-banner',
             },
           ],
         });
       }
 
       // Network OK
-      if (error === '') {
-        return Promise.reject(error);
+      if (requestError === '') {
+        return Promise.reject(requestError);
       }
 
-      return Promise.reject(error.response.data);
+      return Promise.reject(requestError.response.data);
     }
   );
 
@@ -68,8 +68,8 @@ const http = ({
 
     case 'post':
       return axios.post(url, payload, {
-        onUploadProgress,
         onDownloadProgress,
+        onUploadProgress,
       });
 
     default:

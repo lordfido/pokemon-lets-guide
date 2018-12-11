@@ -1,14 +1,14 @@
-export const capitalize = (string: string) => {
-  if (typeof string !== 'string') {
-    return string;
+export const capitalize = (text: string) => {
+  if (typeof text !== 'string') {
+    return text;
   }
 
-  if (!string || !string[0]) {
-    return string;
+  if (!text || !text[0]) {
+    return text;
   }
 
-  const firstLetter = string[0].toUpperCase();
-  const sentence = string.substring(1);
+  const firstLetter = text[0].toUpperCase();
+  const sentence = text.substring(1);
 
   return `${firstLetter}${sentence}`;
 };

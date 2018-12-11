@@ -1,12 +1,12 @@
 import { log } from '../../common/utils/logger';
 import { isDev } from '../../common/utils/platforms';
 
-import { cacheName } from '../constants';
 import { APP_DOMAIN } from '../../constants/branding';
 import { cacheOnDemand } from '../../constants/features';
+import { cacheName } from '../constants';
 
 const handler = async (event: any) => {
-  var requestUrl = new URL(event.request.url);
+  const requestUrl = new URL(event.request.url);
 
   log('New request', { isDev: isDev() }, requestUrl);
   if (

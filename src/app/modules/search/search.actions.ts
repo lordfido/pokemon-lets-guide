@@ -1,19 +1,19 @@
 import { ActionCreator } from '../../../definitions/action-creator';
 
-interface UpdateArgs {
+interface IUpdateArgs {
   filter: string;
-  value: string | Array<string> | boolean;
+  value: string | string[] | boolean;
 }
 
-export const updateFilters: ActionCreator = ({ filter, value }: UpdateArgs) => dispatch => {
+export const updateFilters: ActionCreator = ({ filter, value }: IUpdateArgs) => dispatch => {
   const parsedValue = value === 'on' ? true : value === 'off' ? false : value;
 
   dispatch({
-    type: 'UPDATE_FILTER',
     payload: {
       filter,
       value: parsedValue,
     },
+    type: 'UPDATE_FILTER',
   });
 };
 

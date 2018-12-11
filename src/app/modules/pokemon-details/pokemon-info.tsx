@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { getPaddedId } from '../../utils/pokemon';
 
-import Tag from '../../components/tag';
 import Spacer from '../../components/spacer';
+import Tag from '../../components/tag';
 
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon-types-icons';
 import { getTranslation } from '../../utils/translations';
 
-import { RichPokemon } from '../pokemon-list/pokemon-list.types';
 import { PokemonType } from '../../../constants/pokemon-types';
+import { IRichPokemon } from '../pokemon-list/pokemon-list.types';
 
-interface OwnProps {
-  pokemon: RichPokemon;
+interface IOwnProps {
+  pokemon: IRichPokemon;
 }
 
-class PokemonInfo extends React.Component<OwnProps> {
-  static displayName = 'PokemonInfo';
+class PokemonInfo extends React.Component<IOwnProps> {
+  public static displayName = 'PokemonInfo';
 
-  render() {
+  public render() {
     const { pokemon } = this.props;
 
     return (
