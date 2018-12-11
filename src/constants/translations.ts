@@ -46,7 +46,10 @@ const translations: ITranslationsCollection = {
   'forms-alolan': ['', 'Alolan', '', 'Alola', '', '', '', ''],
 
   // Header
-  'header-go-home': ['', 'Go to Home screen', '', 'Ir a la página de inicio', '', '', '', ''],
+  'header-home': ['', 'Home', '', 'Inicio', '', '', '', ''],
+  'header-pokedex': ['', 'Pokédex', '', 'Pokédex', '', '', '', ''],
+  'header-skills': ['', 'Skills', '', 'Movimientos', '', '', '', ''],
+  'header-calculator': ['', 'Calculator', '', 'Calculadora', '', '', '', ''],
 
   // Search
   'search-best-stats': ['', 'Best stats', '', 'Mejores estadísitcas', '', '', '', ''],

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 import { HOME } from '../../../constants/appRoutes';
-import CustomImage from '../../components/image';
 import { getTranslation } from '../../utils/translations';
+import HeaderItem from './header-item';
 
 class HeaderView extends React.Component {
   public static displayName = 'HeaderView';
@@ -11,13 +10,17 @@ class HeaderView extends React.Component {
   public render() {
     return (
       <header className="Header">
-        <Link className="Header-item" to={{ pathname: HOME }}>
-          <CustomImage
-            src={require('../../../assets/images/pokeball.png')}
-            className="Header-logo"
-            alt={getTranslation('header-go-home')}
-          />
-        </Link>
+        <HeaderItem image={require('../../../assets/images/pokeball.png')} to={HOME} />
+        <HeaderItem
+          image={require('../../../assets/images/pokedex.png')}
+          text={getTranslation('header-pokedex')}
+          to={HOME}
+        />
+        <HeaderItem image={require('../../../assets/images/skills.png')} text={getTranslation('header-skills')} />
+        <HeaderItem
+          image={require('../../../assets/images/calculator.png')}
+          text={getTranslation('header-calculator')}
+        />
       </header>
     );
   }
