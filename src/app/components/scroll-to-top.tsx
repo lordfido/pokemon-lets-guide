@@ -6,8 +6,6 @@ type RouteProps = RouteComponentProps<{
 }>;
 
 class ScrollToTop extends React.Component<RouteProps> {
-  public static displayName = 'ScrollToTop';
-
   public componentDidUpdate(prevProps: RouteProps) {
     if (this.props.location !== prevProps.location) {
       const scrollingElement = document.querySelector('.App-content');

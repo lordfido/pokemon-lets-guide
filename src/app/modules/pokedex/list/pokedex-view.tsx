@@ -34,8 +34,6 @@ interface IOwnState {
 }
 
 class PokedexView extends React.Component<IOwnProps, IOwnState> {
-  public static displayName = 'PokedexView';
-
   public state = {
     isOpen: false,
   };

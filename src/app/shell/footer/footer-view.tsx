@@ -13,45 +13,37 @@ interface IOwnProps {
   handleLanguageSelection: (language: string) => void;
 }
 
-class FooterView extends React.Component<IOwnProps> {
-  public static displayName = 'FooterView';
-
-  public render() {
-    const { handleLanguageSelection } = this.props;
-
-    return (
-      <footer className="Page Footer">
-        <div className="Footer-wrapper">
-          <p className="Footer-text">
-            <Link
-              options={{
-                id: 'app-web',
-                label: APP_NAME,
-                to: APP_WEB,
+const FooterView = ({ handleLanguageSelection }: IOwnProps) => (
+  <footer className="Page Footer">
+    <div className="Footer-wrapper">
+      <p className="Footer-text">
+        <Link
+          options={{
+            id: 'app-web',
+            label: APP_NAME,
+            to: APP_WEB,
+          }}
+        />{' '}
+        {!isProduction() && `v${APP_VERSION}`} | {new Date().getFullYear()}{' '}
+      </p>
+      <p className="Footer-text">
+        {languageISOs.map((language, index) => (
+          <React.Fragment key={`language-${language.name}`}>
+            {index > 0 && ' | '}
+            <button
+              id={`language-${language.name}`}
+              className="Button Button--link"
+              onClick={() => {
+                handleLanguageSelection(language.iso);
               }}
-            />{' '}
-            {!isProduction() && `v${APP_VERSION}`} | {new Date().getFullYear()}{' '}
-          </p>
-          <p className="Footer-text">
-            {languageISOs.map((language, index) => (
-              <React.Fragment key={`language-${language.name}`}>
-                {index > 0 && ' | '}
-                <button
-                  id={`language-${language.name}`}
-                  className="Button Button--link"
-                  onClick={() => {
-                    handleLanguageSelection(language.iso);
-                  }}
-                >
-                  {language.name}
-                </button>
-              </React.Fragment>
-            ))}
-          </p>
-        </div>
-      </footer>
-    );
-  }
-}
+            >
+              {language.name}
+            </button>
+          </React.Fragment>
+        ))}
+      </p>
+    </div>
+  </footer>
+);
 
 export default FooterView;

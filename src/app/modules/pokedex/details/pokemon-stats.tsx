@@ -28,8 +28,6 @@ interface IOwnState {
 }
 
 class PokemonStats extends React.Component<IOwnProps, IOwnState> {
-  public static displayName = 'PokemonStats';
-
   constructor(props: IOwnProps) {
     super(props);
 

@@ -14,8 +14,6 @@ interface IOwnState {
 }
 
 class Tabs extends React.Component<IOwnProps, IOwnState> {
-  public static displayName = 'Tabs';
-
   public state = {
     width: 0,
   };

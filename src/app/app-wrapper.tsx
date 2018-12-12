@@ -45,8 +45,6 @@ interface IDispatchProps {
 type Props = IOwnProps & RouteProps & IStateProps & IDispatchProps;
 
 class AppWrapper extends React.Component<Props> {
-  public static displayName = 'AppWrapper';
-
   public componentDidMount() {
     const { GetPokemon, lastRoute, history } = this.props;
 

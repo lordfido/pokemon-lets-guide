@@ -3,21 +3,17 @@ import { setInstallationData } from '../../utils/installation';
 
 import FooterView from './footer-view';
 
-class FooterWrapper extends React.Component {
-  public static displayName = 'FooterWrapper';
+const handleLanguageSelection = (language: string) => {
+  setInstallationData({
+    language: {
+      override: true,
+      value: language,
+    },
+  });
+};
 
-  public handleLanguageSelection = (language: string) => {
-    setInstallationData({
-      language: {
-        override: true,
-        value: language,
-      },
-    });
-  };
-
-  public render() {
-    return <FooterView handleLanguageSelection={this.handleLanguageSelection} />;
-  }
-}
+const FooterWrapper = () => {
+  return <FooterView handleLanguageSelection={handleLanguageSelection} />;
+};
 
 export default FooterWrapper;

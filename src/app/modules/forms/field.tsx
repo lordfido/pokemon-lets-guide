@@ -25,8 +25,6 @@ const isDisabled = ({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, i
   (typeof isDiactivatable === 'undefined' || isDiactivatable) && ((disabled && !isAlwaysEnabled) || isAlwaysDisabled);
 
 class Field extends React.Component<IOwnProps> {
-  public static displayName = 'Field';
-
   public onClick = (
     event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {

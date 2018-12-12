@@ -27,9 +27,7 @@ interface IDispatchProps {
 
 type Props = IStateProps & IDispatchProps;
 
-class PokemonListWrapper extends React.Component<Props> {
-  public static displayName = 'PokemonListWrapper';
-
+class PokedexWrapper extends React.Component<Props> {
   public handleLoadMore() {
     const { LoadMore } = this.props;
 
@@ -102,4 +100,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PokemonListWrapper);
+)(PokedexWrapper);
