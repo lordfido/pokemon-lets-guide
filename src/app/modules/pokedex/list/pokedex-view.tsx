@@ -6,7 +6,7 @@ import { getTranslation } from '../../../utils/translations';
 import Buttons from '../../../components/buttons';
 import Table from '../../../components/table';
 import PokedexEntry from './pokedex-entry';
-import SearchForm from './search-form';
+import PokedexFilters from './pokedex-filters';
 
 import {
   ATTACK_ID,
@@ -23,8 +23,10 @@ import { IPokemonWithBaseCP } from '../pokedex.models';
 
 interface IOwnProps {
   collection: IPokemonWithBaseCP[];
-  sort: (key: string) => void;
+  handleSortBy: (key: string) => void;
   handleLoadMore?: () => void;
+  handleUpdateFilter: (filter: string, selection: any) => void;
+  handleResetFilters: () => void;
 }
 
 interface IOwnState {
@@ -47,7 +49,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
   }
 
   public render() {
-    const { handleLoadMore, collection, sort } = this.props;
+    const { collection, handleLoadMore, handleResetFilters, handleSortBy, handleUpdateFilter } = this.props;
     const { isOpen } = this.state;
 
     const filtersButton = {
@@ -65,7 +67,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
         <div className={classnames('Search-filters', { ['is-open']: isOpen })}>
           <Buttons className="Search-buttons" options={[filtersButton]} />
 
-          <SearchForm />
+          <PokedexFilters handleResetFilters={handleResetFilters} handleUpdateFilter={handleUpdateFilter} />
         </div>
         <div className="Search-results">
           <Table
@@ -73,14 +75,14 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
             headings={[
               {
                 label: '#',
-                onClick: () => sort('id'),
+                onClick: () => handleSortBy('id'),
               },
               // {
               //   label: getTranslation('pokemon-avatar'),
               // },
               {
                 label: getTranslation('pokemon-name'),
-                onClick: () => sort('name'),
+                onClick: () => handleSortBy('name'),
               },
               {
                 label: getTranslation('pokemon-type-1'),
@@ -90,11 +92,11 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
               },
               {
                 label: getTranslation('pokemon-base-cp'),
-                onClick: () => sort('baseCP'),
+                onClick: () => handleSortBy('baseCP'),
               },
               {
                 label: getStatName(HP_ID),
-                onClick: () => sort(`baseStats.${HP_ID}`),
+                onClick: () => handleSortBy(`baseStats.${HP_ID}`),
                 style: {
                   backgroundColor: chroma(getStatColor(HP_ID))
                     .alpha(0.3)
@@ -103,7 +105,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
               },
               {
                 label: getStatName(ATTACK_ID),
-                onClick: () => sort(`baseStats.${ATTACK_ID}`),
+                onClick: () => handleSortBy(`baseStats.${ATTACK_ID}`),
                 style: {
                   backgroundColor: chroma(getStatColor(ATTACK_ID))
                     .alpha(0.3)
@@ -112,7 +114,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
               },
               {
                 label: getStatName(DEFENSE_ID),
-                onClick: () => sort(`baseStats.${DEFENSE_ID}`),
+                onClick: () => handleSortBy(`baseStats.${DEFENSE_ID}`),
                 style: {
                   backgroundColor: chroma(getStatColor(DEFENSE_ID))
                     .alpha(0.3)
@@ -121,7 +123,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
               },
               {
                 label: getStatName(SPEED_ID),
-                onClick: () => sort(`baseStats.${SPEED_ID}`),
+                onClick: () => handleSortBy(`baseStats.${SPEED_ID}`),
                 style: {
                   backgroundColor: chroma(getStatColor(SPEED_ID))
                     .alpha(0.3)
@@ -130,7 +132,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
               },
               {
                 label: getStatName(SPECIAL_DEFENSE_ID),
-                onClick: () => sort(`baseStats.${SPECIAL_DEFENSE_ID}`),
+                onClick: () => handleSortBy(`baseStats.${SPECIAL_DEFENSE_ID}`),
                 style: {
                   backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
                     .alpha(0.3)
@@ -139,7 +141,7 @@ class PokedexView extends React.Component<IOwnProps, IOwnState> {
               },
               {
                 label: getStatName(SPECIAL_ATTACK_ID),
-                onClick: () => sort(`baseStats.${SPECIAL_ATTACK_ID}`),
+                onClick: () => handleSortBy(`baseStats.${SPECIAL_ATTACK_ID}`),
                 style: {
                   backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
                     .alpha(0.3)
