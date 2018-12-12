@@ -1,11 +1,17 @@
-import { Pokedex } from 'pokelab-lets-go';
+import { Pokedex, Stats } from 'pokelab-lets-go';
 import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
+import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
-import { createPokemonFromPokeLab } from '../../utils/pokemon';
+import { getCombatPoints, getMegaevolutionId, getMegaevolutionName, getPaddedId } from '../../utils/pokemon';
 
+import { PokedexActionType } from '../../../constants/actionTypes';
 import { StatId } from '../../../constants/pokemon-stats';
 import { PokemonType } from '../../../constants/pokemon-types';
+import { getTranslation } from '../../utils/translations';
 
+export interface IPokedexAction extends AnyAction {
+  type: PokedexActionType;
+}
 export interface IMegaEvolution {
   evolvesWith: MegaStone;
 }
@@ -16,7 +22,7 @@ export interface ITypeRelations {
 }
 
 export interface IPokemonTypeData {
-  readonly ownTypes: PokemonType[];
+  ownTypes: ReadonlyArray<PokemonType>;
   relations: ITypeRelations[];
 }
 
@@ -94,6 +100,63 @@ export interface IPokedexState {
     order: string;
   };
 }
+
+/**
+ * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
+ */
+const createPokemonFromPokeLab = (pokemon: Pokedex.IPokemonSheet): IPokemonWithBaseCP => {
+  const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats } = pokemon;
+
+  // Get pokemon types
+  const types = {
+    ownTypes: pTypes,
+    relations: [] as ITypeRelations[],
+  };
+
+  // Get base stats
+  const baseStats: IPokemonStats = {
+    attack: pBaseStats[Stats.Attack],
+    defense: pBaseStats[Stats.Defense],
+    hp: pBaseStats[Stats.HP],
+    spAttack: pBaseStats[Stats.SpecialAttack],
+    spDefense: pBaseStats[Stats.SpecialDefense],
+    speed: pBaseStats[Stats.Speed],
+  };
+
+  // Get baseCP
+  const baseCP = getCombatPoints({ stats: baseStats });
+
+  // Get alolan form flag
+  const alolanForm = !!pokemon.isAlolan;
+
+  // Get megaevolution data
+  const megaEvolution = pokemon.megaEvolvedWith
+    ? {
+        evolvesWith: pokemon.megaEvolvedWith,
+      }
+    : undefined;
+
+  // Get the ID
+  const rawId = getPaddedId(String(nationalNumber));
+  const id = alolanForm ? `${rawId}_f2` : getMegaevolutionId(rawId, pokemon.megaEvolvedWith);
+
+  // Get the name
+  const rawName = String(pName);
+  const name = alolanForm
+    ? `${rawName} ${getTranslation('forms-alolan')}`
+    : getMegaevolutionName(rawName, pokemon.megaEvolvedWith);
+
+  return {
+    alolanForm,
+    baseCP,
+    baseStats,
+    id,
+    megaEvolution,
+    name,
+    nationalNumber,
+    types,
+  };
+};
 
 export const createPokemonCollectionFromPokeLab = (): IPokemonWithBaseCP[] =>
   Pokedex.All.map(createPokemonFromPokeLab).sort(sortBy('id', 'asc'));

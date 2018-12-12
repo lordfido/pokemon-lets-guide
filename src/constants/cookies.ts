@@ -1,2 +1,4 @@
-export const INSTALLATION_ID = 'installationId';
-export const LANGUAGE = 'language';
+export type CookieName = 'installationId' | 'language';
+
+export const INSTALLATION_ID: CookieName = 'installationId';
+export const LANGUAGE: CookieName = 'language';

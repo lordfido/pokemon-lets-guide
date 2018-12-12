@@ -1,11 +1,18 @@
-import { AnyAction, Reducer } from 'redux';
+import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
 
+import {
+  POKEDEX_CREATE,
+  POKEDEX_FILTER,
+  POKEDEX_LOAD_MORE,
+  POKEDEX_RESET_FILTERS,
+  POKEDEX_SORT,
+} from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon-stats';
 
-import { IPokedexState, IPokemon } from './pokedex.models';
+import { IPokedexAction, IPokedexState, IPokemon } from './pokedex.models';
 
 const initialState: IPokedexState = {
   collection: [],
@@ -36,21 +43,21 @@ const initialState: IPokedexState = {
   },
 };
 
-const reducer = (state = initialState, action: AnyAction): IPokedexState => {
+const reducer = (state = initialState, action: IPokedexAction): IPokedexState => {
   switch (action.type) {
-    case 'FETCH_POKEMON_SUCCESS':
+    case POKEDEX_CREATE:
       return {
         ...state,
         collection: action.payload.collection,
       };
 
-    case 'SORT_POKEMON_LIST':
+    case POKEDEX_SORT:
       return {
         ...state,
         sort: action.payload.sort,
       };
 
-    case 'LOAD_MORE':
+    case POKEDEX_LOAD_MORE:
       return {
         ...state,
         pagination: {
@@ -59,7 +66,7 @@ const reducer = (state = initialState, action: AnyAction): IPokedexState => {
         },
       };
 
-    case 'UPDATE_FILTER':
+    case POKEDEX_FILTER:
       return {
         ...state,
         filters: {
@@ -68,7 +75,7 @@ const reducer = (state = initialState, action: AnyAction): IPokedexState => {
         },
       };
 
-    case 'RESET_FILTERS':
+    case POKEDEX_RESET_FILTERS:
       return {
         ...state,
         filters: {

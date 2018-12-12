@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
 import { isPre, isProduction } from '../common/utils/platforms';
 import registerServiceWorker from './utils/service-worker';
 
 import AppView from './app-view';
-// import pokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
 import pokemonDetailsWrapper from './modules/pokedex/details/pokemon-wrapper';
 import pokedexWrapper from './modules/pokedex/list/pokedex-wrapper';
 
-import { getPokemon } from './modules/pokedex/pokedex.actions';
+import { createPokedex } from './modules/pokedex/pokedex.actions';
 
 import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
@@ -108,7 +107,8 @@ class AppWrapper extends React.Component<Props> {
         <Switch>
           <Route path={routes.SEARCH} component={pokedexWrapper} />
           <Route exact path={routes.POKEMON} component={pokemonDetailsWrapper} />
-          <Route exact path={routes.HOME} component={pokedexWrapper} />
+          <Route exact path={routes.POKEDEX} component={pokedexWrapper} />
+          <Redirect to={{ pathname: routes.POKEDEX }} />
         </Switch>
       </AppView>
     );
@@ -124,7 +124,7 @@ const mapStateToProps = (state: IRootState): IStateProps => {
 };
 
 const mapDispatchToProps = {
-  GetPokemon: getPokemon,
+  GetPokemon: createPokedex,
 };
 
 const connectedApp = withRouter(

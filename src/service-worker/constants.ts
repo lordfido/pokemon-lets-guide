@@ -4,4 +4,4 @@ const version: string = packageJson.version;
 
 export const cacheNamePrefix = `${name}-`;
 export const cacheName = `${cacheNamePrefix}${version}`;
-export const cachedAssets = [];
+export const cachedAssets: string[] = [];

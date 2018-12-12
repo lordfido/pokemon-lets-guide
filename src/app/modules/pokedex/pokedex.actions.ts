@@ -1,36 +1,22 @@
 import { ActionCreator } from '../../../definitions/action-creator';
+
+import {
+  POKEDEX_CREATE,
+  POKEDEX_FILTER,
+  POKEDEX_LOAD_MORE,
+  POKEDEX_RESET_FILTERS,
+  POKEDEX_SORT,
+} from '../../../constants/actionTypes';
+
 import { createPokemonCollectionFromPokeLab } from './pokedex.models';
 
-interface IUpdateArgs {
-  filter: string;
-  value: string | string[] | boolean;
-}
-
-export const updateFilters: ActionCreator = ({ filter, value }: IUpdateArgs) => dispatch => {
-  const parsedValue = value === 'on' ? true : value === 'off' ? false : value;
-
-  dispatch({
-    payload: {
-      filter,
-      value: parsedValue,
-    },
-    type: 'UPDATE_FILTER',
-  });
-};
-
-export const resetFilters: ActionCreator = () => dispatch => {
-  dispatch({
-    type: 'RESET_FILTERS',
-  });
-};
-
-export const getPokemon: ActionCreator = () => dispatch => {
+export const createPokedex: ActionCreator = () => dispatch => {
   // Send them to the store
   dispatch({
     payload: {
       collection: createPokemonCollectionFromPokeLab(),
     },
-    type: 'FETCH_POKEMON_SUCCESS',
+    type: POKEDEX_CREATE,
   });
 };
 
@@ -39,17 +25,40 @@ interface ISort {
   order: string;
 }
 
-export const sortPokemonList: ActionCreator = (sort: ISort) => dispatch => {
+export const sortPokedex: ActionCreator = (sort: ISort) => dispatch => {
   dispatch({
     payload: {
       sort,
     },
-    type: 'SORT_POKEMON_LIST',
+    type: POKEDEX_SORT,
   });
 };
 
-export const loadMore: ActionCreator = () => dispatch => {
+export const loadMorePokedex: ActionCreator = () => dispatch => {
   dispatch({
-    type: 'LOAD_MORE',
+    type: POKEDEX_LOAD_MORE,
+  });
+};
+
+interface IUpdateArgs {
+  filter: string;
+  value: string | string[] | boolean;
+}
+
+export const filterPokedex: ActionCreator = ({ filter, value }: IUpdateArgs) => dispatch => {
+  const parsedValue = value === 'on' ? true : value === 'off' ? false : value;
+
+  dispatch({
+    payload: {
+      filter,
+      value: parsedValue,
+    },
+    type: POKEDEX_FILTER,
+  });
+};
+
+export const resetPokedexFilters: ActionCreator = () => dispatch => {
+  dispatch({
+    type: POKEDEX_RESET_FILTERS,
   });
 };

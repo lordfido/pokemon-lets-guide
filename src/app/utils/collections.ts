@@ -1,5 +1,3 @@
-import { sortBy } from './arrays';
-
 /**
  * Given a list of elements, and a payload, it will look and
  * add/replace elements based on given elements by the backend
@@ -28,13 +26,4 @@ export const updateCollection = (collection: any[], payload: any[]) => {
   });
 
   return updatedCollection;
-};
-
-export const sortCollection = <T>(collection: T[], key: string, order = 'desc') => {
-  // @ts-ignore
-  if (!key || !collection.length || typeof !collection[0][key] === 'undefined') {
-    return collection;
-  }
-
-  return collection.sort(sortBy(key, order));
 };

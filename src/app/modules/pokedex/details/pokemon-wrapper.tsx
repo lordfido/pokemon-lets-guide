@@ -10,7 +10,7 @@ import PokemonDetailsView from './pokemon-view';
 import { IRootState } from '../../../root.models';
 import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
 
-import { HOME } from '../../../../constants/appRoutes';
+import { POKEDEX } from '../../../../constants/appRoutes';
 
 interface IMatchParams {
   id: string;
@@ -26,7 +26,7 @@ interface IStateProps {
 type Props = ILocationProps & IStateProps;
 
 const PokemonDetailsWrapper = ({ pokemon, pagination }: Props) =>
-  pokemon ? <PokemonDetailsView pokemon={pokemon} pagination={pagination} /> : <Redirect to={{ pathname: HOME }} />;
+  pokemon ? <PokemonDetailsView pokemon={pokemon} pagination={pagination} /> : <Redirect to={{ pathname: POKEDEX }} />;
 
 const mapStateToProps = (state: IRootState, props: Props): IStateProps => {
   const selectedPokemon = getSelectedPokemon(state)(props.match.params.id);

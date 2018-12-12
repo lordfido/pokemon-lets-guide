@@ -30,14 +30,6 @@ export const scrollTo = (elem: HTMLElement, target: HTMLElement, customGap?: num
   }
 };
 
-interface IResource {
-  me: number | void;
-  user: number;
-  type: string;
-  company: number;
-  action: string;
-}
-
 export const formatDate = (date?: Date, absolute?: boolean, format?: string) => {
   if (typeof date === 'undefined') {
     date = new Date();

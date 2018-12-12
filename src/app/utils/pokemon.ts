@@ -1,7 +1,6 @@
-import { Pokedex, Stats, Types } from 'pokelab-lets-go';
+import { Types } from 'pokelab-lets-go';
 import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
 import { sortBy } from './arrays';
-import { getTranslation } from './translations';
 
 import pokemonExtraInfoList from '../../common/apis/mocks';
 
@@ -51,7 +50,7 @@ export const getPaddedId = (pokemonId: string): string => {
  * @example getMegaevolutionId('006'); // Will return '006'
  * @example getMegaevolutionId('006', 'CharizarditeY'); // Will return '006_f3'
  */
-const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
+export const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
   if (!evolvesWith) {
     return id;
   }
@@ -88,7 +87,7 @@ const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
  * @example getMegaevolutionName('Venusaur', 'Venusaurite'); // Will return 'Mega Venusaur'
  * @example getMegaevolutionName('Charizard', 'CharizarditeY'); // Will return 'Mega Charizard Y'
  */
-const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
+export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
   if (!evolvesWith) {
     return name;
   }
@@ -121,7 +120,7 @@ interface IGetCPArguments {
 /**
  * This formula calculates the CP of a pokemon, based on its Level, Stats and AVs
  */
-const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: IGetCPArguments): number => {
+export const getCombatPoints = ({ stats, level = 100, ivs, avs = 0 }: IGetCPArguments): number => {
   const keepItSimple = true;
 
   if (keepItSimple) {
@@ -205,67 +204,9 @@ export const getSuggestedIVs = (stats: IPokemonStats): IPokemonStats[] => {
 };
 
 /**
- * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
- */
-export const createPokemonFromPokeLab = (pokemon: Pokedex.IPokemonSheet): IPokemonWithBaseCP => {
-  const { nationalNumber, name: pName, types: pTypes, baseStats: pBaseStats } = pokemon;
-
-  // Get pokemon types
-  const types = {
-    ownTypes: pTypes,
-    relations: [] as ITypeRelations[],
-  };
-
-  // Get base stats
-  const baseStats: IPokemonStats = {
-    attack: pBaseStats[Stats.Attack],
-    defense: pBaseStats[Stats.Defense],
-    hp: pBaseStats[Stats.HP],
-    spAttack: pBaseStats[Stats.SpecialAttack],
-    spDefense: pBaseStats[Stats.SpecialDefense],
-    speed: pBaseStats[Stats.Speed],
-  };
-
-  // Get baseCP
-  const baseCP = getCombatPoints({ stats: baseStats });
-
-  // Get alolan form flag
-  const alolanForm = !!pokemon.isAlolan;
-
-  // Get megaevolution data
-  const megaEvolution = pokemon.megaEvolvedWith
-    ? {
-        evolvesWith: pokemon.megaEvolvedWith,
-      }
-    : undefined;
-
-  // Get the ID
-  const rawId = getPaddedId(String(nationalNumber));
-  const id = alolanForm ? `${rawId}_f2` : getMegaevolutionId(rawId, pokemon.megaEvolvedWith);
-
-  // Get the name
-  const rawName = String(pName);
-  const name = alolanForm
-    ? `${rawName} ${getTranslation('forms-alolan')}`
-    : getMegaevolutionName(rawName, pokemon.megaEvolvedWith);
-
-  return {
-    alolanForm,
-    baseCP,
-    baseStats,
-    id,
-    megaEvolution,
-    name,
-    nationalNumber,
-    // @ts-ignore
-    types,
-  };
-};
-
-/**
  * Given an array of pokemon `Types`, will generate a map with all relations based on those types
  */
-export const getTypeRelations = (types: PokemonType[]) => {
+export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
   const relations: ITypeRelations[] = [];
 
   // Loop through each one of current pokemon's types

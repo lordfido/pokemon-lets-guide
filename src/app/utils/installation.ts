@@ -1,18 +1,8 @@
 import { v1 as uuid } from 'uuid';
+import { getCookie, setCookie } from '../../common/utils/cookies';
 import { log } from '../../common/utils/logger';
+
 import { INSTALLATION_ID, LANGUAGE } from '../../constants/cookies';
-
-/**
- * If no installation ID available, create it
- */
-const setInstallationId = () => {
-  if (!getInstallationId()) {
-    const value = uuid();
-    log(`Setting InstallationID: <${value}>`);
-
-    document.cookie = `${INSTALLATION_ID}=${value}`;
-  }
-};
 
 /**
  * Get Installation ID
@@ -33,14 +23,14 @@ const getInstallationId = () => {
 };
 
 /**
- * If no language available, create it
+ * If no installation ID available, create it
  */
-const setLanguageCookie = (value: string, override: boolean = false) => {
-  if (!getLanguageCookie() || override) {
-    log(`Setting Language: <${value}>`);
+const setInstallationId = (override: boolean = false) => {
+  if (!getInstallationId() || override) {
+    const value = uuid();
+    log(`Setting InstallationID: <${value}>`);
 
-    document.cookie = `${LANGUAGE}=${value}`;
-    location.reload();
+    setCookie(INSTALLATION_ID, value);
   }
 };
 
@@ -48,18 +38,22 @@ const setLanguageCookie = (value: string, override: boolean = false) => {
  * Get language
  */
 const getLanguageCookie = () => {
-  const allCookies = document.cookie.split(';').map(c => {
-    const cookie = c.split('=');
-    return {
-      name: cookie[0] ? cookie[0].trim() : '',
-      value: cookie[1] ? cookie[1].trim() : '',
-    };
-  });
+  const language = getCookie(LANGUAGE);
 
-  const language = allCookies.find(c => c.name === LANGUAGE) || { name: LANGUAGE, value: '' };
+  log(`Current Language: ${language}`);
+  return language;
+};
 
-  log(`Current Language: ${language && language.value}`);
-  return language.value;
+/**
+ * If no language available, create it
+ */
+const setLanguageCookie = (value: string, override: boolean = false) => {
+  if (!getLanguageCookie() || override) {
+    log(`Setting Language: <${value}>`);
+
+    setCookie(LANGUAGE, value);
+    location.reload();
+  }
 };
 
 interface IInstallationDataParameters {
@@ -74,14 +68,14 @@ interface IInstallationDataParameters {
  * - Installation id
  * - Language
  */
-export const setInstallationData = ({ language }: IInstallationDataParameters) => {
+export const setInstallationData = ({ language: { value, override } }: IInstallationDataParameters) => {
   setInstallationId();
-  setLanguageCookie(language.value, language.override);
+  setLanguageCookie(value, override);
 };
 
 export interface IInstallationData {
   installationId: string;
-  language: string;
+  language: string | void;
 }
 
 /**

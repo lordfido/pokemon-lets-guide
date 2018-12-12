@@ -8,32 +8,28 @@ import HeaderWrapper from './shell/header/header-wrapper';
 
 import { HOME } from '../constants/appRoutes';
 
-class AppView extends React.Component {
-  public static displayName = 'AppView';
-
-  public render() {
-    const { children } = this.props;
-
-    return (
-      <React.Fragment>
-        <Link className="HomeButton" to={{ pathname: HOME }} />
-        <div
-          id="app"
-          className={classnames('App', {
-            'is-pwa': isInstalledPWA(),
-          })}
-        >
-          <HeaderWrapper />
-          <div className="App-content">
-            <React.Fragment>
-              {children}
-              <FooterWrapper />
-            </React.Fragment>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+interface IOwnProps {
+  children: JSX.Element;
 }
+
+const AppView = ({ children }: IOwnProps) => (
+  <React.Fragment>
+    <Link className="HomeButton" to={{ pathname: HOME }} />
+    <div
+      id="app"
+      className={classnames('App', {
+        'is-pwa': isInstalledPWA(),
+      })}
+    >
+      <HeaderWrapper />
+      <div className="App-content">
+        <React.Fragment>
+          {children}
+          <FooterWrapper />
+        </React.Fragment>
+      </div>
+    </div>
+  </React.Fragment>
+);
 
 export default AppView;

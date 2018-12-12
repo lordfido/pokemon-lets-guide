@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { HOME } from '../../../constants/appRoutes';
+import { HOME, POKEDEX } from '../../../constants/appRoutes';
 import { getTranslation } from '../../utils/translations';
 import HeaderItem from './header-item';
 
@@ -14,7 +14,7 @@ class HeaderView extends React.Component {
         <HeaderItem
           image={require('../../../assets/images/pokedex.png')}
           text={getTranslation('header-pokedex')}
-          to={HOME}
+          to={POKEDEX}
         />
         <HeaderItem image={require('../../../assets/images/skills.png')} text={getTranslation('header-skills')} />
         <HeaderItem

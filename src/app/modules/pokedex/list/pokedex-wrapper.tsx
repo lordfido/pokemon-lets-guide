@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PokedexView from './pokedex-view';
 
 import { getPokemonList, getPokemonListPagination, getPokemonSortOptions } from '../../../root.reducer';
-import { loadMore, resetFilters, sortPokemonList, updateFilters } from '../pokedex.actions';
+import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from '../pokedex.actions';
 
 import { IRootState } from '../../../root.models';
 import { IPokemonListPagination, IPokemonWithBaseCP } from '../pokedex.models';
@@ -93,10 +93,10 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  LoadMore: loadMore,
-  ResetFilters: resetFilters,
-  SortPokemonList: sortPokemonList,
-  UpdateFilters: updateFilters,
+  LoadMore: loadMorePokedex,
+  ResetFilters: resetPokedexFilters,
+  SortPokemonList: sortPokedex,
+  UpdateFilters: filterPokedex,
 };
 
 export default connect(
