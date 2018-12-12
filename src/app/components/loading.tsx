@@ -5,19 +5,10 @@ interface IOwnProps {
   size?: string;
 }
 
-class Loading extends React.Component<IOwnProps> {
-  public static displayName = 'Loading';
-
-  public render() {
-    const { size = 'md' } = this.props;
-    const classes = classnames('Loading', classnames, { [`Loading--${size}`]: true });
-
-    return (
-      <div className={classes}>
-        <div className="Loading-spinner" />
-      </div>
-    );
-  }
-}
+const Loading = ({ size = 'md' }: IOwnProps) => (
+  <div className={classnames('Loading', classnames, { [`Loading--${size}`]: true })}>
+    <div className="Loading-spinner" />
+  </div>
+);
 
 export default Loading;

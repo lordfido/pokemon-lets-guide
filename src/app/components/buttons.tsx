@@ -9,30 +9,21 @@ interface IButtonsProps {
   align?: string;
 }
 
-class Buttons extends React.Component<IButtonsProps> {
-  public static displayName = 'Buttons';
-
-  public render() {
-    const { className, options, align = 'right' } = this.props;
-
-    const classes = classnames('Buttons', className, {
-      'is-center': align === 'center',
-      'is-left': align === 'left',
-    });
-
-    if (!options.length) {
-      return null;
-    }
-
-    return (
-      <div className={classes}>
-        {options.map(button => {
-          const isDisabled = (!button.isAlwaysEnabled && button.isDisabled) || button.isAlwaysDisabled;
-          return <Button key={button.id} options={{ ...button, isDisabled }} />;
-        })}
-      </div>
-    );
-  }
-}
+const Buttons = ({ className, options, align = 'right' }: IButtonsProps) =>
+  options.length ? (
+    <div
+      className={classnames('Buttons', className, {
+        'is-center': align === 'center',
+        'is-left': align === 'left',
+      })}
+    >
+      {options.map(button => (
+        <Button
+          key={button.id}
+          options={{ ...button, isDisabled: (!button.isAlwaysEnabled && button.isDisabled) || button.isAlwaysDisabled }}
+        />
+      ))}
+    </div>
+  ) : null;
 
 export default Buttons;

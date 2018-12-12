@@ -10,34 +10,28 @@ interface IOwnProps {
   };
 }
 
-class TouchableContent extends React.Component<IOwnProps> {
-  public render() {
-    const {
-      options: { icon, iconLast, label },
-    } = this.props;
-
-    if (typeof icon === 'string') {
-      return (
-        <span>
-          {icon && !iconLast && <i className={`fa fa-${icon}`} />}
-          {icon && !iconLast && label && <Space />}
-          {label}
-          {icon && iconLast && label && <Space />}
-          {icon && iconLast && <i className={`fa fa-${icon}`} />}
-        </span>
-      );
-    }
-
+const TouchableContent = ({ options: { icon, iconLast, label } }: IOwnProps) => {
+  if (typeof icon === 'string') {
     return (
       <span>
-        {icon && !iconLast && icon}
+        {icon && !iconLast && <i className={`fa fa-${icon}`} />}
         {icon && !iconLast && label && <Space />}
         {label}
         {icon && iconLast && label && <Space />}
-        {icon && iconLast && icon}
+        {icon && iconLast && <i className={`fa fa-${icon}`} />}
       </span>
     );
   }
-}
+
+  return (
+    <span>
+      {icon && !iconLast && icon}
+      {icon && !iconLast && label && <Space />}
+      {label}
+      {icon && iconLast && label && <Space />}
+      {icon && iconLast && icon}
+    </span>
+  );
+};
 
 export default TouchableContent;

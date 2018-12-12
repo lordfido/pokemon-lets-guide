@@ -37,65 +37,50 @@ interface IOwnProps {
   children: JSX.Element[];
 }
 
-class Table extends React.Component<IOwnProps> {
-  public static displayName = 'Table';
+const Table = ({ children, className, headings }: IOwnProps) => {
+  const renderHeads = () => (
+    <thead>
+      <tr className="Table-row">
+        {headings &&
+          headings.map((heading, index) => (
+            <th
+              key={index}
+              className={classnames('Table-cell', { 'is-clickable': heading.onClick })}
+              onClick={heading.onClick}
+              style={heading.style}
+            >
+              {heading.label}
+            </th>
+          ))}
+      </tr>
+    </thead>
+  );
 
-  public renderHeads() {
-    const { headings } = this.props;
-
-    return (
-      <thead>
-        <tr className="Table-row">
-          {headings &&
-            headings.map((heading, index) => (
-              <th
-                key={index}
-                className={classnames('Table-cell', { 'is-clickable': heading.onClick })}
-                onClick={heading.onClick}
-                style={heading.style}
-              >
-                {heading.label}
-              </th>
-            ))}
-        </tr>
-      </thead>
-    );
-  }
-
-  public render() {
-    const { children, className } = this.props;
-
-    const classes = {
-      desktop: classnames('Table Table--desktop', className),
-      mobile: classnames('Table Table--mobile', className),
-    };
-
-    return (
-      <Media query="(max-width: 1023px)">
-        {(matches: boolean) =>
-          matches ? (
-            <div className={classes.mobile}>
-              {React.Children.map(children, child => {
-                return (
-                  <Card className="Table-card">
-                    <table>
-                      {this.renderHeads()}
-                      <tbody>{child}</tbody>
-                    </table>
-                  </Card>
-                );
-              })}
-            </div>
-          ) : (
-            <table className={classes.desktop}>
-              {this.renderHeads()}
-              <tbody>{children}</tbody>
-            </table>
-          )
-        }
-      </Media>
-    );
-  }
-}
+  return (
+    <Media query="(max-width: 1023px)">
+      {(matches: boolean) =>
+        matches ? (
+          <div className={classnames('Table Table--mobile', className)}>
+            {React.Children.map(children, child => {
+              return (
+                <Card className="Table-card">
+                  <table>
+                    {renderHeads()}
+                    <tbody>{child}</tbody>
+                  </table>
+                </Card>
+              );
+            })}
+          </div>
+        ) : (
+          <table className={classnames('Table Table--desktop', className)}>
+            {renderHeads()}
+            <tbody>{children}</tbody>
+          </table>
+        )
+      }
+    </Media>
+  );
+};
 
 export default Table;

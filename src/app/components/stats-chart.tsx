@@ -12,7 +12,7 @@ import {
 } from '../../constants/pokemon-stats';
 import { getStatName } from '../../constants/pokemon-stats-name';
 
-import { IPokemonStats } from '../modules/pokemon-list/pokemon-list.types';
+import { IPokemonStats } from '../modules/pokedex/pokemon-list.types';
 
 const chartLegend = {
   [HP_ID]: getStatName(HP_ID),
@@ -29,15 +29,13 @@ interface IOwnProps {
   size?: number;
 }
 
-class StatsChart extends React.Component<IOwnProps> {
-  public static displayName = 'StatsChart';
-
-  public render() {
-    const { stats, color, size } = this.props;
-    const chartData = [{ data: stats, meta: { color } }];
-
-    return <RadarChart captions={chartLegend} data={chartData} size={size} options={{ scales: 1, dots: true }} />;
-  }
-}
+const StatsChart = ({ stats, color, size }: IOwnProps) => (
+  <RadarChart
+    captions={chartLegend}
+    data={[{ data: stats, meta: { color } }]}
+    size={size}
+    options={{ scales: 1, dots: true }}
+  />
+);
 
 export default StatsChart;
