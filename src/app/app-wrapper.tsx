@@ -9,15 +9,15 @@ import registerServiceWorker from './utils/service-worker';
 
 import AppView from './app-view';
 // import pokemonListWrapper from './modules/pokemon-list/pokemon-list-wrapper';
-import pokemonDetailsWrapper from './modules/pokemon-details/pokemon-details-wrapper';
-import searchWrapper from './modules/search/search-wrapper';
+import pokemonDetailsWrapper from './modules/pokedex/details/pokemon-wrapper';
+import pokedexWrapper from './modules/pokedex/list/pokedex-wrapper';
 
-import { getPokemon } from './modules/pokemon-list/pokemon-list.actions';
+import { getPokemon } from './modules/pokedex/pokedex.actions';
 
 import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 
-import { IRootState } from './root.types';
+import { IRootState } from './root.models';
 
 const packageJson = require('../../package.json');
 const appVersion = packageJson.version;
@@ -106,9 +106,9 @@ class AppWrapper extends React.Component<Props> {
     return (
       <AppView>
         <Switch>
-          <Route path={routes.SEARCH} component={searchWrapper} />
+          <Route path={routes.SEARCH} component={pokedexWrapper} />
           <Route exact path={routes.POKEMON} component={pokemonDetailsWrapper} />
-          <Route exact path={routes.HOME} component={searchWrapper} />
+          <Route exact path={routes.HOME} component={pokedexWrapper} />
         </Switch>
       </AppView>
     );

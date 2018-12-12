@@ -1,5 +1,9 @@
+import { Pokedex } from 'pokelab-lets-go';
 import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
+import { sortBy } from '../../utils/arrays';
+import { createPokemonFromPokeLab } from '../../utils/pokemon';
 
+import { StatId } from '../../../constants/pokemon-stats';
 import { PokemonType } from '../../../constants/pokemon-types';
 
 export interface IMegaEvolution {
@@ -53,8 +57,37 @@ export interface IRichPokemon extends IPokemonWithBaseCP {
   pokedexEntry: string;
 }
 
-export interface IPokemonListState {
+export interface IPokemonListPagination {
+  first: number;
+  last: number;
+}
+
+export interface IPokemonDetailPagination {
+  next: IPokemon;
+  prev: IPokemon;
+}
+
+export interface IPokedexFilters {
+  bestStats: StatId[];
+  // canLearnSkills: StatId[];
+  // canLearnMTs: StatId[];
+  // dropsCandies: StatId[];
+  excludedTypes: PokemonType[];
+  includedTypes: PokemonType[];
+  maxBaseCP?: string;
+  minBaseCP?: string;
+  nameOrNumber: string | void;
+  // needsCandies: StatId[];
+  showAlolanForms: boolean;
+  showMegaevolutions: boolean;
+  strongAgainst: PokemonType[];
+  weakAgainst: PokemonType[];
+  worstStats: StatId[];
+}
+
+export interface IPokedexState {
   collection: IPokemonWithBaseCP[];
+  filters: IPokedexFilters;
   pagination: IPokemonListPagination;
   sort: {
     sortBy: string;
@@ -62,12 +95,5 @@ export interface IPokemonListState {
   };
 }
 
-export interface IPokemonListPagination {
-  first: number;
-  last: number;
-}
-
-export interface IPokemonPagination {
-  next: IPokemon;
-  prev: IPokemon;
-}
+export const createPokemonCollectionFromPokeLab = (): IPokemonWithBaseCP[] =>
+  Pokedex.All.map(createPokemonFromPokeLab).sort(sortBy('id', 'asc'));

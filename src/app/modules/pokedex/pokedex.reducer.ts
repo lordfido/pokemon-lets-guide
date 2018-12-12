@@ -1,15 +1,31 @@
-import { AnyAction } from 'redux';
+import { AnyAction, Reducer } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
 
 import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon-stats';
 
-import { ISearchState } from '../search/search.types';
-import { IPokemon, IPokemonListState } from './pokemon-list.types';
+import { IPokedexState, IPokemon } from './pokedex.models';
 
-const initialState: IPokemonListState = {
+const initialState: IPokedexState = {
   collection: [],
+  filters: {
+    bestStats: [],
+    // canLearnMTs: [],
+    // canLearnSkills: [],
+    // dropsCandies: [],
+    excludedTypes: [],
+    includedTypes: [],
+    maxBaseCP: undefined,
+    minBaseCP: undefined,
+    nameOrNumber: undefined,
+    // needsCandies: [],
+    showAlolanForms: false,
+    showMegaevolutions: false,
+    strongAgainst: [],
+    weakAgainst: [],
+    worstStats: [],
+  },
   pagination: {
     first: 0,
     last: paginationSize,
@@ -20,7 +36,7 @@ const initialState: IPokemonListState = {
   },
 };
 
-const reducer = (state = initialState, action: AnyAction) => {
+const reducer = (state = initialState, action: AnyAction): IPokedexState => {
   switch (action.type) {
     case 'FETCH_POKEMON_SUCCESS':
       return {
@@ -43,6 +59,23 @@ const reducer = (state = initialState, action: AnyAction) => {
         },
       };
 
+    case 'UPDATE_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [action.payload.filter]: action.payload.value,
+        },
+      };
+
+    case 'RESET_FILTERS':
+      return {
+        ...state,
+        filters: {
+          ...initialState.filters,
+        },
+      };
+
     default:
       return state;
   }
@@ -50,25 +83,25 @@ const reducer = (state = initialState, action: AnyAction) => {
 
 // Pokemon List
 // Get a list of pokemon (already filtered)
-export const getPokemonList = (state: IPokemonListState, search: ISearchState) => {
-  const { collection, pagination } = state;
+export const getPokemonList = (state: IPokedexState) => {
+  const { collection, filters, pagination } = state;
 
   return collection
     .filter(pokemon => {
       // Filter list by name or number
-      if (search.nameOrNumber) {
+      if (filters.nameOrNumber) {
         if (
-          search.nameOrNumber !== String(pokemon.nationalNumber) &&
-          new RegExp(search.nameOrNumber.toLowerCase()).test(pokemon.name.toLowerCase()) === false
+          filters.nameOrNumber !== String(pokemon.nationalNumber) &&
+          new RegExp(filters.nameOrNumber.toLowerCase()).test(pokemon.name.toLowerCase()) === false
         ) {
           return false;
         }
       }
 
       // Filter list by included types
-      if (search.includedTypes.length) {
+      if (filters.includedTypes.length) {
         let shouldShow = false;
-        search.includedTypes.forEach(type => {
+        filters.includedTypes.forEach(type => {
           if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
             shouldShow = true;
           }
@@ -80,9 +113,9 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
       }
 
       // Filter list by excluded types
-      if (search.excludedTypes.length) {
+      if (filters.excludedTypes.length) {
         let shouldSkip = false;
-        search.excludedTypes.forEach(type => {
+        filters.excludedTypes.forEach(type => {
           if (pokemon.types.ownTypes.findIndex(t => t === type) >= 0) {
             shouldSkip = true;
           }
@@ -94,11 +127,11 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
       }
 
       // Filter list by strong against
-      if (search.strongAgainst.length) {
+      if (filters.strongAgainst.length) {
         const relations = getTypeRelations(pokemon.types.ownTypes);
 
         let shouldSkip = true;
-        search.strongAgainst.forEach(type => {
+        filters.strongAgainst.forEach(type => {
           const strongAgainst = relations.filter(relation => relation.id === type && relation.effectiveness < 1);
           if (strongAgainst.length) {
             shouldSkip = false;
@@ -111,11 +144,11 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
       }
 
       // Filter list by weak against
-      if (search.weakAgainst.length) {
+      if (filters.weakAgainst.length) {
         const relations = getTypeRelations(pokemon.types.ownTypes);
 
         let shouldSkip = true;
-        search.weakAgainst.forEach(type => {
+        filters.weakAgainst.forEach(type => {
           const weakAgainst = relations.filter(relation => relation.id === type && relation.effectiveness > 1);
           if (weakAgainst.length) {
             shouldSkip = false;
@@ -128,7 +161,7 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
       }
 
       // Filter list by the best stats
-      if (search.bestStats.length) {
+      if (filters.bestStats.length) {
         // @ts-ignore
         const parsedStats = Object.keys(pokemon.baseStats).map((name: StatId) => ({
           name,
@@ -138,7 +171,7 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
         const orderedStats = getSortedStats(parsedStats);
 
         let statMatches = true;
-        search.bestStats.forEach((stat: StatId) => {
+        filters.bestStats.forEach((stat: StatId) => {
           if (orderedStats.slice(0, 3).findIndex(s => s === stat) < 0) {
             statMatches = false;
           }
@@ -150,7 +183,7 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
       }
 
       // Filter list by the worst stats
-      if (search.worstStats.length) {
+      if (filters.worstStats.length) {
         // @ts-ignore
         const parsedStats = Object.keys(pokemon.baseStats).map((name: StatId) => ({
           name,
@@ -160,7 +193,7 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
         const orderedStats = getSortedStats(parsedStats, 'asc');
 
         let statMatches = true;
-        search.worstStats.forEach((stat: StatId) => {
+        filters.worstStats.forEach((stat: StatId) => {
           if (orderedStats.slice(0, 3).findIndex(s => s === stat) < 0) {
             statMatches = false;
           }
@@ -172,26 +205,26 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
       }
 
       // Filter by minimum CP
-      if (typeof search.minBaseCP !== 'undefined' && search.minBaseCP.length) {
-        if (pokemon.baseCP < parseInt(search.minBaseCP, 10)) {
+      if (typeof filters.minBaseCP !== 'undefined' && filters.minBaseCP.length) {
+        if (pokemon.baseCP < parseInt(filters.minBaseCP, 10)) {
           return false;
         }
       }
 
       // Filter by maximum CP
-      if (typeof search.maxBaseCP !== 'undefined' && search.maxBaseCP.length) {
-        if (pokemon.baseCP > parseInt(search.maxBaseCP, 10)) {
+      if (typeof filters.maxBaseCP !== 'undefined' && filters.maxBaseCP.length) {
+        if (pokemon.baseCP > parseInt(filters.maxBaseCP, 10)) {
           return false;
         }
       }
 
       // Filter mega evolutions
-      if (!search.showMegaevolutions && pokemon.megaEvolution) {
+      if (!filters.showMegaevolutions && pokemon.megaEvolution) {
         return false;
       }
 
       // Filter alolan forms
-      if (!search.showAlolanForms && pokemon.alolanForm) {
+      if (!filters.showAlolanForms && pokemon.alolanForm) {
         return false;
       }
 
@@ -202,23 +235,22 @@ export const getPokemonList = (state: IPokemonListState, search: ISearchState) =
 };
 
 // Get pagination data for pokemon list
-export const getPokemonListPagination = (state: IPokemonListState) => state.pagination;
+export const getPokemonListPagination = (state: IPokedexState) => state.pagination;
 
 // Get sorting options for pokemon list
-export const getPokemonSortOptions = (state: IPokemonListState) => state.sort;
+export const getPokemonSortOptions = (state: IPokedexState) => state.sort;
 
 // Pokemon Details
 // Get details of selected pokemon
-export const getSelectedPokemon = (state: IPokemonListState) => (pokemonId: string) =>
+export const getSelectedPokemon = (state: IPokedexState) => (pokemonId: string) =>
   state.collection.find(pokemon => pokemon.id === pokemonId);
 
 // Get pagination data for a particular pokemon (already filtered)
-export const getPokemonPagination = (state: IPokemonListState, search: ISearchState) => (pokemonId: string) => {
+export const getPokemonPagination = (state: IPokedexState) => (pokemonId: string) => {
   const samePokemon = (pokemon: IPokemon) => pokemon.id === pokemonId;
 
   // Select filtered collection or complete collection
-  const collection =
-    getPokemonList(state, search).findIndex(samePokemon) >= 0 ? getPokemonList(state, search) : state.collection;
+  const collection = getPokemonList(state).findIndex(samePokemon) >= 0 ? getPokemonList(state) : state.collection;
 
   // Select pokemon position in that position
   const position = collection.findIndex(samePokemon);
@@ -228,5 +260,8 @@ export const getPokemonPagination = (state: IPokemonListState, search: ISearchSt
     prev: position > 0 ? collection[position - 1] : collection[collection.length - 1],
   };
 };
+
+// Returns all filters
+export const getFilters = (state: IPokedexState) => state.filters;
 
 export default reducer;

@@ -12,7 +12,7 @@ import {
 } from '../../constants/pokemon-stats';
 import { getStatName } from '../../constants/pokemon-stats-name';
 
-import { IPokemonStats } from '../modules/pokedex/pokemon-list.types';
+import { IPokemonStats } from '../modules/pokedex/pokedex.models';
 
 const chartLegend = {
   [HP_ID]: getStatName(HP_ID),

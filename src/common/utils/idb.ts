@@ -1,7 +1,7 @@
 import * as idb from 'idb-keyval';
 import { log } from '../../common/utils/logger';
 
-import { IRootState } from '../../app/root.types';
+import { IRootState } from '../../app/root.models';
 import { ILastSession, IWorkerConfig } from '../../definitions/idb';
 
 const read = (selectedTable: string): Promise<any> => {

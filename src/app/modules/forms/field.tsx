@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { log } from '../../../common/utils/logger';
 
-import { Button } from '../../components/button';
+import Button from '../../components/button';
 import Checkbox from './form-checkbox';
 import Date from './form-date';
 import Dropdown from './form-dropdown';

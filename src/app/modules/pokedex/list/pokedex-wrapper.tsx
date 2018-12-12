@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import PokemonListView from './pokemon-list-view';
+import PokedexView from './pokedex-view';
 
-import { getPokemonList, getPokemonListPagination, getPokemonSortOptions } from '../../root.reducer';
-import { loadMore, sortPokemonList } from './pokemon-list.actions';
+import { getPokemonList, getPokemonListPagination, getPokemonSortOptions } from '../../../root.reducer';
+import { loadMore, sortPokemonList } from '../pokedex.actions';
 
-import { IRootState } from '../../root.types';
-import { IPokemonListPagination, IPokemonWithBaseCP } from './pokemon-list.types';
+import { IRootState } from '../../../root.models';
+import { IPokemonListPagination, IPokemonWithBaseCP } from '../pokedex.models';
 
 interface IStateProps {
   collection: IPokemonWithBaseCP[];
@@ -57,7 +57,7 @@ class PokemonListWrapper extends React.Component<Props> {
     const { collection, pagination } = this.props;
 
     return (
-      <PokemonListView
+      <PokedexView
         collection={collection}
         sort={this.sortBy}
         handleLoadMore={

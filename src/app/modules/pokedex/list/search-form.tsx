@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
-import { getTranslation } from '../../utils/translations';
+import { getTranslation } from '../../../utils/translations';
 
-import Buttons from '../../components/buttons';
-import Field from '../forms/field';
+import Buttons from '../../../components/buttons';
+import Field from '../../forms/field';
 import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
-import { resetFilters, updateFilters } from './search.actions';
+import { resetFilters, updateFilters } from '../pokedex.actions';
 
-import { HOME, SEARCH } from '../../../constants/appRoutes';
-import { filtersEnabled } from '../../../constants/features';
+import { HOME, SEARCH } from '../../../../constants/appRoutes';
+import { filtersEnabled } from '../../../../constants/features';
 
 interface IMatchParams {
   query: string;

@@ -4,7 +4,7 @@ import { isDev, isPre } from './platforms';
 
 import rootReducer from '../../app/root.reducer';
 
-import { IRootState } from '../../app/root.types';
+import { IRootState } from '../../app/root.models';
 
 const buildStore = async (persistedStore?: IRootState | void) => {
   // @ts-ignore

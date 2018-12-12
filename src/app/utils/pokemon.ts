@@ -19,12 +19,7 @@ import {
 } from '../../constants/pokemon-stats';
 
 import { PokemonType } from '../../constants/pokemon-types';
-import {
-  IPokemonStats,
-  IPokemonWithBaseCP,
-  IRichPokemon,
-  ITypeRelations,
-} from '../modules/pokemon-list/pokemon-list.types';
+import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon, ITypeRelations } from '../modules/pokedex/pokedex.models';
 
 /**
  * Based on a value and a max value, returns a number between 0 and 1
