@@ -15,7 +15,7 @@ import './styles/main.scss';
 import AppWrapper from './app/app-wrapper';
 import ScrollToTop from './app/components/scroll-to-top';
 
-import { IRootState } from './app/root.types';
+import { IRootState } from './app/root.models';
 
 const packageJson = require('../package.json');
 const backgroundImage = require('./assets/images/switch.png');

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import PokemonListView from './pokemon-list-view';
+import PokedexView from './pokedex-view';
 
-import { getPokemonList, getPokemonListPagination, getPokemonSortOptions } from '../../root.reducer';
-import { loadMore, sortPokemonList } from './pokemon-list.actions';
+import { getPokemonList, getPokemonListPagination, getPokemonSortOptions } from '../../../root.reducer';
+import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from '../pokedex.actions';
 
-import { IRootState } from '../../root.types';
-import { IPokemonListPagination, IPokemonWithBaseCP } from './pokemon-list.types';
+import { IRootState } from '../../../root.models';
+import { IPokemonListPagination, IPokemonWithBaseCP } from '../pokedex.models';
 
 interface IStateProps {
   collection: IPokemonWithBaseCP[];
@@ -20,7 +20,9 @@ interface IStateProps {
 
 interface IDispatchProps {
   LoadMore: () => void;
+  ResetFilters: () => void;
   SortPokemonList: (parameters: any) => void;
+  UpdateFilters: (parameters: any) => void;
 }
 
 type Props = IStateProps & IDispatchProps;
@@ -28,7 +30,19 @@ type Props = IStateProps & IDispatchProps;
 class PokemonListWrapper extends React.Component<Props> {
   public static displayName = 'PokemonListWrapper';
 
-  public sortBy = (sortBy: string) => {
+  public handleLoadMore() {
+    const { LoadMore } = this.props;
+
+    LoadMore();
+  }
+
+  public handleUpdateFilter(filter: string, selection: any) {
+    const { UpdateFilters } = this.props;
+
+    UpdateFilters({ filter, value: selection.map ? selection.map((s: any) => s.value) : selection });
+  }
+
+  public handleSortBy = (sortBy: string) => {
     const { SortPokemonList, sort } = this.props;
 
     const reverse = sortBy === sort.sortBy;
@@ -47,19 +61,12 @@ class PokemonListWrapper extends React.Component<Props> {
     SortPokemonList({ sortBy, order });
   };
 
-  public handleLoadMore() {
-    const { LoadMore } = this.props;
-
-    LoadMore();
-  }
-
   public render() {
-    const { collection, pagination } = this.props;
+    const { collection, pagination, ResetFilters } = this.props;
 
     return (
-      <PokemonListView
+      <PokedexView
         collection={collection}
-        sort={this.sortBy}
         handleLoadMore={
           collection.length >= pagination.last
             ? () => {
@@ -67,6 +74,13 @@ class PokemonListWrapper extends React.Component<Props> {
               }
             : undefined
         }
+        handleResetFilters={() => {
+          ResetFilters();
+        }}
+        handleSortBy={this.handleSortBy}
+        handleUpdateFilter={(filter: string, selection: any) => {
+          this.handleUpdateFilter(filter, selection);
+        }}
       />
     );
   }
@@ -79,8 +93,10 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  LoadMore: loadMore,
-  SortPokemonList: sortPokemonList,
+  LoadMore: loadMorePokedex,
+  ResetFilters: resetPokedexFilters,
+  SortPokemonList: sortPokedex,
+  UpdateFilters: filterPokedex,
 };
 
 export default connect(

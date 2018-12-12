@@ -1,15 +1,15 @@
 import { Line } from 'rc-progress';
 import * as React from 'react';
 
-import Buttons from '../../components/buttons';
-import StatsChart from '../../components/stats-chart';
+import Buttons from '../../../components/buttons';
+import StatsChart from '../../../components/stats-chart';
 
-import { StatId } from '../../../constants/pokemon-stats';
-import { getStatName } from '../../../constants/pokemon-stats-name';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTranslation } from '../../utils/translations';
+import { StatId } from '../../../../constants/pokemon-stats';
+import { getStatName } from '../../../../constants/pokemon-stats-name';
+import { getTypeColor } from '../../../../constants/pokemon-types-color';
+import { getTranslation } from '../../../utils/translations';
 
-import { IRichPokemon } from '../pokemon-list/pokemon-list.types';
+import { IRichPokemon } from '../pokedex.models';
 
 type Bars = 'bars';
 const BARS: Bars = 'bars';

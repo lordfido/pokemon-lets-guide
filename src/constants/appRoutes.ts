@@ -1,4 +1,8 @@
 // Generic
 export const HOME = '/';
-export const POKEMON = '/pokemon/:id';
-export const SEARCH = '/search/:query';
+
+// Pokedex
+export const POKEDEX = HOME;
+// export const POKEDEX = '/pokedex/';
+export const POKEMON = `${POKEDEX}:id`;
+export const SEARCH = `${POKEDEX}search/:query`;

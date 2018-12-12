@@ -1,29 +1,22 @@
-import { combineReducers, Reducer } from 'redux';
-
 // Import reducers
-import pokemonReducer, * as pokemonSelectors from './modules/pokemon-list/pokemon-list.reducer';
-import searchReducer, * as searchSelectors from './modules/search/search.reducer';
+import * as pokedexSelectors from './modules/pokedex/pokedex.reducer';
 
-import { IRootState } from './root.types';
+import { createRootReducer, IRootState } from './root.models';
 
 // Declare root reducer
-const rootReducer: Reducer<IRootState> = combineReducers({
-  pokemon: pokemonReducer,
-  search: searchReducer,
-});
+const rootReducer = createRootReducer();
 
 // Custom selectors
 // Pokemon List
-export const getPokemonList = ({ pokemon, search }: IRootState) => pokemonSelectors.getPokemonList(pokemon, search);
-export const getPokemonListPagination = ({ pokemon }: IRootState) => pokemonSelectors.getPokemonListPagination(pokemon);
-export const getPokemonSortOptions = ({ pokemon }: IRootState) => pokemonSelectors.getPokemonSortOptions(pokemon);
+export const getPokemonList = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonList(pokedex);
+export const getPokemonListPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonListPagination(pokedex);
+export const getPokemonSortOptions = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonSortOptions(pokedex);
 
 // Pokemon details
-export const getSelectedPokemon = ({ pokemon }: IRootState) => pokemonSelectors.getSelectedPokemon(pokemon);
-export const getPokemonPagination = ({ pokemon, search }: IRootState) =>
-  pokemonSelectors.getPokemonPagination(pokemon, search);
+export const getSelectedPokemon = ({ pokedex }: IRootState) => pokedexSelectors.getSelectedPokemon(pokedex);
+export const getPokemonPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonPagination(pokedex);
 
 // Search filters
-export const getFilters = ({ search }: IRootState) => searchSelectors.getFilters(search);
+export const getFilters = ({ pokedex }: IRootState) => pokedexSelectors.getFilters(pokedex);
 
 export default rootReducer;

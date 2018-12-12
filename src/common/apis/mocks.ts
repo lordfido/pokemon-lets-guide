@@ -1,4 +1,4 @@
-import { IAdditionalPokemonInfo } from '../../app/modules/pokemon-list/pokemon-list.types';
+import { IAdditionalPokemonInfo } from '../../app/modules/pokedex/pokedex.models';
 
 const initialPokemon: IAdditionalPokemonInfo[] = [
   {

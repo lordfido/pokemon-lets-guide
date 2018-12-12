@@ -20,36 +20,30 @@ interface IOwnSingleProps {
   reference: any;
 }
 
-class Tab extends React.Component<IOwnSingleProps> {
-  public static displayName = 'Tab';
+const Tab = ({ handleClick, isActive, options, reference }: IOwnSingleProps) => {
+  const classes = classnames('Tabs-tab', { 'is-active': isActive });
 
-  public render() {
-    const { options, isActive, handleClick, reference } = this.props;
-
-    const classes = classnames('Tabs-tab', { 'is-active': isActive });
-
-    if (options.to) {
-      return (
-        <li id={options.id} role="button" className={classes} ref={reference}>
-          <Link options={options} isTransparent shouldInherit />
-        </li>
-      );
-    }
-
+  if (options.to) {
     return (
-      <li
-        id={options.id}
-        role="button"
-        className={classes}
-        onClick={() => {
-          handleClick(options);
-        }}
-        ref={reference}
-      >
-        <TouchableContent options={options} />
+      <li id={options.id} role="button" className={classes} ref={reference}>
+        <Link options={options} isTransparent shouldInherit />
       </li>
     );
   }
-}
+
+  return (
+    <li
+      id={options.id}
+      role="button"
+      className={classes}
+      onClick={() => {
+        handleClick(options);
+      }}
+      ref={reference}
+    >
+      <TouchableContent options={options} />
+    </li>
+  );
+};
 
 export default Tab;

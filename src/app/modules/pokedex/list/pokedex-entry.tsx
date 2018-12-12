@@ -1,14 +1,14 @@
 import chroma from 'chroma-js';
 import * as React from 'react';
-import { getPaddedId } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
+import { getPaddedId } from '../../../utils/pokemon';
+import { getTranslation } from '../../../utils/translations';
 
-import Button from '../../components/button';
-import { TableCell, TableRow } from '../../components/table';
+import Button from '../../../components/button';
+import { TableCell, TableRow } from '../../../components/table';
 // import CustomImage from '../../components/image';
-import Tag from '../../components/tag';
+import Tag from '../../../components/tag';
 
-import { POKEMON } from '../../../constants/appRoutes';
+import { POKEMON } from '../../../../constants/appRoutes';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -16,19 +16,19 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-} from '../../../constants/pokemon-stats';
-import { getStatColor } from '../../../constants/pokemon-stats-color';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../constants/pokemon-types-icons';
+} from '../../../../constants/pokemon-stats';
+import { getStatColor } from '../../../../constants/pokemon-stats-color';
+import { getTypeColor } from '../../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
 
-import { IPokemonWithBaseCP } from './pokemon-list.types';
+import { IPokemonWithBaseCP } from '../pokedex.models';
 
 interface IOwnProps {
   pokemon: IPokemonWithBaseCP;
 }
 
-class PokemonListItem extends React.Component<IOwnProps> {
-  public static displayName = 'PokemonListItem';
+class PokedexEntry extends React.Component<IOwnProps> {
+  public static displayName = 'PokedexEntry';
 
   public render() {
     const { pokemon } = this.props;
@@ -144,4 +144,4 @@ class PokemonListItem extends React.Component<IOwnProps> {
   }
 }
 
-export default PokemonListItem;
+export default PokedexEntry;

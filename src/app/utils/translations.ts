@@ -26,7 +26,7 @@ let selectedLocale = languagesIndex.english;
  * @example setLocale('en-GB');
  * @example setLocale('es-ES');
  */
-export const setLocale = (iso: string) => {
+export const setLocale = (iso: string | void) => {
   switch (iso) {
     case 'en-EN':
     case 'en-GB':
@@ -105,4 +105,5 @@ export const languageISOs = [
 ];
 
 // When this file has ben read, update the default locale based on persisted one
-setLocale(getInstallationData().language);
+const currentLanguage = getInstallationData().language;
+setLocale(currentLanguage);

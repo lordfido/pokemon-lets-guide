@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
-import { sortBy } from '../../utils/arrays';
-import { getTranslation } from '../../utils/translations';
+import { sortBy } from '../../../utils/arrays';
+import { getTranslation } from '../../../utils/translations';
 
 import {
   ATTACK_ID,
@@ -10,9 +10,9 @@ import {
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
-} from '../../../constants/pokemon-stats';
-import { getStatColor } from '../../../constants/pokemon-stats-color';
-import { getStatName } from '../../../constants/pokemon-stats-name';
+} from '../../../../constants/pokemon-stats';
+import { getStatColor } from '../../../../constants/pokemon-stats-color';
+import { getStatName } from '../../../../constants/pokemon-stats-name';
 
 interface IDropdownReadableData {
   data: any;

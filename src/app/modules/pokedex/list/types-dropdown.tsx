@@ -1,10 +1,10 @@
 import chroma from 'chroma-js';
-import { sortBy } from '../../utils/arrays';
-import { getTranslation } from '../../utils/translations';
+import { sortBy } from '../../../utils/arrays';
+import { getTranslation } from '../../../utils/translations';
 
-import { getTypes, PokemonType } from '../../../constants/pokemon-types';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../constants/pokemon-types-icons';
+import { getTypes, PokemonType } from '../../../../constants/pokemon-types';
+import { getTypeColor } from '../../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
 
 interface IDropdownReadableData {
   data: any;

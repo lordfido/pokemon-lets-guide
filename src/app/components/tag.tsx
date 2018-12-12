@@ -12,27 +12,13 @@ export interface ITagProps {
   style?: React.CSSProperties;
 }
 
-class Tag extends React.Component<ITagProps> {
-  public static displayName = 'Tag';
-
-  public render() {
-    const { className, label, icon, backgroundColor, large, style } = this.props;
-
-    const classes = {
-      icon: 'Tag-icon',
-      label: 'Tag-label',
-      wrapper: classnames('Tag', className, { 'Tag--large': large }),
-    };
-
-    return (
-      <span className={classes.wrapper} style={style}>
-        {icon && <CustomImage className={classes.icon} style={{ backgroundColor, opacity: 1 }} src={icon} />}
-        <span className={classes.label} style={{ backgroundColor }}>
-          {label}
-        </span>
-      </span>
-    );
-  }
-}
+const Tag = ({ className, label, icon, backgroundColor, large, style }: ITagProps) => (
+  <span className={classnames('Tag', className, { 'Tag--large': large })} style={style}>
+    {icon && <CustomImage className={'Tag-icon'} style={{ backgroundColor, opacity: 1 }} src={icon} />}
+    <span className={'Tag-label'} style={{ backgroundColor }}>
+      {label}
+    </span>
+  </span>
+);
 
 export default Tag;

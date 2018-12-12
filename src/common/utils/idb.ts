@@ -1,8 +1,7 @@
 import * as idb from 'idb-keyval';
 import { log } from '../../common/utils/logger';
 
-import { IRootState } from '../../app/root.types';
-import { ILastSession, IWorkerConfig } from '../../definitions/idb';
+import { IRootState } from '../../app/root.models';
 
 const read = (selectedTable: string): Promise<any> => {
   log(`reading ${selectedTable}`);
@@ -35,27 +34,41 @@ export const getStore = (): Promise<IRootState> => read('store').then(response =
  */
 export const clearStore = () => remove('store');
 
+export interface IWorkerConfig {
+  defaultBadgeUrl: string;
+  defaultIconUrl: string;
+}
+
 /**
  * Persist Worker config
  */
 export const setWorkerConfig = (workerConfig: IWorkerConfig) => write('worker.config', workerConfig);
+
 /**
  * Read persisted Worker config
  */
 export const getWorkerConfig = (): Promise<IWorkerConfig> => read('worker.config').then(response => response || {});
+
 /**
  * Clear persisted Worker config
  */
 export const clearWorkerConfig = () => remove('worker.config');
 
+export interface ILastSession {
+  route: string;
+  version: string;
+}
+
 /**
  * Persist Last session
  */
 export const setLastSession = (value: ILastSession) => write('lastSession', value);
+
 /**
  * Read persisted Last session
  */
 export const getLastSession = (): Promise<ILastSession> => read('lastSession').then(response => response || {});
+
 /**
  * Clear persisted Last session
  */
