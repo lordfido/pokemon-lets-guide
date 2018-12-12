@@ -7,6 +7,7 @@ import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
 import { filtersEnabled } from '../../../../constants/features';
+import { ICheckboxOptions, IDropdownOptions, IGenericField, ITextOptions } from '../../forms/form.models';
 
 interface IOwnProps {
   handleUpdateFilter: (filter: string, selection: any) => void;
@@ -14,9 +15,8 @@ interface IOwnProps {
 }
 
 const PokedexFilters = ({ handleResetFilters, handleUpdateFilter }: IOwnProps) => {
-  const fields = [
+  const fields: Array<IGenericField & (ITextOptions | IDropdownOptions | ICheckboxOptions)> = [
     {
-      form: 'search',
       id: 'nameOrNumber',
       isDisabled: !filtersEnabled,
       label: getTranslation('search-name-or-number'),
@@ -66,7 +66,6 @@ const PokedexFilters = ({ handleResetFilters, handleUpdateFilter }: IOwnProps) =
       onChange: (selection: any[]) => handleUpdateFilter('worstStats', selection),
     },
     {
-      form: 'search',
       id: 'minBaseCP',
       isDisabled: !filtersEnabled,
       label: getTranslation('search-min-cp'),
@@ -74,7 +73,6 @@ const PokedexFilters = ({ handleResetFilters, handleUpdateFilter }: IOwnProps) =
       type: 'number',
     },
     {
-      form: 'search',
       id: 'maxBaseCP',
       isDisabled: !filtersEnabled,
       label: getTranslation('search-max-cp'),
@@ -82,7 +80,6 @@ const PokedexFilters = ({ handleResetFilters, handleUpdateFilter }: IOwnProps) =
       type: 'number',
     },
     {
-      form: 'search',
       id: 'showMegaevolutions',
       isDisabled: !filtersEnabled,
       label: getTranslation('search-show-megaevolutions'),
@@ -90,7 +87,6 @@ const PokedexFilters = ({ handleResetFilters, handleUpdateFilter }: IOwnProps) =
       type: 'switch',
     },
     {
-      form: 'search',
       id: 'showAlolanForms',
       isDisabled: !filtersEnabled,
       label: getTranslation('search-show-alolan-forms'),

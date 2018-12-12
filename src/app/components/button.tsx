@@ -2,10 +2,10 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { IFieldProps } from '../modules/forms/field';
+import { IGenericField } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
-export interface IButtonProps extends IFieldProps {
+export interface IButtonProps extends IGenericField {
   to?: string;
 }
 

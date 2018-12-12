@@ -8,63 +8,21 @@ import Dropdown from './form-dropdown';
 import Switch from './form-switch';
 import Text from './form-text';
 
-interface IResource {
-  type: string;
-  id: number | void;
+import { ICheckboxOptions, IDateOptions, IDropdownOptions, IGenericField, ITextOptions } from './form.models';
+
+interface IOwnProps {
+  options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ITextOptions);
 }
 
-interface IOption {
-  id: string;
-  type: string;
-  label: string;
-  value: string;
-  icon?: string;
-}
-
-export interface IFieldProps {
-  type: string;
-  id: string;
-  updateId?: string;
-  model?: string | void;
-  form?: string;
-  defaultValue?: string | boolean | string[] | void;
-
-  className?: string;
-  label?: string;
-  icon?: string | React.ReactElement<{}>;
-  iconLast?: boolean;
-  placeholder?: string;
-
-  isRequired?: boolean;
-  isSubmitted?: boolean;
-  isChecked?: boolean;
+interface IDisablingProps {
   isDiactivatable?: boolean;
   isDisabled?: boolean;
   isAlwaysDisabled?: boolean;
   isAlwaysEnabled?: boolean;
-  isMulti?: boolean;
-
-  error?: string;
-
-  minLength?: number;
-  maxLength?: number;
-  options?: IOption[];
-  fields?: IFieldProps[];
-  resource?: IResource;
-
-  onClick?: (params?: any) => void;
-  onChange?: (params?: any) => void;
-  onFocus?: (params?: any) => void;
-  onUpload?: (result: string, response: any) => void;
 }
 
-const checkIsDisabled = (options: IFieldProps) =>
-  (typeof options.isDiactivatable === 'undefined' || options.isDiactivatable) &&
-  ((options.isDisabled && !options.isAlwaysEnabled) || options.isAlwaysDisabled);
-
-interface IOwnProps {
-  options: IFieldProps;
-}
+const isDisabled = ({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled }: IDisablingProps) =>
+  (typeof isDiactivatable === 'undefined' || isDiactivatable) && ((disabled && !isAlwaysEnabled) || isAlwaysDisabled);
 
 class Field extends React.Component<IOwnProps> {
   public static displayName = 'Field';
@@ -135,11 +93,13 @@ class Field extends React.Component<IOwnProps> {
   }
 
   public render() {
-    const { options: defaultOptions } = this.props;
+    const {
+      options: { isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled, ...defaultOptions },
+    } = this.props;
 
     const options = {
       ...defaultOptions,
-      isDisabled: checkIsDisabled(defaultOptions),
+      isDisabled: isDisabled({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled }),
     };
 
     switch (options.type) {
@@ -149,7 +109,15 @@ class Field extends React.Component<IOwnProps> {
       case 'password':
       case 'textarea':
         return this.renderWrappedField(
-          <Text options={options} onClick={this.onClick} onChange={this.onChange} onFocus={this.onFocus} />
+          <Text
+            options={{
+              ...options,
+              defaultValue: 'defaultValue' in options ? String(options.defaultValue) : undefined,
+            }}
+            onClick={this.onClick}
+            onChange={this.onChange}
+            onFocus={this.onFocus}
+          />
         );
 
       case 'switch':
@@ -164,13 +132,33 @@ class Field extends React.Component<IOwnProps> {
 
       case 'dropdown':
         return this.renderWrappedField(
-          <Dropdown options={options} onClick={this.onClick} onChange={this.onChange} onFocus={this.onFocus} />
+          <Dropdown
+            options={{
+              ...options,
+              defaultValue:
+                'defaultValue' in options && typeof options.defaultValue !== 'string'
+                  ? options.defaultValue
+                  : undefined,
+              options: 'options' in options ? options.options : [],
+            }}
+            onClick={this.onClick}
+            onChange={this.onChange}
+            onFocus={this.onFocus}
+          />
         );
 
       case 'multi':
         return this.renderWrappedField(
           <Dropdown
-            options={{ ...options, isMulti: true }}
+            options={{
+              ...options,
+              defaultValue:
+                'defaultValue' in options && typeof options.defaultValue !== 'string'
+                  ? options.defaultValue
+                  : undefined,
+              isMulti: true,
+              options: 'options' in options ? options.options : [],
+            }}
             onClick={this.onClick}
             onChange={this.onChange}
             onFocus={this.onFocus}
@@ -179,7 +167,18 @@ class Field extends React.Component<IOwnProps> {
 
       case 'date':
         return this.renderWrappedField(
-          <Date options={options} onClick={this.onClick} onChange={this.onChange} onFocus={this.onFocus} />
+          <Date
+            options={{
+              ...options,
+              defaultValue:
+                'defaultValue' in options && typeof options.defaultValue === 'string'
+                  ? options.defaultValue
+                  : undefined,
+            }}
+            onClick={this.onClick}
+            onChange={this.onChange}
+            onFocus={this.onFocus}
+          />
         );
 
       case 'button':
