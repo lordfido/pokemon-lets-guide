@@ -40,19 +40,14 @@ export const loadMorePokedex: ActionCreator = () => dispatch => {
   });
 };
 
-interface IUpdateArgs {
-  filter: string;
+interface IFilters {
+  name: string;
   value: string | string[] | boolean;
 }
 
-export const filterPokedex: ActionCreator = ({ filter, value }: IUpdateArgs) => dispatch => {
-  const parsedValue = value === 'on' ? true : value === 'off' ? false : value;
-
+export const filterPokedex: ActionCreator = (filters: IFilters[]) => dispatch => {
   dispatch({
-    payload: {
-      filter,
-      value: parsedValue,
-    },
+    payload: { filters },
     type: POKEDEX_FILTER,
   });
 };
