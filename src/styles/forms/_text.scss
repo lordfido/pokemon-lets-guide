@@ -16,13 +16,13 @@
   &-field {
     background-color: white;
     border-radius: $border-radius;
-    border: none;
-    border-bottom: 1px solid $brand-color;
-    border-top: 1px solid transparent;
+    border: 1px solid $input-border-color;
     font-family: inherit;
     font-size: 14px;
     line-height: 1.3em;
+    min-height: 38px;
     padding: 5px 10px;
+    outline: none;
 
     user-select: initial;
     -webkit-touch-callout: initial;
@@ -38,6 +38,12 @@
       border-bottom-color: darkgray !important;
       color: $disabled-color !important;
       cursor: not-allowed !important;
+    }
+
+    &:active,
+    &:focus {
+      border: 1px solid $input-focused-border-color;
+      box-shadow: 0 0 0 1px $input-focused-border-color;
     }
   }
 
