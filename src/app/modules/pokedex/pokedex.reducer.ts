@@ -235,7 +235,7 @@ export const getPokemonPagination = (state: IPokedexState) => (pokemonId: string
   const samePokemon = (pokemon: IPokemon) => pokemon.id === pokemonId;
 
   // Select filtered collection or complete collection
-  const filteredCollection = getPokemonList(state, false);
+  const filteredCollection = getPokedex(state, false);
   const collection = filteredCollection.findIndex(samePokemon) >= 0 ? filteredCollection : state.collection;
 
   // Select pokemon position in that position
