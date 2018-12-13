@@ -5,6 +5,8 @@ interface ITranslationsCollection {
 const translations: ITranslationsCollection = {
   demo: ['', '', '', '', '', '', '', ''],
   order: ['japanese', 'english', 'german', 'spanish', 'french', 'italian', 'korean', 'chinese'],
+  'generic-no': ['', 'No', '', 'No', '', '', '', ''],
+  'generic-yes': ['', 'Yes', '', 'Si', '', '', '', ''],
 
   // Pokemon Types
   'type-Bug': ['', 'Bug', '', 'Bicho', '', '', '', ''],

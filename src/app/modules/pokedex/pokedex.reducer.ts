@@ -1,4 +1,3 @@
-import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
 
@@ -12,38 +11,9 @@ import {
 import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon-stats';
 
-import { IPokedexAction, IPokedexState, IPokemon } from './pokedex.models';
+import { IPokedexAction, IPokedexState, IPokemon, pokedexInitialState } from './pokedex.models';
 
-const initialState: IPokedexState = {
-  collection: [],
-  filters: {
-    bestStats: [],
-    // canLearnMTs: [],
-    // canLearnSkills: [],
-    // dropsCandies: [],
-    excludedTypes: [],
-    includedTypes: [],
-    maxBaseCP: undefined,
-    minBaseCP: undefined,
-    nameOrNumber: undefined,
-    // needsCandies: [],
-    showAlolanForms: false,
-    showMegaevolutions: false,
-    strongAgainst: [],
-    weakAgainst: [],
-    worstStats: [],
-  },
-  pagination: {
-    first: 0,
-    last: paginationSize,
-  },
-  sort: {
-    order: 'asc',
-    sortBy: 'id',
-  },
-};
-
-const reducer = (state = initialState, action: IPokedexAction): IPokedexState => {
+const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexState => {
   switch (action.type) {
     case POKEDEX_CREATE:
       return {
@@ -67,19 +37,27 @@ const reducer = (state = initialState, action: IPokedexAction): IPokedexState =>
       };
 
     case POKEDEX_FILTER:
+      const newFilters = {
+        ...state.filters,
+      };
+
+      if (action.payload && action.payload.filters) {
+        action.payload.filters.forEach((filter: { name: string; value: string | string[] | boolean }) => {
+          // @ts-ignore
+          newFilters[filter.name] = filter.value;
+        });
+      }
+
       return {
         ...state,
-        filters: {
-          ...state.filters,
-          [action.payload.filter]: action.payload.value,
-        },
+        filters: newFilters,
       };
 
     case POKEDEX_RESET_FILTERS:
       return {
         ...state,
         filters: {
-          ...initialState.filters,
+          ...pokedexInitialState.filters,
         },
       };
 
@@ -90,7 +68,7 @@ const reducer = (state = initialState, action: IPokedexAction): IPokedexState =>
 
 // Pokemon List
 // Get a list of pokemon (already filtered)
-export const getPokemonList = (state: IPokedexState, isPaginated: boolean = true) => {
+export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) => {
   const { collection, filters, pagination } = state;
 
   return collection
@@ -242,10 +220,10 @@ export const getPokemonList = (state: IPokedexState, isPaginated: boolean = true
 };
 
 // Get pagination data for pokemon list
-export const getPokemonListPagination = (state: IPokedexState) => state.pagination;
+export const getPokedexPagination = (state: IPokedexState) => state.pagination;
 
 // Get sorting options for pokemon list
-export const getPokemonSortOptions = (state: IPokedexState) => state.sort;
+export const getPokedexSortOptions = (state: IPokedexState) => state.sort;
 
 // Pokemon Details
 // Get details of selected pokemon
@@ -270,6 +248,6 @@ export const getPokemonPagination = (state: IPokedexState) => (pokemonId: string
 };
 
 // Returns all filters
-export const getFilters = (state: IPokedexState) => state.filters;
+export const getPokedexFilters = (state: IPokedexState) => state.filters;
 
 export default reducer;

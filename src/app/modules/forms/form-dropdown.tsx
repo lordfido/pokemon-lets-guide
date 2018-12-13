@@ -32,7 +32,7 @@ const Dropdown = ({ options, onChange, onClick, onFocus }: IOwnProps) => (
           options.options
             ? options.options.filter(option => {
                 if (options.defaultValue) {
-                  return options.defaultValue.findIndex(o => o.value === option.value) >= 0;
+                  return options.defaultValue.findIndex(o => o === option.value) >= 0;
                 }
 
                 return false;
@@ -51,7 +51,7 @@ const Dropdown = ({ options, onChange, onClick, onFocus }: IOwnProps) => (
         id={options.id}
         name={options.id}
         className={classnames('Dropdown-field', { 'has-errors': options.error })}
-        defaultValue={options.defaultValue ? options.defaultValue.map(option => option.value) : undefined}
+        defaultValue={options.defaultValue ? options.defaultValue : undefined}
         onClick={onClick}
         onChange={onChange}
         onFocus={onFocus}
@@ -59,14 +59,7 @@ const Dropdown = ({ options, onChange, onClick, onFocus }: IOwnProps) => (
       >
         {options.options &&
           options.options.map(option => (
-            <option
-              key={option.id}
-              className="Dropdown-options"
-              value={option.value}
-              selected={
-                !!(options.defaultValue && options.defaultValue.findIndex(opt => opt.value === option.value) >= 0)
-              }
-            >
+            <option key={option.id} className="Dropdown-options" value={option.value}>
               {option.label}
             </option>
           ))}

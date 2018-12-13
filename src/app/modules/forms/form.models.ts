@@ -46,7 +46,7 @@ export interface IDropdownOptions extends ICommonOptions {
   error?: string;
   isMulti?: boolean;
   placeholder?: string;
-  defaultValue?: IOption[];
+  defaultValue?: string[];
   options: IOption[];
 }
 

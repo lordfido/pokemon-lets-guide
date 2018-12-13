@@ -7,16 +7,12 @@ import { createRootReducer, IRootState } from './root.models';
 const rootReducer = createRootReducer();
 
 // Custom selectors
-// Pokemon List
-export const getPokemonList = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonList(pokedex);
-export const getPokemonListPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonListPagination(pokedex);
-export const getPokemonSortOptions = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonSortOptions(pokedex);
-
-// Pokemon details
+// Pokedex
+export const getPokedex = ({ pokedex }: IRootState) => pokedexSelectors.getPokedex(pokedex);
+export const getPokedexPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokedexPagination(pokedex);
+export const getPokedexSortOptions = ({ pokedex }: IRootState) => pokedexSelectors.getPokedexSortOptions(pokedex);
+export const getPokedexFilters = ({ pokedex }: IRootState) => pokedexSelectors.getPokedexFilters(pokedex);
 export const getSelectedPokemon = ({ pokedex }: IRootState) => pokedexSelectors.getSelectedPokemon(pokedex);
 export const getPokemonPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonPagination(pokedex);
-
-// Search filters
-export const getFilters = ({ pokedex }: IRootState) => pokedexSelectors.getFilters(pokedex);
 
 export default rootReducer;

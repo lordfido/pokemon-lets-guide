@@ -3,11 +3,12 @@ import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
 import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getCombatPoints, getMegaevolutionId, getMegaevolutionName, getPaddedId } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
 import { PokedexActionType } from '../../../constants/actionTypes';
+import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon-stats';
 import { PokemonType } from '../../../constants/pokemon-types';
-import { getTranslation } from '../../utils/translations';
 
 export interface IPokedexAction extends AnyAction {
   type: PokedexActionType;
@@ -80,9 +81,9 @@ export interface IPokedexFilters {
   // dropsCandies: StatId[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
-  maxBaseCP?: string;
-  minBaseCP?: string;
-  nameOrNumber: string | void;
+  maxBaseCP: string;
+  minBaseCP: string;
+  nameOrNumber: string;
   // needsCandies: StatId[];
   showAlolanForms: boolean;
   showMegaevolutions: boolean;
@@ -100,6 +101,35 @@ export interface IPokedexState {
     order: string;
   };
 }
+
+export const pokedexInitialState: IPokedexState = {
+  collection: [],
+  filters: {
+    bestStats: [],
+    // canLearnMTs: [],
+    // canLearnSkills: [],
+    // dropsCandies: [],
+    excludedTypes: [],
+    includedTypes: [],
+    maxBaseCP: '',
+    minBaseCP: '',
+    nameOrNumber: '',
+    // needsCandies: [],
+    showAlolanForms: false,
+    showMegaevolutions: false,
+    strongAgainst: [],
+    weakAgainst: [],
+    worstStats: [],
+  },
+  pagination: {
+    first: 0,
+    last: paginationSize,
+  },
+  sort: {
+    order: 'asc',
+    sortBy: 'id',
+  },
+};
 
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
