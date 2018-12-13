@@ -4,6 +4,10 @@ import * as React from 'react';
 import Space from '../../components/space';
 
 import { ICheckboxOptions } from './form.models';
+import { getTranslation } from '../../utils/translations';
+
+const prevArrow = require('../../../assets/images/prev-arrow.png');
+const nextArrow = require('../../../assets/images/next-arrow.png');
 
 interface IOwnProps {
   options: ICheckboxOptions;
@@ -28,10 +32,17 @@ const Switch = ({ options, onChange, onClick, onFocus }: IOwnProps) => (
     />
 
     <span className="Switch-label">
-      <div className={classnames('Switch-switch', { 'is-on': options.isChecked })} />
       {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
-      {options.label && <Space />}
+      {options.icon && options.label && <Space />}
       {options.label}
+    </span>
+
+    <span className="Switch-options">
+      <img className="Switch-arrow Switch--prev" src={prevArrow} />
+      <span className="Switch-selectedOption">
+        {options.defaultChecked || options.isChecked ? getTranslation('generic-yes') : getTranslation('generic-no')}
+      </span>
+      <img className="Switch-arrow Switch--next" src={nextArrow} />
     </span>
   </label>
 );

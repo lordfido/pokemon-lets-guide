@@ -1,10 +1,14 @@
 .Switch {
+  background-color: $white;
+  border-radius: $border-radius;
+  border: 1px solid $input-border-color;
   color: #666;
   display: inline-block;
   font-size: 16px;
   margin: 5px;
   margin-top: 10px;
-  padding: 5px;
+  min-height: 38px;
+  padding: 5px 10px;
   width: calc(100% - 10px);
 
   &-field {
@@ -58,5 +62,46 @@
       background-color: #ccc;
       border-color: #ccc;
     }
+  }
+
+  &-field,
+  &-label,
+  &-options {
+    vertical-align: top;
+  }
+
+  &-label {
+    display: inline-block;
+    width: calc(100% - 80px);
+  }
+
+  &-options {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: row;
+    margin-left: 4px;
+    text-align: center;
+    width: 76px;
+  }
+
+  &-arrow,
+  &-selectedOption {
+    display: flex !important;
+    justify-content: center;
+  }
+
+  &-arrow {
+    cursor: pointer;
+    height: 18px;
+    transition: transform 0.2s;
+    width: 18px;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &-selectedOption {
+    flex: 1;
   }
 }

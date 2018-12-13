@@ -68,7 +68,7 @@ const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexS
 
 // Pokemon List
 // Get a list of pokemon (already filtered)
-export const getPokemonList = (state: IPokedexState, isPaginated: boolean = true) => {
+export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) => {
   const { collection, filters, pagination } = state;
 
   return collection
