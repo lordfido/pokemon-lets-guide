@@ -90,7 +90,7 @@ const reducer = (state = initialState, action: IPokedexAction): IPokedexState =>
 
 // Pokemon List
 // Get a list of pokemon (already filtered)
-export const getPokemonList = (state: IPokedexState) => {
+export const getPokemonList = (state: IPokedexState, isPaginated: boolean = true) => {
   const { collection, filters, pagination } = state;
 
   return collection
@@ -238,7 +238,7 @@ export const getPokemonList = (state: IPokedexState) => {
       return true;
     })
     .sort(sortBy(state.sort.sortBy, state.sort.order))
-    .slice(pagination.first, pagination.last);
+    .slice(pagination.first, isPaginated ? pagination.last : state.collection.length - 1);
 };
 
 // Get pagination data for pokemon list
@@ -257,7 +257,8 @@ export const getPokemonPagination = (state: IPokedexState) => (pokemonId: string
   const samePokemon = (pokemon: IPokemon) => pokemon.id === pokemonId;
 
   // Select filtered collection or complete collection
-  const collection = getPokemonList(state).findIndex(samePokemon) >= 0 ? getPokemonList(state) : state.collection;
+  const filteredCollection = getPokemonList(state, false);
+  const collection = filteredCollection.findIndex(samePokemon) >= 0 ? filteredCollection : state.collection;
 
   // Select pokemon position in that position
   const position = collection.findIndex(samePokemon);
