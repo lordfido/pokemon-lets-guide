@@ -8,7 +8,7 @@ import PokedexView from './pokedex-view';
 import { getPokedex, getPokedexFilters, getPokedexPagination, getPokedexSortOptions } from '../../../root.reducer';
 import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from '../pokedex.actions';
 
-import { HOME, POKEDEX, SEARCH } from '../../../../constants/appRoutes';
+import { POKEDEX, SEARCH } from '../../../../constants/appRoutes';
 
 import { IRootState } from '../../../root.models';
 import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from '../pokedex.models';
@@ -57,7 +57,9 @@ const filtersToString = (filters: IPokedexFilters) =>
     .filter(f => f)
     .join(';');
 
-type RouteProps = RouteComponentProps;
+type RouteProps = RouteComponentProps<{
+  query: string;
+}>;
 
 interface IStateProps {
   collection: IPokemonWithBaseCP[];
@@ -96,7 +98,23 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   private filtersDebounce: NodeJS.Timeout = setTimeout(() => undefined, 0);
 
-  public componentDidUpdate() {
+  public componentDidMount() {
+    const {
+      FilterPokedex,
+      match: { params },
+    } = this.props;
+
+    const urlFilters = stringToFilters(params.query);
+    const parsedFilters = Object.keys(pokedexInitialState.filters).map(key => ({
+      name: key,
+      // @ts-ignore
+      value: urlFilters[key] || pokedexInitialState.filters[key],
+    }));
+
+    FilterPokedex(parsedFilters);
+  }
+
+  public componentDidUpdate(prevProps: Props) {
     const { FilterPokedex } = this.props;
     const { redirectTo } = this.state;
 
@@ -132,7 +150,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   public handleResetFilters = () => {
     this.setState({
-      redirectTo: HOME,
+      redirectTo: POKEDEX,
     });
   };
 
@@ -158,7 +176,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   public handleUpdateFilter(filter: string, selection: any) {
     clearTimeout(this.filtersDebounce);
     this.filtersDebounce = setTimeout(() => {
-      const { filters, FilterPokedex } = this.props;
+      const { filters } = this.props;
 
       const newFilters = {
         ...filters,
@@ -176,20 +194,23 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
       const redirectTo = filtersToString(newFilters);
       this.setState({
-        redirectTo: redirectTo || HOME,
+        redirectTo: redirectTo || POKEDEX,
       });
     }, DEBOUNCE_MS);
   }
 
   public render() {
+    const {
+      match: { url },
+    } = this.props;
     const { areFiltersOpen, redirectTo } = this.state;
-    const redirection = redirectTo ? SEARCH.replace(':query', redirectTo) : POKEDEX;
+    const redirection = redirectTo ? SEARCH.replace(':query', redirectTo) : '';
 
-    if (redirectTo && redirection !== redirectTo) {
+    if (redirection && redirection !== url) {
       return <Redirect to={{ pathname: redirection }} />;
     }
 
-    const { collection, filters, pagination, ResetPokedexFilters } = this.props;
+    const { collection, filters, pagination } = this.props;
 
     return (
       <PokedexView

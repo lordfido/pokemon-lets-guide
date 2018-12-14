@@ -103,7 +103,7 @@ class AppWrapper extends React.Component<Props> {
     return (
       <AppView>
         <Switch>
-          <Route path={routes.SEARCH} component={pokedexWrapper} />
+          <Route exact path={routes.SEARCH} component={pokedexWrapper} />
           <Route exact path={routes.POKEMON} component={pokemonDetailsWrapper} />
           <Route exact path={routes.POKEDEX} component={pokedexWrapper} />
           <Redirect to={{ pathname: routes.POKEDEX }} />
