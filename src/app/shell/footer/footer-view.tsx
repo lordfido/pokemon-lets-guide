@@ -8,6 +8,7 @@ import Link from '../../components/link';
 import { APP_NAME, APP_WEB } from '../../../constants/branding';
 import { PAGE_MAX_WIDTH, SIZE_S, SIZE_XXS } from '../../../constants/styles';
 import { WHITE } from '../../../constants/styles-colors';
+import { FONT_XS, TEXT_DARK } from '../../../constants/styles-fonts';
 import { TABLET_OR_LANDSCAPE } from '../../../constants/styles-media-queries';
 
 import { ISheet } from '../../root.models';
@@ -22,8 +23,8 @@ const sheet: ISheet = {
   },
   wrapper: {
     backgroundColor: WHITE,
-    color: '#666',
-    fontSize: '10px',
+    color: TEXT_DARK,
+    fontSize: FONT_XS,
     marginBottom: '0 !important',
     minHeight: '0 !important',
     padding: SIZE_XXS,
@@ -58,15 +59,15 @@ const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => 
         {languageISOs.map((language, index) => (
           <React.Fragment key={`language-${language.name}`}>
             {index > 0 && ' | '}
-            <button
-              id={`language-${language.name}`}
-              className="Button Button--link"
-              onClick={() => {
-                handleLanguageSelection(language.iso);
+            <Link
+              options={{
+                id: `language-${language.name}`,
+                label: language.name,
+                onClick: () => {
+                  handleLanguageSelection(language.iso);
+                },
               }}
-            >
-              {language.name}
-            </button>
+            />
           </React.Fragment>
         ))}
       </p>

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import CustomImage from './image';
+import Image from './image';
 
 import { AVATAR_SIZE } from '../../constants/styles';
+import { WHITE } from '../../constants/styles-colors';
 
 import { ISheet } from '../root.models';
 
@@ -14,11 +15,11 @@ const sheet: ISheet = {
     minWidth: AVATAR_SIZE,
   },
   wrapper: {
-    backgroundColor: 'rgba(white, 0.4)',
+    backgroundColor: `rgba(${WHITE}, 0.4)`,
     borderRadius: AVATAR_SIZE / 2,
     display: 'inline-block',
     height: AVATAR_SIZE,
-    margin: '0',
+    margin: 0,
     overflow: 'hidden',
     position: 'relative',
     width: AVATAR_SIZE,
@@ -32,7 +33,7 @@ interface IOwnProps {
 
 const UnstyledAvatar = ({ classes, picture }: IOwnProps) => (
   <div className={classes.wrapper}>
-    <CustomImage className={classes.picture} src={picture} />
+    <Image className={classes.picture} src={picture} />
   </div>
 );
 

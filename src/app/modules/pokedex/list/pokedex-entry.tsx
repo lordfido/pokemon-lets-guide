@@ -5,7 +5,7 @@ import { getTranslation } from '../../../utils/translations';
 
 import Button from '../../../components/button';
 import { TableCell, TableRow } from '../../../components/table';
-// import CustomImage from '../../components/image';
+// import Image from '../../components/image';
 import Tag from '../../../components/tag';
 
 import { POKEMON } from '../../../../constants/appRoutes';
@@ -31,7 +31,7 @@ const PokedexEntry = ({ pokemon }: IOwnProps) => (
   <TableRow className="PokemonList-item">
     <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
     {/* <TableCell center>
-          <CustomImage className="PokemonList-image" src={avatar} />
+          <Image className="PokemonList-image" src={avatar} />
         </TableCell> */}
     <TableCell>{pokemon.name}</TableCell>
     <TableCell center>

@@ -3,7 +3,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 
 import { BORDER_RADIUS, SIZE_M, SIZE_XS, SIZE_XXS, SIZE_XXXS } from '../../constants/styles';
-import { WHITE } from '../../constants/styles-colors';
+import { FONT_S, TEXT_WHITE } from '../../constants/styles-fonts';
 
 import { ISheet } from '../root.models';
 
@@ -41,10 +41,10 @@ const sheet: ISheet = {
     paddingLeft: 14,
   },
   wrapper: {
-    color: WHITE,
+    color: TEXT_WHITE,
     display: 'inline-block',
     flexGrow: 1,
-    fontSize: SIZE_XXS,
+    fontSize: FONT_S,
     letterSpacing: -0.6,
     marginLeft: 4,
     position: 'relative',

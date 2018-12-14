@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import CustomImage from './image';
+import Image from './image';
 
 import { AVATAR_SIZE, BORDER_RADIUS, SIZE_M, SIZE_XXS } from '../../constants/styles';
 import { WHITE } from '../../constants/styles-colors';
@@ -46,7 +46,7 @@ interface IOwnProps {
 const unstyledCard = ({ children, classes, className, image, title }: IOwnProps) => (
   <div className={classnames(classes.wrapper, className)}>
     {!!title && <span className={classes.title}>{title}</span>}
-    {!!image && <CustomImage className={classes.picture} src={image} />}
+    {!!image && <Image className={classes.picture} src={image} />}
     {children}
   </div>
 );

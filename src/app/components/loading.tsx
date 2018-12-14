@@ -23,7 +23,7 @@ const sheet: ISheet = {
       content: "' '",
       display: 'block',
       height: spinnerSize - spinnerSize / 4,
-      margin: '1px',
+      margin: 1,
       width: spinnerSize - spinnerSize / 4,
     },
   },

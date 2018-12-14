@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import TouchableContent from './touchable-content';
 
-import { BRAND_COLOR } from '../../constants/styles-colors';
+import { TEXT_BRANDED } from '../../constants/styles-fonts';
 
 import { ISheet } from '../root.models';
 
@@ -16,10 +16,14 @@ const sheet: ISheet = {
     },
   },
   link: {
+    appearance: 'none',
+    background: 'none',
+    border: 'none',
     color: 'inherit',
     cursor: 'pointer',
     display: 'inline-block',
     height: '100%',
+    outline: 'none',
     textDecoration: 'none',
     width: '100%',
 
@@ -28,7 +32,7 @@ const sheet: ISheet = {
     },
   },
   wrapper: {
-    color: BRAND_COLOR,
+    color: TEXT_BRANDED,
     display: 'inline-block',
   },
 };

@@ -2,7 +2,8 @@
 // B&W Scale
 export const WHITE = '#fff';
 export const GREY_LIGHT = '#ccc';
-export const GREY_DARK = '#333';
+export const GREY_DARK = '#666';
+export const GREY_DARK_2 = '#333';
 export const BLACK = '#000';
 
 // Colors

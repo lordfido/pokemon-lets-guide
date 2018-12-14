@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import CustomImage from '../../../components/image';
+import Image from '../../../components/image';
 
 interface IOwnProps {
   src: string;
@@ -9,7 +9,7 @@ interface IOwnProps {
 
 const PokemonPreview = ({ src, alt }: IOwnProps) => (
   <div className="PokemonPreview">
-    <CustomImage className="PokemonPreview-image" src={src} alt={alt} />
+    <Image className="PokemonPreview-image" src={src} alt={alt} />
   </div>
 );
 
