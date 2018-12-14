@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { getPaddedId } from '../../../utils/pokemon';
+import { getTranslation } from '../../../utils/translations';
 
 import Spacer from '../../../components/spacer';
 import Tag from '../../../components/tag';
 
+import { getTypeName, PokemonType } from '../../../../constants/pokemon-types';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
-import { getTranslation } from '../../../utils/translations';
 
-import { PokemonType } from '../../../../constants/pokemon-types';
 import { IRichPokemon } from '../pokedex.models';
 
 interface IOwnProps {
@@ -25,12 +25,7 @@ const PokemonInfo = ({ pokemon }: IOwnProps) => (
         <p className="PokemonInfo-line PokemonInfo-name">{pokemon.name}</p>
         <span className="PokemonInfo-line PokemonInfo-types">
           {pokemon.types.ownTypes.map((type: PokemonType) => (
-            <Tag
-              key={type}
-              label={getTranslation(`type-${type}`)}
-              icon={getTypeIcon(type)}
-              backgroundColor={getTypeColor(type)}
-            />
+            <Tag key={type} label={getTypeName(type)} icon={getTypeIcon(type)} backgroundColor={getTypeColor(type)} />
           ))}
         </span>
         <p className="PokemonInfo-line PokemonInfo-description">{pokemon.description}</p>
@@ -45,7 +40,7 @@ const PokemonInfo = ({ pokemon }: IOwnProps) => (
               <Tag
                 key={id}
                 className="PokemonInfo-relation"
-                label={`${getTranslation(`type-${id}`)} x${effectiveness}`}
+                label={`${getTypeName(id)} x${effectiveness}`}
                 icon={getTypeIcon(id)}
                 backgroundColor={getTypeColor(id)}
                 style={{ marginBottom: 4 }}
@@ -60,7 +55,7 @@ const PokemonInfo = ({ pokemon }: IOwnProps) => (
               <Tag
                 key={id}
                 className="PokemonInfo-relation"
-                label={`${getTranslation(`type-${id}`)} x${effectiveness}`}
+                label={`${getTypeName(id)} x${effectiveness}`}
                 icon={getTypeIcon(id)}
                 backgroundColor={getTypeColor(id)}
                 style={{ marginBottom: 4 }}

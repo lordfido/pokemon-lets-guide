@@ -1,13 +1,14 @@
 import { Line } from 'rc-progress';
 import * as React from 'react';
+import { getTranslation } from '../../../utils/translations';
 
+import { IButtonProps } from '../../../components/button';
 import Buttons from '../../../components/buttons';
 import StatsChart from '../../../components/stats-chart';
 
 import { StatId } from '../../../../constants/pokemon-stats';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { getTranslation } from '../../../utils/translations';
 
 import { IRichPokemon } from '../pokedex.models';
 
@@ -42,7 +43,7 @@ class PokemonStats extends React.Component<IOwnProps, IOwnState> {
     });
   }
 
-  public getStatsTabs() {
+  public getStatsTabs(): IButtonProps[] {
     const { viewMode } = this.state;
 
     return [

@@ -1,4 +1,4 @@
-import { Languages, Natures } from 'pokelab-lets-go';
+import { Languages, Natures } from 'pokelab';
 import { getLocale } from '../app/utils/translations';
 
 export type PokemonNature = Natures.Nature;

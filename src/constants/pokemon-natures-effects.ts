@@ -1,4 +1,4 @@
-import { Natures, Stats } from 'pokelab-lets-go';
+import { Natures, Stats } from 'pokelab';
 import { PokemonNature } from './pokemon-natures';
 import { ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID, StatId } from './pokemon-stats';
 

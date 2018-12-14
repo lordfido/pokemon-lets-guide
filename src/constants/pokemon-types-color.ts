@@ -1,4 +1,4 @@
-import { Types } from 'pokelab-lets-go';
+import { Types } from 'pokelab';
 import { PokemonType } from './pokemon-types';
 
 const colors = {

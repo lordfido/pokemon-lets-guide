@@ -18,6 +18,7 @@ import {
   SPEED_ID,
 } from '../../../../constants/pokemon-stats';
 import { getStatColor } from '../../../../constants/pokemon-stats-color';
+import { getTypeName } from '../../../../constants/pokemon-types';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
 
@@ -38,7 +39,7 @@ const PokedexEntry = ({ pokemon }: IOwnProps) => (
       {pokemon.types.ownTypes[0] && (
         <Tag
           key={pokemon.types.ownTypes[0]}
-          label={getTranslation(`type-${pokemon.types.ownTypes[0]}`)}
+          label={getTypeName(pokemon.types.ownTypes[0])}
           icon={getTypeIcon(pokemon.types.ownTypes[0])}
           backgroundColor={getTypeColor(pokemon.types.ownTypes[0])}
         />
@@ -48,7 +49,7 @@ const PokedexEntry = ({ pokemon }: IOwnProps) => (
       {pokemon.types.ownTypes[1] && (
         <Tag
           key={pokemon.types.ownTypes[1]}
-          label={getTranslation(`type-${pokemon.types.ownTypes[1]}`)}
+          label={getTypeName(pokemon.types.ownTypes[1])}
           icon={getTypeIcon(pokemon.types.ownTypes[1])}
           backgroundColor={getTypeColor(pokemon.types.ownTypes[1])}
         />
