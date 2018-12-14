@@ -1,4 +1,4 @@
-import { GREY_LIGHT, GREY_LIGHT_2, GREY_LIGHT_3, WHITE } from './styles-colors';
+import { GREY_LIGHT, GREY_LIGHT_2, GREY_LIGHT_3, GREY_LIGHT_4, WHITE } from './styles-colors';
 
 // Buttons
 export const BUTTON_BACKGROUND = WHITE;
@@ -8,5 +8,5 @@ export const BUTTON_DISABLED_BORDER = GREY_LIGHT_2;
 export const BUTTON_DISABLED_COLOR = GREY_LIGHT;
 
 // Inputs
-export const INPUT_BORDER_COLOR = GREY_LIGHT;
+export const INPUT_BORDER_COLOR = GREY_LIGHT_4;
 export const INPUT_BORDER_COLOR_FOCUSED = '#2684ff';

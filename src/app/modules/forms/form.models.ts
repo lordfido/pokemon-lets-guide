@@ -1,5 +1,18 @@
+type types =
+  | 'text'
+  | 'email'
+  | 'number'
+  | 'password'
+  | 'textarea'
+  | 'switch'
+  | 'checkbox'
+  | 'dropdown'
+  | 'multi'
+  | 'date'
+  | 'button';
+
 interface ICommonOptions {
-  type: string;
+  type: types;
   id: string;
   updateId?: string;
 
@@ -21,7 +34,6 @@ export interface IGenericField extends ICommonOptions {
   isAlwaysDisabled?: boolean;
   isAlwaysEnabled?: boolean;
   isDiactivatable?: boolean;
-  type: string;
 }
 
 export interface ICheckboxOptions extends ICommonOptions {
@@ -56,5 +68,4 @@ export interface ITextOptions extends ICommonOptions {
   maxLength?: number;
   minLength?: number;
   placeholder?: string;
-  type: string;
 }
