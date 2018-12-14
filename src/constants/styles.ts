@@ -1,5 +1,7 @@
 const size = 8;
+
 // Sizes
+export const SIZE_XXXS = size; // 8
 export const SIZE_XXS = size * 1.5; // 12
 export const SIZE_XS = size * 2; // 16
 export const SIZE_S = size * 2.5; // 20
