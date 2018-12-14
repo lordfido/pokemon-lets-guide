@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { HEADER_SIZE } from '../../../constants/styles';
 import { BLACK, traslucentColor } from '../../../constants/styles-colors';
 import { FONT_M, TEXT_WHITE } from '../../../constants/styles-fonts';
-import { DESKTOP, MOBILE_LARGE } from '../../../constants/styles-media-queries';
+import { DESKTOP, MOBILE_L } from '../../../constants/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 
@@ -38,7 +38,7 @@ const sheet: ISheet = {
     verticalAlign: 'top',
     width: `calc((100% - ${HEADER_SIZE}px) / 3)`,
 
-    [MOBILE_LARGE]: {
+    [MOBILE_L]: {
       padding: ITEM_PADDING,
       width: 120,
     },
