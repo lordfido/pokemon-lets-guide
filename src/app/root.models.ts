@@ -22,3 +22,5 @@ export const createRootReducer = () =>
 export interface ISheet {
   [key: string]: CSSProperties;
 }
+
+export type CssSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

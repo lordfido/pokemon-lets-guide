@@ -11,11 +11,20 @@
 @import 'forms/buttons', 'forms/checkbox', 'forms/date', 'forms/dropdown', 'forms/forms', 'forms/radio', 'forms/switch',
   'forms/tabs', 'forms/text';
 
-@import 'components/list', 'components/loading', 'components/message', 'components/table', 'components/tag';
+@import 'components/list', 'components/message', 'components/table', 'components/tag';
 
 @import 'modules/pokemon-details', 'modules/pokemon-list', 'modules/search';
 
 @import './app';
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 // react-svg-radar-chart
 .scale {

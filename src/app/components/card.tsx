@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 import CustomImage from './image';
 
-import { AVATAR_SIZE, BORDER_RADIUS, SIZE_S, SIZE_XXS } from '../../constants/styles';
+import { AVATAR_SIZE, BORDER_RADIUS, SIZE_M, SIZE_XXS } from '../../constants/styles';
 
 import { ISheet } from '../root.models';
 
@@ -28,7 +28,7 @@ const sheet: ISheet = {
     textAlign: 'center',
 
     '@media screen and (min-width: 720px)': {
-      padding: SIZE_S,
+      padding: SIZE_M,
     },
   },
 };
