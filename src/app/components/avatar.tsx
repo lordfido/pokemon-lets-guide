@@ -1,14 +1,41 @@
 import * as React from 'react';
+import injectSheet from 'react-jss';
+
 import CustomImage from './image';
 
+import { AVATAR_SIZE } from '../../constants/styles';
+
+import { ISheet } from '../root.models';
+
+const sheet: ISheet = {
+  picture: {
+    maxWidth: '100%',
+    minHeight: AVATAR_SIZE,
+    minWidth: AVATAR_SIZE,
+  },
+  wrapper: {
+    backgroundColor: 'rgba(white, 0.4)',
+    borderRadius: AVATAR_SIZE / 2,
+    display: 'inline-block',
+    height: AVATAR_SIZE,
+    margin: '0',
+    overflow: 'hidden',
+    position: 'relative',
+    width: AVATAR_SIZE,
+  },
+};
+
 interface IOwnProps {
+  classes: { [key: string]: string };
   picture: string;
 }
 
-const Avatar = ({ picture }: IOwnProps) => (
-  <div className="Avatar">
-    <CustomImage className="Avatar-picture" src={picture} />
+const UnstyledAvatar = ({ classes, picture }: IOwnProps) => (
+  <div className={classes.wrapper}>
+    <CustomImage className={classes.picture} src={picture} />
   </div>
 );
+
+const Avatar = injectSheet(sheet)(UnstyledAvatar);
 
 export default Avatar;
