@@ -9,6 +9,7 @@ export const SIZE_M = size * 3; // 24
 export const SIZE_L = size * 4; // 32
 export const SIZE_XL = size * 5; // 40
 export const SIZE_XXL = size * 6; // 48
+export const SIZE_XXXL = size * 7; // 56
 
 // Page
 export const PAGE_MAX_WIDTH = 940;
@@ -18,3 +19,6 @@ export const BORDER_RADIUS = 4;
 
 // Avatar
 export const AVATAR_SIZE = size * 12; // 96
+
+// Header
+export const HEADER_SIZE = SIZE_XXXL;

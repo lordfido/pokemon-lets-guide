@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import Image from './image';
 
 import { AVATAR_SIZE } from '../../constants/styles';
-import { WHITE } from '../../constants/styles-colors';
+import { traslucentColor, WHITE } from '../../constants/styles-colors';
 
 import { ISheet } from '../root.models';
 
@@ -15,7 +15,7 @@ const sheet: ISheet = {
     minWidth: AVATAR_SIZE,
   },
   wrapper: {
-    backgroundColor: `rgba(${WHITE}, 0.4)`,
+    backgroundColor: traslucentColor(WHITE, 0.4),
     borderRadius: AVATAR_SIZE / 2,
     display: 'inline-block',
     height: AVATAR_SIZE,

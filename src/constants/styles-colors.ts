@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 // Colors
 // B&W Scale
 export const WHITE = '#fff';
@@ -26,3 +28,5 @@ export const DISABLED_COLOR = '#808080';
 export const BRAND_COLOR_LIGHT = DANGER_LIGHT;
 export const BRAND_COLOR = RED;
 export const BRAND_COLOR_DARK = DANGER;
+
+export const traslucentColor = (color: string, opacity: number) => `rgba(${chroma(color).rgb()}, ${opacity})`;
