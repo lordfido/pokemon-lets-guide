@@ -2,7 +2,8 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { BRAND_COLOR, SIZE_S, SIZE_XXL } from '../../constants/styles';
+import { SIZE_S, SIZE_XXL } from '../../constants/styles';
+import { BRAND_COLOR } from '../../constants/styles-colors';
 
 import { CssSizes, ISheet } from '../root.models';
 

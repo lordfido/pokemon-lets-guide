@@ -5,6 +5,8 @@ import injectSheet from 'react-jss';
 import CustomImage from './image';
 
 import { AVATAR_SIZE, BORDER_RADIUS, SIZE_M, SIZE_XXS } from '../../constants/styles';
+import { WHITE } from '../../constants/styles-colors';
+import { TABLET } from '../../constants/styles-media-queries';
 
 import { ISheet } from '../root.models';
 
@@ -19,7 +21,7 @@ const sheet: ISheet = {
   },
   title: {},
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: WHITE,
     borderRadius: BORDER_RADIUS,
     display: 'inline-block',
     maxWidth: '100%',
@@ -27,7 +29,7 @@ const sheet: ISheet = {
     padding: SIZE_XXS,
     textAlign: 'center',
 
-    '@media screen and (min-width: 720px)': {
+    [TABLET]: {
       padding: SIZE_M,
     },
   },

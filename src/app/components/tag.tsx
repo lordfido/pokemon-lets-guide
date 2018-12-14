@@ -2,7 +2,8 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { BORDER_RADIUS, SIZE_M, SIZE_XS, SIZE_XXS, SIZE_XXXS, WHITE } from '../../constants/styles';
+import { BORDER_RADIUS, SIZE_M, SIZE_XS, SIZE_XXS, SIZE_XXXS } from '../../constants/styles';
+import { WHITE } from '../../constants/styles-colors';
 
 import { ISheet } from '../root.models';
 

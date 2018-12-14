@@ -1,22 +1,50 @@
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { isProduction } from '../../../common/utils/platforms';
 import { languageISOs } from '../../utils/translations';
 
 import Link from '../../components/link';
 
 import { APP_NAME, APP_WEB } from '../../../constants/branding';
+import { PAGE_MAX_WIDTH, SIZE_S, SIZE_XXS } from '../../../constants/styles';
+import { WHITE } from '../../../constants/styles-colors';
+import { TABLET_OR_LANDSCAPE } from '../../../constants/styles-media-queries';
+
+import { ISheet } from '../../root.models';
 
 const packageJson = require('../../../../package.json');
 const APP_VERSION = packageJson.version;
 
+const sheet: ISheet = {
+  content: {
+    margin: '0 auto',
+    maxWidth: PAGE_MAX_WIDTH,
+  },
+  wrapper: {
+    backgroundColor: WHITE,
+    color: '#666',
+    fontSize: '10px',
+    marginBottom: '0 !important',
+    minHeight: '0 !important',
+    padding: SIZE_XXS,
+    width: '100%',
+
+    [TABLET_OR_LANDSCAPE]: {
+      padding: SIZE_S,
+      textAlign: 'center',
+    },
+  },
+};
+
 interface IOwnProps {
+  classes: { [key: string]: string };
   handleLanguageSelection: (language: string) => void;
 }
 
-const FooterView = ({ handleLanguageSelection }: IOwnProps) => (
-  <footer className="Page Footer">
-    <div className="Footer-wrapper">
-      <p className="Footer-text">
+const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => (
+  <footer className={classes.wrapper}>
+    <div className={classes.content}>
+      <p>
         <Link
           options={{
             id: 'app-web',
@@ -26,7 +54,7 @@ const FooterView = ({ handleLanguageSelection }: IOwnProps) => (
         />{' '}
         {!isProduction() && `v${APP_VERSION}`} | {new Date().getFullYear()}{' '}
       </p>
-      <p className="Footer-text">
+      <p>
         {languageISOs.map((language, index) => (
           <React.Fragment key={`language-${language.name}`}>
             {index > 0 && ' | '}
@@ -45,5 +73,7 @@ const FooterView = ({ handleLanguageSelection }: IOwnProps) => (
     </div>
   </footer>
 );
+
+const FooterView = injectSheet(sheet)(unstyledFooterView);
 
 export default FooterView;

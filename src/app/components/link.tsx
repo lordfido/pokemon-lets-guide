@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import TouchableContent from './touchable-content';
 
-import { BRAND_COLOR } from '../../constants/styles';
+import { BRAND_COLOR } from '../../constants/styles-colors';
 
 import { ISheet } from '../root.models';
 
