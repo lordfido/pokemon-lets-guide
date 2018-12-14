@@ -34,7 +34,7 @@
         opacity: 1;
         width: 100%;
 
-        @media screen and (min-width: 496px) {
+        @media screen and (min-width: 512px) {
           &[data-type='multi'],
           &[data-type='number'] {
             width: 50%;
