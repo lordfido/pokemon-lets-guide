@@ -1,8 +1,37 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { Link as RouterLink } from 'react-router-dom';
 
 import TouchableContent from './touchable-content';
+
+import { BRAND_COLOR } from '../../constants/styles';
+
+import { ISheet } from '../root.models';
+
+const sheet: ISheet = {
+  inherit: {
+    '&, &:hover, &:visited, &:active': {
+      color: 'inherit',
+    },
+  },
+  link: {
+    color: 'inherit',
+    cursor: 'pointer',
+    display: 'inline-block',
+    height: '100%',
+    textDecoration: 'none',
+    width: '100%',
+
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  wrapper: {
+    color: BRAND_COLOR,
+    display: 'inline-block',
+  },
+};
 
 export interface ILinkProps {
   id: string;
@@ -16,35 +45,36 @@ export interface ILinkProps {
 }
 
 interface IOwnProps {
-  options: ILinkProps;
+  classes: { [key: string]: string };
   isTransparent?: boolean;
+  options: ILinkProps;
   shouldInherit?: boolean;
 }
 
-const Link = ({ options, isTransparent, shouldInherit }: IOwnProps) => {
+const unstyledLink = ({ classes, isTransparent, options, shouldInherit }: IOwnProps) => {
   const onClick = (link?: ILinkProps) => {
     if (link && link.onClick) {
       link.onClick();
     }
   };
 
-  const classes = {
+  const linkClasses = {
     element: '',
     wrapper: '',
   };
 
   // If component should inherit color properties
   if (shouldInherit) {
-    classes.element = 'is-inherit';
+    linkClasses.element = classes.inherit;
 
     // If component should not have own properties
   } else if (isTransparent) {
-    classes.element = options.className || '';
+    linkClasses.element = options.className || '';
 
     // Normal component
   } else {
-    classes.wrapper = 'Link';
-    classes.element = classnames('Link-elem', options.className);
+    linkClasses.wrapper = classes.wrapper;
+    linkClasses.element = classnames(classes.link, options.className);
   }
 
   const touchable = {
@@ -55,10 +85,10 @@ const Link = ({ options, isTransparent, shouldInherit }: IOwnProps) => {
 
   if (options.onClick) {
     return (
-      <span className={classes.wrapper}>
+      <span className={linkClasses.wrapper}>
         <button
           id={options.id}
-          className={classes.element}
+          className={linkClasses.element}
           onClick={() => {
             onClick(options);
           }}
@@ -71,12 +101,12 @@ const Link = ({ options, isTransparent, shouldInherit }: IOwnProps) => {
 
   if (options.isExternal) {
     return (
-      <span className={classes.wrapper}>
+      <span className={linkClasses.wrapper}>
         <a
           id={options.id}
           href={options.to}
-          className={classes.element}
-          onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
+          className={linkClasses.element}
+          onClick={() => {
             onClick();
           }}
           target="_blank"
@@ -93,7 +123,7 @@ const Link = ({ options, isTransparent, shouldInherit }: IOwnProps) => {
   }
 
   return (
-    <span className={classes.wrapper}>
+    <span className={linkClasses.wrapper}>
       <RouterLink
         id={options.id}
         to={
@@ -104,7 +134,7 @@ const Link = ({ options, isTransparent, shouldInherit }: IOwnProps) => {
                 state: { from: location && location.pathname },
               }
         }
-        className={classes.element}
+        className={linkClasses.element}
         onClick={() => {
           onClick();
         }}
@@ -114,5 +144,7 @@ const Link = ({ options, isTransparent, shouldInherit }: IOwnProps) => {
     </span>
   );
 };
+
+const Link = injectSheet(sheet)(unstyledLink);
 
 export default Link;

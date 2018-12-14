@@ -11,8 +11,7 @@
 @import 'forms/buttons', 'forms/checkbox', 'forms/date', 'forms/dropdown', 'forms/forms', 'forms/radio', 'forms/switch',
   'forms/tabs', 'forms/text';
 
-@import 'components/card', 'components/link', 'components/list', 'components/loading', 'components/message',
-  'components/table', 'components/tag';
+@import 'components/list', 'components/loading', 'components/message', 'components/table', 'components/tag';
 
 @import 'modules/pokemon-details', 'modules/pokemon-list', 'modules/search';
 
@@ -99,13 +98,6 @@ a:hover,
 a:visited,
 a:active {
   text-decoration: none;
-}
-
-.is-inherit,
-.is-inherit:hover,
-.is-inherit:visited,
-.is-inherit:active {
-  color: inherit;
 }
 
 #app-wrapper {
