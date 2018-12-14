@@ -3,6 +3,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link as RouterLink } from 'react-router-dom';
 
+import Field from '../modules/forms/field';
 import TouchableContent from './touchable-content';
 
 import { TEXT_BRANDED } from '../../constants/styles-fonts';
@@ -17,17 +18,26 @@ const sheet: ISheet = {
   },
   link: {
     appearance: 'none',
-    background: 'none',
-    border: 'none',
-    color: 'inherit',
     cursor: 'pointer',
     display: 'inline-block',
     height: '100%',
     outline: 'none',
-    textDecoration: 'none',
-    width: '100%',
 
-    '&:hover': {
+    '&, &:active, &:hover, &:focus, & > *, &:active > *, &:hover > *, &:focus > *': {
+      background: 'none',
+      border: 'none',
+      color: 'inherit',
+      fontFamily: 'inherit',
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      margin: 0,
+      maxWidth: 'none',
+      padding: 0,
+      textDecoration: 'none',
+      width: '100%',
+    },
+
+    '&:active > *, &:hover > *, &:focus > *': {
       textDecoration: 'underline',
     },
   },
@@ -90,15 +100,13 @@ const unstyledLink = ({ classes, isTransparent, options, shouldInherit }: IOwnPr
   if (options.onClick) {
     return (
       <span className={linkClasses.wrapper}>
-        <button
-          id={options.id}
-          className={linkClasses.element}
-          onClick={() => {
-            onClick(options);
+        <Field
+          options={{
+            ...options,
+            className: linkClasses.element,
+            type: 'button',
           }}
-        >
-          <TouchableContent options={touchable} />
-        </button>
+        />
       </span>
     );
   }

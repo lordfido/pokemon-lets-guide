@@ -8,9 +8,9 @@ import { IDropdownOptions } from './form.models';
 
 interface IOwnProps {
   options: IDropdownOptions;
-  onChange: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
-  onClick: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
-  onFocus: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
+  onClick?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
+  onFocus?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
 }
 
 const Dropdown = ({ options, onChange, onClick, onFocus }: IOwnProps) => (

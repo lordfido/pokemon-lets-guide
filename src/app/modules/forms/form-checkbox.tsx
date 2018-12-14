@@ -5,9 +5,9 @@ import { ICheckboxOptions } from './form.models';
 
 interface IOwnProps {
   options: ICheckboxOptions;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
-  onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const Checkbox = ({ options, onChange, onClick, onFocus }: IOwnProps) => (

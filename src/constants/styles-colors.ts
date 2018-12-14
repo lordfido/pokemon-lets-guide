@@ -3,7 +3,10 @@ import chroma from 'chroma-js';
 // Colors
 // B&W Scale
 export const WHITE = '#fff';
-export const GREY_LIGHT = '#ccc';
+export const GREY_LIGHT_4 = '#ccc';
+export const GREY_LIGHT_3 = '#d3d3d3';
+export const GREY_LIGHT_2 = '#a9a9a9';
+export const GREY_LIGHT = '#808080';
 export const GREY_DARK = '#666';
 export const GREY_DARK_2 = '#333';
 export const BLACK = '#000';

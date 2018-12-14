@@ -1,19 +1,19 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import { getTranslation } from '../../utils/translations';
 
 import Space from '../../components/space';
 
 import { ICheckboxOptions } from './form.models';
-import { getTranslation } from '../../utils/translations';
 
 const prevArrow = require('../../../assets/images/prev-arrow.png');
 const nextArrow = require('../../../assets/images/next-arrow.png');
 
 interface IOwnProps {
   options: ICheckboxOptions;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
-  onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const Switch = ({ options, onChange, onClick, onFocus }: IOwnProps) => (

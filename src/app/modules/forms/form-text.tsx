@@ -5,9 +5,9 @@ import { ITextOptions } from './form.models';
 
 interface IOwnProps {
   options: ITextOptions;
-  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onClick: (event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onFocus: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 const Text = ({ options, onChange, onClick, onFocus }: IOwnProps) => (
