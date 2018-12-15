@@ -1,7 +1,13 @@
 import { BORDER_RADIUS } from '../../../constants/styles';
-import { DISABLED_BACKGROUND, DISABLED_COLOR, GREY_DARK, WHITE } from '../../../constants/styles-colors';
+import {
+  DISABLED_BACKGROUND,
+  DISABLED_COLOR,
+  GREY_DARK,
+  WHITE,
+  DISABLED_BORDER,
+} from '../../../constants/styles-colors';
 import { FONT_L, FONT_M } from '../../../constants/styles-fonts';
-import { INPUT_BORDER_COLOR } from '../../../constants/styles-skin';
+import { INPUT_BORDER_COLOR, INPUT_BORDER_COLOR_FOCUSED } from '../../../constants/styles-skin';
 
 import { ISheet } from '../../root.models';
 
@@ -15,16 +21,22 @@ export const commonStyles: ISheet = {
     borderRadius: BORDER_RADIUS,
     display: 'block',
     fontFamily: 'inherit',
-    fontSize: FONT_M,
+    fontSize: 'inherit',
     lineHeight: '1.3em',
     minHeight: 38,
     outline: 'none',
-    padding: `${margin}px ${margin * 2}px`,
+    padding: `${2}px ${8}px`,
     verticalAlign: 'middle',
     width: '100%',
+
+    '&:active, &:focus': {
+      border: `1px solid ${INPUT_BORDER_COLOR_FOCUSED}`,
+      boxShadow: `0 0 0 1px ${INPUT_BORDER_COLOR_FOCUSED}`,
+    },
   },
   fieldDisabled: {
     backgroundColor: DISABLED_BACKGROUND,
+    borderColor: DISABLED_BORDER,
     color: DISABLED_COLOR,
     cursor: 'not-allowed',
   },

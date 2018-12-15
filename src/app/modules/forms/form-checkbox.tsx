@@ -9,22 +9,26 @@ import { ICheckboxOptions } from './form.models';
 
 const sheet: ISheet = {
   label: {
-    ...commonStyles.field,
-    backgroundColor: 'none',
-    border: 'none',
     display: 'inline-block',
-    margin: 0,
-    minHeight: 0,
-    padding: 0,
+    fontFamily: commonStyles.field.fontFamily,
+    fontSize: commonStyles.field.fontSize,
+    lineHeight: commonStyles.field.lineHeight,
     paddingLeft: 4,
-    width: 'auto',
   },
   wrapper: {
     ...commonStyles.field,
     color: commonStyles.wrapper.color,
     fontSize: commonStyles.wrapper.fontSize,
     margin: commonStyles.wrapper.margin,
+    marginTop: commonStyles.wrapper.marginTop,
+    paddingBottom: 7,
+    paddingTop: 7,
     width: commonStyles.wrapper.width,
+
+    '&:active, &focus': {
+      border: commonStyles.field.border,
+      boxShadow: 'none',
+    },
   },
   wrapperDisabled: commonStyles.fieldDisabled,
 };

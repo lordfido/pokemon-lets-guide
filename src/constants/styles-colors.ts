@@ -24,7 +24,8 @@ export const WARNING_LIGHT = '#fdfeb5';
 export const WARNING = '#646400';
 export const DANGER_LIGHT = '#f3b5b4';
 export const DANGER = '#640000';
-export const DISABLED_BACKGROUND = '#eee';
+export const DISABLED_BACKGROUND = '#f2f2f2';
+export const DISABLED_BORDER = '#e6e6e6';
 export const DISABLED_COLOR = '#808080';
 
 // Branding

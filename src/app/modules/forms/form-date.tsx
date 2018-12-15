@@ -51,9 +51,7 @@ const unstyledDatePicker = ({ classes, options, onChange, onClick, onFocus }: IO
       type="date"
       id={options.id}
       name={options.id}
-      className={classnames(classes.field, options.className, options.isDisabled ? classes.fieldDisabled : undefined, {
-        'has-errors': options.error,
-      })}
+      className={classnames(classes.field, options.className, options.isDisabled ? classes.fieldDisabled : undefined)}
       placeholder={options.placeholder}
       disabled={options.isDisabled}
       required={options.isRequired}
@@ -63,7 +61,7 @@ const unstyledDatePicker = ({ classes, options, onChange, onClick, onFocus }: IO
       onFocus={onFocus}
     />
 
-    {options.error && <span className="Date-error">{options.error}</span>}
+    {options.error && <span className={classes.error}>{options.error}</span>}
   </div>
 );
 
