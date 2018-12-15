@@ -11,6 +11,14 @@ export const SIZE_XL = size * 5; // 40
 export const SIZE_XXL = size * 6; // 48
 export const SIZE_XXXL = size * 7; // 56
 
+// Paddings
+const padding = 6;
+export const PADDING_XS = padding / 2;
+export const PADDING_S = padding / 1.5;
+export const PADDING_M = padding;
+export const PADDING_L = padding * 1.5;
+export const PADDING_XL = padding * 2;
+
 // Page
 export const PAGE_MAX_WIDTH = 940;
 
