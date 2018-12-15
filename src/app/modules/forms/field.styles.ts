@@ -1,10 +1,10 @@
 import { BORDER_RADIUS } from '../../../constants/styles';
 import {
   DISABLED_BACKGROUND,
+  DISABLED_BORDER,
   DISABLED_COLOR,
   GREY_DARK,
   WHITE,
-  DISABLED_BORDER,
 } from '../../../constants/styles-colors';
 import { FONT_L, FONT_M } from '../../../constants/styles-fonts';
 import { INPUT_BORDER_COLOR, INPUT_BORDER_COLOR_FOCUSED } from '../../../constants/styles-skin';
@@ -19,6 +19,7 @@ export const commonStyles: ISheet = {
     backgroundColor: WHITE,
     border: `1px solid ${INPUT_BORDER_COLOR}`,
     borderRadius: BORDER_RADIUS,
+    color: 'inherit',
     display: 'block',
     fontFamily: 'inherit',
     fontSize: 'inherit',

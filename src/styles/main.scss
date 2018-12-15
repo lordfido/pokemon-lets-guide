@@ -6,9 +6,9 @@
 
 @import 'abstracts/variables', 'abstracts/functions', 'abstracts/helpers';
 
-@import 'forms/tabs', 'forms/text';
+@import 'forms/tabs';
 
-@import 'components/list', 'components/message', 'components/table';
+@import 'components/table';
 
 @import 'modules/pokemon-details', 'modules/pokemon-list', 'modules/search';
 
