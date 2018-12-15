@@ -14,6 +14,7 @@ import {
 import { getStatColor } from '../../../../constants/pokemon-stats-color';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
 import { TEXT_BLACK } from '../../../../constants/styles-fonts';
+import { IDropdownOptions } from '../../forms/form.models';
 
 interface IDropdownReadableData {
   data: any;
@@ -84,9 +85,9 @@ const statsColorStyles = {
   },
 };
 
-const statsDropdown = {
+const statsDropdown: IDropdownOptions = {
   colourStyles: statsColorStyles,
-  form: 'search',
+  id: '',
   options: statsFilterOptions,
   placeholder: getTranslation('search-select-some-types'),
   type: 'multi',

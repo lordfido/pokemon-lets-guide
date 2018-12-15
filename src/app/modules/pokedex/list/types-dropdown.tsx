@@ -5,6 +5,7 @@ import { getTranslation } from '../../../utils/translations';
 import { getTypes, PokemonType } from '../../../../constants/pokemon-types';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
+import { IDropdownOptions } from '../../forms/form.models';
 
 interface IDropdownReadableData {
   data: any;
@@ -76,9 +77,9 @@ const typeColorStyles = {
   },
 };
 
-const typesDropdown = {
+const typesDropdown: IDropdownOptions = {
   colourStyles: typeColorStyles,
-  form: 'search',
+  id: '',
   options: typeFilterOptions,
   placeholder: getTranslation('search-select-some-types'),
   type: 'multi',

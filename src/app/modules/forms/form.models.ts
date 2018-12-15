@@ -1,4 +1,4 @@
-type types =
+export type types =
   | 'text'
   | 'email'
   | 'number'

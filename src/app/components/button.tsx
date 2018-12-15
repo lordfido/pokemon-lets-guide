@@ -137,23 +137,13 @@ const unstyledButton = ({ classes, options }: IOwnProps) => {
     label: options.label,
   };
 
-  if (options.type === 'picture') {
-    return (
-      <span className={buttonClasses.wrapper}>
-        <span id={options.id} className={buttonClasses.button}>
-          <TouchableContent options={touchable} />
-        </span>
-      </span>
-    );
-  }
-
   return (
     <button
       id={options.id}
       type={options.type}
       className={buttonClasses.wrapper}
       onClick={handleClick}
-      disabled={(options.type !== 'submit' && !options.onClick) || options.isDisabled || options.isAlwaysDisabled}
+      disabled={options.isDisabled}
     >
       <span className={buttonClasses.button}>
         <TouchableContent options={touchable} />

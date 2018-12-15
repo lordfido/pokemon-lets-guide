@@ -8,6 +8,9 @@ import { ISheet } from '../../root.models';
 import { ICheckboxOptions } from './form.models';
 
 const sheet: ISheet = {
+  field: {
+    verticalAlign: 'middle',
+  },
   label: {
     display: 'inline-block',
     fontFamily: commonStyles.field.fontFamily,

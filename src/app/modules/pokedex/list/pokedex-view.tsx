@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { getTranslation } from '../../../utils/translations';
 
+import { IButtonProps } from '../../../components/button';
 import Buttons from '../../../components/buttons';
 import Table from '../../../components/table';
 import PokedexEntry from './pokedex-entry';
@@ -42,7 +43,7 @@ const PokedexView = ({
   handleToggleFilters,
   handleUpdateFilter,
 }: IOwnProps) => {
-  const filtersButton = {
+  const filtersButton: IButtonProps = {
     className: 'Search-toggle',
     icon: 'search',
     id: 'toggle-filters',
