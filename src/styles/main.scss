@@ -8,8 +8,6 @@
 
 @import 'modules/pokemon-details';
 
-@import './app';
-
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);
@@ -110,21 +108,5 @@ a:active {
 
   @media screen and (max-width: 1920px) {
     background-image: none !important;
-  }
-}
-
-.HomeButton {
-  $size: 80px;
-  background-color: transparent;
-  display: none;
-  height: $size;
-  left: calc(50% + 846px);
-  position: absolute;
-  top: calc(50% + 164px);
-  width: $size;
-  z-index: 1;
-
-  @media screen and (min-width: 1921px) {
-    display: block;
   }
 }
