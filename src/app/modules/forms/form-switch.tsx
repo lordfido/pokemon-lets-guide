@@ -40,6 +40,7 @@ const sheet: ISheet = {
     fontFamily: commonStyles.field.fontFamily,
     fontSize: commonStyles.field.fontSize,
     lineHeight: commonStyles.field.lineHeight,
+    textAlign: commonStyles.field.textAlign,
     width: 'calc(100% - 80px)',
   },
   optionLabel: {
@@ -77,6 +78,7 @@ const sheet: ISheet = {
     marginTop: commonStyles.wrapper.marginTop,
     paddingBottom: 7,
     paddingTop: 7,
+    textAlign: commonStyles.wrapper.textAlign,
     width: commonStyles.wrapper.width,
 
     '&:active, &focus': {
@@ -89,16 +91,23 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   options: ICheckboxOptions;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const unstyledSwitch = ({ classes, options, onChange, onClick, onFocus }: IOwnProps) => (
+const unstyledSwitch = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
   <label
     htmlFor={options.id}
-    className={classnames(classes.wrapper, options.className, options.isDisabled ? classes.wrapperDisabled : undefined)}
+    data-type={options.type}
+    className={classnames(
+      classes.wrapper,
+      options.className,
+      className,
+      options.isDisabled ? classes.wrapperDisabled : undefined
+    )}
   >
     <input
       id={options.id}

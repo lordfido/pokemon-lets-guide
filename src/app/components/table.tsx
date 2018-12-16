@@ -84,6 +84,7 @@ const sheet: ISheet = {
 
     [DESKTOP]: {
       display: 'table-cell',
+      textAlign: 'center',
       width: 'auto',
     },
   },
@@ -163,10 +164,10 @@ const unstyledTable = ({ children, classes, className, headings }: IOwnProps) =>
           <div className={classnames(classes.table, className)}>
             {React.Children.map(children, child => {
               return (
-                <Card className={classes.card}>
+                <Card className={classnames(classes.card, child.props.className)}>
                   <table className={classes.table}>
                     {renderHeads()}
-                    <tbody className={classes.tableBody}>{child}</tbody>
+                    <tbody className={classes.tableBody}>{React.cloneElement(child, { className: '' })}</tbody>
                   </table>
                 </Card>
               );

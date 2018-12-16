@@ -33,6 +33,7 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   options: IDateOptions;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
@@ -40,8 +41,8 @@ interface IOwnProps {
 }
 
 // TODO: Add a React date-picker
-const unstyledDatePicker = ({ classes, options, onChange, onClick, onFocus }: IOwnProps) => (
-  <div className={classes.wrapper}>
+const unstyledDatePicker = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
+  <div data-type={options.type} className={classnames(classes.wrapper, className)}>
     <label htmlFor={options.id} className={classes.label}>
       {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
       <span>{options.label}</span>
@@ -49,6 +50,7 @@ const unstyledDatePicker = ({ classes, options, onChange, onClick, onFocus }: IO
 
     <input
       type="date"
+      data-type={options.type}
       id={options.id}
       name={options.id}
       className={classnames(classes.field, options.className, options.isDisabled ? classes.fieldDisabled : undefined)}

@@ -96,10 +96,11 @@ export interface IButtonProps extends IGenericField {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   options: IButtonProps;
 }
 
-const unstyledButton = ({ classes, options }: IOwnProps) => {
+const unstyledButton = ({ classes, className, options }: IOwnProps) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const { isDisabled, onClick } = options;
 
@@ -110,9 +111,15 @@ const unstyledButton = ({ classes, options }: IOwnProps) => {
 
   const buttonClasses = {
     button: classnames(classes.content, options.isDisabled ? classes.disabledContent : undefined),
-    wrapper: classnames(classes.wrapper, options.className, options.isDisabled ? classes.disabledWrapper : undefined, {
-      'Button--icon': options.icon && !options.label,
-    }),
+    wrapper: classnames(
+      classes.wrapper,
+      options.className,
+      className,
+      options.isDisabled ? classes.disabledWrapper : undefined,
+      {
+        'Button--icon': options.icon && !options.label,
+      }
+    ),
   };
 
   if (options.to) {

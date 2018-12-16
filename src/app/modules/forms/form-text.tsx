@@ -24,14 +24,15 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   options: ITextOptions;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onClick?: (event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const unstyledText = ({ classes, options, onChange, onClick, onFocus }: IOwnProps) => (
-  <label htmlFor={options.id} className={classes.wrapper}>
+const unstyledText = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
+  <label htmlFor={options.id} data-type={options.type} className={classnames(classes.wrapper, className)}>
     <span className={classes.label}>
       {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
       <span>{options.label}</span>

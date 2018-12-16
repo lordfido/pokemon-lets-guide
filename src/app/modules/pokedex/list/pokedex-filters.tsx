@@ -11,17 +11,20 @@ import { ICheckboxOptions, IDropdownOptions, IGenericField, ITextOptions } from 
 import { IPokedexFilters } from '../pokedex.models';
 
 interface IOwnProps {
+  classNames: {
+    form: string;
+    formField: string;
+  };
   filters: IPokedexFilters;
   handleUpdateFilter: (filter: string, selection: any) => void;
   handleResetFilters: () => void;
 }
 
-const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOwnProps) => {
+const PokedexFilters = ({ classNames, filters, handleResetFilters, handleUpdateFilter }: IOwnProps) => {
   const fields: Array<IGenericField & (ITextOptions | IDropdownOptions | ICheckboxOptions)> = [
     {
       defaultValue: filters.nameOrNumber,
       id: 'nameOrNumber',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-name-or-number'),
       onChange: (selection: any[]) => handleUpdateFilter('nameOrNumber', selection),
       type: 'text',
@@ -30,7 +33,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
       ...typesDropdown,
       defaultValue: filters.includedTypes,
       id: 'includedTypes',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-include-types'),
       onChange: (selection: any[]) => handleUpdateFilter('includedTypes', selection),
     },
@@ -38,7 +40,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
       ...typesDropdown,
       defaultValue: filters.excludedTypes,
       id: 'excludedTypes',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-exclude-types'),
       onChange: (selection: any[]) => handleUpdateFilter('excludedTypes', selection),
     },
@@ -46,7 +47,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
       ...typesDropdown,
       defaultValue: filters.strongAgainst,
       id: 'strongAgainst',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-strong-against'),
       onChange: (selection: any[]) => handleUpdateFilter('strongAgainst', selection),
     },
@@ -54,7 +54,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
       ...typesDropdown,
       defaultValue: filters.weakAgainst,
       id: 'weakAgainst',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-weak-against'),
       onChange: (selection: any[]) => handleUpdateFilter('weakAgainst', selection),
     },
@@ -62,7 +61,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
       ...statsDropdown,
       defaultValue: filters.bestStats,
       id: 'bestStats',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-best-stats'),
       onChange: (selection: any[]) => handleUpdateFilter('bestStats', selection),
     },
@@ -70,14 +68,12 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
       ...statsDropdown,
       defaultValue: filters.worstStats,
       id: 'worstStats',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-worst-stats'),
       onChange: (selection: any[]) => handleUpdateFilter('worstStats', selection),
     },
     {
       defaultValue: filters.minBaseCP,
       id: 'minBaseCP',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-min-cp'),
       onChange: (selection: any[]) => handleUpdateFilter('minBaseCP', selection),
       type: 'number',
@@ -85,7 +81,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
     {
       defaultValue: filters.maxBaseCP,
       id: 'maxBaseCP',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-max-cp'),
       onChange: (selection: any[]) => handleUpdateFilter('maxBaseCP', selection),
       type: 'number',
@@ -93,7 +88,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
     {
       defaultChecked: filters.showMegaevolutions,
       id: 'showMegaevolutions',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-show-megaevolutions'),
       onChange: (selection: any[]) => handleUpdateFilter('showMegaevolutions', selection),
       type: 'switch',
@@ -101,7 +95,6 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
     {
       defaultChecked: filters.showAlolanForms,
       id: 'showAlolanForms',
-      isDisabled: !filtersEnabled,
       label: getTranslation('search-show-alolan-forms'),
       onChange: (selection: any[]) => handleUpdateFilter('showAlolanForms', selection),
       type: 'switch',
@@ -109,9 +102,9 @@ const PokedexFilters = ({ filters, handleResetFilters, handleUpdateFilter }: IOw
   ];
 
   return (
-    <form noValidate>
+    <form className={classNames.form} noValidate>
       {fields.map(field => (
-        <Field key={field.id} options={field} />
+        <Field key={field.id} className={classNames.formField} options={{ ...field, isDisabled: !filtersEnabled }} />
       ))}
 
       <Buttons

@@ -25,6 +25,7 @@ export const commonStyles: ISheet = {
     minHeight: 38,
     outline: 'none',
     padding: `${PADDING_S / 2}px ${PADDING_L}px`,
+    textAlign: 'inherit',
     verticalAlign: 'middle',
     width: '100%',
 
@@ -41,6 +42,7 @@ export const commonStyles: ISheet = {
   },
   label: {
     display: 'block',
+    textAlign: 'inherit',
     width: '100%',
   },
   wrapper: {
@@ -50,6 +52,7 @@ export const commonStyles: ISheet = {
     margin: PADDING_M,
     marginTop: PADDING_XL,
     position: 'relative',
+    textAlign: 'left',
     width: `calc(100% - ${PADDING_XL}px)`,
   },
 };

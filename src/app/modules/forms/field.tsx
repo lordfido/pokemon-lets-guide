@@ -11,6 +11,7 @@ import Text from './form-text';
 import { ICheckboxOptions, IDateOptions, IDropdownOptions, IGenericField, ITextOptions } from './form.models';
 
 interface IOwnProps {
+  className?: string;
   options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ITextOptions);
 }
 
@@ -78,6 +79,7 @@ class Field extends React.Component<IOwnProps> {
 
   public render() {
     const {
+      className,
       options: { isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled, ...defaultOptions },
     } = this.props;
 
@@ -94,6 +96,7 @@ class Field extends React.Component<IOwnProps> {
       case 'textarea':
         return (
           <Text
+            className={className}
             options={{
               ...options,
               defaultValue: 'defaultValue' in options ? String(options.defaultValue) : undefined,
@@ -107,6 +110,7 @@ class Field extends React.Component<IOwnProps> {
       case 'switch':
         return (
           <Switch
+            className={className}
             options={options}
             onChange={!options.isDisabled ? this.onChange : undefined}
             onClick={!options.isDisabled ? this.onClick : undefined}
@@ -117,6 +121,7 @@ class Field extends React.Component<IOwnProps> {
       case 'checkbox':
         return (
           <Checkbox
+            className={className}
             options={options}
             onChange={!options.isDisabled ? this.onChange : undefined}
             onClick={!options.isDisabled ? this.onClick : undefined}
@@ -127,6 +132,7 @@ class Field extends React.Component<IOwnProps> {
       case 'dropdown':
         return (
           <Dropdown
+            className={className}
             options={{
               ...options,
               defaultValue:
@@ -144,6 +150,7 @@ class Field extends React.Component<IOwnProps> {
       case 'multi':
         return (
           <Dropdown
+            className={className}
             options={{
               ...options,
               defaultValue:
@@ -162,6 +169,7 @@ class Field extends React.Component<IOwnProps> {
       case 'date':
         return (
           <Date
+            className={className}
             options={{
               ...options,
               defaultValue:
@@ -178,6 +186,7 @@ class Field extends React.Component<IOwnProps> {
       case 'button':
         return (
           <Button
+            className={className}
             options={{
               ...options,
               onChange: !options.isDisabled ? this.onChange : undefined,

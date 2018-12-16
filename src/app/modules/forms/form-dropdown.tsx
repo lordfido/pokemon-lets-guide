@@ -18,14 +18,19 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   options: IDropdownOptions;
   onChange?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
   onClick?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
   onFocus?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
 }
 
-const unstyledDropdown = ({ classes, options, onChange, onFocus }: IOwnProps) => (
-  <label htmlFor={options.id} className={classnames(classes.wrapper, options.className)}>
+const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IOwnProps) => (
+  <label
+    htmlFor={options.id}
+    data-type={options.type}
+    className={classnames(classes.wrapper, options.className, className)}
+  >
     <span className={classes.label}>
       <TouchableContent options={options} />
     </span>
