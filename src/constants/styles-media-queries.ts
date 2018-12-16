@@ -1,3 +1,5 @@
+import Media from 'react-media';
+
 // Mobile
 const MOBILE = '@media screen and (min-width: 320px)';
 const MAX_MOBILE = '@media screen and (min-width: 479px)';
@@ -21,3 +23,6 @@ export const HD_DISPLAY = '@media screen and (min-width: 1921px)';
 
 // Mixes
 export const TABLET_OR_LANDSCAPE = '@media screen and (orientation: landscape), screen and (min-width: 720px)';
+
+const getMediaQuery = (query: string) => query.replace('@media screen and ', '');
+export default getMediaQuery;
