@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { IGenericField } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
-import { BORDER_RADIUS, SIZE_XXS, SIZE_XXXS } from '../../constants/styles';
+import { BORDER_RADIUS, PADDING_XL, PADDING_S } from '../../constants/styles';
 import { FONT_M, TEXT_BLACK } from '../../constants/styles-fonts';
 import {
   BUTTON_BACKGROUND,
@@ -54,7 +54,7 @@ const sheet: ISheet = {
     lineHeight: '1.5em',
     margin: '0 auto',
     maxWidth: '100%',
-    padding: `0px ${SIZE_XXS}px`,
+    padding: `0px ${PADDING_XL}px`,
 
     ':active > &, :focus > &, :hover > &': {
       ...activeContent,
@@ -75,8 +75,8 @@ const sheet: ISheet = {
     display: 'inline-block',
     fontFamily: 'inherit',
     fontWeight: 700,
-    margin: `${SIZE_XXXS / 2}px ${SIZE_XXXS / 4}px`,
-    maxWidth: `calc(100% - ${SIZE_XXXS / 2}px)`,
+    margin: `${PADDING_S}px ${PADDING_S / 2}px`,
+    maxWidth: `calc(100% - ${PADDING_S}px)`,
     textAlign: 'center',
     verticalAlign: 'middle',
 

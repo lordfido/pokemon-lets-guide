@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { SIZE_S, SIZE_XXL } from '../../constants/styles';
+import { PADDING_XXL, SIZE_XXL } from '../../constants/styles';
 import { BRAND_COLOR } from '../../constants/styles-colors';
 
 import { CssSizes, ISheet } from '../root.models';
@@ -29,7 +29,7 @@ const sheet: ISheet = {
   },
   wrapper: {
     display: 'inline-block',
-    margin: `${SIZE_S}px auto`,
+    margin: `${PADDING_XXL}px auto`,
     position: 'relative',
     textAlign: 'center',
     width: '100%',

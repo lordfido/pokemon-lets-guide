@@ -3,16 +3,16 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 
 import Field from '../modules/forms/field';
-import Button, { IButtonProps } from './button';
+import { IButtonProps } from './button';
 
-import { SIZE_XXS } from '../../constants/styles';
+import { PADDING_M, PADDING_XL } from '../../constants/styles';
 
 import { ISheet } from '../root.models';
 
 const sheet: ISheet = {
   wrapper: {
-    margin: `${SIZE_XXS}px ${SIZE_XXS / 2}px`,
-    width: `calc(100% - ${SIZE_XXS}px)`,
+    margin: `${PADDING_XL}px ${PADDING_M}px`,
+    width: `calc(100% - ${PADDING_XL}px)`,
   },
 
   left: {

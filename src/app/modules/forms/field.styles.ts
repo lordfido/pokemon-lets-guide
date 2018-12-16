@@ -1,4 +1,4 @@
-import { BORDER_RADIUS } from '../../../constants/styles';
+import { BORDER_RADIUS, PADDING_L, PADDING_S, PADDING_M, PADDING_XL } from '../../../constants/styles';
 import {
   DISABLED_BACKGROUND,
   DISABLED_BORDER,
@@ -6,12 +6,10 @@ import {
   GREY_DARK,
   WHITE,
 } from '../../../constants/styles-colors';
-import { FONT_L, FONT_M } from '../../../constants/styles-fonts';
+import { FONT_L } from '../../../constants/styles-fonts';
 import { INPUT_BORDER_COLOR, INPUT_BORDER_COLOR_FOCUSED } from '../../../constants/styles-skin';
 
 import { ISheet } from '../../root.models';
-
-const margin = 6;
 
 export const commonStyles: ISheet = {
   field: {
@@ -26,7 +24,7 @@ export const commonStyles: ISheet = {
     lineHeight: '1.3em',
     minHeight: 38,
     outline: 'none',
-    padding: `${2}px ${8}px`,
+    padding: `${PADDING_S / 2}px ${PADDING_L}px`,
     verticalAlign: 'middle',
     width: '100%',
 
@@ -49,9 +47,9 @@ export const commonStyles: ISheet = {
     color: GREY_DARK,
     display: 'inline-block',
     fontSize: FONT_L,
-    margin,
-    marginTop: margin * 2,
+    margin: PADDING_M,
+    marginTop: PADDING_XL,
     position: 'relative',
-    width: `calc(100% - ${margin * 2}px)`,
+    width: `calc(100% - ${PADDING_XL}px)`,
   },
 };

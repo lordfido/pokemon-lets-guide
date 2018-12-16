@@ -6,6 +6,7 @@ import { getTranslation } from '../../utils/translations';
 import Space from '../../components/space';
 
 import { commonStyles } from './field.styles';
+import { PADDING_S } from '../../../constants/styles';
 
 import { ISheet } from '../../root.models';
 import { ICheckboxOptions } from './form.models';
@@ -63,7 +64,7 @@ const sheet: ISheet = {
     alignItems: 'center',
     display: 'inline-flex',
     flexDirection: 'row',
-    marginLeft: 4,
+    marginLeft: PADDING_S,
     textAlign: 'center',
     verticalAlign: 'top',
     width: 76,

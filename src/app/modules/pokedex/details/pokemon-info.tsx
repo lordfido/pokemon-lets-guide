@@ -8,6 +8,7 @@ import Tag from '../../../components/tag';
 import { getTypeName, PokemonType } from '../../../../constants/pokemon-types';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
+import { PADDING_S } from '../../../../constants/styles';
 
 import { IRichPokemon } from '../pokedex.models';
 
@@ -43,7 +44,7 @@ const PokemonInfo = ({ pokemon }: IOwnProps) => (
                 label={`${getTypeName(id)} x${effectiveness}`}
                 icon={getTypeIcon(id)}
                 backgroundColor={getTypeColor(id)}
-                style={{ marginBottom: 4 }}
+                style={{ marginBottom: PADDING_S }}
               />
             ))}
         </div>
@@ -58,7 +59,7 @@ const PokemonInfo = ({ pokemon }: IOwnProps) => (
                 label={`${getTypeName(id)} x${effectiveness}`}
                 icon={getTypeIcon(id)}
                 backgroundColor={getTypeColor(id)}
-                style={{ marginBottom: 4 }}
+                style={{ marginBottom: PADDING_S }}
               />
             ))}
         </div>

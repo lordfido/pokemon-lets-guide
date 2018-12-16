@@ -13,11 +13,13 @@ export const SIZE_XXXL = size * 7; // 56
 
 // Paddings
 const padding = 6;
-export const PADDING_XS = padding / 2;
-export const PADDING_S = padding / 1.5;
-export const PADDING_M = padding;
-export const PADDING_L = padding * 1.5;
-export const PADDING_XL = padding * 2;
+export const PADDING_XS = padding / 2; // 3
+export const PADDING_S = padding / 1.5; // 4
+export const PADDING_M = padding; // 6
+export const PADDING_L = padding * 1.5; // 8
+export const PADDING_XL = padding * 2; // 12
+export const PADDING_XXL = padding * 3; // 18
+export const PADDING_XXXL = padding * 4; // 24
 
 // Page
 export const PAGE_MAX_WIDTH = 940;

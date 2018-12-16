@@ -3,7 +3,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 
-import { HEADER_SIZE } from '../../../constants/styles';
+import { HEADER_SIZE, PADDING_S } from '../../../constants/styles';
 import { BLACK, traslucentColor } from '../../../constants/styles-colors';
 import { FONT_M, TEXT_WHITE } from '../../../constants/styles-fonts';
 import { DESKTOP, MOBILE_L } from '../../../constants/styles-media-queries';
@@ -32,7 +32,7 @@ const sheet: ISheet = {
     fontWeight: 700,
     height: HEADER_SIZE,
     lineHeight: `${HEADER_SIZE - ITEM_PADDING * 2}px`,
-    padding: `${ITEM_PADDING}px ${4}px`,
+    padding: `${ITEM_PADDING}px ${PADDING_S}px`,
     textAlign: 'center',
     transition: 'background-color 0.2s',
     verticalAlign: 'top',

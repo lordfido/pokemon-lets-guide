@@ -6,7 +6,7 @@ import { languageISOs } from '../../utils/translations';
 import Link from '../../components/link';
 
 import { APP_NAME, APP_WEB } from '../../../constants/branding';
-import { PAGE_MAX_WIDTH, SIZE_S, SIZE_XXS } from '../../../constants/styles';
+import { PADDING_XL, PADDING_XXL, PAGE_MAX_WIDTH } from '../../../constants/styles';
 import { WHITE } from '../../../constants/styles-colors';
 import { FONT_XS, TEXT_DARK } from '../../../constants/styles-fonts';
 import { TABLET_OR_LANDSCAPE } from '../../../constants/styles-media-queries';
@@ -27,11 +27,11 @@ const sheet: ISheet = {
     fontSize: FONT_XS,
     marginBottom: '0 !important',
     minHeight: '0 !important',
-    padding: SIZE_XXS,
+    padding: PADDING_XL,
     width: '100%',
 
     [TABLET_OR_LANDSCAPE]: {
-      padding: SIZE_S,
+      padding: PADDING_XXL,
       textAlign: 'center',
     },
   },

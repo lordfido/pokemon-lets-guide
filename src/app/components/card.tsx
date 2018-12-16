@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 import Image from './image';
 
-import { AVATAR_SIZE, BORDER_RADIUS, SIZE_M, SIZE_XXS } from '../../constants/styles';
+import { AVATAR_SIZE, BORDER_RADIUS, PADDING_XL, PADDING_XXXL } from '../../constants/styles';
 import { WHITE } from '../../constants/styles-colors';
 import { TABLET } from '../../constants/styles-media-queries';
 
@@ -14,7 +14,7 @@ const sheet: ISheet = {
   picture: {
     display: 'block',
     margin: '0 auto',
-    marginTop: SIZE_XXS,
+    marginTop: PADDING_XL,
     maxWidth: '100%',
     minHeight: AVATAR_SIZE,
     minWidth: AVATAR_SIZE,
@@ -26,11 +26,11 @@ const sheet: ISheet = {
     display: 'inline-block',
     maxWidth: '100%',
     overflow: 'hidden',
-    padding: SIZE_XXS,
+    padding: PADDING_XL,
     textAlign: 'center',
 
     [TABLET]: {
-      padding: SIZE_M,
+      padding: PADDING_XXXL,
     },
   },
 };

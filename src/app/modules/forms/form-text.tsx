@@ -5,6 +5,8 @@ import TextArea from 'react-textarea-autosize';
 
 import { commonStyles } from './field.styles';
 
+import { PADDING_L } from '../../../constants/styles';
+
 import { ISheet } from '../../root.models';
 import { ITextOptions } from './form.models';
 
@@ -14,7 +16,7 @@ const sheet: ISheet = {
   label: commonStyles.label,
   textArea: {
     minHeight: 150,
-    padding: 8,
+    padding: PADDING_L,
     resize: 'vertical',
   },
   wrapper: commonStyles.wrapper,

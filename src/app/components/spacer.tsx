@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { SIZE_S, SIZE_XS, SIZE_XXXS } from '../../constants/styles';
+import { PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles';
 
 const sheet = {
   wrapper: {
@@ -12,17 +12,17 @@ const sheet = {
 
   xs: {
     borderBottom: 'none',
-    margin: `${SIZE_XXXS}px auto`,
+    margin: `${PADDING_L}px auto`,
   },
 
   sm: {
     borderBottom: 'none',
-    margin: `${SIZE_XS}px auto`,
+    margin: `${PADDING_XL}px auto`,
   },
 
   md: {
     borderBottom: '1px solid #ddd',
-    margin: `${SIZE_S}px auto`,
+    margin: `${PADDING_XXL}px auto`,
   },
 };
 interface IOwnProps {

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { BORDER_RADIUS, SIZE_M, SIZE_XS, SIZE_XXS, SIZE_XXXS } from '../../constants/styles';
+import { BORDER_RADIUS, PADDING_L, PADDING_S, PADDING_XL, SIZE_M, SIZE_XS } from '../../constants/styles';
 import { FONT_S, TEXT_WHITE } from '../../constants/styles-fonts';
 
 import { ISheet } from '../root.models';
@@ -24,7 +24,7 @@ const sheet: ISheet = {
     display: 'inline-block',
     height: SIZE_M,
     lineHeight: `${SIZE_XS}px`,
-    padding: `${SIZE_XXXS / 2}px ${SIZE_XXXS}px`,
+    padding: `${PADDING_S}px ${PADDING_L}px`,
     position: 'relative',
     textAlign: 'center',
     verticalAlign: 'middle',
@@ -33,11 +33,11 @@ const sheet: ISheet = {
   labelWithIcon: {
     height: SIZE_XS,
     marginLeft: -6,
-    padding: `0px ${SIZE_XXXS}px`,
+    padding: `0px ${PADDING_L}px`,
     paddingLeft: 10,
   },
   large: {
-    padding: `0px ${SIZE_XXS}px`,
+    padding: `0px ${PADDING_XL}px`,
     paddingLeft: 14,
   },
   wrapper: {
