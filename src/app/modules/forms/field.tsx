@@ -28,38 +28,26 @@ const isDisabled = ({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, i
     ((disabled && !isAlwaysEnabled) || isAlwaysDisabled)
   );
 
-class Field extends React.Component<IOwnProps> {
-  public onClick = (
+const Field = ({ className, options }: IOwnProps) => {
+  const onClick = (
     event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
-    const { options } = this.props;
-
-    log(`onClick() of <${options.id}>`);
-
     if (options.onClick) {
       options.onClick(event);
     }
   };
 
-  public onFocus = (
+  const onFocus = (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
-    const { options } = this.props;
-
-    log(`onFocus() of <${options.id}>`);
-
     if (options.onFocus) {
       options.onFocus(event);
     }
   };
 
-  public onChange = (
+  const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
-    const { options } = this.props;
-
-    log(`onChange() of <${options.id}>`, this.props);
-
     if (options.onChange) {
       if (event.target) {
         switch (event.target.type) {
@@ -77,129 +65,123 @@ class Field extends React.Component<IOwnProps> {
     }
   };
 
-  public render() {
-    const {
-      className,
-      options: { isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled, ...defaultOptions },
-    } = this.props;
+  const { isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled, ...defaultOptions } = options;
+  const newOptions = {
+    ...defaultOptions,
+    isDisabled: isDisabled({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled }),
+  };
 
-    const options = {
-      ...defaultOptions,
-      isDisabled: isDisabled({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled }),
-    };
+  switch (newOptions.type) {
+    case 'text':
+    case 'email':
+    case 'number':
+    case 'password':
+    case 'textarea':
+      return (
+        <Text
+          className={className}
+          options={{
+            ...newOptions,
+            defaultValue: 'defaultValue' in newOptions ? String(newOptions.defaultValue) : undefined,
+          }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
 
-    switch (options.type) {
-      case 'text':
-      case 'email':
-      case 'number':
-      case 'password':
-      case 'textarea':
-        return (
-          <Text
-            className={className}
-            options={{
-              ...options,
-              defaultValue: 'defaultValue' in options ? String(options.defaultValue) : undefined,
-            }}
-            onChange={!options.isDisabled ? this.onChange : undefined}
-            onClick={!options.isDisabled ? this.onClick : undefined}
-            onFocus={!options.isDisabled ? this.onFocus : undefined}
-          />
-        );
+    case 'switch':
+      return (
+        <Switch
+          className={className}
+          options={newOptions}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
 
-      case 'switch':
-        return (
-          <Switch
-            className={className}
-            options={options}
-            onChange={!options.isDisabled ? this.onChange : undefined}
-            onClick={!options.isDisabled ? this.onClick : undefined}
-            onFocus={!options.isDisabled ? this.onFocus : undefined}
-          />
-        );
+    case 'checkbox':
+      return (
+        <Checkbox
+          className={className}
+          options={newOptions}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
 
-      case 'checkbox':
-        return (
-          <Checkbox
-            className={className}
-            options={options}
-            onChange={!options.isDisabled ? this.onChange : undefined}
-            onClick={!options.isDisabled ? this.onClick : undefined}
-            onFocus={!options.isDisabled ? this.onFocus : undefined}
-          />
-        );
+    case 'dropdown':
+      return (
+        <Dropdown
+          className={className}
+          options={{
+            ...newOptions,
+            defaultValue:
+              'defaultValue' in newOptions && typeof newOptions.defaultValue !== 'string'
+                ? newOptions.defaultValue
+                : undefined,
+            options: 'options' in newOptions ? newOptions.options : [],
+          }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
 
-      case 'dropdown':
-        return (
-          <Dropdown
-            className={className}
-            options={{
-              ...options,
-              defaultValue:
-                'defaultValue' in options && typeof options.defaultValue !== 'string'
-                  ? options.defaultValue
-                  : undefined,
-              options: 'options' in options ? options.options : [],
-            }}
-            onChange={!options.isDisabled ? this.onChange : undefined}
-            onClick={!options.isDisabled ? this.onClick : undefined}
-            onFocus={!options.isDisabled ? this.onFocus : undefined}
-          />
-        );
+    case 'multi':
+      return (
+        <Dropdown
+          className={className}
+          options={{
+            ...newOptions,
+            defaultValue:
+              'defaultValue' in newOptions && typeof newOptions.defaultValue !== 'string'
+                ? newOptions.defaultValue
+                : undefined,
+            isMulti: true,
+            options: 'options' in newOptions ? newOptions.options : [],
+          }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
 
-      case 'multi':
-        return (
-          <Dropdown
-            className={className}
-            options={{
-              ...options,
-              defaultValue:
-                'defaultValue' in options && typeof options.defaultValue !== 'string'
-                  ? options.defaultValue
-                  : undefined,
-              isMulti: true,
-              options: 'options' in options ? options.options : [],
-            }}
-            onChange={!options.isDisabled ? this.onChange : undefined}
-            onClick={!options.isDisabled ? this.onClick : undefined}
-            onFocus={!options.isDisabled ? this.onFocus : undefined}
-          />
-        );
+    case 'date':
+      return (
+        <Date
+          className={className}
+          options={{
+            ...newOptions,
+            defaultValue:
+              'defaultValue' in newOptions && typeof newOptions.defaultValue === 'string'
+                ? newOptions.defaultValue
+                : undefined,
+          }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
 
-      case 'date':
-        return (
-          <Date
-            className={className}
-            options={{
-              ...options,
-              defaultValue:
-                'defaultValue' in options && typeof options.defaultValue === 'string'
-                  ? options.defaultValue
-                  : undefined,
-            }}
-            onChange={!options.isDisabled ? this.onChange : undefined}
-            onClick={!options.isDisabled ? this.onClick : undefined}
-            onFocus={!options.isDisabled ? this.onFocus : undefined}
-          />
-        );
+    case 'button':
+      return (
+        <Button
+          className={className}
+          options={{
+            ...newOptions,
+            onChange: !newOptions.isDisabled ? onChange : undefined,
+            onClick: !newOptions.isDisabled ? onClick : undefined,
+            onFocus: !newOptions.isDisabled ? onFocus : undefined,
+          }}
+        />
+      );
 
-      case 'button':
-        return (
-          <Button
-            className={className}
-            options={{
-              ...options,
-              onChange: !options.isDisabled ? this.onChange : undefined,
-              onClick: !options.isDisabled ? this.onClick : undefined,
-              onFocus: !options.isDisabled ? this.onFocus : undefined,
-            }}
-          />
-        );
-
-      default:
-        return null;
-    }
+    default:
+      return null;
   }
-}
+};
 
 export default Field;
