@@ -1,11 +1,12 @@
 import chroma from 'chroma-js';
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { getPaddedId } from '../../../utils/pokemon';
 import { getTranslation } from '../../../utils/translations';
 
 import Button from '../../../components/button';
 import { TableCell, TableRow } from '../../../components/table';
-// import CustomImage from '../../components/image';
+// import Image from '../../components/image';
 import Tag from '../../../components/tag';
 
 import { POKEMON } from '../../../../constants/appRoutes';
@@ -18,27 +19,34 @@ import {
   SPEED_ID,
 } from '../../../../constants/pokemon-stats';
 import { getStatColor } from '../../../../constants/pokemon-stats-color';
+import { getTypeName } from '../../../../constants/pokemon-types';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
 
 import { IPokemonWithBaseCP } from '../pokedex.models';
+import { ISheet } from '../../../root.models';
+
+const sheet: ISheet = {
+  details: {
+    margin: 0,
+  },
+};
 
 interface IOwnProps {
+  classes: { [key: string]: string };
+  className?: string;
   pokemon: IPokemonWithBaseCP;
 }
 
-const PokedexEntry = ({ pokemon }: IOwnProps) => (
-  <TableRow className="PokemonList-item">
+const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
+  <TableRow className={className}>
     <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
-    {/* <TableCell center>
-          <CustomImage className="PokemonList-image" src={avatar} />
-        </TableCell> */}
     <TableCell>{pokemon.name}</TableCell>
     <TableCell center>
       {pokemon.types.ownTypes[0] && (
         <Tag
           key={pokemon.types.ownTypes[0]}
-          label={getTranslation(`type-${pokemon.types.ownTypes[0]}`)}
+          label={getTypeName(pokemon.types.ownTypes[0])}
           icon={getTypeIcon(pokemon.types.ownTypes[0])}
           backgroundColor={getTypeColor(pokemon.types.ownTypes[0])}
         />
@@ -48,7 +56,7 @@ const PokedexEntry = ({ pokemon }: IOwnProps) => (
       {pokemon.types.ownTypes[1] && (
         <Tag
           key={pokemon.types.ownTypes[1]}
-          label={getTranslation(`type-${pokemon.types.ownTypes[1]}`)}
+          label={getTypeName(pokemon.types.ownTypes[1])}
           icon={getTypeIcon(pokemon.types.ownTypes[1])}
           backgroundColor={getTypeColor(pokemon.types.ownTypes[1])}
         />
@@ -121,9 +129,10 @@ const PokedexEntry = ({ pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[SPECIAL_ATTACK_ID]}
     </TableCell>
-    <TableCell center>
+    <TableCell center style={{ height: 'auto' }}>
       <Button
         options={{
+          className: classes.details,
           id: pokemon.id.toString(),
           label: getTranslation('pokemon-details'),
           to: POKEMON.replace(':id', String(pokemon.id)),
@@ -133,5 +142,7 @@ const PokedexEntry = ({ pokemon }: IOwnProps) => (
     </TableCell>
   </TableRow>
 );
+
+const PokedexEntry = injectSheet(sheet)(unstyledPokedexEntry);
 
 export default PokedexEntry;

@@ -1,8 +1,10 @@
 import chroma from 'chroma-js';
 import classnames from 'classnames';
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { getTranslation } from '../../../utils/translations';
 
+import { IButtonProps } from '../../../components/button';
 import Buttons from '../../../components/buttons';
 import Table from '../../../components/table';
 import PokedexEntry from './pokedex-entry';
@@ -18,11 +20,117 @@ import {
 } from '../../../../constants/pokemon-stats';
 import { getStatColor } from '../../../../constants/pokemon-stats-color';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
+import { PADDING_L, PADDING_M, PADDING_S, PADDING_XL, PADDING_XXL } from '../../../../constants/styles';
+import { TEXT_DARK } from '../../../../constants/styles-fonts';
+import { DESKTOP_L, MOBILE_XL } from '../../../../constants/styles-media-queries';
 
+import { ISheet } from '../../../root.models';
 import { IPokedexFilters, IPokemonWithBaseCP } from '../pokedex.models';
+
+const sidebarSize = 280;
+
+const sheet: ISheet = {
+  buttons: {
+    margin: 0,
+    padding: `0 ${PADDING_L}px`,
+    width: '100%',
+  },
+  filters: {
+    maxHeight: 54,
+    overflow: 'hidden',
+    padding: PADDING_XL,
+    paddingBottom: 0,
+    textAlign: 'center',
+  },
+  filtersOpen: {
+    maxHeight: 'none',
+  },
+  results: {
+    padding: PADDING_XXL,
+  },
+  resultsEntry: {
+    color: TEXT_DARK,
+    opacity: 0.7,
+    transition: 'opacity 0.2s',
+
+    '&:active, &:focus, &:hover': {
+      opacity: 1,
+    },
+  },
+
+  form: {
+    padding: `0 ${PADDING_M}px`,
+  },
+  formField: {
+    display: 'none',
+    marginLeft: 0,
+    marginRight: 0,
+    opacity: 0,
+    transition: 'opacity 0.2s',
+    width: '100%',
+
+    [MOBILE_XL]: {
+      "&[data-type='multi'], &[data-type='number']": {
+        width: `calc(50% - ${PADDING_S}px)`,
+
+        '&:nth-child(even)': {
+          marginRight: PADDING_S,
+        },
+        '&:nth-child(odd)': {
+          marginLeft: PADDING_S,
+        },
+      },
+    },
+  },
+  formFieldOpen: {
+    display: 'inline-block',
+    opacity: 1,
+  },
+
+  [DESKTOP_L]: {
+    buttons: {
+      display: 'none',
+    },
+    filters: {
+      display: 'inline-block',
+      height: '100%',
+      maxHeight: 'none',
+      padding: PADDING_XXL,
+      paddingRight: 0,
+      textAlign: 'left',
+      verticalAlign: 'top',
+      width: sidebarSize,
+    },
+    filtersOpen: {},
+    results: {
+      display: 'inline-block',
+      height: '100%',
+      verticalAlign: 'top',
+      width: `calc(100% - ${sidebarSize}px)`,
+    },
+
+    form: {
+      padding: 0,
+    },
+    formField: {
+      display: 'inline-block',
+      opacity: 1,
+
+      "&, &[data-type='multi'], &[data-type='number']": {
+        width: '100%',
+
+        '&:nth-child(odd), &:nth-child(even)': {
+          marginLeft: 0,
+          marginRight: 0,
+        },
+      },
+    },
+  },
+};
 
 interface IOwnProps {
   areFiltersOpen: boolean;
+  classes: { [key: string]: string };
   collection: IPokemonWithBaseCP[];
   filters: IPokedexFilters;
   handleLoadMore?: () => void;
@@ -32,8 +140,9 @@ interface IOwnProps {
   handleUpdateFilter: (filter: string, selection: any) => void;
 }
 
-const PokedexView = ({
+const unstyledPokedexView = ({
   areFiltersOpen,
+  classes,
   collection,
   filters,
   handleLoadMore,
@@ -42,8 +151,7 @@ const PokedexView = ({
   handleToggleFilters,
   handleUpdateFilter,
 }: IOwnProps) => {
-  const filtersButton = {
-    className: 'Search-toggle',
+  const filtersButton: IButtonProps = {
     icon: 'search',
     id: 'toggle-filters',
     onClick: handleToggleFilters,
@@ -51,19 +159,22 @@ const PokedexView = ({
   };
 
   return (
-    <div className="Search">
-      <div className={classnames('Search-filters', { ['is-open']: areFiltersOpen })}>
-        <Buttons className="Search-buttons" options={[filtersButton]} />
+    <React.Fragment>
+      <div className={classnames(classes.filters, areFiltersOpen ? classes.filtersOpen : undefined)}>
+        <Buttons className={classes.buttons} options={[filtersButton]} />
 
         <PokedexFilters
+          classNames={{
+            form: classes.form,
+            formField: classnames(classes.formField, areFiltersOpen ? classes.formFieldOpen : undefined),
+          }}
           filters={filters}
           handleResetFilters={handleResetFilters}
           handleUpdateFilter={handleUpdateFilter}
         />
       </div>
-      <div className="Search-results">
+      <div className={classes.results}>
         <Table
-          className="PokemonList"
           headings={[
             {
               label: '#',
@@ -149,7 +260,7 @@ const PokedexView = ({
           ]}
         >
           {collection.map((pokemon, index) => (
-            <PokedexEntry key={index} pokemon={pokemon} />
+            <PokedexEntry key={index} className={classes.resultsEntry} pokemon={pokemon} />
           ))}
         </Table>
 
@@ -167,8 +278,10 @@ const PokedexView = ({
           />
         )}
       </div>
-    </div>
+    </React.Fragment>
   );
 };
+
+const PokedexView = injectSheet(sheet)(unstyledPokedexView);
 
 export default PokedexView;

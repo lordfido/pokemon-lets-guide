@@ -14,8 +14,6 @@ export const paths = {
 };
 
 export const regex = {
-  css: /\.s?css$/,
-  fonts: /\.(woff|woff2|ttf|eot|svg)$/,
   html: /\.html$/,
   img: /\.(png|jpe?g|gif|ico|svg)$/,
   js: /\.js$/,
@@ -23,22 +21,6 @@ export const regex = {
   sw: /sw\.js/,
   ts: /\.ts$/,
   tsx: /\.tsx$/,
-};
-
-export const loaderPostCSS = {
-  loader: 'postcss-loader',
-  options: {
-    plugins: [...postcssConfig.plugins],
-    sourceMap: true,
-  },
-};
-
-export const loaderSass = {
-  loader: 'sass-loader',
-  options: {
-    sourceMap: true,
-    // importer: jsonImporter(),
-  },
 };
 
 export const loaderImages = {

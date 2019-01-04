@@ -5,28 +5,9 @@ interface ITranslationsCollection {
 const translations: ITranslationsCollection = {
   demo: ['', '', '', '', '', '', '', ''],
   order: ['japanese', 'english', 'german', 'spanish', 'french', 'italian', 'korean', 'chinese'],
+
   'generic-no': ['', 'No', '', 'No', '', '', '', ''],
   'generic-yes': ['', 'Yes', '', 'Si', '', '', '', ''],
-
-  // Pokemon Types
-  'type-Bug': ['', 'Bug', '', 'Bicho', '', '', '', ''],
-  'type-Dark': ['', 'Dark', '', 'Siniestro', '', '', '', ''],
-  'type-Dragon': ['', 'Dragon', '', 'Dragón', '', '', '', ''],
-  'type-Electric': ['', 'Electric', '', 'Eléctrico', '', '', '', ''],
-  'type-Fairy': ['', 'Fairy', '', 'Hada', '', '', '', ''],
-  'type-Fighting': ['', 'Fighting', '', 'Lucha', '', '', '', ''],
-  'type-Fire': ['', 'Fire', '', 'Fuego', '', '', '', ''],
-  'type-Flying': ['', 'Flying', '', 'Volador', '', '', '', ''],
-  'type-Ghost': ['', 'Ghost', '', 'Fantasma', '', '', '', ''],
-  'type-Grass': ['', 'Grass', '', 'Planta', '', '', '', ''],
-  'type-Ground': ['', 'Ground', '', 'Tierra', '', '', '', ''],
-  'type-Ice': ['', 'Ice', '', 'Hielo', '', '', '', ''],
-  'type-Normal': ['', 'Normal', '', 'Normal', '', '', '', ''],
-  'type-Poison': ['', 'Poison', '', 'Veneno', '', '', '', ''],
-  'type-Psychic': ['', 'Psychic', '', 'Psíquico', '', '', '', ''],
-  'type-Rock': ['', 'Rock', '', 'Roca', '', '', '', ''],
-  'type-Steel': ['', 'Steel', '', 'Acero', '', '', '', ''],
-  'type-Water': ['', 'Water', '', 'Agua', '', '', '', ''],
 
   // Pokemon stats
   'stat-attack': ['', 'Attack', '', 'Ataque', '', '', '', ''],

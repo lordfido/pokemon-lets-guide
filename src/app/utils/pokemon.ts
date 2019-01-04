@@ -1,5 +1,4 @@
-import { Types } from 'pokelab-lets-go';
-import { MegaStone } from 'pokelab-lets-go/dist/cjs/items';
+import { Types } from 'pokelab';
 import { sortBy } from './arrays';
 
 import pokemonExtraInfoList from '../../common/apis/mocks';
@@ -48,10 +47,10 @@ export const getPaddedId = (pokemonId: string): string => {
  * its avatar
  *
  * @example getMegaevolutionId('006'); // Will return '006'
- * @example getMegaevolutionId('006', 'CharizarditeY'); // Will return '006_f3'
+ * @example getMegaevolutionId('006', true, 'Y'); // Will return '006_f3'
  */
-export const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
-  if (!evolvesWith) {
+export const getMegaevolutionId = (id: string, isMega?: boolean, variant?: string) => {
+  if (!isMega) {
     return id;
   }
 
@@ -66,12 +65,10 @@ export const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
     },
   ];
 
-  for (const index in megaOptions) {
-    if (megaOptions[index]) {
-      const option = megaOptions[index];
-      if (new RegExp(option.name).test(evolvesWith)) {
-        return `${id}_${option.form}`;
-      }
+  if (variant) {
+    const option = megaOptions.find(o => o.name === variant);
+    if (option) {
+      return `${id}_${option.form}`;
     }
   }
 
@@ -84,22 +81,16 @@ export const getMegaevolutionId = (id: string, evolvesWith?: MegaStone) => {
  * its avatar
  *
  * @example getMegaevolutionName('Charizard'); // Will return 'Charizard'
- * @example getMegaevolutionName('Venusaur', 'Venusaurite'); // Will return 'Mega Venusaur'
- * @example getMegaevolutionName('Charizard', 'CharizarditeY'); // Will return 'Mega Charizard Y'
+ * @example getMegaevolutionName('Venusaur', true); // Will return 'Mega Venusaur'
+ * @example getMegaevolutionName('Charizard', true, 'Y'); // Will return 'Mega Charizard Y'
  */
-export const getMegaevolutionName = (name: string, evolvesWith?: MegaStone) => {
-  if (!evolvesWith) {
+export const getMegaevolutionName = (name: string, isMega?: boolean, variant?: string) => {
+  if (!isMega) {
     return name;
   }
 
-  const megaOptions = ['X', 'Y'];
-  for (const index in megaOptions) {
-    if (megaOptions[index]) {
-      const option = megaOptions[index];
-      if (new RegExp(option).test(evolvesWith)) {
-        return `Mega ${name} ${option}`;
-      }
-    }
+  if (variant) {
+    return `Mega ${name} ${variant}`;
   }
 
   return `Mega ${name}`;

@@ -1,4 +1,4 @@
-import { Types } from 'pokelab-lets-go';
+import { Types } from 'pokelab';
 
 const typeIcons = {
   [Types.Bug]: require('../assets/images/type-icons/bug.png'),

@@ -2,7 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
-import baseConfig, { loaderImages, loaderPostCSS, loaderSass, manifestPlugin, paths, regex } from './base.config';
+import baseConfig, { loaderImages, manifestPlugin, paths, regex } from './base.config';
 
 export const appConfig: webpack.Configuration = {
   ...baseConfig,
@@ -35,35 +35,6 @@ export const appConfig: webpack.Configuration = {
             },
           },
           loaderImages,
-        ],
-      },
-
-      // Fonts
-      {
-        include: paths.root,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name]_[hash].[ext]',
-        },
-        test: regex.fonts,
-      },
-
-      // CSS
-      {
-        exclude: /node_modules/,
-        include: paths.src,
-        test: regex.css,
-        use: [
-          {
-            loader: 'style-loader',
-            options: { sourceMap: true },
-          },
-          {
-            loader: 'css-loader',
-            options: { sourceMap: true },
-          },
-          loaderPostCSS,
-          loaderSass,
         ],
       },
 

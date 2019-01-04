@@ -11,6 +11,7 @@ import Text from './form-text';
 import { ICheckboxOptions, IDateOptions, IDropdownOptions, IGenericField, ITextOptions } from './form.models';
 
 interface IOwnProps {
+  className?: string;
   options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ITextOptions);
 }
 
@@ -22,7 +23,10 @@ interface IDisablingProps {
 }
 
 const isDisabled = ({ isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled }: IDisablingProps) =>
-  (typeof isDiactivatable === 'undefined' || isDiactivatable) && ((disabled && !isAlwaysEnabled) || isAlwaysDisabled);
+  !!(
+    (typeof isDiactivatable === 'undefined' || isDiactivatable) &&
+    ((disabled && !isAlwaysEnabled) || isAlwaysDisabled)
+  );
 
 class Field extends React.Component<IOwnProps> {
   public onClick = (
@@ -73,25 +77,9 @@ class Field extends React.Component<IOwnProps> {
     }
   };
 
-  public renderWrappedField(field: React.ReactElement<{}>) {
-    const { options } = this.props;
-
-    const styles = {
-      wrapper: {
-        display: 'block',
-        textAlign: options.type === 'button' ? 'center' : 'initial',
-      } as React.CSSProperties,
-    };
-
-    return (
-      <span key={options.updateId || options.id} style={styles.wrapper} data-type={options.type}>
-        {field}
-      </span>
-    );
-  }
-
   public render() {
     const {
+      className,
       options: { isDiactivatable, isDisabled: disabled, isAlwaysDisabled, isAlwaysEnabled, ...defaultOptions },
     } = this.props;
 
@@ -106,31 +94,45 @@ class Field extends React.Component<IOwnProps> {
       case 'number':
       case 'password':
       case 'textarea':
-        return this.renderWrappedField(
+        return (
           <Text
+            className={className}
             options={{
               ...options,
               defaultValue: 'defaultValue' in options ? String(options.defaultValue) : undefined,
             }}
-            onClick={this.onClick}
-            onChange={this.onChange}
-            onFocus={this.onFocus}
+            onChange={!options.isDisabled ? this.onChange : undefined}
+            onClick={!options.isDisabled ? this.onClick : undefined}
+            onFocus={!options.isDisabled ? this.onFocus : undefined}
           />
         );
 
       case 'switch':
-        return this.renderWrappedField(
-          <Switch options={options} onClick={this.onClick} onChange={this.onChange} onFocus={this.onFocus} />
+        return (
+          <Switch
+            className={className}
+            options={options}
+            onChange={!options.isDisabled ? this.onChange : undefined}
+            onClick={!options.isDisabled ? this.onClick : undefined}
+            onFocus={!options.isDisabled ? this.onFocus : undefined}
+          />
         );
 
       case 'checkbox':
-        return this.renderWrappedField(
-          <Checkbox options={options} onClick={this.onClick} onChange={this.onChange} onFocus={this.onFocus} />
+        return (
+          <Checkbox
+            className={className}
+            options={options}
+            onChange={!options.isDisabled ? this.onChange : undefined}
+            onClick={!options.isDisabled ? this.onClick : undefined}
+            onFocus={!options.isDisabled ? this.onFocus : undefined}
+          />
         );
 
       case 'dropdown':
-        return this.renderWrappedField(
+        return (
           <Dropdown
+            className={className}
             options={{
               ...options,
               defaultValue:
@@ -139,15 +141,16 @@ class Field extends React.Component<IOwnProps> {
                   : undefined,
               options: 'options' in options ? options.options : [],
             }}
-            onClick={this.onClick}
-            onChange={this.onChange}
-            onFocus={this.onFocus}
+            onChange={!options.isDisabled ? this.onChange : undefined}
+            onClick={!options.isDisabled ? this.onClick : undefined}
+            onFocus={!options.isDisabled ? this.onFocus : undefined}
           />
         );
 
       case 'multi':
-        return this.renderWrappedField(
+        return (
           <Dropdown
+            className={className}
             options={{
               ...options,
               defaultValue:
@@ -157,15 +160,16 @@ class Field extends React.Component<IOwnProps> {
               isMulti: true,
               options: 'options' in options ? options.options : [],
             }}
-            onClick={this.onClick}
-            onChange={this.onChange}
-            onFocus={this.onFocus}
+            onChange={!options.isDisabled ? this.onChange : undefined}
+            onClick={!options.isDisabled ? this.onClick : undefined}
+            onFocus={!options.isDisabled ? this.onFocus : undefined}
           />
         );
 
       case 'date':
-        return this.renderWrappedField(
+        return (
           <Date
+            className={className}
             options={{
               ...options,
               defaultValue:
@@ -173,14 +177,24 @@ class Field extends React.Component<IOwnProps> {
                   ? options.defaultValue
                   : undefined,
             }}
-            onClick={this.onClick}
-            onChange={this.onChange}
-            onFocus={this.onFocus}
+            onChange={!options.isDisabled ? this.onChange : undefined}
+            onClick={!options.isDisabled ? this.onClick : undefined}
+            onFocus={!options.isDisabled ? this.onFocus : undefined}
           />
         );
 
       case 'button':
-        return this.renderWrappedField(<Button options={options} />);
+        return (
+          <Button
+            className={className}
+            options={{
+              ...options,
+              onChange: !options.isDisabled ? this.onChange : undefined,
+              onClick: !options.isDisabled ? this.onClick : undefined,
+              onFocus: !options.isDisabled ? this.onFocus : undefined,
+            }}
+          />
+        );
 
       default:
         return null;

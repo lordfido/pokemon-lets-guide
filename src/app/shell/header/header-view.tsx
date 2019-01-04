@@ -1,11 +1,32 @@
 import * as React from 'react';
-
-import { HOME, POKEDEX } from '../../../constants/appRoutes';
+import injectSheet from 'react-jss';
 import { getTranslation } from '../../utils/translations';
+
 import HeaderItem from './header-item';
 
-const HeaderView = () => (
-  <header className="Header">
+import { HOME, POKEDEX } from '../../../constants/appRoutes';
+import { HEADER_SIZE } from '../../../constants/styles';
+import { BLACK } from '../../../constants/styles-colors';
+import { TEXT_WHITE } from '../../../constants/styles-fonts';
+
+import { ISheet } from '../../root.models';
+
+const sheet: ISheet = {
+  wrapper: {
+    backgroundColor: BLACK,
+    color: TEXT_WHITE,
+    flexShrink: 0,
+    height: HEADER_SIZE,
+    width: '100%',
+  },
+};
+
+interface IOwnProps {
+  classes: { [key: string]: string };
+}
+
+const unstyledHeaderView = ({ classes }: IOwnProps) => (
+  <header className={classes.wrapper}>
     <HeaderItem image={require('../../../assets/images/home.png')} to={HOME} />
     <HeaderItem
       image={require('../../../assets/images/pokedex.png')}
@@ -16,5 +37,7 @@ const HeaderView = () => (
     <HeaderItem image={require('../../../assets/images/calculator.png')} text={getTranslation('header-calculator')} />
   </header>
 );
+
+const HeaderView = injectSheet(sheet)(unstyledHeaderView);
 
 export default HeaderView;

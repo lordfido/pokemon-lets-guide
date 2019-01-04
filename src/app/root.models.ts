@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react-jss';
 import { combineReducers } from 'redux';
 
 import pokedexReducer from './modules/pokedex/pokedex.reducer';
@@ -17,3 +18,9 @@ export const createRootReducer = () =>
   combineReducers({
     pokedex: pokedexReducer,
   });
+
+export interface ISheet {
+  [key: string]: CSSProperties;
+}
+
+export type CssSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

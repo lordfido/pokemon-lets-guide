@@ -1,9 +1,34 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import injectSheet from 'react-jss';
 
 import Tab, { ITabOptions } from './tab';
 
+import { SIZE_XXS } from '../../constants/styles';
+
+import { ISheet } from '../root.models';
+
+const sheet: ISheet = {
+  content: {
+    display: 'block',
+    margin: '0 auto',
+  },
+  wrapper: {
+    display: 'block',
+    marginBottom: SIZE_XXS,
+    overflow: 'hidden',
+    overflowX: 'auto',
+    textAlign: 'center',
+    width: '100%',
+
+    '&::-webkit-scrollbar, &::-webkit-scrollbar-thumb': {
+      display: 'none',
+    },
+  },
+};
+
 interface IOwnProps {
+  classes: { [key: string]: string };
   options: ITabOptions[];
   activeTab: string;
   className?: string;
@@ -13,7 +38,7 @@ interface IOwnState {
   width: number;
 }
 
-class Tabs extends React.Component<IOwnProps, IOwnState> {
+class UnstyledTabs extends React.Component<IOwnProps, IOwnState> {
   public state = {
     width: 0,
   };
@@ -48,19 +73,18 @@ class Tabs extends React.Component<IOwnProps, IOwnState> {
   };
 
   public render() {
-    const { className, options, activeTab } = this.props;
+    const { classes, className, options, activeTab } = this.props;
     const { width } = this.state;
 
     if (!options || !options.length) {
       return null;
     }
 
-    const classes = classnames('Tabs', className);
     const wrapperStyle = { minWidth: `${width}px` };
 
     return (
-      <div className={classes}>
-        <ul className="Tabs-wrapper" style={wrapperStyle}>
+      <div className={classnames(classes.wrapper, className)}>
+        <ul className={classes.content} style={wrapperStyle}>
           {options.map(tab => (
             <Tab
               key={tab.id}
@@ -81,5 +105,7 @@ class Tabs extends React.Component<IOwnProps, IOwnState> {
     );
   }
 }
+
+const Tabs = injectSheet(sheet)(UnstyledTabs);
 
 export default Tabs;

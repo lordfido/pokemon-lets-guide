@@ -1,73 +1,66 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import Select from 'react-select';
 
 import TouchableContent from '../../components/touchable-content';
 
+import { commonStyles } from './field.styles';
+
+import { ISheet } from '../../root.models';
 import { IDropdownOptions } from './form.models';
 
+const sheet: ISheet = {
+  fieldDisabled: commonStyles.fieldDisabled,
+  label: commonStyles.label,
+  wrapper: commonStyles.wrapper,
+};
+
 interface IOwnProps {
+  classes: { [key: string]: string };
+  className?: string;
   options: IDropdownOptions;
-  onChange: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
-  onClick: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
-  onFocus: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
+  onClick?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
+  onFocus?: (event: React.ChangeEvent<HTMLInputElement> | any) => void;
 }
 
-const Dropdown = ({ options, onChange, onClick, onFocus }: IOwnProps) => (
+const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IOwnProps) => (
   <label
     htmlFor={options.id}
-    className={classnames('Dropdown', options.className, {
-      'is-submitted': options.isSubmitted || options.error,
-    })}
+    data-type={options.type}
+    className={classnames(classes.wrapper, options.className, className)}
   >
-    <span className="Dropdown-label">
+    <span className={classes.label}>
       <TouchableContent options={options} />
     </span>
 
-    {options.isMulti && (
-      <Select
-        placeholder={options.placeholder}
-        options={options.options}
-        defaultValue={
-          options.options
-            ? options.options.filter(option => {
-                if (options.defaultValue) {
-                  return options.defaultValue.findIndex(o => o === option.value) >= 0;
-                }
+    <Select
+      className={classnames(options.isDisabled ? classes.fieldDisabled : undefined)}
+      defaultValue={
+        options.options
+          ? options.options.filter(option => {
+              if (options.defaultValue) {
+                return options.defaultValue.findIndex(o => o === option.value) >= 0;
+              }
 
-                return false;
-              })
-            : null
-        }
-        onChange={onChange}
-        isMulti
-        isDisabled={options.isDisabled}
-        styles={options.colourStyles}
-      />
-    )}
+              return false;
+            })
+          : null
+      }
+      isDisabled={options.isDisabled}
+      isMulti={options.isMulti}
+      onChange={onChange}
+      onFocus={onFocus}
+      options={options.options}
+      placeholder={options.placeholder}
+      styles={options.colourStyles}
+    />
 
-    {!options.isMulti && (
-      <select
-        id={options.id}
-        name={options.id}
-        className={classnames('Dropdown-field', { 'has-errors': options.error })}
-        defaultValue={options.defaultValue ? options.defaultValue : undefined}
-        onClick={onClick}
-        onChange={onChange}
-        onFocus={onFocus}
-        disabled={options.isDisabled}
-      >
-        {options.options &&
-          options.options.map(option => (
-            <option key={option.id} className="Dropdown-options" value={option.value}>
-              {option.label}
-            </option>
-          ))}
-      </select>
-    )}
-
-    {options.error && <span className="Dropdown-error">{options.error}</span>}
+    {options.error && <span className={classes.error}>{options.error}</span>}
   </label>
 );
+
+const Dropdown = injectSheet(sheet)(unstyledDropdown);
 
 export default Dropdown;

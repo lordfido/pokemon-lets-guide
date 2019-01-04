@@ -1,4 +1,4 @@
-import { Languages } from 'pokelab-lets-go';
+import { Languages } from 'pokelab';
 import { warn } from '../../common/utils/logger';
 import { getInstallationData } from './installation';
 

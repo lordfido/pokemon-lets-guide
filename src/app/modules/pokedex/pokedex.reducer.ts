@@ -204,12 +204,12 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
       }
 
       // Filter mega evolutions
-      if (!filters.showMegaevolutions && pokemon.megaEvolution) {
+      if (!filters.showMegaevolutions && pokemon.isMega) {
         return false;
       }
 
       // Filter alolan forms
-      if (!filters.showAlolanForms && pokemon.alolanForm) {
+      if (!filters.showAlolanForms && pokemon.isAlolan) {
         return false;
       }
 

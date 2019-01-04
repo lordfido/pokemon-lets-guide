@@ -6,6 +6,6 @@ interface IOwnProps {
   [key: string]: any;
 }
 
-const CustomLazyImage = ({ src, ...props }: IOwnProps) => <Img offset={300} src={src} {...props} />;
+const Image = ({ src, ...props }: IOwnProps) => <Img offset={300} src={src} {...props} />;
 
-export default CustomLazyImage;
+export default Image;

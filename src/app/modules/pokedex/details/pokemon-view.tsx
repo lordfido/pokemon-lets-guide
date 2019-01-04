@@ -1,4 +1,5 @@
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { getSuggestedIVs } from '../../../utils/pokemon';
 import { getTranslation } from '../../../utils/translations';
 
@@ -10,15 +11,29 @@ import PokemonPreview from './pokemon-preview';
 import PokemonStats from './pokemon-stats';
 
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
+import { PADDING_XL } from '../../../../constants/styles';
+import { POKEDEX_BACKGROUND } from '../../../../constants/styles-colors';
+import { TEXT_WHITE } from '../../../../constants/styles-fonts';
 
 import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
+import { ISheet } from '../../../root.models';
+
+const sheet: ISheet = {
+  wrapper: {
+    backgroundColor: POKEDEX_BACKGROUND,
+    color: TEXT_WHITE,
+    paddingBottom: PADDING_XL,
+    width: '100%',
+  },
+};
 
 interface IOwnProps {
+  classes: { [key: string]: string };
   pokemon: IRichPokemon;
   pagination: IPokemonDetailPagination;
 }
 
-const PokemonDetailsView = ({ pokemon, pagination }: IOwnProps) => {
+const unstyledPokemonDetailsView = ({ classes, pokemon, pagination }: IOwnProps) => {
   const renderSuggestedStats = () => {
     const suggestedIVs = getSuggestedIVs(pokemon.baseStats);
 
@@ -31,7 +46,7 @@ const PokemonDetailsView = ({ pokemon, pagination }: IOwnProps) => {
   };
 
   return (
-    <div className="PokemonDetails">
+    <div className={classes.wrapper}>
       <PokemonInfo pokemon={pokemon} />
       <PokemonPreview src={pokemon.avatar} alt={getTranslation('pokemon-details-preview', pokemon.name)} />
       <PokemonStats pokemon={pokemon} />
@@ -44,5 +59,7 @@ const PokemonDetailsView = ({ pokemon, pagination }: IOwnProps) => {
     </div>
   );
 };
+
+const PokemonDetailsView = injectSheet(sheet)(unstyledPokemonDetailsView);
 
 export default PokemonDetailsView;
