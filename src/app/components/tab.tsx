@@ -1,3 +1,4 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -48,9 +49,10 @@ const sheet: ISheet = {
 };
 
 export interface ITabOptions {
+  customIcon?: React.ReactElement<{}>;
   id: string;
   label?: string;
-  icon?: string;
+  icon?: IconProp;
   iconLast?: boolean;
   to?: string;
   onClick?: (params?: any) => void;

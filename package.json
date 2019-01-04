@@ -17,11 +17,11 @@
     }
   },
   "scripts": {
+    "lint": "tslint **/*.ts **/*.tsx !node_modules/*",
     "check-types": "tsc",
     "prettier": "prettier --config .prettierrc --write './src/**/*.tsx' './src/**/*.ts' './src/**/*.js'",
-    "lint": "tslint **/*.ts **/*.tsx !node_modules/*",
     "clean:build": "rimraf dist",
-    "pre-build": "npm run check-types && npm run lint && npm run prettier && npm run clean:build",
+    "pre-build": "npm run lint && npm run check-types && npm run prettier && npm run clean:build",
     "build:dev": "npm run pre-build && webpack --config ./webpack/dev.config.ts",
     "build:pre": "npm run pre-build && webpack --config ./webpack/pre.config.ts",
     "build": "npm run pre-build && webpack --config ./webpack/prod.config.ts",

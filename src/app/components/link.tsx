@@ -1,3 +1,4 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -50,8 +51,9 @@ const sheet: ISheet = {
 export interface ILinkProps {
   id: string;
   className?: string;
+  customIcon?: React.ReactElement<{}>;
   label?: string;
-  icon?: string | React.ReactElement<{}>;
+  icon?: IconProp;
   iconLast?: boolean;
   isExternal?: boolean;
   to?: any;
@@ -92,6 +94,7 @@ const unstyledLink = ({ classes, isTransparent, options, shouldInherit }: IOwnPr
   }
 
   const touchable = {
+    customIcon: options.customIcon,
     icon: options.icon,
     iconLast: options.iconLast,
     label: options.label,
