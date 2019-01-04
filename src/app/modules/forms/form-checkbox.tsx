@@ -1,6 +1,9 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
+
+import Space from '../../components/space';
 
 import { commonStyles } from './field.styles';
 
@@ -72,7 +75,8 @@ const unstyledCheckbox = ({ classes, className, options, onChange, onClick, onFo
 
     <span className={classes.label}>
       <div className={classnames(classes.checkbox, { [classes.isOn]: options.isChecked })} />
-      {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
+      {options.icon && <FontAwesomeIcon icon={options.icon} />}
+      {options.icon && options.label && <Space />}
       {options.label}
     </span>
   </label>

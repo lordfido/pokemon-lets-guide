@@ -1,4 +1,4 @@
-import { BORDER_RADIUS, PADDING_L, PADDING_S, PADDING_M, PADDING_XL } from '../../../constants/styles';
+import { BORDER_RADIUS, PADDING_L, PADDING_M, PADDING_S, PADDING_XL } from '../../../constants/styles';
 import {
   DISABLED_BACKGROUND,
   DISABLED_BORDER,

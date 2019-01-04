@@ -1,6 +1,9 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
+
+import Space from '../../components/space';
 
 import { BORDER_RADIUS } from '../../../constants/styles';
 import { BRAND_COLOR } from '../../../constants/styles-colors';
@@ -44,7 +47,8 @@ interface IOwnProps {
 const unstyledDatePicker = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
   <div data-type={options.type} className={classnames(classes.wrapper, className)}>
     <label htmlFor={options.id} className={classes.label}>
-      {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
+      {options.icon && <FontAwesomeIcon icon={options.icon} />}
+      {options.icon && options.label && <Space />}
       <span>{options.label}</span>
     </label>
 

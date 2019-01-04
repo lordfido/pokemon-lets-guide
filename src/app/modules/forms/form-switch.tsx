@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -5,8 +6,8 @@ import { getTranslation } from '../../utils/translations';
 
 import Space from '../../components/space';
 
-import { commonStyles } from './field.styles';
 import { PADDING_S } from '../../../constants/styles';
+import { commonStyles } from './field.styles';
 
 import { ISheet } from '../../root.models';
 import { ICheckboxOptions } from './form.models';
@@ -123,7 +124,7 @@ const unstyledSwitch = ({ classes, className, options, onChange, onClick, onFocu
     />
 
     <span className={classes.label}>
-      {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
+      {options.icon && <FontAwesomeIcon icon={options.icon} />}
       {options.icon && options.label && <Space />}
       {options.label}
     </span>

@@ -1,11 +1,13 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import TextArea from 'react-textarea-autosize';
 
-import { commonStyles } from './field.styles';
+import Space from '../../components/space';
 
 import { PADDING_L } from '../../../constants/styles';
+import { commonStyles } from './field.styles';
 
 import { ISheet } from '../../root.models';
 import { ITextOptions } from './form.models';
@@ -34,7 +36,8 @@ interface IOwnProps {
 const unstyledText = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
   <label htmlFor={options.id} data-type={options.type} className={classnames(classes.wrapper, className)}>
     <span className={classes.label}>
-      {options.icon && <i className={classnames('fa', { [`fa-${options.icon}`]: options.icon })} />}
+      {options.icon && <FontAwesomeIcon icon={options.icon} />}
+      {options.icon && options.label && <Space />}
       <span>{options.label}</span>
     </span>
 

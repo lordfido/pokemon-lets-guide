@@ -73,11 +73,11 @@ const sheet: ISheet = {
       "&[data-type='multi'], &[data-type='number']": {
         width: `calc(50% - ${PADDING_S}px)`,
 
-        '&:nth-child(odd)': {
-          marginLeft: PADDING_S,
-        },
         '&:nth-child(even)': {
           marginRight: PADDING_S,
+        },
+        '&:nth-child(odd)': {
+          marginLeft: PADDING_S,
         },
       },
     },

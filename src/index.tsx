@@ -5,13 +5,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { setInstallationData } from './app/utils/installation';
 import buildStore from './common/utils/buildStore';
+import initFontAwesome from './common/utils/iconLibrary';
 import getCustomStyles from './common/utils/styles';
 
 import { clearStore, clearWorkerConfig, getLastSession, getStore, setLastSession } from './common/utils/idb';
 import { error } from './common/utils/logger';
-
-// Import the CSS
-import './styles/main.scss';
 
 import AppWrapper from './app/app-wrapper';
 import ScrollToTop from './app/components/scroll-to-top';
@@ -21,6 +19,8 @@ import { IRootState } from './app/root.models';
 const packageJson = require('../package.json');
 const backgroundImage = require('./assets/images/switch.png');
 const htmlLogo = require('./images/logo.png');
+
+initFontAwesome();
 
 /**
  * Read persisted store and start a React application with persisted data
