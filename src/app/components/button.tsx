@@ -82,6 +82,10 @@ const sheet: ISheet = {
       ...wrapperActive,
     },
 
+    '&, &:active, &:focus, &:hover': {
+      textDecoration: 'none',
+    },
+
     '&:disabled': {
       ...wrapperDisabled,
     },

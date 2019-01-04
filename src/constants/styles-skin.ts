@@ -1,5 +1,8 @@
 import { GREY_LIGHT, GREY_LIGHT_2, GREY_LIGHT_3, GREY_LIGHT_4, WHITE } from './styles-colors';
 
+// App
+export const APP_BACKGROUND = WHITE;
+
 // Buttons
 export const BUTTON_BACKGROUND = WHITE;
 export const BUTTON_BORDER = '#f8e875';

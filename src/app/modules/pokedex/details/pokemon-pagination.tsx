@@ -42,7 +42,7 @@ const sheet: ISheet = {
     fontSize: FONT_XL,
     margin: `0 ${PADDING_L}px`,
     position: 'relative',
-    top: '-44%',
+    top: '-50%',
     verticalAlign: 'middle',
 
     [MAX_MOBILE_L]: {

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { setInstallationData } from './app/utils/installation';
 import buildStore from './common/utils/buildStore';
+import getCustomStyles from './common/utils/styles';
 
 import { clearStore, clearWorkerConfig, getLastSession, getStore, setLastSession } from './common/utils/idb';
 import { error } from './common/utils/logger';
@@ -55,6 +56,10 @@ const initReactApplication = async () => {
   });
 
   const store = await buildStore(persistedStore);
+
+  getCustomStyles().forEach(styles => {
+    document.head.appendChild(styles);
+  });
 
   const mountPoint = document.getElementById('app-wrapper');
   if (!!mountPoint) {
