@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { IGenericField } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
-import { BORDER_RADIUS, PADDING_XL, PADDING_S } from '../../constants/styles';
+import { BORDER_RADIUS, PADDING_S, PADDING_XL } from '../../constants/styles';
 import { FONT_M, TEXT_BLACK } from '../../constants/styles-fonts';
 import {
   BUTTON_BACKGROUND,
@@ -18,31 +18,29 @@ import {
 
 import { ISheet } from '../root.models';
 
-const activeWrapper = {
+const wrapperActive = {
   backgroundColor: BUTTON_BORDER,
   borderColor: BUTTON_BORDER,
 };
 
-const activeContent = {
+const contentActive = {
   backgroundColor: BUTTON_BORDER,
   borderColor: BUTTON_BACKGROUND,
 };
 
-const disabledWrapper = {
+const wrapperDisabled = {
   backgroundColor: BUTTON_DISABLED_BACKGROUND,
   borderColor: BUTTON_DISABLED_BACKGROUND,
   color: BUTTON_DISABLED_COLOR,
   cursor: 'not-allowed',
 };
 
-const disabledContent = {
+const contentDisabled = {
   backgroundColor: BUTTON_DISABLED_BACKGROUND,
   borderColor: BUTTON_DISABLED_BORDER,
 };
 
 const sheet: ISheet = {
-  activeContent,
-  activeWrapper,
   content: {
     backgroundColor: BUTTON_BACKGROUND,
     border: `2px solid ${BUTTON_BORDER}`,
@@ -57,15 +55,15 @@ const sheet: ISheet = {
     padding: `0px ${PADDING_XL}px`,
 
     ':active > &, :focus > &, :hover > &': {
-      ...activeContent,
+      ...contentActive,
     },
 
     ':disabled > &': {
-      ...disabledContent,
+      ...contentDisabled,
     },
   },
-  disabledContent,
-  disabledWrapper,
+  contentActive,
+  contentDisabled,
   wrapper: {
     backgroundColor: BUTTON_BACKGROUND,
     border: `2px solid ${BUTTON_BACKGROUND}`,
@@ -81,16 +79,19 @@ const sheet: ISheet = {
     verticalAlign: 'middle',
 
     '&:active, &:focus, &:hover': {
-      ...activeWrapper,
+      ...wrapperActive,
     },
 
     '&:disabled': {
-      ...disabledWrapper,
+      ...wrapperDisabled,
     },
   },
+  wrapperActive,
+  wrapperDisabled,
 };
 
 export interface IButtonProps extends IGenericField {
+  isActive?: boolean;
   to?: string;
 }
 
@@ -110,16 +111,14 @@ const unstyledButton = ({ classes, className, options }: IOwnProps) => {
   };
 
   const buttonClasses = {
-    button: classnames(classes.content, options.isDisabled ? classes.disabledContent : undefined),
-    wrapper: classnames(
-      classes.wrapper,
-      options.className,
-      className,
-      options.isDisabled ? classes.disabledWrapper : undefined,
-      {
-        'Button--icon': options.icon && !options.label,
-      }
-    ),
+    button: classnames(classes.content, {
+      [classes.contentActive]: options.isActive,
+      [classes.contentDisabled]: options.isDisabled,
+    }),
+    wrapper: classnames(classes.wrapper, options.className, className, {
+      [classes.wrapperActive]: options.isActive,
+      [classes.wrapperDisabled]: options.isDisabled,
+    }),
   };
 
   if (options.to) {

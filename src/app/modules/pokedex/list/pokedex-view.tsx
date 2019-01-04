@@ -20,12 +20,12 @@ import {
 } from '../../../../constants/pokemon-stats';
 import { getStatColor } from '../../../../constants/pokemon-stats-color';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
-import { PADDING_L, PADDING_XL, PADDING_XXL, PADDING_M, PADDING_S } from '../../../../constants/styles';
+import { PADDING_L, PADDING_M, PADDING_S, PADDING_XL, PADDING_XXL } from '../../../../constants/styles';
+import { TEXT_DARK } from '../../../../constants/styles-fonts';
 import { DESKTOP_L, MOBILE_XL } from '../../../../constants/styles-media-queries';
 
-import { IPokedexFilters, IPokemonWithBaseCP } from '../pokedex.models';
 import { ISheet } from '../../../root.models';
-import { TEXT_DARK } from '../../../../constants/styles-fonts';
+import { IPokedexFilters, IPokemonWithBaseCP } from '../pokedex.models';
 
 const sidebarSize = 280;
 

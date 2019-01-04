@@ -1,17 +1,15 @@
-import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
-import { isInstalledPWA } from '../common/utils/platforms';
 
 import FooterWrapper from './shell/footer/footer-wrapper';
 import HeaderWrapper from './shell/header/header-wrapper';
 
 import { HOME } from '../constants/appRoutes';
+import { GREY_LIGHT_5 } from '../constants/styles-colors';
 import { HD_DISPLAY } from '../constants/styles-media-queries';
 
 import { ISheet } from './root.models';
-import { GREY_LIGHT_5 } from '../constants/styles-colors';
 
 const homeButtonSize = 80;
 

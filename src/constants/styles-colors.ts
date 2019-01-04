@@ -34,4 +34,14 @@ export const BRAND_COLOR_LIGHT = DANGER_LIGHT;
 export const BRAND_COLOR = RED;
 export const BRAND_COLOR_DARK = DANGER;
 
+// Pokedex
+export const POKEDEX_BACKGROUND = '#00b2b6';
+export const POKEDEX_WINDOW_BACKGROUND = '#009cb3';
+export const POKEDEX_WINDOW_BACKGROUND_2 = '#0378ae';
+export const POKEDEX_WINDOW_BACKGROUND_3 = '#35b4d7';
+
 export const traslucentColor = (color: string, opacity: number) => `rgba(${chroma(color).rgb()}, ${opacity})`;
+export const lighterColor = (color: string, value?: number) =>
+  chroma(color)
+    .brighten(value)
+    .hex();

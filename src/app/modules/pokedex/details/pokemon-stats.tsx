@@ -1,5 +1,6 @@
 import { Line } from 'rc-progress';
 import * as React from 'react';
+import injectSheet from 'react-jss';
 import { getTranslation } from '../../../utils/translations';
 
 import { IButtonProps } from '../../../components/button';
@@ -9,8 +10,38 @@ import StatsChart from '../../../components/stats-chart';
 import { StatId } from '../../../../constants/pokemon-stats';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../../constants/styles';
+import { DESKTOP } from '../../../../constants/styles-media-queries';
+import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
+import { ISheet } from '../../../root.models';
 import { IRichPokemon } from '../pokedex.models';
+
+const sheet: ISheet = {
+  bars: {
+    margin: `${PADDING_L}px auto`,
+  },
+  chart: {
+    margin: '0 auto',
+    overflow: 'hidden',
+  },
+  window: {
+    ...commonStyles.window,
+    borderRadius: `${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px `,
+
+    [DESKTOP]: {
+      margin: 0,
+      marginRight: PADDING_XXL,
+      marginTop: PADDING_XXL,
+      width: MAX_WIDTH - PADDING_XXL,
+    },
+  },
+  wrapper: {
+    ...commonStyles.wrapper,
+    borderRadius: `${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px `,
+    textAlign: 'center',
+  },
+};
 
 type Bars = 'bars';
 const BARS: Bars = 'bars';
@@ -21,6 +52,7 @@ const CHART: Chart = 'chart';
 type ViewMode = Bars | Chart;
 
 interface IOwnProps {
+  classes: { [key: string]: string };
   pokemon: IRichPokemon;
 }
 
@@ -28,7 +60,7 @@ interface IOwnState {
   viewMode: ViewMode;
 }
 
-class PokemonStats extends React.Component<IOwnProps, IOwnState> {
+class UnstyledPokemonStats extends React.Component<IOwnProps, IOwnState> {
   constructor(props: IOwnProps) {
     super(props);
 
@@ -48,8 +80,8 @@ class PokemonStats extends React.Component<IOwnProps, IOwnState> {
 
     return [
       {
-        className: viewMode === CHART ? 'is-active' : '',
         id: CHART,
+        isActive: viewMode === CHART,
         label: getTranslation('pokemon-details-chart'),
         onClick: () => {
           this.toggleViewMode(CHART);
@@ -57,8 +89,8 @@ class PokemonStats extends React.Component<IOwnProps, IOwnState> {
         type: 'button',
       },
       {
-        className: viewMode === BARS ? 'is-active' : '',
         id: BARS,
+        isActive: viewMode === BARS,
         label: getTranslation('pokemon-details-bars'),
         onClick: () => {
           this.toggleViewMode(BARS);
@@ -80,7 +112,7 @@ class PokemonStats extends React.Component<IOwnProps, IOwnState> {
     // @ts-ignore
     return Object.keys(pokemon.relativeStats).map((statId: StatId) => {
       return (
-        <p key={statId} className="PokemonStats-individual">
+        <p key={statId}>
           {getStatName(statId)}: {pokemon.baseStats[statId]}
           <Line
             percent={pokemon.relativeStats[statId] * 100}
@@ -94,16 +126,17 @@ class PokemonStats extends React.Component<IOwnProps, IOwnState> {
   }
 
   public render() {
+    const { classes } = this.props;
     const { viewMode } = this.state;
 
     return (
-      <div className="PokemonStats">
-        <div className="PokemonStats-wrapper">
-          <p className="PokemonStats-line PokemonStats-title">{getTranslation('pokemon-details-base-stats')}</p>
+      <div className={classes.window}>
+        <div className={classes.wrapper}>
+          <p>{getTranslation('pokemon-details-base-stats')}</p>
 
-          {viewMode === CHART && <div className="PokemonStats-chart">{this.renderChart()}</div>}
+          {viewMode === CHART && <div className={classes.chart}>{this.renderChart()}</div>}
 
-          {viewMode === BARS && <div className="PokemonStats-bars">{this.renderBars()}</div>}
+          {viewMode === BARS && <div className={classes.bars}>{this.renderBars()}</div>}
 
           <Buttons align="center" options={this.getStatsTabs()} />
         </div>
@@ -111,5 +144,7 @@ class PokemonStats extends React.Component<IOwnProps, IOwnState> {
     );
   }
 }
+
+const PokemonStats = injectSheet(sheet)(UnstyledPokemonStats);
 
 export default PokemonStats;

@@ -5,11 +5,11 @@ import Media from 'react-media';
 
 import Card from './card';
 
-import { PADDING_M, PADDING_XXXL, PADDING_S, PADDING_L } from '../../constants/styles';
-import getMediaQuery, { MAX_TABLET, TABLET, DESKTOP } from '../../constants/styles-media-queries';
+import { PADDING_L, PADDING_M, PADDING_S, PADDING_XXXL } from '../../constants/styles';
+import { WHITE } from '../../constants/styles-colors';
+import getQuery, { DESKTOP, MAX_TABLET, TABLET } from '../../constants/styles-media-queries';
 
 import { ISheet } from '../root.models';
-import { WHITE } from '../../constants/styles-colors';
 
 const sheet: ISheet = {
   card: {
@@ -40,6 +40,9 @@ const sheet: ISheet = {
   center: {
     textAlign: 'center',
   },
+  isClickable: {
+    cursor: 'pointer',
+  },
   row: {},
   table: {
     display: 'block',
@@ -52,8 +55,8 @@ const sheet: ISheet = {
   },
   tableBody: {
     display: 'inline-block',
-    verticalAlign: 'top',
     textAlign: 'left',
+    verticalAlign: 'top',
 
     [DESKTOP]: {
       display: 'table-row-group',
@@ -61,8 +64,8 @@ const sheet: ISheet = {
   },
   tableHead: {
     display: 'inline-block',
-    verticalAlign: 'top',
     textAlign: 'left',
+    verticalAlign: 'top',
 
     [DESKTOP]: {
       display: 'table-header-group',
@@ -146,7 +149,7 @@ const unstyledTable = ({ children, classes, className, headings }: IOwnProps) =>
           headings.map((heading, index) => (
             <th
               key={index}
-              className={classnames(classes.th, classes.cell, { 'is-clickable': heading.onClick })}
+              className={classnames(classes.th, classes.cell, { [classes.isClickable]: heading.onClick })}
               onClick={heading.onClick}
               style={heading.style}
             >
@@ -158,7 +161,7 @@ const unstyledTable = ({ children, classes, className, headings }: IOwnProps) =>
   );
 
   return (
-    <Media query={getMediaQuery(MAX_TABLET)}>
+    <Media query={getQuery(MAX_TABLET)}>
       {(matches: boolean) =>
         matches ? (
           <div className={classnames(classes.table, className)}>

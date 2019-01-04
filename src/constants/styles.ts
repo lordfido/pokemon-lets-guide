@@ -26,6 +26,8 @@ export const PAGE_MAX_WIDTH = 940;
 
 // MISC
 export const BORDER_RADIUS = 4;
+export const BORDER_RADIUS_SMALL = BORDER_RADIUS * 4;
+export const BORDER_RADIUS_BIG = BORDER_RADIUS * 8;
 
 // Avatar
 export const AVATAR_SIZE = size * 12; // 96
