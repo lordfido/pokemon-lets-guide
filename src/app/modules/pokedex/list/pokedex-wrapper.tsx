@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, RouteComponentProps } from 'react-router';
+import { Redirect } from 'react-router';
 import { updateCollection } from '../../../utils/collections';
 
 import PokedexView from './pokedex-view';
@@ -15,8 +15,8 @@ import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexIni
 
 const DEBOUNCE_MS = 300;
 
-const stringToFilters = (url: string) => {
-  if (/\;/.test(url) === false && /\=/.test(url) === false) {
+const stringToFilters = (url?: string) => {
+  if (!url || (/\;/.test(url) === false && /\=/.test(url) === false)) {
     return {};
   }
 
@@ -57,9 +57,10 @@ const filtersToString = (filters: IPokedexFilters) =>
     .filter(f => f)
     .join(';');
 
-type RouteProps = RouteComponentProps<{
-  query: string;
-}>;
+interface IOwnProps {
+  query?: string;
+  url: string;
+}
 
 interface IStateProps {
   collection: IPokemonWithBaseCP[];
@@ -83,7 +84,7 @@ interface IDispatchProps {
   SortPokedex: (parameters: any) => void;
 }
 
-type Props = RouteProps & IStateProps & IDispatchProps;
+type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
@@ -99,12 +100,9 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   private filtersDebounce: NodeJS.Timeout = setTimeout(() => undefined, 0);
 
   public componentDidMount() {
-    const {
-      FilterPokedex,
-      match: { params },
-    } = this.props;
+    const { FilterPokedex, query } = this.props;
 
-    const urlFilters = stringToFilters(params.query);
+    const urlFilters = stringToFilters(query);
     const parsedFilters = Object.keys(pokedexInitialState.filters).map(key => ({
       name: key,
       // @ts-ignore
@@ -200,9 +198,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   }
 
   public render() {
-    const {
-      match: { url },
-    } = this.props;
+    const { url } = this.props;
     const { areFiltersOpen, redirectTo } = this.state;
     const redirection = redirectTo ? SEARCH.replace(':query', redirectTo) : '';
 

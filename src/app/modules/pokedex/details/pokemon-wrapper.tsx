@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { getRichPokemon } from '../../../utils/pokemon';
 
 import { getPokemonPagination, getSelectedPokemon } from '../../../root.reducer';
@@ -12,28 +12,28 @@ import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
 
 import { POKEDEX } from '../../../../constants/appRoutes';
 
-interface IMatchParams {
+interface IOwnProps {
   id: string;
 }
-
-interface ILocationProps extends RouteComponentProps<IMatchParams> {}
 
 interface IStateProps {
   pokemon: IRichPokemon | void;
   pagination: IPokemonDetailPagination;
 }
 
-type Props = ILocationProps & IStateProps;
+type Props = IOwnProps & IStateProps;
 
 const PokemonDetailsWrapper = ({ pokemon, pagination }: Props) =>
   pokemon ? <PokemonDetailsView pokemon={pokemon} pagination={pagination} /> : <Redirect to={{ pathname: POKEDEX }} />;
 
-const mapStateToProps = (state: IRootState, props: Props): IStateProps => {
-  const selectedPokemon = getSelectedPokemon(state)(props.match.params.id);
+const mapStateToProps = (state: IRootState, ownProps: Props): IStateProps => {
+  const selectedPokemon = getSelectedPokemon(state)(ownProps.id);
   const pokemon = selectedPokemon ? getRichPokemon(selectedPokemon) : undefined;
 
+  const pagination = getPokemonPagination(state)(ownProps.id);
+
   return {
-    pagination: getPokemonPagination(state)(props.match.params.id),
+    pagination,
     pokemon,
   };
 };
