@@ -17,7 +17,9 @@ import {
 } from '../../constants/pokemon-stats';
 
 import { PokemonType } from '../../constants/pokemon-types';
+import { variantOptions } from '../../constants/pokemon-variants';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon, ITypeRelations } from '../modules/pokedex/pokedex.models';
+import { getTranslation } from './translations';
 
 /**
  * Based on a value and a max value, returns a number between 0 and 1
@@ -41,66 +43,92 @@ export const getPaddedId = (pokemonId: string): string => {
   return id;
 };
 
+interface IVariantProps {
+  isAlolan?: boolean;
+  isMega?: boolean;
+  variant?: string;
+}
+
 /**
+ *
  * Based in a pokemon ID, and an object that makes that pokemon evolve,
  * generates a new ID matching www.pokemon.com patterns, so we can fetch
  * its avatar
- *
- * @example getMegaevolutionId('006'); // Will return '006'
- * @example getMegaevolutionId('006', true, 'Y'); // Will return '006_f3'
  */
-export const getMegaevolutionId = (id: string, isMega?: boolean, variant?: string) => {
-  if (!isMega) {
+interface IVariantIdProps extends IVariantProps {
+  id: string;
+}
+export const getVariantId = ({ id, isAlolan, isMega, variant }: IVariantIdProps) => {
+  if (!isAlolan && !isMega && !variant) {
     return id;
   }
 
-  const megaOptions = [
-    {
-      form: 'f2',
-      name: 'X',
-    },
-    {
-      form: 'f3',
-      name: 'Y',
-    },
-  ];
+  let option;
+  // Alolan pokemon
+  if (isAlolan) {
+    option = variantOptions.find(o => !!o.isExact && o.name === 'Alolan' && (!o.id || o.id === id));
 
-  if (variant) {
-    const option = megaOptions.find(o => o.name === variant);
-    if (option) {
-      return `${id}_${option.form}`;
+    // Megaevolutions
+  } else if (isMega) {
+    if (variant) {
+      option = variantOptions.find(o => !!o.isExact && o.name === variant && (!o.id || o.id === id));
+    } else {
+      option = { form: 'f2' };
     }
+
+    // Other variants (pokemon specific)
+  } else {
+    option = variantOptions.find(
+      o =>
+        !!variant && (!o.id || o.id === id) && ((!!o.isExact && o.name === variant) || new RegExp(o.name).test(variant))
+    );
   }
 
-  return `${id}_${megaOptions[0].form}`;
+  if (option && option.form) {
+    return `${id}_${option.form}`;
+  }
+
+  return id;
 };
 
 /**
- * Based in a pokemon name, and an object that makes that pokemon evolve,
- * generates a new ID matching www.pokemon.com patterns, so we can fetch
- * its avatar
- *
- * @example getMegaevolutionName('Charizard'); // Will return 'Charizard'
- * @example getMegaevolutionName('Venusaur', true); // Will return 'Mega Venusaur'
- * @example getMegaevolutionName('Charizard', true, 'Y'); // Will return 'Mega Charizard Y'
+ * Based in a pokemon name and variant, generates a new name
  */
-export const getMegaevolutionName = (name: string, isMega?: boolean, variant?: string) => {
-  if (!isMega) {
+interface IVariantNameProps extends IVariantProps {
+  name: string;
+}
+export const getVariantName = ({ name, isAlolan, isMega, variant }: IVariantNameProps) => {
+  if (!isAlolan && !isMega && !variant) {
     return name;
   }
 
-  if (variant) {
-    return `Mega ${name} ${variant}`;
+  // Alolan pokemon
+  if (isAlolan) {
+    return `${name} ${getTranslation('forms-alolan')}`;
   }
 
-  return `Mega ${name}`;
+  // Megaevolutions
+  if (isMega) {
+    if (variant) {
+      return `Mega ${name} ${variant}`;
+    }
+
+    return `Mega ${name}`;
+  }
+
+  // Other variants (pokemon specific)
+  if (variant) {
+    return `${name} (${variant})`;
+  }
+
+  return name;
 };
 
 /**
  * Fetch the avatar of selected pokemon from www.pokemon.com
  */
 export const getAvatarFromId = (pokemonId: string): string =>
-  `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPaddedId(pokemonId)}.png`;
+  `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${getPaddedId(pokemonId)}.png`;
 
 interface IGetCPArguments {
   stats: IPokemonStats;

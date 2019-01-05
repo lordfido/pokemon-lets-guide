@@ -216,7 +216,7 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
       return true;
     })
     .sort(sortBy(state.sort.sortBy, state.sort.order))
-    .slice(pagination.first, isPaginated ? pagination.last : state.collection.length - 1);
+    .slice(pagination.first, isPaginated ? pagination.last : state.collection.length);
 };
 
 // Get pagination data for pokemon list
