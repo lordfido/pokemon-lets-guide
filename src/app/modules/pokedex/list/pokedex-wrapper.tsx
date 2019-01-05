@@ -155,17 +155,12 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   public handleSortBy = (sortBy: string) => {
     const { SortPokedex, sort } = this.props;
 
-    const reverse = sortBy === sort.sortBy;
-    let order = 'asc';
+    const isTheSameFilter = sortBy === sort.sortBy;
+    const options = ['asc', 'desc'];
+    let order = options[0];
 
-    if (sortBy === 'id' || sortBy === 'name') {
-      if (reverse) {
-        order = 'desc';
-      }
-    } else {
-      if (!reverse) {
-        order = 'desc';
-      }
+    if ((!isTheSameFilter && sortBy !== 'id' && sortBy !== 'name') || (isTheSameFilter && order === sort.order)) {
+      order = options[1];
     }
 
     SortPokedex({ sortBy, order });
