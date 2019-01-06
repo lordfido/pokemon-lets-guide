@@ -8,7 +8,7 @@ type RouteProps = RouteComponentProps<{
 class ScrollToTop extends React.Component<RouteProps> {
   public componentDidUpdate(prevProps: RouteProps) {
     if (this.props.location !== prevProps.location) {
-      const scrollingElement = document.querySelector('.App-content');
+      const scrollingElement = document.querySelector('#app > div');
 
       if (scrollingElement) {
         scrollingElement.scrollTo(0, 0);
