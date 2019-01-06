@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import analyticsApi from '../../common/apis/analytics';
 
 type RouteProps = RouteComponentProps<{
   location: any;
@@ -13,6 +14,8 @@ class ScrollToTop extends React.Component<RouteProps> {
       if (scrollingElement) {
         scrollingElement.scrollTo(0, 0);
       }
+
+      analyticsApi.logPageView(this.props.location.pathname);
     }
   }
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import analyticsApi from '../common/apis/analytics';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
 import { isPre, isProduction } from '../common/utils/platforms';
@@ -15,6 +16,8 @@ import { createPokedex } from './modules/pokedex/pokedex.actions';
 
 import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
+import { LOAD_FINISHED, LOAD_INIT } from '../constants/metrics/actions';
+import { APP_LOAD } from '../constants/metrics/categories';
 
 import { IRootState } from './root.models';
 
@@ -63,6 +66,15 @@ class AppWrapper extends React.Component<Props> {
 
     // Get pokedex
     GetPokemon();
+
+    const initTimer = analyticsApi.getTimer(LOAD_INIT);
+    const renderTimer = new Date().getTime() - initTimer;
+
+    analyticsApi.logTiming({
+      action: LOAD_FINISHED,
+      category: APP_LOAD,
+      value: renderTimer,
+    });
   }
 
   public componentDidUpdate(prevProps: Props) {

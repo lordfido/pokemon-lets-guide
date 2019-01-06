@@ -4,15 +4,19 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { setInstallationData } from './app/utils/installation';
+import analyticsApi from './common/apis/analytics';
 import buildStore from './common/utils/buildStore';
 import initFontAwesome from './common/utils/iconLibrary';
-import getCustomStyles from './common/utils/styles';
-
 import { clearStore, clearWorkerConfig, getLastSession, getStore, setLastSession } from './common/utils/idb';
 import { error } from './common/utils/logger';
+import getCustomStyles from './common/utils/styles';
 
 import AppWrapper from './app/app-wrapper';
 import ScrollToTop from './app/components/scroll-to-top';
+
+import { ANALYTICS_ID } from './constants/branding';
+import { ANALTYICS_INIT, LOAD_INIT } from './constants/metrics/actions';
+import { APP_LOAD } from './constants/metrics/categories';
 
 import { IRootState } from './app/root.models';
 
@@ -20,12 +24,24 @@ const packageJson = require('../package.json');
 const backgroundImage = require('./assets/images/switch.png');
 const htmlLogo = require('./images/logo.png');
 
-initFontAwesome();
-
 /**
  * Read persisted store and start a React application with persisted data
  */
 const initReactApplication = async () => {
+  const analyticsTimer = analyticsApi.getTimer(ANALTYICS_INIT);
+  const initTime = new Date().getTime();
+
+  analyticsApi.setTimer(LOAD_INIT, initTime);
+
+  analyticsApi.logTiming({
+    action: LOAD_INIT,
+    category: APP_LOAD,
+    value: initTime - analyticsTimer,
+  });
+
+  // Setup FontAwesome
+  initFontAwesome();
+
   // Set installation data (installationId)
   setInstallationData({
     language: {
@@ -81,7 +97,11 @@ const initReactApplication = async () => {
 /**
  * Some package that need to be initialized before app starts
  */
-const requiredInits: Array<Promise<any>> = [];
+const requiredInits: Array<Promise<any>> = [
+  analyticsApi.init({
+    tag: ANALYTICS_ID,
+  }),
+];
 Promise.all(requiredInits).then(
   () => {
     initReactApplication();

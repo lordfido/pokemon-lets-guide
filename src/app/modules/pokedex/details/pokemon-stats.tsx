@@ -1,12 +1,14 @@
 import { Line } from 'rc-progress';
 import * as React from 'react';
 import injectSheet from 'react-jss';
+import { getCookie, setCookie } from '../../../../common/utils/cookies';
 import { getTranslation } from '../../../utils/translations';
 
 import { IButtonProps } from '../../../components/button';
 import Buttons from '../../../components/buttons';
 import StatsChart from '../../../components/stats-chart';
 
+import { STATS_VIEW_MODE } from '../../../../constants/cookies';
 import { StatId } from '../../../../constants/pokemon-stats';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
@@ -16,8 +18,9 @@ import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
 import { ISheet } from '../../../root.models';
 import { IRichPokemon } from '../pokedex.models';
-import { getCookie, setCookie } from '../../../../common/utils/cookies';
-import { STATS_VIEW_MODE } from '../../../../constants/cookies';
+import analyticsApi from '../../../../common/apis/analytics';
+import { VIEW_MODE } from '../../../../constants/metrics/actions';
+import { USER_PREFERENCES } from '../../../../constants/metrics/categories';
 
 const sheet: ISheet = {
   bars: {
@@ -74,6 +77,13 @@ class UnstyledPokemonStats extends React.Component<IOwnProps, IOwnState> {
 
   public toggleViewMode(viewMode: ViewMode) {
     setCookie(STATS_VIEW_MODE, viewMode);
+
+    analyticsApi.logEvent({
+      action: VIEW_MODE,
+      category: USER_PREFERENCES,
+      label: viewMode,
+    });
+
     this.setState({
       viewMode,
     });
