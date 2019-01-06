@@ -16,6 +16,8 @@ import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
 import { ISheet } from '../../../root.models';
 import { IRichPokemon } from '../pokedex.models';
+import { getCookie, setCookie } from '../../../../common/utils/cookies';
+import { STATS_VIEW_MODE } from '../../../../constants/cookies';
 
 const sheet: ISheet = {
   bars: {
@@ -64,12 +66,14 @@ class UnstyledPokemonStats extends React.Component<IOwnProps, IOwnState> {
   constructor(props: IOwnProps) {
     super(props);
 
+    const viewMode = (getCookie(STATS_VIEW_MODE) as ViewMode) || CHART;
     this.state = {
-      viewMode: CHART,
+      viewMode,
     };
   }
 
   public toggleViewMode(viewMode: ViewMode) {
+    setCookie(STATS_VIEW_MODE, viewMode);
     this.setState({
       viewMode,
     });
