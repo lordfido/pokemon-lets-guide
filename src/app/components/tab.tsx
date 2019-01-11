@@ -1,4 +1,4 @@
-import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
+import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';

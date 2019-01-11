@@ -1,4 +1,4 @@
-import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
+import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 
 export type types =
   | 'text'
