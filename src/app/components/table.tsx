@@ -5,19 +5,24 @@ import Media from 'react-media';
 
 import Card from './card';
 
-import { PADDING_L, PADDING_M, PADDING_S, PADDING_XXXL } from '../../constants/styles';
+import { PADDING_L, PADDING_M, PADDING_S } from '../../constants/styles';
 import { WHITE } from '../../constants/styles-colors';
-import getQuery, { DESKTOP, MAX_TABLET, TABLET } from '../../constants/styles-media-queries';
+import getQuery, { DESKTOP, MAX_TABLET_L, MOBILE_XXL, TABLET, TABLET_L } from '../../constants/styles-media-queries';
 
 import { ISheet } from '../root.models';
 
 const sheet: ISheet = {
   card: {
     margin: PADDING_M,
-    width: 256 + PADDING_M * 2,
+    maxWidth: 366,
+    width: `calc(100% - ${PADDING_M * 2}px)`,
 
-    [TABLET]: {
-      width: 256 + PADDING_XXXL * 2,
+    [MOBILE_XXL]: {
+      width: `calc(50% - ${PADDING_M * 2}px)`,
+    },
+
+    [TABLET_L]: {
+      width: `calc(33% - ${PADDING_M * 2}px)`,
     },
   },
   cell: {
@@ -28,7 +33,7 @@ const sheet: ISheet = {
       padding: `${PADDING_S}px ${PADDING_L}px`,
     },
 
-    [MAX_TABLET]: {
+    [MAX_TABLET_L]: {
       height: 32,
       verticalAlign: 'top',
     },
@@ -58,6 +63,10 @@ const sheet: ISheet = {
     textAlign: 'left',
     verticalAlign: 'top',
 
+    [MAX_TABLET_L]: {
+      width: 'calc(100% - 125px)',
+    },
+
     [DESKTOP]: {
       display: 'table-row-group',
     },
@@ -66,6 +75,10 @@ const sheet: ISheet = {
     display: 'inline-block',
     textAlign: 'left',
     verticalAlign: 'top',
+
+    [MAX_TABLET_L]: {
+      width: 125,
+    },
 
     [DESKTOP]: {
       display: 'table-header-group',
@@ -161,7 +174,7 @@ const unstyledTable = ({ children, classes, className, headings }: IOwnProps) =>
   );
 
   return (
-    <Media query={getQuery(MAX_TABLET)}>
+    <Media query={getQuery(MAX_TABLET_L)}>
       {(matches: boolean) =>
         matches ? (
           <div className={classnames(classes.table, className)}>
