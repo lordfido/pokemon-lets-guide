@@ -15,7 +15,7 @@ import AppWrapper from './app/app-wrapper';
 import ScrollToTop from './app/components/scroll-to-top';
 
 import { ANALYTICS_ID } from './constants/branding';
-import { ANALTYICS_INIT, APP_PARSED, APP_INIT } from './constants/metrics/actions';
+import { ANALTYICS_INIT, APP_INIT, APP_PARSED } from './constants/metrics/actions';
 import { APP_LOAD } from './constants/metrics/categories';
 
 import { IRootState } from './app/root.models';
@@ -38,7 +38,7 @@ const initReactApplication = async () => {
     action: APP_INIT,
     category: APP_LOAD,
     value: initTimer,
-  })
+  });
 
   analyticsApi.logTiming({
     action: APP_PARSED,
