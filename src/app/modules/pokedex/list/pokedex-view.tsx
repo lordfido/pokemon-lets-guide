@@ -6,6 +6,7 @@ import { getTranslation } from '../../../utils/translations';
 
 import { IButtonProps } from '../../../components/button';
 import Buttons from '../../../components/buttons';
+import Sidebar from '../../../components/sidebar';
 import Table from '../../../components/table';
 import PokedexEntry from './pokedex-entry';
 import PokedexFilters from './pokedex-filters';
@@ -20,7 +21,7 @@ import {
 } from '../../../../constants/pokemon-stats';
 import { getStatColor } from '../../../../constants/pokemon-stats-color';
 import { getStatName } from '../../../../constants/pokemon-stats-name';
-import { PADDING_L, PADDING_M, PADDING_S, PADDING_XL, PADDING_XXL } from '../../../../constants/styles';
+import { PADDING_M, PADDING_S, PADDING_XXL } from '../../../../constants/styles';
 import { TEXT_DARK } from '../../../../constants/styles-fonts';
 import { DESKTOP_L, MOBILE_XL } from '../../../../constants/styles-media-queries';
 
@@ -30,21 +31,6 @@ import { IPokedexFilters, IPokemonWithBaseCP } from '../pokedex.models';
 const sidebarSize = 280;
 
 const sheet: ISheet = {
-  buttons: {
-    margin: 0,
-    padding: `0 ${PADDING_L}px`,
-    width: '100%',
-  },
-  filters: {
-    maxHeight: 54,
-    overflow: 'hidden',
-    padding: PADDING_XL,
-    paddingBottom: 0,
-    textAlign: 'center',
-  },
-  filtersOpen: {
-    maxHeight: 'none',
-  },
   results: {
     padding: PADDING_XXL,
   },
@@ -88,20 +74,6 @@ const sheet: ISheet = {
   },
 
   [DESKTOP_L]: {
-    buttons: {
-      display: 'none',
-    },
-    filters: {
-      display: 'inline-block',
-      height: '100%',
-      maxHeight: 'none',
-      padding: PADDING_XXL,
-      paddingRight: 0,
-      textAlign: 'left',
-      verticalAlign: 'top',
-      width: sidebarSize,
-    },
-    filtersOpen: {},
     results: {
       display: 'inline-block',
       height: '100%',
@@ -160,19 +132,19 @@ const unstyledPokedexView = ({
 
   return (
     <>
-      <div className={classnames(classes.filters, areFiltersOpen ? classes.filtersOpen : undefined)}>
-        <Buttons className={classes.buttons} options={[filtersButton]} />
-
-        <PokedexFilters
-          classNames={{
-            form: classes.form,
-            formField: classnames(classes.formField, areFiltersOpen ? classes.formFieldOpen : undefined),
-          }}
-          filters={filters}
-          handleResetFilters={handleResetFilters}
-          handleUpdateFilter={handleUpdateFilter}
-        />
-      </div>
+      <Sidebar
+        render={isOpen => (
+          <PokedexFilters
+            classNames={{
+              form: classes.form,
+              formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
+            }}
+            filters={filters}
+            handleResetFilters={handleResetFilters}
+            handleUpdateFilter={handleUpdateFilter}
+          />
+        )}
+      />
       <div className={classes.results}>
         <Table
           headings={[
