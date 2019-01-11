@@ -38,10 +38,10 @@ const unstyledPokemonDetailsView = ({ classes, pokemon, pagination }: IOwnProps)
     const suggestedIVs = getSuggestedIVs(pokemon.baseStats);
 
     return suggestedIVs.map((suggestion, index) => (
-      <React.Fragment key={`suggested-${index}`}>
+      <>
         <p>{getTranslation('pokemon-details-recommended', (index + 1).toString())}</p>
         <StatsChart stats={suggestion} color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />
-      </React.Fragment>
+      </>
     ));
   };
 

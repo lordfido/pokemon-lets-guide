@@ -49,7 +49,7 @@ interface IOwnProps {
 }
 
 const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
-  <React.Fragment>
+  <>
     <div className={classes.window}>
       <div className={classes.wrapper}>
         <p>
@@ -95,7 +95,7 @@ const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
         </div>
       </div>
     </div>
-  </React.Fragment>
+  </>
 );
 
 const PokemonInfo = injectSheet(sheet)(unstyledPokemonInfo);

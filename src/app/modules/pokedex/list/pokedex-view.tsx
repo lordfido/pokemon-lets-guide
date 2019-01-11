@@ -159,7 +159,7 @@ const unstyledPokedexView = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className={classnames(classes.filters, areFiltersOpen ? classes.filtersOpen : undefined)}>
         <Buttons className={classes.buttons} options={[filtersButton]} />
 
@@ -278,7 +278,7 @@ const unstyledPokedexView = ({
           />
         )}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

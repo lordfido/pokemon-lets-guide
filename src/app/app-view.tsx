@@ -62,18 +62,18 @@ interface IOwnProps {
 }
 
 const unstyledAppView = ({ children, classes }: IOwnProps) => (
-  <React.Fragment>
+  <>
     <Link className={classes.homeButton} to={{ pathname: HOME }} />
     <div id="app" className={classes.wrapper}>
       <HeaderWrapper />
       <div className={classes.content}>
-        <React.Fragment>
+        <>
           {children}
           <FooterWrapper />
-        </React.Fragment>
+        </>
       </div>
     </div>
-  </React.Fragment>
+  </>
 );
 
 const AppView = injectSheet(sheet)(unstyledAppView);
