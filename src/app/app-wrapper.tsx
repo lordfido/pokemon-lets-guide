@@ -16,7 +16,7 @@ import { createPokedex } from './modules/pokedex/pokedex.actions';
 
 import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
-import { LOAD_FINISHED, LOAD_INIT } from '../constants/metrics/actions';
+import { APP_FINISHED, APP_INIT } from '../constants/metrics/actions';
 import { APP_LOAD } from '../constants/metrics/categories';
 
 import { IRootState } from './root.models';
@@ -67,11 +67,11 @@ class AppWrapper extends React.Component<Props> {
     // Get pokedex
     GetPokemon();
 
-    const initTimer = analyticsApi.getTimer(LOAD_INIT);
+    const initTimer = analyticsApi.getTimer(APP_INIT);
     const renderTimer = new Date().getTime() - initTimer;
 
     analyticsApi.logTiming({
-      action: LOAD_FINISHED,
+      action: APP_FINISHED,
       category: APP_LOAD,
       value: renderTimer,
     });

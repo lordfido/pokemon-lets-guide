@@ -8,7 +8,8 @@ import { EventCategory } from '../../constants/metrics/categories';
 const isDebug = false;
 const isVerbose = true;
 const isTracking = isDebug || isProduction();
-const timers: { [key: string]: number } = {};
+// @ts-ignore
+const timers: { [key: string]: number } = window.pokeTimers;
 
 interface IAnalyticsInitParameter {
   tag: string;

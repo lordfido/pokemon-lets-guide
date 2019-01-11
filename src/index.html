@@ -1,52 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- <base href="/"> -->
-    <!-- <base href="./"> -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
-    <!-- Standard -->
-    <title>Pokemon Let's Guide</title>
-    <meta name="description" content="A Pokedex based in Pokémon Let's Go games" />
+<head>
+  <!-- <base href="/"> -->
+  <!-- <base href="./"> -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- Standard -->
+  <title>Pokemon Let's Guide</title>
+  <meta name="description" content="A Pokedex based in Pokémon Let's Go games" />
 
-    <link rel="shortcut icon" href="/src/images/logo.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <!-- Windows (Manual) -->
-    <!-- TODO: <meta name="msapplication-config" content="/src/browserconfig.xml"> -->
-    <meta name="msapplication-TileColor" content="#000000" />
-    <!-- <meta name="msapplication-TileImage" content="/src/images/favicons/icon-144.png" sizes="144x144" /> -->
+  <link rel="shortcut icon" href="/src/images/logo.png" />
 
-    <!-- iOS (PWA Compat) -->
-    <!--
-      https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
-    -->
-    <!-- TODO: <link rel="mask-icon" href="/src/images/favicons/apple-touch-icon.svg" color="#273238" /> -->
-    <!-- <link rel="apple-touch-icon" href="/src/images/favicons/apple-touch-icon.png" /> -->
-    <!-- <link rel="apple-touch-icon" href="/src/images/favicons/icon-180.png" sizes="180x180" /> -->
-    <!-- <link rel="apple-touch-icon" href="/src/images/favicons/icon-167.png" sizes="167x167" /> -->
-    <!-- <link rel="apple-touch-icon" href="/src/images/favicons/icon-152.png" sizes="152x152" /> -->
-    <!-- <link rel="apple-touch-icon" href="/src/images/favicons/icon-120.png" sizes="120x120" /> -->
-    <!-- <link rel="apple-touch-icon" href="/src/images/favicons/icon-076.png" sizes="76x76" /> -->
+  <!-- Windows (Manual) -->
+  <!-- TODO: <meta name="msapplication-config" content="/src/browserconfig.xml"> -->
+  <meta name="msapplication-TileColor" content="#000000" />
+  <!-- <meta name="msapplication-TileImage" content="/src/images/favicons/icon-144.png" sizes="144x144" /> -->
 
-    <!-- Chrome (PWA Compat) -->
-    <!-- https://developer.chrome.com/multidevice/android/installtohomescreen -->
-    <!-- <link rel="icon" href="/src/images/favicons/icon-192.png" sizes="192x192" /> -->
-    <!-- <link rel="icon" href="/src/images/favicons/icon-128.png" sizes="128x128" /> -->
+  <script>
+    window.pokeTimers = {
+      'app-init': new Date().getTime(),
+    };
+  </script>
+</head>
 
-    <!-- Android (PWA Compat) -->
-    <!-- https://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html -->
-    <!-- <meta name="theme-color" content="#779ec1"> -->
-    <!-- <link rel="icon" href="/src/images/favicons/icon-096.png" sizes="96x96" /> -->
-    <!-- <link rel="icon" href="/src/images/favicons/icon-072.png" sizes="72x72" /> -->
-    <!-- <link rel="icon" href="/src/images/favicons/icon-048.png" sizes="48x48" /> -->
-    <!-- <link rel="icon" href="/src/images/favicons/icon-036.png" sizes="36x36" /> -->
-  </head>
+<body>
+  <div id="app-wrapper"></div>
+</body>
 
-  <body>
-    <div id="app-wrapper"></div>
-  </body>
 </html>
