@@ -24,7 +24,11 @@ interface IStateProps {
 type Props = IOwnProps & IStateProps;
 
 const PokemonDetailsWrapper = ({ pokemon, pagination }: Props) =>
-  pokemon ? <PokemonDetailsView pokemon={pokemon} pagination={pagination} /> : <Redirect to={{ pathname: POKEDEX }} />;
+  pokemon ? (
+    <PokemonDetailsView pokemon={pokemon} pagination={pagination} />
+  ) : (
+    <Redirect to={{ pathname: POKEDEX.replace(':id?', '') }} />
+  );
 
 const mapStateToProps = (state: IRootState, ownProps: Props): IStateProps => {
   const selectedPokemon = getSelectedPokemon(state)(ownProps.id);

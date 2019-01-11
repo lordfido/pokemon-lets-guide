@@ -6,7 +6,7 @@ import { getAvatarFromId } from '../../../utils/pokemon';
 
 import Avatar from '../../../components/avatar';
 
-import { POKEMON } from '../../../../constants/appRoutes';
+import { POKEDEX } from '../../../../constants/appRoutes';
 import { PADDING_L, PADDING_XL } from '../../../../constants/styles';
 import { traslucentColor, WHITE } from '../../../../constants/styles-colors';
 import { FONT_XL, TEXT_WHITE } from '../../../../constants/styles-fonts';
@@ -96,7 +96,7 @@ const unstyledPokemonPagination = ({ classes, currentPokemon, pagination: { prev
       {currentPokemon !== prev.id && (
         <Link
           className={classnames(classes.link, classes.linkLeft)}
-          to={{ pathname: `${POKEMON.replace(':id', String(prev.id))}` }}
+          to={{ pathname: `${POKEDEX.replace(':id?', String(prev.id))}` }}
         >
           <span className={classnames(classes.content, classes.contentLeft)}>
             <span className={classes.label}>{prev.name}</span> <Avatar picture={getAvatarFromId(prev.id)} />
@@ -107,7 +107,7 @@ const unstyledPokemonPagination = ({ classes, currentPokemon, pagination: { prev
       {currentPokemon !== next.id && (
         <Link
           className={classnames(classes.link, classes.linkRight)}
-          to={{ pathname: `${POKEMON.replace(':id', String(next.id))}` }}
+          to={{ pathname: `${POKEDEX.replace(':id?', String(next.id))}` }}
         >
           <span className={classnames(classes.content, classes.contentRight)}>
             <Avatar picture={getAvatarFromId(next.id)} /> <span className={classes.label}>{next.name}</span>

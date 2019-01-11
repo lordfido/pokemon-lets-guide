@@ -9,7 +9,7 @@ import { TableCell, TableRow } from '../../../components/table';
 // import Image from '../../components/image';
 import Tag from '../../../components/tag';
 
-import { POKEMON } from '../../../../constants/appRoutes';
+import { POKEDEX } from '../../../../constants/appRoutes';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -23,8 +23,8 @@ import { getTypeName } from '../../../../constants/pokemon-types';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
 
-import { IPokemonWithBaseCP } from '../pokedex.models';
 import { ISheet } from '../../../root.models';
+import { IPokemonWithBaseCP } from '../pokedex.models';
 
 const sheet: ISheet = {
   details: {
@@ -135,7 +135,7 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
           className: classes.details,
           id: pokemon.id.toString(),
           label: getTranslation('pokemon-details'),
-          to: POKEMON.replace(':id', String(pokemon.id)),
+          to: POKEDEX.replace(':id?', String(pokemon.id)),
           type: 'button',
         }}
       />

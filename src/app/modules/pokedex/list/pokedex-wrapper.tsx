@@ -89,12 +89,14 @@ type Props = IOwnProps & IStateProps & IDispatchProps;
 interface IOwnState {
   areFiltersOpen: boolean;
   redirectTo?: string;
+  redirectToPokedex?: boolean;
 }
 
 class PokedexWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
     redirectTo: '',
+    redirectToPokedex: false,
   };
 
   private filtersDebounce: NodeJS.Timeout = setTimeout(() => undefined, 0);
@@ -112,9 +114,15 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     FilterPokedex(parsedFilters);
   }
 
-  public componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate() {
     const { FilterPokedex } = this.props;
-    const { redirectTo } = this.state;
+    const { redirectTo, redirectToPokedex } = this.state;
+
+    if (redirectToPokedex) {
+      this.setState({
+        redirectToPokedex: false,
+      });
+    }
 
     if (redirectTo) {
       this.setState({
@@ -148,7 +156,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   public handleResetFilters = () => {
     this.setState({
-      redirectTo: POKEDEX,
+      redirectToPokedex: true,
     });
   };
 
@@ -194,7 +202,12 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   public render() {
     const { url } = this.props;
-    const { areFiltersOpen, redirectTo } = this.state;
+    const { areFiltersOpen, redirectTo, redirectToPokedex } = this.state;
+
+    if (redirectToPokedex) {
+      return <Redirect to={{ pathname: POKEDEX }} />;
+    }
+
     const redirection = redirectTo ? SEARCH.replace(':query', redirectTo) : '';
 
     if (redirection && redirection !== url) {
