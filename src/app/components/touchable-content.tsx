@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 
@@ -7,21 +7,22 @@ import Space from './space';
 interface IOwnProps {
   options: {
     customIcon?: React.ReactElement<{}>;
-    icon?: IconProp;
+    icon?: IconName;
     iconLast?: boolean;
+    iconPrefix?: IconPrefix;
     label?: string;
   };
 }
 
-const TouchableContent = ({ options: { customIcon, icon, iconLast, label } }: IOwnProps) => {
-  if (icon) {
+const TouchableContent = ({ options: { customIcon, icon, iconLast, iconPrefix = 'fas', label } }: IOwnProps) => {
+  if (icon && iconPrefix) {
     return (
       <span>
-        {!iconLast && <FontAwesomeIcon icon={icon} />}
+        {!iconLast && <FontAwesomeIcon icon={[iconPrefix, icon]} />}
         {!iconLast && label && <Space />}
         {label}
         {iconLast && label && <Space />}
-        {iconLast && <FontAwesomeIcon icon={icon} />}
+        {iconLast && <FontAwesomeIcon icon={[iconPrefix, icon]} />}
       </span>
     );
   }

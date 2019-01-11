@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -52,8 +52,9 @@ export interface ITabOptions {
   customIcon?: React.ReactElement<{}>;
   id: string;
   label?: string;
-  icon?: IconProp;
+  icon?: IconName;
   iconLast?: boolean;
+  iconPrefix?: IconPrefix;
   to?: string;
   onClick?: (params?: any) => void;
 }

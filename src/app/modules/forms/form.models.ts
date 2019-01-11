@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
 
 export type types =
   | 'text'
@@ -20,9 +20,10 @@ interface ICommonOptions {
 
   className?: string;
   label?: string;
-  icon?: IconProp;
   customIcon?: React.ReactElement<{}>;
+  icon?: IconName;
   iconLast?: boolean;
+  iconPrefix?: IconPrefix;
 
   isRequired?: boolean;
   isSubmitted?: boolean;

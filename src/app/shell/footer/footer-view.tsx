@@ -5,7 +5,7 @@ import { languageISOs } from '../../utils/translations';
 
 import Link from '../../components/link';
 
-import { APP_NAME, APP_WEB } from '../../../constants/branding';
+import { APP_NAME, APP_WEB, APP_REPOSITORY } from '../../../constants/branding';
 import { PADDING_XL, PADDING_XXL, PAGE_MAX_WIDTH } from '../../../constants/styles';
 import { WHITE } from '../../../constants/styles-colors';
 import { FONT_XS, TEXT_DARK } from '../../../constants/styles-fonts';
@@ -46,18 +46,33 @@ const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => 
   <footer className={classes.wrapper}>
     <div className={classes.content}>
       <p>
+        <>
+          <Link
+            options={{
+              id: 'app-web',
+              label: APP_NAME,
+              to: APP_WEB,
+            }}
+          />
+          {!isProduction() && ` v${APP_VERSION}`}
+        </>
+        {' | '}
         <Link
           options={{
-            id: 'app-web',
-            label: APP_NAME,
-            to: APP_WEB,
+            icon: 'github',
+            iconPrefix: 'fab',
+            id: 'app-github',
+            isExternal: true,
+            label: 'Github',
+            to: APP_REPOSITORY,
           }}
-        />{' '}
-        {!isProduction() && `v${APP_VERSION}`} | {new Date().getFullYear()}{' '}
+        />
+        {' | '}
+        {new Date().getFullYear()}
       </p>
       <p>
         {languageISOs.map((language, index) => (
-          <React.Fragment key={`language-${language.name}`}>
+          <>
             {index > 0 && ' | '}
             <Link
               options={{
@@ -68,7 +83,7 @@ const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => 
                 },
               }}
             />
-          </React.Fragment>
+          </>
         ))}
       </p>
     </div>

@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -53,8 +53,9 @@ export interface ILinkProps {
   className?: string;
   customIcon?: React.ReactElement<{}>;
   label?: string;
-  icon?: IconProp;
+  icon?: IconName;
   iconLast?: boolean;
+  iconPrefix?: IconPrefix;
   isExternal?: boolean;
   to?: any;
   onClick?: (params?: any) => void;
@@ -97,6 +98,7 @@ const unstyledLink = ({ classes, isTransparent, options, shouldInherit }: IOwnPr
     customIcon: options.customIcon,
     icon: options.icon,
     iconLast: options.iconLast,
+    iconPrefix: options.iconPrefix,
     label: options.label,
   };
 
