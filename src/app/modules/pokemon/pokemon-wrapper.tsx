@@ -11,7 +11,7 @@ import { IButtonProps } from '../../components/button';
 import PokemonView from './pokemon-view';
 
 import { IRootState } from '../../root.models';
-import { IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
+import { IPokemon, IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
 
 import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
 import { POKEMON_VIEW_MODE } from '../../../constants/cookies';
@@ -19,6 +19,8 @@ import { POKEMON_VIEW_MODE as POKEMON_VIEW_MODE_ACTION } from '../../../constant
 import { USER_PREFERENCES } from '../../../constants/metrics/categories';
 import { BARS, CHART, ViewMode } from '../../components/stats-chart';
 import { getTranslation } from '../../utils/translations';
+
+const getPokemonUrl = (pokemon: IPokemon) => POKEDEX.replace(':id?', pokemon.id);
 
 interface IOwnProps {
   id: string;
@@ -32,15 +34,61 @@ interface IStateProps {
 type Props = IOwnProps & IStateProps;
 
 interface IOwnState {
+  redirectTo: string;
   viewMode: ViewMode;
 }
 
 class PokemonWrapper extends React.Component<Props, IOwnState> {
   public state = {
+    redirectTo: '',
     viewMode: (getCookie(POKEMON_VIEW_MODE) as ViewMode) || CHART,
   };
 
-  public toggleViewMode(viewMode: ViewMode) {
+  public componentDidMount() {
+    document.addEventListener('keyup', this.handleKeyPress);
+  }
+
+  public componentDidUpdate() {
+    if (this.state.redirectTo) {
+      this.setState({
+        redirectTo: '',
+      });
+    }
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('keyup', this.handleKeyPress);
+  }
+
+  public handleKeyPress = (event: KeyboardEvent) => {
+    const { pagination } = this.props;
+    const { keyCode } = event;
+
+    event.preventDefault();
+    let redirectTo = '';
+
+    switch (keyCode) {
+      case 37: // left
+      case 38: // up
+        redirectTo = getPokemonUrl(pagination.prev);
+        break;
+
+      case 39: // right
+      case 40: // down
+        redirectTo = getPokemonUrl(pagination.next);
+        break;
+
+      default:
+    }
+
+    if (redirectTo) {
+      this.setState({
+        redirectTo,
+      });
+    }
+  };
+
+  public toggleViewMode = (viewMode: ViewMode) => {
     setCookie(POKEMON_VIEW_MODE, viewMode);
 
     analyticsApi.logEvent({
@@ -52,9 +100,9 @@ class PokemonWrapper extends React.Component<Props, IOwnState> {
     this.setState({
       viewMode,
     });
-  }
+  };
 
-  public getAvailableViewModes(): IButtonProps[] {
+  public getAvailableViewModes = (): IButtonProps[] => {
     const { pokemon } = this.props;
     const { viewMode } = this.state;
 
@@ -84,11 +132,15 @@ class PokemonWrapper extends React.Component<Props, IOwnState> {
         type: 'button',
       },
     ];
-  }
+  };
 
   public render() {
     const { pagination, pokemon } = this.props;
-    const { viewMode } = this.state;
+    const { redirectTo, viewMode } = this.state;
+
+    if (redirectTo) {
+      return <Redirect to={{ pathname: redirectTo }} />;
+    }
 
     if (pokemon) {
       const availableViewModes = this.getAvailableViewModes();
