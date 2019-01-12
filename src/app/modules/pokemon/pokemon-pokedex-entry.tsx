@@ -47,7 +47,7 @@ interface IOwnProps {
 const unstyledPokemonPokedexEntry = ({ classes, text }: IOwnProps) => (
   <div className={classes.window}>
     <div className={classes.wrapper}>
-      <p className={classes.text}>{text || getTranslation('pokemon-details-no-pokedex-entry')}</p>
+      <p className={classes.text}>{text || getTranslation('pokemon-no-pokedex-entry')}</p>
     </div>
   </div>
 );

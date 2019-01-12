@@ -138,7 +138,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       {
         id: CHART,
         isActive: viewMode === CHART,
-        label: getTranslation('pokemon-details-chart'),
+        label: getTranslation('pokemon-chart'),
         onClick: () => {
           this.toggleViewMode(CHART);
         },
@@ -147,7 +147,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       {
         id: BARS,
         isActive: viewMode === BARS,
-        label: getTranslation('pokemon-details-bars'),
+        label: getTranslation('pokemon-bars'),
         onClick: () => {
           this.toggleViewMode(BARS);
         },

@@ -88,18 +88,28 @@ type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
+  filters: IPokedexFilters;
   redirectTo?: string;
-  redirectToPokedex?: boolean;
 }
 
 class PokedexWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
+    filters: {
+      bestStats: [],
+      excludedTypes: [],
+      includedTypes: [],
+      maxBaseCP: '',
+      minBaseCP: '',
+      nameOrNumber: '',
+      showAlolanForms: false,
+      showMegaevolutions: false,
+      strongAgainst: [],
+      weakAgainst: [],
+      worstStats: [],
+    },
     redirectTo: '',
-    redirectToPokedex: false,
   };
-
-  private filtersDebounce: NodeJS.Timeout = setTimeout(() => undefined, 0);
 
   public componentDidMount() {
     const { FilterPokedex, query } = this.props;
@@ -115,42 +125,14 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   }
 
   public componentDidUpdate() {
-    const { FilterPokedex } = this.props;
-    const { redirectTo, redirectToPokedex } = this.state;
-
-    if (redirectToPokedex) {
-      this.setState({
-        redirectToPokedex: false,
-      });
-    }
+    const { redirectTo } = this.state;
 
     if (redirectTo) {
       this.setState({
         redirectTo: '',
       });
-
-      const urlFilters = stringToFilters(redirectTo);
-      const parsedFilters = Object.keys(pokedexInitialState.filters).map(key => ({
-        name: key,
-        // @ts-ignore
-        value: urlFilters[key] || pokedexInitialState.filters[key],
-      }));
-
-      FilterPokedex(parsedFilters);
     }
   }
-
-  public handleLoadMorePokedex() {
-    const { LoadMorePokedex } = this.props;
-
-    LoadMorePokedex();
-  }
-
-  public handleResetFilters = () => {
-    this.setState({
-      redirectToPokedex: true,
-    });
-  };
 
   public handleSortBy = (sortBy: string) => {
     const { SortPokedex, sort } = this.props;
@@ -167,51 +149,73 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleUpdateFilter({ id, value }: { id: string; value: any }) {
-    clearTimeout(this.filtersDebounce);
-    this.filtersDebounce = setTimeout(() => {
-      const { filters } = this.props;
+    const { filters } = this.state;
 
-      const newFilters = {
-        ...filters,
-      };
+    const newFilters = {
+      ...filters,
+    };
 
+    // @ts-ignore
+    const prevFilter = filters[id];
+    if (typeof prevFilter === 'boolean' || typeof prevFilter === 'string') {
       // @ts-ignore
-      const prevFilter = filters[id];
-      if (typeof prevFilter === 'boolean' || typeof prevFilter === 'string') {
-        // @ts-ignore
-        newFilters[id] = typeof value !== 'undefined' ? value : prevFilter;
-      } else {
-        // @ts-ignore
-        newFilters[id] = updateCollection(prevFilter, value.map(s => s.value));
-      }
+      newFilters[id] = typeof value !== 'undefined' ? value : prevFilter;
+    } else {
+      // @ts-ignore
+      newFilters[id] = updateCollection(prevFilter, value.map(s => s.value));
+    }
 
-      const redirectTo = filtersToString(newFilters);
-      this.setState({
-        redirectTo: redirectTo || POKEDEX,
-      });
-    }, DEBOUNCE_MS);
+    this.setState({
+      filters: newFilters,
+    });
+  }
+
+  public handleReset = () => {
+    this.setState({
+      redirectTo: POKEDEX.replace(':id?', ''),
+    });
+  };
+
+  public handleSubmit = () => {
+    const { filters } = this.state;
+
+    const redirectTo = filtersToString(filters);
+    this.setState({
+      redirectTo: redirectTo ? SEARCH.replace(':query', redirectTo) : POKEDEX.replace(':id?', ''),
+    });
+  };
+
+  public handleLoadMorePokedex() {
+    const { LoadMorePokedex } = this.props;
+
+    LoadMorePokedex();
   }
 
   public render() {
     const { url } = this.props;
-    const { redirectTo, redirectToPokedex } = this.state;
+    const { redirectTo } = this.state;
 
-    if (redirectToPokedex) {
-      return <Redirect to={{ pathname: POKEDEX }} />;
+    if (redirectTo && redirectTo !== url) {
+      return <Redirect to={{ pathname: redirectTo }} />;
     }
 
-    const redirection = redirectTo ? SEARCH.replace(':query', redirectTo) : '';
-
-    if (redirection && redirection !== url) {
-      return <Redirect to={{ pathname: redirection }} />;
-    }
-
-    const { collection, filters, pagination } = this.props;
+    const { collection, pagination } = this.props;
+    const { filters } = this.state;
 
     return (
       <PokedexView
         collection={collection}
+        handleSortBy={this.handleSortBy}
         filters={filters}
+        handleUpdateFilter={(option: { id: string; value: any }) => {
+          this.handleUpdateFilter(option);
+        }}
+        handleReset={() => {
+          this.handleReset();
+        }}
+        handleSubmit={() => {
+          this.handleSubmit();
+        }}
         handleLoadMore={
           collection.length >= pagination.last
             ? () => {
@@ -219,13 +223,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
               }
             : undefined
         }
-        handleResetFilters={() => {
-          this.handleResetFilters();
-        }}
-        handleSortBy={this.handleSortBy}
-        handleUpdateFilter={(option: { id: string; value: any }) => {
-          this.handleUpdateFilter(option);
-        }}
       />
     );
   }

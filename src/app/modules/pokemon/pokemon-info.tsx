@@ -53,7 +53,7 @@ const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
     <div className={classes.window}>
       <div className={classes.wrapper}>
         <p>
-          {getTranslation('pokemon-details-pokedex-number')} {getPaddedId(String(pokemon.nationalNumber))}
+          {getTranslation('pokemon-pokedex-number')} {getPaddedId(String(pokemon.nationalNumber))}
         </p>
         <p>{pokemon.name}</p>
         <span>

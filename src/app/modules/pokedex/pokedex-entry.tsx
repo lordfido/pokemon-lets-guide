@@ -140,7 +140,7 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
           {
             className: classes.noMargin,
             id: `${pokemon.id.toString()}-details`,
-            label: getTranslation('pokemon-details'),
+            label: getTranslation('pokedex-details'),
             to: POKEDEX.replace(':id?', String(pokemon.id)),
             type: 'button',
           },

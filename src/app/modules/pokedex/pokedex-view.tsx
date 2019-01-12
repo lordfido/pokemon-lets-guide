@@ -71,21 +71,23 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   collection: IPokemonWithBaseCP[];
-  filters: IPokedexFilters;
-  handleLoadMore?: () => void;
-  handleResetFilters: () => void;
   handleSortBy: (key: string) => void;
+  filters: IPokedexFilters;
   handleUpdateFilter: (option: { id: string; value: any }) => void;
+  handleReset: () => void;
+  handleSubmit: () => void;
+  handleLoadMore?: () => void;
 }
 
 const unstyledPokedexView = ({
   classes,
   collection,
-  filters,
-  handleLoadMore,
-  handleResetFilters,
   handleSortBy,
+  filters,
   handleUpdateFilter,
+  handleReset,
+  handleSubmit,
+  handleLoadMore,
 }: IOwnProps) => (
   <>
     <Sidebar
@@ -96,8 +98,9 @@ const unstyledPokedexView = ({
             formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
           }}
           filters={filters}
-          handleResetFilters={handleResetFilters}
           handleUpdateFilter={handleUpdateFilter}
+          handleReset={handleReset}
+          handleSubmit={handleSubmit}
         />
       )}
     />
@@ -109,17 +112,17 @@ const unstyledPokedexView = ({
             onClick: () => handleSortBy('id'),
           },
           {
-            label: getTranslation('pokemon-name'),
+            label: getTranslation('pokedex-name'),
             onClick: () => handleSortBy('name'),
           },
           {
-            label: getTranslation('pokemon-type-1'),
+            label: getTranslation('pokedex-type-1'),
           },
           {
-            label: getTranslation('pokemon-type-2'),
+            label: getTranslation('pokedex-type-2'),
           },
           {
-            label: getTranslation('pokemon-base-cp'),
+            label: getTranslation('pokedex-base-cp'),
             onClick: () => handleSortBy('baseCP'),
           },
           {
@@ -195,7 +198,7 @@ const unstyledPokedexView = ({
           options={[
             {
               id: 'load-more',
-              label: getTranslation('pokemon-load-more'),
+              label: getTranslation('pokedex-load-more'),
               onClick: handleLoadMore,
               type: 'button',
             },

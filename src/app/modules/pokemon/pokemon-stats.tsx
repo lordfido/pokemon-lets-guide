@@ -52,7 +52,7 @@ interface IOwnProps {
 const UnstyledPokemonStats = ({ availableViewModes, classes, pokemon, viewMode }: IOwnProps) => (
   <div className={classes.window}>
     <div className={classes.wrapper}>
-      <p>{getTranslation('pokemon-details-base-stats')}</p>
+      <p>{getTranslation('pokemon-base-stats')}</p>
 
       <div className={classnames({ [classes.bars]: viewMode === BARS, [classes.chart]: viewMode === CHART })}>
         {

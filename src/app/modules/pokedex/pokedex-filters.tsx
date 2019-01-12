@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { getTranslation } from '../../utils/translations';
 
+import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
 import Field from '../forms/field';
 import statsDropdown from './stats-dropdown';
@@ -17,10 +18,11 @@ interface IOwnProps {
   };
   filters: IPokedexFilters;
   handleUpdateFilter: (option: { id: string; value: string }) => void;
-  handleResetFilters: () => void;
+  handleReset: () => void;
+  handleSubmit: () => void;
 }
 
-const PokedexFilters = ({ classNames, filters, handleResetFilters, handleUpdateFilter }: IOwnProps) => {
+const PokedexFilters = ({ classNames, filters, handleReset, handleUpdateFilter, handleSubmit }: IOwnProps) => {
   const fields: Array<IGenericField & (ITextOptions | IDropdownOptions | ICheckboxOptions)> = [
     {
       defaultValue: filters.nameOrNumber,
@@ -100,6 +102,24 @@ const PokedexFilters = ({ classNames, filters, handleResetFilters, handleUpdateF
       type: 'switch',
     },
   ];
+  const buttons: IButtonProps[] = [
+    {
+      id: 'submit',
+      label: getTranslation('search-filters-apply'),
+      onClick: () => {
+        handleSubmit();
+      },
+      type: 'button',
+    },
+    {
+      id: 'reset',
+      label: getTranslation('search-filters-reset'),
+      onClick: () => {
+        handleReset();
+      },
+      type: 'button',
+    },
+  ];
 
   return (
     <form className={classNames.form} noValidate>
@@ -107,18 +127,7 @@ const PokedexFilters = ({ classNames, filters, handleResetFilters, handleUpdateF
         <Field key={field.id} className={classNames.formField} options={{ ...field, isDisabled: !filtersEnabled }} />
       ))}
 
-      <Buttons
-        options={[
-          {
-            id: 'reset',
-            label: getTranslation('search-reset-filters'),
-            onClick: () => {
-              handleResetFilters();
-            },
-            type: 'button',
-          },
-        ]}
-      />
+      <Buttons options={buttons} />
     </form>
   );
 };
