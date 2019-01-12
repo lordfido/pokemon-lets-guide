@@ -11,7 +11,7 @@ import { ISheet } from '../../root.models';
 const sheet: ISheet = {
   image: {
     margin: '0 auto',
-    maxHeight: 216,
+    maxHeight: 320,
     maxWidth: '100%',
 
     [DESKTOP]: {
