@@ -58,7 +58,7 @@ export const SEARCH: IRouteConfig = {
 export const HOME: IRouteConfig = {
   path: routes.HOME,
   render: ({ match }) => {
-    if (true) {
+    if (false) {
       const {
         params: { id },
       } = match;

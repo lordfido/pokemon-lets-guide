@@ -5,7 +5,7 @@ import { getTranslation } from '../../utils/translations';
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
 import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
-import StatsChart from '../../components/stats-chart';
+import StatsChart, { ViewMode } from '../../components/stats-chart';
 import Field from '../forms/field';
 import PokemonPreview from '../pokedex/details/pokemon-preview';
 
@@ -60,6 +60,8 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  availableViewModes: IButtonProps[];
+  viewMode: ViewMode;
   pokemonList: IPokemonWithBaseCP[];
   handlePokemonChange: (pokemon: { id: string; value: string }) => void;
   pokemon?: IRichPokemon;
@@ -79,6 +81,8 @@ interface IOwnProps {
 
 const unstyledCalculatorView = ({
   classes,
+  availableViewModes,
+  viewMode,
   pokemonList,
   pokemon,
   handlePokemonChange,
@@ -324,10 +328,11 @@ const unstyledCalculatorView = ({
               <h4>{getTranslation('calculator-final-stats')}</h4>
               <StatsChart
                 stats={stats}
-                viewMode="bars"
+                viewMode={viewMode}
                 color={getTypeColor(pokemon.types.ownTypes[0])}
-                size={MAX_STAT_VALUE}
+                max={MAX_STAT_VALUE}
               />
+              <Buttons options={availableViewModes} align="center" />
 
               <h4>{getTranslation('calculator-nature')}</h4>
               <p>{getNatureName(nature)}</p>

@@ -2,13 +2,23 @@ import { Stats } from 'pokelab';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import analyticsApi from '../../../common/apis/analytics';
+import { getCookie, setCookie } from '../../../common/utils/cookies';
 import { getRichPokemon, getStatRatio } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
+import { IButtonProps } from '../../components/button';
+import { BARS, CHART, ViewMode } from '../../components/stats-chart';
 import CalculatorView from './calculator-view';
 
 import { getRawPokedex, getSelectedPokemon } from '../../root.reducer';
 
-import { CALCULATOR } from '../../../constants/appRoutes';
+import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
+import { CALCULATOR_VIEW_MODE } from '../../../constants/cookies';
+import { CALCULATOR_VIEW_MODE as CALCULATOR_VIEW_MODE_ACTION } from '../../../constants/metrics/actions';
+import { USER_PREFERENCES } from '../../../constants/metrics/categories';
+import { MAX_CANDIES_VALUE } from '../../../constants/pokemon-candies';
+import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
 import { PokemonNature } from '../../../constants/pokemon-natures';
 import { findNature, getNatureModifier, INatureEffect } from '../../../constants/pokemon-natures-effects';
 import {
@@ -22,10 +32,7 @@ import {
 } from '../../../constants/pokemon-stats';
 
 import { IRootState } from '../../root.models';
-import { IOption } from '../forms/form.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
-import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
-import { MAX_CANDIES_VALUE } from '../../../constants/pokemon-candies';
 
 const defaultCandies = 0;
 const defaultIVs = 16;
@@ -63,6 +70,7 @@ interface IOwnState {
   natureEffects: INatureEffect;
   reRender: boolean;
   redirectTo: string;
+  viewMode: ViewMode;
 }
 
 class CalculatorWrapper extends React.Component<Props, IOwnState> {
@@ -88,6 +96,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
     natureEffects: defaultNatureEffects,
     reRender: false,
     redirectTo: '',
+    viewMode: (getCookie(CALCULATOR_VIEW_MODE) as ViewMode) || CHART,
   };
 
   public componentDidUpdate(prevProps: Props, prevState: IOwnState) {
@@ -102,6 +111,52 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         reRender: false,
       });
     }
+  }
+
+  public toggleViewMode(viewMode: ViewMode) {
+    setCookie(CALCULATOR_VIEW_MODE, viewMode);
+
+    analyticsApi.logEvent({
+      action: CALCULATOR_VIEW_MODE_ACTION,
+      category: USER_PREFERENCES,
+      label: viewMode,
+    });
+
+    this.setState({
+      viewMode,
+    });
+  }
+
+  public getAvailableViewModes(): IButtonProps[] {
+    const { pokemon } = this.props;
+    const { viewMode } = this.state;
+
+    return [
+      {
+        id: CHART,
+        isActive: viewMode === CHART,
+        label: getTranslation('pokemon-details-chart'),
+        onClick: () => {
+          this.toggleViewMode(CHART);
+        },
+        type: 'button',
+      },
+      {
+        id: BARS,
+        isActive: viewMode === BARS,
+        label: getTranslation('pokemon-details-bars'),
+        onClick: () => {
+          this.toggleViewMode(BARS);
+        },
+        type: 'button',
+      },
+      {
+        id: 'pokedex',
+        label: getTranslation('header-pokedex'),
+        to: POKEDEX.replace(':id?', pokemon ? pokemon.id : ''),
+        type: 'button',
+      },
+    ];
   }
 
   public handlePokemonChange = (pokemon: { id: string; value: string }) => {
@@ -202,7 +257,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
 
   public render() {
     const { id, pokemon, pokemonList } = this.props;
-    const { candies, ivs, level, nature, natureEffects, reRender, redirectTo } = this.state;
+    const { candies, ivs, level, nature, natureEffects, reRender, redirectTo, viewMode } = this.state;
     const currentRoute = CALCULATOR.replace(':id?', id || '');
 
     if (reRender) {
@@ -266,8 +321,12 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         }
       : undefined;
 
+    const availableViewModes = this.getAvailableViewModes();
+
     return (
       <CalculatorView
+        availableViewModes={availableViewModes}
+        viewMode={viewMode}
         pokemonList={pokemonList}
         pokemon={pokemon}
         handlePokemonChange={e => {

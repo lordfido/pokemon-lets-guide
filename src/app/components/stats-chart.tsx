@@ -2,7 +2,9 @@ import { Line } from 'rc-progress';
 import * as React from 'react';
 // @ts-ignore
 import RadarChart from 'react-svg-radar-chart';
+import { getCookie } from '../../common/utils/cookies';
 
+import { POKEMON_VIEW_MODE } from '../../constants/cookies';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -27,21 +29,25 @@ const chartLegend = {
 
 export type ViewMode = 'bars' | 'chart';
 
+export const BARS: ViewMode = 'bars';
+export const CHART: ViewMode = 'chart';
+
 interface IOwnProps {
   stats: IPokemonStats;
   viewMode: ViewMode;
   color: string;
   size?: number;
+  max?: number;
 }
 
-const StatsChart = ({ stats, viewMode, color, size = 272 }: IOwnProps) => {
+const StatsChart = ({ stats, viewMode, color, size = 272, max = 100 }: IOwnProps) => {
   switch (viewMode) {
     case 'bars':
       return (
         <>
           {Object.keys(stats).map(statId => (
             <p key={statId}>
-              {getStatName(statId as StatId)}: {Math.round(stats[statId] * size)}
+              {getStatName(statId as StatId)}: {Math.round(stats[statId] * max)}
               <Line percent={stats[statId] * 100} strokeColor={color} strokeWidth="4" trailWidth="4" />
             </p>
           ))}
@@ -49,17 +55,17 @@ const StatsChart = ({ stats, viewMode, color, size = 272 }: IOwnProps) => {
       );
 
     case 'chart':
-      return (
-        <RadarChart
-          captions={chartLegend}
-          data={[{ data: stats, meta: { color } }]}
-          size={size}
-          options={{ scales: 1, dots: true }}
-        />
-      );
-
     default:
-      return null;
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <RadarChart
+            captions={chartLegend}
+            data={[{ data: stats, meta: { color } }]}
+            size={size}
+            options={{ scales: 1, dots: true }}
+          />
+        </div>
+      );
   }
 };
 
