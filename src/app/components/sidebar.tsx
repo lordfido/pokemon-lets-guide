@@ -112,7 +112,7 @@ class UnstyledSidebar extends React.Component<IOwnProps, IOwnState> {
     const { isOpen } = this.state;
 
     const toggleButton: IButtonProps = {
-      icon: isOpen ? 'minus' : 'plus',
+      icon: 'bars',
       id: 'toggle-sidebar',
       onClick: () => {
         this.handleToggleSidebar();
