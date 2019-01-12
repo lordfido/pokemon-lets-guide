@@ -24,7 +24,7 @@ export const commonStyles: ISheet = {
     lineHeight: '1.3em',
     minHeight: 38,
     outline: 'none',
-    padding: `${PADDING_S / 2}px 0px`,
+    padding: `${PADDING_S / 2}px ${PADDING_L}px`,
     textAlign: 'inherit',
     verticalAlign: 'middle',
     width: '100%',

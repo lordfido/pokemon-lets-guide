@@ -58,12 +58,12 @@ export const SEARCH: IRouteConfig = {
 export const HOME: IRouteConfig = {
   path: routes.HOME,
   render: ({ match }) => {
-    if (false) {
+    if (true) {
       const {
         params: { id },
       } = match;
       // @ts-ignore
-      return <CalculatorWrapper id={id} />;
+      return <CalculatorWrapper id={id || '006'} />;
     }
 
     const { url } = match;

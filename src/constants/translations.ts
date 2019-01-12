@@ -35,6 +35,16 @@ const translations: ITranslationsCollection = {
   'header-skills': ['', 'Skills', '', 'Movimientos', '', '', '', ''],
 
   // Calculator
+  'calculator-candies': ['', 'Candies', '', 'Caramelos', '', '', '', ''],
+  'calculator-candy-attack': ['', 'Mighty candy', '', 'Caramelo Músculo', '', '', '', ''],
+  'calculator-candy-defense': ['', 'Tough candy', '', 'Caramelo Aguante', '', '', '', ''],
+  'calculator-candy-hp': ['', 'Health candy', '', 'Caramelo Vigor', '', '', '', ''],
+  'calculator-candy-spAttack': ['', 'Smart candy', '', 'Caramelo Intelecto', '', '', '', ''],
+  'calculator-candy-spDefense': ['', 'Courage candy', '', 'Caramelo Mente', '', '', '', ''],
+  'calculator-candy-speed': ['', 'Quick candy', '', 'Caramelo Ímpetu', '', '', '', ''],
+  'calculator-final-stats': ['', 'Final stats', '', 'Estadísticas finales', '', '', '', ''],
+  'calculator-ivs': ['', 'IVs', '', 'IVs', '', '', '', ''],
+  'calculator-level': ['', 'Level', '', 'Nivel', '', '', '', ''],
   'calculator-select-pokemon': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
 
   // Pokemon list

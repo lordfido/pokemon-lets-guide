@@ -10,4 +10,4 @@ export const SPEED_ID: StatId = 'speed';
 
 // Stat values
 export const MAX_INITIAL_STAT_VALUE = 255;
-export const MAX_STAT_VALUE = 557;
+export const MAX_STAT_VALUE = 624;

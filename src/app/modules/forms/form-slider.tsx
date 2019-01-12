@@ -5,7 +5,7 @@ import injectSheet from 'react-jss';
 
 import Space from '../../components/space';
 
-import { PADDING_L } from '../../../constants/styles';
+import { PADDING_L, PADDING_S } from '../../../constants/styles';
 import { commonStyles } from './field.styles';
 
 import { ISheet } from '../../root.models';
@@ -17,6 +17,7 @@ const nextArrow = require('../../../assets/images/next-arrow.png');
 const sheet: ISheet = {
   field: {
     ...commonStyles.field,
+    padding: `${PADDING_S / 2}px 0px`,
 
     '&::-webkit-slider-thumb': {
       appearance: 'none',

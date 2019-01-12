@@ -2,7 +2,6 @@ import { Pokedex, Stats } from 'pokelab';
 import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getCombatPoints, getPaddedId, getVariantId, getVariantName } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
 
 import { PokedexActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
@@ -24,6 +23,7 @@ export interface IPokemonTypeData {
 }
 
 export interface IPokemonStats {
+  [key: string]: number;
   attack: number;
   spAttack: number;
   defense: number;

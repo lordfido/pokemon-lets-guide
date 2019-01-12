@@ -146,14 +146,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     LoadMorePokedex();
   }
 
-  public handleToggleFilters = () => {
-    const { areFiltersOpen } = this.state;
-
-    this.setState({
-      areFiltersOpen: !areFiltersOpen,
-    });
-  };
-
   public handleResetFilters = () => {
     this.setState({
       redirectToPokedex: true,
@@ -174,7 +166,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     SortPokedex({ sortBy, order });
   };
 
-  public handleUpdateFilter(filter: string, selection: any) {
+  public handleUpdateFilter({ id, value }: { id: string; value: string }) {
     clearTimeout(this.filtersDebounce);
     this.filtersDebounce = setTimeout(() => {
       const { filters } = this.props;
@@ -184,13 +176,13 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
       };
 
       // @ts-ignore
-      const prevFilter = filters[filter];
+      const prevFilter = filters[id];
       if (typeof prevFilter === 'boolean' || typeof prevFilter === 'string') {
         // @ts-ignore
-        newFilters[filter] = typeof selection !== 'undefined' ? selection : prevFilter;
+        newFilters[id] = typeof value !== 'undefined' ? value : prevFilter;
       } else {
         // @ts-ignore
-        newFilters[filter] = updateCollection(prevFilter, selection.map(s => s.value));
+        newFilters[id] = updateCollection(prevFilter, value.map(s => s.value));
       }
 
       const redirectTo = filtersToString(newFilters);

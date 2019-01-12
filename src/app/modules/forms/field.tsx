@@ -61,11 +61,11 @@ const Field = ({ className, options }: IOwnProps) => {
         switch (event.target.type) {
           case 'checkbox':
             // @ts-ignore
-            options.onChange(event.target.checked);
+            options.onChange({ id: options.id, value: event.target.checked });
             break;
 
           default:
-            options.onChange(event.target.value);
+            options.onChange({ id: options.id, value: event.target.value });
         }
       } else {
         options.onChange(event);

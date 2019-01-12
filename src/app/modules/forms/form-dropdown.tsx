@@ -51,7 +51,11 @@ const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IO
       }
       isDisabled={options.isDisabled}
       isMulti={options.isMulti}
-      onChange={onChange}
+      onChange={option => {
+        if (onChange) {
+          onChange({ id: options.id, value: option });
+        }
+      }}
       onFocus={onFocus}
       options={options.options}
       placeholder={options.placeholder}
