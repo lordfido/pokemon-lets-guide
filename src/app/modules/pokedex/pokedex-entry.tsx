@@ -2,14 +2,14 @@ import chroma from 'chroma-js';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getPaddedId } from '../../../utils/pokemon';
-import { getTranslation } from '../../../utils/translations';
+import { getPaddedId } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
-import Buttons from '../../../components/buttons';
-import { TableCell, TableRow } from '../../../components/table';
-import Tag from '../../../components/tag';
+import Buttons from '../../components/buttons';
+import { TableCell, TableRow } from '../../components/table';
+import Tag from '../../components/tag';
 
-import { CALCULATOR, POKEDEX } from '../../../../constants/appRoutes';
+import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -17,14 +17,14 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-} from '../../../../constants/pokemon-stats';
-import { getStatColor } from '../../../../constants/pokemon-stats-color';
-import { getTypeName } from '../../../../constants/pokemon-types';
-import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
+} from '../../../constants/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
+import { getTypeName } from '../../../constants/pokemon-types';
+import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon-types-icons';
 
-import { ISheet } from '../../../root.models';
-import { IPokemonWithBaseCP } from '../pokedex.models';
+import { ISheet } from '../../root.models';
+import { IPokemonWithBaseCP } from './pokedex.models';
 
 const sheet: ISheet = {
   fullWidth: {

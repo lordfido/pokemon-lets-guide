@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { log } from '../../../common/utils/logger';
 
 import Button from '../../components/button';
 import Checkbox from './form-checkbox';

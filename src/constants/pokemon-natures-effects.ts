@@ -51,10 +51,10 @@ export const getNatureModifier = (stat: StatId, nature?: INatureEffect) => {
 };
 
 /**
- * TODO: Given a IPokemonStats and PokemonNature, it will modify those stats
+ * Given a IPokemonStats and PokemonNature, it will modify those stats
  * based on this nature
  */
-const modifyStatsByNature = (stats: IPokemonStats, nature: PokemonNature): IPokemonStats => ({
+export const modifyStatsByNature = (stats: IPokemonStats, nature: PokemonNature): IPokemonStats => ({
   attack: stats.attack * getNatureModifier(ATTACK_ID, getNatureEffects(nature)),
   defense: stats.defense * getNatureModifier(DEFENSE_ID, getNatureEffects(nature)),
   hp: stats.hp * getNatureModifier(HP_ID, getNatureEffects(nature)),

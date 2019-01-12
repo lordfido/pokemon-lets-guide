@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { getTranslation } from '../../../utils/translations';
+import { getTranslation } from '../../utils/translations';
 
-import Buttons from '../../../components/buttons';
-import Field from '../../forms/field';
+import Buttons from '../../components/buttons';
+import Field from '../forms/field';
 import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
-import { filtersEnabled } from '../../../../constants/features';
-import { ICheckboxOptions, IDropdownOptions, IGenericField, ITextOptions } from '../../forms/form.models';
-import { IPokedexFilters } from '../pokedex.models';
+import { filtersEnabled } from '../../../constants/features';
+import { ICheckboxOptions, IDropdownOptions, IGenericField, ITextOptions } from '../forms/form.models';
+import { IPokedexFilters } from './pokedex.models';
 
 interface IOwnProps {
   classNames: {

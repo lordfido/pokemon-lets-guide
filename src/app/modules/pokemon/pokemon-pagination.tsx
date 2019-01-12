@@ -2,18 +2,18 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
-import { getAvatarFromId } from '../../../utils/pokemon';
+import { getAvatarFromId } from '../../utils/pokemon';
 
-import Avatar from '../../../components/avatar';
+import Avatar from '../../components/avatar';
 
-import { POKEDEX } from '../../../../constants/appRoutes';
-import { PADDING_L, PADDING_XL } from '../../../../constants/styles';
-import { traslucentColor, WHITE } from '../../../../constants/styles-colors';
-import { FONT_XL, TEXT_WHITE } from '../../../../constants/styles-fonts';
-import { MAX_MOBILE_L, MOBILE_XL } from '../../../../constants/styles-media-queries';
+import { POKEDEX } from '../../../constants/appRoutes';
+import { PADDING_L, PADDING_XL } from '../../../constants/styles';
+import { traslucentColor, WHITE } from '../../../constants/styles-colors';
+import { FONT_XL, TEXT_WHITE } from '../../../constants/styles-fonts';
+import { MAX_MOBILE_L, MOBILE_XL } from '../../../constants/styles-media-queries';
 
-import { ISheet } from '../../../root.models';
-import { IPokemonDetailPagination } from '../pokedex.models';
+import { ISheet } from '../../root.models';
+import { IPokemonDetailPagination } from '../pokedex/pokedex.models';
 
 const borderWidth = 3;
 

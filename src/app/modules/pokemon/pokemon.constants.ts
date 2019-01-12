@@ -1,12 +1,12 @@
-import { PADDING_XL } from '../../../../constants/styles';
+import { PADDING_XL } from '../../../constants/styles';
 import {
   lighterColor,
   POKEDEX_BACKGROUND,
   POKEDEX_WINDOW_BACKGROUND,
   traslucentColor,
-} from '../../../../constants/styles-colors';
+} from '../../../constants/styles-colors';
 
-import { ISheet } from '../../../root.models';
+import { ISheet } from '../../root.models';
 
 export const commonStyles: ISheet = {
   window: {

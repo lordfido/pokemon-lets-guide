@@ -1,20 +1,20 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../../utils/translations';
+import { getTranslation } from '../../utils/translations';
 
-import { IButtonProps } from '../../../components/button';
-import Buttons from '../../../components/buttons';
-import StatsChart, { BARS, CHART, ViewMode } from '../../../components/stats-chart';
+import { IButtonProps } from '../../components/button';
+import Buttons from '../../components/buttons';
+import StatsChart, { BARS, CHART, ViewMode } from '../../components/stats-chart';
 
-import { MAX_INITIAL_STAT_VALUE } from '../../../../constants/pokemon-stats';
-import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../../constants/styles';
-import { DESKTOP } from '../../../../constants/styles-media-queries';
+import { MAX_INITIAL_STAT_VALUE } from '../../../constants/pokemon-stats';
+import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../constants/styles';
+import { DESKTOP } from '../../../constants/styles-media-queries';
 import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
-import { ISheet } from '../../../root.models';
-import { IRichPokemon } from '../pokedex.models';
+import { ISheet } from '../../root.models';
+import { IRichPokemon } from '../pokedex/pokedex.models';
 
 const sheet: ISheet = {
   bars: {

@@ -7,7 +7,7 @@ import Buttons from '../../components/buttons';
 import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
 import StatsChart, { ViewMode } from '../../components/stats-chart';
 import Field from '../forms/field';
-import PokemonPreview from '../pokedex/details/pokemon-preview';
+import PokemonPreview from '../pokemon/pokemon-preview';
 
 import { MAX_CANDIES_VALUE } from '../../../constants/pokemon-candies';
 import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
@@ -28,7 +28,7 @@ import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { PADDING_XXL } from '../../../constants/styles';
 import { DESKTOP, DESKTOP_L } from '../../../constants/styles-media-queries';
-import { commonStyles, MAX_WIDTH } from '../pokedex/details/pokemon.constants';
+import { commonStyles, MAX_WIDTH } from '../pokemon/pokemon.constants';
 
 import { ISheet } from '../../root.models';
 import { IDropdownOptions, IOption, ISliderOptions } from '../forms/form.models';

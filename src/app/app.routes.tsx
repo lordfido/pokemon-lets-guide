@@ -2,8 +2,8 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import CalculatorWrapper from '../app/modules/calculator/calculator-wrapper';
-import PokemonDetailsWrapper from '../app/modules/pokedex/details/pokemon-wrapper';
-import PokedexWrapper from '../app/modules/pokedex/list/pokedex-wrapper';
+import PokemonWrapper from './modules/pokemon/pokemon-wrapper';
+import PokedexWrapper from './modules/pokedex/pokedex-wrapper';
 
 import * as routes from '../constants/appRoutes';
 
@@ -38,7 +38,7 @@ export const POKEDEX: IRouteConfig = {
     } = match;
     if (id) {
       // @ts-ignore
-      return <PokemonDetailsWrapper id={id} />;
+      return <PokemonWrapper id={id} />;
     }
     return <PokedexWrapper url={url} />;
   },

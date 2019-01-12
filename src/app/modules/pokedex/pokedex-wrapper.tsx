@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { updateCollection } from '../../../utils/collections';
+import { updateCollection } from '../../utils/collections';
 
 import PokedexView from './pokedex-view';
 
-import { getPokedex, getPokedexFilters, getPokedexPagination, getPokedexSortOptions } from '../../../root.reducer';
-import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from '../pokedex.actions';
+import { getPokedex, getPokedexFilters, getPokedexPagination, getPokedexSortOptions } from '../../root.reducer';
+import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from './pokedex.actions';
 
-import { POKEDEX, SEARCH } from '../../../../constants/appRoutes';
+import { POKEDEX, SEARCH } from '../../../constants/appRoutes';
 
-import { IRootState } from '../../../root.models';
-import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from '../pokedex.models';
+import { IRootState } from '../../root.models';
+import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
 
 const DEBOUNCE_MS = 300;
 
@@ -194,7 +194,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   public render() {
     const { url } = this.props;
-    const { areFiltersOpen, redirectTo, redirectToPokedex } = this.state;
+    const { redirectTo, redirectToPokedex } = this.state;
 
     if (redirectToPokedex) {
       return <Redirect to={{ pathname: POKEDEX }} />;

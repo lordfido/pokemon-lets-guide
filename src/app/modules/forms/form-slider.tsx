@@ -77,7 +77,7 @@ class UnstyledSlider extends React.Component<IOwnProps, IOwnState> {
   };
 
   public render() {
-    const { classes, className, options, onChange, onClick, onFocus } = this.props;
+    const { classes, className, options, onClick, onFocus } = this.props;
     const { value } = this.state;
 
     return (

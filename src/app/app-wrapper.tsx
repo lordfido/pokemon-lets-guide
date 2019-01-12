@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import analyticsApi from '../common/apis/analytics';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';

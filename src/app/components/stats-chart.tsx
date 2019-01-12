@@ -2,9 +2,7 @@ import { Line } from 'rc-progress';
 import * as React from 'react';
 // @ts-ignore
 import RadarChart from 'react-svg-radar-chart';
-import { getCookie } from '../../common/utils/cookies';
 
-import { POKEMON_VIEW_MODE } from '../../constants/cookies';
 import {
   ATTACK_ID,
   DEFENSE_ID,

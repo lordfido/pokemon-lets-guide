@@ -2,12 +2,11 @@ import chroma from 'chroma-js';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../../utils/translations';
+import { getTranslation } from '../../utils/translations';
 
-import { IButtonProps } from '../../../components/button';
-import Buttons from '../../../components/buttons';
-import Sidebar, { SIDEBAR_SIZE } from '../../../components/sidebar';
-import Table from '../../../components/table';
+import Buttons from '../../components/buttons';
+import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
+import Table from '../../components/table';
 import PokedexEntry from './pokedex-entry';
 import PokedexFilters from './pokedex-filters';
 
@@ -18,15 +17,15 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-} from '../../../../constants/pokemon-stats';
-import { getStatColor } from '../../../../constants/pokemon-stats-color';
-import { getStatName } from '../../../../constants/pokemon-stats-name';
-import { PADDING_M, PADDING_S, PADDING_XXL } from '../../../../constants/styles';
-import { TEXT_DARK } from '../../../../constants/styles-fonts';
-import { DESKTOP_L, MOBILE_XL } from '../../../../constants/styles-media-queries';
+} from '../../../constants/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
+import { getStatName } from '../../../constants/pokemon-stats-name';
+import { PADDING_M, PADDING_XXL } from '../../../constants/styles';
+import { TEXT_DARK } from '../../../constants/styles-fonts';
+import { DESKTOP_L } from '../../../constants/styles-media-queries';
 
-import { ISheet } from '../../../root.models';
-import { IPokedexFilters, IPokemonWithBaseCP } from '../pokedex.models';
+import { ISheet } from '../../root.models';
+import { IPokedexFilters, IPokemonWithBaseCP } from './pokedex.models';
 
 const sheet: ISheet = {
   results: {

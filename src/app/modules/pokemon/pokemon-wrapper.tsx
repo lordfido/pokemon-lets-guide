@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import analyticsApi from '../../../../common/apis/analytics';
-import { getCookie, setCookie } from '../../../../common/utils/cookies';
-import { getRichPokemon } from '../../../utils/pokemon';
+import analyticsApi from '../../../common/apis/analytics';
+import { getCookie, setCookie } from '../../../common/utils/cookies';
+import { getRichPokemon } from '../../utils/pokemon';
 
-import { getPokemonPagination, getSelectedPokemon } from '../../../root.reducer';
+import { getPokemonPagination, getSelectedPokemon } from '../../root.reducer';
 
-import { IButtonProps } from '../../../components/button';
-import PokemonDetailsView from './pokemon-view';
+import { IButtonProps } from '../../components/button';
+import PokemonView from './pokemon-view';
 
-import { IRootState } from '../../../root.models';
-import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
+import { IRootState } from '../../root.models';
+import { IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
 
-import { POKEDEX, CALCULATOR } from '../../../../constants/appRoutes';
-import { POKEMON_VIEW_MODE } from '../../../../constants/cookies';
-import { POKEMON_VIEW_MODE as POKEMON_VIEW_MODE_ACTION } from '../../../../constants/metrics/actions';
-import { USER_PREFERENCES } from '../../../../constants/metrics/categories';
-import { BARS, CHART, ViewMode } from '../../../components/stats-chart';
-import { getTranslation } from '../../../utils/translations';
+import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
+import { POKEMON_VIEW_MODE } from '../../../constants/cookies';
+import { POKEMON_VIEW_MODE as POKEMON_VIEW_MODE_ACTION } from '../../../constants/metrics/actions';
+import { USER_PREFERENCES } from '../../../constants/metrics/categories';
+import { BARS, CHART, ViewMode } from '../../components/stats-chart';
+import { getTranslation } from '../../utils/translations';
 
 interface IOwnProps {
   id: string;
@@ -35,7 +35,7 @@ interface IOwnState {
   viewMode: ViewMode;
 }
 
-class PokemonDetailsWrapper extends React.Component<Props, IOwnState> {
+class PokemonWrapper extends React.Component<Props, IOwnState> {
   public state = {
     viewMode: (getCookie(POKEMON_VIEW_MODE) as ViewMode) || CHART,
   };
@@ -94,7 +94,7 @@ class PokemonDetailsWrapper extends React.Component<Props, IOwnState> {
       const availableViewModes = this.getAvailableViewModes();
 
       return (
-        <PokemonDetailsView
+        <PokemonView
           availableViewModes={availableViewModes}
           pagination={pagination}
           pokemon={pokemon}
@@ -119,4 +119,4 @@ const mapStateToProps = (state: IRootState, ownProps: Props): IStateProps => {
   };
 };
 
-export default connect(mapStateToProps)(PokemonDetailsWrapper);
+export default connect(mapStateToProps)(PokemonWrapper);

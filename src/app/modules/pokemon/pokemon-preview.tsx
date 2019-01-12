@@ -1,12 +1,12 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import Image from '../../../components/image';
+import Image from '../../components/image';
 
-import { DESKTOP, DESKTOP_L } from '../../../../constants/styles-media-queries';
+import { DESKTOP, DESKTOP_L } from '../../../constants/styles-media-queries';
 import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
-import { ISheet } from '../../../root.models';
+import { ISheet } from '../../root.models';
 
 const sheet: ISheet = {
   image: {

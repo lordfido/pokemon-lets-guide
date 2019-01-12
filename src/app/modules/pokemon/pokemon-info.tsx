@@ -1,20 +1,20 @@
 import * as React from 'react';
 import injectSheet, { CSSProperties } from 'react-jss';
-import { getPaddedId } from '../../../utils/pokemon';
-import { getTranslation } from '../../../utils/translations';
+import { getPaddedId } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
-import Spacer from '../../../components/spacer';
-import Tag from '../../../components/tag';
+import Spacer from '../../components/spacer';
+import Tag from '../../components/tag';
 
-import { getTypeName, PokemonType } from '../../../../constants/pokemon-types';
-import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
-import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_S, PADDING_XXL } from '../../../../constants/styles';
-import { DESKTOP } from '../../../../constants/styles-media-queries';
+import { getTypeName, PokemonType } from '../../../constants/pokemon-types';
+import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon-types-icons';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_S, PADDING_XXL } from '../../../constants/styles';
+import { DESKTOP } from '../../../constants/styles-media-queries';
 import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
-import { ISheet } from '../../../root.models';
-import { IRichPokemon } from '../pokedex.models';
+import { ISheet } from '../../root.models';
+import { IRichPokemon } from '../pokedex/pokedex.models';
 
 const strengthsAndWeaknesses: CSSProperties = {
   display: 'inline-block',

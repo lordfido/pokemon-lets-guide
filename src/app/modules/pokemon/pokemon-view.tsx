@@ -1,28 +1,23 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import analyticsApi from '../../../../common/apis/analytics';
-import { getCookie, setCookie } from '../../../../common/utils/cookies';
-import { getSuggestedIVs } from '../../../utils/pokemon';
-import { getTranslation } from '../../../utils/translations';
+import { getSuggestedIVs } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
-import { IButtonProps } from '../../../components/button';
-import StatsChart, { BARS, CHART, ViewMode } from '../../../components/stats-chart';
+import { IButtonProps } from '../../components/button';
+import StatsChart, { ViewMode } from '../../components/stats-chart';
 import PokemonInfo from './pokemon-info';
 import PokemonPagination from './pokemon-pagination';
 import PokemonPokedexEntry from './pokemon-pokedex-entry';
 import PokemonPreview from './pokemon-preview';
 import PokemonStats from './pokemon-stats';
 
-import { POKEMON_VIEW_MODE } from '../../../../constants/cookies';
-import { POKEMON_VIEW_MODE as POKEMON_VIEW_MODE_ACTION } from '../../../../constants/metrics/actions';
-import { USER_PREFERENCES } from '../../../../constants/metrics/categories';
-import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { PADDING_XL } from '../../../../constants/styles';
-import { POKEDEX_BACKGROUND } from '../../../../constants/styles-colors';
-import { TEXT_WHITE } from '../../../../constants/styles-fonts';
+import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { PADDING_XL } from '../../../constants/styles';
+import { POKEDEX_BACKGROUND } from '../../../constants/styles-colors';
+import { TEXT_WHITE } from '../../../constants/styles-fonts';
 
-import { ISheet } from '../../../root.models';
-import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
+import { ISheet } from '../../root.models';
+import { IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
 
 const sheet: ISheet = {
   wrapper: {
@@ -41,7 +36,7 @@ interface IOwnProps {
   viewMode: ViewMode;
 }
 
-const unstyledPokemonDetailsView = ({ availableViewModes, classes, pagination, pokemon, viewMode }: IOwnProps) => {
+const unstyledPokemonView = ({ availableViewModes, classes, pagination, pokemon, viewMode }: IOwnProps) => {
   const renderSuggestedStats = () => {
     const suggestedIVs = getSuggestedIVs(pokemon.baseStats);
 
@@ -68,6 +63,6 @@ const unstyledPokemonDetailsView = ({ availableViewModes, classes, pagination, p
   );
 };
 
-const PokemonDetailsView = injectSheet(sheet)(unstyledPokemonDetailsView);
+const PokemonView = injectSheet(sheet)(unstyledPokemonView);
 
-export default PokemonDetailsView;
+export default PokemonView;
