@@ -1,5 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
+import { getAvatarFromId } from '../../utils/pokemon';
 import { getTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
@@ -34,6 +35,11 @@ import { ISheet } from '../../root.models';
 import { IDropdownOptions, IOption, ISliderOptions } from '../forms/form.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
 
+const defaultPokemon = {
+  avatar: getAvatarFromId('025'),
+  name: 'Pikachu',
+};
+
 const sheet: ISheet = {
   customization: {
     ...commonStyles.window,
@@ -46,6 +52,12 @@ const sheet: ISheet = {
       marginTop: PADDING_XXL,
       width: MAX_WIDTH - PADDING_XXL,
     },
+  },
+  emptyCase: {
+    textAlign: 'center',
+  },
+  emptyCaseImage: {
+    opacity: 0.3,
   },
   result: {
     display: 'inline-block',
@@ -110,7 +122,7 @@ const unstyledCalculatorView = ({
     label: getTranslation('calculator-select-pokemon'),
     onChange: handlePokemonChangeProxy,
     options: pokemonList.map(({ id, name }) => ({ id, label: name, value: id })),
-    placeholder: 'Pikachu',
+    placeholder: defaultPokemon.name,
     type: 'dropdown',
   };
 
@@ -338,6 +350,15 @@ const unstyledCalculatorView = ({
               <p>{getNatureName(nature)}</p>
             </div>
           </>
+        )}
+
+        {!pokemon && (
+          <div className={classes.emptyCase}>
+            <h4>{getTranslation('calculator-empty-case')}</h4>
+            <div className={classes.emptyCaseImage}>
+              <PokemonPreview src={defaultPokemon.avatar} />
+            </div>
+          </div>
         )}
       </div>
     </>

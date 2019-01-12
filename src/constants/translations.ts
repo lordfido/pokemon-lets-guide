@@ -42,6 +42,7 @@ const translations: ITranslationsCollection = {
   'calculator-candy-spAttack': ['', 'Smart candy', '', 'Caramelo Intelecto', '', '', '', ''],
   'calculator-candy-spDefense': ['', 'Courage candy', '', 'Caramelo Mente', '', '', '', ''],
   'calculator-candy-speed': ['', 'Quick candy', '', 'Caramelo Ímpetu', '', '', '', ''],
+  'calculator-empty-case': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
   'calculator-final-stats': ['', 'Final stats', '', 'Estadísticas finales', '', '', '', ''],
   'calculator-increase': ['', 'Increase', '', 'Aumenta', '', '', '', ''],
   'calculator-ivs': ['', 'IVs', '', 'IVs', '', '', '', ''],
@@ -51,7 +52,7 @@ const translations: ITranslationsCollection = {
   'calculator-nature': ['', 'Nature', '', 'Naturaleza', '', '', '', ''],
   'calculator-reduce': ['', 'Reduce', '', 'Reduce', '', '', '', ''],
   'calculator-reset': ['', 'Reset', '', 'Reiniciar', '', '', '', ''],
-  'calculator-select-pokemon': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
+  'calculator-select-pokemon': ['', 'Pokémon', '', 'Pokémon', '', '', '', ''],
 
   // Pokemon list
   'pokemon-avatar': ['', 'Avatar', '', 'Avatar', '', '', '', ''],
