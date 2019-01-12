@@ -80,7 +80,6 @@ export interface IPokedexFilters {
   includedTypes: PokemonType[];
   maxBaseCP: string;
   minBaseCP: string;
-  nameOrNumber: string;
   // needsCandies: StatId[];
   showAlolanForms: boolean;
   showMegaevolutions: boolean;
@@ -110,7 +109,6 @@ export const pokedexInitialState: IPokedexState = {
     includedTypes: [],
     maxBaseCP: '',
     minBaseCP: '',
-    nameOrNumber: '',
     // needsCandies: [],
     showAlolanForms: false,
     showMegaevolutions: false,

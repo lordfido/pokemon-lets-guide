@@ -73,16 +73,6 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
 
   return collection
     .filter(pokemon => {
-      // Filter list by name or number
-      if (filters.nameOrNumber) {
-        if (
-          filters.nameOrNumber !== String(pokemon.nationalNumber) &&
-          new RegExp(filters.nameOrNumber.toLowerCase()).test(pokemon.name.toLowerCase()) === false
-        ) {
-          return false;
-        }
-      }
-
       // Filter list by included types
       if (filters.includedTypes.length) {
         let shouldShow = false;

@@ -26,6 +26,7 @@ import { DESKTOP_L } from '../../../constants/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IPokedexFilters, IPokemonWithBaseCP } from './pokedex.models';
+import { IOption } from '../forms/form.models';
 
 const sheet: ISheet = {
   results: {
@@ -72,8 +73,10 @@ interface IOwnProps {
   classes: { [key: string]: string };
   collection: IPokemonWithBaseCP[];
   handleSortBy: (key: string) => void;
+  pokemonList: IOption[];
+  handlePokemonChange: (pokemon: { id: string; value: string }) => void;
   filters: IPokedexFilters;
-  handleUpdateFilter: (option: { id: string; value: any }) => void;
+  handleFilterChange: (option: { id: string; value: any }) => void;
   handleReset: () => void;
   handleSubmit: () => void;
   handleLoadMore?: () => void;
@@ -83,8 +86,10 @@ const unstyledPokedexView = ({
   classes,
   collection,
   handleSortBy,
+  pokemonList,
+  handlePokemonChange,
   filters,
-  handleUpdateFilter,
+  handleFilterChange,
   handleReset,
   handleSubmit,
   handleLoadMore,
@@ -97,8 +102,10 @@ const unstyledPokedexView = ({
             form: classes.form,
             formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
           }}
+          pokemonList={pokemonList}
+          handlePokemonChange={handlePokemonChange}
           filters={filters}
-          handleUpdateFilter={handleUpdateFilter}
+          handleFilterChange={handleFilterChange}
           handleReset={handleReset}
           handleSubmit={handleSubmit}
         />

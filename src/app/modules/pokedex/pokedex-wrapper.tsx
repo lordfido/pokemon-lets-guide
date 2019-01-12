@@ -5,15 +5,20 @@ import { updateCollection } from '../../utils/collections';
 
 import PokedexView from './pokedex-view';
 
-import { getPokedex, getPokedexFilters, getPokedexPagination, getPokedexSortOptions } from '../../root.reducer';
+import {
+  getPokedex,
+  getPokedexFilters,
+  getPokedexPagination,
+  getPokedexSortOptions,
+  getRawPokedex,
+} from '../../root.reducer';
 import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from './pokedex.actions';
 
 import { POKEDEX, SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
+import { IOption } from '../forms/form.models';
 import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
-
-const DEBOUNCE_MS = 300;
 
 const stringToFilters = (url?: string) => {
   if (!url || (/\;/.test(url) === false && /\=/.test(url) === false)) {
@@ -66,6 +71,7 @@ interface IStateProps {
   collection: IPokemonWithBaseCP[];
   filters: IPokedexFilters;
   pagination: IPokemonListPagination;
+  pokemonList: IOption[];
   sort: {
     sortBy: string;
     order: string;
@@ -101,7 +107,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
       includedTypes: [],
       maxBaseCP: '',
       minBaseCP: '',
-      nameOrNumber: '',
       showAlolanForms: false,
       showMegaevolutions: false,
       strongAgainst: [],
@@ -148,7 +153,13 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     SortPokedex({ sortBy, order });
   };
 
-  public handleUpdateFilter({ id, value }: { id: string; value: any }) {
+  public handlePokemonChange = (pokemon: { id: string; value: string }) => {
+    this.setState({
+      redirectTo: POKEDEX.replace(':id?', pokemon.value),
+    });
+  };
+
+  public handleFilterChange = ({ id, value }: { id: string; value: any }) => {
     const { filters } = this.state;
 
     const newFilters = {
@@ -168,7 +179,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     this.setState({
       filters: newFilters,
     });
-  }
+  };
 
   public handleReset = () => {
     this.setState({
@@ -185,14 +196,14 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     });
   };
 
-  public handleLoadMorePokedex() {
+  public handleLoadMorePokedex = () => {
     const { LoadMorePokedex } = this.props;
 
     LoadMorePokedex();
-  }
+  };
 
   public render() {
-    const { url } = this.props;
+    const { url, pokemonList } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -206,9 +217,13 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
       <PokedexView
         collection={collection}
         handleSortBy={this.handleSortBy}
+        pokemonList={pokemonList}
+        handlePokemonChange={e => {
+          this.handlePokemonChange(e);
+        }}
         filters={filters}
-        handleUpdateFilter={(option: { id: string; value: any }) => {
-          this.handleUpdateFilter(option);
+        handleFilterChange={(option: { id: string; value: any }) => {
+          this.handleFilterChange(option);
         }}
         handleReset={() => {
           this.handleReset();
@@ -232,6 +247,11 @@ const mapStateToProps = (state: IRootState) => ({
   collection: getPokedex(state),
   filters: getPokedexFilters(state),
   pagination: getPokedexPagination(state),
+  pokemonList: getRawPokedex(state).map(pokemon => ({
+    id: pokemon.id,
+    label: pokemon.name,
+    value: pokemon.id,
+  })),
   sort: getPokedexSortOptions(state),
 });
 

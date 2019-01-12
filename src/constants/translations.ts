@@ -98,7 +98,7 @@ const translations: ITranslationsCollection = {
   'search-include-types': ['', 'Include types', '', 'Incluir tipos', '', '', '', ''],
   'search-max-cp': ['', 'Max. Base CP', '', 'PC base máximos', '', '', '', ''],
   'search-min-cp': ['', 'Min. Base CP', '', 'PC base mínimos', '', '', '', ''],
-  'search-name-or-number': ['', 'Name or number', '', 'Nombre o número', '', '', '', ''],
+  'search-pokemon': ['', 'Pokémon', '', 'Pokémon', '', '', '', ''],
   'search-select-some-stats': ['', 'Select some stats', '', 'Selecciona alguna estadística', '', '', '', ''],
   'search-select-some-types': ['', 'Select some types', '', 'Selecciona algún tipo', '', '', '', ''],
   'search-show-alolan-forms': ['', 'Show Alolan forms', '', 'Mostrar formas Alola', '', '', '', ''],
