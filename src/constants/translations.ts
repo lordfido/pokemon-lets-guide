@@ -46,8 +46,11 @@ const translations: ITranslationsCollection = {
   'calculator-increase': ['', 'Increase', '', 'Aumenta', '', '', '', ''],
   'calculator-ivs': ['', 'IVs', '', 'IVs', '', '', '', ''],
   'calculator-level': ['', 'Level', '', 'Nivel', '', '', '', ''],
+  'calculator-level-down': ['', 'Set to min.', '', 'Bajar al mín.', '', '', '', ''],
+  'calculator-level-up': ['', 'Set to max.', '', 'Subir al máx.', '', '', '', ''],
   'calculator-nature': ['', 'Nature', '', 'Naturaleza', '', '', '', ''],
   'calculator-reduce': ['', 'Reduce', '', 'Reduce', '', '', '', ''],
+  'calculator-reset': ['', 'Reset', '', 'Reiniciar', '', '', '', ''],
   'calculator-select-pokemon': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
 
   // Pokemon list

@@ -2,6 +2,8 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { getTranslation } from '../../utils/translations';
 
+import { IButtonProps } from '../../components/button';
+import Buttons from '../../components/buttons';
 import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
 import StatsChart from '../../components/stats-chart';
 import Field from '../forms/field';
@@ -59,13 +61,15 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   pokemonList: IPokemonWithBaseCP[];
-  handlePokemonSelect: (event: any) => void;
+  handlePokemonChange: (pokemon: { id: string; value: string }) => void;
   pokemon?: IRichPokemon;
   level: string;
   handleLevelChange: (level: { id: string; value: string }) => void;
   nature?: PokemonNature;
   natureEffects: INatureEffect;
   handleNatureChange: (nature: { id: string; value?: StatId }) => void;
+  handleResetAll: () => void;
+  handleModifyAll: (isMax?: boolean) => void;
   ivs: IPokemonStats;
   handleIVsChange: (event: { stat: StatId; value: string }) => void;
   candies: IPokemonStats;
@@ -77,18 +81,36 @@ const unstyledCalculatorView = ({
   classes,
   pokemonList,
   pokemon,
-  handlePokemonSelect,
+  handlePokemonChange,
   level,
   handleLevelChange,
   nature,
   natureEffects,
   handleNatureChange,
+  handleResetAll,
+  handleModifyAll,
   ivs,
   handleIVsChange,
   candies,
   handleCandiesChange,
   stats,
 }: IOwnProps) => {
+  // Pokemon
+  const handlePokemonChangeProxy = (option: { id: string; value: IOption }) => {
+    handlePokemonChange({ id: option.id, value: option.value.value });
+  };
+
+  const pokemonField: IDropdownOptions = {
+    defaultValue: pokemon ? [pokemon.id] : undefined,
+    id: 'pokemon',
+    label: getTranslation('calculator-select-pokemon'),
+    onChange: handlePokemonChangeProxy,
+    options: pokemonList.map(({ id, name }) => ({ id, label: name, value: id })),
+    placeholder: 'Pikachu',
+    type: 'dropdown',
+  };
+
+  // Level
   const levelField: ISliderOptions = {
     defaultValue: level,
     id: 'level',
@@ -98,6 +120,7 @@ const unstyledCalculatorView = ({
     type: 'slider',
   };
 
+  // Nature
   const handleNatureChangeProxy = (option: { id: string; value: IOption }) => {
     handleNatureChange({ id: option.id.replace('nature-', ''), value: option.value.value as StatId });
   };
@@ -128,6 +151,38 @@ const unstyledCalculatorView = ({
     },
   ];
 
+  // Quick actions
+  const buttonsCommonProps: IButtonProps = {
+    id: '',
+    type: 'button',
+  };
+
+  const buttons: IButtonProps[] = [
+    {
+      ...buttonsCommonProps,
+      id: 'level-up',
+      label: getTranslation('calculator-level-up'),
+      onClick: () => {
+        handleModifyAll(true);
+      },
+    },
+    {
+      ...buttonsCommonProps,
+      id: 'level-down',
+      label: getTranslation('calculator-level-down'),
+      onClick: () => {
+        handleModifyAll(false);
+      },
+    },
+    {
+      ...buttonsCommonProps,
+      id: 'reset',
+      label: getTranslation('calculator-reset'),
+      onClick: handleResetAll,
+    },
+  ];
+
+  // IVs
   const handleIVsChangeProxy = (option: IOption) => {
     handleIVsChange({ stat: option.id.replace('ivs-', '') as StatId, value: option.value });
   };
@@ -178,6 +233,7 @@ const unstyledCalculatorView = ({
     },
   ];
 
+  // Candies
   const handleCandiesChangeProxy = (option: IOption) => {
     handleCandiesChange({ stat: option.id.replace('candies-', '') as StatId, value: option.value });
   };
@@ -233,17 +289,7 @@ const unstyledCalculatorView = ({
       <Sidebar
         render={() => (
           <form noValidate>
-            <Field
-              options={{
-                defaultValue: pokemon ? pokemon.id : undefined,
-                id: 'pokemon',
-                label: getTranslation('calculator-select-pokemon'),
-                onChange: handlePokemonSelect,
-                options: pokemonList.map(({ id, name }) => ({ id, label: name, value: id })),
-                placeholder: 'Pikachu',
-                type: 'dropdown',
-              }}
-            />
+            <Field options={pokemonField} />
           </form>
         )}
       />
@@ -258,6 +304,8 @@ const unstyledCalculatorView = ({
               {natureFields.map(field => (
                 <Field key={field.id} options={field} />
               ))}
+
+              <Buttons options={buttons} />
 
               <h4>{getTranslation('calculator-ivs')}</h4>
               {ivsFields.map(field => (
