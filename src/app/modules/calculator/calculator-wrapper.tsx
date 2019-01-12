@@ -1,22 +1,24 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { getRichPokemon } from '../../utils/pokemon';
 
 import CalculatorView from './calculator-view';
 
-import { getPokedex, getSelectedPokemon } from '../../root.reducer';
+import { getRawPokedex, getSelectedPokemon } from '../../root.reducer';
+
+import { CALCULATOR } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
-import { IPokemonWithBaseCP } from '../pokedex/pokedex.models';
-import { Redirect } from 'react-router';
 import { IOption } from '../forms/form.models';
-import { CALCULATOR } from '../../../constants/appRoutes';
+import { IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
 
 interface IOwnProps {
   id?: string;
 }
 
 interface IStateProps {
-  pokemon?: IPokemonWithBaseCP;
+  pokemon?: IRichPokemon;
   pokemonList: IPokemonWithBaseCP[];
 }
 
@@ -68,10 +70,10 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
 
 const mapStateToProps = (state: IRootState, { id }: Props) => {
   const selectedPokemon = id ? getSelectedPokemon(state)(id) : undefined;
-  const pokemonList = getPokedex(state, false);
+  const pokemonList = getRawPokedex(state);
 
   return {
-    pokemon: selectedPokemon,
+    pokemon: selectedPokemon ? getRichPokemon(selectedPokemon) : undefined,
     pokemonList,
   };
 };

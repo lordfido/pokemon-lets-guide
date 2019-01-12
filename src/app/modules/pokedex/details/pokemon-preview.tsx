@@ -12,16 +12,14 @@ const sheet: ISheet = {
   image: {
     margin: '0 auto',
     maxHeight: 216,
-    maxWidth: 216,
+    maxWidth: '100%',
 
     [DESKTOP]: {
       maxHeight: 352,
-      maxWidth: 352,
     },
 
     [DESKTOP_L]: {
       maxHeight: 560,
-      maxWidth: 560,
     },
   },
   window: {
@@ -42,9 +40,9 @@ const sheet: ISheet = {
   },
 };
 interface IOwnProps {
+  alt?: string;
   classes: { [key: string]: string };
   src: string;
-  alt?: string;
 }
 
 const unstyledPokemonPreview = ({ classes, src, alt }: IOwnProps) => (

@@ -10,6 +10,7 @@ const rootReducer = createRootReducer();
 // Pokedex
 export const getPokedex = ({ pokedex }: IRootState, isPaginated?: boolean) =>
   pokedexSelectors.getPokedex(pokedex, isPaginated);
+export const getRawPokedex = ({ pokedex }: IRootState) => pokedexSelectors.getRawPokedex(pokedex);
 export const getPokedexPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokedexPagination(pokedex);
 export const getPokedexSortOptions = ({ pokedex }: IRootState) => pokedexSelectors.getPokedexSortOptions(pokedex);
 export const getPokedexFilters = ({ pokedex }: IRootState) => pokedexSelectors.getPokedexFilters(pokedex);

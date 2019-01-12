@@ -219,6 +219,9 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
     .slice(pagination.first, isPaginated ? pagination.last : state.collection.length);
 };
 
+// Get a complete list of pokemon (without paginate, order or filter)
+export const getRawPokedex = (state: IPokedexState) => state.collection;
+
 // Get pagination data for pokemon list
 export const getPokedexPagination = (state: IPokedexState) => state.pagination;
 

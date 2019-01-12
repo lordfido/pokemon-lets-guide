@@ -6,8 +6,8 @@ import FooterWrapper from './shell/footer/footer-wrapper';
 import HeaderWrapper from './shell/header/header-wrapper';
 
 import { HOME } from '../constants/appRoutes';
-import { GREY_LIGHT_5 } from '../constants/styles-colors';
 import { HD_DISPLAY } from '../constants/styles-media-queries';
+import { APP_BACKGROUND } from '../constants/styles-skin';
 import { CONTENT } from '../constants/styles-zindex';
 
 import { ISheet } from './root.models';
@@ -42,7 +42,7 @@ const sheet: ISheet = {
     },
   },
   wrapper: {
-    backgroundColor: GREY_LIGHT_5,
+    backgroundColor: APP_BACKGROUND,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',

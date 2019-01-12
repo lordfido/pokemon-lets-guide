@@ -34,4 +34,5 @@ export const AVATAR_SIZE = size * 12; // 96
 
 // Header
 export const HEADER_SIZE = SIZE_XXXL;
-export const FOOTER_SIZE = 82;
+export const FOOTER_SIZE = 72;
+export const FOOTER_SIZE_L = 84;

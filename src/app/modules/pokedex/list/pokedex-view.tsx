@@ -31,6 +31,13 @@ import { IPokedexFilters, IPokemonWithBaseCP } from '../pokedex.models';
 const sheet: ISheet = {
   results: {
     padding: PADDING_XXL,
+
+    [DESKTOP_L]: {
+      display: 'inline-block',
+      height: '100%',
+      verticalAlign: 'top',
+      width: `calc(100% - ${SIDEBAR_SIZE}px)`,
+    },
   },
   resultsEntry: {
     color: TEXT_DARK,
@@ -44,56 +51,20 @@ const sheet: ISheet = {
 
   form: {
     padding: `0 ${PADDING_M}px`,
-  },
-  formField: {
-    display: 'none',
-    marginLeft: 0,
-    marginRight: 0,
-    opacity: 0,
-    transition: 'opacity 0.2s',
-    width: '100%',
 
-    [MOBILE_XL]: {
-      "&[data-type='multi'], &[data-type='number']": {
-        width: `calc(50% - ${PADDING_S}px)`,
-
-        '&:nth-child(even)': {
-          marginRight: PADDING_S,
-        },
-        '&:nth-child(odd)': {
-          marginLeft: PADDING_S,
-        },
-      },
-    },
-  },
-  formFieldOpen: {
-    display: 'inline-block',
-    opacity: 1,
-  },
-
-  [DESKTOP_L]: {
-    results: {
-      display: 'inline-block',
-      height: '100%',
-      verticalAlign: 'top',
-      width: `calc(100% - ${SIDEBAR_SIZE}px)`,
-    },
-
-    form: {
+    [DESKTOP_L]: {
       padding: 0,
     },
-    formField: {
+  },
+  formField: {
+    display: 'inline-block',
+    marginLeft: 0,
+    marginRight: 0,
+    width: '100%',
+
+    [DESKTOP_L]: {
       display: 'inline-block',
       opacity: 1,
-
-      "&, &[data-type='multi'], &[data-type='number']": {
-        width: '100%',
-
-        '&:nth-child(odd), &:nth-child(even)': {
-          marginLeft: 0,
-          marginRight: 0,
-        },
-      },
     },
   },
 };
