@@ -2,15 +2,7 @@ import chroma from 'chroma-js';
 import { sortBy } from '../../utils/arrays';
 import { getTranslation } from '../../utils/translations';
 
-import {
-  ATTACK_ID,
-  DEFENSE_ID,
-  HP_ID,
-  SPECIAL_ATTACK_ID,
-  SPECIAL_DEFENSE_ID,
-  SPEED_ID,
-  StatId,
-} from '../../../constants/pokemon-stats';
+import { getStats, StatId } from '../../../constants/pokemon-stats';
 import { getStatColor } from '../../../constants/pokemon-stats-color';
 import { getStatName } from '../../../constants/pokemon-stats-name';
 import { TEXT_BLACK } from '../../../constants/styles-fonts';
@@ -23,7 +15,7 @@ interface IDropdownReadableData {
   isSelected: boolean;
 }
 
-const statsFilterOptions = [HP_ID, ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID]
+const statsFilterOptions = getStats()
   .map(stat => ({
     id: stat,
     label: getStatName(stat),

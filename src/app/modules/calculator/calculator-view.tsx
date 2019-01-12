@@ -19,6 +19,7 @@ import { getNatureName } from '../../../constants/pokemon-natures-name';
 import {
   ATTACK_ID,
   DEFENSE_ID,
+  getStats,
   HP_ID,
   MAX_STAT_VALUE,
   SPECIAL_ATTACK_ID,
@@ -30,6 +31,7 @@ import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { PADDING_XXL } from '../../../constants/styles';
 import { DESKTOP, DESKTOP_L } from '../../../constants/styles-media-queries';
+import statsDropdown from '../pokedex/stats-dropdown';
 import { commonStyles, MAX_WIDTH } from '../pokemon/pokemon.constants';
 
 import { ISheet } from '../../root.models';
@@ -148,9 +150,10 @@ const unstyledCalculatorView = ({
   };
 
   const natureCommonProps: IDropdownOptions = {
+    ...statsDropdown,
     id: '',
     onChange: handleNatureChangeProxy,
-    options: [ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID].map(statId => ({
+    options: getStats(false).map(statId => ({
       id: statId,
       label: getStatName(statId),
       value: statId,

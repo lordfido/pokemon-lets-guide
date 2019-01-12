@@ -6,6 +6,7 @@ import RadarChart from 'react-svg-radar-chart';
 import {
   ATTACK_ID,
   DEFENSE_ID,
+  getStats,
   HP_ID,
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
@@ -43,7 +44,7 @@ const StatsChart = ({ stats, viewMode, color, size = 272, max = 100 }: IOwnProps
     case 'bars':
       return (
         <>
-          {Object.keys(stats).map(statId => (
+          {getStats().map(statId => (
             <p key={statId}>
               {getStatName(statId as StatId)}: {Math.round(stats[statId] * max)}
               <Line percent={stats[statId] * 100} strokeColor={color} strokeWidth="4" trailWidth="4" />
