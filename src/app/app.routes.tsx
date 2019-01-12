@@ -24,6 +24,7 @@ export const CALCULATOR: IRouteConfig = {
     const {
       params: { id },
     } = match;
+    // @ts-ignore
     return <CalculatorWrapper id={id} />;
   },
 };
@@ -65,6 +66,7 @@ export const HOME: IRouteConfig = {
     const {
       params: { id },
     } = match;
+    // @ts-ignore
     return <CalculatorWrapper id={id} />;
   },
 };

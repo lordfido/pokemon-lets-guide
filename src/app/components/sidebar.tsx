@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 import { IButtonProps } from './button';
 
-import { HEADER_SIZE, PADDING_L, PADDING_XL, PADDING_XXL, FOOTER_SIZE_L } from '../../constants/styles';
+import { FOOTER_SIZE_L, HEADER_SIZE, PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles';
 import { DESKTOP_L, HD_DISPLAY } from '../../constants/styles-media-queries';
 import { SIDEBAR_BACKDROP_BACKGROUND, SIDEBAR_BACKGROUND } from '../../constants/styles-skin';
 import { BACKGROUND, SIDEBAR, SIDEBAR_BACKDROP } from '../../constants/styles-zindex';

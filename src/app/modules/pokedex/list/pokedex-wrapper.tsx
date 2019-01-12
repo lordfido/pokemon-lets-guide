@@ -218,7 +218,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
     return (
       <PokedexView
-        areFiltersOpen={areFiltersOpen}
         collection={collection}
         filters={filters}
         handleLoadMore={
@@ -232,9 +231,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
           this.handleResetFilters();
         }}
         handleSortBy={this.handleSortBy}
-        handleToggleFilters={() => {
-          this.handleToggleFilters();
-        }}
         handleUpdateFilter={(filter: string, selection: any) => {
           this.handleUpdateFilter(filter, selection);
         }}
