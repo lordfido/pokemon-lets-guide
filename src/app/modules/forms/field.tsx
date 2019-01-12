@@ -1,18 +1,25 @@
 import * as React from 'react';
-import { log } from '../../../common/utils/logger';
 
 import Button from '../../components/button';
 import Checkbox from './form-checkbox';
 import Date from './form-date';
 import Dropdown from './form-dropdown';
+import Slider from './form-slider';
 import Switch from './form-switch';
 import Text from './form-text';
 
-import { ICheckboxOptions, IDateOptions, IDropdownOptions, IGenericField, ITextOptions } from './form.models';
+import {
+  ICheckboxOptions,
+  IDateOptions,
+  IDropdownOptions,
+  IGenericField,
+  ISliderOptions,
+  ITextOptions,
+} from './form.models';
 
 interface IOwnProps {
   className?: string;
-  options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ITextOptions);
+  options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ISliderOptions | ITextOptions);
 }
 
 interface IDisablingProps {
@@ -53,11 +60,11 @@ const Field = ({ className, options }: IOwnProps) => {
         switch (event.target.type) {
           case 'checkbox':
             // @ts-ignore
-            options.onChange(event.target.checked);
+            options.onChange({ id: options.id, value: event.target.checked });
             break;
 
           default:
-            options.onChange(event.target.value);
+            options.onChange({ id: options.id, value: event.target.value });
         }
       } else {
         options.onChange(event);
@@ -72,32 +79,16 @@ const Field = ({ className, options }: IOwnProps) => {
   };
 
   switch (newOptions.type) {
-    case 'text':
-    case 'email':
-    case 'number':
-    case 'password':
-    case 'textarea':
+    case 'button':
       return (
-        <Text
+        <Button
           className={className}
           options={{
             ...newOptions,
-            defaultValue: 'defaultValue' in newOptions ? String(newOptions.defaultValue) : undefined,
+            onChange: !newOptions.isDisabled ? onChange : undefined,
+            onClick: !newOptions.isDisabled ? onClick : undefined,
+            onFocus: !newOptions.isDisabled ? onFocus : undefined,
           }}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
-          onFocus={!newOptions.isDisabled ? onFocus : undefined}
-        />
-      );
-
-    case 'switch':
-      return (
-        <Switch
-          className={className}
-          options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
-          onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
 
@@ -106,6 +97,23 @@ const Field = ({ className, options }: IOwnProps) => {
         <Checkbox
           className={className}
           options={newOptions}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
+
+    case 'date':
+      return (
+        <Date
+          className={className}
+          options={{
+            ...newOptions,
+            defaultValue:
+              'defaultValue' in newOptions && typeof newOptions.defaultValue === 'string'
+                ? newOptions.defaultValue
+                : undefined,
+          }}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
@@ -149,9 +157,9 @@ const Field = ({ className, options }: IOwnProps) => {
         />
       );
 
-    case 'date':
+    case 'slider':
       return (
-        <Date
+        <Slider
           className={className}
           options={{
             ...newOptions,
@@ -159,6 +167,7 @@ const Field = ({ className, options }: IOwnProps) => {
               'defaultValue' in newOptions && typeof newOptions.defaultValue === 'string'
                 ? newOptions.defaultValue
                 : undefined,
+            range: 'range' in newOptions ? newOptions.range : ([0, 10] as [number, number]),
           }}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
@@ -166,16 +175,32 @@ const Field = ({ className, options }: IOwnProps) => {
         />
       );
 
-    case 'button':
+    case 'switch':
       return (
-        <Button
+        <Switch
+          className={className}
+          options={newOptions}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
+
+    case 'text':
+    case 'email':
+    case 'number':
+    case 'password':
+    case 'textarea':
+      return (
+        <Text
           className={className}
           options={{
             ...newOptions,
-            onChange: !newOptions.isDisabled ? onChange : undefined,
-            onClick: !newOptions.isDisabled ? onClick : undefined,
-            onFocus: !newOptions.isDisabled ? onFocus : undefined,
+            defaultValue: 'defaultValue' in newOptions ? String(newOptions.defaultValue) : undefined,
           }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
 

@@ -6,8 +6,9 @@ import FooterWrapper from './shell/footer/footer-wrapper';
 import HeaderWrapper from './shell/header/header-wrapper';
 
 import { HOME } from '../constants/appRoutes';
-import { GREY_LIGHT_5 } from '../constants/styles-colors';
 import { HD_DISPLAY } from '../constants/styles-media-queries';
+import { APP_BACKGROUND } from '../constants/styles-skin';
+import { CONTENT } from '../constants/styles-zindex';
 
 import { ISheet } from './root.models';
 
@@ -15,6 +16,11 @@ const homeButtonSize = 80;
 
 const sheet: ISheet = {
   content: {
+    flexGrow: 1,
+  },
+  contentWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
     flexGrow: 1,
     margin: 0,
     overflow: 'hidden',
@@ -29,10 +35,14 @@ const sheet: ISheet = {
     position: 'absolute',
     top: 'calc(50% + 164px)',
     width: homeButtonSize,
-    zIndex: 1,
+    zIndex: CONTENT,
+
+    [HD_DISPLAY]: {
+      display: 'block',
+    },
   },
   wrapper: {
-    backgroundColor: GREY_LIGHT_5,
+    backgroundColor: APP_BACKGROUND,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
@@ -41,13 +51,8 @@ const sheet: ISheet = {
     overflowY: 'auto',
     transition: 'height 0.2s, width 0.2s',
     width: '100%',
-  },
 
-  [HD_DISPLAY]: {
-    homeButton: {
-      display: 'block',
-    },
-    wrapper: {
+    [HD_DISPLAY]: {
       maxHeight: 720,
       maxWidth: 1280,
       position: 'relative',
@@ -66,11 +71,9 @@ const unstyledAppView = ({ children, classes }: IOwnProps) => (
     <Link className={classes.homeButton} to={{ pathname: HOME }} />
     <div id="app" className={classes.wrapper}>
       <HeaderWrapper />
-      <div className={classes.content}>
-        <>
-          {children}
-          <FooterWrapper />
-        </>
+      <div className={classes.contentWrapper}>
+        <div className={classes.content}>{children}</div>
+        <FooterWrapper />
       </div>
     </div>
   </>

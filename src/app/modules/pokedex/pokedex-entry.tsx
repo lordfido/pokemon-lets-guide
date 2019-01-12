@@ -1,15 +1,15 @@
 import chroma from 'chroma-js';
+import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getPaddedId } from '../../../utils/pokemon';
-import { getTranslation } from '../../../utils/translations';
+import { getPaddedId } from '../../utils/pokemon';
+import { getTranslation } from '../../utils/translations';
 
-import Button from '../../../components/button';
-import { TableCell, TableRow } from '../../../components/table';
-// import Image from '../../components/image';
-import Tag from '../../../components/tag';
+import Buttons from '../../components/buttons';
+import { TableCell, TableRow } from '../../components/table';
+import Tag from '../../components/tag';
 
-import { POKEMON } from '../../../../constants/appRoutes';
+import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -17,17 +17,20 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-} from '../../../../constants/pokemon-stats';
-import { getStatColor } from '../../../../constants/pokemon-stats-color';
-import { getTypeName } from '../../../../constants/pokemon-types';
-import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
+} from '../../../constants/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
+import { getTypeName } from '../../../constants/pokemon-types';
+import { getTypeColor } from '../../../constants/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon-types-icons';
 
-import { IPokemonWithBaseCP } from '../pokedex.models';
-import { ISheet } from '../../../root.models';
+import { ISheet } from '../../root.models';
+import { IPokemonWithBaseCP } from './pokedex.models';
 
 const sheet: ISheet = {
-  details: {
+  fullWidth: {
+    width: '100%',
+  },
+  noMargin: {
     margin: 0,
   },
 };
@@ -130,14 +133,25 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
       {pokemon.baseStats[SPECIAL_ATTACK_ID]}
     </TableCell>
     <TableCell center style={{ height: 'auto' }}>
-      <Button
-        options={{
-          className: classes.details,
-          id: pokemon.id.toString(),
-          label: getTranslation('pokemon-details'),
-          to: POKEMON.replace(':id', String(pokemon.id)),
-          type: 'button',
-        }}
+      <Buttons
+        className={classnames(classes.fullWidth, classes.noMargin)}
+        align="left"
+        options={[
+          {
+            className: classes.noMargin,
+            id: `${pokemon.id.toString()}-details`,
+            label: getTranslation('pokedex-details'),
+            to: POKEDEX.replace(':id?', String(pokemon.id)),
+            type: 'button',
+          },
+          {
+            className: classes.noMargin,
+            id: `${pokemon.id.toString()}-calculator`,
+            label: getTranslation('header-calculator'),
+            to: CALCULATOR.replace(':id?', String(pokemon.id)),
+            type: 'button',
+          },
+        ]}
       />
     </TableCell>
   </TableRow>

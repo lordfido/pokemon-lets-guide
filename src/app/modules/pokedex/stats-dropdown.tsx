@@ -1,11 +1,12 @@
 import chroma from 'chroma-js';
-import { sortBy } from '../../../utils/arrays';
-import { getTranslation } from '../../../utils/translations';
+import { sortBy } from '../../utils/arrays';
+import { getTranslation } from '../../utils/translations';
 
-import { getTypes, PokemonType } from '../../../../constants/pokemon-types';
-import { getTypeColor } from '../../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../../constants/pokemon-types-icons';
-import { IDropdownOptions } from '../../forms/form.models';
+import { getStats, StatId } from '../../../constants/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon-stats-color';
+import { getStatName } from '../../../constants/pokemon-stats-name';
+import { TEXT_BLACK } from '../../../constants/styles-fonts';
+import { IDropdownOptions } from '../forms/form.models';
 
 interface IDropdownReadableData {
   data: any;
@@ -14,31 +15,29 @@ interface IDropdownReadableData {
   isSelected: boolean;
 }
 
-const typeFilterOptions = getTypes()
-  .map(option => ({
-    icon: getTypeIcon(option.id),
-    id: option.id,
-    label: option.name,
-    type: 'option',
-    value: option.id,
+const statsFilterOptions = getStats()
+  .map(stat => ({
+    id: stat,
+    label: getStatName(stat),
+    value: stat,
   }))
   .sort(sortBy('label', 'asc'));
 
-const getTypeDropdownColors = (type: PokemonType) => {
-  const color = chroma(getTypeColor(type));
+const getStatDropdownColors = (stat: StatId) => {
+  const color = chroma(getStatColor(stat));
 
   const colors = {
-    activeBackgroundColor: color.alpha(1).css(),
-    backgroundColor: color.alpha(0.7).css(),
-    color: '#FFF',
+    activeBackgroundColor: color.alpha(0.5).css(),
+    backgroundColor: color.alpha(0.3).css(),
+    color: TEXT_BLACK,
   };
 
   return colors;
 };
 
-const typeColorStyles = {
+const statsColorStyles = {
   multiValue: (styles: React.CSSProperties, { data, isDisabled }: IDropdownReadableData) => {
-    const colors = getTypeDropdownColors(data.value);
+    const colors = getStatDropdownColors(data.value);
 
     return {
       ...styles,
@@ -47,7 +46,7 @@ const typeColorStyles = {
     };
   },
   multiValueLabel: (styles: React.CSSProperties, { data, isDisabled }: IDropdownReadableData) => {
-    const colors = getTypeDropdownColors(data.value);
+    const colors = getStatDropdownColors(data.value);
 
     return {
       ...styles,
@@ -55,7 +54,7 @@ const typeColorStyles = {
     };
   },
   multiValueRemove: (styles: React.CSSProperties, { data, isDisabled }: IDropdownReadableData) => {
-    const colors = getTypeDropdownColors(data.value);
+    const colors = getStatDropdownColors(data.value);
 
     return {
       ...styles,
@@ -67,7 +66,7 @@ const typeColorStyles = {
     };
   },
   option: (styles: React.CSSProperties, { data, isDisabled, isFocused, isSelected }: IDropdownReadableData) => {
-    const colors = getTypeDropdownColors(data.value);
+    const colors = getStatDropdownColors(data.value);
 
     return {
       ...styles,
@@ -77,12 +76,12 @@ const typeColorStyles = {
   },
 };
 
-const typesDropdown: IDropdownOptions = {
-  colourStyles: typeColorStyles,
+const statsDropdown: IDropdownOptions = {
+  colourStyles: statsColorStyles,
   id: '',
-  options: typeFilterOptions,
-  placeholder: getTranslation('search-select-some-types'),
+  options: statsFilterOptions,
+  placeholder: getTranslation('search-select-some-stats'),
   type: 'multi',
 };
 
-export default typesDropdown;
+export default statsDropdown;

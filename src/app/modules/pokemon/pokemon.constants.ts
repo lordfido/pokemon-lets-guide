@@ -1,17 +1,19 @@
-import { PADDING_XL } from '../../../../constants/styles';
+import { PADDING_XL } from '../../../constants/styles';
 import {
   lighterColor,
   POKEDEX_BACKGROUND,
   POKEDEX_WINDOW_BACKGROUND,
   traslucentColor,
-} from '../../../../constants/styles-colors';
+} from '../../../constants/styles-colors';
+import { TEXT_WHITE } from '../../../constants/styles-fonts';
 
-import { ISheet } from '../../../root.models';
+import { ISheet } from '../../root.models';
 
 export const commonStyles: ISheet = {
   window: {
     backgroundColor: POKEDEX_WINDOW_BACKGROUND,
     border: `2px solid ${POKEDEX_WINDOW_BACKGROUND}`,
+    color: TEXT_WHITE,
     display: 'inline-block',
     margin: PADDING_XL,
     verticalAlign: 'top',

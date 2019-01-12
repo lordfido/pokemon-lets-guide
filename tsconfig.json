@@ -26,7 +26,10 @@
     "isolatedModules": false,
 
     // Import non-ES modules as default imports.
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    // Throw errors when unused imports or variables
+    "noUnusedLocals": true
   },
   "include": ["./**/*"],
   "exclude": ["./node_modules/*"]

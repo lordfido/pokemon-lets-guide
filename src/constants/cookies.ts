@@ -1,5 +1,13 @@
-export type CookieName = 'installationId' | 'language' | 'statsViewMode';
+export type CookieName = 'installationId' | 'language' | 'pokemonViewMode' | 'calculatorViewMode';
 
+// Generics
 export const INSTALLATION_ID: CookieName = 'installationId';
 export const LANGUAGE: CookieName = 'language';
-export const STATS_VIEW_MODE: CookieName = 'statsViewMode';
+
+// Pokedex
+
+// Pokemon
+export const POKEMON_VIEW_MODE: CookieName = 'pokemonViewMode';
+
+// Calculator
+export const CALCULATOR_VIEW_MODE: CookieName = 'calculatorViewMode';

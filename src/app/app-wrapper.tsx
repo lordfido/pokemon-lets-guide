@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import analyticsApi from '../common/apis/analytics';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
@@ -9,12 +9,10 @@ import { isPre, isProduction } from '../common/utils/platforms';
 import registerServiceWorker from './utils/service-worker';
 
 import AppView from './app-view';
-import PokemonDetailsWrapper from './modules/pokedex/details/pokemon-wrapper';
-import PokedexWrapper from './modules/pokedex/list/pokedex-wrapper';
+import routes from './app.routes';
 
 import { createPokedex } from './modules/pokedex/pokedex.actions';
 
-import * as routes from '../constants/appRoutes';
 import { restoreLastRoute } from '../constants/features';
 import { APP_FINISHED, APP_INIT } from '../constants/metrics/actions';
 import { APP_LOAD } from '../constants/metrics/categories';
@@ -115,40 +113,10 @@ class AppWrapper extends React.Component<Props> {
     return (
       <AppView>
         <Switch>
-          <Route
-            exact
-            path={routes.SEARCH}
-            render={({ match }) => {
-              const {
-                params: { query },
-                url,
-              } = match;
-
-              return <PokedexWrapper url={url} query={query} />;
-            }}
-          />
-          <Route
-            exact
-            path={routes.POKEMON}
-            render={({ match }) => {
-              const {
-                params: { id },
-              } = match;
-
-              // @ts-ignore
-              return <PokemonDetailsWrapper id={id} />;
-            }}
-          />
-          <Route
-            exact
-            path={routes.POKEDEX}
-            render={({ match }) => {
-              const { url } = match;
-
-              return <PokedexWrapper url={url} />;
-            }}
-          />
-          <Redirect to={{ pathname: routes.POKEDEX }} />
+          {routes.map(({ exact, path, render }, index) => (
+            <Route key={index} exact={exact} path={path} render={render} />
+          ))}
+          {/* <Redirect to={{ pathname: routes.POKEDEX }} /> */}
         </Switch>
       </AppView>
     );

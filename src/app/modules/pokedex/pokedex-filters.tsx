@@ -1,103 +1,136 @@
 import * as React from 'react';
-import { getTranslation } from '../../../utils/translations';
+import { getTranslation } from '../../utils/translations';
 
-import Buttons from '../../../components/buttons';
-import Field from '../../forms/field';
+import { IButtonProps } from '../../components/button';
+import Buttons from '../../components/buttons';
+import Field from '../forms/field';
 import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
-import { filtersEnabled } from '../../../../constants/features';
-import { ICheckboxOptions, IDropdownOptions, IGenericField, ITextOptions } from '../../forms/form.models';
-import { IPokedexFilters } from '../pokedex.models';
+import { filtersEnabled } from '../../../constants/features';
+import { ICheckboxOptions, IDropdownOptions, IGenericField, IOption, ITextOptions } from '../forms/form.models';
+import { IPokedexFilters } from './pokedex.models';
 
 interface IOwnProps {
   classNames: {
     form: string;
     formField: string;
   };
+  pokemonList: IOption[];
+  handlePokemonChange: (pokemon: { id: string; value: string }) => void;
   filters: IPokedexFilters;
-  handleUpdateFilter: (filter: string, selection: any) => void;
-  handleResetFilters: () => void;
+  handleFilterChange: (option: { id: string; value: string }) => void;
+  handleReset: () => void;
+  handleSubmit: () => void;
 }
 
-const PokedexFilters = ({ classNames, filters, handleResetFilters, handleUpdateFilter }: IOwnProps) => {
+const PokedexFilters = ({
+  classNames,
+  pokemonList,
+  handlePokemonChange,
+  filters,
+  handleFilterChange,
+  handleReset,
+  handleSubmit,
+}: IOwnProps) => {
   const fields: Array<IGenericField & (ITextOptions | IDropdownOptions | ICheckboxOptions)> = [
     {
-      defaultValue: filters.nameOrNumber,
       id: 'nameOrNumber',
-      label: getTranslation('search-name-or-number'),
-      onChange: (selection: any[]) => handleUpdateFilter('nameOrNumber', selection),
-      type: 'text',
+      label: getTranslation('search-pokemon'),
+      onChange: (option: { id: string; value: IOption }) => {
+        handlePokemonChange({ id: option.id, value: option.value.value });
+      },
+      options: pokemonList,
+      placeholder: getTranslation('search-pokemon'),
+      type: 'dropdown',
     },
     {
       ...typesDropdown,
       defaultValue: filters.includedTypes,
       id: 'includedTypes',
       label: getTranslation('search-include-types'),
-      onChange: (selection: any[]) => handleUpdateFilter('includedTypes', selection),
+      onChange: handleFilterChange,
     },
     {
       ...typesDropdown,
       defaultValue: filters.excludedTypes,
       id: 'excludedTypes',
       label: getTranslation('search-exclude-types'),
-      onChange: (selection: any[]) => handleUpdateFilter('excludedTypes', selection),
+      onChange: handleFilterChange,
     },
     {
       ...typesDropdown,
       defaultValue: filters.strongAgainst,
       id: 'strongAgainst',
       label: getTranslation('search-strong-against'),
-      onChange: (selection: any[]) => handleUpdateFilter('strongAgainst', selection),
+      onChange: handleFilterChange,
     },
     {
       ...typesDropdown,
       defaultValue: filters.weakAgainst,
       id: 'weakAgainst',
       label: getTranslation('search-weak-against'),
-      onChange: (selection: any[]) => handleUpdateFilter('weakAgainst', selection),
+      onChange: handleFilterChange,
     },
     {
       ...statsDropdown,
       defaultValue: filters.bestStats,
       id: 'bestStats',
       label: getTranslation('search-best-stats'),
-      onChange: (selection: any[]) => handleUpdateFilter('bestStats', selection),
+      onChange: handleFilterChange,
     },
     {
       ...statsDropdown,
       defaultValue: filters.worstStats,
       id: 'worstStats',
       label: getTranslation('search-worst-stats'),
-      onChange: (selection: any[]) => handleUpdateFilter('worstStats', selection),
+      onChange: handleFilterChange,
     },
     {
       defaultValue: filters.minBaseCP,
       id: 'minBaseCP',
       label: getTranslation('search-min-cp'),
-      onChange: (selection: any[]) => handleUpdateFilter('minBaseCP', selection),
+      onChange: handleFilterChange,
       type: 'number',
     },
     {
       defaultValue: filters.maxBaseCP,
       id: 'maxBaseCP',
       label: getTranslation('search-max-cp'),
-      onChange: (selection: any[]) => handleUpdateFilter('maxBaseCP', selection),
+      onChange: handleFilterChange,
       type: 'number',
     },
     {
       defaultChecked: filters.showMegaevolutions,
       id: 'showMegaevolutions',
       label: getTranslation('search-show-megaevolutions'),
-      onChange: (selection: any[]) => handleUpdateFilter('showMegaevolutions', selection),
+      onChange: handleFilterChange,
       type: 'switch',
     },
     {
       defaultChecked: filters.showAlolanForms,
       id: 'showAlolanForms',
       label: getTranslation('search-show-alolan-forms'),
-      onChange: (selection: any[]) => handleUpdateFilter('showAlolanForms', selection),
+      onChange: handleFilterChange,
       type: 'switch',
+    },
+  ];
+  const buttons: IButtonProps[] = [
+    {
+      id: 'submit',
+      label: getTranslation('search-filters-apply'),
+      onClick: () => {
+        handleSubmit();
+      },
+      type: 'button',
+    },
+    {
+      id: 'reset',
+      label: getTranslation('search-filters-reset'),
+      onClick: () => {
+        handleReset();
+      },
+      type: 'button',
     },
   ];
 
@@ -107,18 +140,7 @@ const PokedexFilters = ({ classNames, filters, handleResetFilters, handleUpdateF
         <Field key={field.id} className={classNames.formField} options={{ ...field, isDisabled: !filtersEnabled }} />
       ))}
 
-      <Buttons
-        options={[
-          {
-            id: 'reset',
-            label: getTranslation('search-reset-filters'),
-            onClick: () => {
-              handleResetFilters();
-            },
-            type: 'button',
-          },
-        ]}
-      />
+      <Buttons options={buttons} />
     </form>
   );
 };

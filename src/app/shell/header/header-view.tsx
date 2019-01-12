@@ -4,7 +4,7 @@ import { getTranslation } from '../../utils/translations';
 
 import HeaderItem from './header-item';
 
-import { HOME, POKEDEX } from '../../../constants/appRoutes';
+import { CALCULATOR, HOME, POKEDEX } from '../../../constants/appRoutes';
 import { HEADER_SIZE } from '../../../constants/styles';
 import { BLACK } from '../../../constants/styles-colors';
 import { TEXT_WHITE } from '../../../constants/styles-fonts';
@@ -31,10 +31,14 @@ const unstyledHeaderView = ({ classes }: IOwnProps) => (
     <HeaderItem
       image={require('../../../assets/images/pokedex.png')}
       text={getTranslation('header-pokedex')}
-      to={POKEDEX}
+      to={POKEDEX.replace(':id?', '')}
     />
     <HeaderItem image={require('../../../assets/images/skills.png')} text={getTranslation('header-skills')} />
-    <HeaderItem image={require('../../../assets/images/calculator.png')} text={getTranslation('header-calculator')} />
+    <HeaderItem
+      image={require('../../../assets/images/calculator.png')}
+      text={getTranslation('header-calculator')}
+      to={CALCULATOR.replace(':id?', '')}
+    />
   </header>
 );
 

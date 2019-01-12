@@ -15,24 +15,25 @@ import AppWrapper from './app/app-wrapper';
 import ScrollToTop from './app/components/scroll-to-top';
 
 import { ANALYTICS_ID } from './constants/branding';
-import { ANALTYICS_INIT, APP_INIT, APP_PARSED } from './constants/metrics/actions';
+import { ANALTYICS_INIT, APP_DEPENDENCIES, APP_INIT, APP_PARSED } from './constants/metrics/actions';
 import { APP_LOAD } from './constants/metrics/categories';
 
 import { IRootState } from './app/root.models';
 
 const packageJson = require('../package.json');
 const backgroundImage = require('./assets/images/switch.png');
+// @ts-ignore
 const htmlLogo = require('./images/logo.png');
+
+const initTimer = analyticsApi.getTimer(APP_INIT);
+const parseTimer = new Date().getTime();
+analyticsApi.setTimer(APP_PARSED, parseTimer);
 
 /**
  * Read persisted store and start a React application with persisted data
  */
 const initReactApplication = async () => {
-  const initTimer = analyticsApi.getTimer(APP_INIT);
-  const analyticsTimer = analyticsApi.getTimer(ANALTYICS_INIT);
-
-  const parseTimer = new Date().getTime();
-  analyticsApi.setTimer(APP_PARSED, parseTimer);
+  const dependenciesTimer = analyticsApi.getTimer(ANALTYICS_INIT);
 
   analyticsApi.logTiming({
     action: APP_INIT,
@@ -44,6 +45,12 @@ const initReactApplication = async () => {
     action: APP_PARSED,
     category: APP_LOAD,
     value: parseTimer - initTimer,
+  });
+
+  analyticsApi.logTiming({
+    action: APP_DEPENDENCIES,
+    category: APP_LOAD,
+    value: parseTimer - dependenciesTimer,
   });
 
   // Setup FontAwesome

@@ -5,12 +5,17 @@ import Select from 'react-select';
 
 import TouchableContent from '../../components/touchable-content';
 
+import { PADDING_XL } from '../../../constants/styles';
+import { GREY_DARK } from '../../../constants/styles-colors';
 import { commonStyles } from './field.styles';
 
 import { ISheet } from '../../root.models';
 import { IDropdownOptions } from './form.models';
 
 const sheet: ISheet = {
+  field: {
+    color: GREY_DARK,
+  },
   fieldDisabled: commonStyles.fieldDisabled,
   label: commonStyles.label,
   wrapper: commonStyles.wrapper,
@@ -36,7 +41,7 @@ const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IO
     </span>
 
     <Select
-      className={classnames(options.isDisabled ? classes.fieldDisabled : undefined)}
+      className={classnames(classes.field, { [classes.fieldDisabled]: options.isDisabled })}
       defaultValue={
         options.options
           ? options.options.filter(option => {
@@ -50,11 +55,24 @@ const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IO
       }
       isDisabled={options.isDisabled}
       isMulti={options.isMulti}
-      onChange={onChange}
+      onChange={option => {
+        if (onChange) {
+          onChange({ id: options.id, value: option });
+        }
+      }}
       onFocus={onFocus}
       options={options.options}
       placeholder={options.placeholder}
-      styles={options.colourStyles}
+      styles={{
+        placeholder: (styles: React.CSSProperties) => ({
+          ...styles,
+          maxWidth: `calc(100% - ${PADDING_XL}px)`,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }),
+        ...options.colourStyles,
+      }}
     />
 
     {options.error && <span className={classes.error}>{options.error}</span>}

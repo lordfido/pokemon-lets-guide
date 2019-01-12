@@ -1,17 +1,18 @@
 import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 
 export type types =
-  | 'text'
+  | 'button'
+  | 'checkbox'
+  | 'date'
+  | 'dropdown'
   | 'email'
+  | 'multi'
   | 'number'
   | 'password'
-  | 'textarea'
+  | 'slider'
   | 'switch'
-  | 'checkbox'
-  | 'dropdown'
-  | 'multi'
-  | 'date'
-  | 'button';
+  | 'text'
+  | 'textarea';
 
 interface ICommonOptions {
   type: types;
@@ -51,12 +52,6 @@ export interface IDateOptions extends ICommonOptions {
   placeholder?: string;
 }
 
-interface IOption {
-  id: string;
-  label: string;
-  value: string;
-}
-
 export interface IDropdownOptions extends ICommonOptions {
   colourStyles?: any;
   error?: string;
@@ -64,6 +59,17 @@ export interface IDropdownOptions extends ICommonOptions {
   placeholder?: string;
   defaultValue?: string[];
   options: IOption[];
+}
+
+export interface IOption {
+  id: string;
+  label: string;
+  value: string;
+}
+
+export interface ISliderOptions extends ICommonOptions {
+  defaultValue?: string;
+  range: [number, number];
 }
 
 export interface ITextOptions extends ICommonOptions {

@@ -4,7 +4,6 @@ import path from 'path';
 import UglifyPlugin from 'terser-webpack-plugin';
 import ManifestPlugin from 'webpack-pwa-manifest';
 
-import postcssConfig from '../postcss.config';
 import { APP_COLOR, APP_DESC, APP_NAME } from '../src/constants/branding';
 
 export const paths = {

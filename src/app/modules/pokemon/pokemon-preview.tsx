@@ -1,27 +1,25 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import Image from '../../../components/image';
+import Image from '../../components/image';
 
-import { DESKTOP, DESKTOP_L } from '../../../../constants/styles-media-queries';
+import { DESKTOP, DESKTOP_L } from '../../../constants/styles-media-queries';
 import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
-import { ISheet } from '../../../root.models';
+import { ISheet } from '../../root.models';
 
 const sheet: ISheet = {
   image: {
     margin: '0 auto',
-    maxHeight: 216,
-    maxWidth: 216,
+    maxHeight: 320,
+    maxWidth: '100%',
 
     [DESKTOP]: {
       maxHeight: 352,
-      maxWidth: 352,
     },
 
     [DESKTOP_L]: {
       maxHeight: 560,
-      maxWidth: 560,
     },
   },
   window: {
@@ -42,9 +40,9 @@ const sheet: ISheet = {
   },
 };
 interface IOwnProps {
+  alt?: string;
   classes: { [key: string]: string };
   src: string;
-  alt?: string;
 }
 
 const unstyledPokemonPreview = ({ classes, src, alt }: IOwnProps) => (

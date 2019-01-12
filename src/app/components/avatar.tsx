@@ -3,7 +3,7 @@ import injectSheet from 'react-jss';
 
 import Image from './image';
 
-import { AVATAR_SIZE } from '../../constants/styles';
+import { AVATAR_SIZE, PADDING_XL } from '../../constants/styles';
 import { traslucentColor, WHITE } from '../../constants/styles-colors';
 
 import { ISheet } from '../root.models';
@@ -13,6 +13,7 @@ const sheet: ISheet = {
     maxWidth: '100%',
     minHeight: AVATAR_SIZE,
     minWidth: AVATAR_SIZE,
+    padding: PADDING_XL,
   },
   wrapper: {
     backgroundColor: traslucentColor(WHITE, 0.4),

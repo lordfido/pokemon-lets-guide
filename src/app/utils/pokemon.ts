@@ -25,7 +25,7 @@ import { getTranslation } from './translations';
  * Based on a value and a max value, returns a number between 0 and 1
  * @example getStatRatio(150, 300); // Will return 0.5
  */
-const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
+export const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): number => value / max;
 
 /**
  * Based on a pokemon national ID, this will return a string with 3 digits

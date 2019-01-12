@@ -2,7 +2,6 @@ import { Pokedex, Stats } from 'pokelab';
 import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getCombatPoints, getPaddedId, getVariantId, getVariantName } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
 
 import { PokedexActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
@@ -24,6 +23,7 @@ export interface IPokemonTypeData {
 }
 
 export interface IPokemonStats {
+  [key: string]: number;
   attack: number;
   spAttack: number;
   defense: number;
@@ -80,7 +80,6 @@ export interface IPokedexFilters {
   includedTypes: PokemonType[];
   maxBaseCP: string;
   minBaseCP: string;
-  nameOrNumber: string;
   // needsCandies: StatId[];
   showAlolanForms: boolean;
   showMegaevolutions: boolean;
@@ -110,7 +109,6 @@ export const pokedexInitialState: IPokedexState = {
     includedTypes: [],
     maxBaseCP: '',
     minBaseCP: '',
-    nameOrNumber: '',
     // needsCandies: [],
     showAlolanForms: false,
     showMegaevolutions: false,
@@ -134,10 +132,9 @@ export const pokedexInitialState: IPokedexState = {
  */
 const onlyPokemonLetsGo = (pokemon: Pokedex.Pokemon) =>
   // Pokemon Let's Go
-  // (pokemon.nationalNumber <= 151 || pokemon.nationalNumber === 808 || pokemon.nationalNumber === 809)
-
-  // All pokemon
-  !pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false;
+  (pokemon.nationalNumber <= 151 || pokemon.nationalNumber === 808 || pokemon.nationalNumber === 809) &&
+  // Remove partners
+  (!pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false);
 
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements

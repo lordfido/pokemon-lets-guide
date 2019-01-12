@@ -1,12 +1,12 @@
 import { History } from 'history';
 import analyticsApi from '../../common/apis/analytics';
 import { error, log } from '../../common/utils/logger';
-import { ANALTYICS_INIT, SW_INIT, SW_FINISHED } from '../../constants/metrics/actions';
+import { ANALTYICS_INIT, SW_FINISHED, SW_INIT } from '../../constants/metrics/actions';
 import { SW_LOAD } from '../../constants/metrics/categories';
 
 const serviceWorkerUrl = './sw.js';
 
-let router: History;
+export let router: History;
 
 // Compatibility
 let areServiceWorkerSupported = false;

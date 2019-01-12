@@ -1,18 +1,18 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../../utils/translations';
+import { getTranslation } from '../../utils/translations';
 
-import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_XXL } from '../../../../constants/styles';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_XXL } from '../../../constants/styles';
 import {
   POKEDEX_WINDOW_BACKGROUND_2,
   POKEDEX_WINDOW_BACKGROUND_3,
   traslucentColor,
-} from '../../../../constants/styles-colors';
-import { FONT_XXL } from '../../../../constants/styles-fonts';
-import { DESKTOP } from '../../../../constants/styles-media-queries';
+} from '../../../constants/styles-colors';
+import { FONT_XXL } from '../../../constants/styles-fonts';
+import { DESKTOP } from '../../../constants/styles-media-queries';
 import { commonStyles } from './pokemon.constants';
 
-import { ISheet } from '../../../root.models';
+import { ISheet } from '../../root.models';
 
 const sheet: ISheet = {
   text: {
@@ -47,7 +47,7 @@ interface IOwnProps {
 const unstyledPokemonPokedexEntry = ({ classes, text }: IOwnProps) => (
   <div className={classes.window}>
     <div className={classes.wrapper}>
-      <p className={classes.text}>{text || getTranslation('pokemon-details-no-pokedex-entry')}</p>
+      <p className={classes.text}>{text || getTranslation('pokemon-no-pokedex-entry')}</p>
     </div>
   </div>
 );
