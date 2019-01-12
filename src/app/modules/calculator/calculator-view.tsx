@@ -17,6 +17,7 @@ import {
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
+  MAX_STAT_VALUE,
 } from '../../../constants/pokemon-stats';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { PADDING_XXL } from '../../../constants/styles';
@@ -229,7 +230,12 @@ const unstyledCalculatorView = ({
 
             <div className={classes.customization}>
               <h4>{getTranslation('calculator-final-stats')}</h4>
-              <StatsChart stats={stats} color={getTypeColor(pokemon.types.ownTypes[0])} />
+              <StatsChart
+                stats={stats}
+                viewMode="bars"
+                color={getTypeColor(pokemon.types.ownTypes[0])}
+                size={MAX_STAT_VALUE}
+              />
             </div>
           </>
         )}

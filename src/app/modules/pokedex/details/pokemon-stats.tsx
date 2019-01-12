@@ -1,16 +1,17 @@
-import { Line } from 'rc-progress';
+import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
+import analyticsApi from '../../../../common/apis/analytics';
 import { getCookie, setCookie } from '../../../../common/utils/cookies';
 import { getTranslation } from '../../../utils/translations';
 
 import { IButtonProps } from '../../../components/button';
 import Buttons from '../../../components/buttons';
-import StatsChart from '../../../components/stats-chart';
+import StatsChart, { ViewMode } from '../../../components/stats-chart';
 
 import { STATS_VIEW_MODE } from '../../../../constants/cookies';
-import { StatId } from '../../../../constants/pokemon-stats';
-import { getStatName } from '../../../../constants/pokemon-stats-name';
+import { VIEW_MODE } from '../../../../constants/metrics/actions';
+import { USER_PREFERENCES } from '../../../../constants/metrics/categories';
 import { getTypeColor } from '../../../../constants/pokemon-types-color';
 import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../../constants/styles';
 import { DESKTOP } from '../../../../constants/styles-media-queries';
@@ -18,9 +19,7 @@ import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
 import { ISheet } from '../../../root.models';
 import { IRichPokemon } from '../pokedex.models';
-import analyticsApi from '../../../../common/apis/analytics';
-import { VIEW_MODE } from '../../../../constants/metrics/actions';
-import { USER_PREFERENCES } from '../../../../constants/metrics/categories';
+import { MAX_INITIAL_STAT_VALUE } from '../../../../constants/pokemon-stats';
 
 const sheet: ISheet = {
   bars: {
@@ -48,13 +47,8 @@ const sheet: ISheet = {
   },
 };
 
-type Bars = 'bars';
-const BARS: Bars = 'bars';
-
-type Chart = 'chart';
-const CHART: Chart = 'chart';
-
-type ViewMode = Bars | Chart;
+const BARS: ViewMode = 'bars';
+const CHART: ViewMode = 'chart';
 
 interface IOwnProps {
   classes: { [key: string]: string };
@@ -114,33 +108,8 @@ class UnstyledPokemonStats extends React.Component<IOwnProps, IOwnState> {
     ];
   }
 
-  public renderChart() {
-    const { pokemon } = this.props;
-
-    return <StatsChart stats={pokemon.relativeStats} color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />;
-  }
-
-  public renderBars() {
-    const { pokemon } = this.props;
-
-    // @ts-ignore
-    return Object.keys(pokemon.relativeStats).map((statId: StatId) => {
-      return (
-        <p key={statId}>
-          {getStatName(statId)}: {pokemon.baseStats[statId]}
-          <Line
-            percent={pokemon.relativeStats[statId] * 100}
-            strokeColor={getTypeColor(pokemon.types.ownTypes[0])}
-            strokeWidth="4"
-            trailWidth="4"
-          />
-        </p>
-      );
-    });
-  }
-
   public render() {
-    const { classes } = this.props;
+    const { classes, pokemon } = this.props;
     const { viewMode } = this.state;
 
     return (
@@ -148,9 +117,16 @@ class UnstyledPokemonStats extends React.Component<IOwnProps, IOwnState> {
         <div className={classes.wrapper}>
           <p>{getTranslation('pokemon-details-base-stats')}</p>
 
-          {viewMode === CHART && <div className={classes.chart}>{this.renderChart()}</div>}
-
-          {viewMode === BARS && <div className={classes.bars}>{this.renderBars()}</div>}
+          <div className={classnames({ [classes.bars]: viewMode === BARS, [classes.chart]: viewMode === CHART })}>
+            {
+              <StatsChart
+                stats={pokemon.relativeStats}
+                viewMode={viewMode}
+                color={getTypeColor(pokemon.types.ownTypes[0])}
+                size={viewMode === 'bars' ? MAX_INITIAL_STAT_VALUE : undefined}
+              />
+            }
+          </div>
 
           <Buttons align="center" options={this.getStatsTabs()} />
         </div>

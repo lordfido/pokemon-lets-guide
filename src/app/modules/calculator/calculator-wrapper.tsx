@@ -9,7 +9,6 @@ import CalculatorView from './calculator-view';
 import { getRawPokedex, getSelectedPokemon } from '../../root.reducer';
 
 import { CALCULATOR } from '../../../constants/appRoutes';
-import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
 import { MAX_STAT_VALUE, StatId } from '../../../constants/pokemon-stats';
 
 import { IRootState } from '../../root.models';
@@ -19,7 +18,7 @@ import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/poke
 const defaultCandies = 0;
 const defaultIVs = 16;
 const defaultLevel = 50;
-const defaultNature = 1;
+const defaultNature = 1.1;
 
 const getStatsRatio = (stats: IPokemonStats, max: number) => ({
   attack: getStatRatio(stats.attack, max),
