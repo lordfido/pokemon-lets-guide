@@ -1,5 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
+import { getRandomNumber } from '../../utils/numbers';
 import { getAvatarFromId } from '../../utils/pokemon';
 import { getTranslation } from '../../utils/translations';
 
@@ -37,11 +38,6 @@ import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/poke
 
 export const MAX_HAPPINESS_VALUE = 255;
 export const MAX_LEVEL_VALUE = 100;
-
-const defaultPokemon = {
-  avatar: getAvatarFromId('025'),
-  name: 'Pikachu',
-};
 
 const sheet: ISheet = {
   customization: {
@@ -118,6 +114,9 @@ const unstyledCalculatorView = ({
   handleCandiesChange,
   stats,
 }: IOwnProps) => {
+  const randomPokemon = getRandomNumber(0, pokemonList.length - 1);
+  const defaultPokemon = pokemonList[randomPokemon];
+
   // Pokemon
   const handlePokemonChangeProxy = (option: { id: string; value: IOption }) => {
     handlePokemonChange({ id: option.id, value: option.value.value });
@@ -375,7 +374,7 @@ const unstyledCalculatorView = ({
           <div className={classes.emptyCase}>
             <h4>{getTranslation('calculator-empty-case')}</h4>
             <div className={classes.emptyCaseImage}>
-              <PokemonPreview src={defaultPokemon.avatar} />
+              <PokemonPreview src={getAvatarFromId(defaultPokemon.id)} />
             </div>
           </div>
         )}
