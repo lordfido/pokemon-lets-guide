@@ -64,13 +64,28 @@ const unstyledCalculatorView = ({ classes, handlePokemonSelect, pokemon, pokemon
         </form>
       )}
     />
-    {pokemon && (
-      <div className={classes.result}>
-        <div className={classes.customization}>Aquí las opciones de personalización</div>
-        <PokemonPreview src={pokemon.avatar} />
-        <PokemonStats pokemon={pokemon} />
-      </div>
-    )}
+
+    <div className={classes.result}>
+      {pokemon && (
+        <>
+          <div className={classes.customization}>
+            <p>Aquí las opciones de personalización</p>
+
+            <Field
+              options={{
+                defaultValue: 0,
+                id: 'slider',
+                label: 'Caramelos Aguante',
+                range: [0, 200],
+                type: 'slider',
+              }}
+            />
+          </div>
+          <PokemonPreview src={pokemon.avatar} />
+          <PokemonStats pokemon={pokemon} />
+        </>
+      )}
+    </div>
   </>
 );
 

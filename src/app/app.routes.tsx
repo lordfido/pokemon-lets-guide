@@ -59,15 +59,15 @@ export const HOME: IRouteConfig = {
   path: routes.HOME,
   render: ({ match }) => {
     if (false) {
-      const { url } = match;
-      return <PokedexWrapper url={url} />;
+      const {
+        params: { id },
+      } = match;
+      // @ts-ignore
+      return <CalculatorWrapper id={id} />;
     }
 
-    const {
-      params: { id },
-    } = match;
-    // @ts-ignore
-    return <CalculatorWrapper id={id} />;
+    const { url } = match;
+    return <PokedexWrapper url={url} />;
   },
 };
 
