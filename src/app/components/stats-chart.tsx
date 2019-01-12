@@ -1,4 +1,3 @@
-import { Line } from 'rc-progress';
 import * as React from 'react';
 // @ts-ignore
 import RadarChart from 'react-svg-radar-chart';
@@ -16,6 +15,7 @@ import {
 import { getStatName } from '../../constants/pokemon-stats-name';
 
 import { IPokemonStats } from '../modules/pokedex/pokedex.models';
+import ProgressBar from './progress-bar';
 
 const chartLegend = {
   [HP_ID]: getStatName(HP_ID),
@@ -47,7 +47,7 @@ const StatsChart = ({ stats, viewMode, color, size = 272, max = 100 }: IOwnProps
           {getStats().map(statId => (
             <p key={statId}>
               {getStatName(statId as StatId)}: {Math.round(stats[statId] * max)}
-              <Line percent={stats[statId] * 100} strokeColor={color} strokeWidth="4" trailWidth="4" />
+              <ProgressBar percentage={stats[statId] * 100} color={color} />
             </p>
           ))}
         </>
