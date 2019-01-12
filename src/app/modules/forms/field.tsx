@@ -5,15 +5,22 @@ import Button from '../../components/button';
 import Checkbox from './form-checkbox';
 import Date from './form-date';
 import Dropdown from './form-dropdown';
+import Slider from './form-slider';
 import Switch from './form-switch';
 import Text from './form-text';
 
-import { ICheckboxOptions, IDateOptions, IDropdownOptions, IGenericField, ITextOptions } from './form.models';
-import Slider from './form-slider';
+import {
+  ICheckboxOptions,
+  IDateOptions,
+  IDropdownOptions,
+  IGenericField,
+  ISliderOptions,
+  ITextOptions,
+} from './form.models';
 
 interface IOwnProps {
   className?: string;
-  options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ITextOptions);
+  options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ISliderOptions | ITextOptions);
 }
 
 interface IDisablingProps {
@@ -157,10 +164,15 @@ const Field = ({ className, options }: IOwnProps) => {
           className={className}
           options={{
             ...newOptions,
-            onChange: !newOptions.isDisabled ? onChange : undefined,
-            onClick: !newOptions.isDisabled ? onClick : undefined,
-            onFocus: !newOptions.isDisabled ? onFocus : undefined,
+            defaultValue:
+              'defaultValue' in newOptions && typeof newOptions.defaultValue === 'string'
+                ? newOptions.defaultValue
+                : undefined,
+            range: 'range' in newOptions ? newOptions.range : ([0, 10] as [number, number]),
           }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
 
