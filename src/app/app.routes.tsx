@@ -2,8 +2,8 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import CalculatorWrapper from '../app/modules/calculator/calculator-wrapper';
-import PokemonWrapper from './modules/pokemon/pokemon-wrapper';
 import PokedexWrapper from './modules/pokedex/pokedex-wrapper';
+import PokemonWrapper from './modules/pokemon/pokemon-wrapper';
 
 import * as routes from '../constants/appRoutes';
 
@@ -63,7 +63,7 @@ export const HOME: IRouteConfig = {
         params: { id },
       } = match;
       // @ts-ignore
-      return <CalculatorWrapper id={id} />;
+      return <CalculatorWrapper id={id || '025'} />;
     }
 
     const { url } = match;

@@ -1,11 +1,5 @@
 import { BORDER_RADIUS, PADDING_L, PADDING_M, PADDING_S, PADDING_XL } from '../../../constants/styles';
-import {
-  DISABLED_BACKGROUND,
-  DISABLED_BORDER,
-  DISABLED_COLOR,
-  GREY_DARK,
-  WHITE,
-} from '../../../constants/styles-colors';
+import { DISABLED_BACKGROUND, DISABLED_BORDER, DISABLED_COLOR, WHITE } from '../../../constants/styles-colors';
 import { FONT_L } from '../../../constants/styles-fonts';
 import { INPUT_BORDER_COLOR, INPUT_BORDER_COLOR_FOCUSED } from '../../../constants/styles-skin';
 
@@ -46,7 +40,7 @@ export const commonStyles: ISheet = {
     width: '100%',
   },
   wrapper: {
-    color: GREY_DARK,
+    color: 'inherit',
     display: 'inline-block',
     fontSize: FONT_L,
     margin: PADDING_M,

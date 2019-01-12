@@ -9,7 +9,8 @@ import { getTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import { BARS, CHART, ViewMode } from '../../components/stats-chart';
-import CalculatorView, { MAX_HAPPINESS_VALUE, MAX_LEVEL_VALUE } from './calculator-view';
+import { MAX_HAPPINESS_VALUE, MAX_LEVEL_VALUE } from './calculator-customizations';
+import CalculatorView from './calculator-view';
 
 import { getRawPokedex, getSelectedPokemon } from '../../root.reducer';
 
@@ -348,7 +349,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         handlePokemonChange={e => {
           this.handlePokemonChange(e);
         }}
-        level={level.toString()}
+        level={level}
         handleLevelChange={e => {
           this.handleLevelChange(e);
         }}

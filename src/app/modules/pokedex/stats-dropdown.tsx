@@ -80,7 +80,7 @@ const statsDropdown: IDropdownOptions = {
   colourStyles: statsColorStyles,
   id: '',
   options: statsFilterOptions,
-  placeholder: getTranslation('search-select-some-types'),
+  placeholder: getTranslation('search-select-some-stats'),
   type: 'multi',
 };
 

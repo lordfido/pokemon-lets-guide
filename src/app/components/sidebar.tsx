@@ -56,6 +56,8 @@ const sheet: ISheet = {
     zIndex: SIDEBAR,
 
     [DESKTOP_L]: {
+      backgroundColor: 'transparent',
+      color: 'inherit',
       height: 'auto',
       marginLeft: 0,
       minHeight: `calc(100vh - ${HEADER_SIZE}px - ${PADDING_XXL * 2}px - ${FOOTER_SIZE_L}px - 6px)`,

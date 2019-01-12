@@ -15,6 +15,7 @@ import { commonStyles, MAX_WIDTH } from './pokemon.constants';
 
 import { ISheet } from '../../root.models';
 import { IRichPokemon } from '../pokedex/pokedex.models';
+import Spacer from '../../components/spacer';
 
 const sheet: ISheet = {
   bars: {
@@ -52,6 +53,9 @@ interface IOwnProps {
 const UnstyledPokemonStats = ({ availableViewModes, classes, pokemon, viewMode }: IOwnProps) => (
   <div className={classes.window}>
     <div className={classes.wrapper}>
+      <Buttons align="center" options={availableViewModes.slice(0, 2)} />
+      <Spacer />
+
       <p>{getTranslation('pokemon-base-stats')}</p>
 
       <div className={classnames({ [classes.bars]: viewMode === BARS, [classes.chart]: viewMode === CHART })}>
@@ -64,8 +68,9 @@ const UnstyledPokemonStats = ({ availableViewModes, classes, pokemon, viewMode }
           />
         }
       </div>
+      <Spacer />
 
-      <Buttons align="center" options={availableViewModes} />
+      <Buttons align="center" options={availableViewModes.slice(2)} />
     </div>
   </div>
 );
