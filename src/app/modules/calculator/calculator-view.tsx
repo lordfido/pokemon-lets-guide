@@ -9,25 +9,28 @@ import PokemonPreview from '../pokedex/details/pokemon-preview';
 
 import { MAX_CANDIES_VALUE } from '../../../constants/pokemon-candies';
 import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
+import { PokemonNature } from '../../../constants/pokemon-natures';
+import { INatureEffect } from '../../../constants/pokemon-natures-effects';
+import { getNatureName } from '../../../constants/pokemon-natures-name';
 import {
   ATTACK_ID,
   DEFENSE_ID,
   HP_ID,
+  MAX_STAT_VALUE,
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
-  MAX_STAT_VALUE,
 } from '../../../constants/pokemon-stats';
+import { getStatName } from '../../../constants/pokemon-stats-name';
 import { getTypeColor } from '../../../constants/pokemon-types-color';
 import { PADDING_XXL } from '../../../constants/styles';
 import { DESKTOP, DESKTOP_L } from '../../../constants/styles-media-queries';
 import { commonStyles, MAX_WIDTH } from '../pokedex/details/pokemon.constants';
 
 import { ISheet } from '../../root.models';
-import { IOption, ISliderOptions } from '../forms/form.models';
+import { IDropdownOptions, IOption, ISliderOptions } from '../forms/form.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
-import { getStatName } from '../../../constants/pokemon-stats-name';
 
 const sheet: ISheet = {
   customization: {
@@ -60,10 +63,13 @@ interface IOwnProps {
   pokemon?: IRichPokemon;
   level: string;
   handleLevelChange: (level: { id: string; value: string }) => void;
-  candies: IPokemonStats;
-  handleCandiesChange: (event: { stat: StatId; value: string }) => void;
+  nature?: PokemonNature;
+  natureEffects: INatureEffect;
+  handleNatureChange: (nature: { id: string; value?: StatId }) => void;
   ivs: IPokemonStats;
   handleIVsChange: (event: { stat: StatId; value: string }) => void;
+  candies: IPokemonStats;
+  handleCandiesChange: (event: { stat: StatId; value: string }) => void;
   stats?: IPokemonStats;
 }
 
@@ -71,13 +77,16 @@ const unstyledCalculatorView = ({
   classes,
   pokemonList,
   pokemon,
+  handlePokemonSelect,
   level,
   handleLevelChange,
-  handlePokemonSelect,
-  candies,
-  handleCandiesChange,
+  nature,
+  natureEffects,
+  handleNatureChange,
   ivs,
   handleIVsChange,
+  candies,
+  handleCandiesChange,
   stats,
 }: IOwnProps) => {
   const levelField: ISliderOptions = {
@@ -89,53 +98,33 @@ const unstyledCalculatorView = ({
     type: 'slider',
   };
 
-  const handleCandiesChangeProxy = (option: IOption) => {
-    handleCandiesChange({ stat: option.id.replace('candies-', '') as StatId, value: option.value });
+  const handleNatureChangeProxy = (option: { id: string; value: IOption }) => {
+    handleNatureChange({ id: option.id.replace('nature-', ''), value: option.value.value as StatId });
   };
 
-  const commonCandiesProps: ISliderOptions = {
+  const natureCommonProps: IDropdownOptions = {
     id: '',
-    onChange: handleCandiesChangeProxy,
-    range: [0, MAX_CANDIES_VALUE],
-    type: 'slider',
+    onChange: handleNatureChangeProxy,
+    options: [ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID].map(statId => ({
+      id: statId,
+      label: getStatName(statId),
+      value: statId,
+    })),
+    type: 'dropdown',
   };
 
-  const candiesFields: ISliderOptions[] = [
+  const natureFields: IDropdownOptions[] = [
     {
-      ...commonCandiesProps,
-      defaultValue: candies.hp.toString(),
-      id: `candies-${HP_ID}`,
-      label: getTranslation('calculator-candy-hp'),
+      ...natureCommonProps,
+      defaultValue: natureEffects.increases ? [natureEffects.increases] : undefined,
+      id: 'nature-increases',
+      label: getTranslation('calculator-increase'),
     },
     {
-      ...commonCandiesProps,
-      defaultValue: candies.attack.toString(),
-      id: `candies-${ATTACK_ID}`,
-      label: getTranslation('calculator-candy-attack'),
-    },
-    {
-      ...commonCandiesProps,
-      defaultValue: candies.defense.toString(),
-      id: `candies-${DEFENSE_ID}`,
-      label: getTranslation('calculator-candy-defense'),
-    },
-    {
-      ...commonCandiesProps,
-      defaultValue: candies.speed.toString(),
-      id: `candies-${SPEED_ID}`,
-      label: getTranslation('calculator-candy-speed'),
-    },
-    {
-      ...commonCandiesProps,
-      defaultValue: candies.spDefense.toString(),
-      id: `candies-${SPECIAL_DEFENSE_ID}`,
-      label: getTranslation('calculator-candy-spDefense'),
-    },
-    {
-      ...commonCandiesProps,
-      defaultValue: candies.spAttack.toString(),
-      id: `candies-${SPECIAL_ATTACK_ID}`,
-      label: getTranslation('calculator-candy-spAttack'),
+      ...natureCommonProps,
+      defaultValue: natureEffects.reduces ? [natureEffects.reduces] : undefined,
+      id: 'nature-reduces',
+      label: getTranslation('calculator-reduce'),
     },
   ];
 
@@ -189,6 +178,56 @@ const unstyledCalculatorView = ({
     },
   ];
 
+  const handleCandiesChangeProxy = (option: IOption) => {
+    handleCandiesChange({ stat: option.id.replace('candies-', '') as StatId, value: option.value });
+  };
+
+  const commonCandiesProps: ISliderOptions = {
+    id: '',
+    onChange: handleCandiesChangeProxy,
+    range: [0, MAX_CANDIES_VALUE],
+    type: 'slider',
+  };
+
+  const candiesFields: ISliderOptions[] = [
+    {
+      ...commonCandiesProps,
+      defaultValue: candies.hp.toString(),
+      id: `candies-${HP_ID}`,
+      label: getTranslation('calculator-candy-hp'),
+    },
+    {
+      ...commonCandiesProps,
+      defaultValue: candies.attack.toString(),
+      id: `candies-${ATTACK_ID}`,
+      label: getTranslation('calculator-candy-attack'),
+    },
+    {
+      ...commonCandiesProps,
+      defaultValue: candies.defense.toString(),
+      id: `candies-${DEFENSE_ID}`,
+      label: getTranslation('calculator-candy-defense'),
+    },
+    {
+      ...commonCandiesProps,
+      defaultValue: candies.speed.toString(),
+      id: `candies-${SPEED_ID}`,
+      label: getTranslation('calculator-candy-speed'),
+    },
+    {
+      ...commonCandiesProps,
+      defaultValue: candies.spDefense.toString(),
+      id: `candies-${SPECIAL_DEFENSE_ID}`,
+      label: getTranslation('calculator-candy-spDefense'),
+    },
+    {
+      ...commonCandiesProps,
+      defaultValue: candies.spAttack.toString(),
+      id: `candies-${SPECIAL_ATTACK_ID}`,
+      label: getTranslation('calculator-candy-spAttack'),
+    },
+  ];
+
   return (
     <>
       <Sidebar
@@ -215,13 +254,18 @@ const unstyledCalculatorView = ({
             <div className={classes.customization}>
               <Field options={levelField} />
 
-              <h4>{getTranslation('calculator-candies')}</h4>
-              {candiesFields.map(field => (
+              <h4>{getTranslation('calculator-nature')}</h4>
+              {natureFields.map(field => (
                 <Field key={field.id} options={field} />
               ))}
 
               <h4>{getTranslation('calculator-ivs')}</h4>
               {ivsFields.map(field => (
+                <Field key={field.id} options={field} />
+              ))}
+
+              <h4>{getTranslation('calculator-candies')}</h4>
+              {candiesFields.map(field => (
                 <Field key={field.id} options={field} />
               ))}
             </div>
@@ -236,6 +280,9 @@ const unstyledCalculatorView = ({
                 color={getTypeColor(pokemon.types.ownTypes[0])}
                 size={MAX_STAT_VALUE}
               />
+
+              <h4>{getTranslation('calculator-nature')}</h4>
+              <p>{getNatureName(nature)}</p>
             </div>
           </>
         )}

@@ -76,7 +76,7 @@ interface IOwnProps {
   handleLoadMore?: () => void;
   handleResetFilters: () => void;
   handleSortBy: (key: string) => void;
-  handleUpdateFilter: (filter: string, selection: any) => void;
+  handleUpdateFilter: (option: { id: string; value: any }) => void;
 }
 
 const unstyledPokedexView = ({

@@ -11,7 +11,6 @@ import {
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
-  MAX_STAT_VALUE,
 } from '../../constants/pokemon-stats';
 import { getStatName } from '../../constants/pokemon-stats-name';
 

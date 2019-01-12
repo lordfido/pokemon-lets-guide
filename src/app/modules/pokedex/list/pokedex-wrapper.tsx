@@ -166,7 +166,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     SortPokedex({ sortBy, order });
   };
 
-  public handleUpdateFilter({ id, value }: { id: string; value: string }) {
+  public handleUpdateFilter({ id, value }: { id: string; value: any }) {
     clearTimeout(this.filtersDebounce);
     this.filtersDebounce = setTimeout(() => {
       const { filters } = this.props;
@@ -223,8 +223,8 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
           this.handleResetFilters();
         }}
         handleSortBy={this.handleSortBy}
-        handleUpdateFilter={(filter: string, selection: any) => {
-          this.handleUpdateFilter(filter, selection);
+        handleUpdateFilter={(option: { id: string; value: any }) => {
+          this.handleUpdateFilter(option);
         }}
       />
     );

@@ -9,7 +9,17 @@ import CalculatorView from './calculator-view';
 import { getRawPokedex, getSelectedPokemon } from '../../root.reducer';
 
 import { CALCULATOR } from '../../../constants/appRoutes';
-import { MAX_STAT_VALUE, StatId } from '../../../constants/pokemon-stats';
+import { PokemonNature } from '../../../constants/pokemon-natures';
+import { findNature, getNatureModifier, INatureEffect } from '../../../constants/pokemon-natures-effects';
+import {
+  ATTACK_ID,
+  DEFENSE_ID,
+  MAX_STAT_VALUE,
+  SPECIAL_ATTACK_ID,
+  SPECIAL_DEFENSE_ID,
+  SPEED_ID,
+  StatId,
+} from '../../../constants/pokemon-stats';
 
 import { IRootState } from '../../root.models';
 import { IOption } from '../forms/form.models';
@@ -18,7 +28,10 @@ import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/poke
 const defaultCandies = 0;
 const defaultIVs = 16;
 const defaultLevel = 50;
-const defaultNature = 1.1;
+const defaultNatureEffects = {
+  increases: undefined,
+  reduces: undefined,
+};
 
 const getStatsRatio = (stats: IPokemonStats, max: number) => ({
   attack: getStatRatio(stats.attack, max),
@@ -44,7 +57,8 @@ interface IOwnState {
   candies: IPokemonStats;
   ivs: IPokemonStats;
   level: number;
-  nature: number;
+  nature?: PokemonNature;
+  natureEffects: INatureEffect;
   redirectTo: string;
 }
 
@@ -67,7 +81,8 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       speed: defaultIVs,
     },
     level: defaultLevel,
-    nature: defaultNature,
+    nature: undefined,
+    natureEffects: defaultNatureEffects,
     redirectTo: '',
   };
 
@@ -91,11 +106,17 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
     });
   };
 
-  public handleCandiesChange = ({ stat, value }: { stat: StatId; value: string }) => {
+  public handleNatureChange = (natureEffects: { id: string; value?: StatId }) => {
+    const nature = findNature({
+      ...this.state.natureEffects,
+      [natureEffects.id]: natureEffects.value,
+    });
+
     this.setState({
-      candies: {
-        ...this.state.candies,
-        [stat]: parseInt(value, 10),
+      nature,
+      natureEffects: {
+        ...this.state.natureEffects,
+        [natureEffects.id]: natureEffects.value,
       },
     });
   };
@@ -109,9 +130,18 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
     });
   };
 
+  public handleCandiesChange = ({ stat, value }: { stat: StatId; value: string }) => {
+    this.setState({
+      candies: {
+        ...this.state.candies,
+        [stat]: parseInt(value, 10),
+      },
+    });
+  };
+
   public render() {
     const { id, pokemon, pokemonList } = this.props;
-    const { candies, ivs, level, nature, redirectTo } = this.state;
+    const { candies, ivs, level, nature, natureEffects, redirectTo } = this.state;
     const currentRoute = CALCULATOR.replace(':id?', id || '');
 
     if (redirectTo && redirectTo !== currentRoute) {
@@ -125,7 +155,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
             baseStat: pokemon.baseStats.attack,
             individualValue: ivs.attack,
             level,
-            nature,
+            nature: getNatureModifier(ATTACK_ID, natureEffects),
             stat: Stats.Attack,
           }),
           defense: Stats.getStat({
@@ -133,7 +163,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
             baseStat: pokemon.baseStats.defense,
             individualValue: ivs.defense,
             level,
-            nature,
+            nature: getNatureModifier(DEFENSE_ID, natureEffects),
             stat: Stats.Defense,
           }),
           hp: Stats.getStat({
@@ -148,7 +178,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
             baseStat: pokemon.baseStats.spAttack,
             individualValue: ivs.spAttack,
             level,
-            nature,
+            nature: getNatureModifier(SPECIAL_ATTACK_ID, natureEffects),
             stat: Stats.SpecialAttack,
           }),
           spDefense: Stats.getStat({
@@ -156,7 +186,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
             baseStat: pokemon.baseStats.spDefense,
             individualValue: ivs.spDefense,
             level,
-            nature,
+            nature: getNatureModifier(SPECIAL_DEFENSE_ID, natureEffects),
             stat: Stats.SpecialDefense,
           }),
           speed: Stats.getStat({
@@ -164,7 +194,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
             baseStat: pokemon.baseStats.speed,
             individualValue: ivs.speed,
             level,
-            nature,
+            nature: getNatureModifier(SPEED_ID, natureEffects),
             stat: Stats.Speed,
           }),
         }
@@ -181,13 +211,18 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         handleLevelChange={e => {
           this.handleLevelChange(e);
         }}
-        candies={candies}
-        handleCandiesChange={e => {
-          this.handleCandiesChange(e);
+        nature={nature}
+        natureEffects={natureEffects}
+        handleNatureChange={e => {
+          this.handleNatureChange(e);
         }}
         ivs={ivs}
         handleIVsChange={e => {
           this.handleIVsChange(e);
+        }}
+        candies={candies}
+        handleCandiesChange={e => {
+          this.handleCandiesChange(e);
         }}
         stats={stats ? getStatsRatio(stats, MAX_STAT_VALUE) : undefined}
       />

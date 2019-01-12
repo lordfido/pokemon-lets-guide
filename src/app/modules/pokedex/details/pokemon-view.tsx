@@ -15,8 +15,8 @@ import { PADDING_XL } from '../../../../constants/styles';
 import { POKEDEX_BACKGROUND } from '../../../../constants/styles-colors';
 import { TEXT_WHITE } from '../../../../constants/styles-fonts';
 
-import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
 import { ISheet } from '../../../root.models';
+import { IPokemonDetailPagination, IRichPokemon } from '../pokedex.models';
 
 const sheet: ISheet = {
   wrapper: {
@@ -40,7 +40,7 @@ const unstyledPokemonDetailsView = ({ classes, pokemon, pagination }: IOwnProps)
     return suggestedIVs.map((suggestion, index) => (
       <>
         <p>{getTranslation('pokemon-details-recommended', (index + 1).toString())}</p>
-        <StatsChart stats={suggestion} color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />
+        <StatsChart stats={suggestion} viewMode="chart" color={getTypeColor(pokemon.types.ownTypes[0])} size={272} />
       </>
     ));
   };
