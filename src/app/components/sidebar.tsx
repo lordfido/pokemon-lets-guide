@@ -4,13 +4,13 @@ import injectSheet from 'react-jss';
 
 import { IButtonProps } from './button';
 
-import { PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles';
+import { FOOTER_SIZE, HEADER_SIZE, PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles';
 import { DESKTOP_L } from '../../constants/styles-media-queries';
 
 import { ISheet } from '../root.models';
 import Buttons from './buttons';
 
-const sidebarSize = 280;
+export const SIDEBAR_SIZE = 280;
 
 const sheet: ISheet = {
   buttons: {
@@ -31,13 +31,13 @@ const sheet: ISheet = {
 
     [DESKTOP_L]: {
       display: 'inline-block',
-      height: '100%',
       maxHeight: 'none',
+      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE}px)`,
       padding: PADDING_XXL,
       paddingRight: 0,
       textAlign: 'left',
       verticalAlign: 'top',
-      width: sidebarSize,
+      width: SIDEBAR_SIZE,
     },
   },
   wrapperOpen: {

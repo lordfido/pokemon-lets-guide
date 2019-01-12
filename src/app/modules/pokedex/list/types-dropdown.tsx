@@ -19,7 +19,6 @@ const typeFilterOptions = getTypes()
     icon: getTypeIcon(option.id),
     id: option.id,
     label: option.name,
-    type: 'option',
     value: option.id,
   }))
   .sort(sortBy('label', 'asc'));

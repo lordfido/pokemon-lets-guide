@@ -134,10 +134,9 @@ export const pokedexInitialState: IPokedexState = {
  */
 const onlyPokemonLetsGo = (pokemon: Pokedex.Pokemon) =>
   // Pokemon Let's Go
-  // (pokemon.nationalNumber <= 151 || pokemon.nationalNumber === 808 || pokemon.nationalNumber === 809)
-
-  // All pokemon
-  !pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false;
+  (pokemon.nationalNumber <= 151 || pokemon.nationalNumber === 808 || pokemon.nationalNumber === 809) &&
+  // Remove partners
+  (!pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false);
 
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements

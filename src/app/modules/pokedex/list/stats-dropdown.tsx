@@ -27,7 +27,6 @@ const statsFilterOptions = [HP_ID, ATTACK_ID, DEFENSE_ID, SPECIAL_ATTACK_ID, SPE
   .map(stat => ({
     id: stat,
     label: getStatName(stat),
-    type: 'option',
     value: stat,
   }))
   .sort(sortBy('label', 'asc'));

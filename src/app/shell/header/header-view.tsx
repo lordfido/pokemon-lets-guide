@@ -37,7 +37,7 @@ const unstyledHeaderView = ({ classes }: IOwnProps) => (
     <HeaderItem
       image={require('../../../assets/images/calculator.png')}
       text={getTranslation('header-calculator')}
-      to={CALCULATOR.replace(':id?', '006')}
+      to={CALCULATOR.replace(':id?', '')}
     />
   </header>
 );

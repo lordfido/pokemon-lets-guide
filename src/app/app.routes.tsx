@@ -57,8 +57,15 @@ export const SEARCH: IRouteConfig = {
 export const HOME: IRouteConfig = {
   path: routes.HOME,
   render: ({ match }) => {
-    const { url } = match;
-    return <PokedexWrapper url={url} />;
+    if (false) {
+      const { url } = match;
+      return <PokedexWrapper url={url} />;
+    }
+
+    const {
+      params: { id },
+    } = match;
+    return <CalculatorWrapper id={id} />;
   },
 };
 

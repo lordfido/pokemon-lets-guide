@@ -5,6 +5,7 @@ import Select from 'react-select';
 
 import TouchableContent from '../../components/touchable-content';
 
+import { WHITE } from '../../../constants/styles-colors';
 import { commonStyles } from './field.styles';
 
 import { ISheet } from '../../root.models';

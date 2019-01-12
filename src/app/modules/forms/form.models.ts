@@ -51,7 +51,7 @@ export interface IDateOptions extends ICommonOptions {
   placeholder?: string;
 }
 
-interface IOption {
+export interface IOption {
   id: string;
   label: string;
   value: string;
