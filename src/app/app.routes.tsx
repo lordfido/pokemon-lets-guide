@@ -63,7 +63,7 @@ export const HOME: IRouteConfig = {
         params: { id },
       } = match;
       // @ts-ignore
-      return <CalculatorWrapper id={id || '006'} />;
+      return <CalculatorWrapper id={id} />;
     }
 
     const { url } = match;

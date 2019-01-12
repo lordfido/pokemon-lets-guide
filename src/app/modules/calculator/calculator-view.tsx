@@ -35,6 +35,9 @@ import { ISheet } from '../../root.models';
 import { IDropdownOptions, IOption, ISliderOptions } from '../forms/form.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
 
+export const MAX_HAPPINESS_VALUE = 255;
+export const MAX_LEVEL_VALUE = 100;
+
 const defaultPokemon = {
   avatar: getAvatarFromId('025'),
   name: 'Pikachu',
@@ -82,6 +85,8 @@ interface IOwnProps {
   nature?: PokemonNature;
   natureEffects: INatureEffect;
   handleNatureChange: (nature: { id: string; value?: StatId }) => void;
+  happiness: number;
+  handleHappinessChange: (happiness: { id: string; value: string }) => void;
   handleResetAll: () => void;
   handleModifyAll: (isMax?: boolean) => void;
   ivs: IPokemonStats;
@@ -103,6 +108,8 @@ const unstyledCalculatorView = ({
   nature,
   natureEffects,
   handleNatureChange,
+  happiness,
+  handleHappinessChange,
   handleResetAll,
   handleModifyAll,
   ivs,
@@ -132,7 +139,7 @@ const unstyledCalculatorView = ({
     id: 'level',
     label: getTranslation('calculator-level'),
     onChange: handleLevelChange,
-    range: [1, 100],
+    range: [1, MAX_LEVEL_VALUE],
     type: 'slider',
   };
 
@@ -166,6 +173,16 @@ const unstyledCalculatorView = ({
       label: getTranslation('calculator-reduce'),
     },
   ];
+
+  // Happiness
+  const happinessField: ISliderOptions = {
+    defaultValue: happiness.toString(),
+    id: 'happiness',
+    label: getTranslation('calculator-happiness'),
+    onChange: handleHappinessChange,
+    range: [0, MAX_HAPPINESS_VALUE],
+    type: 'slider',
+  };
 
   // Quick actions
   const buttonsCommonProps: IButtonProps = {
@@ -320,6 +337,8 @@ const unstyledCalculatorView = ({
               {natureFields.map(field => (
                 <Field key={field.id} options={field} />
               ))}
+
+              <Field options={happinessField} />
 
               <Buttons options={buttons} />
 

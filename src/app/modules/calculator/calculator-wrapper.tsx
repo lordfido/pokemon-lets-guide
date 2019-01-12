@@ -9,7 +9,7 @@ import { getTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import { BARS, CHART, ViewMode } from '../../components/stats-chart';
-import CalculatorView from './calculator-view';
+import CalculatorView, { MAX_HAPPINESS_VALUE, MAX_LEVEL_VALUE } from './calculator-view';
 
 import { getRawPokedex, getSelectedPokemon } from '../../root.reducer';
 
@@ -35,8 +35,9 @@ import { IRootState } from '../../root.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
 
 const defaultCandies = 0;
-const defaultIVs = 16;
-const defaultLevel = 50;
+const defaultHappiness = Math.round(MAX_HAPPINESS_VALUE / 2);
+const defaultIVs = Math.round(MAX_IV_VALUE / 2);
+const defaultLevel = Math.round(MAX_LEVEL_VALUE / 2);
 const defaultNatureEffects = {
   increases: undefined,
   reduces: undefined,
@@ -64,6 +65,7 @@ type Props = IOwnProps & IStateProps;
 
 interface IOwnState {
   candies: IPokemonStats;
+  happiness: number;
   ivs: IPokemonStats;
   level: number;
   nature?: PokemonNature;
@@ -83,6 +85,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       spDefense: defaultCandies,
       speed: defaultCandies,
     },
+    happiness: defaultHappiness,
     ivs: {
       attack: defaultIVs,
       defense: defaultIVs,
@@ -186,6 +189,12 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
     });
   };
 
+  public handleHappinessChange = (happiness: { id: string; value: string }) => {
+    this.setState({
+      happiness: parseInt(happiness.value, 10),
+    });
+  };
+
   public handleResetAll = () => {
     this.setState({
       candies: {
@@ -196,6 +205,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         spDefense: defaultCandies,
         speed: defaultCandies,
       },
+      happiness: defaultHappiness,
       ivs: {
         attack: defaultIVs,
         defense: defaultIVs,
@@ -224,6 +234,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         spDefense: isMax ? MAX_CANDIES_VALUE : 0,
         speed: isMax ? MAX_CANDIES_VALUE : 0,
       },
+      happiness: isMax ? MAX_HAPPINESS_VALUE : 0,
       ivs: {
         attack: isMax ? MAX_IV_VALUE : 0,
         defense: isMax ? MAX_IV_VALUE : 0,
@@ -232,7 +243,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         spDefense: isMax ? MAX_IV_VALUE : 0,
         speed: isMax ? MAX_IV_VALUE : 0,
       },
-      level: isMax ? 100 : 1,
+      level: isMax ? MAX_LEVEL_VALUE : 1,
       reRender: true,
     });
   };
@@ -257,7 +268,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
 
   public render() {
     const { id, pokemon, pokemonList } = this.props;
-    const { candies, ivs, level, nature, natureEffects, reRender, redirectTo, viewMode } = this.state;
+    const { candies, happiness, ivs, level, nature, natureEffects, reRender, redirectTo, viewMode } = this.state;
     const currentRoute = CALCULATOR.replace(':id?', id || '');
 
     if (reRender) {
@@ -281,6 +292,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
           attack: Stats.getStat({
             awakeningValue: candies.attack,
             baseStat: pokemon.baseStats.attack,
+            happiness,
             individualValue: ivs.attack,
             level,
             nature: getNatureModifier(ATTACK_ID, natureEffects),
@@ -289,6 +301,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
           defense: Stats.getStat({
             awakeningValue: candies.defense,
             baseStat: pokemon.baseStats.defense,
+            happiness,
             individualValue: ivs.defense,
             level,
             nature: getNatureModifier(DEFENSE_ID, natureEffects),
@@ -297,6 +310,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
           speed: Stats.getStat({
             awakeningValue: candies.speed,
             baseStat: pokemon.baseStats.speed,
+            happiness,
             individualValue: ivs.speed,
             level,
             nature: getNatureModifier(SPEED_ID, natureEffects),
@@ -305,6 +319,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
           spDefense: Stats.getStat({
             awakeningValue: candies.spDefense,
             baseStat: pokemon.baseStats.spDefense,
+            happiness,
             individualValue: ivs.spDefense,
             level,
             nature: getNatureModifier(SPECIAL_DEFENSE_ID, natureEffects),
@@ -313,6 +328,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
           spAttack: Stats.getStat({
             awakeningValue: candies.spAttack,
             baseStat: pokemon.baseStats.spAttack,
+            happiness,
             individualValue: ivs.spAttack,
             level,
             nature: getNatureModifier(SPECIAL_ATTACK_ID, natureEffects),
@@ -340,6 +356,10 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
         natureEffects={natureEffects}
         handleNatureChange={e => {
           this.handleNatureChange(e);
+        }}
+        happiness={happiness}
+        handleHappinessChange={e => {
+          this.handleHappinessChange(e);
         }}
         handleResetAll={() => {
           this.handleResetAll();

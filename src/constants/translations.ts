@@ -44,6 +44,7 @@ const translations: ITranslationsCollection = {
   'calculator-candy-speed': ['', 'Quick candy', '', 'Caramelo Ímpetu', '', '', '', ''],
   'calculator-empty-case': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
   'calculator-final-stats': ['', 'Final stats', '', 'Estadísticas finales', '', '', '', ''],
+  'calculator-happiness': ['', 'Happiness', '', 'Felicidad', '', '', '', ''],
   'calculator-increase': ['', 'Increase', '', 'Aumenta', '', '', '', ''],
   'calculator-ivs': ['', 'IVs', '', 'IVs', '', '', '', ''],
   'calculator-level': ['', 'Level', '', 'Nivel', '', '', '', ''],
