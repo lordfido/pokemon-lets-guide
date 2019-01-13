@@ -11,10 +11,10 @@ import PokemonPokedexEntry from './pokemon-pokedex-entry';
 import PokemonPreview from './pokemon-preview';
 import PokemonStats from './pokemon-stats';
 
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { PADDING_XL } from '../../../constants/styles';
-import { POKEDEX_BACKGROUND } from '../../../constants/styles-colors';
-import { TEXT_WHITE } from '../../../constants/styles-fonts';
+import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
+import { PADDING_XL } from '../../../constants/styles/styles';
+import { POKEDEX_BACKGROUND } from '../../../constants/styles/styles-colors';
+import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 
 import { ISheet } from '../../root.models';
 import { IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';

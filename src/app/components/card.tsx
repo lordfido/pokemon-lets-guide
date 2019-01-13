@@ -4,9 +4,9 @@ import injectSheet from 'react-jss';
 
 import Image from './image';
 
-import { AVATAR_SIZE, BORDER_RADIUS, PADDING_XL, PADDING_XXXL } from '../../constants/styles';
-import { WHITE } from '../../constants/styles-colors';
-import { TABLET } from '../../constants/styles-media-queries';
+import { AVATAR_SIZE, BORDER_RADIUS, PADDING_XL, PADDING_XXXL } from '../../constants/styles/styles';
+import { WHITE } from '../../constants/styles/styles-colors';
+import { TABLET } from '../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../root.models';
 

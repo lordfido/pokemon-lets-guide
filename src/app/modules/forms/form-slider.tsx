@@ -5,8 +5,8 @@ import injectSheet from 'react-jss';
 
 import Space from '../../components/space';
 
-import { PADDING_L, PADDING_S } from '../../../constants/styles';
-import { commonStyles } from './field.styles';
+import { PADDING_L, PADDING_S } from '../../../constants/styles/styles';
+import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
 import { ISliderOptions } from './form.models';
@@ -16,7 +16,7 @@ const nextArrow = require('../../../assets/images/next-arrow.png');
 
 const sheet: ISheet = {
   field: {
-    ...commonStyles.field,
+    ...formInputStyles.field,
     padding: `${PADDING_S / 2}px 0px`,
 
     '&::-webkit-slider-thumb': {
@@ -29,14 +29,14 @@ const sheet: ISheet = {
       width: 48,
     },
   },
-  fieldDisabled: commonStyles.fieldDisabled,
-  label: commonStyles.label,
+  fieldDisabled: formInputStyles.fieldDisabled,
+  label: formInputStyles.label,
   textArea: {
     minHeight: 150,
     padding: PADDING_L,
     resize: 'vertical',
   },
-  wrapper: commonStyles.wrapper,
+  wrapper: formInputStyles.wrapper,
 };
 
 interface IOwnProps {

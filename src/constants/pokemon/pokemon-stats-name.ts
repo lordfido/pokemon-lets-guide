@@ -1,4 +1,4 @@
-import { getTranslation } from '../app/utils/translations';
+import { getTranslation } from '../../app/utils/translations';
 
 import { StatId } from './pokemon-stats';
 

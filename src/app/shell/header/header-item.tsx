@@ -3,10 +3,10 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 
-import { HEADER_SIZE, PADDING_S } from '../../../constants/styles';
-import { BLACK, traslucentColor } from '../../../constants/styles-colors';
-import { FONT_M, TEXT_WHITE } from '../../../constants/styles-fonts';
-import { DESKTOP, MOBILE_L } from '../../../constants/styles-media-queries';
+import { HEADER_SIZE, PADDING_S } from '../../../constants/styles/styles';
+import { BLACK, traslucentColor } from '../../../constants/styles/styles-colors';
+import { FONT_M, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
+import { DESKTOP, MOBILE_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 

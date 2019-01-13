@@ -5,8 +5,8 @@ import { getCombatPoints, getPaddedId, getVariantId, getVariantName } from '../.
 
 import { PokedexActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
-import { StatId } from '../../../constants/pokemon-stats';
-import { PokemonType } from '../../../constants/pokemon-types';
+import { StatId } from '../../../constants/pokemon/pokemon-stats';
+import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 
 export interface IPokedexAction extends AnyAction {
   type: PokedexActionType;

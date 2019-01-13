@@ -6,10 +6,10 @@ import { languageISOs } from '../../utils/translations';
 import Link from '../../components/link';
 
 import { APP_NAME, APP_REPOSITORY, APP_WEB } from '../../../constants/branding';
-import { PADDING_XL, PADDING_XXL, PAGE_MAX_WIDTH } from '../../../constants/styles';
-import { WHITE } from '../../../constants/styles-colors';
-import { FONT_XS, TEXT_DARK } from '../../../constants/styles-fonts';
-import { TABLET_OR_LANDSCAPE } from '../../../constants/styles-media-queries';
+import { PADDING_XL, PADDING_XXL, PAGE_MAX_WIDTH } from '../../../constants/styles/styles';
+import { WHITE } from '../../../constants/styles/styles-colors';
+import { FONT_XS, TEXT_DARK } from '../../../constants/styles/styles-fonts';
+import { TABLET_OR_LANDSCAPE } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 

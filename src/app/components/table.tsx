@@ -5,9 +5,15 @@ import Media from 'react-media';
 
 import Card from './card';
 
-import { PADDING_L, PADDING_M, PADDING_S } from '../../constants/styles';
-import { WHITE } from '../../constants/styles-colors';
-import getQuery, { DESKTOP, MAX_TABLET_L, MOBILE_XXL, TABLET, TABLET_L } from '../../constants/styles-media-queries';
+import { PADDING_L, PADDING_M, PADDING_S } from '../../constants/styles/styles';
+import { WHITE } from '../../constants/styles/styles-colors';
+import getQuery, {
+  DESKTOP,
+  MAX_TABLET_L,
+  MOBILE_XXL,
+  TABLET,
+  TABLET_L,
+} from '../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../root.models';
 

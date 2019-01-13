@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 import Tab, { ITabOptions } from './tab';
 
-import { SIZE_XXS } from '../../constants/styles';
+import { SIZE_XXS } from '../../constants/styles/styles';
 
 import { ISheet } from '../root.models';
 

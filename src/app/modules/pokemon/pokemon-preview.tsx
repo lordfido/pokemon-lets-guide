@@ -3,8 +3,8 @@ import injectSheet from 'react-jss';
 
 import Image from '../../components/image';
 
-import { DESKTOP, DESKTOP_L } from '../../../constants/styles-media-queries';
-import { commonStyles, MAX_WIDTH } from './pokemon.constants';
+import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { DESKTOP, DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 
@@ -23,7 +23,7 @@ const sheet: ISheet = {
     },
   },
   window: {
-    ...commonStyles.window,
+    ...pokedexWindowStyles.window,
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     textAlign: 'center',
@@ -31,7 +31,7 @@ const sheet: ISheet = {
     [DESKTOP]: {
       margin: 0,
       paddingTop: 200,
-      width: `calc(100% - ${MAX_WIDTH * 2}px)`,
+      width: `calc(100% - ${POKEDEX_WINDOW_MAX_WIDTH * 2}px)`,
     },
 
     [DESKTOP_L]: {

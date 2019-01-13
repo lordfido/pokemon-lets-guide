@@ -5,20 +5,20 @@ import injectSheet from 'react-jss';
 
 import Space from '../../components/space';
 
-import { BORDER_RADIUS } from '../../../constants/styles';
-import { BRAND_COLOR } from '../../../constants/styles-colors';
-import { TEXT_WHITE } from '../../../constants/styles-fonts';
-import { commonStyles } from './field.styles';
+import { BORDER_RADIUS } from '../../../constants/styles/styles';
+import { BRAND_COLOR } from '../../../constants/styles/styles-colors';
+import { formInputStyles } from '../../../constants/styles/styles-common-rules';
+import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 
 import { ISheet } from '../../root.models';
 import { IDateOptions } from './form.models';
 
 const sheet: ISheet = {
-  field: commonStyles.field,
-  fieldDisabled: commonStyles.fieldDisabled,
-  label: commonStyles.label,
+  field: formInputStyles.field,
+  fieldDisabled: formInputStyles.fieldDisabled,
+  label: formInputStyles.label,
   wrapper: {
-    ...commonStyles.wrapper,
+    ...formInputStyles.wrapper,
 
     '.vdp-datepicker__clear-button': {
       position: 'absolute',

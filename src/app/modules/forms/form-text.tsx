@@ -6,22 +6,22 @@ import TextArea from 'react-textarea-autosize';
 
 import Space from '../../components/space';
 
-import { PADDING_L } from '../../../constants/styles';
-import { commonStyles } from './field.styles';
+import { PADDING_L } from '../../../constants/styles/styles';
+import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
 import { ITextOptions } from './form.models';
 
 const sheet: ISheet = {
-  field: commonStyles.field,
-  fieldDisabled: commonStyles.fieldDisabled,
-  label: commonStyles.label,
+  field: formInputStyles.field,
+  fieldDisabled: formInputStyles.fieldDisabled,
+  label: formInputStyles.label,
   textArea: {
     minHeight: 150,
     padding: PADDING_L,
     resize: 'vertical',
   },
-  wrapper: commonStyles.wrapper,
+  wrapper: formInputStyles.wrapper,
 };
 
 interface IOwnProps {

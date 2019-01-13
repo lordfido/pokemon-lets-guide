@@ -18,10 +18,10 @@ import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
 import { CALCULATOR_VIEW_MODE } from '../../../constants/cookies';
 import { CALCULATOR_VIEW_MODE as CALCULATOR_VIEW_MODE_ACTION } from '../../../constants/metrics/actions';
 import { USER_PREFERENCES } from '../../../constants/metrics/categories';
-import { MAX_CANDIES_VALUE } from '../../../constants/pokemon-candies';
-import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
-import { PokemonNature } from '../../../constants/pokemon-natures';
-import { findNature, getNatureModifier, INatureEffect } from '../../../constants/pokemon-natures-effects';
+import { MAX_CANDIES_VALUE } from '../../../constants/pokemon/pokemon-candies';
+import { MAX_IV_VALUE } from '../../../constants/pokemon/pokemon-ivs';
+import { PokemonNature } from '../../../constants/pokemon/pokemon-natures';
+import { findNature, getNatureModifier, INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -30,7 +30,7 @@ import {
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
-} from '../../../constants/pokemon-stats';
+} from '../../../constants/pokemon/pokemon-stats';
 
 import { IRootState } from '../../root.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';

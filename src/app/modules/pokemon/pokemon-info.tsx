@@ -6,12 +6,12 @@ import { getTranslation } from '../../utils/translations';
 import Spacer from '../../components/spacer';
 import Tag from '../../components/tag';
 
-import { getTypeName, PokemonType } from '../../../constants/pokemon-types';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../constants/pokemon-types-icons';
-import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_S, PADDING_XXL } from '../../../constants/styles';
-import { DESKTOP } from '../../../constants/styles-media-queries';
-import { commonStyles, MAX_WIDTH } from './pokemon.constants';
+import { getTypeName, PokemonType } from '../../../constants/pokemon/pokemon-types';
+import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_S, PADDING_XXL } from '../../../constants/styles/styles';
+import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IRichPokemon } from '../pokedex/pokedex.models';
@@ -27,18 +27,18 @@ const sheet: ISheet = {
   strengths: strengthsAndWeaknesses,
   weaknessess: strengthsAndWeaknesses,
   window: {
-    ...commonStyles.window,
+    ...pokedexWindowStyles.window,
     borderRadius: `${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px`,
 
     [DESKTOP]: {
       margin: 0,
       marginLeft: PADDING_XXL,
       marginTop: PADDING_XXL,
-      width: MAX_WIDTH - PADDING_XXL,
+      width: POKEDEX_WINDOW_MAX_WIDTH - PADDING_XXL,
     },
   },
   wrapper: {
-    ...commonStyles.wrapper,
+    ...pokedexWindowStyles.wrapper,
     borderRadius: `${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px`,
   },
 };

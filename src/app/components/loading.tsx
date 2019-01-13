@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { PADDING_XXL, SIZE_XXL } from '../../constants/styles';
-import { BRAND_COLOR } from '../../constants/styles-colors';
+import { PADDING_XXL, SIZE_XXL } from '../../constants/styles/styles';
+import { BRAND_COLOR } from '../../constants/styles/styles-colors';
 
 import { CssSizes, ISheet } from '../root.models';
 

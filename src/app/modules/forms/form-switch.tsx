@@ -6,8 +6,8 @@ import { getTranslation } from '../../utils/translations';
 
 import Space from '../../components/space';
 
-import { PADDING_S } from '../../../constants/styles';
-import { commonStyles } from './field.styles';
+import { PADDING_S } from '../../../constants/styles/styles';
+import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
 import { ICheckboxOptions } from './form.models';
@@ -38,10 +38,10 @@ const sheet: ISheet = {
   },
   label: {
     display: 'inline-block',
-    fontFamily: commonStyles.field.fontFamily,
-    fontSize: commonStyles.field.fontSize,
-    lineHeight: commonStyles.field.lineHeight,
-    textAlign: commonStyles.field.textAlign,
+    fontFamily: formInputStyles.field.fontFamily,
+    fontSize: formInputStyles.field.fontSize,
+    lineHeight: formInputStyles.field.lineHeight,
+    textAlign: formInputStyles.field.textAlign,
     width: 'calc(100% - 80px)',
   },
   optionLabel: {
@@ -72,22 +72,22 @@ const sheet: ISheet = {
     width: 76,
   },
   wrapper: {
-    ...commonStyles.field,
-    color: commonStyles.wrapper.color,
-    fontSize: commonStyles.wrapper.fontSize,
-    margin: commonStyles.wrapper.margin,
-    marginTop: commonStyles.wrapper.marginTop,
+    ...formInputStyles.field,
+    color: formInputStyles.wrapper.color,
+    fontSize: formInputStyles.wrapper.fontSize,
+    margin: formInputStyles.wrapper.margin,
+    marginTop: formInputStyles.wrapper.marginTop,
     paddingBottom: 7,
     paddingTop: 7,
-    textAlign: commonStyles.wrapper.textAlign,
-    width: commonStyles.wrapper.width,
+    textAlign: formInputStyles.wrapper.textAlign,
+    width: formInputStyles.wrapper.width,
 
     '&:active, &focus': {
-      border: commonStyles.field.border,
+      border: formInputStyles.field.border,
       boxShadow: 'none',
     },
   },
-  wrapperDisabled: commonStyles.fieldDisabled,
+  wrapperDisabled: formInputStyles.fieldDisabled,
 };
 
 interface IOwnProps {

@@ -11,8 +11,8 @@ import {
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
-} from '../../constants/pokemon-stats';
-import { getStatName } from '../../constants/pokemon-stats-name';
+} from '../../constants/pokemon/pokemon-stats';
+import { getStatName } from '../../constants/pokemon/pokemon-stats-name';
 
 import { IPokemonStats } from '../modules/pokedex/pokedex.models';
 import ProgressBar from './progress-bar';

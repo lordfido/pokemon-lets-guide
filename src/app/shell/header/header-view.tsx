@@ -5,9 +5,9 @@ import { getTranslation } from '../../utils/translations';
 import HeaderItem from './header-item';
 
 import { CALCULATOR, HOME, POKEDEX } from '../../../constants/appRoutes';
-import { HEADER_SIZE } from '../../../constants/styles';
-import { BLACK } from '../../../constants/styles-colors';
-import { TEXT_WHITE } from '../../../constants/styles-fonts';
+import { HEADER_SIZE } from '../../../constants/styles/styles';
+import { BLACK } from '../../../constants/styles/styles-colors';
+import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 
 import { ISheet } from '../../root.models';
 

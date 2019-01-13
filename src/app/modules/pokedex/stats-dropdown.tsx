@@ -2,10 +2,10 @@ import chroma from 'chroma-js';
 import { sortBy } from '../../utils/arrays';
 import { getTranslation } from '../../utils/translations';
 
-import { getStats, StatId } from '../../../constants/pokemon-stats';
-import { getStatColor } from '../../../constants/pokemon-stats-color';
-import { getStatName } from '../../../constants/pokemon-stats-name';
-import { TEXT_BLACK } from '../../../constants/styles-fonts';
+import { getStats, StatId } from '../../../constants/pokemon/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon/pokemon-stats-color';
+import { getStatName } from '../../../constants/pokemon/pokemon-stats-name';
+import { TEXT_BLACK } from '../../../constants/styles/styles-fonts';
 import { IDropdownOptions } from '../forms/form.models';
 
 interface IDropdownReadableData {

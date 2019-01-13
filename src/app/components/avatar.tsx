@@ -3,8 +3,8 @@ import injectSheet from 'react-jss';
 
 import Image from './image';
 
-import { AVATAR_SIZE, PADDING_XL } from '../../constants/styles';
-import { traslucentColor, WHITE } from '../../constants/styles-colors';
+import { AVATAR_SIZE, PADDING_XL } from '../../constants/styles/styles';
+import { traslucentColor, WHITE } from '../../constants/styles/styles-colors';
 
 import { ISheet } from '../root.models';
 

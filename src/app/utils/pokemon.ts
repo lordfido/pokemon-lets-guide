@@ -1,9 +1,9 @@
 import { Types } from 'pokelab';
-import { sortBy } from './arrays';
-
 import pokemonExtraInfoList from '../../common/apis/mocks';
+import { sortBy } from './arrays';
+import { getTranslation } from './translations';
 
-import { MAX_IV_VALUE } from '../../constants/pokemon-ivs';
+import { MAX_IV_VALUE } from '../../constants/pokemon/pokemon-ivs';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -14,12 +14,11 @@ import {
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
   StatId,
-} from '../../constants/pokemon-stats';
+} from '../../constants/pokemon/pokemon-stats';
+import { PokemonType } from '../../constants/pokemon/pokemon-types';
+import { variantOptions } from '../../constants/pokemon/pokemon-variants';
 
-import { PokemonType } from '../../constants/pokemon-types';
-import { variantOptions } from '../../constants/pokemon-variants';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon, ITypeRelations } from '../modules/pokedex/pokedex.models';
-import { getTranslation } from './translations';
 
 /**
  * Based on a value and a max value, returns a number between 0 and 1

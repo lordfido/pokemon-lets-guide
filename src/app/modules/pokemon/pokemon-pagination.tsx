@@ -7,10 +7,10 @@ import { getAvatarFromId } from '../../utils/pokemon';
 import Avatar from '../../components/avatar';
 
 import { POKEDEX } from '../../../constants/appRoutes';
-import { PADDING_L, PADDING_XL } from '../../../constants/styles';
-import { traslucentColor, WHITE } from '../../../constants/styles-colors';
-import { FONT_XL, TEXT_WHITE } from '../../../constants/styles-fonts';
-import { MAX_MOBILE_L, MOBILE_XL } from '../../../constants/styles-media-queries';
+import { PADDING_L, PADDING_XL } from '../../../constants/styles/styles';
+import { traslucentColor, WHITE } from '../../../constants/styles/styles-colors';
+import { FONT_XL, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
+import { MAX_MOBILE_L, MOBILE_XL } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IPokemonDetailPagination } from '../pokedex/pokedex.models';

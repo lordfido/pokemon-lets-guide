@@ -17,16 +17,16 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-} from '../../../constants/pokemon-stats';
-import { getStatColor } from '../../../constants/pokemon-stats-color';
-import { getStatName } from '../../../constants/pokemon-stats-name';
-import { PADDING_M, PADDING_XXL } from '../../../constants/styles';
-import { TEXT_DARK } from '../../../constants/styles-fonts';
-import { DESKTOP_L } from '../../../constants/styles-media-queries';
+} from '../../../constants/pokemon/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon/pokemon-stats-color';
+import { getStatName } from '../../../constants/pokemon/pokemon-stats-name';
+import { PADDING_M, PADDING_XXL } from '../../../constants/styles/styles';
+import { TEXT_DARK } from '../../../constants/styles/styles-fonts';
+import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
-import { IPokedexFilters, IPokemonWithBaseCP } from './pokedex.models';
 import { IOption } from '../forms/form.models';
+import { IPokedexFilters, IPokemonWithBaseCP } from './pokedex.models';
 
 const sheet: ISheet = {
   results: {

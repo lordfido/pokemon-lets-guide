@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { BORDER_RADIUS, PADDING_L, PADDING_S, PADDING_XL, SIZE_M, SIZE_XS } from '../../constants/styles';
-import { FONT_S, TEXT_WHITE } from '../../constants/styles-fonts';
+import { BORDER_RADIUS, PADDING_L, PADDING_S, PADDING_XL, SIZE_M, SIZE_XS } from '../../constants/styles/styles';
+import { FONT_S, TEXT_WHITE } from '../../constants/styles/styles-fonts';
 
 import { ISheet } from '../root.models';
 

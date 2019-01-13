@@ -1,6 +1,6 @@
-import { FONT_L } from '../../constants/styles-fonts';
-import { MAX_DESKTOP_L } from '../../constants/styles-media-queries';
-import { APP_BACKGROUND } from '../../constants/styles-skin';
+import { FONT_L } from '../../constants/styles/styles-fonts';
+import { MAX_DESKTOP_L } from '../../constants/styles/styles-media-queries';
+import { APP_BACKGROUND } from '../../constants/styles/styles-skin';
 
 const getGoogleFonts = () => {
   const style = document.createElement('style');

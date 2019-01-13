@@ -4,40 +4,40 @@ import { getTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
+import Spacer from '../../components/spacer';
 import Field from '../forms/field';
 
-import { MAX_CANDIES_VALUE } from '../../../constants/pokemon-candies';
-import { MAX_IV_VALUE } from '../../../constants/pokemon-ivs';
-import { INatureEffect } from '../../../constants/pokemon-natures-effects';
-import { getStats, StatId } from '../../../constants/pokemon-stats';
-import { getStatName } from '../../../constants/pokemon-stats-name';
-import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_XXL } from '../../../constants/styles';
-import { DESKTOP } from '../../../constants/styles-media-queries';
+import { MAX_CANDIES_VALUE } from '../../../constants/pokemon/pokemon-candies';
+import { MAX_IV_VALUE } from '../../../constants/pokemon/pokemon-ivs';
+import { INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
+import { getStats, StatId } from '../../../constants/pokemon/pokemon-stats';
+import { getStatName } from '../../../constants/pokemon/pokemon-stats-name';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_XXL } from '../../../constants/styles/styles';
+import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 import statsDropdown from '../pokedex/stats-dropdown';
-import { commonStyles, MAX_WIDTH } from '../pokemon/pokemon.constants';
 
 import { ISheet } from '../../root.models';
 import { IDropdownOptions, IOption, ISliderOptions } from '../forms/form.models';
 import { IPokemonStats } from '../pokedex/pokedex.models';
-import Spacer from '../../components/spacer';
 
 export const MAX_HAPPINESS_VALUE = 255;
 export const MAX_LEVEL_VALUE = 100;
 
 const sheet: ISheet = {
   window: {
-    ...commonStyles.window,
+    ...pokedexWindowStyles.window,
     borderRadius: `${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px`,
 
     [DESKTOP]: {
       margin: 0,
       marginLeft: PADDING_XXL,
       marginTop: PADDING_XXL,
-      width: MAX_WIDTH - PADDING_XXL,
+      width: POKEDEX_WINDOW_MAX_WIDTH - PADDING_XXL,
     },
   },
   wrapper: {
-    ...commonStyles.wrapper,
+    ...pokedexWindowStyles.wrapper,
     borderRadius: `${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px`,
   },
 };

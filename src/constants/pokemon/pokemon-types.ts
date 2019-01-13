@@ -1,5 +1,5 @@
 import { Languages, Types } from 'pokelab';
-import { getLocale } from '../app/utils/translations';
+import { getLocale } from '../../app/utils/translations';
 
 export type PokemonType = Types.Type;
 

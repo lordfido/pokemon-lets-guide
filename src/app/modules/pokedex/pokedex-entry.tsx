@@ -17,11 +17,11 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-} from '../../../constants/pokemon-stats';
-import { getStatColor } from '../../../constants/pokemon-stats-color';
-import { getTypeName } from '../../../constants/pokemon-types';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { getTypeIcon } from '../../../constants/pokemon-types-icons';
+} from '../../../constants/pokemon/pokemon-stats';
+import { getStatColor } from '../../../constants/pokemon/pokemon-stats-color';
+import { getTypeName } from '../../../constants/pokemon/pokemon-types';
+import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
+import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
 
 import { ISheet } from '../../root.models';
 import { IPokemonWithBaseCP } from './pokedex.models';

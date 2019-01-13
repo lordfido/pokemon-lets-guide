@@ -1,8 +1,8 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { PADDING_M } from '../../constants/styles';
-import { GREY_LIGHT_3 } from '../../constants/styles-colors';
+import { PADDING_M } from '../../constants/styles/styles';
+import { GREY_LIGHT_3 } from '../../constants/styles/styles-colors';
 
 import { ISheet } from '../root.models';
 

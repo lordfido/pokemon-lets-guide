@@ -9,7 +9,7 @@ import {
   POKEDEX_SORT,
 } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
-import { StatId } from '../../../constants/pokemon-stats';
+import { StatId } from '../../../constants/pokemon/pokemon-stats';
 
 import { IPokedexAction, IPokedexState, IPokemon, pokedexInitialState } from './pokedex.models';
 

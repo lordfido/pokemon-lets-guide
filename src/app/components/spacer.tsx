@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles';
+import { PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles/styles';
 
 const sheet = {
   wrapper: {

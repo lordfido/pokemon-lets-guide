@@ -6,9 +6,9 @@ import injectSheet from 'react-jss';
 import Link from './link';
 import TouchableContent from './touchable-content';
 
-import { BORDER_RADIUS, PADDING_M, PADDING_XL } from '../../constants/styles';
-import { GREEN_LIGHT, WHITE, YELLOW } from '../../constants/styles-colors';
-import { FONT_M, TEXT_BLACK } from '../../constants/styles-fonts';
+import { BORDER_RADIUS, PADDING_M, PADDING_XL } from '../../constants/styles/styles';
+import { GREEN_LIGHT, WHITE, YELLOW } from '../../constants/styles/styles-colors';
+import { FONT_M, TEXT_BLACK } from '../../constants/styles/styles-fonts';
 
 import { ISheet } from '../root.models';
 

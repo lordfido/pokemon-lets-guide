@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 import { IButtonProps as ButtonProps } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
-import { BORDER_RADIUS, PADDING_S, PADDING_XL } from '../../constants/styles';
-import { FONT_M, TEXT_BLACK } from '../../constants/styles-fonts';
+import { BORDER_RADIUS, PADDING_S, PADDING_XL } from '../../constants/styles/styles';
+import { FONT_M, TEXT_BLACK } from '../../constants/styles/styles-fonts';
 import {
   BUTTON_BACKGROUND,
   BUTTON_BORDER,
   BUTTON_DISABLED_BACKGROUND,
   BUTTON_DISABLED_BORDER,
   BUTTON_DISABLED_COLOR,
-} from '../../constants/styles-skin';
+} from '../../constants/styles/styles-skin';
 
 import { ISheet } from '../root.models';
 

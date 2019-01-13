@@ -12,13 +12,13 @@ import PokemonPreview from '../pokemon/pokemon-preview';
 import CalculatorCustomizations from './calculator-customizations';
 import CalculatorResult from './calculator-result';
 
-import { PokemonNature } from '../../../constants/pokemon-natures';
-import { INatureEffect } from '../../../constants/pokemon-natures-effects';
-import { StatId } from '../../../constants/pokemon-stats';
-import { PADDING_XL } from '../../../constants/styles';
-import { POKEDEX_BACKGROUND } from '../../../constants/styles-colors';
-import { TEXT_BLACK, TEXT_WHITE } from '../../../constants/styles-fonts';
-import { DESKTOP_L } from '../../../constants/styles-media-queries';
+import { PokemonNature } from '../../../constants/pokemon/pokemon-natures';
+import { INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
+import { StatId } from '../../../constants/pokemon/pokemon-stats';
+import { PADDING_XL } from '../../../constants/styles/styles';
+import { POKEDEX_BACKGROUND } from '../../../constants/styles/styles-colors';
+import { TEXT_BLACK, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
+import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IDropdownOptions, IOption } from '../forms/form.models';

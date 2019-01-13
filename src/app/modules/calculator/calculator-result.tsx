@@ -5,19 +5,19 @@ import { getTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
+import Spacer from '../../components/spacer';
 import StatsChart, { BARS, CHART, ViewMode } from '../../components/stats-chart';
 
-import { PokemonNature } from '../../../constants/pokemon-natures';
-import { getNatureName } from '../../../constants/pokemon-natures-name';
-import { MAX_STAT_VALUE } from '../../../constants/pokemon-stats';
-import { getTypeColor } from '../../../constants/pokemon-types-color';
-import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../constants/styles';
-import { DESKTOP } from '../../../constants/styles-media-queries';
-import { commonStyles, MAX_WIDTH } from '../pokemon/pokemon.constants';
+import { PokemonNature } from '../../../constants/pokemon/pokemon-natures';
+import { getNatureName } from '../../../constants/pokemon/pokemon-natures-name';
+import { MAX_STAT_VALUE } from '../../../constants/pokemon/pokemon-stats';
+import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
+import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../constants/styles/styles';
+import { POKEDEX_WINDOW_MAX_WIDTH, pokedexWindowStyles } from '../../../constants/styles/styles-common-rules';
+import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IPokemonStats, IRichPokemon } from '../pokedex/pokedex.models';
-import Spacer from '../../components/spacer';
 
 const sheet: ISheet = {
   bars: {
@@ -28,18 +28,18 @@ const sheet: ISheet = {
     overflow: 'hidden',
   },
   window: {
-    ...commonStyles.window,
+    ...pokedexWindowStyles.window,
     borderRadius: `${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px `,
 
     [DESKTOP]: {
       margin: 0,
       marginRight: PADDING_XXL,
       marginTop: PADDING_XXL,
-      width: MAX_WIDTH - PADDING_XXL,
+      width: POKEDEX_WINDOW_MAX_WIDTH - PADDING_XXL,
     },
   },
   wrapper: {
-    ...commonStyles.wrapper,
+    ...pokedexWindowStyles.wrapper,
     borderRadius: `${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px ${BORDER_RADIUS_SMALL}px ${BORDER_RADIUS_BIG}px `,
     textAlign: 'center',
   },

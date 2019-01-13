@@ -7,7 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Field from '../modules/forms/field';
 import TouchableContent from './touchable-content';
 
-import { TEXT_BRANDED } from '../../constants/styles-fonts';
+import { TEXT_BRANDED } from '../../constants/styles/styles-fonts';
 
 import { ISheet } from '../root.models';
 

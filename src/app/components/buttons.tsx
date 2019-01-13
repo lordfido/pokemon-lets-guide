@@ -5,7 +5,7 @@ import injectSheet from 'react-jss';
 import Field from '../modules/forms/field';
 import { IButtonProps } from './button';
 
-import { PADDING_M, PADDING_XL } from '../../constants/styles';
+import { PADDING_M, PADDING_XL } from '../../constants/styles/styles';
 
 import { ISheet } from '../root.models';
 

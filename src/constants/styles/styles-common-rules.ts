@@ -1,11 +1,41 @@
-import { BORDER_RADIUS, PADDING_L, PADDING_M, PADDING_S, PADDING_XL } from '../../../constants/styles';
-import { DISABLED_BACKGROUND, DISABLED_BORDER, DISABLED_COLOR, WHITE } from '../../../constants/styles-colors';
-import { FONT_L } from '../../../constants/styles-fonts';
-import { INPUT_BORDER_COLOR, INPUT_BORDER_COLOR_FOCUSED } from '../../../constants/styles-skin';
+import { BORDER_RADIUS, PADDING_L, PADDING_M, PADDING_S, PADDING_XL } from './styles';
+import {
+  DISABLED_BACKGROUND,
+  DISABLED_BORDER,
+  DISABLED_COLOR,
+  lighterColor,
+  POKEDEX_BACKGROUND,
+  POKEDEX_WINDOW_BACKGROUND,
+  traslucentColor,
+  WHITE,
+} from './styles-colors';
+import { FONT_L, TEXT_WHITE } from './styles-fonts';
+import { INPUT_BORDER_COLOR, INPUT_BORDER_COLOR_FOCUSED } from './styles-skin';
 
-import { ISheet } from '../../root.models';
+import { ISheet } from '../../app/root.models';
 
-export const commonStyles: ISheet = {
+// POKEDEX
+export const POKEDEX_WINDOW_MAX_WIDTH = 314;
+
+export const pokedexWindowStyles: ISheet = {
+  window: {
+    backgroundColor: POKEDEX_WINDOW_BACKGROUND,
+    border: `2px solid ${POKEDEX_WINDOW_BACKGROUND}`,
+    color: TEXT_WHITE,
+    display: 'inline-block',
+    margin: PADDING_XL,
+    verticalAlign: 'top',
+    width: `calc(100% - ${PADDING_XL * 2}px)`,
+  },
+  wrapper: {
+    border: `2px solid ${traslucentColor(lighterColor(POKEDEX_BACKGROUND), 0.8)}`,
+    maxWidth: '100%',
+    padding: PADDING_XL,
+  },
+};
+
+// FIELDS
+export const formInputStyles: ISheet = {
   field: {
     appearance: 'none',
     backgroundColor: WHITE,

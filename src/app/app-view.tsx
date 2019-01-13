@@ -6,9 +6,9 @@ import FooterWrapper from './shell/footer/footer-wrapper';
 import HeaderWrapper from './shell/header/header-wrapper';
 
 import { HOME } from '../constants/appRoutes';
-import { HD_DISPLAY } from '../constants/styles-media-queries';
-import { APP_BACKGROUND } from '../constants/styles-skin';
-import { CONTENT } from '../constants/styles-zindex';
+import { HD_DISPLAY } from '../constants/styles/styles-media-queries';
+import { APP_BACKGROUND } from '../constants/styles/styles-skin';
+import { CONTENT } from '../constants/styles/styles-zindex';
 
 import { ISheet } from './root.models';
 

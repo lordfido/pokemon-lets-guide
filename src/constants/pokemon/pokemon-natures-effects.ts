@@ -3,7 +3,7 @@ import { Natures, Stats } from 'pokelab';
 import { PokemonNature } from './pokemon-natures';
 import { ATTACK_ID, DEFENSE_ID, HP_ID, SPECIAL_ATTACK_ID, SPECIAL_DEFENSE_ID, SPEED_ID, StatId } from './pokemon-stats';
 
-import { IPokemonStats } from '../app/modules/pokedex/pokedex.models';
+import { IPokemonStats } from '../../app/modules/pokedex/pokedex.models';
 
 interface IStatIndex {
   [key: string]:

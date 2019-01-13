@@ -5,9 +5,9 @@ import Select from 'react-select';
 
 import TouchableContent from '../../components/touchable-content';
 
-import { PADDING_XL } from '../../../constants/styles';
-import { GREY_DARK } from '../../../constants/styles-colors';
-import { commonStyles } from './field.styles';
+import { PADDING_XL } from '../../../constants/styles/styles';
+import { GREY_DARK } from '../../../constants/styles/styles-colors';
+import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
 import { IDropdownOptions } from './form.models';
@@ -16,9 +16,9 @@ const sheet: ISheet = {
   field: {
     color: GREY_DARK,
   },
-  fieldDisabled: commonStyles.fieldDisabled,
-  label: commonStyles.label,
-  wrapper: commonStyles.wrapper,
+  fieldDisabled: formInputStyles.fieldDisabled,
+  label: formInputStyles.label,
+  wrapper: formInputStyles.wrapper,
 };
 
 interface IOwnProps {
