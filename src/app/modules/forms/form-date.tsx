@@ -11,7 +11,7 @@ import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 
 import { ISheet } from '../../root.models';
-import { IDateOptions } from './form.models';
+import { DateOutput, IDateOptions } from './form.models';
 
 const sheet: ISheet = {
   field: formInputStyles.field,
@@ -38,38 +38,42 @@ interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
   options: IDateOptions;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange: (value: DateOutput) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 // TODO: Add a React date-picker
-const unstyledDatePicker = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
-  <div data-type={options.type} className={classnames(classes.wrapper, className)}>
-    <label htmlFor={options.id} className={classes.label}>
-      {options.icon && <FontAwesomeIcon icon={options.icon} />}
-      {options.icon && options.label && <Space />}
-      <span>{options.label}</span>
+const unstyledDatePicker = ({ classes, className, options, onChange, onFocus }: IOwnProps) => {
+  const onChangeProxy = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(new Date(event.target.value).getTime());
+  };
+
+  return (
+    <label htmlFor={options.id} data-type={options.type} className={classnames(classes.wrapper, className)}>
+      <span className={classes.label}>
+        {options.icon && <FontAwesomeIcon icon={options.icon} />}
+        {options.icon && options.label && <Space />}
+        <span>{options.label}</span>
+      </span>
+
+      <input
+        type="date"
+        data-type={options.type}
+        id={options.id}
+        name={options.id}
+        className={classnames(classes.field, options.className, options.isDisabled ? classes.fieldDisabled : undefined)}
+        placeholder={options.placeholder}
+        disabled={options.isDisabled}
+        required={options.isRequired}
+        defaultValue={options.defaultValue ? new Date(options.defaultValue).toString() : undefined}
+        onChange={onChangeProxy}
+        onFocus={onFocus}
+      />
+
+      {options.error && <span className={classes.error}>{options.error}</span>}
     </label>
-
-    <input
-      type="date"
-      data-type={options.type}
-      id={options.id}
-      name={options.id}
-      className={classnames(classes.field, options.className, options.isDisabled ? classes.fieldDisabled : undefined)}
-      placeholder={options.placeholder}
-      disabled={options.isDisabled}
-      required={options.isRequired}
-      defaultValue={options.defaultValue || ''}
-      onClick={onClick}
-      onChange={onChange}
-      onFocus={onFocus}
-    />
-
-    {options.error && <span className={classes.error}>{options.error}</span>}
-  </div>
-);
+  );
+};
 
 const DatePicker = injectSheet(sheet)(unstyledDatePicker);
 

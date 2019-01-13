@@ -17,7 +17,7 @@ import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from
 import { POKEDEX, SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
-import { IOption } from '../forms/form.models';
+import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
 import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
 
 const stringToFilters = (url?: string) => {
@@ -153,13 +153,15 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     SortPokedex({ sortBy, order });
   };
 
-  public handlePokemonChange = (pokemon: { id: string; value: string }) => {
+  public handlePokemonChange = (field: IFieldOutput) => {
+    const option = field.value as DropdownOutput;
+
     this.setState({
-      redirectTo: POKEDEX.replace(':id?', pokemon.value),
+      redirectTo: POKEDEX.replace(':id?', option ? option.value : ''),
     });
   };
 
-  public handleFilterChange = ({ id, value }: { id: string; value: any }) => {
+  public handleFilterChange = (field: IFieldOutput) => {
     const { filters } = this.state;
 
     const newFilters = {
@@ -167,13 +169,13 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     };
 
     // @ts-ignore
-    const prevFilter = filters[id];
+    const prevFilter = filters[field.id];
     if (typeof prevFilter === 'boolean' || typeof prevFilter === 'string') {
       // @ts-ignore
-      newFilters[id] = typeof value !== 'undefined' ? value : prevFilter;
+      newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
     } else {
       // @ts-ignore
-      newFilters[id] = updateCollection(prevFilter, value.map(s => s.value));
+      newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => s.value));
     }
 
     this.setState({
@@ -222,8 +224,8 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
           this.handlePokemonChange(e);
         }}
         filters={filters}
-        handleFilterChange={(option: { id: string; value: any }) => {
-          this.handleFilterChange(option);
+        handleFilterChange={e => {
+          this.handleFilterChange(e);
         }}
         handleReset={() => {
           this.handleReset();

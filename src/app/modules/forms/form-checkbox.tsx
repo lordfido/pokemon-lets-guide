@@ -8,7 +8,7 @@ import Space from '../../components/space';
 import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
-import { ICheckboxOptions } from './form.models';
+import { CheckboxOutput, ICheckboxOptions } from './form.models';
 
 const sheet: ISheet = {
   field: {
@@ -44,43 +44,47 @@ interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
   options: ICheckboxOptions;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange: (event: CheckboxOutput) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const unstyledCheckbox = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
-  <label
-    htmlFor={options.id}
-    data-type={options.type}
-    className={classnames(
-      classes.wrapper,
-      options.className,
-      className,
-      options.isDisabled ? classes.wrapperDisabled : undefined
-    )}
-  >
-    <input
-      id={options.id}
-      name={options.id}
-      className={classes.field}
-      type="checkbox"
-      required={options.isRequired}
-      disabled={options.isDisabled}
-      defaultChecked={!!options.defaultChecked}
-      onClick={onClick}
-      onChange={onChange}
-      onFocus={onFocus}
-    />
+const unstyledCheckbox = ({ classes, className, options, onChange, onFocus }: IOwnProps) => {
+  const onChangeProxy = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.checked);
+  };
 
-    <span className={classes.label}>
-      <div className={classnames(classes.checkbox, { [classes.isOn]: options.isChecked })} />
-      {options.icon && <FontAwesomeIcon icon={options.icon} />}
-      {options.icon && options.label && <Space />}
-      {options.label}
-    </span>
-  </label>
-);
+  return (
+    <label
+      htmlFor={options.id}
+      data-type={options.type}
+      className={classnames(
+        classes.wrapper,
+        options.className,
+        className,
+        options.isDisabled ? classes.wrapperDisabled : undefined
+      )}
+    >
+      <input
+        id={options.id}
+        name={options.id}
+        className={classes.field}
+        type="checkbox"
+        required={options.isRequired}
+        disabled={options.isDisabled}
+        defaultChecked={!!options.defaultChecked}
+        onChange={onChangeProxy}
+        onFocus={onFocus}
+      />
+
+      <span className={classes.label}>
+        <div className={classnames(classes.checkbox, { [classes.isOn]: options.isChecked })} />
+        {options.icon && <FontAwesomeIcon icon={options.icon} />}
+        {options.icon && options.label && <Space />}
+        {options.label}
+      </span>
+    </label>
+  );
+};
 
 const Checkbox = injectSheet(sheet)(unstyledCheckbox);
 

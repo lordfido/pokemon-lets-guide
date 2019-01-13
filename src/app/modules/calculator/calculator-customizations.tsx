@@ -10,15 +10,15 @@ import Field from '../forms/field';
 import { MAX_CANDIES_VALUE } from '../../../constants/pokemon/pokemon-candies';
 import { MAX_IV_VALUE } from '../../../constants/pokemon/pokemon-ivs';
 import { INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
-import { getStats, StatId } from '../../../constants/pokemon/pokemon-stats';
+import { getStats } from '../../../constants/pokemon/pokemon-stats';
 import { getStatName } from '../../../constants/pokemon/pokemon-stats-name';
 import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_XXL } from '../../../constants/styles/styles';
-import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { POKEDEX_WINDOW_MAX_WIDTH, pokedexWindowStyles } from '../../../constants/styles/styles-common-rules';
 import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 import statsDropdown from '../pokedex/stats-dropdown';
 
 import { ISheet } from '../../root.models';
-import { IDropdownOptions, IOption, ISliderOptions } from '../forms/form.models';
+import { IDropdownOptions, IFieldOutput, ISliderOptions } from '../forms/form.models';
 import { IPokemonStats } from '../pokedex/pokedex.models';
 
 export const MAX_HAPPINESS_VALUE = 255;
@@ -45,17 +45,17 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   level: number;
-  handleLevelChange: (level: { id: string; value: string }) => void;
+  handleLevelChange: (field: IFieldOutput) => void;
   natureEffects: INatureEffect;
-  handleNatureChange: (nature: { id: string; value?: StatId }) => void;
+  handleNatureChange: (field: IFieldOutput) => void;
   happiness: number;
-  handleHappinessChange: (happiness: { id: string; value: string }) => void;
+  handleHappinessChange: (field: IFieldOutput) => void;
   handleResetAll: () => void;
   handleModifyAll: (isMax?: boolean) => void;
   ivs: IPokemonStats;
-  handleIVsChange: (event: { stat: StatId; value: string }) => void;
+  handleIVsChange: (field: IFieldOutput) => void;
   candies: IPokemonStats;
-  handleCandiesChange: (event: { stat: StatId; value: string }) => void;
+  handleCandiesChange: (field: IFieldOutput) => void;
 }
 
 type Tab = 'generic' | 'ivs' | 'candies';
@@ -139,7 +139,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
 
     // Level
     const levelField: ISliderOptions = {
-      defaultValue: level.toString(),
+      defaultValue: level,
       id: 'level',
       label: getTranslation('calculator-level'),
       onChange: handleLevelChange,
@@ -148,8 +148,8 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     };
 
     // Nature
-    const handleNatureChangeProxy = (option: { id: string; value: IOption }) => {
-      handleNatureChange({ id: option.id.replace('nature-', ''), value: option.value.value as StatId });
+    const handleNatureChangeProxy = (field: IFieldOutput) => {
+      handleNatureChange({ id: field.id.replace('nature-', ''), value: field.value });
     };
 
     const natureCommonProps: IDropdownOptions = {
@@ -181,7 +181,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
 
     // Happiness
     const happinessField: ISliderOptions = {
-      defaultValue: happiness.toString(),
+      defaultValue: happiness,
       id: 'happiness',
       label: getTranslation('calculator-happiness'),
       onChange: handleHappinessChange,
@@ -216,8 +216,8 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     ];
 
     // IVs
-    const handleIVsChangeProxy = (option: IOption) => {
-      handleIVsChange({ stat: option.id.replace('ivs-', '') as StatId, value: option.value });
+    const handleIVsChangeProxy = (field: IFieldOutput) => {
+      handleIVsChange({ id: field.id.replace('ivs-', ''), value: field.value });
     };
 
     const commonIVsProps: ISliderOptions = {
@@ -229,14 +229,14 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
 
     const ivsFields: ISliderOptions[] = getStats().map(statId => ({
       ...commonIVsProps,
-      defaultValue: ivs[statId].toString(),
+      defaultValue: ivs[statId],
       id: `ivs-${statId}`,
       label: getStatName(statId),
     }));
 
     // Candies
-    const handleCandiesChangeProxy = (option: IOption) => {
-      handleCandiesChange({ stat: option.id.replace('candies-', '') as StatId, value: option.value });
+    const handleCandiesChangeProxy = (field: IFieldOutput) => {
+      handleCandiesChange({ id: field.id.replace('candies-', ''), value: field.value });
     };
 
     const commonCandiesProps: ISliderOptions = {
@@ -248,7 +248,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
 
     const candiesFields: ISliderOptions[] = getStats().map(statId => ({
       ...commonCandiesProps,
-      defaultValue: candies[statId].toString(),
+      defaultValue: candies[statId],
       id: `candies-${statId}`,
       label: getTranslation(`calculator-candy-${statId}`),
     }));

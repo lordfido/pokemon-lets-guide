@@ -8,7 +8,7 @@ import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
 import { filtersEnabled } from '../../../constants/features';
-import { ICheckboxOptions, IDropdownOptions, IGenericField, IOption, ITextOptions } from '../forms/form.models';
+import { ICheckboxOptions, IDropdownOptions, IFieldOutput, IOption, ITextOptions } from '../forms/form.models';
 import { IPokedexFilters } from './pokedex.models';
 
 interface IOwnProps {
@@ -17,9 +17,9 @@ interface IOwnProps {
     formField: string;
   };
   pokemonList: IOption[];
-  handlePokemonChange: (pokemon: { id: string; value: string }) => void;
+  handlePokemonChange: (field: IFieldOutput) => void;
   filters: IPokedexFilters;
-  handleFilterChange: (option: { id: string; value: string }) => void;
+  handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
   handleSubmit: () => void;
 }
@@ -33,12 +33,12 @@ const PokedexFilters = ({
   handleReset,
   handleSubmit,
 }: IOwnProps) => {
-  const fields: Array<IGenericField & (ITextOptions | IDropdownOptions | ICheckboxOptions)> = [
+  const fields: Array<ITextOptions | IDropdownOptions | ICheckboxOptions> = [
     {
       id: 'nameOrNumber',
       label: getTranslation('search-pokemon'),
-      onChange: (option: { id: string; value: IOption }) => {
-        handlePokemonChange({ id: option.id, value: option.value.value });
+      onChange: (option: IFieldOutput) => {
+        handlePokemonChange(option);
       },
       options: pokemonList,
       placeholder: getTranslation('search-pokemon'),

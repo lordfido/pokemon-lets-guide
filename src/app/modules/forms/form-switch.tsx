@@ -10,7 +10,7 @@ import { PADDING_S } from '../../../constants/styles/styles';
 import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
-import { ICheckboxOptions } from './form.models';
+import { CheckboxOutput, ICheckboxOptions } from './form.models';
 
 const prevArrow = require('../../../assets/images/prev-arrow.png');
 const nextArrow = require('../../../assets/images/next-arrow.png');
@@ -94,49 +94,53 @@ interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
   options: ICheckboxOptions;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange: (value: CheckboxOutput) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const unstyledSwitch = ({ classes, className, options, onChange, onClick, onFocus }: IOwnProps) => (
-  <label
-    htmlFor={options.id}
-    data-type={options.type}
-    className={classnames(
-      classes.wrapper,
-      options.className,
-      className,
-      options.isDisabled ? classes.wrapperDisabled : undefined
-    )}
-  >
-    <input
-      id={options.id}
-      name={options.id}
-      className={classes.field}
-      type="checkbox"
-      required={options.isRequired}
-      disabled={options.isDisabled}
-      defaultChecked={!!options.defaultChecked}
-      onClick={onClick}
-      onChange={onChange}
-      onFocus={onFocus}
-    />
+const unstyledSwitch = ({ classes, className, options, onChange, onFocus }: IOwnProps) => {
+  const onChangeProxy = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.checked);
+  };
 
-    <span className={classes.label}>
-      {options.icon && <FontAwesomeIcon icon={options.icon} />}
-      {options.icon && options.label && <Space />}
-      {options.label}
-    </span>
+  return (
+    <label
+      htmlFor={options.id}
+      data-type={options.type}
+      className={classnames(
+        classes.wrapper,
+        options.className,
+        className,
+        options.isDisabled ? classes.wrapperDisabled : undefined
+      )}
+    >
+      <input
+        id={options.id}
+        name={options.id}
+        className={classes.field}
+        type="checkbox"
+        required={options.isRequired}
+        disabled={options.isDisabled}
+        defaultChecked={!!options.defaultChecked}
+        onChange={onChangeProxy}
+        onFocus={onFocus}
+      />
 
-    <span className={classes.options}>
-      <img className={classes.arrow} src={prevArrow} />
-      <span className={classnames(classes.optionLabel, classes.optionNo)}>{getTranslation('generic-no')}</span>
-      <span className={classnames(classes.optionLabel, classes.optionYes)}>{getTranslation('generic-yes')}</span>
-      <img className={classes.arrow} src={nextArrow} />
-    </span>
-  </label>
-);
+      <span className={classes.label}>
+        {options.icon && <FontAwesomeIcon icon={options.icon} />}
+        {options.icon && options.label && <Space />}
+        {options.label}
+      </span>
+
+      <span className={classes.options}>
+        <img className={classes.arrow} src={prevArrow} />
+        <span className={classnames(classes.optionLabel, classes.optionNo)}>{getTranslation('generic-no')}</span>
+        <span className={classnames(classes.optionLabel, classes.optionYes)}>{getTranslation('generic-yes')}</span>
+        <img className={classes.arrow} src={nextArrow} />
+      </span>
+    </label>
+  );
+};
 
 const Switch = injectSheet(sheet)(unstyledSwitch);
 

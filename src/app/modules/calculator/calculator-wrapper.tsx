@@ -29,10 +29,10 @@ import {
   SPECIAL_ATTACK_ID,
   SPECIAL_DEFENSE_ID,
   SPEED_ID,
-  StatId,
 } from '../../../constants/pokemon/pokemon-stats';
 
 import { IRootState } from '../../root.models';
+import { DropdownOutput, IFieldOutput } from '../forms/form.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
 
 const defaultCandies = 0;
@@ -163,36 +163,41 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
     ];
   }
 
-  public handlePokemonChange = (pokemon: { id: string; value: string }) => {
+  public handlePokemonChange = (field: IFieldOutput) => {
+    const option = field.value as DropdownOutput;
+
     this.setState({
-      redirectTo: CALCULATOR.replace(':id?', pokemon.value),
+      redirectTo: CALCULATOR.replace(':id?', option ? option.value : ''),
     });
   };
 
-  public handleLevelChange = (level: { id: string; value: string }) => {
+  public handleLevelChange = (field: IFieldOutput) => {
     this.setState({
-      level: parseInt(level.value, 10),
+      level: field.value as number,
     });
   };
 
-  public handleNatureChange = (natureEffects: { id: string; value?: StatId }) => {
-    const nature = findNature({
-      ...this.state.natureEffects,
-      [natureEffects.id]: natureEffects.value,
-    });
+  public handleNatureChange = (field: IFieldOutput) => {
+    const option = field.value as DropdownOutput;
+
+    const natureEffects = option
+      ? {
+          ...this.state.natureEffects,
+          [field.id]: option.value,
+        }
+      : this.state.natureEffects;
+
+    const nature = findNature(natureEffects);
 
     this.setState({
       nature,
-      natureEffects: {
-        ...this.state.natureEffects,
-        [natureEffects.id]: natureEffects.value,
-      },
+      natureEffects,
     });
   };
 
-  public handleHappinessChange = (happiness: { id: string; value: string }) => {
+  public handleHappinessChange = (field: IFieldOutput) => {
     this.setState({
-      happiness: parseInt(happiness.value, 10),
+      happiness: field.value as number,
     });
   };
 
@@ -249,20 +254,20 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
     });
   };
 
-  public handleIVsChange = ({ stat, value }: { stat: StatId; value: string }) => {
+  public handleIVsChange = (field: IFieldOutput) => {
     this.setState({
       ivs: {
         ...this.state.ivs,
-        [stat]: parseInt(value, 10),
+        [field.id]: field.value as number,
       },
     });
   };
 
-  public handleCandiesChange = ({ stat, value }: { stat: StatId; value: string }) => {
+  public handleCandiesChange = (field: IFieldOutput) => {
     this.setState({
       candies: {
         ...this.state.candies,
-        [stat]: parseInt(value, 10),
+        [field.id]: field.value as number,
       },
     });
   };

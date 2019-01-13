@@ -9,11 +9,11 @@ import Slider from './form-slider';
 import Switch from './form-switch';
 import Text from './form-text';
 
-import { IGenericField } from './form.models';
+import { GenericOutput, IFieldOutput, IGenericField } from './form.models';
 
 interface IOwnProps {
   className?: string;
-  options: IGenericField;
+  options: IGenericField & { onChange?: (value: IFieldOutput) => void };
 }
 
 interface IDisablingProps {
@@ -33,7 +33,7 @@ const Field = ({ className, options }: IOwnProps) => {
   const onClick = (
     event: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
   ) => {
-    if (options.onClick) {
+    if ('onClick' in options && options.onClick) {
       options.onClick(event);
     }
   };
@@ -46,23 +46,9 @@ const Field = ({ className, options }: IOwnProps) => {
     }
   };
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | HTMLButtonElement>
-  ) => {
-    if (options.onChange) {
-      if (event.target) {
-        switch (event.target.type) {
-          case 'checkbox':
-            // @ts-ignore
-            options.onChange({ id: options.id, value: event.target.checked });
-            break;
-
-          default:
-            options.onChange({ id: options.id, value: event.target.value });
-        }
-      } else {
-        options.onChange(event);
-      }
+  const onChange = (value: GenericOutput) => {
+    if ('onChange' in options && options.onChange) {
+      options.onChange({ id: options.id, value });
     }
   };
 
@@ -79,7 +65,6 @@ const Field = ({ className, options }: IOwnProps) => {
           className={className}
           options={{
             ...newOptions,
-            onChange: !newOptions.isDisabled ? onChange : undefined,
             onClick: !newOptions.isDisabled ? onClick : undefined,
             onFocus: !newOptions.isDisabled ? onFocus : undefined,
           }}
@@ -91,8 +76,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Checkbox
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -102,8 +86,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Date
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -113,8 +96,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Dropdown
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -127,8 +109,7 @@ const Field = ({ className, options }: IOwnProps) => {
             ...newOptions,
             isMulti: true,
           }}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -138,8 +119,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Range
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -149,8 +129,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Slider
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -160,8 +139,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Switch
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );
@@ -175,8 +153,7 @@ const Field = ({ className, options }: IOwnProps) => {
         <Text
           className={className}
           options={newOptions}
-          onChange={!newOptions.isDisabled ? onChange : undefined}
-          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onChange={onChange}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
         />
       );

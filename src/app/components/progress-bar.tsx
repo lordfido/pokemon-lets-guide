@@ -32,9 +32,9 @@ interface IOwnProps {
 }
 
 const unstyledProgressBar = ({ classes, color, percentage }: IOwnProps) => (
-  <div className={classes.wrapper}>
-    <div className={classes.line} style={{ backgroundColor: color, width: `${percentage}%` }} />
-  </div>
+  <span className={classes.wrapper}>
+    <span className={classes.line} style={{ backgroundColor: color, width: `${percentage}%` }} />
+  </span>
 );
 
 const ProgressBar = injectSheet(sheet)(unstyledProgressBar);

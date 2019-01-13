@@ -25,7 +25,7 @@ import { TEXT_DARK } from '../../../constants/styles/styles-fonts';
 import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
-import { IOption } from '../forms/form.models';
+import { IFieldOutput, IOption } from '../forms/form.models';
 import { IPokedexFilters, IPokemonWithBaseCP } from './pokedex.models';
 
 const sheet: ISheet = {
@@ -74,9 +74,9 @@ interface IOwnProps {
   collection: IPokemonWithBaseCP[];
   handleSortBy: (key: string) => void;
   pokemonList: IOption[];
-  handlePokemonChange: (pokemon: { id: string; value: string }) => void;
+  handlePokemonChange: (field: IFieldOutput) => void;
   filters: IPokedexFilters;
-  handleFilterChange: (option: { id: string; value: any }) => void;
+  handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
   handleSubmit: () => void;
   handleLoadMore?: () => void;

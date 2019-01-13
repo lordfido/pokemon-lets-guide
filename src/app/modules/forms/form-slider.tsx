@@ -1,41 +1,52 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
+import ReactSlider from 'rc-slider';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
 import Space from '../../components/space';
 
-import { PADDING_L, PADDING_S } from '../../../constants/styles/styles';
+import { PADDING_S } from '../../../constants/styles/styles';
 import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
-import { ISliderOptions } from './form.models';
+import { ISliderOptions, SliderOutput } from './form.models';
 
 const prevArrow = require('../../../assets/images/prev-arrow.png');
 const nextArrow = require('../../../assets/images/next-arrow.png');
 
+const arrowSize = 24;
+
+const styles = {
+  tracks: {
+    backgroundImage: `url(${prevArrow}), url(${nextArrow})`,
+    backgroundPositionX: `0px, ${arrowSize}px`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: arrowSize,
+    display: 'inline-block',
+    height: arrowSize,
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: arrowSize * 2,
+  },
+} as { [key: string]: React.CSSProperties };
+
 const sheet: ISheet = {
   field: {
-    ...formInputStyles.field,
-    padding: `${PADDING_S / 2}px 0px`,
-
-    '&::-webkit-slider-thumb': {
-      appearance: 'none',
-      backgroundImage: `url(${prevArrow}), url(${nextArrow})`,
-      backgroundPositionX: '0px, 24px',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: '24px 24px',
-      height: 24,
-      width: 48,
-    },
+    height: formInputStyles.field.minHeight,
+    margin: '0px auto',
+    position: 'relative',
+    width: `calc(100% - ${arrowSize * 2}px)`,
   },
   fieldDisabled: formInputStyles.fieldDisabled,
-  label: formInputStyles.label,
-  textArea: {
-    minHeight: 150,
-    padding: PADDING_L,
-    resize: 'vertical',
+  fieldWrapper: {
+    ...formInputStyles.field,
+    overflow: 'hidden',
+    padding: `${PADDING_S / 2}px 0px`,
+    position: 'relative',
   },
+  label: formInputStyles.label,
   wrapper: formInputStyles.wrapper,
 };
 
@@ -43,41 +54,31 @@ interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
   options: ISliderOptions;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange: (value: SliderOutput) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 interface IOwnState {
-  value: string;
+  value: number;
 }
 
 class UnstyledSlider extends React.Component<IOwnProps, IOwnState> {
   public state = {
-    value: '0',
+    value: this.props.options.defaultValue || 0,
   };
 
-  public componentDidMount() {
-    this.setState({
-      value: this.props.options.defaultValue || '0',
-    });
-  }
-
-  public onChangeProxy = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public onChangeProxy = (value: SliderOutput) => {
     const { onChange } = this.props;
-    const { value } = event.target;
 
     this.setState({
       value,
     });
 
-    if (onChange) {
-      onChange(event);
-    }
+    onChange(value);
   };
 
   public render() {
-    const { classes, className, options, onClick, onFocus } = this.props;
+    const { classes, className, options } = this.props;
     const { value } = this.state;
 
     return (
@@ -88,24 +89,21 @@ class UnstyledSlider extends React.Component<IOwnProps, IOwnState> {
           {options.label && `${options.label}: ${value}`}
         </span>
 
-        <input
-          id={options.id}
-          name={options.id}
-          className={classnames(
-            classes.field,
-            options.className,
-            options.isDisabled ? classes.fieldDisabled : undefined
-          )}
-          type="range"
-          required={options.isRequired}
-          disabled={options.isDisabled}
-          defaultValue={options.defaultValue}
-          min={options.range[0]}
-          max={options.range[1]}
-          onClick={onClick}
-          onChange={this.onChangeProxy}
-          onFocus={onFocus}
-        />
+        <span
+          className={classnames(classes.fieldWrapper, options.className, {
+            [classes.fieldDisabled]: options.isDisabled,
+          })}
+        >
+          <ReactSlider
+            className={classes.field}
+            disabled={options.isDisabled}
+            defaultValue={options.defaultValue || this.state.value}
+            min={options.range[0]}
+            max={options.range[1]}
+            handleStyle={styles.tracks}
+            onChange={this.onChangeProxy}
+          />
+        </span>
       </label>
     );
   }

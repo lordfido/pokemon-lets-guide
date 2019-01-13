@@ -6,11 +6,11 @@ import injectSheet from 'react-jss';
 
 import Space from '../../components/space';
 
-import { PADDING_L, PADDING_S } from '../../../constants/styles/styles';
+import { PADDING_S } from '../../../constants/styles/styles';
 import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
-import { IRangeOptions } from './form.models';
+import { IRangeOptions, RangeOutput } from './form.models';
 
 const prevArrow = require('../../../assets/images/prev-arrow.png');
 const nextArrow = require('../../../assets/images/next-arrow.png');
@@ -60,8 +60,7 @@ interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
   options: IRangeOptions;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange: (values: RangeOutput) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
@@ -74,14 +73,18 @@ class UnstyledRange extends React.Component<IOwnProps, IOwnState> {
     values: this.props.options.defaultValue || [this.props.options.range[0], this.props.options.range[1]],
   };
 
-  public onChangeProxy = (values: [number, number]) => {
+  public onChangeProxy = (values: RangeOutput) => {
+    const { onChange } = this.props;
+
     this.setState({
       values,
     });
+
+    onChange(values);
   };
 
   public render() {
-    const { classes, className, options, onClick, onFocus } = this.props;
+    const { classes, className, options } = this.props;
     const { values } = this.state;
 
     return (
@@ -92,7 +95,7 @@ class UnstyledRange extends React.Component<IOwnProps, IOwnState> {
           {`${options.label ? `${options.label}: ` : ''}${values[0]} - ${values[1]}`}
         </span>
 
-        <div
+        <span
           className={classnames(classes.fieldWrapper, options.className, {
             [classes.fieldDisabled]: options.isDisabled,
           })}
@@ -121,7 +124,7 @@ class UnstyledRange extends React.Component<IOwnProps, IOwnState> {
             pushable={true}
             onChange={this.onChangeProxy}
           />
-        </div>
+        </span>
       </label>
     );
   }

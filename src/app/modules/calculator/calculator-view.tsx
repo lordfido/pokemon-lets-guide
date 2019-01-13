@@ -14,14 +14,13 @@ import CalculatorResult from './calculator-result';
 
 import { PokemonNature } from '../../../constants/pokemon/pokemon-natures';
 import { INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
-import { StatId } from '../../../constants/pokemon/pokemon-stats';
 import { PADDING_XL } from '../../../constants/styles/styles';
 import { POKEDEX_BACKGROUND } from '../../../constants/styles/styles-colors';
 import { TEXT_BLACK, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
-import { IDropdownOptions, IOption } from '../forms/form.models';
+import { IDropdownOptions, IFieldOutput } from '../forms/form.models';
 import { IPokemonStats, IPokemonWithBaseCP, IRichPokemon } from '../pokedex/pokedex.models';
 
 const sheet: ISheet = {
@@ -33,6 +32,7 @@ const sheet: ISheet = {
   },
   result: {
     display: 'inline-block',
+    paddingBottom: PADDING_XL,
     verticalAlign: 'top',
     width: '100%',
 
@@ -51,7 +51,6 @@ const sheet: ISheet = {
   wrapper: {
     backgroundColor: POKEDEX_BACKGROUND,
     color: TEXT_WHITE,
-    paddingBottom: PADDING_XL,
     width: '100%',
   },
 };
@@ -61,21 +60,21 @@ interface IOwnProps {
   availableViewModes: IButtonProps[];
   viewMode: ViewMode;
   pokemonList: IPokemonWithBaseCP[];
-  handlePokemonChange: (pokemon: { id: string; value: string }) => void;
+  handlePokemonChange: (field: IFieldOutput) => void;
   pokemon?: IRichPokemon;
   level: number;
-  handleLevelChange: (level: { id: string; value: string }) => void;
+  handleLevelChange: (field: IFieldOutput) => void;
   nature?: PokemonNature;
   natureEffects: INatureEffect;
-  handleNatureChange: (nature: { id: string; value?: StatId }) => void;
+  handleNatureChange: (field: IFieldOutput) => void;
   happiness: number;
-  handleHappinessChange: (happiness: { id: string; value: string }) => void;
+  handleHappinessChange: (field: IFieldOutput) => void;
   handleResetAll: () => void;
   handleModifyAll: (isMax?: boolean) => void;
   ivs: IPokemonStats;
-  handleIVsChange: (event: { stat: StatId; value: string }) => void;
+  handleIVsChange: (field: IFieldOutput) => void;
   candies: IPokemonStats;
-  handleCandiesChange: (event: { stat: StatId; value: string }) => void;
+  handleCandiesChange: (field: IFieldOutput) => void;
   stats?: IPokemonStats;
 }
 
@@ -104,16 +103,11 @@ const unstyledCalculatorView = ({
   const randomPokemon = getRandomNumber(0, pokemonList.length - 1);
   const defaultPokemon = pokemonList ? pokemonList[randomPokemon] : undefined;
 
-  // Pokemon
-  const handlePokemonChangeProxy = (option: { id: string; value: IOption }) => {
-    handlePokemonChange({ id: option.id, value: option.value.value });
-  };
-
   const pokemonField: IDropdownOptions = {
     defaultValue: pokemon ? [pokemon.id] : undefined,
     id: 'pokemon',
     label: getTranslation('calculator-select-pokemon'),
-    onChange: handlePokemonChangeProxy,
+    onChange: handlePokemonChange,
     options: pokemonList.map(({ id, name }) => ({ id, label: name, value: id })),
     placeholder: defaultPokemon ? defaultPokemon.name : undefined,
     type: 'dropdown',
