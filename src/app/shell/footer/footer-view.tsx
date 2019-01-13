@@ -71,9 +71,26 @@ const unstyledFooterView = ({ classes, handleGameLanguageSelection, handleUiLang
         {new Date().getFullYear()}
       </p>
       <p>
+        UI language:{' '}
         {languageISOs.map((language, index) => (
           <>
-            {index > 0 && ' | '}
+            {index > 0 && ' - '}
+            <Link
+              options={{
+                id: `language-${language.name}`,
+                label: language.name,
+                onClick: () => {
+                  handleUiLanguageSelection(language.iso);
+                },
+              }}
+            />
+          </>
+        ))}
+        {' | '}
+        Game elements language:{' '}
+        {languageISOs.map((language, index) => (
+          <>
+            {index > 0 && ' - '}
             <Link
               options={{
                 id: `language-${language.name}`,
