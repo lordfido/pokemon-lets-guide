@@ -8,18 +8,11 @@ import Slider from './form-slider';
 import Switch from './form-switch';
 import Text from './form-text';
 
-import {
-  ICheckboxOptions,
-  IDateOptions,
-  IDropdownOptions,
-  IGenericField,
-  ISliderOptions,
-  ITextOptions,
-} from './form.models';
+import { IGenericField } from './form.models';
 
 interface IOwnProps {
   className?: string;
-  options: IGenericField & (ICheckboxOptions | IDateOptions | IDropdownOptions | ISliderOptions | ITextOptions);
+  options: IGenericField;
 }
 
 interface IDisablingProps {
@@ -107,13 +100,7 @@ const Field = ({ className, options }: IOwnProps) => {
       return (
         <Date
           className={className}
-          options={{
-            ...newOptions,
-            defaultValue:
-              'defaultValue' in newOptions && typeof newOptions.defaultValue === 'string'
-                ? newOptions.defaultValue
-                : undefined,
-          }}
+          options={newOptions}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
@@ -124,14 +111,7 @@ const Field = ({ className, options }: IOwnProps) => {
       return (
         <Dropdown
           className={className}
-          options={{
-            ...newOptions,
-            defaultValue:
-              'defaultValue' in newOptions && typeof newOptions.defaultValue !== 'string'
-                ? newOptions.defaultValue
-                : undefined,
-            options: 'options' in newOptions ? newOptions.options : [],
-          }}
+          options={newOptions}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
@@ -144,12 +124,7 @@ const Field = ({ className, options }: IOwnProps) => {
           className={className}
           options={{
             ...newOptions,
-            defaultValue:
-              'defaultValue' in newOptions && typeof newOptions.defaultValue !== 'string'
-                ? newOptions.defaultValue
-                : undefined,
             isMulti: true,
-            options: 'options' in newOptions ? newOptions.options : [],
           }}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
@@ -161,14 +136,7 @@ const Field = ({ className, options }: IOwnProps) => {
       return (
         <Slider
           className={className}
-          options={{
-            ...newOptions,
-            defaultValue:
-              'defaultValue' in newOptions && typeof newOptions.defaultValue === 'string'
-                ? newOptions.defaultValue
-                : undefined,
-            range: 'range' in newOptions ? newOptions.range : ([0, 10] as [number, number]),
-          }}
+          options={newOptions}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}
@@ -194,10 +162,7 @@ const Field = ({ className, options }: IOwnProps) => {
       return (
         <Text
           className={className}
-          options={{
-            ...newOptions,
-            defaultValue: 'defaultValue' in newOptions ? String(newOptions.defaultValue) : undefined,
-          }}
+          options={newOptions}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}

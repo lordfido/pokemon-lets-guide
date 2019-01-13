@@ -1,16 +1,30 @@
 import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 
+import { IButtonProps } from '../../components/button';
+
 export type types =
+  // Button
   | 'button'
+
+  // Checkbox or Switch
   | 'checkbox'
+  | 'switch'
+
+  // Datepicker
   | 'date'
+
+  // Dropdowns
   | 'dropdown'
-  | 'email'
   | 'multi'
+
+  // Slider or Range
+  | 'slider'
+  | 'range'
+
+  // Text
+  | 'email'
   | 'number'
   | 'password'
-  | 'slider'
-  | 'switch'
   | 'text'
   | 'textarea';
 
@@ -29,27 +43,32 @@ interface ICommonOptions {
   isRequired?: boolean;
   isSubmitted?: boolean;
   isDisabled?: boolean;
+  isAlwaysDisabled?: boolean;
+  isAlwaysEnabled?: boolean;
+  isDiactivatable?: boolean;
 
   onChange?: (params?: any) => void;
   onClick?: (params?: any) => void;
   onFocus?: (params?: any) => void;
 }
 
-export interface IGenericField extends ICommonOptions {
-  isAlwaysDisabled?: boolean;
-  isAlwaysEnabled?: boolean;
-  isDiactivatable?: boolean;
+export interface IButtonProps extends ICommonOptions {
+  isActive?: boolean;
+  to?: string;
+  type: 'button';
 }
 
 export interface ICheckboxOptions extends ICommonOptions {
   defaultChecked?: boolean | void;
   isChecked?: boolean;
+  type: 'checkbox' | 'switch';
 }
 
 export interface IDateOptions extends ICommonOptions {
   defaultValue?: string;
   error?: string;
   placeholder?: string;
+  type: 'date';
 }
 
 export interface IDropdownOptions extends ICommonOptions {
@@ -59,6 +78,7 @@ export interface IDropdownOptions extends ICommonOptions {
   placeholder?: string;
   defaultValue?: string[];
   options: IOption[];
+  type: 'dropdown' | 'multi';
 }
 
 export interface IOption {
@@ -70,6 +90,7 @@ export interface IOption {
 export interface ISliderOptions extends ICommonOptions {
   defaultValue?: string;
   range: [number, number];
+  type: 'slider' | 'range';
 }
 
 export interface ITextOptions extends ICommonOptions {
@@ -78,4 +99,13 @@ export interface ITextOptions extends ICommonOptions {
   maxLength?: number;
   minLength?: number;
   placeholder?: string;
+  type: 'email' | 'number' | 'password' | 'text' | 'textarea';
 }
+
+export type IGenericField =
+  | IButtonProps
+  | ICheckboxOptions
+  | IDateOptions
+  | IDropdownOptions
+  | ISliderOptions
+  | ITextOptions;

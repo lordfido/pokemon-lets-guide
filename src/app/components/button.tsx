@@ -3,7 +3,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 
-import { IGenericField } from '../modules/forms/form.models';
+import { IButtonProps as ButtonProps } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
 import { BORDER_RADIUS, PADDING_S, PADDING_XL } from '../../constants/styles';
@@ -94,10 +94,7 @@ const sheet: ISheet = {
   wrapperDisabled,
 };
 
-export interface IButtonProps extends IGenericField {
-  isActive?: boolean;
-  to?: string;
-}
+export type IButtonProps = ButtonProps;
 
 interface IOwnProps {
   classes: { [key: string]: string };

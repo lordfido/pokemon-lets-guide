@@ -114,7 +114,7 @@ export const manifestPlugin = new ManifestPlugin({
   ],
   name: APP_NAME,
   orientation: 'any',
-  short_name: APP_NAME,
+  short_name: APP_NAME.replace('Pokémon ', ''),
   start_url: '/',
   theme_color: APP_COLOR,
 });
