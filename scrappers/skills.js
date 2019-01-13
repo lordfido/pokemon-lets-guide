@@ -5,9 +5,11 @@ const jsdom = require('jsdom');
 
 const URL = 'https://pokemondb.net/move/all';
 const IDENTIFIER = 'table#moves';
+const filePath = './src/constants/skills/';
+const fileName = 'skills-list.json';
 
 const generateJson = json => {
-  fs.writeFileSync('./scrapped_data/skills.json', JSON.stringify(json));
+  fs.writeFileSync(filePath + fileName, JSON.stringify(json));
 };
 
 const getLinkLabel = td => td.firstElementChild && td.firstElementChild.innerHTML;
