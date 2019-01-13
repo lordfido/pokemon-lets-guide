@@ -10,7 +10,17 @@ import {
 
 import { createSkillsCollectionFromPokeLab } from './skills.models';
 
-export const createPokedex: ActionCreator = () => dispatch => {
+interface IFilters {
+  name: string;
+  value: string | string[] | boolean;
+}
+
+interface ISort {
+  sortBy: string;
+  order: string;
+}
+
+export const createSkills: ActionCreator = () => dispatch => {
   // Send them to the store
   dispatch({
     payload: {
@@ -20,40 +30,30 @@ export const createPokedex: ActionCreator = () => dispatch => {
   });
 };
 
-interface ISort {
-  sortBy: string;
-  order: string;
-}
-
-export const sortPokedex: ActionCreator = (sort: ISort) => dispatch => {
-  dispatch({
-    payload: {
-      sort,
-    },
-    type: SKILLS_SORT,
-  });
-};
-
-export const loadMorePokedex: ActionCreator = () => dispatch => {
-  dispatch({
-    type: SKILLS_LOAD_MORE,
-  });
-};
-
-interface IFilters {
-  name: string;
-  value: string | string[] | boolean;
-}
-
-export const filterPokedex: ActionCreator = (filters: IFilters[]) => dispatch => {
+export const filterSkills: ActionCreator = (filters: IFilters[]) => dispatch => {
   dispatch({
     payload: { filters },
     type: SKILLS_FILTER,
   });
 };
 
-export const resetPokedexFilters: ActionCreator = () => dispatch => {
+export const loadMoreSkills: ActionCreator = () => dispatch => {
+  dispatch({
+    type: SKILLS_LOAD_MORE,
+  });
+};
+
+export const resetSkillsFilters: ActionCreator = () => dispatch => {
   dispatch({
     type: SKILLS_RESET_FILTERS,
+  });
+};
+
+export const sortSkills: ActionCreator = (sort: ISort) => dispatch => {
+  dispatch({
+    payload: {
+      sort,
+    },
+    type: SKILLS_SORT,
   });
 };

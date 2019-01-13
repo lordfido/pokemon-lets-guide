@@ -4,22 +4,22 @@ import { Redirect } from 'react-router';
 import { updateCollection } from '../../utils/collections';
 import { filtersToString, stringToFilters } from '../../utils/urls';
 
-import PokedexView from './pokedex-view';
+import SkillsView from './skills-view';
 
 import {
-  getPokedex,
-  getPokedexFilters,
-  getPokedexPagination,
-  getPokedexSortOptions,
-  getRawPokedex,
+  getRawSkills,
+  getSkills,
+  getSkillsFilters,
+  getSkillsPagination,
+  getSkillsSortOptions,
 } from '../../root.reducer';
-import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from './pokedex.actions';
+import { filterSkills, loadMoreSkills, resetSkillsFilters, sortSkills } from './skills.actions';
 
-import { POKEDEX, POKEDEX_SEARCH } from '../../../constants/appRoutes';
+import { SKILLS, SKILLS_SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
 import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
-import { IPokedexFilters, IPokedexPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
+import { ISkill, ISkillsFilters, ISkillsPagination, skillsInitialState } from './skills.models';
 
 interface IOwnProps {
   query?: string;
@@ -27,10 +27,10 @@ interface IOwnProps {
 }
 
 interface IStateProps {
-  collection: IPokemonWithBaseCP[];
-  filters: IPokedexFilters;
-  pagination: IPokedexPagination;
-  pokemonList: IOption[];
+  collection: ISkill[];
+  filters: ISkillsFilters;
+  pagination: ISkillsPagination;
+  skillList: IOption[];
   sort: {
     sortBy: string;
     order: string;
@@ -38,43 +38,43 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
-  FilterPokedex: (
+  FilterSkills: (
     parameters: Array<{
       name: string;
       value: string | string[] | boolean;
     }>
   ) => void;
-  LoadMorePokedex: () => void;
-  ResetPokedexFilters: () => void;
-  SortPokedex: (parameters: any) => void;
+  LoadMoreSkills: () => void;
+  ResetSkillsFilters: () => void;
+  SortSkills: (parameters: any) => void;
 }
 
 type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
-  filters: IPokedexFilters;
+  filters: ISkillsFilters;
   redirectTo?: string;
 }
 
-class PokedexWrapper extends React.Component<Props, IOwnState> {
+class SkillsWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
-    filters: pokedexInitialState.filters,
+    filters: skillsInitialState.filters,
     redirectTo: '',
   };
 
   public componentDidMount() {
-    const { FilterPokedex, query } = this.props;
+    const { FilterSkills, query } = this.props;
 
     const urlFilters = stringToFilters(query);
-    const parsedFilters = Object.keys(pokedexInitialState.filters).map(key => ({
+    const parsedFilters = Object.keys(skillsInitialState.filters).map(key => ({
       name: key,
       // @ts-ignore
-      value: urlFilters[key] || pokedexInitialState.filters[key],
+      value: urlFilters[key] || skillsInitialState.filters[key],
     }));
 
-    FilterPokedex(parsedFilters);
+    FilterSkills(parsedFilters);
   }
 
   public componentDidUpdate(prevProps: Props) {
@@ -87,21 +87,21 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     }
 
     if (prevProps.url !== this.props.url) {
-      const { FilterPokedex, query } = this.props;
+      const { FilterSkills, query } = this.props;
 
       const urlFilters = stringToFilters(query);
-      const parsedFilters = Object.keys(pokedexInitialState.filters).map(key => ({
+      const parsedFilters = Object.keys(skillsInitialState.filters).map(key => ({
         name: key,
         // @ts-ignore
-        value: urlFilters[key] || pokedexInitialState.filters[key],
+        value: urlFilters[key] || skillsInitialState.filters[key],
       }));
 
-      FilterPokedex(parsedFilters);
+      FilterSkills(parsedFilters);
     }
   }
 
   public handleSortBy = (sortBy: string) => {
-    const { SortPokedex, sort } = this.props;
+    const { SortSkills, sort } = this.props;
 
     const isTheSameFilter = sortBy === sort.sortBy;
     const options = ['asc', 'desc'];
@@ -111,14 +111,14 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
       order = options[1];
     }
 
-    SortPokedex({ sortBy, order });
+    SortSkills({ sortBy, order });
   };
 
-  public handlePokemonChange = (field: IFieldOutput) => {
+  public handleSkillChange = (field: IFieldOutput) => {
     const option = field.value as DropdownOutput;
 
     this.setState({
-      redirectTo: POKEDEX.replace(':id?', option ? option.value : ''),
+      redirectTo: SKILLS.replace(':id?', option ? option.value : ''),
     });
   };
 
@@ -131,7 +131,14 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
     // @ts-ignore
     const prevFilter = filters[field.id];
-    if (field.id === 'baseCP' || field.id === 'showAlolanForms' || field.id === 'showMegaevolutions') {
+    if (
+      field.id === 'accuracy' ||
+      field.id === 'category' ||
+      field.id === 'power' ||
+      field.id === 'pp' ||
+      field.id === 'probability' ||
+      field.id === 'tm'
+    ) {
       // @ts-ignore
       newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
     } else {
@@ -146,7 +153,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   public handleReset = () => {
     this.setState({
-      redirectTo: POKEDEX.replace(':id?', ''),
+      redirectTo: SKILLS.replace(':id?', ''),
     });
   };
 
@@ -155,18 +162,18 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
     const redirectTo = filtersToString(filters);
     this.setState({
-      redirectTo: redirectTo ? POKEDEX_SEARCH.replace(':query', redirectTo) : POKEDEX.replace(':id?', ''),
+      redirectTo: redirectTo ? SKILLS_SEARCH.replace(':query', redirectTo) : SKILLS.replace(':id?', ''),
     });
   };
 
-  public handleLoadMorePokedex = () => {
-    const { LoadMorePokedex } = this.props;
+  public handleLoadMoreSkills = () => {
+    const { LoadMoreSkills } = this.props;
 
-    LoadMorePokedex();
+    LoadMoreSkills();
   };
 
   public render() {
-    const { collection, filters, url, pagination, pokemonList } = this.props;
+    const { collection, filters, url, pagination, skillList } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -174,12 +181,12 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     }
 
     return (
-      <PokedexView
+      <SkillsView
         collection={collection}
         handleSortBy={this.handleSortBy}
-        pokemonList={pokemonList}
-        handlePokemonChange={e => {
-          this.handlePokemonChange(e);
+        skillList={skillList}
+        handleSkillChange={e => {
+          this.handleSkillChange(e);
         }}
         filters={filters}
         handleFilterChange={e => {
@@ -194,7 +201,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
         handleLoadMore={
           collection.length >= pagination.last
             ? () => {
-                this.handleLoadMorePokedex();
+                this.handleLoadMoreSkills();
               }
             : undefined
         }
@@ -204,25 +211,25 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 }
 
 const mapStateToProps = (state: IRootState) => ({
-  collection: getPokedex(state),
-  filters: getPokedexFilters(state),
-  pagination: getPokedexPagination(state),
-  pokemonList: getRawPokedex(state).map(pokemon => ({
-    id: pokemon.id,
-    label: pokemon.name,
-    value: pokemon.id,
+  collection: getSkills(state),
+  filters: getSkillsFilters(state),
+  pagination: getSkillsPagination(state),
+  skillList: getRawSkills(state).map(skill => ({
+    id: skill.id,
+    label: skill.name,
+    value: skill.id,
   })),
-  sort: getPokedexSortOptions(state),
+  sort: getSkillsSortOptions(state),
 });
 
 const mapDispatchToProps = {
-  FilterPokedex: filterPokedex,
-  LoadMorePokedex: loadMorePokedex,
-  ResetPokedexFilters: resetPokedexFilters,
-  SortPokedex: sortPokedex,
+  FilterSkills: filterSkills,
+  LoadMoreSkills: loadMoreSkills,
+  ResetSkillsFilters: resetSkillsFilters,
+  SortSkills: sortSkills,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PokedexWrapper);
+)(SkillsWrapper);

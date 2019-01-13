@@ -43,8 +43,13 @@ interface IOwnProps {
 
 const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
   <TableRow className={className}>
+    {/* National Number */}
     <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
+
+    {/* Name */}
     <TableCell>{pokemon.name}</TableCell>
+
+    {/* Type 1 */}
     <TableCell center>
       {pokemon.types.ownTypes[0] && (
         <Tag
@@ -55,6 +60,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
         />
       )}
     </TableCell>
+
+    {/* Type 2 */}
     <TableCell center>
       {pokemon.types.ownTypes[1] && (
         <Tag
@@ -65,7 +72,11 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
         />
       )}
     </TableCell>
+
+    {/* Base CP */}
     <TableCell center>{pokemon.baseCP}</TableCell>
+
+    {/* HP */}
     <TableCell
       center
       style={{
@@ -77,6 +88,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[HP_ID]}
     </TableCell>
+
+    {/* Attack */}
     <TableCell
       center
       style={{
@@ -88,6 +101,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[ATTACK_ID]}
     </TableCell>
+
+    {/* Defense */}
     <TableCell
       center
       style={{
@@ -99,6 +114,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[DEFENSE_ID]}
     </TableCell>
+
+    {/* Speed */}
     <TableCell
       center
       style={{
@@ -110,6 +127,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[SPEED_ID]}
     </TableCell>
+
+    {/* Special Defense */}
     <TableCell
       center
       style={{
@@ -121,6 +140,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[SPECIAL_DEFENSE_ID]}
     </TableCell>
+
+    {/* Special Attack */}
     <TableCell
       center
       style={{
@@ -132,6 +153,8 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     >
       {pokemon.baseStats[SPECIAL_ATTACK_ID]}
     </TableCell>
+
+    {/* Quick Actions */}
     <TableCell center style={{ height: 'auto' }}>
       <Buttons
         className={classnames(classes.fullWidth, classes.noMargin)}

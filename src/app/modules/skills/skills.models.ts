@@ -12,14 +12,13 @@ import {
   MIN_POWER_VALUE,
   MIN_PP_VALUE,
 } from '../../../constants/skills/skills';
+import { SkillCategory } from '../../../constants/skills/skills-categories';
 
 import { ITypeRelations } from '../pokedex/pokedex.models';
 
 export interface ISkillsAction extends AnyAction {
   type: SkillsActionType;
 }
-
-type SkillCategory = 'physical' | 'special' | 'status';
 
 export interface ISkillTypeData {
   ownType: PokemonType;
@@ -32,6 +31,7 @@ export interface ISkill {
   effect: string;
   probability: number;
   id: string;
+  name: string;
   power: number;
   pp: number;
   tm?: string;

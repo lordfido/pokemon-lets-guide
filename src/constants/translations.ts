@@ -22,6 +22,34 @@ export const gameTranslations: ITranslationsCollection = {
   // Forms
   'forms-alolan': ['', 'Alolan', '', 'Alola', '', '', '', ''],
 
+  // Pokemon data
+  'base-cp': ['', 'Base CP', '', 'PC Base', '', '', '', ''],
+  'base-stats': ['', 'Base Stats', '', 'Estadísticas base', '', '', '', ''],
+  name: ['', 'Name', '', 'Nombre', '', '', '', ''],
+  'pokedex-number': ['', 'Pokédex No.', '', 'Nº en la Pokédex:', '', '', '', ''],
+  'type-1': ['', 'Type 1', '', 'Tipo 1', '', '', '', ''],
+  'type-2': ['', 'Type 2', '', 'Tipo 2', '', '', '', ''],
+
+  // Pokemon modifiers
+  happiness: ['', 'Happiness', '', 'Felicidad', '', '', '', ''],
+  ivs: ['', 'IVs', '', 'IVs', '', '', '', ''],
+  level: ['', 'Level', '', 'Nivel', '', '', '', ''],
+  nature: ['', 'Nature', '', 'Naturaleza', '', '', '', ''],
+
+  // Skills data
+  accuracy: ['', 'Accuracy', '', 'Precisión', '', '', '', ''],
+  category: ['', 'Category', '', 'Categoría', '', '', '', ''],
+  power: ['', 'Power', '', 'Poder', '', '', '', ''],
+  pp: ['', 'PP', '', 'PP', '', '', '', ''],
+  probability: ['', 'Probability', '', 'Probabilidad', '', '', '', ''],
+  tm: ['', 'TM', '', 'MT', '', '', '', ''],
+  type: ['', 'Type', '', 'Tipo', '', '', '', ''],
+
+  // Categories
+  'category-physical': ['', 'Physical', '', 'Normal', '', '', '', ''],
+  'category-special': ['', 'Special', '', 'Especial', '', '', '', ''],
+  'category-status': ['', 'Status', '', 'Estado', '', '', '', ''],
+
   // Candies
   candies: ['', 'Candies', '', 'Caramelos', '', '', '', ''],
   'candy-attack': ['', 'Mighty candy', '', 'Caramelo Músculo', '', '', '', ''],
@@ -30,20 +58,6 @@ export const gameTranslations: ITranslationsCollection = {
   'candy-spAttack': ['', 'Smart candy', '', 'Caramelo Intelecto', '', '', '', ''],
   'candy-spDefense': ['', 'Courage candy', '', 'Caramelo Mente', '', '', '', ''],
   'candy-speed': ['', 'Quick candy', '', 'Caramelo Ímpetu', '', '', '', ''],
-
-  // Pokemon modifiers
-  happiness: ['', 'Happiness', '', 'Felicidad', '', '', '', ''],
-  ivs: ['', 'IVs', '', 'IVs', '', '', '', ''],
-  level: ['', 'Level', '', 'Nivel', '', '', '', ''],
-  nature: ['', 'Nature', '', 'Naturaleza', '', '', '', ''],
-
-  // Pokemon data
-  'base-cp': ['', 'Base CP', '', 'PC Base', '', '', '', ''],
-  'base-stats': ['', 'Base Stats', '', 'Estadísticas base', '', '', '', ''],
-  name: ['', 'Name', '', 'Nombre', '', '', '', ''],
-  'pokedex-number': ['', 'Pokédex No.', '', 'Nº en la Pokédex:', '', '', '', ''],
-  'type-1': ['', 'Type 1', '', 'Tipo 1', '', '', '', ''],
-  'type-2': ['', 'Type 2', '', 'Tipo 2', '', '', '', ''],
 };
 
 export const uiTranslations: ITranslationsCollection = {
@@ -74,11 +88,11 @@ export const uiTranslations: ITranslationsCollection = {
   'calculator-reset': ['', 'Reset', '', 'Reiniciar', '', '', '', ''],
   'calculator-select-pokemon': ['', 'Pokémon', '', 'Pokémon', '', '', '', ''],
 
-  // Pokemon list
+  // Pokédex
   'pokedex-details': ['', 'Details', '', 'Detalles', '', '', '', ''],
   'pokedex-load-more': ['', 'Load more', '', 'Ver más', '', '', '', ''],
 
-  // Pokemon details
+  // Pokémon
   'pokemon-bars': ['', 'Bars', '', 'Barras', '', '', '', ''],
   'pokemon-chart': ['', 'Chart', '', 'Gráfica', '', '', '', ''],
   'pokemon-no-pokedex-entry': [
@@ -103,6 +117,10 @@ export const uiTranslations: ITranslationsCollection = {
     '',
   ],
 
+  // Skills
+
+  // Skill
+
   // Search
   'search-base-cp': ['', 'Base CP', '', 'PC base', '', '', '', ''],
   'search-best-stats': ['', 'Best stats', '', 'Mejores estadísitcas', '', '', '', ''],
@@ -115,6 +133,8 @@ export const uiTranslations: ITranslationsCollection = {
   'search-select-some-types': ['', 'Select some types', '', 'Selecciona algún tipo', '', '', '', ''],
   'search-show-alolan-forms': ['', 'Show Alolan forms', '', 'Mostrar formas Alola', '', '', '', ''],
   'search-show-megaevolutions': ['', 'Show Megaevolutions', '', 'Mostrar Megaevoluciones', '', '', '', ''],
+  'search-show-tm': ['', 'Show TM skills', '', 'Mostrar habilidades MT', '', '', '', ''],
+  'search-skill': ['', 'Skill', '', 'Habilidad', '', '', '', ''],
   'search-strong-against': ['', 'Strong against', '', 'Fuerte contra', '', '', '', ''],
   'search-weak-against': ['', 'Weak against', '', 'Débil contra', '', '', '', ''],
   'search-worst-stats': ['', 'Worst stats', '', 'Peores estadísticas', '', '', '', ''],
