@@ -15,6 +15,7 @@ import {
 import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from './pokedex.actions';
 
 import { POKEDEX, SEARCH } from '../../../constants/appRoutes';
+import { MAX_BASE_CP_VALUE } from '../../../constants/pokemon/pokemon-stats';
 
 import { IRootState } from '../../root.models';
 import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
@@ -102,11 +103,10 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
     filters: {
+      baseCP: [0, MAX_BASE_CP_VALUE] as [number, number],
       bestStats: [],
       excludedTypes: [],
       includedTypes: [],
-      maxBaseCP: '',
-      minBaseCP: '',
       showAlolanForms: false,
       showMegaevolutions: false,
       strongAgainst: [],
@@ -129,13 +129,26 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     FilterPokedex(parsedFilters);
   }
 
-  public componentDidUpdate() {
+  public componentDidUpdate(prevProps: Props) {
     const { redirectTo } = this.state;
 
     if (redirectTo) {
       this.setState({
         redirectTo: '',
       });
+    }
+
+    if (prevProps.url !== this.props.url) {
+      const { FilterPokedex, query } = this.props;
+
+      const urlFilters = stringToFilters(query);
+      const parsedFilters = Object.keys(pokedexInitialState.filters).map(key => ({
+        name: key,
+        // @ts-ignore
+        value: urlFilters[key] || pokedexInitialState.filters[key],
+      }));
+
+      FilterPokedex(parsedFilters);
     }
   }
 
@@ -170,12 +183,12 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
     // @ts-ignore
     const prevFilter = filters[field.id];
-    if (typeof prevFilter === 'boolean' || typeof prevFilter === 'string') {
+    if (field.id === 'baseCP' || field.id === 'showAlolanForms' || field.id === 'showMegaevolutions') {
       // @ts-ignore
       newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
     } else {
       // @ts-ignore
-      newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => s.value));
+      newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => (s.value ? s.value : s)));
     }
 
     this.setState({
@@ -205,15 +218,12 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public render() {
-    const { url, pokemonList } = this.props;
+    const { collection, filters, url, pagination, pokemonList } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
       return <Redirect to={{ pathname: redirectTo }} />;
     }
-
-    const { collection, pagination } = this.props;
-    const { filters } = this.state;
 
     return (
       <PokedexView

@@ -15,7 +15,7 @@ export const updateCollection = (collection: any[], payload: any[]) => {
   payload.forEach(element => {
     // @ts-ignore
     const prevElementIndex =
-      typeof element === 'string'
+      typeof element === 'string' || typeof element === 'number' || typeof element === 'boolean'
         ? updatedCollection.findIndex(e => e === element)
         : element.id
         ? updatedCollection.findIndex(e => e.id === element.id)

@@ -9,6 +9,7 @@ export const SPECIAL_DEFENSE_ID: StatId = 'spDefense';
 export const SPECIAL_ATTACK_ID: StatId = 'spAttack';
 
 // Stat values
+export const MAX_BASE_CP_VALUE = 780;
 export const MAX_INITIAL_STAT_VALUE = 255;
 export const MAX_STAT_VALUE = 851;
 

@@ -8,7 +8,7 @@ import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
 import { filtersEnabled } from '../../../constants/features';
-import { ICheckboxOptions, IDropdownOptions, IFieldOutput, IOption, ITextOptions } from '../forms/form.models';
+import { ICheckboxOptions, IDropdownOptions, IFieldOutput, IOption, IRangeOptions } from '../forms/form.models';
 import { IPokedexFilters } from './pokedex.models';
 
 interface IOwnProps {
@@ -33,7 +33,7 @@ const PokedexFilters = ({
   handleReset,
   handleSubmit,
 }: IOwnProps) => {
-  const fields: Array<ITextOptions | IDropdownOptions | ICheckboxOptions> = [
+  const fields = [
     {
       id: 'nameOrNumber',
       label: getTranslation('search-pokemon'),
@@ -43,77 +43,71 @@ const PokedexFilters = ({
       options: pokemonList,
       placeholder: getTranslation('search-pokemon'),
       type: 'dropdown',
-    },
+    } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.includedTypes,
       id: 'includedTypes',
       label: getTranslation('search-include-types'),
       onChange: handleFilterChange,
-    },
+    } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.excludedTypes,
       id: 'excludedTypes',
       label: getTranslation('search-exclude-types'),
       onChange: handleFilterChange,
-    },
+    } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.strongAgainst,
       id: 'strongAgainst',
       label: getTranslation('search-strong-against'),
       onChange: handleFilterChange,
-    },
+    } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.weakAgainst,
       id: 'weakAgainst',
       label: getTranslation('search-weak-against'),
       onChange: handleFilterChange,
-    },
+    } as IDropdownOptions,
     {
       ...statsDropdown,
       defaultValue: filters.bestStats,
       id: 'bestStats',
       label: getTranslation('search-best-stats'),
       onChange: handleFilterChange,
-    },
+    } as IDropdownOptions,
     {
       ...statsDropdown,
       defaultValue: filters.worstStats,
       id: 'worstStats',
       label: getTranslation('search-worst-stats'),
       onChange: handleFilterChange,
-    },
+    } as IDropdownOptions,
     {
-      defaultValue: filters.minBaseCP,
-      id: 'minBaseCP',
+      defaultValue: [filters.baseCP[0], filters.baseCP[1]],
+      id: 'baseCP',
       label: getTranslation('search-min-cp'),
       onChange: handleFilterChange,
-      type: 'number',
-    },
-    {
-      defaultValue: filters.maxBaseCP,
-      id: 'maxBaseCP',
-      label: getTranslation('search-max-cp'),
-      onChange: handleFilterChange,
-      type: 'number',
-    },
+      range: [0, 800],
+      type: 'range',
+    } as IRangeOptions,
     {
       defaultChecked: filters.showMegaevolutions,
       id: 'showMegaevolutions',
       label: getTranslation('search-show-megaevolutions'),
       onChange: handleFilterChange,
       type: 'switch',
-    },
+    } as ICheckboxOptions,
     {
       defaultChecked: filters.showAlolanForms,
       id: 'showAlolanForms',
       label: getTranslation('search-show-alolan-forms'),
       onChange: handleFilterChange,
       type: 'switch',
-    },
+    } as ICheckboxOptions,
   ];
   const buttons: IButtonProps[] = [
     {

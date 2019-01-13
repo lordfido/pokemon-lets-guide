@@ -179,16 +179,9 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
         }
       }
 
-      // Filter by minimum CP
-      if (typeof filters.minBaseCP !== 'undefined' && filters.minBaseCP.length) {
-        if (pokemon.baseCP < parseInt(filters.minBaseCP, 10)) {
-          return false;
-        }
-      }
-
-      // Filter by maximum CP
-      if (typeof filters.maxBaseCP !== 'undefined' && filters.maxBaseCP.length) {
-        if (pokemon.baseCP > parseInt(filters.maxBaseCP, 10)) {
+      // Filter by base CP
+      if (typeof filters.baseCP !== 'undefined') {
+        if (pokemon.baseCP < filters.baseCP[0] || pokemon.baseCP > filters.baseCP[1]) {
           return false;
         }
       }

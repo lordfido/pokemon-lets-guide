@@ -5,7 +5,7 @@ import { getCombatPoints, getPaddedId, getVariantId, getVariantName } from '../.
 
 import { PokedexActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
-import { StatId } from '../../../constants/pokemon/pokemon-stats';
+import { MAX_BASE_CP_VALUE, StatId } from '../../../constants/pokemon/pokemon-stats';
 import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 
 export interface IPokedexAction extends AnyAction {
@@ -72,14 +72,13 @@ export interface IPokemonDetailPagination {
 }
 
 export interface IPokedexFilters {
+  baseCP: [number, number];
   bestStats: StatId[];
   // canLearnSkills: StatId[];
   // canLearnMTs: StatId[];
   // dropsCandies: StatId[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
-  maxBaseCP: string;
-  minBaseCP: string;
   // needsCandies: StatId[];
   showAlolanForms: boolean;
   showMegaevolutions: boolean;
@@ -101,14 +100,13 @@ export interface IPokedexState {
 export const pokedexInitialState: IPokedexState = {
   collection: [],
   filters: {
+    baseCP: [0, MAX_BASE_CP_VALUE],
     bestStats: [],
     // canLearnMTs: [],
     // canLearnSkills: [],
     // dropsCandies: [],
     excludedTypes: [],
     includedTypes: [],
-    maxBaseCP: '',
-    minBaseCP: '',
     // needsCandies: [],
     showAlolanForms: false,
     showMegaevolutions: false,
