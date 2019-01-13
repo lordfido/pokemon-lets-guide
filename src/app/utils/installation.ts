@@ -91,8 +91,9 @@ interface IInstallationDataParameters {
 
 /**
  * Set installation data:
+ * - Game Language
  * - Installation id
- * - Language
+ * - UI Language
  */
 export const setInstallationData = ({ gameLanguage, uiLanguage }: IInstallationDataParameters) => {
   setInstallationId();
@@ -114,8 +115,9 @@ export interface IInstallationData {
 
 /**
  * Get installation data:
+ * - Game Language
  * - Installation id
- * - Language
+ * - UI Language
  */
 export const getInstallationData = () => {
   const data: IInstallationData = {

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getUiTranslation } from '../../utils/translations';
+import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -74,7 +74,7 @@ const unstyledCalculatorResult = ({ classes, availableViewModes, viewMode, natur
           }
         </div>
 
-        <h4>{getUiTranslation('calculator-nature')}</h4>
+        <h4>{getGameTranslation('nature')}</h4>
         <p>{getNatureName(nature)}</p>
         <Spacer />
 

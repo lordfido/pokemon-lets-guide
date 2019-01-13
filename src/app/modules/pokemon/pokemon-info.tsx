@@ -1,7 +1,7 @@
 import * as React from 'react';
 import injectSheet, { CSSProperties } from 'react-jss';
 import { getPaddedId } from '../../utils/pokemon';
-import { getUiTranslation } from '../../utils/translations';
+import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 
 import Spacer from '../../components/spacer';
 import Tag from '../../components/tag';
@@ -10,7 +10,7 @@ import { getTypeName, PokemonType } from '../../../constants/pokemon/pokemon-typ
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
 import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_S, PADDING_XXL } from '../../../constants/styles/styles';
-import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { POKEDEX_WINDOW_MAX_WIDTH, pokedexWindowStyles } from '../../../constants/styles/styles-common-rules';
 import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
@@ -53,7 +53,7 @@ const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
     <div className={classes.window}>
       <div className={classes.wrapper}>
         <p>
-          {getUiTranslation('pokemon-pokedex-number')} {getPaddedId(String(pokemon.nationalNumber))}
+          {getGameTranslation('pokedex-number')} {getPaddedId(String(pokemon.nationalNumber))}
         </p>
         <p>{pokemon.name}</p>
         <span>

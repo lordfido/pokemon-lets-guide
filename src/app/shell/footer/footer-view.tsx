@@ -1,7 +1,7 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { isProduction } from '../../../common/utils/platforms';
-import { languageISOs } from '../../utils/translations';
+import { languageISOs, getUiTranslation } from '../../utils/translations';
 
 import Link from '../../components/link';
 
@@ -71,13 +71,13 @@ const unstyledFooterView = ({ classes, handleGameLanguageSelection, handleUiLang
         {new Date().getFullYear()}
       </p>
       <p>
-        UI language:{' '}
+        {getUiTranslation('footer-ui-elements')}:{' '}
         {languageISOs.map((language, index) => (
           <>
             {index > 0 && ' - '}
             <Link
               options={{
-                id: `language-${language.name}`,
+                id: `ui-language-${language.name}`,
                 label: language.name,
                 onClick: () => {
                   handleUiLanguageSelection(language.iso);
@@ -87,13 +87,13 @@ const unstyledFooterView = ({ classes, handleGameLanguageSelection, handleUiLang
           </>
         ))}
         {' | '}
-        Game elements language:{' '}
+        {getUiTranslation('footer-game-elements')}:{' '}
         {languageISOs.map((language, index) => (
           <>
             {index > 0 && ' - '}
             <Link
               options={{
-                id: `language-${language.name}`,
+                id: `game-language-${language.name}`,
                 label: language.name,
                 onClick: () => {
                   handleGameLanguageSelection(language.iso);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getUiTranslation } from '../../utils/translations';
+import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -117,7 +117,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
         ...buttonsCommonProps,
         id: `tab-${ivsTab}`,
         isActive: activeTab === ivsTab,
-        label: getUiTranslation(`calculator-${ivsTab}`),
+        label: getGameTranslation(ivsTab),
         onClick: () => {
           this.setState({
             activeTab: ivsTab,
@@ -128,7 +128,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
         ...buttonsCommonProps,
         id: `tab-${candiesTab}`,
         isActive: activeTab === candiesTab,
-        label: getUiTranslation(`calculator-${candiesTab}`),
+        label: getGameTranslation(candiesTab),
         onClick: () => {
           this.setState({
             activeTab: candiesTab,
@@ -141,7 +141,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     const levelField: ISliderOptions = {
       defaultValue: level,
       id: 'level',
-      label: getUiTranslation('calculator-level'),
+      label: getGameTranslation('level'),
       onChange: handleLevelChange,
       range: [1, MAX_LEVEL_VALUE],
       type: 'slider',
@@ -183,7 +183,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     const happinessField: ISliderOptions = {
       defaultValue: happiness,
       id: 'happiness',
-      label: getUiTranslation('calculator-happiness'),
+      label: getGameTranslation('happiness'),
       onChange: handleHappinessChange,
       range: [0, MAX_HAPPINESS_VALUE],
       type: 'slider',
@@ -250,7 +250,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
       ...commonCandiesProps,
       defaultValue: candies[statId],
       id: `candies-${statId}`,
-      label: getUiTranslation(`calculator-candy-${statId}`),
+      label: getGameTranslation(`candy-${statId}`),
     }));
 
     return (

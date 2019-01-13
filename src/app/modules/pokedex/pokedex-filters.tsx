@@ -89,7 +89,7 @@ const PokedexFilters = ({
     {
       defaultValue: [filters.baseCP[0], filters.baseCP[1]],
       id: 'baseCP',
-      label: getUiTranslation('search-min-cp'),
+      label: getUiTranslation('search-base-cp'),
       onChange: handleFilterChange,
       range: [0, 800],
       type: 'range',

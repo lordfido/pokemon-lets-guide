@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getUiTranslation } from '../../utils/translations';
+import { getGameTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -11,7 +11,7 @@ import StatsChart, { BARS, CHART, ViewMode } from '../../components/stats-chart'
 import { MAX_INITIAL_STAT_VALUE } from '../../../constants/pokemon/pokemon-stats';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_L, PADDING_XXL } from '../../../constants/styles/styles';
-import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { POKEDEX_WINDOW_MAX_WIDTH, pokedexWindowStyles } from '../../../constants/styles/styles-common-rules';
 import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
@@ -56,7 +56,7 @@ const UnstyledPokemonStats = ({ availableViewModes, classes, pokemon, viewMode }
       <Buttons align="center" options={availableViewModes.slice(0, 2)} />
       <Spacer />
 
-      <p>{getUiTranslation('pokemon-base-stats')}</p>
+      <p>{getGameTranslation('base-stats')}</p>
 
       <div className={classnames({ [classes.bars]: viewMode === BARS, [classes.chart]: viewMode === CHART })}>
         {

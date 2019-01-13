@@ -3,7 +3,7 @@ import { getLocale } from '../../app/utils/translations';
 
 export type PokemonType = Types.Type;
 
-export const getTypeName = (type: PokemonType) => Types.getName(type, Languages.All[getLocale()]);
+export const getTypeName = (type: PokemonType) => Types.getName(type, Languages.All[getLocale('game')]);
 
 interface IParsedType {
   id: PokemonType;

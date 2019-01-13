@@ -59,6 +59,10 @@ export const uiTranslations: ITranslationsCollection = {
   'header-pokedex': ['', 'Pokédex', '', 'Pokédex', '', '', '', ''],
   'header-skills': ['', 'Skills', '', 'Movimientos', '', '', '', ''],
 
+  // Footer
+  'footer-game-elements': ['', "Game elements' language", '', 'Idioma de los elementos del juego', '', '', '', ''],
+  'footer-ui-elements': ['', "App's language", '', 'Idioma de la App', '', '', '', ''],
+
   // Calculator
   'calculator-empty-case': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
   'calculator-final-stats': ['', 'Final stats', '', 'Estadísticas finales', '', '', '', ''],

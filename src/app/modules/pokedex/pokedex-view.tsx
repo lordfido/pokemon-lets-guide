@@ -2,7 +2,7 @@ import chroma from 'chroma-js';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getUiTranslation } from '../../utils/translations';
+import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 
 import Buttons from '../../components/buttons';
 import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
@@ -119,17 +119,17 @@ const unstyledPokedexView = ({
             onClick: () => handleSortBy('id'),
           },
           {
-            label: getUiTranslation('pokedex-name'),
+            label: getGameTranslation('name'),
             onClick: () => handleSortBy('name'),
           },
           {
-            label: getUiTranslation('pokedex-type-1'),
+            label: getGameTranslation('type-1'),
           },
           {
-            label: getUiTranslation('pokedex-type-2'),
+            label: getGameTranslation('type-2'),
           },
           {
-            label: getUiTranslation('pokedex-base-cp'),
+            label: getGameTranslation('base-cp'),
             onClick: () => handleSortBy('baseCP'),
           },
           {

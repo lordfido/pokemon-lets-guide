@@ -87,16 +87,17 @@ const getTranslation = (token: string, elements: 'game' | 'ui', variable?: strin
   }
 
   // Default locale
-  if (!Translations[token][selectedGameLocale]) {
+  const selectedLocale = elements === 'game' ? selectedGameLocale : selectedUiLocale;
+  if (!Translations[token][selectedLocale]) {
     // Default locale translation doesn't exists
-    warn(`No <${Languages.All[selectedGameLocale]}> translation for <${token}>`);
+    warn(`No <${Languages.All[selectedLocale]}> translation for <${token}>`);
     return (
       Translations[token][languagesIndex.english].replace(':var:', variable || '') ||
-      `No <${Languages.All[selectedGameLocale]}> translation for <${token}>`
+      `No <${Languages.All[selectedLocale]}> translation for <${token}>`
     );
   }
 
-  return Translations[token][selectedGameLocale].replace(':var:', variable || '');
+  return Translations[token][selectedLocale].replace(':var:', variable || '');
 };
 
 /**
