@@ -4,6 +4,7 @@ import Button from '../../components/button';
 import Checkbox from './form-checkbox';
 import Date from './form-date';
 import Dropdown from './form-dropdown';
+import Range from './form-range';
 import Slider from './form-slider';
 import Switch from './form-switch';
 import Text from './form-text';
@@ -126,6 +127,17 @@ const Field = ({ className, options }: IOwnProps) => {
             ...newOptions,
             isMulti: true,
           }}
+          onChange={!newOptions.isDisabled ? onChange : undefined}
+          onClick={!newOptions.isDisabled ? onClick : undefined}
+          onFocus={!newOptions.isDisabled ? onFocus : undefined}
+        />
+      );
+
+    case 'range':
+      return (
+        <Range
+          className={className}
+          options={newOptions}
           onChange={!newOptions.isDisabled ? onChange : undefined}
           onClick={!newOptions.isDisabled ? onClick : undefined}
           onFocus={!newOptions.isDisabled ? onFocus : undefined}

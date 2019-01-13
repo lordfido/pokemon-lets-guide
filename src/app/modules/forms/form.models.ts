@@ -17,9 +17,11 @@ export type types =
   | 'dropdown'
   | 'multi'
 
-  // Slider or Range
-  | 'slider'
+  // Range
   | 'range'
+
+  // Slider
+  | 'slider'
 
   // Text
   | 'email'
@@ -87,10 +89,16 @@ export interface IOption {
   value: string;
 }
 
+export interface IRangeOptions extends ICommonOptions {
+  defaultValue?: [number, number];
+  range: [number, number];
+  type: 'range';
+}
+
 export interface ISliderOptions extends ICommonOptions {
   defaultValue?: string;
   range: [number, number];
-  type: 'slider' | 'range';
+  type: 'slider';
 }
 
 export interface ITextOptions extends ICommonOptions {
@@ -107,5 +115,6 @@ export type IGenericField =
   | ICheckboxOptions
   | IDateOptions
   | IDropdownOptions
+  | IRangeOptions
   | ISliderOptions
   | ITextOptions;
