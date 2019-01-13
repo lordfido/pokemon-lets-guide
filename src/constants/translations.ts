@@ -46,9 +46,9 @@ export const gameTranslations: ITranslationsCollection = {
   type: ['', 'Type', '', 'Tipo', '', '', '', ''],
 
   // Categories
-  'category-physical': ['', 'Physical', '', 'Normal', '', '', '', ''],
-  'category-special': ['', 'Special', '', 'Especial', '', '', '', ''],
-  'category-status': ['', 'Status', '', 'Estado', '', '', '', ''],
+  'category-Physical': ['', 'Physical', '', 'Normal', '', '', '', ''],
+  'category-Special': ['', 'Special', '', 'Especial', '', '', '', ''],
+  'category-Status': ['', 'Status', '', 'Estado', '', '', '', ''],
 
   // Candies
   candies: ['', 'Candies', '', 'Caramelos', '', '', '', ''],

@@ -1,8 +1,8 @@
-export type SkillCategory = 'physical' | 'special' | 'status';
+export type SkillCategory = 'Physical' | 'Special' | 'Status';
 
-const PHYSICAL: SkillCategory = 'physical';
-const SPECIAL: SkillCategory = 'special';
-const STATUS: SkillCategory = 'status';
+const PHYSICAL: SkillCategory = 'Physical';
+const SPECIAL: SkillCategory = 'Special';
+const STATUS: SkillCategory = 'Status';
 
 export const getCategories = () => [PHYSICAL, SPECIAL, STATUS];
 

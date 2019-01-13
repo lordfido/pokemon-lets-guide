@@ -35,9 +35,6 @@ interface IOwnProps {
 
 const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
   <TableRow className={className}>
-    {/* ID */}
-    <TableCell center>{getPaddedId(String(skill.id))}</TableCell>
-
     {/* Name */}
     <TableCell ellipsis={true}>{skill.name}</TableCell>
 
@@ -59,7 +56,7 @@ const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
     </TableCell>
 
     {/* Power */}
-    <TableCell center>{skill.power}</TableCell>
+    <TableCell center>{skill.power ? `${skill.power}` : '-'}</TableCell>
 
     {/* Accuracy */}
     <TableCell center>{skill.accuracy ? `${skill.accuracy}%` : '-'}</TableCell>

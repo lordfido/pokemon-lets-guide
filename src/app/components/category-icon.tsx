@@ -20,9 +20,12 @@ interface IOwnProps {
   category: SkillCategory;
 }
 
-const unstyledCategoryIcon = ({ classes, category }: IOwnProps) => (
-  <img className={classes.image} src={getCategoryIcon(category)} alt={`${category} category icon`} />
-);
+const unstyledCategoryIcon = ({ classes, category }: IOwnProps) =>
+  category ? (
+    <img className={classes.image} src={getCategoryIcon(category)} alt={`${category} category icon`} />
+  ) : (
+    <span>{'-'}</span>
+  );
 
 const CategoryIcon = injectSheet(sheet)(unstyledCategoryIcon);
 

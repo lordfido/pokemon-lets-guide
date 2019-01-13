@@ -104,10 +104,6 @@ const unstyledSkillsView = ({
       <Table
         headings={[
           {
-            label: '#',
-            onClick: () => handleSortBy('id'),
-          },
-          {
             label: getGameTranslation('name'),
             onClick: () => handleSortBy('name'),
           },

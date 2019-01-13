@@ -135,14 +135,14 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
 
       // Filter by accuracy
       if (typeof filters.accuracy !== 'undefined') {
-        if (skill.accuracy < filters.accuracy[0] || skill.accuracy > filters.accuracy[1]) {
+        if (skill.accuracy && (skill.accuracy < filters.accuracy[0] || skill.accuracy > filters.accuracy[1])) {
           return false;
         }
       }
 
       // Filter by power
       if (typeof filters.power !== 'undefined') {
-        if (skill.power < filters.power[0] || skill.power > filters.power[1]) {
+        if (skill.power && (skill.power < filters.power[0] || skill.power > filters.power[1])) {
           return false;
         }
       }
