@@ -1,5 +1,5 @@
 import { Types } from 'pokelab';
-import pokemonExtraInfoList from '../../common/apis/mocks';
+import { mockedPokemonCollection } from '../../common/apis/mocks';
 import { sortBy } from './arrays';
 import { getGameTranslation } from './translations';
 
@@ -264,7 +264,7 @@ export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
  */
 export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon => {
   // Get some hardcoded data
-  const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
+  const pokemonExtraInfo = mockedPokemonCollection.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
 
   // Get pokemon short description
   const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');

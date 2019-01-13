@@ -118,6 +118,8 @@ export const uiTranslations: ITranslationsCollection = {
   ],
 
   // Skills
+  'skills-details': ['', 'Details', '', 'Detalles', '', '', '', ''],
+  'skills-load-more': ['', 'Load more', '', 'Ver más', '', '', '', ''],
 
   // Skill
 

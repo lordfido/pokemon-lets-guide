@@ -1,5 +1,7 @@
 import { AnyAction } from 'redux';
+import { mockedSkillsCollection } from '../../../common/apis/mocks';
 import { sortBy } from '../../utils/arrays';
+import { getTypeRelations } from '../../utils/pokemon';
 
 import { SkillsActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
@@ -22,19 +24,26 @@ export interface ISkillsAction extends AnyAction {
 
 export interface ISkillTypeData {
   ownType: PokemonType;
-  relations: ITypeRelations;
+  relations: ITypeRelations[];
 }
 
-export interface ISkill {
+interface ISkill {
   accuracy: number;
   category: SkillCategory;
-  effect: string;
-  probability: number;
+  effect?: string;
   id: string;
   name: string;
   power: number;
   pp: number;
-  tm?: string;
+  probability?: number;
+  tm?: number;
+}
+
+export interface ISkillWithType extends ISkill {
+  type: PokemonType;
+}
+
+export interface IRichSkill extends ISkill {
   types: ISkillTypeData;
 }
 
@@ -44,8 +53,8 @@ export interface ISkillsPagination {
 }
 
 export interface ISkillPagination {
-  next: ISkill;
-  prev: ISkill;
+  next: IRichSkill;
+  prev: IRichSkill;
 }
 
 export interface ISkillsFilters {
@@ -70,7 +79,7 @@ export interface ISkillsFilters {
 }
 
 export interface ISkillsState {
-  collection: ISkill[];
+  collection: IRichSkill[];
   filters: ISkillsFilters;
   pagination: ISkillsPagination;
   sort: {
@@ -106,7 +115,21 @@ export const skillsInitialState: ISkillsState = {
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
  */
-const createSkillFromPokeLab = (skill: any): ISkill => skill;
+const createSkillFromPokeLab = (skill: ISkillWithType): IRichSkill => {
+  const { type, ...rest } = skill;
 
-export const createSkillsCollectionFromPokeLab = (): ISkill[] =>
-  [].map(createSkillFromPokeLab).sort(sortBy('id', 'asc'));
+  const relations = getTypeRelations([type]);
+
+  const types = {
+    ownType: type,
+    relations,
+  };
+
+  return {
+    ...rest,
+    types,
+  };
+};
+
+export const createSkillsCollectionFromPokeLab = (): IRichSkill[] =>
+  mockedSkillsCollection.map(createSkillFromPokeLab).sort(sortBy('id', 'asc'));

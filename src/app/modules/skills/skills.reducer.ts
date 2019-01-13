@@ -10,7 +10,7 @@ import {
 } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
 
-import { ISkill, ISkillsAction, ISkillsState, skillsInitialState } from './skills.models';
+import { IRichSkill, ISkillsAction, ISkillsState, skillsInitialState } from './skills.models';
 
 const reducer = (state = skillsInitialState, action: ISkillsAction): ISkillsState => {
   switch (action.type) {
@@ -193,7 +193,7 @@ export const getSelectedSkill = (state: ISkillsState) => (skillId: string) =>
 
 // Get pagination data for a particular pokemon (already filtered)
 export const getSkillPagination = (state: ISkillsState) => (skillId: string) => {
-  const sameSkill = (skill: ISkill) => skill.id === skillId;
+  const sameSkill = (skill: IRichSkill) => skill.id === skillId;
 
   // Select filtered collection or complete collection
   const filteredCollection = getSkills(state, false);

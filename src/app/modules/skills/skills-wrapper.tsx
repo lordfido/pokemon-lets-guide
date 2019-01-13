@@ -19,7 +19,7 @@ import { SKILLS, SKILLS_SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
 import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
-import { ISkill, ISkillsFilters, ISkillsPagination, skillsInitialState } from './skills.models';
+import { IRichSkill, ISkillsFilters, ISkillsPagination, skillsInitialState } from './skills.models';
 
 interface IOwnProps {
   query?: string;
@@ -27,7 +27,7 @@ interface IOwnProps {
 }
 
 interface IStateProps {
-  collection: ISkill[];
+  collection: IRichSkill[];
   filters: ISkillsFilters;
   pagination: ISkillsPagination;
   skillList: IOption[];

@@ -15,7 +15,7 @@ import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IFieldOutput, IOption } from '../forms/form.models';
-import { ISkill, ISkillsFilters } from './skills.models';
+import { IRichSkill, ISkillsFilters } from './skills.models';
 
 const sheet: ISheet = {
   results: {
@@ -60,7 +60,7 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  collection: ISkill[];
+  collection: IRichSkill[];
   handleSortBy: (key: string) => void;
   skillList: IOption[];
   handleSkillChange: (field: IFieldOutput) => void;
@@ -113,7 +113,7 @@ const unstyledSkillsView = ({
           },
           {
             label: getGameTranslation('type'),
-            onClick: () => handleSortBy('type'),
+            onClick: () => handleSortBy('types.ownType'),
           },
           {
             label: getGameTranslation('category'),

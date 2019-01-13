@@ -12,6 +12,7 @@ import AppView from './app-view';
 import routes from './app.routes';
 
 import { createPokedex } from './modules/pokedex/pokedex.actions';
+import { createSkills } from './modules/skills/skills.actions';
 
 import { restoreLastRoute } from '../constants/features';
 import { APP_FINISHED, APP_INIT } from '../constants/metrics/actions';
@@ -41,13 +42,14 @@ interface IStateProps {
 
 interface IDispatchProps {
   GetPokemon: () => void;
+  GetSkills: () => void;
 }
 
 type Props = IOwnProps & RouteProps & IStateProps & IDispatchProps;
 
 class AppWrapper extends React.Component<Props> {
   public componentDidMount() {
-    const { GetPokemon, lastRoute, history } = this.props;
+    const { GetPokemon, GetSkills, lastRoute, history } = this.props;
 
     if (restoreLastRoute && lastRoute) {
       history.push({
@@ -64,6 +66,9 @@ class AppWrapper extends React.Component<Props> {
 
     // Get pokedex
     GetPokemon();
+
+    // Get skills
+    GetSkills();
 
     const initTimer = analyticsApi.getTimer(APP_INIT);
     const renderTimer = new Date().getTime() - initTimer;
@@ -133,6 +138,7 @@ const mapStateToProps = (state: IRootState): IStateProps => {
 
 const mapDispatchToProps = {
   GetPokemon: createPokedex,
+  GetSkills: createSkills,
 };
 
 const connectedApp = withRouter(

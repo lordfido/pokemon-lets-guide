@@ -41,11 +41,21 @@ const sheet: ISheet = {
 
     [MAX_TABLET_L]: {
       height: 32,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
       verticalAlign: 'top',
+      whiteSpace: 'nowrap',
     },
 
     [DESKTOP]: {
       verticalAlign: 'middle',
+    },
+  },
+  cellEllipsis: {
+    [MAX_TABLET_L]: {
+      textOverflow: 'ellipsis',
+      verticalAlign: 'top',
+      whiteSpace: 'nowrap',
     },
   },
   center: {
@@ -126,11 +136,18 @@ interface ITableCellProps {
   children: any;
   classes: { [key: string]: string };
   className?: string;
+  ellipsis?: boolean;
   style?: React.CSSProperties;
 }
 
-const unstyledTableCell = ({ children, center, classes, className, style }: ITableCellProps) => (
-  <td className={classnames(classes.td, classes.cell, className, center ? classes.center : undefined)} style={style}>
+const unstyledTableCell = ({ children, center, classes, className, ellipsis, style }: ITableCellProps) => (
+  <td
+    className={classnames(classes.td, classes.cell, className, {
+      [classes.center]: center,
+      [classes.ellipsis]: ellipsis,
+    })}
+    style={style}
+  >
     {children}
   </td>
 );

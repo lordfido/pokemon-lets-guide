@@ -47,7 +47,7 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
     <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
 
     {/* Name */}
-    <TableCell>{pokemon.name}</TableCell>
+    <TableCell ellipsis={true}>{pokemon.name}</TableCell>
 
     {/* Type 1 */}
     <TableCell center>

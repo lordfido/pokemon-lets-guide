@@ -5,6 +5,7 @@ import { getPaddedId } from '../../utils/pokemon';
 import { getUiTranslation } from '../../utils/translations';
 
 import Buttons from '../../components/buttons';
+import CategoryIcon from '../../components/category-icon';
 import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
@@ -14,7 +15,9 @@ import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
 
 import { ISheet } from '../../root.models';
-import { ISkill } from './skills.models';
+import { IRichSkill } from './skills.models';
+import Field from '../forms/field';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const sheet: ISheet = {
   fullWidth: {
@@ -28,7 +31,7 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
-  skill: ISkill;
+  skill: IRichSkill;
 }
 
 const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
@@ -37,7 +40,7 @@ const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
     <TableCell center>{getPaddedId(String(skill.id))}</TableCell>
 
     {/* Name */}
-    <TableCell>{skill.name}</TableCell>
+    <TableCell ellipsis={true}>{skill.name}</TableCell>
 
     {/* Type */}
     <TableCell center>
@@ -52,7 +55,9 @@ const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
     </TableCell>
 
     {/* Category */}
-    <TableCell center>{skill.category}</TableCell>
+    <TableCell center>
+      <CategoryIcon category={skill.category} />
+    </TableCell>
 
     {/* Power */}
     <TableCell center>{skill.power}</TableCell>
@@ -64,7 +69,9 @@ const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
     <TableCell center>{skill.pp}</TableCell>
 
     {/* TM */}
-    <TableCell center>{skill.tm}</TableCell>
+    <TableCell center>
+      <FontAwesomeIcon icon={skill.tm ? ['far', 'check-square'] : ['far', 'square']} />
+    </TableCell>
 
     {/* Probability */}
     <TableCell center>{skill.probability ? `${skill.probability}%` : '-'}</TableCell>
