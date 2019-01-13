@@ -61,12 +61,12 @@ export interface IRichPokemon extends IPokemonWithBaseCP {
   pokedexEntry: string;
 }
 
-export interface IPokemonListPagination {
+export interface IPokedexPagination {
   first: number;
   last: number;
 }
 
-export interface IPokemonDetailPagination {
+export interface IPokemonPagination {
   next: IPokemon;
   prev: IPokemon;
 }
@@ -90,7 +90,7 @@ export interface IPokedexFilters {
 export interface IPokedexState {
   collection: IPokemonWithBaseCP[];
   filters: IPokedexFilters;
-  pagination: IPokemonListPagination;
+  pagination: IPokedexPagination;
   sort: {
     sortBy: string;
     order: string;

@@ -13,7 +13,7 @@ import { FONT_XL, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 import { MAX_MOBILE_L, MOBILE_XL } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
-import { IPokemonDetailPagination } from '../pokedex/pokedex.models';
+import { IPokemonPagination } from '../pokedex/pokedex.models';
 
 const borderWidth = 3;
 
@@ -87,7 +87,7 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   currentPokemon: string;
-  pagination: IPokemonDetailPagination;
+  pagination: IPokemonPagination;
 }
 
 const unstyledPokemonPagination = ({ classes, currentPokemon, pagination: { prev, next } }: IOwnProps) =>

@@ -18,7 +18,7 @@ import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 import { HD_DISPLAY, TABLET_OR_LANDSCAPE } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
-import { IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
+import { IPokemonPagination, IRichPokemon } from '../pokedex/pokedex.models';
 
 const sheet: ISheet = {
   wrapper: {
@@ -41,7 +41,7 @@ const sheet: ISheet = {
 interface IOwnProps {
   availableViewModes: IButtonProps[];
   classes: { [key: string]: string };
-  pagination: IPokemonDetailPagination;
+  pagination: IPokemonPagination;
   pokemon: IRichPokemon;
   viewMode: ViewMode;
 }

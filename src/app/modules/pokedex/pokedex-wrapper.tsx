@@ -19,7 +19,7 @@ import { MAX_BASE_CP_VALUE } from '../../../constants/pokemon/pokemon-stats';
 
 import { IRootState } from '../../root.models';
 import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
-import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
+import { IPokedexFilters, IPokedexPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
 
 const stringToFilters = (url?: string) => {
   if (!url || (/\;/.test(url) === false && /\=/.test(url) === false)) {
@@ -71,7 +71,7 @@ interface IOwnProps {
 interface IStateProps {
   collection: IPokemonWithBaseCP[];
   filters: IPokedexFilters;
-  pagination: IPokemonListPagination;
+  pagination: IPokedexPagination;
   pokemonList: IOption[];
   sort: {
     sortBy: string;
