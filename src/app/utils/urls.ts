@@ -1,3 +1,6 @@
+import { IPokedexFilters } from '../modules/pokedex/pokedex.models';
+import { ISkillsFilters } from '../modules/skills/skills.models';
+
 export const stringToFilters = (url?: string) => {
   if (!url || (/\;/.test(url) === false && /\=/.test(url) === false)) {
     return {};
@@ -22,7 +25,7 @@ export const stringToFilters = (url?: string) => {
   return filters;
 };
 
-export const filtersToString = (filters: IPokedexFilters) =>
+export const filtersToString = (filters: IPokedexFilters | ISkillsFilters) =>
   Object.keys(filters)
     .map(key => {
       // @ts-ignore

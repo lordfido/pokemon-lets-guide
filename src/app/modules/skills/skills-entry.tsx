@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -16,8 +17,6 @@ import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
 
 import { ISheet } from '../../root.models';
 import { IRichSkill } from './skills.models';
-import Field from '../forms/field';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const sheet: ISheet = {
   fullWidth: {

@@ -156,7 +156,10 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
 
       // Filter by probability
       if (typeof filters.probability !== 'undefined') {
-        if (skill.probability < filters.probability[0] || skill.probability > filters.probability[1]) {
+        if (
+          skill.probability &&
+          (skill.probability < filters.probability[0] || skill.probability > filters.probability[1])
+        ) {
           return false;
         }
       }
