@@ -3,13 +3,16 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const jsdom = require('jsdom');
 
+const URL = 'https://pokemondb.net/move/all';
+const IDENTIFIER = 'table#moves';
+
 const generateJson = json => {
   fs.writeFileSync('./scrapped_data/skills.json', JSON.stringify(json));
 };
 
-const getLinkLabel = td => td.children[0] && td.children[0].innerHTML;
+const getLinkLabel = td => td.firstElementChild && td.firstElementChild.innerHTML;
 
-const getImageTitle = td => td.children[0] && td.children[0].title;
+const getImageTitle = td => td.firstElementChild && td.firstElementChild.title;
 
 const getNumber = td => {
   const rawContent = td.innerHTML;
@@ -46,19 +49,15 @@ const parseRow = row => {
 
 const parseTable = table => Array.from(table.children[1].children).map(parseRow);
 
-fetch('https://pokemondb.net/move/all')
+fetch(URL)
   .then(res => res.text())
   .then(body => {
     const dom = new jsdom.JSDOM(body);
     const document = dom.window.document;
 
-    const skillsTable = document.getElementById('moves');
-
-    // const sampleRow = parseRow(skillsTable.children[1].children[6]);
-    // console.log(sampleRow);
-
-    const finalJson = parseTable(skillsTable);
-    generateJson(finalJson);
+    const table = document.querySelector(IDENTIFIER);
+    const json = parseTable(table);
+    generateJson(json);
   })
   .catch(error => {
     throw Error(error);
