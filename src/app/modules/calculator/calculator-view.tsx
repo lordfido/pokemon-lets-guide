@@ -14,10 +14,10 @@ import CalculatorResult from './calculator-result';
 
 import { PokemonNature } from '../../../constants/pokemon/pokemon-natures';
 import { INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
-import { PADDING_XL } from '../../../constants/styles/styles';
+import { FOOTER_SIZE, FOOTER_SIZE_L, HEADER_SIZE, PADDING_XL } from '../../../constants/styles/styles';
 import { POKEDEX_BACKGROUND } from '../../../constants/styles/styles-colors';
 import { TEXT_BLACK, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
-import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
+import { DESKTOP_L, HD_DISPLAY, TABLET_OR_LANDSCAPE } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IDropdownOptions, IFieldOutput } from '../forms/form.models';
@@ -51,7 +51,16 @@ const sheet: ISheet = {
   wrapper: {
     backgroundColor: POKEDEX_BACKGROUND,
     color: TEXT_WHITE,
+    minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE}px)`,
     width: '100%',
+
+    [TABLET_OR_LANDSCAPE]: {
+      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L}px)`,
+    },
+
+    [HD_DISPLAY]: {
+      minHeight: 0,
+    },
   },
 };
 

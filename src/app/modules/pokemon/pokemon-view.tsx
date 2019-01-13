@@ -12,9 +12,10 @@ import PokemonPreview from './pokemon-preview';
 import PokemonStats from './pokemon-stats';
 
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
-import { PADDING_XL } from '../../../constants/styles/styles';
+import { FOOTER_SIZE, FOOTER_SIZE_L, HEADER_SIZE, PADDING_XL } from '../../../constants/styles/styles';
 import { POKEDEX_BACKGROUND } from '../../../constants/styles/styles-colors';
 import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
+import { HD_DISPLAY, TABLET_OR_LANDSCAPE } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
@@ -23,8 +24,17 @@ const sheet: ISheet = {
   wrapper: {
     backgroundColor: POKEDEX_BACKGROUND,
     color: TEXT_WHITE,
+    minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE}px)`,
     paddingBottom: PADDING_XL,
     width: '100%',
+
+    [TABLET_OR_LANDSCAPE]: {
+      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L}px)`,
+    },
+
+    [HD_DISPLAY]: {
+      minHeight: 0,
+    },
   },
 };
 
