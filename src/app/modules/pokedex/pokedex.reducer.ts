@@ -21,21 +21,6 @@ const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexS
         collection: action.payload.collection,
       };
 
-    case POKEDEX_SORT:
-      return {
-        ...state,
-        sort: action.payload.sort,
-      };
-
-    case POKEDEX_LOAD_MORE:
-      return {
-        ...state,
-        pagination: {
-          first: 0,
-          last: state.pagination.last + paginationSize,
-        },
-      };
-
     case POKEDEX_FILTER:
       const newFilters = {
         ...state.filters,
@@ -53,12 +38,27 @@ const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexS
         filters: newFilters,
       };
 
+    case POKEDEX_LOAD_MORE:
+      return {
+        ...state,
+        pagination: {
+          first: 0,
+          last: state.pagination.last + paginationSize,
+        },
+      };
+
     case POKEDEX_RESET_FILTERS:
       return {
         ...state,
         filters: {
           ...pokedexInitialState.filters,
         },
+      };
+
+    case POKEDEX_SORT:
+      return {
+        ...state,
+        sort: action.payload.sort,
       };
 
     default:
