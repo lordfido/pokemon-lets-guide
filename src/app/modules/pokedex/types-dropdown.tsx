@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 import { sortBy } from '../../utils/arrays';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { getTypes, PokemonType } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
@@ -80,7 +80,7 @@ const typesDropdown: IDropdownOptions = {
   colourStyles: typeColorStyles,
   id: '',
   options: typeFilterOptions,
-  placeholder: getTranslation('search-select-some-types'),
+  placeholder: getUiTranslation('search-select-some-types'),
   type: 'multi',
 };
 

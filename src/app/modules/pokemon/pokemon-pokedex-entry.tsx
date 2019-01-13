@@ -1,6 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { BORDER_RADIUS_BIG, BORDER_RADIUS_SMALL, PADDING_XXL } from '../../../constants/styles/styles';
 import {
@@ -47,7 +47,7 @@ interface IOwnProps {
 const unstyledPokemonPokedexEntry = ({ classes, text }: IOwnProps) => (
   <div className={classes.window}>
     <div className={classes.wrapper}>
-      <p className={classes.text}>{text || getTranslation('pokemon-no-pokedex-entry')}</p>
+      <p className={classes.text}>{text || getUiTranslation('pokemon-no-pokedex-entry')}</p>
     </div>
   </div>
 );

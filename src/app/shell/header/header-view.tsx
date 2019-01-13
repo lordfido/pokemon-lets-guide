@@ -1,6 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import HeaderItem from './header-item';
 
@@ -30,13 +30,13 @@ const unstyledHeaderView = ({ classes }: IOwnProps) => (
     <HeaderItem image={require('../../../assets/images/home.png')} to={HOME} />
     <HeaderItem
       image={require('../../../assets/images/pokedex.png')}
-      text={getTranslation('header-pokedex')}
+      text={getUiTranslation('header-pokedex')}
       to={POKEDEX.replace(':id?', '')}
     />
-    <HeaderItem image={require('../../../assets/images/skills.png')} text={getTranslation('header-skills')} />
+    <HeaderItem image={require('../../../assets/images/skills.png')} text={getUiTranslation('header-skills')} />
     <HeaderItem
       image={require('../../../assets/images/calculator.png')}
-      text={getTranslation('header-calculator')}
+      text={getUiTranslation('header-calculator')}
       to={CALCULATOR.replace(':id?', '')}
     />
   </header>

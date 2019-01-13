@@ -2,7 +2,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { getRandomNumber } from '../../utils/numbers';
 import { getAvatarFromId } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
@@ -115,7 +115,7 @@ const unstyledCalculatorView = ({
   const pokemonField: IDropdownOptions = {
     defaultValue: pokemon ? [pokemon.id] : undefined,
     id: 'pokemon',
-    label: getTranslation('calculator-select-pokemon'),
+    label: getUiTranslation('calculator-select-pokemon'),
     onChange: handlePokemonChange,
     options: pokemonList.map(({ id, name }) => ({ id, label: name, value: id })),
     placeholder: defaultPokemon ? defaultPokemon.name : undefined,
@@ -166,7 +166,7 @@ const unstyledCalculatorView = ({
 
         {!pokemon && (
           <div className={classes.emptyCase}>
-            <h4>{getTranslation('calculator-empty-case')}</h4>
+            <h4>{getUiTranslation('calculator-empty-case')}</h4>
             <div className={classes.emptyCaseImage}>
               {defaultPokemon && <PokemonPreview src={getAvatarFromId(defaultPokemon.id)} />}
             </div>

@@ -11,5 +11,5 @@ interface IParsedNature {
 export const getNatures = (): IParsedNature[] =>
   Natures.All.map(nature => ({
     id: nature,
-    name: Natures.getName(nature, Languages.All[getLocale()]),
+    name: Natures.getName(nature, Languages.All[getLocale('game')]),
   }));

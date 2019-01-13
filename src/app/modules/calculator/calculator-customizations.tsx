@@ -1,6 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../utils/translations';
+import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -106,7 +106,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
         ...buttonsCommonProps,
         id: `tab-${genericTab}`,
         isActive: activeTab === genericTab,
-        label: getTranslation(`calculator-${genericTab}`),
+        label: getUiTranslation(`calculator-${genericTab}`),
         onClick: () => {
           this.setState({
             activeTab: genericTab,
@@ -117,7 +117,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
         ...buttonsCommonProps,
         id: `tab-${ivsTab}`,
         isActive: activeTab === ivsTab,
-        label: getTranslation(`calculator-${ivsTab}`),
+        label: getGameTranslation(ivsTab),
         onClick: () => {
           this.setState({
             activeTab: ivsTab,
@@ -128,7 +128,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
         ...buttonsCommonProps,
         id: `tab-${candiesTab}`,
         isActive: activeTab === candiesTab,
-        label: getTranslation(`calculator-${candiesTab}`),
+        label: getGameTranslation(candiesTab),
         onClick: () => {
           this.setState({
             activeTab: candiesTab,
@@ -141,7 +141,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     const levelField: ISliderOptions = {
       defaultValue: level,
       id: 'level',
-      label: getTranslation('calculator-level'),
+      label: getGameTranslation('level'),
       onChange: handleLevelChange,
       range: [1, MAX_LEVEL_VALUE],
       type: 'slider',
@@ -169,13 +169,13 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
         ...natureCommonProps,
         defaultValue: natureEffects.increases ? [natureEffects.increases] : undefined,
         id: 'nature-increases',
-        label: getTranslation('calculator-nature-increase'),
+        label: getUiTranslation('calculator-nature-increase'),
       },
       {
         ...natureCommonProps,
         defaultValue: natureEffects.reduces ? [natureEffects.reduces] : undefined,
         id: 'nature-reduces',
-        label: getTranslation('calculator-nature-reduce'),
+        label: getUiTranslation('calculator-nature-reduce'),
       },
     ];
 
@@ -183,7 +183,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     const happinessField: ISliderOptions = {
       defaultValue: happiness,
       id: 'happiness',
-      label: getTranslation('calculator-happiness'),
+      label: getGameTranslation('happiness'),
       onChange: handleHappinessChange,
       range: [0, MAX_HAPPINESS_VALUE],
       type: 'slider',
@@ -194,7 +194,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
       {
         ...buttonsCommonProps,
         id: 'level-up',
-        label: getTranslation('calculator-level-up'),
+        label: getUiTranslation('calculator-level-up'),
         onClick: () => {
           handleModifyAll(true);
         },
@@ -202,7 +202,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
       {
         ...buttonsCommonProps,
         id: 'level-down',
-        label: getTranslation('calculator-level-down'),
+        label: getUiTranslation('calculator-level-down'),
         onClick: () => {
           handleModifyAll(false);
         },
@@ -210,7 +210,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
       {
         ...buttonsCommonProps,
         id: 'reset',
-        label: getTranslation('calculator-reset'),
+        label: getUiTranslation('calculator-reset'),
         onClick: handleResetAll,
       },
     ];
@@ -250,7 +250,7 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
       ...commonCandiesProps,
       defaultValue: candies[statId],
       id: `candies-${statId}`,
-      label: getTranslation(`calculator-candy-${statId}`),
+      label: getGameTranslation(`candy-${statId}`),
     }));
 
     return (

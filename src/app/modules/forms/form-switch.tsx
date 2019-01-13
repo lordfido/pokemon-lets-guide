@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import Space from '../../components/space';
 
@@ -134,8 +134,8 @@ const unstyledSwitch = ({ classes, className, options, onChange, onFocus }: IOwn
 
       <span className={classes.options}>
         <img className={classes.arrow} src={prevArrow} />
-        <span className={classnames(classes.optionLabel, classes.optionNo)}>{getTranslation('generic-no')}</span>
-        <span className={classnames(classes.optionLabel, classes.optionYes)}>{getTranslation('generic-yes')}</span>
+        <span className={classnames(classes.optionLabel, classes.optionNo)}>{getUiTranslation('generic-no')}</span>
+        <span className={classnames(classes.optionLabel, classes.optionYes)}>{getUiTranslation('generic-yes')}</span>
         <img className={classes.arrow} src={nextArrow} />
       </span>
     </label>

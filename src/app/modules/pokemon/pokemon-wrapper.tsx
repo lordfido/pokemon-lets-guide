@@ -18,7 +18,7 @@ import { POKEMON_VIEW_MODE } from '../../../constants/cookies';
 import { POKEMON_VIEW_MODE as POKEMON_VIEW_MODE_ACTION } from '../../../constants/metrics/actions';
 import { USER_PREFERENCES } from '../../../constants/metrics/categories';
 import { BARS, CHART, ViewMode } from '../../components/stats-chart';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 const getPokemonUrl = (pokemon: IPokemon) => POKEDEX.replace(':id?', pokemon.id);
 
@@ -110,7 +110,7 @@ class PokemonWrapper extends React.Component<Props, IOwnState> {
       {
         id: CHART,
         isActive: viewMode === CHART,
-        label: getTranslation('pokemon-chart'),
+        label: getUiTranslation('pokemon-chart'),
         onClick: () => {
           this.toggleViewMode(CHART);
         },
@@ -119,7 +119,7 @@ class PokemonWrapper extends React.Component<Props, IOwnState> {
       {
         id: BARS,
         isActive: viewMode === BARS,
-        label: getTranslation('pokemon-bars'),
+        label: getUiTranslation('pokemon-bars'),
         onClick: () => {
           this.toggleViewMode(BARS);
         },
@@ -127,7 +127,7 @@ class PokemonWrapper extends React.Component<Props, IOwnState> {
       },
       {
         id: 'pokedex',
-        label: getTranslation('header-calculator'),
+        label: getUiTranslation('header-calculator'),
         to: CALCULATOR.replace(':id?', pokemon ? pokemon.id : ''),
         type: 'button',
       },

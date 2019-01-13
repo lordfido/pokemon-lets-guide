@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 import { sortBy } from '../../utils/arrays';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { getStats, StatId } from '../../../constants/pokemon/pokemon-stats';
 import { getStatColor } from '../../../constants/pokemon/pokemon-stats-color';
@@ -80,7 +80,7 @@ const statsDropdown: IDropdownOptions = {
   colourStyles: statsColorStyles,
   id: '',
   options: statsFilterOptions,
-  placeholder: getTranslation('search-select-some-stats'),
+  placeholder: getUiTranslation('search-select-some-stats'),
   type: 'multi',
 };
 

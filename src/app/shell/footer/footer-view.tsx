@@ -1,7 +1,7 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { isProduction } from '../../../common/utils/platforms';
-import { languageISOs } from '../../utils/translations';
+import { languageISOs, getUiTranslation } from '../../utils/translations';
 
 import Link from '../../components/link';
 
@@ -38,10 +38,11 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  handleLanguageSelection: (language: string) => void;
+  handleGameLanguageSelection: (language: string) => void;
+  handleUiLanguageSelection: (language: string) => void;
 }
 
-const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => (
+const unstyledFooterView = ({ classes, handleGameLanguageSelection, handleUiLanguageSelection }: IOwnProps) => (
   <footer className={classes.wrapper}>
     <div className={classes.content}>
       <p>
@@ -70,15 +71,32 @@ const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => 
         {new Date().getFullYear()}
       </p>
       <p>
+        {getUiTranslation('footer-ui-elements')}:{' '}
         {languageISOs.map((language, index) => (
           <>
-            {index > 0 && ' | '}
+            {index > 0 && ' - '}
             <Link
               options={{
-                id: `language-${language.name}`,
+                id: `ui-language-${language.name}`,
                 label: language.name,
                 onClick: () => {
-                  handleLanguageSelection(language.iso);
+                  handleUiLanguageSelection(language.iso);
+                },
+              }}
+            />
+          </>
+        ))}
+        {' | '}
+        {getUiTranslation('footer-game-elements')}:{' '}
+        {languageISOs.map((language, index) => (
+          <>
+            {index > 0 && ' - '}
+            <Link
+              options={{
+                id: `game-language-${language.name}`,
+                label: language.name,
+                onClick: () => {
+                  handleGameLanguageSelection(language.iso);
                 },
               }}
             />

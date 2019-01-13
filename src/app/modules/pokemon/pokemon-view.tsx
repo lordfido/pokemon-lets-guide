@@ -1,7 +1,7 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { getSuggestedIVs } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import StatsChart, { ViewMode } from '../../components/stats-chart';
@@ -52,7 +52,7 @@ const unstyledPokemonView = ({ availableViewModes, classes, pagination, pokemon,
 
     return suggestedIVs.map((suggestion, index) => (
       <>
-        <p>{getTranslation('pokemon-recommended', (index + 1).toString())}</p>
+        <p>{getUiTranslation('pokemon-recommended', (index + 1).toString())}</p>
         <StatsChart stats={suggestion} viewMode={viewMode} color={getTypeColor(pokemon.types.ownTypes[0])} />
       </>
     ));
@@ -61,7 +61,7 @@ const unstyledPokemonView = ({ availableViewModes, classes, pagination, pokemon,
   return (
     <div className={classes.wrapper}>
       <PokemonInfo pokemon={pokemon} />
-      <PokemonPreview src={pokemon.avatar} alt={getTranslation('pokemon-preview', pokemon.name)} />
+      <PokemonPreview src={pokemon.avatar} alt={getUiTranslation('pokemon-preview', pokemon.name)} />
       <PokemonStats pokemon={pokemon} availableViewModes={availableViewModes} viewMode={viewMode} />
       <PokemonPokedexEntry text={pokemon.pokedexEntry} />
 
