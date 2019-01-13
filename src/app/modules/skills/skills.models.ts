@@ -1,3 +1,7 @@
+import { AnyAction } from 'redux';
+import { sortBy } from '../../utils/arrays';
+
+import { SkillsActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
 import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 import {
@@ -8,6 +12,10 @@ import {
 } from '../../../constants/skills/skills';
 
 import { ITypeRelations } from '../pokedex/pokedex.models';
+
+export interface ISkillsAction extends AnyAction {
+  type: SkillsActionType;
+}
 
 type SkillCategory = 'physical' | 'special' | 'status';
 
@@ -92,3 +100,11 @@ export const skillsInitialState: ISkillsState = {
     sortBy: 'id',
   },
 };
+
+/**
+ * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
+ */
+const createSkillFromPokeLab = (skill: any): ISkill => skill;
+
+export const createSkillsCollectionFromPokeLab = (): ISkill[] =>
+  [].map(createSkillFromPokeLab).sort(sortBy('id', 'asc'));

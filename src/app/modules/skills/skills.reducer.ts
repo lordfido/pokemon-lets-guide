@@ -1,11 +1,68 @@
-import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
 import { getTypeRelations } from '../../utils/pokemon';
 
-import { ISkill, ISkillsState, skillsInitialState } from './skills.models';
+import {
+  SKILLS_CREATE,
+  SKILLS_FILTER,
+  SKILLS_LOAD_MORE,
+  SKILLS_RESET_FILTERS,
+  SKILLS_SORT,
+} from '../../../constants/actionTypes';
+import { paginationSize } from '../../../constants/features';
 
-const reducer = (state = skillsInitialState, action: AnyAction): ISkillsState => {
-  return state;
+import { ISkill, ISkillsAction, ISkillsState, skillsInitialState } from './skills.models';
+
+const reducer = (state = skillsInitialState, action: ISkillsAction): ISkillsState => {
+  switch (action.type) {
+    case SKILLS_CREATE:
+      return {
+        ...state,
+        collection: action.payload.collection,
+      };
+
+    case SKILLS_FILTER:
+      const newFilters = {
+        ...state.filters,
+      };
+
+      if (action.payload && action.payload.filters) {
+        action.payload.filters.forEach((filter: { name: string; value: string | string[] | boolean }) => {
+          // @ts-ignore
+          newFilters[filter.name] = filter.value;
+        });
+      }
+
+      return {
+        ...state,
+        filters: newFilters,
+      };
+
+    case SKILLS_LOAD_MORE:
+      return {
+        ...state,
+        pagination: {
+          first: 0,
+          last: state.pagination.last + paginationSize,
+        },
+      };
+
+    case SKILLS_RESET_FILTERS:
+      return {
+        ...state,
+        filters: {
+          ...skillsInitialState.filters,
+        },
+      };
+
+    case SKILLS_SORT:
+      return {
+        ...state,
+        sort: action.payload.sort,
+      };
+
+    default:
+      return state;
+  }
 };
 
 // Get a list of skills (already filtered)
