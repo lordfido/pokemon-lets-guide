@@ -1,7 +1,7 @@
 import * as React from 'react';
 import injectSheet, { CSSProperties } from 'react-jss';
 import { getPaddedId } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import Spacer from '../../components/spacer';
 import Tag from '../../components/tag';
@@ -53,7 +53,7 @@ const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
     <div className={classes.window}>
       <div className={classes.wrapper}>
         <p>
-          {getTranslation('pokemon-pokedex-number')} {getPaddedId(String(pokemon.nationalNumber))}
+          {getUiTranslation('pokemon-pokedex-number')} {getPaddedId(String(pokemon.nationalNumber))}
         </p>
         <p>{pokemon.name}</p>
         <span>
@@ -66,7 +66,7 @@ const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
         <Spacer />
 
         <div className={classes.weaknessess}>
-          <p>{getTranslation('search-weak-against')}</p>
+          <p>{getUiTranslation('search-weak-against')}</p>
           {pokemon.types.relations
             .filter(r => r.effectiveness > 1)
             .map(({ id, effectiveness }) => (
@@ -80,7 +80,7 @@ const unstyledPokemonInfo = ({ classes, pokemon }: IOwnProps) => (
             ))}
         </div>
         <div className={classes.strengths}>
-          <p>{getTranslation('search-strong-against')}</p>
+          <p>{getUiTranslation('search-strong-against')}</p>
           {pokemon.types.relations
             .filter(r => r.effectiveness < 1)
             .map(({ id, effectiveness }) => (

@@ -38,10 +38,11 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  handleLanguageSelection: (language: string) => void;
+  handleGameLanguageSelection: (language: string) => void;
+  handleUiLanguageSelection: (language: string) => void;
 }
 
-const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => (
+const unstyledFooterView = ({ classes, handleGameLanguageSelection, handleUiLanguageSelection }: IOwnProps) => (
   <footer className={classes.wrapper}>
     <div className={classes.content}>
       <p>
@@ -78,7 +79,7 @@ const unstyledFooterView = ({ classes, handleLanguageSelection }: IOwnProps) => 
                 id: `language-${language.name}`,
                 label: language.name,
                 onClick: () => {
-                  handleLanguageSelection(language.iso);
+                  handleGameLanguageSelection(language.iso);
                 },
               }}
             />

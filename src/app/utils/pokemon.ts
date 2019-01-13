@@ -1,7 +1,7 @@
 import { Types } from 'pokelab';
 import pokemonExtraInfoList from '../../common/apis/mocks';
 import { sortBy } from './arrays';
-import { getTranslation } from './translations';
+import { getUiTranslation } from './translations';
 
 import { MAX_IV_VALUE } from '../../constants/pokemon/pokemon-ivs';
 import {
@@ -103,7 +103,7 @@ export const getVariantName = ({ name, isAlolan, isMega, variant }: IVariantName
 
   // Alolan pokemon
   if (isAlolan) {
-    return `${name} ${getTranslation('forms-alolan')}`;
+    return `${name} ${getUiTranslation('forms-alolan')}`;
   }
 
   // Megaevolutions

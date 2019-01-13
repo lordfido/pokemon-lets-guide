@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -36,60 +36,60 @@ const PokedexFilters = ({
   const fields = [
     {
       id: 'nameOrNumber',
-      label: getTranslation('search-pokemon'),
+      label: getUiTranslation('search-pokemon'),
       onChange: (option: IFieldOutput) => {
         handlePokemonChange(option);
       },
       options: pokemonList,
-      placeholder: getTranslation('search-pokemon'),
+      placeholder: getUiTranslation('search-pokemon'),
       type: 'dropdown',
     } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.includedTypes,
       id: 'includedTypes',
-      label: getTranslation('search-include-types'),
+      label: getUiTranslation('search-include-types'),
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.excludedTypes,
       id: 'excludedTypes',
-      label: getTranslation('search-exclude-types'),
+      label: getUiTranslation('search-exclude-types'),
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.strongAgainst,
       id: 'strongAgainst',
-      label: getTranslation('search-strong-against'),
+      label: getUiTranslation('search-strong-against'),
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
       ...typesDropdown,
       defaultValue: filters.weakAgainst,
       id: 'weakAgainst',
-      label: getTranslation('search-weak-against'),
+      label: getUiTranslation('search-weak-against'),
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
       ...statsDropdown,
       defaultValue: filters.bestStats,
       id: 'bestStats',
-      label: getTranslation('search-best-stats'),
+      label: getUiTranslation('search-best-stats'),
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
       ...statsDropdown,
       defaultValue: filters.worstStats,
       id: 'worstStats',
-      label: getTranslation('search-worst-stats'),
+      label: getUiTranslation('search-worst-stats'),
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
       defaultValue: [filters.baseCP[0], filters.baseCP[1]],
       id: 'baseCP',
-      label: getTranslation('search-min-cp'),
+      label: getUiTranslation('search-min-cp'),
       onChange: handleFilterChange,
       range: [0, 800],
       type: 'range',
@@ -97,14 +97,14 @@ const PokedexFilters = ({
     {
       defaultChecked: filters.showMegaevolutions,
       id: 'showMegaevolutions',
-      label: getTranslation('search-show-megaevolutions'),
+      label: getUiTranslation('search-show-megaevolutions'),
       onChange: handleFilterChange,
       type: 'switch',
     } as ICheckboxOptions,
     {
       defaultChecked: filters.showAlolanForms,
       id: 'showAlolanForms',
-      label: getTranslation('search-show-alolan-forms'),
+      label: getUiTranslation('search-show-alolan-forms'),
       onChange: handleFilterChange,
       type: 'switch',
     } as ICheckboxOptions,
@@ -112,7 +112,7 @@ const PokedexFilters = ({
   const buttons: IButtonProps[] = [
     {
       id: 'submit',
-      label: getTranslation('search-filters-apply'),
+      label: getUiTranslation('search-filters-apply'),
       onClick: () => {
         handleSubmit();
       },
@@ -120,7 +120,7 @@ const PokedexFilters = ({
     },
     {
       id: 'reset',
-      label: getTranslation('search-filters-reset'),
+      label: getUiTranslation('search-filters-reset'),
       onClick: () => {
         handleReset();
       },

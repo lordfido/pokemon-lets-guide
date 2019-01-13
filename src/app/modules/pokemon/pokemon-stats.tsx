@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -56,7 +56,7 @@ const UnstyledPokemonStats = ({ availableViewModes, classes, pokemon, viewMode }
       <Buttons align="center" options={availableViewModes.slice(0, 2)} />
       <Spacer />
 
-      <p>{getTranslation('pokemon-base-stats')}</p>
+      <p>{getUiTranslation('pokemon-base-stats')}</p>
 
       <div className={classnames({ [classes.bars]: viewMode === BARS, [classes.chart]: viewMode === CHART })}>
         {

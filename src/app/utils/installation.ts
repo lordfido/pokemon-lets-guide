@@ -2,7 +2,7 @@ import { v1 as uuid } from 'uuid';
 import { getCookie, setCookie } from '../../common/utils/cookies';
 import { log } from '../../common/utils/logger';
 
-import { INSTALLATION_ID, LANGUAGE } from '../../constants/cookies';
+import { GAME_LANGUAGE, INSTALLATION_ID, UI_LANGUAGE } from '../../constants/cookies';
 
 /**
  * Get Installation ID
@@ -35,29 +35,55 @@ const setInstallationId = (override: boolean = false) => {
 };
 
 /**
- * Get language
+ * Get game language
  */
-const getLanguageCookie = () => {
-  const language = getCookie(LANGUAGE);
+const getGameLanguageCookie = () => {
+  const language = getCookie(GAME_LANGUAGE);
 
-  log(`Current Language: ${language}`);
+  log(`Current Game Language: ${language}`);
   return language;
 };
 
 /**
- * If no language available, create it
+ * If no game language available, create it
  */
-const setLanguageCookie = (value: string, override: boolean = false) => {
-  if (!getLanguageCookie() || override) {
-    log(`Setting Language: <${value}>`);
+const setGameLanguageCookie = (value: string, override: boolean = false) => {
+  if (!getGameLanguageCookie() || override) {
+    log(`Setting Game Language: <${value}>`);
 
-    setCookie(LANGUAGE, value);
+    setCookie(GAME_LANGUAGE, value);
+    location.reload();
+  }
+};
+
+/**
+ * Get ui language
+ */
+const getUiLanguageCookie = () => {
+  const language = getCookie(UI_LANGUAGE);
+
+  log(`Current UI Language: ${language}`);
+  return language;
+};
+
+/**
+ * If no ui language available, create it
+ */
+const setUiLanguageCookie = (value: string, override: boolean = false) => {
+  if (!getUiLanguageCookie() || override) {
+    log(`Setting UI Language: <${value}>`);
+
+    setCookie(UI_LANGUAGE, value);
     location.reload();
   }
 };
 
 interface IInstallationDataParameters {
-  language: {
+  gameLanguage?: {
+    value: string;
+    override?: boolean;
+  };
+  uiLanguage?: {
     value: string;
     override?: boolean;
   };
@@ -68,14 +94,22 @@ interface IInstallationDataParameters {
  * - Installation id
  * - Language
  */
-export const setInstallationData = ({ language: { value, override } }: IInstallationDataParameters) => {
+export const setInstallationData = ({ gameLanguage, uiLanguage }: IInstallationDataParameters) => {
   setInstallationId();
-  setLanguageCookie(value, override);
+
+  if (gameLanguage) {
+    setGameLanguageCookie(gameLanguage.value, gameLanguage.override);
+  }
+
+  if (uiLanguage) {
+    setUiLanguageCookie(uiLanguage.value, uiLanguage.override);
+  }
 };
 
 export interface IInstallationData {
+  gameLanguage: string | void;
   installationId: string;
-  language: string | void;
+  uiLanguage: string | void;
 }
 
 /**
@@ -85,8 +119,9 @@ export interface IInstallationData {
  */
 export const getInstallationData = () => {
   const data: IInstallationData = {
+    gameLanguage: getGameLanguageCookie(),
     installationId: getInstallationId(),
-    language: getLanguageCookie(),
+    uiLanguage: getUiLanguageCookie(),
   };
 
   return data;

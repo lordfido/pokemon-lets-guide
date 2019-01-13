@@ -5,7 +5,7 @@ import { Redirect } from 'react-router';
 import analyticsApi from '../../../common/apis/analytics';
 import { getCookie, setCookie } from '../../../common/utils/cookies';
 import { getRichPokemon, getStatRatio } from '../../utils/pokemon';
-import { getTranslation } from '../../utils/translations';
+import { getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import { BARS, CHART, ViewMode } from '../../components/stats-chart';
@@ -139,7 +139,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       {
         id: CHART,
         isActive: viewMode === CHART,
-        label: getTranslation('pokemon-chart'),
+        label: getUiTranslation('pokemon-chart'),
         onClick: () => {
           this.toggleViewMode(CHART);
         },
@@ -148,7 +148,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       {
         id: BARS,
         isActive: viewMode === BARS,
-        label: getTranslation('pokemon-bars'),
+        label: getUiTranslation('pokemon-bars'),
         onClick: () => {
           this.toggleViewMode(BARS);
         },
@@ -156,7 +156,7 @@ class CalculatorWrapper extends React.Component<Props, IOwnState> {
       },
       {
         id: 'pokedex',
-        label: getTranslation('header-pokedex'),
+        label: getUiTranslation('header-pokedex'),
         to: POKEDEX.replace(':id?', pokemon ? pokemon.id : ''),
         type: 'button',
       },
