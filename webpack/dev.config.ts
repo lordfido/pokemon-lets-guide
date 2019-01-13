@@ -38,17 +38,6 @@ export const appConfig: webpack.Configuration = {
         ],
       },
 
-      // JSON
-      {
-        exclude: /node_modules/,
-        include: paths.src,
-        loader: 'file-loader',
-        options: {
-          sourceMap: true,
-        },
-        test: regex.json,
-      },
-
       // HTML
       {
         exclude: /node_modules/,

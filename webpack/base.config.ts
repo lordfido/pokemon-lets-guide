@@ -1,5 +1,4 @@
 import path from 'path';
-// import jsonImporter from 'node-sass-json-importer';
 // @ts-ignore
 import UglifyPlugin from 'terser-webpack-plugin';
 import ManifestPlugin from 'webpack-pwa-manifest';
@@ -15,11 +14,8 @@ export const paths = {
 export const regex = {
   html: /\.html$/,
   img: /\.(png|jpe?g|gif|ico|svg)$/,
-  js: /\.js$/,
-  json: /\.json$/,
   sw: /sw\.js/,
-  ts: /\.ts$/,
-  tsx: /\.tsx$/,
+  ts: /\.(tsx?|js)$/,
 };
 
 export const loaderImages = {
@@ -136,7 +132,7 @@ const baseConfig = {
       {
         exclude: /node_modules/,
         include: paths.src,
-        test: /\.(tsx?|js)$/,
+        test: regex.ts,
         use: [
           {
             loader: 'babel-loader',

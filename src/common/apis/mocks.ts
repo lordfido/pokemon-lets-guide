@@ -1,7 +1,7 @@
 import { IAdditionalPokemonInfo } from '../../app/modules/pokedex/pokedex.models';
 import { ISkillWithType } from '../../app/modules/skills/skills.models';
 
-const scrappedSkills = require('../../../scrapped_data/skills.json');
+const scrappedSkills = require('../../constants/skills/skills-list.json');
 
 export const mockedPokemonCollection: IAdditionalPokemonInfo[] = [
   {
