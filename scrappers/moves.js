@@ -1,8 +1,8 @@
-// @ts-ignore
 const fetch = require('node-fetch');
 const fs = require('fs');
 const jsdom = require('jsdom');
 const pokeUtils = require('./utils.js');
+const translate = require('./moves-translations');
 
 const SCRAP_URL = 'https://pokemondb.net/move/all';
 const ELEMENT_TO_SCRAP = 'table#moves';
@@ -39,13 +39,7 @@ const generateMovesMapTs = () => {
   fs.writeFileSync(OUTPUT_MAP_FILE, content);
 };
 
-const moveNamesList = [];
-const addLineToMoveNamesTs = ({ id, name }) => {
-  const lines = [`  '${id}': ["", "${name}", "", "", "", "", "", ""],`];
-
-  moveNamesList.push(lines.join('\n'));
-};
-
+const moveNamesList = {};
 const generateMoveNamesTs = () => {
   const beginning = [
     'interface ITranslationsCollection {',
@@ -61,7 +55,14 @@ const generateMoveNamesTs = () => {
     '',
   ];
 
-  const content = [beginning.join('\n'), moveNamesList.join('\n'), ending.join('\n')].join('\n');
+  const sortedMoveNameList = [];
+  Object.keys(moveNamesList)
+    .sort()
+    .forEach(key => {
+      sortedMoveNameList.push(moveNamesList[key]);
+    });
+
+  const content = [beginning.join('\n'), sortedMoveNameList.join('\n'), ending.join('\n')].join('\n');
   fs.writeFileSync(OUTPUT_NAMES_FILE, content);
 };
 
@@ -108,15 +109,42 @@ fetch(SCRAP_URL)
 
     const table = document.querySelector(ELEMENT_TO_SCRAP);
     const moves = parseTable(table);
+    const translations = [];
 
     moves.forEach((move, index) => {
       const id = pokeUtils.getPaddedId(index + 1);
       addLineToMoveListTs({ ...move, id });
-      addLineToMoveNamesTs({ ...move, id });
+
+      // Generate a new promise for each skill move
+      translations.push(
+        translate(id, move.name)
+          .then(({ id, translations }) => {
+            const lines = [
+              `  '${id}': ["${translations['0']}", "${translations['1']}", "${translations['2']}", "${
+                translations['3']
+              }", "${translations['4']}", "${translations['5']}", "${translations['6']}", "${translations['7']}"],`,
+            ];
+
+            moveNamesList[id] = lines.join('\n');
+          })
+          .catch(error => {
+            console.error(`Translation for <${id}:${move.name}> failed: ${error}`);
+            const lines = [
+              `  '${id}': ["(${move.name})", "(${move.name})", "(${move.name})", "(${move.name})", "(${
+                move.name
+              })", "(${move.name})", "(${move.name})", "(${move.name})"],`,
+            ];
+
+            moveNamesList[id] = lines.join('\n');
+          })
+      );
     });
 
-    generateMovesMapTs();
-    generateMoveNamesTs();
+    // generateMovesMapTs();
+
+    Promise.all(translations).then(() => {
+      generateMoveNamesTs();
+    });
   })
   .catch(error => {
     throw Error(error);
