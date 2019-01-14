@@ -110,7 +110,7 @@ export const movesInitialState: IMovesState = {
   },
   sort: {
     order: 'asc',
-    sortBy: 'id',
+    sortBy: 'name',
   },
 };
 
@@ -137,4 +137,4 @@ const createMoveFromPokeLab = (move: IScrappedMove): IRichMove => {
 };
 
 export const createMovesCollectionFromPokeLab = (): IRichMove[] =>
-  mockedMovessCollection.map(createMoveFromPokeLab).sort(sortBy('id', 'asc'));
+  mockedMovessCollection.map(createMoveFromPokeLab).sort(sortBy('name', 'asc'));
