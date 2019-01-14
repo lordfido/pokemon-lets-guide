@@ -19,6 +19,18 @@ const getCSSAnimations = () => {
         transform: rotate(360deg);
       }
     }
+
+    @keyframes sprite-bounce {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6%);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
   `;
   return style;
 };
