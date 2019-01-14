@@ -17,6 +17,8 @@ import { MovesCategory } from '../../../constants/moves/moves-categories';
 import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 
 import { ITypeRelations } from '../pokedex/pokedex.models';
+import { getLocale } from '../../utils/translations';
+import { getMoveName } from '../../../constants/moves/moves-names';
 
 export interface IMovesAction extends AnyAction {
   type: MovesActionType;
@@ -125,9 +127,11 @@ const createMoveFromPokeLab = (move: IScrappedMove): IRichMove => {
     relations,
   };
 
+  const locale = getLocale('game');
+
   return {
     ...rest,
-    name: '',
+    name: getMoveName(rest.id, locale),
     types,
   };
 };

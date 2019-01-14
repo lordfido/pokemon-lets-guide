@@ -7,10 +7,11 @@ const pokeUtils = require('./utils.js');
 const SCRAP_URL = 'https://pokemondb.net/move/all';
 const ELEMENT_TO_SCRAP = 'table#moves';
 const OUTPUT_MAP_FILE = './src/constants/moves/moves-list.ts';
+const OUTPUT_NAMES_FILE = './src/constants/moves/moves-names.ts';
 
 // WRITE TS FILE
 const movesList = [];
-const addLineToMoveListTs = ({ accuracy, category, effect, id, name, power, pp, type }) => {
+const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, type }) => {
   const lines = [
     '  {',
     `    accuracy: ${accuracy},`,
@@ -26,18 +27,42 @@ const addLineToMoveListTs = ({ accuracy, category, effect, id, name, power, pp, 
   movesList.push(lines.join('\n'));
 };
 
-const generateJson = () => {
+const generateMovesMapTs = () => {
   const beginning = [
-    "import { IMoveWithType } from '../../app/modules/moves/moves.models';",
+    "import { IScrappedMove } from '../../app/modules/moves/moves.models';",
     '',
-    'const moves: IMoveWithType[] = [',
+    'const moves: IScrappedMove[] = [',
   ];
   const ending = ['];', '', 'export const getMoves = () => moves;', ''];
 
-  const content = [beginning.join('\n'), movesList.sort(pokeUtils.sortBy('id')).join('\n'), ending.join('\n')].join(
-    '\n'
-  );
+  const content = [beginning.join('\n'), movesList.join('\n'), ending.join('\n')].join('\n');
   fs.writeFileSync(OUTPUT_MAP_FILE, content);
+};
+
+const moveNamesList = [];
+const addLineToMoveNamesTs = ({ id, name }) => {
+  const lines = [`  '${id}': ["", "${name}", "", "", "", "", "", ""],`];
+
+  moveNamesList.push(lines.join('\n'));
+};
+
+const generateMoveNamesTs = () => {
+  const beginning = [
+    'interface ITranslationsCollection {',
+    '  [token: string]: [string, string, string, string, string, string, string, string];',
+    '}',
+    '',
+    'const moveNames: ITranslationsCollection = {',
+  ];
+  const ending = [
+    '};',
+    '',
+    "export const getMoveName = (id: string, locale: number) => moveNames[id][locale] || '';",
+    '',
+  ];
+
+  const content = [beginning.join('\n'), moveNamesList.join('\n'), ending.join('\n')].join('\n');
+  fs.writeFileSync(OUTPUT_NAMES_FILE, content);
 };
 
 const getLinkLabel = td => td.firstElementChild && td.firstElementChild.innerHTML;
@@ -85,10 +110,13 @@ fetch(SCRAP_URL)
     const moves = parseTable(table);
 
     moves.forEach((move, index) => {
-      addLineToMoveListTs({ ...move, id: index + 1 });
+      const id = pokeUtils.getPaddedId(index + 1);
+      addLineToMoveListTs({ ...move, id });
+      addLineToMoveNamesTs({ ...move, id });
     });
 
-    generateJson();
+    generateMovesMapTs();
+    generateMoveNamesTs();
   })
   .catch(error => {
     throw Error(error);
