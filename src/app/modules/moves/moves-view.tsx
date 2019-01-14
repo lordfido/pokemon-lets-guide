@@ -6,8 +6,8 @@ import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 import Buttons from '../../components/buttons';
 import Sidebar, { SIDEBAR_SIZE } from '../../components/sidebar';
 import Table from '../../components/table';
-import SkillsEntry from './skills-entry';
-import SkillsFilters from './skills-filters';
+import MovesEntry from './moves-entry';
+import MovesFilters from './moves-filters';
 
 import { PADDING_M, PADDING_XXL } from '../../../constants/styles/styles';
 import { TEXT_DARK } from '../../../constants/styles/styles-fonts';
@@ -15,7 +15,7 @@ import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
 import { IFieldOutput, IOption } from '../forms/form.models';
-import { IRichSkill, ISkillsFilters } from './skills.models';
+import { IMovesFilters, IRichMove } from './moves.models';
 
 const sheet: ISheet = {
   results: {
@@ -60,23 +60,23 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  collection: IRichSkill[];
+  collection: IRichMove[];
   handleSortBy: (key: string) => void;
-  skillList: IOption[];
-  handleSkillChange: (field: IFieldOutput) => void;
-  filters: ISkillsFilters;
+  movesList: IOption[];
+  handleMoveChange: (field: IFieldOutput) => void;
+  filters: IMovesFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
   handleSubmit: () => void;
   handleLoadMore?: () => void;
 }
 
-const unstyledSkillsView = ({
+const unstyledMovesView = ({
   classes,
   collection,
   handleSortBy,
-  skillList,
-  handleSkillChange,
+  movesList,
+  handleMoveChange,
   filters,
   handleFilterChange,
   handleReset,
@@ -86,13 +86,13 @@ const unstyledSkillsView = ({
   <>
     <Sidebar
       render={isOpen => (
-        <SkillsFilters
+        <MovesFilters
           classNames={{
             form: classes.form,
             formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
           }}
-          skillList={skillList}
-          handleSkillChange={handleSkillChange}
+          movesList={movesList}
+          handleMoveChange={handleMoveChange}
           filters={filters}
           handleFilterChange={handleFilterChange}
           handleReset={handleReset}
@@ -143,8 +143,8 @@ const unstyledSkillsView = ({
           },
         ]}
       >
-        {collection.map((skill, index) => (
-          <SkillsEntry key={index} className={classes.resultsEntry} skill={skill} />
+        {collection.map((move, index) => (
+          <MovesEntry key={index} className={classes.resultsEntry} move={move} />
         ))}
       </Table>
 
@@ -154,7 +154,7 @@ const unstyledSkillsView = ({
           options={[
             {
               id: 'load-more',
-              label: getUiTranslation('skills-load-more'),
+              label: getUiTranslation('moves-load-more'),
               onClick: handleLoadMore,
               type: 'button',
             },
@@ -165,6 +165,6 @@ const unstyledSkillsView = ({
   </>
 );
 
-const SkillsView = injectSheet(sheet)(unstyledSkillsView);
+const MovesView = injectSheet(sheet)(unstyledMovesView);
 
-export default SkillsView;
+export default MovesView;

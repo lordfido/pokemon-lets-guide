@@ -1,7 +1,7 @@
-import { getSkills } from '../../constants/skills/skills-list';
+import { getMoves } from '../../constants/moves/moves-list';
 
+import { IScrappedMove } from '../../app/modules/moves/moves.models';
 import { IAdditionalPokemonInfo } from '../../app/modules/pokedex/pokedex.models';
-import { ISkillWithType } from '../../app/modules/skills/skills.models';
 
 export const mockedPokemonCollection: IAdditionalPokemonInfo[] = [
   {
@@ -123,4 +123,4 @@ export const mockedPokemonCollection: IAdditionalPokemonInfo[] = [
   },
 ];
 
-export const mockedSkillsCollection: ISkillWithType[] = getSkills();
+export const mockedMovessCollection: IScrappedMove[] = getMoves();

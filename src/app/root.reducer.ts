@@ -1,6 +1,6 @@
 // Import reducers
+import * as movesSelectors from './modules/moves/moves.reducer';
 import * as pokedexSelectors from './modules/pokedex/pokedex.reducer';
-import * as skillsSelectors from './modules/skills/skills.reducer';
 
 import { createRootReducer, IRootState } from './root.models';
 
@@ -18,14 +18,13 @@ export const getPokedexFilters = ({ pokedex }: IRootState) => pokedexSelectors.g
 export const getSelectedPokemon = ({ pokedex }: IRootState) => pokedexSelectors.getSelectedPokemon(pokedex);
 export const getPokemonPagination = ({ pokedex }: IRootState) => pokedexSelectors.getPokemonPagination(pokedex);
 
-// Skills
-export const getSkills = ({ skills }: IRootState, isPaginated?: boolean) =>
-  skillsSelectors.getSkills(skills, isPaginated);
-export const getRawSkills = ({ skills }: IRootState) => skillsSelectors.getRawSkills(skills);
-export const getSkillsPagination = ({ skills }: IRootState) => skillsSelectors.getSkillsPagination(skills);
-export const getSkillsSortOptions = ({ skills }: IRootState) => skillsSelectors.getSkillsSortOptions(skills);
-export const getSkillsFilters = ({ skills }: IRootState) => skillsSelectors.getSkillsFilters(skills);
-export const getSelectedSkill = ({ skills }: IRootState) => skillsSelectors.getSelectedSkill(skills);
-export const getSkillPagination = ({ skills }: IRootState) => skillsSelectors.getSkillPagination(skills);
+// Moves
+export const getMoves = ({ moves }: IRootState, isPaginated?: boolean) => movesSelectors.getMoves(moves, isPaginated);
+export const getRawMoves = ({ moves }: IRootState) => movesSelectors.getRawMoves(moves);
+export const getMovesPagination = ({ moves }: IRootState) => movesSelectors.getMovesPagination(moves);
+export const getMovesSortOptions = ({ moves }: IRootState) => movesSelectors.getMovesSortOptions(moves);
+export const getMovesFilters = ({ moves }: IRootState) => movesSelectors.getMovesFilters(moves);
+export const getSelectedMove = ({ moves }: IRootState) => movesSelectors.getSelectedMove(moves);
+export const getMovePagination = ({ moves }: IRootState) => movesSelectors.getMovePagination(moves);
 
 export default rootReducer;

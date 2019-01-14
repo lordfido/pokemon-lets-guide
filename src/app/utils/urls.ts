@@ -1,5 +1,5 @@
+import { IMovesFilters } from '../modules/moves/moves.models';
 import { IPokedexFilters } from '../modules/pokedex/pokedex.models';
-import { ISkillsFilters } from '../modules/skills/skills.models';
 
 export const stringToFilters = (url?: string) => {
   if (!url || (/\;/.test(url) === false && /\=/.test(url) === false)) {
@@ -25,7 +25,7 @@ export const stringToFilters = (url?: string) => {
   return filters;
 };
 
-export const filtersToString = (filters: IPokedexFilters | ISkillsFilters) =>
+export const filtersToString = (filters: IPokedexFilters | IMovesFilters) =>
   Object.keys(filters)
     .map(key => {
       // @ts-ignore

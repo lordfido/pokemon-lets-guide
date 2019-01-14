@@ -74,12 +74,10 @@ export interface IPokemonPagination {
 export interface IPokedexFilters {
   baseCP: [number, number];
   bestStats: StatId[];
-  // canLearnSkills: StatId[];
-  // canLearnMTs: StatId[];
+  // canLearnMove: StatId[];
   // dropsCandies: StatId[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
-  // needsCandies: StatId[];
   showAlolanForms: boolean;
   showMegaevolutions: boolean;
   strongAgainst: PokemonType[];
@@ -102,12 +100,10 @@ export const pokedexInitialState: IPokedexState = {
   filters: {
     baseCP: [0, MAX_BASE_CP_VALUE],
     bestStats: [],
-    // canLearnMTs: [],
-    // canLearnSkills: [],
+    // canLearnMoves: [],
     // dropsCandies: [],
     excludedTypes: [],
     includedTypes: [],
-    // needsCandies: [],
     showAlolanForms: false,
     showMegaevolutions: false,
     strongAgainst: [],

@@ -14,30 +14,30 @@ import {
   MAX_PROBABILITY_VALUE,
   MIN_POWER_VALUE,
   MIN_PP_VALUE,
-} from '../../../constants/skills/skills';
-import { getCategories } from '../../../constants/skills/skills-categories';
-import { getCategoryName } from '../../../constants/skills/skills-categories-names';
+} from '../../../constants/moves/moves';
+import { getMovesCategories } from '../../../constants/moves/moves-categories';
+import { getMovesCategoryName } from '../../../constants/moves/moves-categories-names';
 
 import { ICheckboxOptions, IDropdownOptions, IFieldOutput, IOption, IRangeOptions } from '../forms/form.models';
-import { ISkillsFilters } from './skills.models';
+import { IMovesFilters } from './moves.models';
 
 interface IOwnProps {
   classNames: {
     form: string;
     formField: string;
   };
-  skillList: IOption[];
-  handleSkillChange: (field: IFieldOutput) => void;
-  filters: ISkillsFilters;
+  movesList: IOption[];
+  handleMoveChange: (field: IFieldOutput) => void;
+  filters: IMovesFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
   handleSubmit: () => void;
 }
 
-const SkillsFilters = ({
+const MovesFilters = ({
   classNames,
-  skillList,
-  handleSkillChange,
+  movesList,
+  handleMoveChange,
   filters,
   handleFilterChange,
   handleReset,
@@ -46,12 +46,12 @@ const SkillsFilters = ({
   const fields = [
     {
       id: 'nameOrId',
-      label: getUiTranslation('search-skill'),
+      label: getUiTranslation('search-move'),
       onChange: (option: IFieldOutput) => {
-        handleSkillChange(option);
+        handleMoveChange(option);
       },
-      options: skillList,
-      placeholder: getUiTranslation('search-skill'),
+      options: movesList,
+      placeholder: getUiTranslation('search-move'),
       type: 'dropdown',
     } as IDropdownOptions,
     {
@@ -59,9 +59,9 @@ const SkillsFilters = ({
       id: 'category',
       label: getGameTranslation('category'),
       onChange: handleFilterChange,
-      options: getCategories().map(category => ({
+      options: getMovesCategories().map(category => ({
         id: category,
-        label: getCategoryName(category),
+        label: getMovesCategoryName(category),
         value: category,
       })),
       placeholder: getGameTranslation('category'),
@@ -165,4 +165,4 @@ const SkillsFilters = ({
   );
 };
 
-export default SkillsFilters;
+export default MovesFilters;

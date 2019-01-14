@@ -9,13 +9,13 @@ import CategoryIcon from '../../components/category-icon';
 import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
-import { SKILLS } from '../../../constants/appRoutes';
+import { MOVES } from '../../../constants/appRoutes';
 import { getTypeName } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
 
 import { ISheet } from '../../root.models';
-import { IRichSkill } from './skills.models';
+import { IRichMove } from './moves.models';
 
 const sheet: ISheet = {
   fullWidth: {
@@ -29,47 +29,47 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
-  skill: IRichSkill;
+  move: IRichMove;
 }
 
-const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
+const unstyledMovesEntry = ({ classes, className, move }: IOwnProps) => (
   <TableRow className={className}>
     {/* Name */}
-    <TableCell ellipsis={true}>{skill.name}</TableCell>
+    <TableCell ellipsis={true}>{move.name}</TableCell>
 
     {/* Type */}
     <TableCell center>
-      {skill.types.ownType && (
+      {move.types.ownType && (
         <Tag
-          key={skill.types.ownType}
-          label={getTypeName(skill.types.ownType)}
-          icon={getTypeIcon(skill.types.ownType)}
-          backgroundColor={getTypeColor(skill.types.ownType)}
+          key={move.types.ownType}
+          label={getTypeName(move.types.ownType)}
+          icon={getTypeIcon(move.types.ownType)}
+          backgroundColor={getTypeColor(move.types.ownType)}
         />
       )}
     </TableCell>
 
     {/* Category */}
     <TableCell center>
-      <CategoryIcon category={skill.category} />
+      <CategoryIcon category={move.category} />
     </TableCell>
 
     {/* Power */}
-    <TableCell center>{skill.power ? `${skill.power}` : '-'}</TableCell>
+    <TableCell center>{move.power ? `${move.power}` : '-'}</TableCell>
 
     {/* Accuracy */}
-    <TableCell center>{skill.accuracy ? `${skill.accuracy}%` : '-'}</TableCell>
+    <TableCell center>{move.accuracy ? `${move.accuracy}%` : '-'}</TableCell>
 
     {/* PP */}
-    <TableCell center>{skill.pp}</TableCell>
+    <TableCell center>{move.pp ? `${move.pp}` : '-'}</TableCell>
 
     {/* TM */}
     <TableCell center>
-      <FontAwesomeIcon icon={skill.tm ? ['far', 'check-square'] : ['far', 'square']} />
+      <FontAwesomeIcon icon={move.tm ? ['far', 'check-square'] : ['far', 'square']} />
     </TableCell>
 
     {/* Probability */}
-    <TableCell center>{skill.probability ? `${skill.probability}%` : '-'}</TableCell>
+    <TableCell center>{move.probability ? `${move.probability}%` : '-'}</TableCell>
 
     {/* Quick Actions */}
     <TableCell center style={{ height: 'auto' }}>
@@ -79,9 +79,9 @@ const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
         options={[
           {
             className: classes.noMargin,
-            id: `${skill.id.toString()}-details`,
-            label: getUiTranslation('skills-details'),
-            to: SKILLS.replace(':id?', String(skill.id)),
+            id: `${move.id.toString()}-details`,
+            label: getUiTranslation('moves-details'),
+            to: MOVES.replace(':id?', String(move.id)),
             type: 'button',
           },
         ]}
@@ -90,6 +90,6 @@ const unstyledSkillsEntry = ({ classes, className, skill }: IOwnProps) => (
   </TableRow>
 );
 
-const SkillsEntry = injectSheet(sheet)(unstyledSkillsEntry);
+const MovesEntry = injectSheet(sheet)(unstyledMovesEntry);
 
-export default SkillsEntry;
+export default MovesEntry;

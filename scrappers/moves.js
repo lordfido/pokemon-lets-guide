@@ -6,11 +6,11 @@ const pokeUtils = require('./utils.js');
 
 const SCRAP_URL = 'https://pokemondb.net/move/all';
 const ELEMENT_TO_SCRAP = 'table#moves';
-const OUTPUT_MAP_FILE = './src/constants/skills/skills-list.ts';
+const OUTPUT_MAP_FILE = './src/constants/moves/moves-list.ts';
 
 // WRITE TS FILE
-const skillsList = [];
-const addLineToSkillListTs = ({ accuracy, category, effect, id, name, power, pp, type }) => {
+const movesList = [];
+const addLineToMoveListTs = ({ accuracy, category, effect, id, name, power, pp, type }) => {
   const lines = [
     '  {',
     `    accuracy: ${accuracy},`,
@@ -23,18 +23,18 @@ const addLineToSkillListTs = ({ accuracy, category, effect, id, name, power, pp,
     '  },',
   ];
 
-  skillsList.push(lines.join('\n'));
+  movesList.push(lines.join('\n'));
 };
 
 const generateJson = () => {
   const beginning = [
-    "import { ISkillWithType } from '../../app/modules/skills/skills.models';",
+    "import { IMoveWithType } from '../../app/modules/moves/moves.models';",
     '',
-    'const skills: ISkillWithType[] = [',
+    'const moves: IMoveWithType[] = [',
   ];
-  const ending = ['];', '', 'export const getSkills = () => skills;', ''];
+  const ending = ['];', '', 'export const getMoves = () => moves;', ''];
 
-  const content = [beginning.join('\n'), skillsList.sort(pokeUtils.sortBy('id')).join('\n'), ending.join('\n')].join(
+  const content = [beginning.join('\n'), movesList.sort(pokeUtils.sortBy('id')).join('\n'), ending.join('\n')].join(
     '\n'
   );
   fs.writeFileSync(OUTPUT_MAP_FILE, content);
@@ -82,10 +82,10 @@ fetch(SCRAP_URL)
     const document = dom.window.document;
 
     const table = document.querySelector(ELEMENT_TO_SCRAP);
-    const skills = parseTable(table);
+    const moves = parseTable(table);
 
-    skills.forEach((skill, index) => {
-      addLineToSkillListTs({ ...skill, id: index + 1 });
+    moves.forEach((move, index) => {
+      addLineToMoveListTs({ ...move, id: index + 1 });
     });
 
     generateJson();

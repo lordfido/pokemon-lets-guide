@@ -36,7 +36,7 @@ export const gameTranslations: ITranslationsCollection = {
   level: ['', 'Level', '', 'Nivel', '', '', '', ''],
   nature: ['', 'Nature', '', 'Naturaleza', '', '', '', ''],
 
-  // Skills data
+  // Moves data
   accuracy: ['', 'Accuracy', '', 'Precisión', '', '', '', ''],
   category: ['', 'Category', '', 'Categoría', '', '', '', ''],
   power: ['', 'Power', '', 'Poder', '', '', '', ''],
@@ -70,8 +70,8 @@ export const uiTranslations: ITranslationsCollection = {
   // Header
   'header-calculator': ['', 'Calculator', '', 'Calculadora', '', '', '', ''],
   'header-home': ['', 'Home', '', 'Inicio', '', '', '', ''],
+  'header-moves': ['', 'Moves', '', 'Movimientos', '', '', '', ''],
   'header-pokedex': ['', 'Pokédex', '', 'Pokédex', '', '', '', ''],
-  'header-skills': ['', 'Skills', '', 'Movimientos', '', '', '', ''],
 
   // Footer
   'footer-game-elements': ['', "Game elements' language", '', 'Idioma de los elementos del juego', '', '', '', ''],
@@ -117,11 +117,11 @@ export const uiTranslations: ITranslationsCollection = {
     '',
   ],
 
-  // Skills
-  'skills-details': ['', 'Details', '', 'Detalles', '', '', '', ''],
-  'skills-load-more': ['', 'Load more', '', 'Ver más', '', '', '', ''],
+  // Moves
+  'moves-details': ['', 'Details', '', 'Detalles', '', '', '', ''],
+  'moves-load-more': ['', 'Load more', '', 'Ver más', '', '', '', ''],
 
-  // Skill
+  // Move
 
   // Search
   'search-base-cp': ['', 'Base CP', '', 'PC base', '', '', '', ''],
@@ -130,13 +130,13 @@ export const uiTranslations: ITranslationsCollection = {
   'search-filters-apply': ['', 'Search', '', 'Buscar', '', '', '', ''],
   'search-filters-reset': ['', 'Reset', '', 'Limpiar', '', '', '', ''],
   'search-include-types': ['', 'Include types', '', 'Incluir tipos', '', '', '', ''],
+  'search-move': ['', 'Move', '', 'Movimiento', '', '', '', ''],
   'search-pokemon': ['', 'Pokémon', '', 'Pokémon', '', '', '', ''],
   'search-select-some-stats': ['', 'Select some stats', '', 'Selecciona alguna estadística', '', '', '', ''],
   'search-select-some-types': ['', 'Select some types', '', 'Selecciona algún tipo', '', '', '', ''],
   'search-show-alolan-forms': ['', 'Show Alolan forms', '', 'Mostrar formas Alola', '', '', '', ''],
   'search-show-megaevolutions': ['', 'Show Megaevolutions', '', 'Mostrar Megaevoluciones', '', '', '', ''],
-  'search-show-tm': ['', 'Show TM skills', '', 'Mostrar habilidades MT', '', '', '', ''],
-  'search-skill': ['', 'Skill', '', 'Habilidad', '', '', '', ''],
+  'search-show-tm': ['', 'Show TM moves', '', 'Mostrar movimientos MT', '', '', '', ''],
   'search-strong-against': ['', 'Strong against', '', 'Fuerte contra', '', '', '', ''],
   'search-weak-against': ['', 'Weak against', '', 'Débil contra', '', '', '', ''],
   'search-worst-stats': ['', 'Worst stats', '', 'Peores estadísticas', '', '', '', ''],

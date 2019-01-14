@@ -2,10 +2,10 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { PADDING_XXL, SIZE_XXL } from '../../constants/styles/styles';
+import { CSS_SIZES, PADDING_XXL, SIZE_XXL } from '../../constants/styles/styles';
 import { BRAND_COLOR } from '../../constants/styles/styles-colors';
 
-import { CssSizes, ISheet } from '../root.models';
+import { ISheet } from '../root.models';
 
 const spinnerSize = SIZE_XXL;
 
@@ -93,7 +93,7 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  size?: CssSizes;
+  size?: CSS_SIZES;
 }
 
 const unstyledLoading = ({ classes, size = 'md' }: IOwnProps) => (

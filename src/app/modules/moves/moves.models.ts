@@ -1,11 +1,10 @@
 import { AnyAction } from 'redux';
-import { mockedSkillsCollection } from '../../../common/apis/mocks';
+import { mockedMovessCollection } from '../../../common/apis/mocks';
 import { sortBy } from '../../utils/arrays';
 import { getTypeRelations } from '../../utils/pokemon';
 
-import { SkillsActionType } from '../../../constants/actionTypes';
+import { MovesActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
-import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 import {
   MAX_ACCURACY_VALUE,
   MAX_POWER_VALUE,
@@ -13,52 +12,55 @@ import {
   MAX_PROBABILITY_VALUE,
   MIN_POWER_VALUE,
   MIN_PP_VALUE,
-} from '../../../constants/skills/skills';
-import { SkillCategory } from '../../../constants/skills/skills-categories';
+} from '../../../constants/moves/moves';
+import { MovesCategory } from '../../../constants/moves/moves-categories';
+import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 
 import { ITypeRelations } from '../pokedex/pokedex.models';
 
-export interface ISkillsAction extends AnyAction {
-  type: SkillsActionType;
+export interface IMovesAction extends AnyAction {
+  type: MovesActionType;
 }
 
-export interface ISkillTypeData {
+interface IMoveTypeData {
   ownType: PokemonType;
   relations: ITypeRelations[];
 }
 
-interface ISkill {
+interface IMove {
   accuracy?: number;
-  category?: SkillCategory;
+  category?: MovesCategory;
   effect?: string;
   id: string;
   power?: number;
-  pp: number;
+  pp?: number;
   probability?: number;
   tm?: number;
 }
 
-export interface ISkillWithType extends ISkill {
+export interface IScrappedMove extends IMove {
   type: PokemonType;
 }
 
-export interface IRichSkill extends ISkill {
-  types: ISkillTypeData;
+export interface IRichMove extends IMove {
+  name: string;
+  types: IMoveTypeData;
 }
 
-export interface ISkillsPagination {
+export interface IMovesPagination {
   first: number;
   last: number;
 }
 
-export interface ISkillPagination {
-  next: IRichSkill;
-  prev: IRichSkill;
+export interface IMovePagination {
+  next: IRichMove;
+  prev: IRichMove;
 }
 
-export interface ISkillsFilters {
+export interface IMovesFilters {
   accuracy: [number, number];
-  category?: SkillCategory;
+  category?: MovesCategory;
+  // canBeLearntBy: string[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
   power: [number, number];
@@ -67,27 +69,26 @@ export interface ISkillsFilters {
   strongAgainst: PokemonType[];
   /**
    * TODO
-   *
-   * By defaul all skills will be shown.
+   * By defaul all movements will be shown.
    *
    * If user enable this filter (checkbox), a switch appears
-   * so user can decide user show only MTs or only not-MTs skills
+   * so user can decide user show only MTs or only not-MTs movements
    */
   tm?: boolean;
   weakAgainst: PokemonType[];
 }
 
-export interface ISkillsState {
-  collection: IRichSkill[];
-  filters: ISkillsFilters;
-  pagination: ISkillsPagination;
+export interface IMovesState {
+  collection: IRichMove[];
+  filters: IMovesFilters;
+  pagination: IMovesPagination;
   sort: {
     sortBy: string;
     order: string;
   };
 }
 
-export const skillsInitialState: ISkillsState = {
+export const movesInitialState: IMovesState = {
   collection: [],
   filters: {
     accuracy: [0, MAX_ACCURACY_VALUE],
@@ -114,8 +115,8 @@ export const skillsInitialState: ISkillsState = {
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
  */
-const createSkillFromPokeLab = (skill: ISkillWithType): IRichSkill => {
-  const { type, ...rest } = skill;
+const createMoveFromPokeLab = (move: IScrappedMove): IRichMove => {
+  const { type, ...rest } = move;
 
   const relations = getTypeRelations([type]);
 
@@ -126,9 +127,10 @@ const createSkillFromPokeLab = (skill: ISkillWithType): IRichSkill => {
 
   return {
     ...rest,
+    name: '',
     types,
   };
 };
 
-export const createSkillsCollectionFromPokeLab = (): IRichSkill[] =>
-  mockedSkillsCollection.map(createSkillFromPokeLab).sort(sortBy('id', 'asc'));
+export const createMovesCollectionFromPokeLab = (): IRichMove[] =>
+  mockedMovessCollection.map(createMoveFromPokeLab).sort(sortBy('id', 'asc'));

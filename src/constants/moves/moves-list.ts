@@ -1,6 +1,6 @@
-import { ISkillWithType } from '../../app/modules/skills/skills.models';
+import { IScrappedMove } from '../../app/modules/moves/moves.models';
 
-const skills: ISkillWithType[] = [
+const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Special',
@@ -6519,4 +6519,4 @@ const skills: ISkillWithType[] = [
   },
 ];
 
-export const getSkills = () => skills;
+export const getMoves = () => moves;

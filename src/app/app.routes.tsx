@@ -2,9 +2,9 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import CalculatorWrapper from '../app/modules/calculator/calculator-wrapper';
+import MovesWrapper from './modules/moves/moves-wrapper';
 import PokedexWrapper from './modules/pokedex/pokedex-wrapper';
 import PokemonWrapper from './modules/pokemon/pokemon-wrapper';
-import SkillsWrapper from './modules/skills/skills-wrapper';
 
 import * as routes from '../constants/appRoutes';
 
@@ -30,19 +30,19 @@ export const CALCULATOR: IRouteConfig = {
   },
 };
 
-export const SKILLS_SEARCH: IRouteConfig = {
-  path: routes.SKILLS_SEARCH,
+export const MOVES_SEARCH: IRouteConfig = {
+  path: routes.MOVES_SEARCH,
   render: ({ match }) => {
     const {
       params: { query },
       url,
     } = match;
-    return <SkillsWrapper url={url} query={query} />;
+    return <MovesWrapper url={url} query={query} />;
   },
 };
 
-export const SKILLS: IRouteConfig = {
-  path: routes.SKILLS,
+export const MOVES: IRouteConfig = {
+  path: routes.MOVES,
   render: ({ match }) => {
     const {
       // params: { id },
@@ -50,9 +50,9 @@ export const SKILLS: IRouteConfig = {
     } = match;
     // if (id) {
     //   // @ts-ignore
-    //   return <SkillWrapper id={id} />;
+    //   return <MoveWrapper id={id} />;
     // }
-    return <SkillsWrapper url={url} />;
+    return <MovesWrapper url={url} />;
   },
 };
 
@@ -85,17 +85,9 @@ export const POKEDEX: IRouteConfig = {
 export const HOME: IRouteConfig = {
   path: routes.HOME,
   render: ({ match }) => {
-    if (false) {
-      const {
-        params: { id },
-      } = match;
-      // @ts-ignore
-      return <CalculatorWrapper id={id || '025'} />;
-    }
-
     const { url } = match;
     return <PokedexWrapper url={url} />;
   },
 };
 
-export default [CALCULATOR, SKILLS_SEARCH, SKILLS, POKEDEX_SEARCH, POKEDEX, HOME];
+export default [CALCULATOR, MOVES_SEARCH, MOVES, POKEDEX_SEARCH, POKEDEX, HOME];

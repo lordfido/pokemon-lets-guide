@@ -12,16 +12,16 @@ export const POKEDEX_LOAD_MORE: PokedexActionType = 'POKEDEX_LOAD_MORE';
 export const POKEDEX_RESET_FILTERS: PokedexActionType = 'POKEDEX_RESET_FILTERS';
 export const POKEDEX_SORT: PokedexActionType = 'POKEDEX_SORT';
 
-// Skills
-export type SkillsActionType =
-  | 'SKILLS_CREATE'
-  | 'SKILLS_FILTER'
-  | 'SKILLS_LOAD_MORE'
-  | 'SKILLS_RESET_FILTERS'
-  | 'SKILLS_SORT';
+// Moves
+export type MovesActionType =
+  | 'MOVES_CREATE'
+  | 'MOVES_FILTER'
+  | 'MOVES_LOAD_MORE'
+  | 'MOVES_RESET_FILTERS'
+  | 'MOVES_SORT';
 
-export const SKILLS_CREATE: SkillsActionType = 'SKILLS_CREATE';
-export const SKILLS_FILTER: SkillsActionType = 'SKILLS_FILTER';
-export const SKILLS_LOAD_MORE: SkillsActionType = 'SKILLS_LOAD_MORE';
-export const SKILLS_RESET_FILTERS: SkillsActionType = 'SKILLS_RESET_FILTERS';
-export const SKILLS_SORT: SkillsActionType = 'SKILLS_SORT';
+export const MOVES_CREATE: MovesActionType = 'MOVES_CREATE';
+export const MOVES_FILTER: MovesActionType = 'MOVES_FILTER';
+export const MOVES_LOAD_MORE: MovesActionType = 'MOVES_LOAD_MORE';
+export const MOVES_RESET_FILTERS: MovesActionType = 'MOVES_RESET_FILTERS';
+export const MOVES_SORT: MovesActionType = 'MOVES_SORT';

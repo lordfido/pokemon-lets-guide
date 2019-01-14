@@ -4,22 +4,16 @@ import { Redirect } from 'react-router';
 import { updateCollection } from '../../utils/collections';
 import { filtersToString, stringToFilters } from '../../utils/urls';
 
-import SkillsView from './skills-view';
+import MovesView from './moves-view';
 
-import {
-  getRawSkills,
-  getSkills,
-  getSkillsFilters,
-  getSkillsPagination,
-  getSkillsSortOptions,
-} from '../../root.reducer';
-import { filterSkills, loadMoreSkills, resetSkillsFilters, sortSkills } from './skills.actions';
+import { getMoves, getMovesFilters, getMovesPagination, getMovesSortOptions, getRawMoves } from '../../root.reducer';
+import { filterMoves, loadMoreMoves, resetMovesFilters, sortMoves } from './moves.actions';
 
-import { SKILLS, SKILLS_SEARCH } from '../../../constants/appRoutes';
+import { MOVES, MOVES_SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
 import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
-import { IRichSkill, ISkillsFilters, ISkillsPagination, skillsInitialState } from './skills.models';
+import { IMovesFilters, IMovesPagination, IRichMove, movesInitialState } from './moves.models';
 
 interface IOwnProps {
   query?: string;
@@ -27,10 +21,10 @@ interface IOwnProps {
 }
 
 interface IStateProps {
-  collection: IRichSkill[];
-  filters: ISkillsFilters;
-  pagination: ISkillsPagination;
-  skillList: IOption[];
+  collection: IRichMove[];
+  filters: IMovesFilters;
+  pagination: IMovesPagination;
+  movesList: IOption[];
   sort: {
     sortBy: string;
     order: string;
@@ -38,43 +32,43 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
-  FilterSkills: (
+  FilterMoves: (
     parameters: Array<{
       name: string;
       value: string | string[] | boolean;
     }>
   ) => void;
-  LoadMoreSkills: () => void;
-  ResetSkillsFilters: () => void;
-  SortSkills: (parameters: any) => void;
+  LoadMoreMoves: () => void;
+  ResetMovesFilters: () => void;
+  SortMoves: (parameters: any) => void;
 }
 
 type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
-  filters: ISkillsFilters;
+  filters: IMovesFilters;
   redirectTo?: string;
 }
 
-class SkillsWrapper extends React.Component<Props, IOwnState> {
+class MovesWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
-    filters: skillsInitialState.filters,
+    filters: movesInitialState.filters,
     redirectTo: '',
   };
 
   public componentDidMount() {
-    const { FilterSkills, query } = this.props;
+    const { FilterMoves, query } = this.props;
 
     const urlFilters = stringToFilters(query);
-    const parsedFilters = Object.keys(skillsInitialState.filters).map(key => ({
+    const parsedFilters = Object.keys(movesInitialState.filters).map(key => ({
       name: key,
       // @ts-ignore
-      value: urlFilters[key] || skillsInitialState.filters[key],
+      value: urlFilters[key] || movesInitialState.filters[key],
     }));
 
-    FilterSkills(parsedFilters);
+    FilterMoves(parsedFilters);
   }
 
   public componentDidUpdate(prevProps: Props) {
@@ -87,21 +81,21 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
     }
 
     if (prevProps.url !== this.props.url) {
-      const { FilterSkills, query } = this.props;
+      const { FilterMoves, query } = this.props;
 
       const urlFilters = stringToFilters(query);
-      const parsedFilters = Object.keys(skillsInitialState.filters).map(key => ({
+      const parsedFilters = Object.keys(movesInitialState.filters).map(key => ({
         name: key,
         // @ts-ignore
-        value: urlFilters[key] || skillsInitialState.filters[key],
+        value: urlFilters[key] || movesInitialState.filters[key],
       }));
 
-      FilterSkills(parsedFilters);
+      FilterMoves(parsedFilters);
     }
   }
 
   public handleSortBy = (sortBy: string) => {
-    const { SortSkills, sort } = this.props;
+    const { SortMoves, sort } = this.props;
 
     const isTheSameFilter = sortBy === sort.sortBy;
     const options = ['asc', 'desc'];
@@ -111,14 +105,14 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
       order = options[1];
     }
 
-    SortSkills({ sortBy, order });
+    SortMoves({ sortBy, order });
   };
 
-  public handleSkillChange = (field: IFieldOutput) => {
+  public handleMoveChange = (field: IFieldOutput) => {
     const option = field.value as DropdownOutput;
 
     this.setState({
-      redirectTo: SKILLS.replace(':id?', option ? option.value : ''),
+      redirectTo: MOVES.replace(':id?', option ? option.value : ''),
     });
   };
 
@@ -153,7 +147,7 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
 
   public handleReset = () => {
     this.setState({
-      redirectTo: SKILLS.replace(':id?', ''),
+      redirectTo: MOVES.replace(':id?', ''),
     });
   };
 
@@ -162,18 +156,18 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
 
     const redirectTo = filtersToString(filters);
     this.setState({
-      redirectTo: redirectTo ? SKILLS_SEARCH.replace(':query', redirectTo) : SKILLS.replace(':id?', ''),
+      redirectTo: redirectTo ? MOVES_SEARCH.replace(':query', redirectTo) : MOVES.replace(':id?', ''),
     });
   };
 
-  public handleLoadMoreSkills = () => {
-    const { LoadMoreSkills } = this.props;
+  public handleLoadMore = () => {
+    const { LoadMoreMoves } = this.props;
 
-    LoadMoreSkills();
+    LoadMoreMoves();
   };
 
   public render() {
-    const { collection, filters, url, pagination, skillList } = this.props;
+    const { collection, filters, url, pagination, movesList } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -181,12 +175,12 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
     }
 
     return (
-      <SkillsView
+      <MovesView
         collection={collection}
         handleSortBy={this.handleSortBy}
-        skillList={skillList}
-        handleSkillChange={e => {
-          this.handleSkillChange(e);
+        movesList={movesList}
+        handleMoveChange={e => {
+          this.handleMoveChange(e);
         }}
         filters={filters}
         handleFilterChange={e => {
@@ -201,7 +195,7 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
         handleLoadMore={
           collection.length >= pagination.last
             ? () => {
-                this.handleLoadMoreSkills();
+                this.handleLoadMore();
               }
             : undefined
         }
@@ -211,25 +205,25 @@ class SkillsWrapper extends React.Component<Props, IOwnState> {
 }
 
 const mapStateToProps = (state: IRootState) => ({
-  collection: getSkills(state),
-  filters: getSkillsFilters(state),
-  pagination: getSkillsPagination(state),
-  skillList: getRawSkills(state).map(skill => ({
-    id: skill.id,
-    label: skill.name,
-    value: skill.id,
+  collection: getMoves(state),
+  filters: getMovesFilters(state),
+  movesList: getRawMoves(state).map(move => ({
+    id: move.id,
+    label: move.name,
+    value: move.id,
   })),
-  sort: getSkillsSortOptions(state),
+  pagination: getMovesPagination(state),
+  sort: getMovesSortOptions(state),
 });
 
 const mapDispatchToProps = {
-  FilterSkills: filterSkills,
-  LoadMoreSkills: loadMoreSkills,
-  ResetSkillsFilters: resetSkillsFilters,
-  SortSkills: sortSkills,
+  FilterMoves: filterMoves,
+  LoadMoreMoves: loadMoreMoves,
+  ResetMovesFilters: resetMovesFilters,
+  SortMoves: sortMoves,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SkillsWrapper);
+)(MovesWrapper);

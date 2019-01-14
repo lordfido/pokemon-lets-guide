@@ -2,25 +2,25 @@ import { sortBy } from '../../utils/arrays';
 import { getTypeRelations } from '../../utils/pokemon';
 
 import {
-  SKILLS_CREATE,
-  SKILLS_FILTER,
-  SKILLS_LOAD_MORE,
-  SKILLS_RESET_FILTERS,
-  SKILLS_SORT,
+  MOVES_CREATE,
+  MOVES_FILTER,
+  MOVES_LOAD_MORE,
+  MOVES_RESET_FILTERS,
+  MOVES_SORT,
 } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
 
-import { IRichSkill, ISkillsAction, ISkillsState, skillsInitialState } from './skills.models';
+import { IMovesAction, IMovesState, IRichMove, movesInitialState } from './moves.models';
 
-const reducer = (state = skillsInitialState, action: ISkillsAction): ISkillsState => {
+const reducer = (state = movesInitialState, action: IMovesAction): IMovesState => {
   switch (action.type) {
-    case SKILLS_CREATE:
+    case MOVES_CREATE:
       return {
         ...state,
         collection: action.payload.collection,
       };
 
-    case SKILLS_FILTER:
+    case MOVES_FILTER:
       const newFilters = {
         ...state.filters,
       };
@@ -37,7 +37,7 @@ const reducer = (state = skillsInitialState, action: ISkillsAction): ISkillsStat
         filters: newFilters,
       };
 
-    case SKILLS_LOAD_MORE:
+    case MOVES_LOAD_MORE:
       return {
         ...state,
         pagination: {
@@ -46,15 +46,15 @@ const reducer = (state = skillsInitialState, action: ISkillsAction): ISkillsStat
         },
       };
 
-    case SKILLS_RESET_FILTERS:
+    case MOVES_RESET_FILTERS:
       return {
         ...state,
         filters: {
-          ...skillsInitialState.filters,
+          ...movesInitialState.filters,
         },
       };
 
-    case SKILLS_SORT:
+    case MOVES_SORT:
       return {
         ...state,
         sort: action.payload.sort,
@@ -65,17 +65,17 @@ const reducer = (state = skillsInitialState, action: ISkillsAction): ISkillsStat
   }
 };
 
-// Get a list of skills (already filtered)
-export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
+// Get a list of moves (already filtered)
+export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
   const { collection, filters, pagination } = state;
 
   return collection
-    .filter(skill => {
+    .filter(move => {
       // Filter list by included types
       if (filters.includedTypes.length) {
         let shouldShow = false;
         filters.includedTypes.forEach(type => {
-          if (skill.types.ownType === type) {
+          if (move.types.ownType === type) {
             shouldShow = true;
           }
         });
@@ -89,7 +89,7 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
       if (filters.excludedTypes.length) {
         let shouldSkip = false;
         filters.excludedTypes.forEach(type => {
-          if (skill.types.ownType === type) {
+          if (move.types.ownType === type) {
             shouldSkip = true;
           }
         });
@@ -101,7 +101,7 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
 
       // Filter list by strong against
       if (filters.strongAgainst.length) {
-        const relations = getTypeRelations([skill.types.ownType]);
+        const relations = getTypeRelations([move.types.ownType]);
 
         let shouldSkip = true;
         filters.strongAgainst.forEach(type => {
@@ -118,7 +118,7 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
 
       // Filter list by weak against
       if (filters.weakAgainst.length) {
-        const relations = getTypeRelations([skill.types.ownType]);
+        const relations = getTypeRelations([move.types.ownType]);
 
         let shouldSkip = true;
         filters.weakAgainst.forEach(type => {
@@ -135,21 +135,21 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
 
       // Filter by accuracy
       if (typeof filters.accuracy !== 'undefined') {
-        if (skill.accuracy && (skill.accuracy < filters.accuracy[0] || skill.accuracy > filters.accuracy[1])) {
+        if (move.accuracy && (move.accuracy < filters.accuracy[0] || move.accuracy > filters.accuracy[1])) {
           return false;
         }
       }
 
       // Filter by power
       if (typeof filters.power !== 'undefined') {
-        if (skill.power && (skill.power < filters.power[0] || skill.power > filters.power[1])) {
+        if (move.power && (move.power < filters.power[0] || move.power > filters.power[1])) {
           return false;
         }
       }
 
       // Filter by pp
       if (typeof filters.pp !== 'undefined') {
-        if (skill.pp < filters.pp[0] || skill.pp > filters.pp[1]) {
+        if (move.pp && (move.pp < filters.pp[0] || move.pp > filters.pp[1])) {
           return false;
         }
       }
@@ -157,8 +157,8 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
       // Filter by probability
       if (typeof filters.probability !== 'undefined') {
         if (
-          skill.probability &&
-          (skill.probability < filters.probability[0] || skill.probability > filters.probability[1])
+          move.probability &&
+          (move.probability < filters.probability[0] || move.probability > filters.probability[1])
         ) {
           return false;
         }
@@ -166,7 +166,7 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
 
       // Filter by category
       if (typeof filters.category !== 'undefined' && filters.category) {
-        if (skill.category !== filters.category) {
+        if (move.category !== filters.category) {
           return false;
         }
       }
@@ -177,33 +177,33 @@ export const getSkills = (state: ISkillsState, isPaginated: boolean = true) => {
     .slice(pagination.first, isPaginated ? pagination.last : state.collection.length);
 };
 
-// Get a complete list of skills (without paginate, order or filter)
-export const getRawSkills = (state: ISkillsState) => state.collection;
+// Get a complete list of moves (without paginate, order or filter)
+export const getRawMoves = (state: IMovesState) => state.collection;
 
-// Get pagination data for skills list
-export const getSkillsPagination = (state: ISkillsState) => state.pagination;
+// Get pagination data for moves list
+export const getMovesPagination = (state: IMovesState) => state.pagination;
 
-// Get sorting options for skills list
-export const getSkillsSortOptions = (state: ISkillsState) => state.sort;
+// Get sorting options for moves list
+export const getMovesSortOptions = (state: IMovesState) => state.sort;
 
 // Returns all filters
-export const getSkillsFilters = (state: ISkillsState) => state.filters;
+export const getMovesFilters = (state: IMovesState) => state.filters;
 
-// Skill Details
+// Move Details
 // Get details of selected pokemon
-export const getSelectedSkill = (state: ISkillsState) => (skillId: string) =>
-  state.collection.find(skill => skill.id === skillId);
+export const getSelectedMove = (state: IMovesState) => (moveId: string) =>
+  state.collection.find(move => move.id === moveId);
 
 // Get pagination data for a particular pokemon (already filtered)
-export const getSkillPagination = (state: ISkillsState) => (skillId: string) => {
-  const sameSkill = (skill: IRichSkill) => skill.id === skillId;
+export const getMovePagination = (state: IMovesState) => (moveId: string) => {
+  const sameMove = (move: IRichMove) => move.id === moveId;
 
   // Select filtered collection or complete collection
-  const filteredCollection = getSkills(state, false);
-  const collection = filteredCollection.findIndex(sameSkill) >= 0 ? filteredCollection : state.collection;
+  const filteredCollection = getMoves(state, false);
+  const collection = filteredCollection.findIndex(sameMove) >= 0 ? filteredCollection : state.collection;
 
   // Select pokemon position in that position
-  const position = collection.findIndex(sameSkill);
+  const position = collection.findIndex(sameMove);
 
   return {
     next: position < collection.length - 1 ? collection[position + 1] : collection[0],

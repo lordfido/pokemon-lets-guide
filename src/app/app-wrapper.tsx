@@ -11,8 +11,8 @@ import registerServiceWorker from './utils/service-worker';
 import AppView from './app-view';
 import routes from './app.routes';
 
+import { createMoves } from './modules/moves/moves.actions';
 import { createPokedex } from './modules/pokedex/pokedex.actions';
-import { createSkills } from './modules/skills/skills.actions';
 
 import { restoreLastRoute } from '../constants/features';
 import { APP_FINISHED, APP_INIT } from '../constants/metrics/actions';
@@ -42,14 +42,14 @@ interface IStateProps {
 
 interface IDispatchProps {
   GetPokemon: () => void;
-  GetSkills: () => void;
+  GetMoves: () => void;
 }
 
 type Props = IOwnProps & RouteProps & IStateProps & IDispatchProps;
 
 class AppWrapper extends React.Component<Props> {
   public componentDidMount() {
-    const { GetPokemon, GetSkills, lastRoute, history } = this.props;
+    const { GetPokemon, GetMoves, lastRoute, history } = this.props;
 
     if (restoreLastRoute && lastRoute) {
       history.push({
@@ -67,8 +67,8 @@ class AppWrapper extends React.Component<Props> {
     // Get pokedex
     GetPokemon();
 
-    // Get skills
-    GetSkills();
+    // Get moves
+    GetMoves();
 
     const initTimer = analyticsApi.getTimer(APP_INIT);
     const renderTimer = new Date().getTime() - initTimer;
@@ -137,8 +137,8 @@ const mapStateToProps = (state: IRootState): IStateProps => {
 };
 
 const mapDispatchToProps = {
+  GetMoves: createMoves,
   GetPokemon: createPokedex,
-  GetSkills: createSkills,
 };
 
 const connectedApp = withRouter(

@@ -1,11 +1,11 @@
 import { CSSProperties } from 'react-jss';
 import { combineReducers } from 'redux';
 
+import movesReducer from './modules/moves/moves.reducer';
 import pokedexReducer from './modules/pokedex/pokedex.reducer';
-import skillsReducer from './modules/skills/skills.reducer';
 
+import { IMovesState } from './modules/moves/moves.models';
 import { IPokedexState } from './modules/pokedex/pokedex.models';
-import { ISkillsState } from './modules/skills/skills.models';
 
 export interface IDefaultAction {
   type: string;
@@ -13,18 +13,16 @@ export interface IDefaultAction {
 }
 
 export interface IRootState {
+  moves: IMovesState;
   pokedex: IPokedexState;
-  skills: ISkillsState;
 }
 
 export const createRootReducer = () =>
   combineReducers({
+    moves: movesReducer,
     pokedex: pokedexReducer,
-    skills: skillsReducer,
   });
 
 export interface ISheet {
   [key: string]: CSSProperties;
 }
-
-export type CssSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

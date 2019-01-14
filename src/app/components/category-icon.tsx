@@ -1,8 +1,8 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
-import { SkillCategory } from '../../constants/skills/skills-categories';
-import { getCategoryIcon } from '../../constants/skills/skills-categories-icons';
+import { MovesCategory } from '../../constants/moves/moves-categories';
+import { getMovesCategoryIcon } from '../../constants/moves/moves-categories-icons';
 import { BORDER_RADIUS } from '../../constants/styles/styles';
 
 import { ISheet } from '../root.models';
@@ -17,12 +17,12 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  category: SkillCategory;
+  category?: MovesCategory;
 }
 
 const unstyledCategoryIcon = ({ classes, category }: IOwnProps) =>
   category ? (
-    <img className={classes.image} src={getCategoryIcon(category)} alt={`${category} category icon`} />
+    <img className={classes.image} src={getMovesCategoryIcon(category)} alt={`${category} category icon`} />
   ) : (
     <span>{'-'}</span>
   );
