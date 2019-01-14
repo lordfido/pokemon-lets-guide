@@ -22,7 +22,7 @@
     "scrap-pokemon-sprites": "node ./scrappers/pokemon-sprites.js",
     "scrap-pokemon-descriptions": "",
     "scrap-skills": "node ./scrappers/skills.js",
-    "scrap": "npm run scrap-skills",
+    "scrap": "npm run scrap-skills && npm run scrap-pokemon-sprites",
     "lint": "tslint **/*.ts **/*.tsx !node_modules/*",
     "check-types": "tsc",
     "prettier": "prettier --config .prettierrc --write './src/**/*.tsx' './src/**/*.ts' './src/**/*.js'",

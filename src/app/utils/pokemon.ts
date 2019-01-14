@@ -33,9 +33,9 @@ export const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): numbe
 export const getPaddedId = (pokemonId: string): string => {
   let id = String(pokemonId);
 
-  if (pokemonId.length === 1) {
+  if (id.length === 1) {
     id = `00${pokemonId}`;
-  } else if (pokemonId.length === 2) {
+  } else if (id.length === 2) {
     id = `0${pokemonId}`;
   }
 
