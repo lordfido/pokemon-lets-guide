@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { getPaddedId } from '../../utils/pokemon';
 import { getUiTranslation } from '../../utils/translations';
 
 import Buttons from '../../components/buttons';
