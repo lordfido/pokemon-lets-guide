@@ -119,6 +119,9 @@ const unstyledPokedexView = ({
             onClick: () => handleSortBy('id'),
           },
           {
+            label: '',
+          },
+          {
             label: getGameTranslation('name'),
             onClick: () => handleSortBy('name'),
           },

@@ -6,6 +6,7 @@ import { getPaddedId } from '../../utils/pokemon';
 import { getUiTranslation } from '../../utils/translations';
 
 import Buttons from '../../components/buttons';
+import PokemonSprite from '../../components/pokemon-sprite';
 import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
@@ -45,6 +46,11 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
   <TableRow className={className}>
     {/* National Number */}
     <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
+
+    {/* Sprite */}
+    <TableCell center>
+      <PokemonSprite pokemon={pokemon} />
+    </TableCell>
 
     {/* Name */}
     <TableCell ellipsis={true}>{pokemon.name}</TableCell>
