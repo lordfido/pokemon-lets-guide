@@ -76,6 +76,34 @@ const getVariantName = ({ name, isAlolan, isMega, variant }) => {
 
   return name;
 };
+
+const sortBy = (key, order = 'desc') => (a, b) => {
+  const isProperty = /\./.test(key);
+
+  if (isProperty) {
+    const keys = key.split('.');
+    if (a[keys[0]][keys[1]] > b[keys[0]][keys[1]]) {
+      return order === 'asc' ? 1 : -1;
+    }
+    if (a[keys[0]][keys[1]] < b[keys[0]][keys[1]]) {
+      return order === 'asc' ? -1 : 1;
+    }
+    return 0;
+  }
+
+  const firstProp = a[key] || 0;
+  const secondProp = b[key] || 0;
+
+  // Sort
+  if (firstProp > secondProp) {
+    return order === 'asc' ? 1 : -1;
+  }
+  if (firstProp < secondProp) {
+    return order === 'asc' ? -1 : 1;
+  }
+  return 0;
+};
+
 const variantOptions = [
   // Megaevolutions
   {
@@ -371,4 +399,5 @@ module.exports = {
   getPaddedId,
   getVariantId,
   getVariantName,
+  sortBy,
 };

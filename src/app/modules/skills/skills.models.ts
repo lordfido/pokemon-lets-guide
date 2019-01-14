@@ -29,10 +29,9 @@ export interface ISkillTypeData {
 
 interface ISkill {
   accuracy?: number;
-  category: SkillCategory;
+  category?: SkillCategory;
   effect?: string;
   id: string;
-  name: string;
   power?: number;
   pp: number;
   probability?: number;

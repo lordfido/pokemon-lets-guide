@@ -1,7 +1,7 @@
+import { getSkills } from '../../constants/skills/skills-list';
+
 import { IAdditionalPokemonInfo } from '../../app/modules/pokedex/pokedex.models';
 import { ISkillWithType } from '../../app/modules/skills/skills.models';
-
-const scrappedSkills = require('../../constants/skills/skills-list.json');
 
 export const mockedPokemonCollection: IAdditionalPokemonInfo[] = [
   {
@@ -123,7 +123,4 @@ export const mockedPokemonCollection: IAdditionalPokemonInfo[] = [
   },
 ];
 
-export const mockedSkillsCollection: ISkillWithType[] = scrappedSkills.map((skill: ISkillWithType, index: number) => ({
-  ...skill,
-  id: index + 1,
-}));
+export const mockedSkillsCollection: ISkillWithType[] = getSkills();
