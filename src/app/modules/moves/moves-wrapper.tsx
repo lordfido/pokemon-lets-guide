@@ -47,16 +47,16 @@ type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
-  filters: IMovesFilters;
   redirectTo?: string;
 }
 
 class MovesWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
-    filters: movesInitialState.filters,
     redirectTo: '',
   };
+
+  public filters = movesInitialState.filters;
 
   public componentDidMount() {
     const { FilterMoves, query } = this.props;
@@ -117,7 +117,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleFilterChange = (field: IFieldOutput) => {
-    const { filters } = this.state;
+    const { filters } = this;
 
     const newFilters = {
       ...filters,
@@ -140,9 +140,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
       newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => (s.value ? s.value : s)));
     }
 
-    this.setState({
-      filters: newFilters,
-    });
+    this.filters = newFilters;
   };
 
   public handleReset = () => {
@@ -152,7 +150,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleSubmit = () => {
-    const { filters } = this.state;
+    const { filters } = this;
 
     const redirectTo = filtersToString(filters);
     this.setState({
