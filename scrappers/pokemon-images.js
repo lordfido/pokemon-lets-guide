@@ -9,7 +9,7 @@ const pokeUtils = require('./utils.js');
 // CONSTANTS
 const SHOULD_DOWNLOAD_IMAGES = false;
 const SCRAP_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/';
-const IMAGES_DOWNLOAD_PATH = './src/assets/images/pokemon-images/';
+const IMAGES_DOWNLOAD_PATH = '/src/assets/images/pokemon-images/';
 const OUTPUT_MAP_FILE = './src/constants/pokemon/pokemon-images.ts';
 const pokemonList = [];
 const ROUNDS = 16;
