@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 
-import baseConfig, { manifestPlugin } from './base.config';
+import baseConfig, { imageOptimizedLoader, manifestPlugin } from './base.config';
 import { appConfig as devAppConfig, swConfig as devSwConfig } from './dev.config';
 
 const appConfig: webpack.Configuration = {
@@ -14,6 +14,10 @@ const appConfig: webpack.Configuration = {
   devtool: 'source-map',
 
   entry: baseConfig.entry,
+
+  module: {
+    rules: [imageOptimizedLoader, ...baseConfig.module.rules.splice(1)],
+  },
 
   plugins: [
     new webpack.DefinePlugin({

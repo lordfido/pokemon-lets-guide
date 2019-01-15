@@ -18,7 +18,7 @@ export const regex = {
   ts: /\.(tsx?|js)$/,
 };
 
-export const loaderImages = {
+const imageOptimizations = {
   loader: 'image-webpack-loader',
   query: {
     // gifsicle
@@ -45,6 +45,25 @@ export const loaderImages = {
       plugins: [{ cleanupIDs: false }],
     },
   },
+};
+
+export const imageLoader = {
+  exclude: /node_modules/,
+  include: paths.src,
+  test: regex.img,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name: '[path][name].[ext]',
+      },
+    },
+  ],
+};
+
+export const imageOptimizedLoader = {
+  ...imageLoader,
+  use: [...imageLoader.use, imageOptimizations],
 };
 
 export const manifestPlugin = new ManifestPlugin({
