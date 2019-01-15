@@ -1,9 +1,11 @@
-const { NODE_ENV: env } = process.env;
+import { DEVELOPMENT, Environment, PRE_PRODUCTION, PRODUCTION } from '../../constants/environment';
+
+const env = process.env.NODE_ENV as Environment;
 
 // Environments
-export const isProduction = () => env === 'production';
-export const isPre = () => env === 'pre';
-export const isDev = () => env === 'dev';
+export const isProduction = () => env === PRODUCTION;
+export const isPre = () => env === PRE_PRODUCTION;
+export const isDev = () => env === DEVELOPMENT;
 
 // Client
 export const isElectron = () => self.location.protocol === 'file:';

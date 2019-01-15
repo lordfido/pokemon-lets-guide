@@ -32,19 +32,20 @@ Pokelab.Pokedex.All.filter(pokemon => !pokemon.variant || /Partner/.test(pokemon
 // WRITE TS FILE
 const pokemonSpritesMap = [];
 const addLineToTs = ({ id, fileName }) => {
-  pokemonSpritesMap.push(`  '${id}': require('${IMAGES_DOWNLOAD_PATH.replace('./src', '../..')}${fileName}'),`);
+  pokemonSpritesMap.push(`  '${id}': isDev() ? '${SCRAP_URL}${fileName}' : '${IMAGES_DOWNLOAD_PATH}${fileName}',`);
 };
 
 const generateImagesMapTs = () => {
   const beginning = [
     "import { IPokemon, IPokemonWithBaseCP } from '../../app/modules/pokedex/pokedex.models';",
+    "import { isDev } from '../../common/utils/platforms';",
     '',
     'const pokemonImages: { [key: string]: string } = {',
   ];
   const ending = [
     '};',
     '',
-    'export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP): string | void => pokemonImages[id];',
+    'export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP): string | undefined => pokemonImages[id];',
     '',
   ];
 
