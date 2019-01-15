@@ -42,12 +42,12 @@ const sheet: ISheet = {
 interface IOwnProps {
   alt?: string;
   classes: { [key: string]: string };
-  src: string;
+  src?: string;
 }
 
 const unstyledPokemonPreview = ({ classes, src, alt }: IOwnProps) => (
   <div className={classes.window}>
-    <Image className={classes.image} src={src} alt={alt} />
+    {src  && <Image className={classes.image} src={src} alt={alt} />}
   </div>
 );
 
