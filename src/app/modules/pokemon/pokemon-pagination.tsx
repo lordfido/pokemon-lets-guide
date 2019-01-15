@@ -2,11 +2,11 @@ import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
-import { getAvatarFromId } from '../../utils/pokemon';
 
 import Avatar from '../../components/avatar';
 
 import { POKEDEX } from '../../../constants/appRoutes';
+import { getPokemonImage } from '../../../constants/pokemon/pokemon-images';
 import { PADDING_L, PADDING_XL } from '../../../constants/styles/styles';
 import { traslucentColor, WHITE } from '../../../constants/styles/styles-colors';
 import { FONT_XL, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
@@ -99,7 +99,7 @@ const unstyledPokemonPagination = ({ classes, currentPokemon, pagination: { prev
           to={{ pathname: `${POKEDEX.replace(':id?', String(prev.id))}` }}
         >
           <span className={classnames(classes.content, classes.contentLeft)}>
-            <span className={classes.label}>{prev.name}</span> <Avatar picture={getAvatarFromId(prev.id)} />
+            <span className={classes.label}>{prev.name}</span> <Avatar picture={getPokemonImage(prev)} />
           </span>
         </Link>
       )}
@@ -110,7 +110,7 @@ const unstyledPokemonPagination = ({ classes, currentPokemon, pagination: { prev
           to={{ pathname: `${POKEDEX.replace(':id?', String(next.id))}` }}
         >
           <span className={classnames(classes.content, classes.contentRight)}>
-            <Avatar picture={getAvatarFromId(next.id)} /> <span className={classes.label}>{next.name}</span>
+            <Avatar picture={getPokemonImage(next)} /> <span className={classes.label}>{next.name}</span>
           </span>
         </Link>
       )}

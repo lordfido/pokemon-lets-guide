@@ -46,9 +46,7 @@ interface IOwnProps {
 }
 
 const unstyledPokemonPreview = ({ classes, src, alt }: IOwnProps) => (
-  <div className={classes.window}>
-    {src  && <Image className={classes.image} src={src} alt={alt} />}
-  </div>
+  <div className={classes.window}>{src && <Image className={classes.image} src={src} alt={alt} />}</div>
 );
 
 const PokemonPreview = injectSheet(sheet)(unstyledPokemonPreview);

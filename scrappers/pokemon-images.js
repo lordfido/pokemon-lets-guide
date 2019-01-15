@@ -37,14 +37,14 @@ const addLineToTs = ({ id, fileName }) => {
 
 const generateImagesMapTs = () => {
   const beginning = [
-    "import { IPokemonWithBaseCP } from '../../app/modules/pokedex/pokedex.models';",
+    "import { IPokemon, IPokemonWithBaseCP } from '../../app/modules/pokedex/pokedex.models';",
     '',
     'const pokemonImages: { [key: string]: string } = {',
   ];
   const ending = [
     '};',
     '',
-    'export const getPokemonImage = ({ id }: IPokemonWithBaseCP): string | void => pokemonImages[id];',
+    'export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP): string | void => pokemonImages[id];',
     '',
   ];
 

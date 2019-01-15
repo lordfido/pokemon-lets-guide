@@ -29,15 +29,13 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
-  picture: string;
+  picture?: string;
 }
 
-const UnstyledAvatar = ({ classes, picture }: IOwnProps) => (
-  <div className={classes.wrapper}>
-    <Image className={classes.picture} src={picture} />
-  </div>
+const unstyledAvatar = ({ classes, picture }: IOwnProps) => (
+  <div className={classes.wrapper}>{picture && <Image className={classes.picture} src={picture} />}</div>
 );
 
-const Avatar = injectSheet(sheet)(UnstyledAvatar);
+const Avatar = injectSheet(sheet)(unstyledAvatar);
 
 export default Avatar;

@@ -1,4 +1,4 @@
-import { IPokemonWithBaseCP } from '../../app/modules/pokedex/pokedex.models';
+import { IPokemon, IPokemonWithBaseCP } from '../../app/modules/pokedex/pokedex.models';
 
 const pokemonImages: { [key: string]: string } = {
   '001': require('../../assets/images/pokemon-images/001.png'),
@@ -851,4 +851,4 @@ const pokemonImages: { [key: string]: string } = {
   '803': require('../../assets/images/pokemon-images/803.png'),
 };
 
-export const getPokemonImage = ({ id }: IPokemonWithBaseCP): string | undefined => pokemonImages[id];
+export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP): string | undefined => pokemonImages[id];
