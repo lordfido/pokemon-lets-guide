@@ -851,4 +851,4 @@ const pokemonImages: { [key: string]: string } = {
   '803': require('../../assets/images/pokemon-images/803.png'),
 };
 
-export const getPokemonImage = ({ id }: IPokemonWithBaseCP): string | void => pokemonImages[id];
+export const getPokemonImage = ({ id }: IPokemonWithBaseCP): string | undefined => pokemonImages[id];

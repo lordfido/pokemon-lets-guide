@@ -3,6 +3,7 @@ import { mockedPokemonCollection } from '../../common/apis/mocks';
 import { sortBy } from './arrays';
 import { getGameTranslation } from './translations';
 
+import { getPokemonImage } from '../../constants/pokemon/pokemon-images';
 import { MAX_IV_VALUE } from '../../constants/pokemon/pokemon-ivs';
 import {
   ATTACK_ID,
@@ -122,12 +123,6 @@ export const getVariantName = ({ name, isAlolan, isMega, variant }: IVariantName
 
   return name;
 };
-
-/**
- * Fetch the avatar of selected pokemon from www.pokemon.com
- */
-export const getAvatarFromId = (pokemonId: string): string =>
-  `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${getPaddedId(pokemonId)}.png`;
 
 interface IGetCPArguments {
   stats: IPokemonStats;
@@ -273,7 +268,7 @@ export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon =>
   const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
 
   // Get an avatar
-  const avatar = getAvatarFromId(basePokemon.id);
+  const avatar = getPokemonImage(basePokemon);
 
   // Get pokemon type strengths and weaknesses
   const relations = getTypeRelations(basePokemon.types.ownTypes);

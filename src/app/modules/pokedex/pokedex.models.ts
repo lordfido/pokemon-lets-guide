@@ -55,7 +55,7 @@ export interface IPokemonWithBaseCP extends IPokemon {
 
 export interface IRichPokemon extends IPokemonWithBaseCP {
   description: string;
-  avatar: string;
+  avatar?: string;
   relativeStats: IPokemonStats;
   suggestedStats?: IPokemonStats[];
   pokedexEntry: string;
