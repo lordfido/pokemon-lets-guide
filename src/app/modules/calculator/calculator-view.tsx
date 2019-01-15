@@ -1,7 +1,6 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { getRandomNumber } from '../../utils/numbers';
-import { getAvatarFromId } from '../../utils/pokemon';
 import { getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
@@ -12,6 +11,7 @@ import PokemonPreview from '../pokemon/pokemon-preview';
 import CalculatorCustomizations from './calculator-customizations';
 import CalculatorResult from './calculator-result';
 
+import { getPokemonImage } from '../../../constants/pokemon/pokemon-images';
 import { PokemonNature } from '../../../constants/pokemon/pokemon-natures';
 import { INatureEffect } from '../../../constants/pokemon/pokemon-natures-effects';
 import { FOOTER_SIZE, FOOTER_SIZE_L, HEADER_SIZE, PADDING_XL } from '../../../constants/styles/styles';
@@ -168,7 +168,7 @@ const unstyledCalculatorView = ({
           <div className={classes.emptyCase}>
             <h4>{getUiTranslation('calculator-empty-case')}</h4>
             <div className={classes.emptyCaseImage}>
-              {defaultPokemon && <PokemonPreview src={getAvatarFromId(defaultPokemon.id)} />}
+              {defaultPokemon && <PokemonPreview src={getPokemonImage (defaultPokemon)} />}
             </div>
           </div>
         )}
