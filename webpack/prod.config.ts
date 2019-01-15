@@ -16,7 +16,8 @@ const appConfig: webpack.Configuration = {
   entry: baseConfig.entry,
 
   module: {
-    rules: [imageOptimizedLoader, ...baseConfig.module.rules.splice(1)],
+    // @ts-ignore
+    rules: [imageOptimizedLoader, ...devAppConfig.module.rules.splice(1)],
   },
 
   plugins: [

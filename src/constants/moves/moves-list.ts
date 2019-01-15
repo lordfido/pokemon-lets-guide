@@ -4,7 +4,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Pikachu-exclusive Z-Move.",
+    effect: 'Pikachu-exclusive Z-Move.',
     id: '001',
     power: 195,
     pp: 1,
@@ -13,7 +13,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '002',
     power: 20,
     pp: 25,
@@ -22,7 +22,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '003',
     power: 40,
     pp: 20,
@@ -49,7 +49,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Poison type Z-Move.",
+    effect: 'Poison type Z-Move.',
     id: '006',
     power: undefined,
     pp: 1,
@@ -67,7 +67,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Stronger when the user does not have a held item.",
+    effect: 'Stronger when the user does not have a held item.',
     id: '008',
     power: 55,
     pp: 15,
@@ -76,7 +76,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Sharply raises a random stat.",
+    effect: 'Sharply raises a random stat.',
     id: '009',
     power: undefined,
     pp: 30,
@@ -85,7 +85,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '010',
     power: 60,
     pp: 20,
@@ -94,7 +94,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Special',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '011',
     power: 100,
     pp: 5,
@@ -103,7 +103,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Gives target priority in the next turn.",
+    effect: 'Gives target priority in the next turn.',
     id: '012',
     power: undefined,
     pp: 15,
@@ -121,7 +121,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Special',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '014',
     power: 60,
     pp: 25,
@@ -130,7 +130,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Special',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '015',
     power: 75,
     pp: 20,
@@ -139,7 +139,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Fighting type Z-Move.",
+    effect: 'Fighting type Z-Move.',
     id: '016',
     power: undefined,
     pp: 1,
@@ -148,7 +148,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User switches with opposite teammate.",
+    effect: 'User switches with opposite teammate.',
     id: '017',
     power: undefined,
     pp: 15,
@@ -166,7 +166,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user entangles the target with its anchor chain while attacking. The target becomes unable to flee.",
+    effect: 'The user entangles the target with its anchor chain while attacking. The target becomes unable to flee.',
     id: '019',
     power: 80,
     pp: 20,
@@ -184,7 +184,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '021',
     power: 40,
     pp: 20,
@@ -193,7 +193,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Restores a little HP each turn.",
+    effect: 'Restores a little HP each turn.',
     id: '022',
     power: undefined,
     pp: 20,
@@ -202,7 +202,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '023',
     power: 90,
     pp: 10,
@@ -211,7 +211,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '024',
     power: 15,
     pp: 20,
@@ -220,7 +220,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Cures all status problems in your party.",
+    effect: 'Cures all status problems in your party.',
     id: '025',
     power: undefined,
     pp: 5,
@@ -229,7 +229,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Raises Special Defense of allies.",
+    effect: 'Raises Special Defense of allies.',
     id: '026',
     power: undefined,
     pp: 20,
@@ -238,7 +238,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User performs a move known by its allies at random.",
+    effect: 'User performs a move known by its allies at random.',
     id: '027',
     power: undefined,
     pp: 20,
@@ -247,7 +247,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power doubles if opponent already took damage in the same turn.",
+    effect: 'Power doubles if opponent already took damage in the same turn.',
     id: '028',
     power: 60,
     pp: 10,
@@ -256,7 +256,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '029',
     power: 30,
     pp: 15,
@@ -265,7 +265,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '030',
     power: 90,
     pp: 15,
@@ -283,7 +283,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '032',
     power: 80,
     pp: 20,
@@ -301,7 +301,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Halves damage from Physical and Special attacks for five turns.",
+    effect: 'Halves damage from Physical and Special attacks for five turns.',
     id: '034',
     power: undefined,
     pp: 20,
@@ -310,7 +310,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Reduces weight and sharply raises Speed.",
+    effect: 'Reduces weight and sharply raises Speed.',
     id: '035',
     power: undefined,
     pp: 15,
@@ -319,7 +319,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power doubles if user took damage first.",
+    effect: 'Power doubles if user took damage first.',
     id: '036',
     power: 60,
     pp: 10,
@@ -337,7 +337,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Reduces damage from Physical attacks.",
+    effect: 'Reduces damage from Physical attacks.',
     id: '038',
     power: 90,
     pp: 15,
@@ -346,7 +346,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects the user and poisons opponent on contact.",
+    effect: 'Protects the user and poisons opponent on contact.',
     id: '039',
     power: undefined,
     pp: 10,
@@ -355,7 +355,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '040',
     power: 15,
     pp: 20,
@@ -373,7 +373,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User switches out and gives stat changes to the incoming Pokémon.",
+    effect: 'User switches out and gives stat changes to the incoming Pokémon.',
     id: '042',
     power: undefined,
     pp: 40,
@@ -382,7 +382,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user first heats up its beak, and then it attacks the target. Making direct contact with the Pokémon while it’s heating up its beak results in a burn.",
+    effect:
+      'The user first heats up its beak, and then it attacks the target. Making direct contact with the Pokémon while it’s heating up its beak results in a burn.',
     id: '043',
     power: 100,
     pp: 15,
@@ -391,7 +392,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Each Pokémon in your party attacks.",
+    effect: 'Each Pokémon in your party attacks.',
     id: '044',
     power: undefined,
     pp: 30,
@@ -400,7 +401,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User must have consumed a Berry.",
+    effect: 'User must have consumed a Berry.',
     id: '045',
     power: 120,
     pp: 10,
@@ -409,7 +410,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User loses 50% of its max HP, but Attack raises to maximum.",
+    effect: 'User loses 50% of its max HP, but Attack raises to maximum.',
     id: '046',
     power: undefined,
     pp: 10,
@@ -427,7 +428,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "User takes damage for two turns then strikes back double.",
+    effect: 'User takes damage for two turns then strikes back double.',
     id: '048',
     power: undefined,
     pp: 10,
@@ -436,7 +437,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '049',
     power: 15,
     pp: 20,
@@ -445,7 +446,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '050',
     power: 60,
     pp: 25,
@@ -454,7 +455,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Dark type Z-Move.",
+    effect: 'Dark type Z-Move.',
     id: '051',
     power: undefined,
     pp: 1,
@@ -463,7 +464,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '052',
     power: 150,
     pp: 5,
@@ -472,7 +473,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "High critical hit ratio. May burn opponent.",
+    effect: 'High critical hit ratio. May burn opponent.',
     id: '053',
     power: 85,
     pp: 10,
@@ -481,7 +482,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 70,
     category: 'Special',
-    effect: "May freeze opponent.",
+    effect: 'May freeze opponent.',
     id: '054',
     power: 110,
     pp: 5,
@@ -490,7 +491,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Opponent cannot flee or switch.",
+    effect: 'Opponent cannot flee or switch.',
     id: '055',
     power: undefined,
     pp: 5,
@@ -499,7 +500,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Grass type Z-Move.",
+    effect: 'Grass type Z-Move.',
     id: '056',
     power: undefined,
     pp: 1,
@@ -508,7 +509,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '057',
     power: 130,
     pp: 5,
@@ -517,7 +518,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '058',
     power: 85,
     pp: 15,
@@ -526,7 +527,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '059',
     power: 130,
     pp: 5,
@@ -535,7 +536,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '060',
     power: 65,
     pp: 20,
@@ -544,7 +545,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '061',
     power: 25,
     pp: 10,
@@ -553,7 +554,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits twice in one turn.",
+    effect: 'Hits twice in one turn.',
     id: '062',
     power: 50,
     pp: 10,
@@ -562,7 +563,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Hits all adjacent Pokémon.",
+    effect: 'Hits all adjacent Pokémon.',
     id: '063',
     power: 140,
     pp: 10,
@@ -571,7 +572,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Springs up on first turn, attacks on second. May paralyze opponent.",
+    effect: 'Springs up on first turn, attacks on second. May paralyze opponent.',
     id: '064',
     power: 85,
     pp: 5,
@@ -580,7 +581,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '065',
     power: 90,
     pp: 15,
@@ -589,7 +590,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '066',
     power: 120,
     pp: 15,
@@ -598,7 +599,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Normal type Z-Move.",
+    effect: 'Normal type Z-Move.',
     id: '067',
     power: undefined,
     pp: 1,
@@ -607,7 +608,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Breaks through Reflect and Light Screen barriers.",
+    effect: 'Breaks through Reflect and Light Screen barriers.',
     id: '068',
     power: 75,
     pp: 15,
@@ -625,7 +626,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user swings its body around violently to inflict damage on everything in its vicinity.",
+    effect: 'The user swings its body around violently to inflict damage on everything in its vicinity.',
     id: '070',
     power: 60,
     pp: 20,
@@ -688,7 +689,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '077',
     power: 40,
     pp: 30,
@@ -697,7 +698,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '078',
     power: 25,
     pp: 30,
@@ -706,7 +707,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "To inflict massive damage, the user burns itself out. After using this move, the user will no longer be Fire type.",
+    effect:
+      'To inflict massive damage, the user burns itself out. After using this move, the user will no longer be Fire type.',
     id: '079',
     power: 130,
     pp: 5,
@@ -715,7 +717,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Paralyzes the opponent.",
+    effect: 'Paralyzes the opponent.',
     id: '080',
     power: 90,
     pp: 15,
@@ -751,7 +753,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Pikachu-exclusive Z-Move.",
+    effect: 'Pikachu-exclusive Z-Move.',
     id: '084',
     power: 210,
     pp: 1,
@@ -760,7 +762,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The Pokémon congratulates you on your special day. No battle effect.",
+    effect: 'The Pokémon congratulates you on your special day. No battle effect.',
     id: '085',
     power: undefined,
     pp: 40,
@@ -796,7 +798,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Confuses opponent.",
+    effect: 'Confuses opponent.',
     id: '089',
     power: 65,
     pp: 20,
@@ -814,7 +816,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "In battles, the opponent switches. In the wild, the Pokémon runs.",
+    effect: 'In battles, the opponent switches. In the wild, the Pokémon runs.',
     id: '091',
     power: 60,
     pp: 10,
@@ -823,7 +825,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '092',
     power: 35,
     pp: 10,
@@ -841,7 +843,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Kommo-o exclusive Z-Move.",
+    effect: 'Kommo-o exclusive Z-Move.',
     id: '094',
     power: 185,
     pp: 1,
@@ -877,7 +879,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '098',
     power: 18,
     pp: 15,
@@ -895,7 +897,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Confuses opponent.",
+    effect: 'Confuses opponent.',
     id: '100',
     power: undefined,
     pp: 10,
@@ -904,7 +906,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '101',
     power: 50,
     pp: 25,
@@ -922,7 +924,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Rock type Z-Move.",
+    effect: 'Rock type Z-Move.',
     id: '103',
     power: undefined,
     pp: 1,
@@ -967,7 +969,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Steel type Z-Move.",
+    effect: 'Steel type Z-Move.',
     id: '108',
     power: undefined,
     pp: 1,
@@ -1003,7 +1005,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "When hit by a Physical Attack, user strikes back with 2x power.",
+    effect: 'When hit by a Physical Attack, user strikes back with 2x power.',
     id: '112',
     power: undefined,
     pp: 20,
@@ -1021,7 +1023,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '114',
     power: 100,
     pp: 10,
@@ -1030,7 +1032,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects the Pokémon from status moves.",
+    effect: 'Protects the Pokémon from status moves.',
     id: '115',
     power: undefined,
     pp: 10,
@@ -1039,7 +1041,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '116',
     power: 100,
     pp: 5,
@@ -1048,7 +1050,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio. May poison opponent.",
+    effect: 'High critical hit ratio. May poison opponent.',
     id: '117',
     power: 70,
     pp: 20,
@@ -1075,7 +1077,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "More powerful when opponent has higher HP.",
+    effect: 'More powerful when opponent has higher HP.',
     id: '120',
     power: undefined,
     pp: 5,
@@ -1084,7 +1086,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Ghosts lose 50% of max HP and curse the opponent; Non-Ghosts raise Attack, Defense and lower Speed.",
+    effect: 'Ghosts lose 50% of max HP and curse the opponent; Non-Ghosts raise Attack, Defense and lower Speed.',
     id: '121',
     power: undefined,
     pp: 10,
@@ -1093,7 +1095,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '122',
     power: 50,
     pp: 30,
@@ -1102,7 +1104,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '123',
     power: 80,
     pp: 15,
@@ -1111,7 +1113,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 50,
     category: 'Status',
-    effect: "Puts all adjacent opponents to sleep.",
+    effect: 'Puts all adjacent opponents to sleep.',
     id: '124',
     power: undefined,
     pp: 10,
@@ -1129,7 +1131,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Hits all adjacent opponents.",
+    effect: 'Hits all adjacent opponents.',
     id: '126',
     power: 80,
     pp: 10,
@@ -1165,7 +1167,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "If the user faints, the opponent also faints.",
+    effect: 'If the user faints, the opponent also faints.',
     id: '130',
     power: undefined,
     pp: 5,
@@ -1174,7 +1176,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects the user, but may fail if used consecutively.",
+    effect: 'Protects the user, but may fail if used consecutively.',
     id: '131',
     power: undefined,
     pp: 5,
@@ -1183,7 +1185,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Dragon type Z-Move.",
+    effect: 'Dragon type Z-Move.',
     id: '132',
     power: undefined,
     pp: 1,
@@ -1201,7 +1203,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Digs underground on first turn, attacks on second. Can also escape from caves.",
+    effect: 'Digs underground on first turn, attacks on second. Can also escape from caves.',
     id: '134',
     power: 80,
     pp: 10,
@@ -1219,7 +1221,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '136',
     power: 40,
     pp: 15,
@@ -1228,7 +1230,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '137',
     power: 80,
     pp: 15,
@@ -1237,7 +1239,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Dives underwater on first turn, attacks on second turn.",
+    effect: 'Dives underwater on first turn, attacks on second turn.',
     id: '138',
     power: 80,
     pp: 10,
@@ -1246,7 +1248,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '139',
     power: 70,
     pp: 10,
@@ -1255,7 +1257,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Damage occurs 2 turns later.",
+    effect: 'Damage occurs 2 turns later.',
     id: '140',
     power: 140,
     pp: 5,
@@ -1264,7 +1266,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits twice in one turn.",
+    effect: 'Hits twice in one turn.',
     id: '141',
     power: 35,
     pp: 10,
@@ -1273,7 +1275,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits twice in one turn; may cause flinching.",
+    effect: 'Hits twice in one turn; may cause flinching.',
     id: '142',
     power: 60,
     pp: 5,
@@ -1282,7 +1284,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits twice in one turn.",
+    effect: 'Hits twice in one turn.',
     id: '143',
     power: 30,
     pp: 30,
@@ -1291,7 +1293,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '144',
     power: 15,
     pp: 10,
@@ -1309,7 +1311,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '146',
     power: 120,
     pp: 15,
@@ -1336,7 +1338,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '149',
     power: 60,
     pp: 20,
@@ -1345,7 +1347,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '150',
     power: 80,
     pp: 15,
@@ -1363,7 +1365,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user uses its body like a hammer to attack the target and inflict damage.",
+    effect: 'The user uses its body like a hammer to attack the target and inflict damage.',
     id: '152',
     power: 90,
     pp: 15,
@@ -1372,7 +1374,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "",
+    effect: '',
     id: '153',
     power: 85,
     pp: 10,
@@ -1381,7 +1383,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Always inflicts 40 HP.",
+    effect: 'Always inflicts 40 HP.',
     id: '154',
     power: undefined,
     pp: 10,
@@ -1390,7 +1392,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '155',
     power: 100,
     pp: 10,
@@ -1399,7 +1401,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "In battles, the opponent switches. In the wild, the Pokémon runs.",
+    effect: 'In battles, the opponent switches. In the wild, the Pokémon runs.',
     id: '156',
     power: 60,
     pp: 10,
@@ -1408,7 +1410,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '157',
     power: 75,
     pp: 10,
@@ -1417,7 +1419,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers most the HP inflicted on opponent.",
+    effect: 'User recovers most the HP inflicted on opponent.',
     id: '158',
     power: 50,
     pp: 10,
@@ -1426,7 +1428,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers half the HP inflicted on a sleeping opponent.",
+    effect: 'User recovers half the HP inflicted on a sleeping opponent.',
     id: '159',
     power: 100,
     pp: 15,
@@ -1435,7 +1437,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '160',
     power: 80,
     pp: 20,
@@ -1444,7 +1446,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '161',
     power: 80,
     pp: 10,
@@ -1453,7 +1455,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits twice in one turn.",
+    effect: 'Hits twice in one turn.',
     id: '162',
     power: 40,
     pp: 15,
@@ -1462,7 +1464,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 50,
     category: 'Physical',
-    effect: "Confuses opponent.",
+    effect: 'Confuses opponent.',
     id: '163',
     power: 100,
     pp: 5,
@@ -1480,7 +1482,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power is doubled if opponent is underground from using Dig.",
+    effect: 'Power is doubled if opponent is underground from using Dig.',
     id: '165',
     power: 100,
     pp: 10,
@@ -1489,7 +1491,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Power increases each turn.",
+    effect: 'Power increases each turn.',
     id: '166',
     power: 40,
     pp: 15,
@@ -1507,7 +1509,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '168',
     power: 100,
     pp: 10,
@@ -1516,7 +1518,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Prevents all Pokémon from falling asleep for 5 turns.",
+    effect: 'Prevents all Pokémon from falling asleep for 5 turns.',
     id: '169',
     power: undefined,
     pp: 10,
@@ -1534,7 +1536,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "The faster the user, the stronger the attack.",
+    effect: 'The faster the user, the stronger the attack.',
     id: '171',
     power: undefined,
     pp: 10,
@@ -1552,7 +1554,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Opponent cannot use items.",
+    effect: 'Opponent cannot use items.',
     id: '173',
     power: undefined,
     pp: 15,
@@ -1561,7 +1563,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '174',
     power: 40,
     pp: 25,
@@ -1570,7 +1572,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Forces opponent to keep using its last move for 3 turns.",
+    effect: 'Forces opponent to keep using its last move for 3 turns.',
     id: '175',
     power: undefined,
     pp: 5,
@@ -1588,7 +1590,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Always left with at least 1 HP, but may fail if used consecutively.",
+    effect: 'Always left with at least 1 HP, but may fail if used consecutively.',
     id: '177',
     power: undefined,
     pp: 10,
@@ -1624,7 +1626,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User faints.",
+    effect: 'User faints.',
     id: '181',
     power: 250,
     pp: 5,
@@ -1633,7 +1635,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '182',
     power: 80,
     pp: 20,
@@ -1642,7 +1644,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Eevee-exclusive Z-Move. Sharply raises all stats.",
+    effect: 'Eevee-exclusive Z-Move. Sharply raises all stats.',
     id: '183',
     power: undefined,
     pp: 1,
@@ -1651,7 +1653,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '184',
     power: 80,
     pp: 5,
@@ -1660,7 +1662,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power doubles if user is burned, poisoned, or paralyzed.",
+    effect: 'Power doubles if user is burned, poisoned, or paralyzed.',
     id: '185',
     power: 70,
     pp: 20,
@@ -1669,7 +1671,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Prevents fleeing in the next turn.",
+    effect: 'Prevents fleeing in the next turn.',
     id: '186',
     power: undefined,
     pp: 10,
@@ -1678,7 +1680,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "",
+    effect: '',
     id: '187',
     power: 40,
     pp: 30,
@@ -1687,7 +1689,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first, foe flinches. Only usable on first turn.",
+    effect: 'User attacks first, foe flinches. Only usable on first turn.',
     id: '188',
     power: 40,
     pp: 10,
@@ -1705,7 +1707,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Always leaves opponent with at least 1 HP.",
+    effect: 'Always leaves opponent with at least 1 HP.',
     id: '190',
     power: 40,
     pp: 40,
@@ -1723,7 +1725,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Only hits if opponent uses Protect or Detect in the same turn.",
+    effect: 'Only hits if opponent uses Protect or Detect in the same turn.',
     id: '192',
     power: 30,
     pp: 10,
@@ -1732,7 +1734,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '193',
     power: 60,
     pp: 20,
@@ -1768,7 +1770,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '197',
     power: 110,
     pp: 5,
@@ -1777,7 +1779,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "May cause flinching and/or burn opponent.",
+    effect: 'May cause flinching and/or burn opponent.',
     id: '198',
     power: 65,
     pp: 15,
@@ -1786,7 +1788,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user strikes the target with a burning lash. This also lowers the target’s Defense stat.",
+    effect: 'The user strikes the target with a burning lash. This also lowers the target’s Defense stat.',
     id: '199',
     power: 80,
     pp: 15,
@@ -1795,7 +1797,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Added effects appear if combined with Grass Pledge or Water Pledge.",
+    effect: 'Added effects appear if combined with Grass Pledge or Water Pledge.',
     id: '200',
     power: 80,
     pp: 10,
@@ -1804,7 +1806,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '201',
     power: 75,
     pp: 15,
@@ -1813,7 +1815,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Special',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '202',
     power: 35,
     pp: 15,
@@ -1822,7 +1824,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Although this move has great power, it only works the first turn the user is in battle.",
+    effect: 'Although this move has great power, it only works the first turn the user is in battle.',
     id: '203',
     power: 90,
     pp: 10,
@@ -1831,7 +1833,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "One-Hit-KO, if it hits.",
+    effect: 'One-Hit-KO, if it hits.',
     id: '204',
     power: undefined,
     pp: 5,
@@ -1849,7 +1851,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May also injure nearby Pokémon.",
+    effect: 'May also injure nearby Pokémon.',
     id: '206',
     power: 70,
     pp: 15,
@@ -1867,7 +1869,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '208',
     power: 60,
     pp: 25,
@@ -1876,7 +1878,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '209',
     power: 90,
     pp: 15,
@@ -1885,7 +1887,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage. May burn opponent.",
+    effect: 'User receives recoil damage. May burn opponent.',
     id: '210',
     power: 120,
     pp: 15,
@@ -1912,7 +1914,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Confuses opponent, but raises its Special Attack by two stages.",
+    effect: 'Confuses opponent, but raises its Special Attack by two stages.',
     id: '213',
     power: undefined,
     pp: 15,
@@ -1930,7 +1932,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power depends on held item.",
+    effect: 'Power depends on held item.',
     id: '215',
     power: undefined,
     pp: 10,
@@ -1939,7 +1941,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '216',
     power: 90,
     pp: 15,
@@ -1948,7 +1950,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user restores the target’s HP by up to half of its max HP. It restores more HP when the terrain is grass.",
+    effect:
+      'The user restores the target’s HP by up to half of its max HP. It restores more HP when the terrain is grass.',
     id: '217',
     power: undefined,
     pp: 10,
@@ -1957,7 +1960,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Sharply raises Defense of all Grass-type Pokémon on the field.",
+    effect: 'Sharply raises Defense of all Grass-type Pokémon on the field.',
     id: '218',
     power: undefined,
     pp: 10,
@@ -1966,7 +1969,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "Flies up on first turn, attacks on second turn.",
+    effect: 'Flies up on first turn, attacks on second turn.',
     id: '219',
     power: 90,
     pp: 15,
@@ -1975,7 +1978,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "Deals Fighting and Flying type damage.",
+    effect: 'Deals Fighting and Flying type damage.',
     id: '220',
     power: 100,
     pp: 10,
@@ -1993,7 +1996,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Increases critical hit ratio.",
+    effect: 'Increases critical hit ratio.',
     id: '222',
     power: undefined,
     pp: 30,
@@ -2002,7 +2005,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "If the user is hit before attacking, it flinches instead.",
+    effect: 'If the user is hit before attacking, it flinches instead.',
     id: '223',
     power: 150,
     pp: 20,
@@ -2011,7 +2014,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "In Double Battle, the user takes all the attacks.",
+    effect: 'In Double Battle, the user takes all the attacks.',
     id: '224',
     power: undefined,
     pp: 20,
@@ -2020,7 +2023,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '225',
     power: 60,
     pp: 10,
@@ -2029,7 +2032,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.",
+    effect:
+      "Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.",
     id: '226',
     power: undefined,
     pp: 40,
@@ -2038,7 +2042,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Adds Grass type to opponent.",
+    effect: 'Adds Grass type to opponent.',
     id: '227',
     power: undefined,
     pp: 20,
@@ -2056,7 +2060,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Charges on first turn, attacks on second. May paralyze opponent.",
+    effect: 'Charges on first turn, attacks on second. May paralyze opponent.',
     id: '229',
     power: 140,
     pp: 5,
@@ -2065,7 +2069,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May freeze opponent. Super-effective against Water types.",
+    effect: 'May freeze opponent. Super-effective against Water types.',
     id: '230',
     power: 70,
     pp: 20,
@@ -2074,7 +2078,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Resets all stat changes.",
+    effect: 'Resets all stat changes.',
     id: '231',
     power: 90,
     pp: 15,
@@ -2083,7 +2087,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '232',
     power: 150,
     pp: 5,
@@ -2092,7 +2096,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "Always results in a critical hit.",
+    effect: 'Always results in a critical hit.',
     id: '233',
     power: 60,
     pp: 10,
@@ -2101,7 +2105,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power decreases with higher Friendship.",
+    effect: 'Power decreases with higher Friendship.',
     id: '234',
     power: undefined,
     pp: 20,
@@ -2110,7 +2114,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '235',
     power: 15,
     pp: 20,
@@ -2119,7 +2123,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "Power increases each turn.",
+    effect: 'Power increases each turn.',
     id: '236',
     power: 40,
     pp: 20,
@@ -2128,7 +2132,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '237',
     power: 18,
     pp: 15,
@@ -2137,7 +2141,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power increases if Fusion Flare is used in the same turn.",
+    effect: 'Power increases if Fusion Flare is used in the same turn.',
     id: '238',
     power: 100,
     pp: 5,
@@ -2146,7 +2150,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Power increases if Fusion Bolt is used in the same turn.",
+    effect: 'Power increases if Fusion Bolt is used in the same turn.',
     id: '239',
     power: 100,
     pp: 5,
@@ -2155,7 +2159,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Damage occurs 2 turns later.",
+    effect: 'Damage occurs 2 turns later.',
     id: '240',
     power: 120,
     pp: 10,
@@ -2173,7 +2177,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits twice in one turn.",
+    effect: 'Hits twice in one turn.',
     id: '242',
     power: 50,
     pp: 15,
@@ -2182,7 +2186,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user engages its gears to raise the Attack and Sp. Atk stats of ally Pokémon with the Plus or Minus Ability.",
+    effect:
+      'The user engages its gears to raise the Attack and Sp. Atk stats of ally Pokémon with the Plus or Minus Ability.',
     id: '243',
     power: undefined,
     pp: 20,
@@ -2191,7 +2196,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Mew-exclusive Z-Move.",
+    effect: 'Mew-exclusive Z-Move.',
     id: '244',
     power: 185,
     pp: 1,
@@ -2209,7 +2214,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '246',
     power: 75,
     pp: 10,
@@ -2218,7 +2223,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '247',
     power: 150,
     pp: 5,
@@ -2227,7 +2232,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Electric type Z-Move.",
+    effect: 'Electric type Z-Move.',
     id: '248',
     power: undefined,
     pp: 1,
@@ -2245,7 +2250,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Paralyzes opponent.",
+    effect: 'Paralyzes opponent.',
     id: '250',
     power: undefined,
     pp: 30,
@@ -2254,7 +2259,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Reduces damage from Special attacks.",
+    effect: 'Reduces damage from Special attacks.',
     id: '251',
     power: 90,
     pp: 15,
@@ -2263,7 +2268,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "The heavier the opponent, the stronger the attack.",
+    effect: 'The heavier the opponent, the stronger the attack.',
     id: '252',
     power: undefined,
     pp: 20,
@@ -2272,7 +2277,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Added effects appear if preceded by Water Pledge or succeeded by Fire Pledge.",
+    effect: 'Added effects appear if preceded by Water Pledge or succeeded by Fire Pledge.',
     id: '253',
     power: 80,
     pp: 10,
@@ -2281,7 +2286,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 55,
     category: 'Status',
-    effect: "Puts opponent to sleep.",
+    effect: 'Puts opponent to sleep.',
     id: '254',
     power: undefined,
     pp: 15,
@@ -2290,7 +2295,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Restores a little HP of all Pokémon for 5 turns. ",
+    effect: 'Restores a little HP of all Pokémon for 5 turns. ',
     id: '255',
     power: undefined,
     pp: 10,
@@ -2299,7 +2304,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Prevents moves like Fly and Bounce and the Ability Levitate for 5 turns.",
+    effect: 'Prevents moves like Fly and Bounce and the Ability Levitate for 5 turns.',
     id: '256',
     power: undefined,
     pp: 5,
@@ -2335,7 +2340,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Averages Defense and Special Defense with the target.",
+    effect: 'Averages Defense and Special Defense with the target.',
     id: '260',
     power: undefined,
     pp: 10,
@@ -2344,7 +2349,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User and opponent swap Defense and Special Defense.",
+    effect: 'User and opponent swap Defense and Special Defense.',
     id: '261',
     power: undefined,
     pp: 10,
@@ -2362,7 +2367,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "One-Hit-KO, if it hits.",
+    effect: 'One-Hit-KO, if it hits.',
     id: '263',
     power: undefined,
     pp: 5,
@@ -2371,7 +2376,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Physical',
-    effect: "May poison opponent.",
+    effect: 'May poison opponent.',
     id: '264',
     power: 120,
     pp: 5,
@@ -2380,7 +2385,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Hits Pokémon using Fly/Bounce with double power.",
+    effect: 'Hits Pokémon using Fly/Bounce with double power.',
     id: '265',
     power: 40,
     pp: 35,
@@ -2389,7 +2394,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The slower the user, the stronger the attack.",
+    effect: 'The slower the user, the stronger the attack.',
     id: '266',
     power: undefined,
     pp: 5,
@@ -2398,7 +2403,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Non-Ice types are damaged for 5 turns.",
+    effect: 'Non-Ice types are damaged for 5 turns.',
     id: '267',
     power: undefined,
     pp: 10,
@@ -2416,7 +2421,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Doubles prize money from trainer battles.",
+    effect: 'Doubles prize money from trainer battles.',
     id: '269',
     power: undefined,
     pp: 30,
@@ -2434,7 +2439,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Resets all stat changes.",
+    effect: 'Resets all stat changes.',
     id: '271',
     power: undefined,
     pp: 30,
@@ -2443,7 +2448,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '272',
     power: 120,
     pp: 15,
@@ -2452,7 +2457,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '273',
     power: 150,
     pp: 5,
@@ -2461,7 +2466,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '274',
     power: 70,
     pp: 15,
@@ -2479,7 +2484,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Prevents the opponent from restoring HP for 5 turns.",
+    effect: 'Prevents the opponent from restoring HP for 5 turns.',
     id: '276',
     power: undefined,
     pp: 15,
@@ -2488,7 +2493,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers half its max HP.",
+    effect: 'User recovers half its max HP.',
     id: '277',
     power: undefined,
     pp: 10,
@@ -2506,7 +2511,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user faints and the next Pokémon released is fully healed.",
+    effect: 'The user faints and the next Pokémon released is fully healed.',
     id: '279',
     power: undefined,
     pp: 10,
@@ -2515,7 +2520,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '280',
     power: 60,
     pp: 25,
@@ -2524,7 +2529,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Stat changes are swapped with the opponent.",
+    effect: 'Stat changes are swapped with the opponent.',
     id: '281',
     power: undefined,
     pp: 10,
@@ -2533,7 +2538,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The heavier the user, the stronger the attack.",
+    effect: 'The heavier the user, the stronger the attack.',
     id: '282',
     power: undefined,
     pp: 10,
@@ -2542,7 +2547,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '283',
     power: 95,
     pp: 10,
@@ -2551,7 +2556,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The heavier the user, the stronger the attack.",
+    effect: 'The heavier the user, the stronger the attack.',
     id: '284',
     power: undefined,
     pp: 10,
@@ -2569,7 +2574,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Inflicts more damage if the target has a status condition.",
+    effect: 'Inflicts more damage if the target has a status condition.',
     id: '286',
     power: 65,
     pp: 10,
@@ -2587,7 +2592,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "The user fiercely attacks the target using its entire body.",
+    effect: 'The user fiercely attacks the target using its entire body.',
     id: '288',
     power: 95,
     pp: 10,
@@ -2596,7 +2601,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "If it misses, the user loses half their HP.",
+    effect: 'If it misses, the user loses half their HP.',
     id: '289',
     power: 130,
     pp: 10,
@@ -2605,7 +2610,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Always leaves opponent with at least 1 HP.",
+    effect: 'Always leaves opponent with at least 1 HP.',
     id: '290',
     power: 40,
     pp: 40,
@@ -2614,7 +2619,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Makes the user and an ally very happy.",
+    effect: 'Makes the user and an ally very happy.',
     id: '291',
     power: undefined,
     pp: 40,
@@ -2632,7 +2637,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '293',
     power: 65,
     pp: 25,
@@ -2641,7 +2646,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "One-Hit-KO, if it hits.",
+    effect: 'One-Hit-KO, if it hits.',
     id: '294',
     power: undefined,
     pp: 5,
@@ -2650,7 +2655,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '295',
     power: 75,
     pp: 10,
@@ -2668,7 +2673,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 70,
     category: 'Special',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '297',
     power: 110,
     pp: 10,
@@ -2677,7 +2682,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '298',
     power: 150,
     pp: 5,
@@ -2686,7 +2691,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Special',
-    effect: "",
+    effect: '',
     id: '299',
     power: 110,
     pp: 5,
@@ -2695,7 +2700,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Water type Z-Move.",
+    effect: 'Water type Z-Move.',
     id: '300',
     power: undefined,
     pp: 1,
@@ -2704,7 +2709,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '301',
     power: 150,
     pp: 5,
@@ -2713,7 +2718,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '302',
     power: 80,
     pp: 15,
@@ -2722,7 +2727,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "",
+    effect: '',
     id: '303',
     power: 90,
     pp: 10,
@@ -2740,7 +2745,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Can strike through Protect/Detect.",
+    effect: 'Can strike through Protect/Detect.',
     id: '305',
     power: 80,
     pp: 5,
@@ -2749,7 +2754,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 60,
     category: 'Status',
-    effect: "Puts opponent to sleep.",
+    effect: 'Puts opponent to sleep.',
     id: '306',
     power: undefined,
     pp: 20,
@@ -2758,7 +2763,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Doubles in power each turn for 5 turns.",
+    effect: 'Doubles in power each turn for 5 turns.',
     id: '307',
     power: 30,
     pp: 20,
@@ -2767,7 +2772,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May freeze opponent.",
+    effect: 'May freeze opponent.',
     id: '308',
     power: 90,
     pp: 10,
@@ -2776,7 +2781,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "Charges on first turn, attacks on second. May burn opponent.",
+    effect: 'Charges on first turn, attacks on second. May burn opponent.',
     id: '309',
     power: 140,
     pp: 5,
@@ -2785,7 +2790,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "May cause flinching and/or freeze opponent.",
+    effect: 'May cause flinching and/or freeze opponent.',
     id: '310',
     power: 65,
     pp: 15,
@@ -2794,7 +2799,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "The user swings and hits with its strong, heavy fist. It lowers the user’s Speed, however.",
+    effect: 'The user swings and hits with its strong, heavy fist. It lowers the user’s Speed, however.',
     id: '311',
     power: 100,
     pp: 10,
@@ -2803,7 +2808,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May freeze opponent.",
+    effect: 'May freeze opponent.',
     id: '312',
     power: 75,
     pp: 15,
@@ -2812,7 +2817,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '313',
     power: 40,
     pp: 30,
@@ -2821,7 +2826,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '314',
     power: 85,
     pp: 10,
@@ -2830,7 +2835,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '315',
     power: 25,
     pp: 30,
@@ -2848,7 +2853,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Opponent is unable to use moves that the user also knows.",
+    effect: 'Opponent is unable to use moves that the user also knows.',
     id: '317',
     power: undefined,
     pp: 10,
@@ -2866,7 +2871,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 50,
     category: 'Special',
-    effect: "Burns opponent.",
+    effect: 'Burns opponent.',
     id: '319',
     power: 100,
     pp: 5,
@@ -2875,7 +2880,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Fire type Z-Move.",
+    effect: 'Fire type Z-Move.',
     id: '320',
     power: undefined,
     pp: 1,
@@ -2884,7 +2889,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '321',
     power: 20,
     pp: 20,
@@ -2893,7 +2898,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User restores HP each turn. User cannot escape/switch.",
+    effect: 'User restores HP each turn. User cannot escape/switch.',
     id: '322',
     power: undefined,
     pp: 20,
@@ -2902,7 +2907,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Allows an ally to use a move instead.",
+    effect: 'Allows an ally to use a move instead.',
     id: '323',
     power: undefined,
     pp: 15,
@@ -2911,7 +2916,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Changes Normal-type moves to Electric-type.",
+    effect: 'Changes Normal-type moves to Electric-type.',
     id: '324',
     power: undefined,
     pp: 25,
@@ -2929,7 +2934,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '326',
     power: 80,
     pp: 15,
@@ -2947,7 +2952,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Type depends on the Arceus Plate being held.",
+    effect: 'Type depends on the Arceus Plate being held.',
     id: '328',
     power: 100,
     pp: 10,
@@ -2956,7 +2961,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "If it misses, the user loses half their HP.",
+    effect: 'If it misses, the user loses half their HP.',
     id: '329',
     power: 100,
     pp: 10,
@@ -2965,7 +2970,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '330',
     power: 50,
     pp: 25,
@@ -3001,7 +3006,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '334',
     power: 90,
     pp: 10,
@@ -3019,7 +3024,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Can only be used after all other moves are used.",
+    effect: 'Can only be used after all other moves are used.',
     id: '336',
     power: 140,
     pp: 5,
@@ -3028,7 +3033,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '337',
     power: 80,
     pp: 15,
@@ -3037,7 +3042,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '338',
     power: 90,
     pp: 15,
@@ -3064,7 +3069,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Strikes opponent with leaves.",
+    effect: 'Strikes opponent with leaves.',
     id: '341',
     power: 40,
     pp: 40,
@@ -3073,7 +3078,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '342',
     power: 80,
     pp: 10,
@@ -3082,7 +3087,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Status',
-    effect: "Drains HP from opponent each turn.",
+    effect: 'Drains HP from opponent each turn.',
     id: '343',
     power: undefined,
     pp: 10,
@@ -3100,7 +3105,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Mimikyu-exclusive Z-Move.",
+    effect: 'Mimikyu-exclusive Z-Move.',
     id: '345',
     power: 190,
     pp: 1,
@@ -3109,7 +3114,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '346',
     power: 30,
     pp: 30,
@@ -3118,7 +3123,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '347',
     power: 140,
     pp: 5,
@@ -3127,7 +3132,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Halves damage from Special attacks for 5 turns.",
+    effect: 'Halves damage from Special attacks for 5 turns.',
     id: '348',
     power: undefined,
     pp: 30,
@@ -3145,7 +3150,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user slams into the target using a full-force blast of water. This may also lower the target’s Defense stat.",
+    effect:
+      'The user slams into the target using a full-force blast of water. This may also lower the target’s Defense stat.',
     id: '350',
     power: 85,
     pp: 10,
@@ -3163,7 +3169,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Status',
-    effect: "Puts opponent to sleep.",
+    effect: 'Puts opponent to sleep.',
     id: '352',
     power: undefined,
     pp: 10,
@@ -3172,7 +3178,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The heavier the opponent, the stronger the attack.",
+    effect: 'The heavier the opponent, the stronger the attack.',
     id: '353',
     power: undefined,
     pp: 20,
@@ -3190,7 +3196,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Opponent cannot land critical hits for 5 turns.",
+    effect: 'Opponent cannot land critical hits for 5 turns.',
     id: '355',
     power: undefined,
     pp: 30,
@@ -3199,7 +3205,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user faints but the next Pokémon released is fully healed.",
+    effect: 'The user faints but the next Pokémon released is fully healed.',
     id: '356',
     power: undefined,
     pp: 10,
@@ -3208,7 +3214,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user makes a lunge at the target, attacking with full force. This also lowers the target’s Attack stat.",
+    effect:
+      'The user makes a lunge at the target, attacking with full force. This also lowers the target’s Attack stat.',
     id: '357',
     power: 80,
     pp: 15,
@@ -3226,7 +3233,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '359',
     power: 40,
     pp: 30,
@@ -3235,7 +3242,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Reflects moves that cause status conditions back to the attacker.",
+    effect: 'Reflects moves that cause status conditions back to the attacker.',
     id: '360',
     power: undefined,
     pp: 15,
@@ -3244,7 +3251,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Suppresses the effects of held items for five turns.",
+    effect: 'Suppresses the effects of held items for five turns.',
     id: '361',
     power: undefined,
     pp: 10,
@@ -3253,7 +3260,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '362',
     power: 60,
     pp: 20,
@@ -3262,7 +3269,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Special',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '363',
     power: 100,
     pp: 5,
@@ -3271,7 +3278,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '364',
     power: 60,
     pp: 20,
@@ -3280,7 +3287,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User becomes immune to Ground-type moves for 5 turns.",
+    effect: 'User becomes immune to Ground-type moves for 5 turns.',
     id: '365',
     power: undefined,
     pp: 10,
@@ -3289,7 +3296,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Raises Defense and Sp. Defense of Plus/Minus Pokémon.",
+    effect: 'Raises Defense and Sp. Defense of Plus/Minus Pokémon.',
     id: '366',
     power: undefined,
     pp: 20,
@@ -3298,7 +3305,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits with random power.",
+    effect: 'Hits with random power.',
     id: '367',
     power: undefined,
     pp: 30,
@@ -3307,7 +3314,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Incineroar-exclusive Z-Move.",
+    effect: 'Incineroar-exclusive Z-Move.',
     id: '368',
     power: 180,
     pp: 1,
@@ -3316,7 +3323,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects teammates from damaging moves.",
+    effect: 'Protects teammates from damaging moves.',
     id: '369',
     power: undefined,
     pp: 10,
@@ -3334,7 +3341,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Opponent cannot flee or switch.",
+    effect: 'Opponent cannot flee or switch.',
     id: '371',
     power: undefined,
     pp: 5,
@@ -3352,7 +3359,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '373',
     power: 40,
     pp: 15,
@@ -3361,7 +3368,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '374',
     power: 120,
     pp: 5,
@@ -3370,7 +3377,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '375',
     power: 80,
     pp: 20,
@@ -3379,7 +3386,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '376',
     power: 120,
     pp: 10,
@@ -3397,7 +3404,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Lunala-exclusive Z-Move.",
+    effect: 'Lunala-exclusive Z-Move.',
     id: '378',
     power: 200,
     pp: 1,
@@ -3442,7 +3449,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User performs almost any move in the game at random.",
+    effect: 'User performs almost any move in the game at random.',
     id: '383',
     power: undefined,
     pp: 10,
@@ -3451,7 +3458,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers half its max HP.",
+    effect: 'User recovers half its max HP.',
     id: '384',
     power: undefined,
     pp: 10,
@@ -3469,7 +3476,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '386',
     power: 150,
     pp: 5,
@@ -3505,7 +3512,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "When hit by a Special Attack, user strikes back with 2x power.",
+    effect: 'When hit by a Special Attack, user strikes back with 2x power.',
     id: '390',
     power: undefined,
     pp: 20,
@@ -3550,7 +3557,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects the field from status conditions for 5 turns.",
+    effect: 'Protects the field from status conditions for 5 turns.',
     id: '395',
     power: undefined,
     pp: 10,
@@ -3577,7 +3584,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers HP. Amount varies with the weather.",
+    effect: 'User recovers HP. Amount varies with the weather.',
     id: '398',
     power: undefined,
     pp: 5,
@@ -3586,7 +3593,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers HP. Amount varies with the weather.",
+    effect: 'User recovers HP. Amount varies with the weather.',
     id: '399',
     power: undefined,
     pp: 5,
@@ -3613,7 +3620,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Weakens the power of Electric-type moves.",
+    effect: 'Weakens the power of Electric-type moves.',
     id: '402',
     power: undefined,
     pp: 15,
@@ -3676,7 +3683,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Uses a certain move based on the current terrain.",
+    effect: 'Uses a certain move based on the current terrain.',
     id: '409',
     power: undefined,
     pp: 20,
@@ -3694,7 +3701,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '411',
     power: 60,
     pp: 15,
@@ -3703,7 +3710,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Ghost type Z-Move.",
+    effect: 'Ghost type Z-Move.',
     id: '412',
     power: undefined,
     pp: 1,
@@ -3730,7 +3737,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '415',
     power: 70,
     pp: 15,
@@ -3739,7 +3746,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "The sleeping opponent loses 25% of its max HP each turn.",
+    effect: 'The sleeping opponent loses 25% of its max HP each turn.',
     id: '416',
     power: undefined,
     pp: 15,
@@ -3757,7 +3764,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Paralyzes opponent.",
+    effect: 'Paralyzes opponent.',
     id: '418',
     power: 20,
     pp: 20,
@@ -3766,7 +3773,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers most of the HP inflicted on opponent.",
+    effect: 'User recovers most of the HP inflicted on opponent.',
     id: '419',
     power: 80,
     pp: 10,
@@ -3775,7 +3782,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Primarina-exclusive Z-Move.",
+    effect: 'Primarina-exclusive Z-Move.',
     id: '420',
     power: 195,
     pp: 1,
@@ -3793,7 +3800,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.",
+    effect:
+      "Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.",
     id: '422',
     power: undefined,
     pp: 40,
@@ -3811,7 +3819,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Special',
-    effect: "Hits all adjacent opponents.",
+    effect: 'Hits all adjacent opponents.',
     id: '424',
     power: 110,
     pp: 10,
@@ -3820,7 +3828,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks for 2-3 turns but then becomes confused.",
+    effect: 'User attacks for 2-3 turns but then becomes confused.',
     id: '425',
     power: 120,
     pp: 10,
@@ -3847,7 +3855,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User recovers half the HP inflicted on opponent.",
+    effect: 'User recovers half the HP inflicted on opponent.',
     id: '428',
     power: 65,
     pp: 20,
@@ -3865,7 +3873,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "A small amount of money is gained after the battle resolves.",
+    effect: 'A small amount of money is gained after the battle resolves.',
     id: '430',
     power: 40,
     pp: 20,
@@ -3874,7 +3882,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power doubles if the user was attacked first.",
+    effect: 'Power doubles if the user was attacked first.',
     id: '431',
     power: 50,
     pp: 10,
@@ -3883,7 +3891,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '432',
     power: 35,
     pp: 35,
@@ -3892,7 +3900,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Any Pokémon in play when this attack is used faints in 3 turns.",
+    effect: 'Any Pokémon in play when this attack is used faints in 3 turns.',
     id: '433',
     power: undefined,
     pp: 5,
@@ -3901,7 +3909,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits all adjacent Pokémon.",
+    effect: 'Hits all adjacent Pokémon.',
     id: '434',
     power: 90,
     pp: 15,
@@ -3910,7 +3918,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User attacks for 2-3 turns but then becomes confused.",
+    effect: 'User attacks for 2-3 turns but then becomes confused.',
     id: '435',
     power: 120,
     pp: 10,
@@ -3919,7 +3927,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Disappears on first turn, attacks on second. Can strike through Protect/Detect.",
+    effect: 'Disappears on first turn, attacks on second. Can strike through Protect/Detect.',
     id: '436',
     power: 90,
     pp: 10,
@@ -3928,7 +3936,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Uses Attack or Special Attack stat, whichever is higher.",
+    effect: 'Uses Attack or Special Attack stat, whichever is higher.',
     id: '437',
     power: 100,
     pp: 5,
@@ -3946,7 +3954,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '439',
     power: 25,
     pp: 20,
@@ -3955,7 +3963,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Changes Normal-type moves to Electric-type moves.",
+    effect: 'Changes Normal-type moves to Electric-type moves.',
     id: '440',
     power: 100,
     pp: 15,
@@ -3982,7 +3990,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "If the opponent is holding a berry, its effect is stolen by user.",
+    effect: 'If the opponent is holding a berry, its effect is stolen by user.',
     id: '443',
     power: 60,
     pp: 20,
@@ -3991,7 +3999,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May badly poison opponent.",
+    effect: 'May badly poison opponent.',
     id: '444',
     power: 50,
     pp: 15,
@@ -4000,7 +4008,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Status',
-    effect: "Poisons opponent.",
+    effect: 'Poisons opponent.',
     id: '445',
     power: undefined,
     pp: 40,
@@ -4009,7 +4017,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May poison the opponent.",
+    effect: 'May poison the opponent.',
     id: '446',
     power: 80,
     pp: 20,
@@ -4018,7 +4026,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Status',
-    effect: "Poisons opponent.",
+    effect: 'Poisons opponent.',
     id: '447',
     power: undefined,
     pp: 35,
@@ -4027,7 +4035,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May poison the opponent.",
+    effect: 'May poison the opponent.',
     id: '448',
     power: 15,
     pp: 35,
@@ -4036,7 +4044,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio. May poison opponent.",
+    effect: 'High critical hit ratio. May poison opponent.',
     id: '449',
     power: 50,
     pp: 25,
@@ -4045,7 +4053,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "The user attacks the enemy with a pollen puff that explodes. If the target is an ally, it gives the ally a pollen puff that restores its HP instead.",
+    effect:
+      'The user attacks the enemy with a pollen puff that explodes. If the target is an ally, it gives the ally a pollen puff that restores its HP instead.',
     id: '450',
     power: 90,
     pp: 15,
@@ -4054,7 +4063,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '451',
     power: 40,
     pp: 35,
@@ -4063,7 +4072,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Damages Pokémon using Fire type moves.",
+    effect: 'Damages Pokémon using Fire type moves.',
     id: '452',
     power: undefined,
     pp: 20,
@@ -4072,7 +4081,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May freeze opponent.",
+    effect: 'May freeze opponent.',
     id: '453',
     power: 40,
     pp: 25,
@@ -4081,7 +4090,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "",
+    effect: '',
     id: '454',
     power: 80,
     pp: 20,
@@ -4090,7 +4099,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Averages Attack and Special Attack with the target.",
+    effect: 'Averages Attack and Special Attack with the target.',
     id: '455',
     power: undefined,
     pp: 10,
@@ -4099,7 +4108,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User and opponent swap Attack and Special Attack.",
+    effect: 'User and opponent swap Attack and Special Attack.',
     id: '456',
     power: undefined,
     pp: 10,
@@ -4117,7 +4126,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user boasts its strength and attacks the target. The more the user’s stats are raised, the greater the move’s power.",
+    effect:
+      'The user boasts its strength and attacks the target. The more the user’s stats are raised, the greater the move’s power.',
     id: '458',
     power: 20,
     pp: 10,
@@ -4126,7 +4136,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '459',
     power: 120,
     pp: 10,
@@ -4135,7 +4145,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Raises Attack.",
+    effect: 'Raises Attack.',
     id: '460',
     power: 40,
     pp: 10,
@@ -4144,7 +4154,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits all adjacent opponents.",
+    effect: 'Hits all adjacent opponents.',
     id: '461',
     power: 120,
     pp: 10,
@@ -4153,7 +4163,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Either deals damage or heals.",
+    effect: 'Either deals damage or heals.',
     id: '462',
     power: undefined,
     pp: 15,
@@ -4162,7 +4172,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "The user shoots powerful lasers using the power of a prism. The user can’t move on the next turn.",
+    effect: 'The user shoots powerful lasers using the power of a prism. The user can’t move on the next turn.',
     id: '463',
     power: 160,
     pp: 10,
@@ -4171,7 +4181,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects the user, but may fail if used consecutively.",
+    effect: 'Protects the user, but may fail if used consecutively.',
     id: '464',
     power: undefined,
     pp: 10,
@@ -4180,7 +4190,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '465',
     power: 65,
     pp: 20,
@@ -4207,7 +4217,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user bites the target with its psychic capabilities. This can also destroy Light Screen and Reflect.",
+    effect: 'The user bites the target with its psychic capabilities. This can also destroy Light Screen and Reflect.',
     id: '468',
     power: 85,
     pp: 10,
@@ -4216,7 +4226,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Prevents priority moves from being used for 5 turns.",
+    effect: 'Prevents priority moves from being used for 5 turns.',
     id: '469',
     power: undefined,
     pp: 10,
@@ -4234,7 +4244,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '471',
     power: 70,
     pp: 20,
@@ -4279,7 +4289,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Snorlax-exclusive Normal type Z-Move.",
+    effect: 'Snorlax-exclusive Normal type Z-Move.',
     id: '476',
     power: 210,
     pp: 1,
@@ -4297,7 +4307,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user heals the target’s status condition. If the move succeeds, it also restores the user’s own HP.",
+    effect: 'The user heals the target’s status condition. If the move succeeds, it also restores the user’s own HP.',
     id: '478',
     power: undefined,
     pp: 20,
@@ -4306,7 +4316,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Double power if the opponent is switching out.",
+    effect: 'Double power if the opponent is switching out.',
     id: '479',
     power: 40,
     pp: 20,
@@ -4315,7 +4325,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Makes the target act last this turn.",
+    effect: 'Makes the target act last this turn.',
     id: '480',
     power: undefined,
     pp: 15,
@@ -4324,7 +4334,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '481',
     power: 40,
     pp: 30,
@@ -4360,7 +4370,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Forces attacks to hit user, not team-mates.",
+    effect: 'Forces attacks to hit user, not team-mates.',
     id: '485',
     power: undefined,
     pp: 20,
@@ -4369,7 +4379,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Makes it rain for 5 turns.",
+    effect: 'Makes it rain for 5 turns.',
     id: '486',
     power: undefined,
     pp: 5,
@@ -4378,7 +4388,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Removes effects of trap moves.",
+    effect: 'Removes effects of trap moves.',
     id: '487',
     power: 20,
     pp: 40,
@@ -4387,7 +4397,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '488',
     power: 55,
     pp: 25,
@@ -4405,7 +4415,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Charges on first turn, attacks on second. High critical hit ratio.",
+    effect: 'Charges on first turn, attacks on second. High critical hit ratio.',
     id: '490',
     power: 80,
     pp: 10,
@@ -4414,7 +4424,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers half its max HP.",
+    effect: 'User recovers half its max HP.',
     id: '491',
     power: undefined,
     pp: 10,
@@ -4432,7 +4442,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Halves damage from Physical attacks for 5 turns.",
+    effect: 'Halves damage from Physical attacks for 5 turns.',
     id: '493',
     power: undefined,
     pp: 20,
@@ -4450,7 +4460,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Cures paralysis, poison, and burns.",
+    effect: 'Cures paralysis, poison, and burns.',
     id: '495',
     power: undefined,
     pp: 20,
@@ -4459,7 +4469,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May put the target to sleep.",
+    effect: 'May put the target to sleep.',
     id: '496',
     power: 75,
     pp: 10,
@@ -4468,7 +4478,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User sleeps for 2 turns, but user is fully healed.",
+    effect: 'User sleeps for 2 turns, but user is fully healed.',
     id: '497',
     power: undefined,
     pp: 10,
@@ -4477,7 +4487,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Inflicts double damage if a teammate fainted on the last turn.",
+    effect: 'Inflicts double damage if a teammate fainted on the last turn.',
     id: '498',
     power: 70,
     pp: 5,
@@ -4486,7 +4496,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power increases with higher Friendship.",
+    effect: 'Power increases with higher Friendship.',
     id: '499',
     power: undefined,
     pp: 20,
@@ -4504,7 +4514,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power increases if user was hit first.",
+    effect: 'Power increases if user was hit first.',
     id: '501',
     power: 60,
     pp: 10,
@@ -4522,7 +4532,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "In battles, the opponent switches. In the wild, the Pokémon runs.",
+    effect: 'In battles, the opponent switches. In the wild, the Pokémon runs.',
     id: '503',
     power: undefined,
     pp: 20,
@@ -4531,7 +4541,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '504',
     power: 150,
     pp: 5,
@@ -4540,7 +4550,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '505',
     power: 25,
     pp: 10,
@@ -4549,7 +4559,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '506',
     power: 90,
     pp: 20,
@@ -4567,7 +4577,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '508',
     power: 75,
     pp: 10,
@@ -4585,7 +4595,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '510',
     power: 50,
     pp: 15,
@@ -4603,7 +4613,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "User must recharge next turn.",
+    effect: 'User must recharge next turn.',
     id: '512',
     power: 150,
     pp: 5,
@@ -4621,7 +4631,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '514',
     power: 60,
     pp: 15,
@@ -4630,7 +4640,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Doubles in power each turn for 5 turns.",
+    effect: 'Doubles in power each turn for 5 turns.',
     id: '515',
     power: 30,
     pp: 20,
@@ -4639,7 +4649,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers half of its max HP and loses the Flying type temporarily.",
+    effect: 'User recovers half of its max HP and loses the Flying type temporarily.',
     id: '516',
     power: undefined,
     pp: 10,
@@ -4648,7 +4658,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Raises Attack and Special Attack of Grass-types.",
+    effect: 'Raises Attack and Special Attack of Grass-types.',
     id: '517',
     power: undefined,
     pp: 10,
@@ -4657,7 +4667,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Power increases if teammates use it in the same turn.",
+    effect: 'Power increases if teammates use it in the same turn.',
     id: '518',
     power: 60,
     pp: 15,
@@ -4666,7 +4676,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '519',
     power: 100,
     pp: 5,
@@ -4702,7 +4712,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '523',
     power: 35,
     pp: 15,
@@ -4711,7 +4721,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Creates a sandstorm for 5 turns.",
+    effect: 'Creates a sandstorm for 5 turns.',
     id: '524',
     power: undefined,
     pp: 10,
@@ -4720,7 +4730,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Drains HP from opponent each turn.",
+    effect: 'Drains HP from opponent each turn.',
     id: '525',
     power: 90,
     pp: 15,
@@ -4729,7 +4739,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Bug type Z-Move.",
+    effect: 'Bug type Z-Move.',
     id: '526',
     power: undefined,
     pp: 1,
@@ -4738,7 +4748,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '527',
     power: 80,
     pp: 15,
@@ -4756,7 +4766,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '529',
     power: 40,
     pp: 35,
@@ -4774,7 +4784,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '531',
     power: 100,
     pp: 5,
@@ -4783,7 +4793,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Solgaleo-exclusive Z-Move.",
+    effect: 'Solgaleo-exclusive Z-Move.',
     id: '532',
     power: 200,
     pp: 1,
@@ -4792,7 +4802,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Effects of the attack vary with the location.",
+    effect: 'Effects of the attack vary with the location.',
     id: '533',
     power: 70,
     pp: 20,
@@ -4810,7 +4820,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '535',
     power: 80,
     pp: 15,
@@ -4837,7 +4847,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User faints.",
+    effect: 'User faints.',
     id: '538',
     power: 200,
     pp: 5,
@@ -4855,7 +4865,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user attacks by beating the target with a bone that contains a spirit. This may also lower the target’s Defense stat.",
+    effect:
+      'The user attacks by beating the target with a bone that contains a spirit. This may also lower the target’s Defense stat.',
     id: '540',
     power: 85,
     pp: 10,
@@ -4864,7 +4875,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '541',
     power: 70,
     pp: 15,
@@ -4873,7 +4884,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Disappears on first turn, attacks on second. Can strike through Protect/Detect.",
+    effect: 'Disappears on first turn, attacks on second. Can strike through Protect/Detect.',
     id: '542',
     power: 120,
     pp: 5,
@@ -4882,7 +4893,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '543',
     power: 60,
     pp: 20,
@@ -4891,7 +4902,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '544',
     power: 40,
     pp: 30,
@@ -4909,7 +4920,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Psychic type Z-Move.",
+    effect: 'Psychic type Z-Move.',
     id: '546',
     power: undefined,
     pp: 1,
@@ -4918,7 +4929,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "One-Hit-KO, if it hits.",
+    effect: 'One-Hit-KO, if it hits.',
     id: '547',
     power: undefined,
     pp: 5,
@@ -4936,7 +4947,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Deals more damage to opponent if hit by a Physical move.",
+    effect: 'Deals more damage to opponent if hit by a Physical move.',
     id: '549',
     power: 150,
     pp: 5,
@@ -4954,7 +4965,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '551',
     power: 60,
     pp: 20,
@@ -4963,7 +4974,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user regains up to half of its max HP. It restores more HP in a sandstorm.",
+    effect: 'The user regains up to half of its max HP. It restores more HP in a sandstorm.',
     id: '552',
     power: undefined,
     pp: 10,
@@ -4972,7 +4983,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '553',
     power: 75,
     pp: 15,
@@ -4981,7 +4992,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May raise all stats of user at once.",
+    effect: 'May raise all stats of user at once.',
     id: '554',
     power: 60,
     pp: 5,
@@ -4999,7 +5010,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 55,
     category: 'Status',
-    effect: "Puts opponent to sleep.",
+    effect: 'Puts opponent to sleep.',
     id: '556',
     power: undefined,
     pp: 15,
@@ -5008,7 +5019,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Decidueye-exclusive Z-Move.",
+    effect: 'Decidueye-exclusive Z-Move.',
     id: '557',
     power: 180,
     pp: 1,
@@ -5017,7 +5028,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Burns the opponent.",
+    effect: 'Burns the opponent.',
     id: '558',
     power: 90,
     pp: 15,
@@ -5035,7 +5046,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user swaps Abilities with the opponent.",
+    effect: 'The user swaps Abilities with the opponent.',
     id: '560',
     power: undefined,
     pp: 10,
@@ -5044,7 +5055,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Raises Defense on first turn, attacks on second.",
+    effect: 'Raises Defense on first turn, attacks on second.',
     id: '561',
     power: 130,
     pp: 10,
@@ -5053,7 +5064,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Charges on first turn, attacks on second. May cause flinching.",
+    effect: 'Charges on first turn, attacks on second. May cause flinching.',
     id: '562',
     power: 140,
     pp: 5,
@@ -5062,7 +5073,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Takes opponent into the air on first turn, drops them on second turn.",
+    effect: 'Takes opponent into the air on first turn, drops them on second turn.',
     id: '563',
     power: 60,
     pp: 10,
@@ -5071,7 +5082,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits the opponent, even during Fly.",
+    effect: 'Hits the opponent, even during Fly.',
     id: '564',
     power: 85,
     pp: 15,
@@ -5080,7 +5091,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers half its max HP.",
+    effect: 'User recovers half its max HP.',
     id: '565',
     power: undefined,
     pp: 10,
@@ -5089,7 +5100,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '566',
     power: 80,
     pp: 20,
@@ -5098,7 +5109,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '567',
     power: 70,
     pp: 20,
@@ -5107,7 +5118,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Status',
-    effect: "Puts opponent to sleep.",
+    effect: 'Puts opponent to sleep.',
     id: '568',
     power: undefined,
     pp: 15,
@@ -5116,7 +5127,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User performs one of its own moves while sleeping.",
+    effect: 'User performs one of its own moves while sleeping.',
     id: '569',
     power: undefined,
     pp: 10,
@@ -5125,7 +5136,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May poison opponent.",
+    effect: 'May poison opponent.',
     id: '570',
     power: 65,
     pp: 20,
@@ -5134,7 +5145,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May poison opponent.",
+    effect: 'May poison opponent.',
     id: '571',
     power: 90,
     pp: 10,
@@ -5143,7 +5154,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May poison opponent.",
+    effect: 'May poison opponent.',
     id: '572',
     power: 95,
     pp: 10,
@@ -5152,7 +5163,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Makes Flying-type Pokémon vulnerable to Ground moves.",
+    effect: 'Makes Flying-type Pokémon vulnerable to Ground moves.',
     id: '573',
     power: 50,
     pp: 15,
@@ -5161,7 +5172,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "The user stabs the target with a sharp horn. This attack never misses.",
+    effect: 'The user stabs the target with a sharp horn. This attack never misses.',
     id: '574',
     power: 70,
     pp: 10,
@@ -5170,7 +5181,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power doubles if opponent is paralyzed, but cures it.",
+    effect: 'Power doubles if opponent is paralyzed, but cures it.',
     id: '575',
     power: 70,
     pp: 10,
@@ -5179,7 +5190,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 70,
     category: 'Special',
-    effect: "May poison opponent.",
+    effect: 'May poison opponent.',
     id: '576',
     power: 30,
     pp: 20,
@@ -5215,7 +5226,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Can only be used if asleep. May cause flinching.",
+    effect: 'Can only be used if asleep. May cause flinching.',
     id: '580',
     power: 50,
     pp: 15,
@@ -5233,7 +5244,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers half its max HP.",
+    effect: 'User recovers half its max HP.',
     id: '582',
     power: undefined,
     pp: 10,
@@ -5242,7 +5253,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Charges on first turn, attacks on second.",
+    effect: 'Charges on first turn, attacks on second.',
     id: '583',
     power: 120,
     pp: 10,
@@ -5251,7 +5262,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Charges on first turn, attacks on second.",
+    effect: 'Charges on first turn, attacks on second.',
     id: '584',
     power: 125,
     pp: 10,
@@ -5260,7 +5271,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Special',
-    effect: "Always inflicts 20 HP.",
+    effect: 'Always inflicts 20 HP.',
     id: '585',
     power: undefined,
     pp: 20,
@@ -5269,7 +5280,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Marshadow-exclusive Z-Move.",
+    effect: 'Marshadow-exclusive Z-Move.',
     id: '586',
     power: 195,
     pp: 1,
@@ -5278,7 +5289,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Special',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '587',
     power: 100,
     pp: 5,
@@ -5287,7 +5298,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '588',
     power: 65,
     pp: 20,
@@ -5296,7 +5307,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Heals the burns of its target.",
+    effect: 'Heals the burns of its target.',
     id: '589',
     power: 90,
     pp: 10,
@@ -5305,7 +5316,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Cures all status problems in the party Pokémon.",
+    effect: 'Cures all status problems in the party Pokémon.',
     id: '590',
     power: 90,
     pp: 15,
@@ -5314,7 +5325,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "The user hides in the target’s shadow, steals the target’s stat boosts, and then attacks.",
+    effect: 'The user hides in the target’s shadow, steals the target’s stat boosts, and then attacks.',
     id: '591',
     power: 90,
     pp: 10,
@@ -5323,7 +5334,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user exchanges Speed stats with the target.",
+    effect: 'The user exchanges Speed stats with the target.',
     id: '592',
     power: undefined,
     pp: 10,
@@ -5332,7 +5343,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Opponent cannot escape/switch.",
+    effect: 'Opponent cannot escape/switch.',
     id: '593',
     power: undefined,
     pp: 10,
@@ -5341,7 +5352,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '594',
     power: 20,
     pp: 15,
@@ -5350,7 +5361,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Hurts opponents when they switch into battle.",
+    effect: 'Hurts opponents when they switch into battle.',
     id: '595',
     power: undefined,
     pp: 20,
@@ -5359,7 +5370,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Protects the user and inflicts damage on contact.",
+    effect: 'Protects the user and inflicts damage on contact.',
     id: '596',
     power: undefined,
     pp: 10,
@@ -5368,7 +5379,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Prevents the opponent switching out.",
+    effect: 'Prevents the opponent switching out.',
     id: '597',
     power: 80,
     pp: 10,
@@ -5377,7 +5388,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Power depends on how many times the user performed Stockpile.",
+    effect: 'Power depends on how many times the user performed Stockpile.',
     id: '598',
     power: undefined,
     pp: 10,
@@ -5404,7 +5415,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "Lycanroc-exclusive Z-Move.",
+    effect: 'Lycanroc-exclusive Z-Move.',
     id: '601',
     power: 190,
     pp: 1,
@@ -5413,7 +5424,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '602',
     power: 90,
     pp: 15,
@@ -5422,7 +5433,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Puts opponent to sleep.",
+    effect: 'Puts opponent to sleep.',
     id: '603',
     power: undefined,
     pp: 15,
@@ -5431,7 +5442,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user shines a spotlight on the target so that only the target will be attacked during the turn.",
+    effect: 'The user shines a spotlight on the target so that only the target will be attacked during the turn.',
     id: '604',
     power: undefined,
     pp: 15,
@@ -5440,7 +5451,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Damages opponent switching into battle.",
+    effect: 'Damages opponent switching into battle.',
     id: '605',
     power: undefined,
     pp: 20,
@@ -5449,7 +5460,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Special',
-    effect: "May burn opponent.",
+    effect: 'May burn opponent.',
     id: '606',
     power: 110,
     pp: 5,
@@ -5458,7 +5469,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '607',
     power: 65,
     pp: 20,
@@ -5485,7 +5496,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Stores energy for use with Spit Up and Swallow.",
+    effect: 'Stores energy for use with Spit Up and Swallow.',
     id: '610',
     power: undefined,
     pp: 20,
@@ -5494,7 +5505,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Alolan Raichu-exclusive Electric type Z-Move.",
+    effect: 'Alolan Raichu-exclusive Electric type Z-Move.',
     id: '611',
     power: 175,
     pp: 1,
@@ -5503,7 +5514,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '612',
     power: 65,
     pp: 20,
@@ -5512,7 +5523,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Driven by frustration, the user attacks the target. If the user’s previous move has failed, the power of this move doubles.",
+    effect:
+      'Driven by frustration, the user attacks the target. If the user’s previous move has failed, the power of this move doubles.',
     id: '613',
     power: 75,
     pp: 10,
@@ -5521,7 +5533,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Physical',
-    effect: "High critical hit ratio.",
+    effect: 'High critical hit ratio.',
     id: '614',
     power: 100,
     pp: 5,
@@ -5539,7 +5551,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Always results in a critical hit.",
+    effect: 'Always results in a critical hit.',
     id: '616',
     power: 60,
     pp: 10,
@@ -5548,7 +5560,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '617',
     power: 80,
     pp: 15,
@@ -5557,7 +5569,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "The user restores its HP by the same amount as the target’s Attack stat. It also lowers the target’s Attack stat.",
+    effect:
+      'The user restores its HP by the same amount as the target’s Attack stat. It also lowers the target’s Attack stat.',
     id: '618',
     power: undefined,
     pp: 10,
@@ -5575,7 +5588,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Only usable when all PP are gone. Hurts the user.",
+    effect: 'Only usable when all PP are gone. Hurts the user.',
     id: '620',
     power: 50,
     pp: undefined,
@@ -5593,7 +5606,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Status',
-    effect: "Paralyzes opponent.",
+    effect: 'Paralyzes opponent.',
     id: '622',
     power: undefined,
     pp: 30,
@@ -5602,7 +5615,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 80,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '623',
     power: 80,
     pp: 20,
@@ -5611,7 +5624,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Uses HP to creates a decoy that takes hits.",
+    effect: 'Uses HP to creates a decoy that takes hits.',
     id: '624',
     power: undefined,
     pp: 10,
@@ -5620,7 +5633,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Ice type Z-Move.",
+    effect: 'Ice type Z-Move.',
     id: '625',
     power: undefined,
     pp: 1,
@@ -5629,7 +5642,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks first, but only works if opponent is readying an attack.",
+    effect: 'User attacks first, but only works if opponent is readying an attack.',
     id: '626',
     power: 70,
     pp: 5,
@@ -5638,7 +5651,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Makes it sunny for 5 turns.",
+    effect: 'Makes it sunny for 5 turns.',
     id: '627',
     power: undefined,
     pp: 5,
@@ -5674,7 +5687,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 55,
     category: 'Status',
-    effect: "Confuses opponent.",
+    effect: 'Confuses opponent.',
     id: '631',
     power: undefined,
     pp: 20,
@@ -5683,7 +5696,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Flying type Z-Move.",
+    effect: 'Flying type Z-Move.',
     id: '632',
     power: undefined,
     pp: 1,
@@ -5692,7 +5705,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Hits all adjacent Pokémon.",
+    effect: 'Hits all adjacent Pokémon.',
     id: '633',
     power: 90,
     pp: 15,
@@ -5701,7 +5714,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Status',
-    effect: "Opponent becomes confused, but its Attack is sharply raised.",
+    effect: 'Opponent becomes confused, but its Attack is sharply raised.',
     id: '634',
     power: undefined,
     pp: 15,
@@ -5710,7 +5723,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The more times the user has performed Stockpile, the more HP is recovered.",
+    effect: 'The more times the user has performed Stockpile, the more HP is recovered.',
     id: '635',
     power: undefined,
     pp: 10,
@@ -5719,7 +5732,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 75,
     category: 'Status',
-    effect: "Confuses opponent.",
+    effect: 'Confuses opponent.',
     id: '636',
     power: undefined,
     pp: 10,
@@ -5737,7 +5750,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "Ignores Accuracy and Evasiveness.",
+    effect: 'Ignores Accuracy and Evasiveness.',
     id: '638',
     power: 60,
     pp: 20,
@@ -5746,7 +5759,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Swaps held items with the opponent.",
+    effect: 'Swaps held items with the opponent.',
     id: '639',
     power: undefined,
     pp: 15,
@@ -5764,7 +5777,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Hits any Pokémon that shares a type with the user.",
+    effect: 'Hits any Pokémon that shares a type with the user.',
     id: '641',
     power: 120,
     pp: 15,
@@ -5773,7 +5786,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User recovers HP. Amount varies with the weather.",
+    effect: 'User recovers HP. Amount varies with the weather.',
     id: '642',
     power: undefined,
     pp: 5,
@@ -5782,7 +5795,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '643',
     power: 40,
     pp: 35,
@@ -5800,7 +5813,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '645',
     power: 25,
     pp: 10,
@@ -5818,7 +5831,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Doubles Speed for 4 turns.",
+    effect: 'Doubles Speed for 4 turns.',
     id: '647',
     power: undefined,
     pp: 30,
@@ -5827,7 +5840,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '648',
     power: 90,
     pp: 20,
@@ -5836,7 +5849,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Opponent can only use moves that attack.",
+    effect: 'Opponent can only use moves that attack.',
     id: '649',
     power: undefined,
     pp: 20,
@@ -5845,7 +5858,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user gets teary eyed to make the target lose its combative spirit. This lowers the target’s Attack and Sp. Atk stats.",
+    effect:
+      'The user gets teary eyed to make the target lose its combative spirit. This lowers the target’s Attack and Sp. Atk stats.',
     id: '650',
     power: undefined,
     pp: 20,
@@ -5854,7 +5868,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Type depends on the Drive being held.",
+    effect: 'Type depends on the Drive being held.',
     id: '651',
     power: 120,
     pp: 5,
@@ -5863,7 +5877,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Ground type Z-Move.",
+    effect: 'Ground type Z-Move.',
     id: '652',
     power: undefined,
     pp: 1,
@@ -5872,7 +5886,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Confuses all Pokémon.",
+    effect: 'Confuses all Pokémon.',
     id: '653',
     power: undefined,
     pp: 20,
@@ -5890,7 +5904,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Allows user to flee wild battles; also warps player to last PokéCenter.",
+    effect: 'Allows user to flee wild battles; also warps player to last PokéCenter.',
     id: '655',
     power: undefined,
     pp: 20,
@@ -5908,7 +5922,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Makes Flying-type Pokémon vulnerable to Ground moves.",
+    effect: 'Makes Flying-type Pokémon vulnerable to Ground moves.',
     id: '657',
     power: 90,
     pp: 10,
@@ -5917,7 +5931,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Opponent cannot flee or switch.",
+    effect: 'Opponent cannot flee or switch.',
     id: '658',
     power: 90,
     pp: 10,
@@ -5926,7 +5940,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User attacks for 2-3 turns but then becomes confused.",
+    effect: 'User attacks for 2-3 turns but then becomes confused.',
     id: '659',
     power: 120,
     pp: 10,
@@ -5935,7 +5949,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Prevents use of sound moves for two turns.",
+    effect: 'Prevents use of sound moves for two turns.',
     id: '660',
     power: 80,
     pp: 15,
@@ -5944,7 +5958,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 70,
     category: 'Special',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '661',
     power: 110,
     pp: 10,
@@ -5953,7 +5967,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 95,
     category: 'Physical',
-    effect: "May cause flinching and/or paralyze opponent.",
+    effect: 'May cause flinching and/or paralyze opponent.',
     id: '662',
     power: 65,
     pp: 15,
@@ -5962,7 +5976,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '663',
     power: 75,
     pp: 15,
@@ -5971,7 +5985,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '664',
     power: 40,
     pp: 30,
@@ -5980,7 +5994,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Status',
-    effect: "Paralyzes opponent.",
+    effect: 'Paralyzes opponent.',
     id: '665',
     power: undefined,
     pp: 20,
@@ -5989,7 +6003,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May paralyze opponent.",
+    effect: 'May paralyze opponent.',
     id: '666',
     power: 90,
     pp: 15,
@@ -6007,7 +6021,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Reverses stat changes of opponent.",
+    effect: 'Reverses stat changes of opponent.',
     id: '668',
     power: undefined,
     pp: 20,
@@ -6016,7 +6030,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Opponent cannot use the same move in a row.",
+    effect: 'Opponent cannot use the same move in a row.',
     id: '669',
     power: undefined,
     pp: 15,
@@ -6025,7 +6039,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Status',
-    effect: "Badly poisons opponent.",
+    effect: 'Badly poisons opponent.',
     id: '670',
     power: undefined,
     pp: 10,
@@ -6034,7 +6048,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Poisons opponents when they switch into battle.",
+    effect: 'Poisons opponents when they switch into battle.',
     id: '671',
     power: undefined,
     pp: 20,
@@ -6043,7 +6057,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "The user shoots poisonous threads to poison the target and lower the target’s Speed stat.",
+    effect: 'The user shoots poisonous threads to poison the target and lower the target’s Speed stat.',
     id: '672',
     power: undefined,
     pp: 20,
@@ -6052,7 +6066,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "User takes on the form and attacks of the opponent.",
+    effect: 'User takes on the form and attacks of the opponent.',
     id: '673',
     power: undefined,
     pp: 10,
@@ -6061,7 +6075,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May paralyze, burn or freeze opponent.",
+    effect: 'May paralyze, burn or freeze opponent.',
     id: '674',
     power: 80,
     pp: 10,
@@ -6070,7 +6084,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Swaps held items with the opponent.",
+    effect: 'Swaps held items with the opponent.',
     id: '675',
     power: undefined,
     pp: 10,
@@ -6079,7 +6093,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Slower Pokémon move first in the turn for 5 turns.",
+    effect: 'Slower Pokémon move first in the turn for 5 turns.',
     id: '676',
     power: undefined,
     pp: 5,
@@ -6088,7 +6102,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Status',
-    effect: "Adds Ghost type to opponent.",
+    effect: 'Adds Ghost type to opponent.',
     id: '677',
     power: undefined,
     pp: 20,
@@ -6097,7 +6111,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Hits thrice in one turn at increasing power.",
+    effect: 'Hits thrice in one turn at increasing power.',
     id: '678',
     power: 10,
     pp: 10,
@@ -6115,7 +6129,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Special',
-    effect: "The lower the PP, the higher the power.",
+    effect: 'The lower the PP, the higher the power.',
     id: '680',
     power: undefined,
     pp: 5,
@@ -6124,7 +6138,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Hits twice in one turn. May poison opponent.",
+    effect: 'Hits twice in one turn. May poison opponent.',
     id: '681',
     power: 25,
     pp: 20,
@@ -6133,7 +6147,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: undefined,
-    effect: "Fairy type Z-Move.",
+    effect: 'Fairy type Z-Move.',
     id: '682',
     power: undefined,
     pp: 1,
@@ -6142,7 +6156,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May cause flinching. Hits Pokémon using Fly/Bounce with double power.",
+    effect: 'May cause flinching. Hits Pokémon using Fly/Bounce with double power.',
     id: '683',
     power: 40,
     pp: 20,
@@ -6151,7 +6165,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User switches out immediately after attacking.",
+    effect: 'User switches out immediately after attacking.',
     id: '684',
     power: 70,
     pp: 20,
@@ -6160,7 +6174,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User attacks for 3 turns and prevents sleep.",
+    effect: 'User attacks for 3 turns and prevents sleep.',
     id: '685',
     power: 90,
     pp: 10,
@@ -6178,7 +6192,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User attacks first.",
+    effect: 'User attacks first.',
     id: '687',
     power: 40,
     pp: 30,
@@ -6205,7 +6219,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Inflicts double damage if the target is poisoned.",
+    effect: 'Inflicts double damage if the target is poisoned.',
     id: '690',
     power: 65,
     pp: 10,
@@ -6214,7 +6228,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '691',
     power: 55,
     pp: 30,
@@ -6223,7 +6237,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '692',
     power: 45,
     pp: 25,
@@ -6232,7 +6246,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Physical',
-    effect: "User attacks last, but ignores Accuracy and Evasiveness.",
+    effect: 'User attacks last, but ignores Accuracy and Evasiveness.',
     id: '693',
     power: 70,
     pp: 10,
@@ -6241,7 +6255,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "User must switch out after attacking.",
+    effect: 'User must switch out after attacking.',
     id: '694',
     power: 70,
     pp: 20,
@@ -6250,7 +6264,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage. May paralyze opponent.",
+    effect: 'User receives recoil damage. May paralyze opponent.',
     id: '695',
     power: 120,
     pp: 15,
@@ -6259,7 +6273,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "Power doubles if opponent is asleep, but wakes it up.",
+    effect: 'Power doubles if opponent is asleep, but wakes it up.',
     id: '696',
     power: 70,
     pp: 10,
@@ -6268,7 +6282,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "",
+    effect: '',
     id: '697',
     power: 40,
     pp: 25,
@@ -6277,7 +6291,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Added effects appear if preceded by Fire Pledge or succeeded by Grass Pledge.",
+    effect: 'Added effects appear if preceded by Fire Pledge or succeeded by Grass Pledge.',
     id: '698',
     power: 80,
     pp: 10,
@@ -6286,7 +6300,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "May confuse opponent.",
+    effect: 'May confuse opponent.',
     id: '699',
     power: 60,
     pp: 20,
@@ -6295,7 +6309,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Special',
-    effect: "Hits 2-5 times in one turn.",
+    effect: 'Hits 2-5 times in one turn.',
     id: '700',
     power: 15,
     pp: 20,
@@ -6304,7 +6318,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Weakens the power of Fire-type moves.",
+    effect: 'Weakens the power of Fire-type moves.',
     id: '701',
     power: undefined,
     pp: 15,
@@ -6322,7 +6336,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '703',
     power: 80,
     pp: 15,
@@ -6340,7 +6354,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Special',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '705',
     power: 35,
     pp: 15,
@@ -6349,7 +6363,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "In battles, the opponent switches. In the wild, the Pokémon runs.",
+    effect: 'In battles, the opponent switches. In the wild, the Pokémon runs.',
     id: '706',
     power: undefined,
     pp: 20,
@@ -6367,7 +6381,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '708',
     power: 90,
     pp: 15,
@@ -6376,7 +6390,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 85,
     category: 'Status',
-    effect: "Burns opponent.",
+    effect: 'Burns opponent.',
     id: '709',
     power: undefined,
     pp: 15,
@@ -6385,7 +6399,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '710',
     power: 60,
     pp: 35,
@@ -6394,7 +6408,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "The user recovers HP in the following turn.",
+    effect: 'The user recovers HP in the following turn.',
     id: '711',
     power: undefined,
     pp: 10,
@@ -6421,7 +6435,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "User receives recoil damage.",
+    effect: 'User receives recoil damage.',
     id: '714',
     power: 120,
     pp: 15,
@@ -6448,7 +6462,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "Traps opponent, damaging them for 4-5 turns.",
+    effect: 'Traps opponent, damaging them for 4-5 turns.',
     id: '717',
     power: 15,
     pp: 20,
@@ -6466,7 +6480,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "",
+    effect: '',
     id: '719',
     power: 80,
     pp: 15,
@@ -6475,7 +6489,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: undefined,
     category: 'Status',
-    effect: "Puts opponent to sleep in the next turn.",
+    effect: 'Puts opponent to sleep in the next turn.',
     id: '720',
     power: undefined,
     pp: 10,
@@ -6484,7 +6498,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 50,
     category: 'Special',
-    effect: "Paralyzes opponent.",
+    effect: 'Paralyzes opponent.',
     id: '721',
     power: 120,
     pp: 5,
@@ -6493,7 +6507,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 90,
     category: 'Physical',
-    effect: "May cause flinching.",
+    effect: 'May cause flinching.',
     id: '722',
     power: 80,
     pp: 15,
@@ -6502,7 +6516,8 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "A strong electric blast crashes down on the target, giving it an electric shock. This may also make the target flinch.",
+    effect:
+      'A strong electric blast crashes down on the target, giving it an electric shock. This may also make the target flinch.',
     id: '723',
     power: 80,
     pp: 10,
@@ -6511,7 +6526,7 @@ const moves: IScrappedMove[] = [
   {
     accuracy: 100,
     category: 'Physical',
-    effect: "High critical-hit ratio.",
+    effect: 'High critical-hit ratio.',
     id: '724',
     power: 50,
     pp: 15,
