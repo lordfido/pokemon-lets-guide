@@ -53,16 +53,16 @@ type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
-  filters: IPokedexFilters;
   redirectTo?: string;
 }
 
 class PokedexWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
-    filters: pokedexInitialState.filters,
     redirectTo: '',
   };
+
+  public filters = pokedexInitialState.filters;
 
   public componentDidMount() {
     const { FilterPokedex, query } = this.props;
@@ -123,7 +123,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleFilterChange = (field: IFieldOutput) => {
-    const { filters } = this.state;
+    const { filters } = this;
 
     const newFilters = {
       ...filters,
@@ -139,9 +139,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
       newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => (s.value ? s.value : s)));
     }
 
-    this.setState({
-      filters: newFilters,
-    });
+    this.filters = newFilters;
   };
 
   public handleReset = () => {
@@ -151,7 +149,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleSubmit = () => {
-    const { filters } = this.state;
+    const { filters } = this;
 
     const redirectTo = filtersToString(filters);
     this.setState({
