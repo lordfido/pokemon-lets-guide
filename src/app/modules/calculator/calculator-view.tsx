@@ -168,7 +168,7 @@ const unstyledCalculatorView = ({
           <div className={classes.emptyCase}>
             <h4>{getUiTranslation('calculator-empty-case')}</h4>
             <div className={classes.emptyCaseImage}>
-              {defaultPokemon && <PokemonPreview src={getPokemonImage (defaultPokemon)} />}
+              {defaultPokemon && <PokemonPreview src={getPokemonImage(defaultPokemon)} />}
             </div>
           </div>
         )}
