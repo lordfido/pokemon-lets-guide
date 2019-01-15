@@ -34,6 +34,9 @@ const sheet: ISheet = {
   noMargin: {
     margin: 0,
   },
+  sprite: {
+    marginTop: -5,
+  },
 };
 
 interface IOwnProps {
@@ -49,7 +52,7 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
 
     {/* Sprite */}
     <TableCell center>
-      <PokemonSprite pokemon={pokemon} />
+      <PokemonSprite pokemon={pokemon} className={classes.sprite} />
     </TableCell>
 
     {/* Name */}
