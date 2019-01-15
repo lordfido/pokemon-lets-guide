@@ -25,13 +25,14 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   pokemon: IPokemonWithBaseCP;
   size?: 'big' | 'medium' | 'small';
 }
 
-const unstyledPokemonSprite = ({ classes, pokemon, size = 'medium' }: IOwnProps) => (
+const unstyledPokemonSprite = ({ classes, className, pokemon, size = 'medium' }: IOwnProps) => (
   <img
-    className={classnames(classes.image, classes[size])}
+    className={classnames(classes.image, classes[size], className)}
     src={getPokemonSprite(pokemon)}
     alt={`${pokemon.name} thumbnail`}
   />

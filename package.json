@@ -18,7 +18,7 @@
     }
   },
   "scripts": {
-    "scrap-pokemon-images": "",
+    "scrap-pokemon-images": "node ./scrappers/pokemon-images.js",
     "scrap-pokemon-sprites": "node ./scrappers/pokemon-sprites.js",
     "scrap-pokemon-descriptions": "",
     "scrap-moves": "node ./scrappers/moves.js",

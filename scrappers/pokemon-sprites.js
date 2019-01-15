@@ -43,7 +43,7 @@ const addLineToTs = ({ id, fileName }) => {
   pokemonSpritesMap.push(`  '${id}': require('${IMAGES_DOWNLOAD_PATH.replace('./src', '../..')}${fileName}'),`);
 };
 
-const generateJson = () => {
+const generateImageSpritesMapsTs = () => {
   const beginning = [
     "import { IPokemonWithBaseCP } from '../../app/modules/pokedex/pokedex.models';",
     '',
@@ -52,7 +52,7 @@ const generateJson = () => {
   const ending = [
     '};',
     '',
-    "export const getPokemonSprite = ({ id }: IPokemonWithBaseCP) => pokemonSprites[id] || '';",
+    'export const getPokemonSprite = ({ id }: IPokemonWithBaseCP)?: string => pokemonSprites[id];',
     '',
   ];
 
@@ -102,7 +102,7 @@ const downloadImages = array => {
 
   Promise.all(downloads).then(() => {
     console.log('All images have been downloaded');
-    generateJson();
+    generateImageSpritesMapsTs();
 
     console.log('File has been generated: ', OUTPUT_MAP_FILE);
   });
