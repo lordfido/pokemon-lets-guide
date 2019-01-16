@@ -7,5 +7,5 @@ export const SIDEBAR_BACKDROP = SIDEBAR - 1;
 
 export const HEADER = 30;
 
-const MODAL = 40;
+export const MODAL = 40;
 export const MODAL_BACKDROP = MODAL - 1;

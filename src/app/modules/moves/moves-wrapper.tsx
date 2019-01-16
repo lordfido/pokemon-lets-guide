@@ -16,6 +16,7 @@ import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
 import { IMovesFilters, IMovesPagination, IRichMove, movesInitialState } from './moves.models';
 
 interface IOwnProps {
+  isModalOpen: boolean;
   query?: string;
   url: string;
 }
@@ -165,7 +166,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public render() {
-    const { collection, filters, url, pagination, movesList } = this.props;
+    const { collection, filters, isModalOpen, movesList, pagination, url } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -175,6 +176,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
     return (
       <MovesView
         collection={collection}
+        isModalOpen={isModalOpen}
         handleSortBy={this.handleSortBy}
         movesList={movesList}
         handleMoveChange={e => {

@@ -3,6 +3,7 @@ import chroma from 'chroma-js';
 // Colors
 // B&W Scale
 export const WHITE = '#fff';
+export const GREY_LIGHT_6 = '#f8f8f8';
 export const GREY_LIGHT_5 = '#efefef';
 export const GREY_LIGHT_4 = '#ccc';
 export const GREY_LIGHT_3 = '#d3d3d3';
@@ -17,6 +18,7 @@ export const RED = '#c80000';
 export const GREEN = '#028733';
 export const GREEN_LIGHT = '#e5fce1';
 export const YELLOW = '#fff280';
+export const BLUE_LIGHT = '#edfcff';
 
 // Statuses
 export const SUCCESS_LIGHT = '#c1fdb5';
@@ -39,6 +41,11 @@ export const POKEDEX_BACKGROUND = '#00b2b6';
 export const POKEDEX_WINDOW_BACKGROUND = '#009cb3';
 export const POKEDEX_WINDOW_BACKGROUND_2 = '#0378ae';
 export const POKEDEX_WINDOW_BACKGROUND_3 = '#35b4d7';
+
+// MISC
+export const ACCURACY_LABEL = 'lightblue';
+export const CATEGORY_LABEL = 'green';
+export const POWER_LABEL = 'orange';
 
 export const traslucentColor = (color: string, opacity: number) => `rgba(${chroma(color).rgb()}, ${opacity})`;
 export const lighterColor = (color: string, value?: number) =>

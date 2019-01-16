@@ -56,11 +56,15 @@ const sheet: ISheet = {
       opacity: 1,
     },
   },
+  modalOpen: {
+    filter: 'blur(3px)',
+  },
 };
 
 interface IOwnProps {
   classes: { [key: string]: string };
   collection: IRichMove[];
+  isModalOpen: boolean;
   handleSortBy: (key: string) => void;
   movesList: IOption[];
   handleMoveChange: (field: IFieldOutput) => void;
@@ -74,6 +78,7 @@ interface IOwnProps {
 const unstyledMovesView = ({
   classes,
   collection,
+  isModalOpen,
   handleSortBy,
   movesList,
   handleMoveChange,
@@ -85,6 +90,7 @@ const unstyledMovesView = ({
 }: IOwnProps) => (
   <>
     <Sidebar
+      className={classnames({ [classes.modalOpen]: isModalOpen })}
       render={isOpen => (
         <MovesFilters
           classNames={{
@@ -100,7 +106,7 @@ const unstyledMovesView = ({
         />
       )}
     />
-    <div className={classes.results}>
+    <div className={classnames(classes.results, { [classes.modalOpen]: isModalOpen })}>
       <Table
         headings={[
           {

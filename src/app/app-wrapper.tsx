@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps, withRouter } from 'react-router-dom';
 import analyticsApi from '../common/apis/analytics';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
@@ -117,12 +117,11 @@ class AppWrapper extends React.Component<Props> {
   public render() {
     return (
       <AppView>
-        <Switch>
+        <>
           {routes.map(({ exact, path, render }, index) => (
             <Route key={index} exact={exact} path={path} render={render} />
           ))}
-          {/* <Redirect to={{ pathname: routes.POKEDEX }} /> */}
-        </Switch>
+        </>
       </AppView>
     );
   }

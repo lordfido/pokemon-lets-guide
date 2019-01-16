@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import { mockedMovessCollection } from '../../../common/apis/mocks';
 import { sortBy } from '../../utils/arrays';
 import { getTypeRelations } from '../../utils/pokemon';
+import { getLocale } from '../../utils/translations';
 
 import { MovesActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
@@ -14,11 +15,10 @@ import {
   MIN_PP_VALUE,
 } from '../../../constants/moves/moves';
 import { MovesCategory } from '../../../constants/moves/moves-categories';
+import { getMoveName } from '../../../constants/moves/moves-names';
 import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 
 import { ITypeRelations } from '../pokedex/pokedex.models';
-import { getLocale } from '../../utils/translations';
-import { getMoveName } from '../../../constants/moves/moves-names';
 
 export interface IMovesAction extends AnyAction {
   type: MovesActionType;
