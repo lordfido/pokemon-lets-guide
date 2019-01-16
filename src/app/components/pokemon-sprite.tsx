@@ -12,7 +12,7 @@ const sheet: ISheet = {
     maxHeight: 40,
   },
   image: {
-    animation: 'sprite-bounce 0.75s infinite',
+    animation: 'sprite-bounce 0.7s infinite',
     verticalAlign: 'middle',
   },
   medium: {

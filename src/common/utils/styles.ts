@@ -24,7 +24,13 @@ const getCSSAnimations = () => {
       0% {
         transform: translateY(0);
       }
+      49% {
+        transform: translatey(0);
+      }
       50% {
+        transform: translateY(-6%);
+      }
+      99% {
         transform: translateY(-6%);
       }
       100% {
