@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { Redirect } from 'react-router';
 
 import { getSelectedMove } from '../../root.reducer';
 
@@ -14,63 +14,14 @@ interface IOwnProps {
   id: string;
 }
 
-type RouteProps = RouteComponentProps<{
-  history: any;
-}>;
-
 interface IStateProps {
   move?: IRichMove;
 }
 
-type Props = IOwnProps & RouteProps & IStateProps;
+type Props = IOwnProps & IStateProps;
 
-class MoveWrapper extends React.Component<Props> {
-  public componentDidMount() {
-    document.addEventListener('keyup', this.handleKeyPress);
-  }
-
-  public componentWillUnmount() {
-    document.removeEventListener('keyup', this.handleKeyPress);
-  }
-
-  public handleClose = () => {
-    const { history } = this.props;
-
-    history.goBack();
-  };
-
-  public handleKeyPress = (event: KeyboardEvent) => {
-    const { keyCode } = event;
-
-    event.preventDefault();
-
-    switch (keyCode) {
-      case 27:
-        this.handleClose();
-        break;
-
-      default:
-    }
-  };
-
-  public render() {
-    const { move } = this.props;
-
-    if (!move) {
-      return null;
-      return <Redirect to={{ pathname: MOVES.replace(':id?', '') }} />;
-    }
-
-    return (
-      <MoveView
-        handleClose={() => {
-          this.handleClose();
-        }}
-        move={move}
-      />
-    );
-  }
-}
+const MoveWrapper = ({ move }: Props) =>
+  move ? <MoveView move={move} /> : true ? null : <Redirect to={{ pathname: MOVES.replace(':id?', '') }} />;
 
 const mapStateToProps = (state: IRootState, ownProps: Props): IStateProps => {
   const move = getSelectedMove(state)(ownProps.id);
@@ -80,4 +31,4 @@ const mapStateToProps = (state: IRootState, ownProps: Props): IStateProps => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(MoveWrapper));
+export default connect(mapStateToProps)(MoveWrapper);

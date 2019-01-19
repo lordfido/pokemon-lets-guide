@@ -1,5 +1,7 @@
 export const BACKGROUND = -1;
 
+export const CURVED_WINDOW = 5;
+
 export const CONTENT = 10;
 
 export const SIDEBAR = 20;

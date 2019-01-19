@@ -1,15 +1,19 @@
 import classnames from 'classnames';
 import * as React from 'react';
-
 import injectSheet from 'react-jss';
+
+import CurvedWindowPart, { borderSize } from './forbidden/curved-window-part';
 
 import { PADDING_S } from '../../constants/styles/styles';
 import { WINDOW_BACKGROUND, WINDOW_BORDER } from '../../constants/styles/styles-skin';
+import { CONTENT } from '../../constants/styles/styles-zindex';
 
 import { ISheet } from '../root.models';
-import CurvedWindowPart, { borderSize } from './forbidden/curved-window-part';
 
 const sheet: ISheet = {
+  content: {
+    zIndex: CONTENT,
+  },
   window1: {
     padding: PADDING_S,
   },
@@ -41,7 +45,7 @@ const unstyledCurvedWindow = ({
     <CurvedWindowPart backgroundColor={backgroundColor} className={classes.window1}>
       <CurvedWindowPart backgroundColor={borderColor} className={classes.window2}>
         <CurvedWindowPart backgroundColor={backgroundColor} className={classes.window3}>
-          {children}
+          <div className={classes.content}>{children}</div>
         </CurvedWindowPart>
       </CurvedWindowPart>
     </CurvedWindowPart>

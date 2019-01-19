@@ -15,10 +15,11 @@ export const BLACK = '#000';
 
 // Colors
 export const RED = '#c80000';
-export const GREEN = '#028733';
+export const GREEN = '#50ff33';
 export const GREEN_LIGHT = '#e5fce1';
 export const YELLOW = '#fff280';
 export const BLUE_LIGHT = '#edfcff';
+export const BLUE = '#0086d8';
 
 // Statuses
 export const SUCCESS_LIGHT = '#c1fdb5';

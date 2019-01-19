@@ -3,6 +3,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 
 import { WHITE } from '../../../constants/styles/styles-colors';
+import { CURVED_WINDOW } from '../../../constants/styles/styles-zindex';
 
 import { ISheet } from '../../root.models';
 
@@ -11,7 +12,7 @@ const borderPercentage = 2;
 
 const commonBorderProps: React.CSSProperties = {
   position: 'absolute',
-  zIndex: -1,
+  zIndex: CURVED_WINDOW,
 };
 
 const sheet: ISheet = {

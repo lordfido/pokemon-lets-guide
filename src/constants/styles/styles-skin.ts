@@ -1,6 +1,7 @@
 import {
   BLACK,
-  BLUE_LIGHT,
+  BLUE,
+  GREEN,
   GREY_LIGHT,
   GREY_LIGHT_2,
   GREY_LIGHT_3,
@@ -15,7 +16,8 @@ import {
 export const APP_BACKGROUND = GREY_LIGHT_5;
 
 // Modal
-export const MODAL_BACKGROUND = traslucentColor(BLUE_LIGHT, 0.8);
+export const MODAL_BACKGROUND = `linear-gradient(135deg, ${BLUE} 0%, ${GREEN} 50%, ${BLUE} 100%)`;
+export const MODAL_CONTENT_BACKGROUND = traslucentColor(WHITE, 0.7);
 export const MODAL_BACKDROP_BAKGROUND = traslucentColor(BLACK, 0.3);
 
 // Sidebar
