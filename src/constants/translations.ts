@@ -39,7 +39,7 @@ export const gameTranslations: ITranslationsCollection = {
   // Moves data
   accuracy: ['', 'Accuracy', '', 'Precisión', '', '', '', ''],
   category: ['', 'Category', '', 'Categoría', '', '', '', ''],
-  power: ['', 'Power', '', 'Poder', '', '', '', ''],
+  power: ['', 'Power', '', 'Potencia', '', '', '', ''],
   pp: ['', 'PP', '', 'PP', '', '', '', ''],
   probability: ['', 'Probability', '', 'Probabilidad', '', '', '', ''],
   tm: ['', 'TM', '', 'MT', '', '', '', ''],

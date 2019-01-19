@@ -43,11 +43,13 @@ export const POKEDEX_WINDOW_BACKGROUND_2 = '#0378ae';
 export const POKEDEX_WINDOW_BACKGROUND_3 = '#35b4d7';
 
 // MISC
-export const ACCURACY_LABEL = 'lightblue';
-export const CATEGORY_LABEL = 'green';
-export const POWER_LABEL = 'orange';
+export const ACCURACY_LABEL = '#009ada';
+export const CATEGORY_LABEL = '#00d200';
+export const POWER_LABEL = '#ff8600';
 
-export const traslucentColor = (color: string, opacity: number) => `rgba(${chroma(color).rgb()}, ${opacity})`;
+export const traslucentColor = (color: string, opacity: number) =>
+  chroma(`rgba(${chroma(color).rgb()}, ${opacity})`).hex();
+
 export const lighterColor = (color: string, value?: number) =>
   chroma(color)
     .brighten(value)
