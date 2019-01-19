@@ -21,7 +21,7 @@ interface IStateProps {
 type Props = IOwnProps & IStateProps;
 
 const MoveWrapper = ({ move }: Props) =>
-  move ? <MoveView move={move} /> : true ? null : <Redirect to={{ pathname: MOVES.replace(':id?', '') }} />;
+  move ? <MoveView move={move} /> : <Redirect to={{ pathname: MOVES.replace(':id?', '') }} />;
 
 const mapStateToProps = (state: IRootState, ownProps: Props): IStateProps => {
   const move = getSelectedMove(state)(ownProps.id);
