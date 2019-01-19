@@ -89,6 +89,7 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  className?: string;
   render: (isOpen: boolean) => React.ReactElement<any>;
 }
 
@@ -110,7 +111,7 @@ class UnstyledSidebar extends React.Component<IOwnProps, IOwnState> {
   };
 
   public render() {
-    const { classes, render } = this.props;
+    const { classes, className, render } = this.props;
     const { isOpen } = this.state;
 
     const toggleButton: IButtonProps = {
@@ -123,7 +124,7 @@ class UnstyledSidebar extends React.Component<IOwnProps, IOwnState> {
     };
 
     return (
-      <div className={classes.wrapper}>
+      <div className={classnames(classes.wrapper, className)}>
         <Buttons className={classes.buttons} options={[toggleButton]} align="left" />
 
         <aside className={classnames(classes.sidebar, { [classes.sidebarOpen]: isOpen })}>{render(isOpen)}</aside>

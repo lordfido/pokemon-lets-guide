@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 
-import baseConfig, { manifestPlugin, uglifyPlugin } from './base.config';
+import baseConfig, { imageOptimizedLoader, manifestPlugin, uglifyPlugin } from './base.config';
 import { appConfig as devAppConfig, swConfig as devSwConfig } from './dev.config';
 
 const appConfig: webpack.Configuration = {
@@ -14,6 +14,11 @@ const appConfig: webpack.Configuration = {
   devtool: false,
 
   entry: baseConfig.entry,
+
+  module: {
+    // @ts-ignore
+    rules: [imageOptimizedLoader, ...devAppConfig.module.rules.splice(1)],
+  },
 
   plugins: [
     new webpack.DefinePlugin({

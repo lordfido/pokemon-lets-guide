@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps, withRouter } from 'react-router-dom';
 import analyticsApi from '../common/apis/analytics';
 import { setLastSession, setStore } from '../common/utils/idb';
 import { log } from '../common/utils/logger';
@@ -11,6 +11,7 @@ import registerServiceWorker from './utils/service-worker';
 import AppView from './app-view';
 import routes from './app.routes';
 
+import { createMoves } from './modules/moves/moves.actions';
 import { createPokedex } from './modules/pokedex/pokedex.actions';
 
 import { restoreLastRoute } from '../constants/features';
@@ -41,13 +42,14 @@ interface IStateProps {
 
 interface IDispatchProps {
   GetPokemon: () => void;
+  GetMoves: () => void;
 }
 
 type Props = IOwnProps & RouteProps & IStateProps & IDispatchProps;
 
 class AppWrapper extends React.Component<Props> {
   public componentDidMount() {
-    const { GetPokemon, lastRoute, history } = this.props;
+    const { GetPokemon, GetMoves, lastRoute, history } = this.props;
 
     if (restoreLastRoute && lastRoute) {
       history.push({
@@ -64,6 +66,9 @@ class AppWrapper extends React.Component<Props> {
 
     // Get pokedex
     GetPokemon();
+
+    // Get moves
+    GetMoves();
 
     const initTimer = analyticsApi.getTimer(APP_INIT);
     const renderTimer = new Date().getTime() - initTimer;
@@ -112,12 +117,11 @@ class AppWrapper extends React.Component<Props> {
   public render() {
     return (
       <AppView>
-        <Switch>
+        <>
           {routes.map(({ exact, path, render }, index) => (
             <Route key={index} exact={exact} path={path} render={render} />
           ))}
-          {/* <Redirect to={{ pathname: routes.POKEDEX }} /> */}
-        </Switch>
+        </>
       </AppView>
     );
   }
@@ -132,6 +136,7 @@ const mapStateToProps = (state: IRootState): IStateProps => {
 };
 
 const mapDispatchToProps = {
+  GetMoves: createMoves,
   GetPokemon: createPokedex,
 };
 

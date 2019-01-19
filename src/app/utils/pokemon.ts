@@ -1,8 +1,9 @@
 import { Types } from 'pokelab';
-import pokemonExtraInfoList from '../../common/apis/mocks';
+import { mockedPokemonCollection } from '../../common/apis/mocks';
 import { sortBy } from './arrays';
 import { getGameTranslation } from './translations';
 
+import { getPokemonImage } from '../../constants/pokemon/pokemon-images';
 import { MAX_IV_VALUE } from '../../constants/pokemon/pokemon-ivs';
 import {
   ATTACK_ID,
@@ -33,9 +34,9 @@ export const getStatRatio = (value: number, max: number = MAX_STAT_VALUE): numbe
 export const getPaddedId = (pokemonId: string): string => {
   let id = String(pokemonId);
 
-  if (pokemonId.length === 1) {
+  if (id.length === 1) {
     id = `00${pokemonId}`;
-  } else if (pokemonId.length === 2) {
+  } else if (id.length === 2) {
     id = `0${pokemonId}`;
   }
 
@@ -122,12 +123,6 @@ export const getVariantName = ({ name, isAlolan, isMega, variant }: IVariantName
 
   return name;
 };
-
-/**
- * Fetch the avatar of selected pokemon from www.pokemon.com
- */
-export const getAvatarFromId = (pokemonId: string): string =>
-  `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${getPaddedId(pokemonId)}.png`;
 
 interface IGetCPArguments {
   stats: IPokemonStats;
@@ -264,7 +259,7 @@ export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
  */
 export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon => {
   // Get some hardcoded data
-  const pokemonExtraInfo = pokemonExtraInfoList.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
+  const pokemonExtraInfo = mockedPokemonCollection.find(pokemon => getPaddedId(pokemon.id) === basePokemon.id);
 
   // Get pokemon short description
   const description = String(pokemonExtraInfo ? pokemonExtraInfo.description : '');
@@ -273,7 +268,7 @@ export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon =>
   const pokedexEntry = String(pokemonExtraInfo ? pokemonExtraInfo.pokedexEntry : '');
 
   // Get an avatar
-  const avatar = getAvatarFromId(basePokemon.id);
+  const avatar = getPokemonImage(basePokemon);
 
   // Get pokemon type strengths and weaknesses
   const relations = getTypeRelations(basePokemon.types.ownTypes);

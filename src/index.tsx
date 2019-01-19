@@ -57,9 +57,13 @@ const initReactApplication = async () => {
   initFontAwesome();
 
   // Set installation data (installationId)
+  const defaultLanguage = navigator && navigator.language ? navigator.language : '';
   setInstallationData({
-    language: {
-      value: navigator && navigator.language ? navigator.language : '',
+    gameLanguage: {
+      value: defaultLanguage,
+    },
+    uiLanguage: {
+      value: defaultLanguage,
     },
   });
 

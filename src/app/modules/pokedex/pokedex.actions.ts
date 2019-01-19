@@ -10,6 +10,16 @@ import {
 
 import { createPokemonCollectionFromPokeLab } from './pokedex.models';
 
+interface IFilters {
+  name: string;
+  value: string | string[] | boolean;
+}
+
+interface ISort {
+  sortBy: string;
+  order: string;
+}
+
 export const createPokedex: ActionCreator = () => dispatch => {
   // Send them to the store
   dispatch({
@@ -20,17 +30,10 @@ export const createPokedex: ActionCreator = () => dispatch => {
   });
 };
 
-interface ISort {
-  sortBy: string;
-  order: string;
-}
-
-export const sortPokedex: ActionCreator = (sort: ISort) => dispatch => {
+export const filterPokedex: ActionCreator = (filters: IFilters[]) => dispatch => {
   dispatch({
-    payload: {
-      sort,
-    },
-    type: POKEDEX_SORT,
+    payload: { filters },
+    type: POKEDEX_FILTER,
   });
 };
 
@@ -40,20 +43,17 @@ export const loadMorePokedex: ActionCreator = () => dispatch => {
   });
 };
 
-interface IFilters {
-  name: string;
-  value: string | string[] | boolean;
-}
-
-export const filterPokedex: ActionCreator = (filters: IFilters[]) => dispatch => {
-  dispatch({
-    payload: { filters },
-    type: POKEDEX_FILTER,
-  });
-};
-
 export const resetPokedexFilters: ActionCreator = () => dispatch => {
   dispatch({
     type: POKEDEX_RESET_FILTERS,
+  });
+};
+
+export const sortPokedex: ActionCreator = (sort: ISort) => dispatch => {
+  dispatch({
+    payload: {
+      sort,
+    },
+    type: POKEDEX_SORT,
   });
 };

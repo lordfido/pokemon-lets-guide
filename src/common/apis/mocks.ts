@@ -1,6 +1,9 @@
+import { getMoves } from '../../constants/moves/moves-list';
+
+import { IScrappedMove } from '../../app/modules/moves/moves.models';
 import { IAdditionalPokemonInfo } from '../../app/modules/pokedex/pokedex.models';
 
-const initialPokemon: IAdditionalPokemonInfo[] = [
+export const mockedPokemonCollection: IAdditionalPokemonInfo[] = [
   {
     description: '',
     id: '25',
@@ -120,4 +123,4 @@ const initialPokemon: IAdditionalPokemonInfo[] = [
   },
 ];
 
-export default initialPokemon;
+export const mockedMovessCollection: IScrappedMove[] = getMoves();

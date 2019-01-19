@@ -21,21 +21,6 @@ const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexS
         collection: action.payload.collection,
       };
 
-    case POKEDEX_SORT:
-      return {
-        ...state,
-        sort: action.payload.sort,
-      };
-
-    case POKEDEX_LOAD_MORE:
-      return {
-        ...state,
-        pagination: {
-          first: 0,
-          last: state.pagination.last + paginationSize,
-        },
-      };
-
     case POKEDEX_FILTER:
       const newFilters = {
         ...state.filters,
@@ -53,12 +38,27 @@ const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexS
         filters: newFilters,
       };
 
+    case POKEDEX_LOAD_MORE:
+      return {
+        ...state,
+        pagination: {
+          first: 0,
+          last: state.pagination.last + paginationSize,
+        },
+      };
+
     case POKEDEX_RESET_FILTERS:
       return {
         ...state,
         filters: {
           ...pokedexInitialState.filters,
         },
+      };
+
+    case POKEDEX_SORT:
+      return {
+        ...state,
+        sort: action.payload.sort,
       };
 
     default:
@@ -211,6 +211,9 @@ export const getPokedexPagination = (state: IPokedexState) => state.pagination;
 // Get sorting options for pokemon list
 export const getPokedexSortOptions = (state: IPokedexState) => state.sort;
 
+// Returns all filters
+export const getPokedexFilters = (state: IPokedexState) => state.filters;
+
 // Pokemon Details
 // Get details of selected pokemon
 export const getSelectedPokemon = (state: IPokedexState) => (pokemonId: string) =>
@@ -232,8 +235,5 @@ export const getPokemonPagination = (state: IPokedexState) => (pokemonId: string
     prev: position > 0 ? collection[position - 1] : collection[collection.length - 1],
   };
 };
-
-// Returns all filters
-export const getPokedexFilters = (state: IPokedexState) => state.filters;
 
 export default reducer;

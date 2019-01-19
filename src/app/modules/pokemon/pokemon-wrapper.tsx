@@ -11,7 +11,7 @@ import { IButtonProps } from '../../components/button';
 import PokemonView from './pokemon-view';
 
 import { IRootState } from '../../root.models';
-import { IPokemon, IPokemonDetailPagination, IRichPokemon } from '../pokedex/pokedex.models';
+import { IPokemon, IPokemonPagination, IRichPokemon } from '../pokedex/pokedex.models';
 
 import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
 import { POKEMON_VIEW_MODE } from '../../../constants/cookies';
@@ -27,20 +27,20 @@ interface IOwnProps {
 }
 
 interface IStateProps {
-  pokemon: IRichPokemon | void;
-  pagination: IPokemonDetailPagination;
+  pokemon?: IRichPokemon;
+  pagination: IPokemonPagination;
 }
 
 type Props = IOwnProps & IStateProps;
 
 interface IOwnState {
-  redirectTo: string;
+  redirectTo?: string;
   viewMode: ViewMode;
 }
 
 class PokemonWrapper extends React.Component<Props, IOwnState> {
   public state = {
-    redirectTo: '',
+    redirectTo: undefined,
     viewMode: (getCookie(POKEMON_VIEW_MODE) as ViewMode) || CHART,
   };
 
@@ -142,20 +142,20 @@ class PokemonWrapper extends React.Component<Props, IOwnState> {
       return <Redirect to={{ pathname: redirectTo }} />;
     }
 
-    if (pokemon) {
-      const availableViewModes = this.getAvailableViewModes();
-
-      return (
-        <PokemonView
-          availableViewModes={availableViewModes}
-          pagination={pagination}
-          pokemon={pokemon}
-          viewMode={viewMode}
-        />
-      );
+    if (!pokemon) {
+      return <Redirect to={{ pathname: POKEDEX.replace(':id?', '') }} />;
     }
 
-    return <Redirect to={{ pathname: POKEDEX.replace(':id?', '') }} />;
+    const availableViewModes = this.getAvailableViewModes();
+
+    return (
+      <PokemonView
+        availableViewModes={availableViewModes}
+        pagination={pagination}
+        pokemon={pokemon}
+        viewMode={viewMode}
+      />
+    );
   }
 }
 

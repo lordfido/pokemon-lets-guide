@@ -68,18 +68,18 @@ const getTranslation = (token: string, elements: 'game' | 'ui', variable?: strin
 
   // Token doesn't exists
   if (!Translations[token]) {
-    warn(`No translation for <${token}>`);
-    return `No translation for <${token}>`;
+    warn(`No <${elements}> translation for <${token}>`);
+    return `No <${elements}> translation for <${token}>`;
   }
 
   // Specified locale
   if (locale) {
     // Specified locale translation doesn't exists
     if (!Translations[token][locale]) {
-      warn(`No <${Languages.All[locale]}> translation for <${token}>`);
+      warn(`No <${elements}> <${Languages.All[locale]}> translation for <${token}>`);
       return (
         Translations[token][languagesIndex.english].replace(':var:', variable || '') ||
-        `No <${Languages.All[locale]}> translation for <${token}>`
+        `No <${elements}> <${Languages.All[locale]}> translation for <${token}>`
       );
     }
 
@@ -90,10 +90,10 @@ const getTranslation = (token: string, elements: 'game' | 'ui', variable?: strin
   const selectedLocale = elements === 'game' ? selectedGameLocale : selectedUiLocale;
   if (!Translations[token][selectedLocale]) {
     // Default locale translation doesn't exists
-    warn(`No <${Languages.All[selectedLocale]}> translation for <${token}>`);
+    warn(`No <${elements}> <${Languages.All[selectedLocale]}> translation for <${token}>`);
     return (
       Translations[token][languagesIndex.english].replace(':var:', variable || '') ||
-      `No <${Languages.All[selectedLocale]}> translation for <${token}>`
+      `No <${elements}> <${Languages.All[selectedLocale]}> translation for <${token}>`
     );
   }
 

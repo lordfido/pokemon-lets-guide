@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { updateCollection } from '../../utils/collections';
+import { filtersToString, stringToFilters } from '../../utils/urls';
 
 import PokedexView from './pokedex-view';
 
@@ -14,54 +15,11 @@ import {
 } from '../../root.reducer';
 import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from './pokedex.actions';
 
-import { POKEDEX, SEARCH } from '../../../constants/appRoutes';
-import { MAX_BASE_CP_VALUE } from '../../../constants/pokemon/pokemon-stats';
+import { POKEDEX, POKEDEX_SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
 import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
-import { IPokedexFilters, IPokemonListPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
-
-const stringToFilters = (url?: string) => {
-  if (!url || (/\;/.test(url) === false && /\=/.test(url) === false)) {
-    return {};
-  }
-
-  const queryParams = url.split(';');
-  const filters = {};
-
-  queryParams.forEach(stringParam => {
-    const stringParts = stringParam.split('=');
-    // @ts-ignore
-    filters[stringParts[0]] =
-      stringParts[1] === 'true'
-        ? true
-        : stringParts[1] === 'false'
-        ? false
-        : /\[(.*)\]/.test(stringParts[1])
-        ? JSON.parse(stringParts[1])
-        : stringParts[1];
-  });
-
-  return filters;
-};
-
-const filtersToString = (filters: IPokedexFilters) =>
-  Object.keys(filters)
-    .map(key => {
-      // @ts-ignore
-      const filter = filters[key];
-
-      if (typeof filter !== 'undefined' && ((typeof filter === 'boolean' && filter) || filter.length)) {
-        if (typeof filter === 'string' || typeof filter === 'boolean') {
-          return `${key}=${String(filter)}`;
-        }
-
-        const arrayValue = filter.map((f: string) => `\"${f}\"`);
-        return `${key}=[${arrayValue.join(',')}]`;
-      }
-    })
-    .filter(f => f)
-    .join(';');
+import { IPokedexFilters, IPokedexPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
 
 interface IOwnProps {
   query?: string;
@@ -71,7 +29,7 @@ interface IOwnProps {
 interface IStateProps {
   collection: IPokemonWithBaseCP[];
   filters: IPokedexFilters;
-  pagination: IPokemonListPagination;
+  pagination: IPokedexPagination;
   pokemonList: IOption[];
   sort: {
     sortBy: string;
@@ -95,26 +53,16 @@ type Props = IOwnProps & IStateProps & IDispatchProps;
 
 interface IOwnState {
   areFiltersOpen: boolean;
-  filters: IPokedexFilters;
   redirectTo?: string;
 }
 
 class PokedexWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
-    filters: {
-      baseCP: [0, MAX_BASE_CP_VALUE] as [number, number],
-      bestStats: [],
-      excludedTypes: [],
-      includedTypes: [],
-      showAlolanForms: false,
-      showMegaevolutions: false,
-      strongAgainst: [],
-      weakAgainst: [],
-      worstStats: [],
-    },
     redirectTo: '',
   };
+
+  public filters = pokedexInitialState.filters;
 
   public componentDidMount() {
     const { FilterPokedex, query } = this.props;
@@ -175,7 +123,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleFilterChange = (field: IFieldOutput) => {
-    const { filters } = this.state;
+    const { filters } = this;
 
     const newFilters = {
       ...filters,
@@ -191,9 +139,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
       newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => (s.value ? s.value : s)));
     }
 
-    this.setState({
-      filters: newFilters,
-    });
+    this.filters = newFilters;
   };
 
   public handleReset = () => {
@@ -203,11 +149,11 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleSubmit = () => {
-    const { filters } = this.state;
+    const { filters } = this;
 
     const redirectTo = filtersToString(filters);
     this.setState({
-      redirectTo: redirectTo ? SEARCH.replace(':query', redirectTo) : POKEDEX.replace(':id?', ''),
+      redirectTo: redirectTo ? POKEDEX_SEARCH.replace(':query', redirectTo) : POKEDEX.replace(':id?', ''),
     });
   };
 

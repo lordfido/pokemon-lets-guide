@@ -2,7 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
-import baseConfig, { loaderImages, manifestPlugin, paths, regex } from './base.config';
+import baseConfig, { imageLoader, manifestPlugin, paths, regex } from './base.config';
 
 export const appConfig: webpack.Configuration = {
   ...baseConfig,
@@ -22,32 +22,7 @@ export const appConfig: webpack.Configuration = {
 
   module: {
     rules: [
-      // Images
-      {
-        exclude: /node_modules/,
-        include: paths.src,
-        test: regex.img,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-            },
-          },
-          loaderImages,
-        ],
-      },
-
-      // JSON
-      {
-        exclude: /node_modules/,
-        include: paths.src,
-        loader: 'file-loader',
-        options: {
-          sourceMap: true,
-        },
-        test: regex.json,
-      },
+      imageLoader,
 
       // HTML
       {
@@ -95,29 +70,6 @@ export const swConfig: webpack.Configuration = {
   output: {
     ...baseConfig.output,
     filename: '[name].js',
-  },
-
-  module: {
-    rules: [
-      // Images
-      {
-        exclude: /node_modules/,
-        include: paths.src,
-        test: regex.img,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-            },
-          },
-          loaderImages,
-        ],
-      },
-
-      // @ts-ignore
-      ...baseConfig.module.rules,
-    ],
   },
 
   plugins: [
