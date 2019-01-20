@@ -20,6 +20,8 @@ export const GREEN_LIGHT = '#e5fce1';
 export const YELLOW = '#fff280';
 export const BLUE_LIGHT = '#edfcff';
 export const BLUE = '#0086d8';
+export const ORANGE = '#f8e875';
+export const ORANGE_DARK = '#e8ab58';
 
 // Statuses
 export const SUCCESS_LIGHT = '#c1fdb5';

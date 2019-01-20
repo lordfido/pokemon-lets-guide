@@ -7,10 +7,13 @@ import { IButtonProps as ButtonProps } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
 import { BORDER_RADIUS, PADDING_S, PADDING_XL } from '../../constants/styles/styles';
+import { WHITE } from '../../constants/styles/styles-colors';
 import { FONT_M, TEXT_BLACK } from '../../constants/styles/styles-fonts';
 import {
   BUTTON_BACKGROUND,
+  BUTTON_BACKGROUND_ACTIVE,
   BUTTON_BORDER,
+  BUTTON_BORDER_ACTIVE,
   BUTTON_DISABLED_BACKGROUND,
   BUTTON_DISABLED_BORDER,
   BUTTON_DISABLED_COLOR,
@@ -19,13 +22,11 @@ import {
 import { ISheet } from '../root.models';
 
 const wrapperActive = {
-  backgroundColor: BUTTON_BORDER,
-  borderColor: BUTTON_BORDER,
+  background: BUTTON_BACKGROUND_ACTIVE,
 };
 
 const contentActive = {
-  backgroundColor: BUTTON_BORDER,
-  borderColor: BUTTON_BACKGROUND,
+  borderColor: BUTTON_BORDER_ACTIVE,
 };
 
 const wrapperDisabled = {
@@ -42,7 +43,7 @@ const contentDisabled = {
 
 const sheet: ISheet = {
   content: {
-    backgroundColor: BUTTON_BACKGROUND,
+    background: 'transparent',
     border: `2px solid ${BUTTON_BORDER}`,
     borderRadius: BORDER_RADIUS,
     color: TEXT_BLACK,
@@ -65,8 +66,8 @@ const sheet: ISheet = {
   contentActive,
   contentDisabled,
   wrapper: {
-    backgroundColor: BUTTON_BACKGROUND,
-    border: `2px solid ${BUTTON_BACKGROUND}`,
+    background: BUTTON_BACKGROUND,
+    border: 'none',
     borderRadius: BORDER_RADIUS,
     color: TEXT_BLACK,
     cursor: 'pointer',
@@ -75,6 +76,7 @@ const sheet: ISheet = {
     fontWeight: 700,
     margin: `${PADDING_S}px ${PADDING_S / 2}px`,
     maxWidth: `calc(100% - ${PADDING_S}px)`,
+    padding: PADDING_S / 2,
     textAlign: 'center',
     verticalAlign: 'middle',
 
@@ -88,6 +90,10 @@ const sheet: ISheet = {
 
     '&:disabled': {
       ...wrapperDisabled,
+    },
+
+    '&:focus, &:hover': {
+      animation: 'button-flashing 1s linear infinite',
     },
   },
   wrapperActive,

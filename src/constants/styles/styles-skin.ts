@@ -10,6 +10,8 @@ import {
   GREY_LIGHT_6,
   traslucentColor,
   WHITE,
+  ORANGE,
+  ORANGE_DARK,
 } from './styles-colors';
 
 // App
@@ -29,8 +31,10 @@ export const WINDOW_BACKGROUND = GREY_LIGHT_6;
 export const WINDOW_BORDER = WHITE;
 
 // Buttons
+export const BUTTON_BORDER = ORANGE;
+export const BUTTON_BORDER_ACTIVE = WHITE;
 export const BUTTON_BACKGROUND = WHITE;
-export const BUTTON_BORDER = '#f8e875';
+export const BUTTON_BACKGROUND_ACTIVE = `linear-gradient(to top, ${ORANGE_DARK} 0%, ${ORANGE} 100%)`;
 export const BUTTON_DISABLED_BACKGROUND = GREY_LIGHT_3;
 export const BUTTON_DISABLED_BORDER = GREY_LIGHT_2;
 export const BUTTON_DISABLED_COLOR = GREY_LIGHT;

@@ -1,6 +1,7 @@
 import { FONT_L } from '../../constants/styles/styles-fonts';
 import { MAX_DESKTOP_L } from '../../constants/styles/styles-media-queries';
 import { APP_BACKGROUND } from '../../constants/styles/styles-skin';
+import { WHITE } from '../../constants/styles/styles-colors';
 
 const getGoogleFonts = () => {
   const style = document.createElement('style');
@@ -35,6 +36,20 @@ const getCSSAnimations = () => {
       }
       100% {
         transform: translateY(0px);
+      }
+    }
+
+    @keyframes button-flashing {
+      0% {
+        box-shadow: 0px 0px 0px 0px transparent
+      }
+
+      50% {
+        box-shadow: 0px 0px 10px 0px ${WHITE}
+      }
+
+      99% {
+        box-shadow: 0px 0px 10px 0px transparent
       }
     }
   `;
