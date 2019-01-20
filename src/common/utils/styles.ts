@@ -31,7 +31,7 @@ const getCSSAnimations = () => {
       50% {
         transform: translateY(-6%);
       }
-      99% {
+      100% {
         transform: translateY(-6%);
       }
       100% {
@@ -43,13 +43,41 @@ const getCSSAnimations = () => {
       0% {
         box-shadow: 0px 0px 0px 0px transparent
       }
-
       50% {
         box-shadow: 0px 0px 10px 0px ${WHITE}
       }
-
-      99% {
+      100% {
         box-shadow: 0px 0px 10px 0px transparent
+      }
+    }
+
+    @keyframes arrow-bounce-prev {
+      0% {
+        width: 26px;
+        transform: translateX(10px);
+      }
+      50% {
+        width: 30px;
+        transform: translateX(0px);
+      }
+      100% {
+        width: 26px;
+        transform: translateX(10px);
+      }
+    }
+
+    @keyframes arrow-bounce-next {
+      0% {
+        width: 26px;
+        transform: translateX(-10px);
+      }
+      50% {
+        width: 30px;
+        transform: translateX(0px);
+      }
+      100% {
+        width: 26px;
+        transform: translateX(-10px);
       }
     }
   `;

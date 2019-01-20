@@ -67,10 +67,10 @@ class UnstyledModal extends React.Component<Props> {
     const { handleClose, history } = this.props;
 
     if (handleClose) {
-      handleClose();
+      return handleClose();
     }
 
-    history.goBack();
+    return history.goBack();
   };
 
   public handleKeyPress = (event: KeyboardEvent) => {

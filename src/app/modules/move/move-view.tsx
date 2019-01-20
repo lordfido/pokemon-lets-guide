@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 import { getGameTranslation } from '../../utils/translations';
 
 import CategoryIcon from '../../components/category-icon';
@@ -8,6 +9,7 @@ import CurvedWindow from '../../components/curved-window';
 import Modal from '../../components/modal';
 import Tag from '../../components/tag';
 
+import { MOVES } from '../../../constants/appRoutes';
 import { getTypeName } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
@@ -26,7 +28,10 @@ import { MAX_MOBILE_L, MOBILE_XL } from '../../../constants/styles/styles-media-
 import { BACKGROUND, CONTENT } from '../../../constants/styles/styles-zindex';
 
 import { ISheet } from '../../root.models';
-import { IRichMove } from '../moves/moves.models';
+import { IMovePagination, IRichMove } from '../moves/moves.models';
+
+const prevArrow = require('../../../assets/images/move-prev-arrow.png');
+const nextArrow = require('../../../assets/images/move-next-arrow.png');
 
 const typeWidth = 80;
 const ppWidth = 100;
@@ -72,9 +77,20 @@ const sheet: ISheet = {
   },
   effectContent: {},
   effectWrapper: {
+    margin: '0px auto',
     paddingTop: PADDING_XXXL,
-    textAlign: 'left',
-    width: '70%',
+    textAlign: 'center',
+    width: '100%',
+
+    [MOBILE_XL]: {
+      textAlign: 'left',
+      width: '70%',
+    },
+  },
+  link: {
+    '&, &:active, &:focus, &:hover': {
+      textDecoration: 'none',
+    },
   },
   mobilePp: {
     [MOBILE_XL]: {
@@ -95,6 +111,32 @@ const sheet: ISheet = {
       margin: 0,
       padding: `0px ${PADDING_S}px`,
       width: '100%',
+    },
+  },
+  pagination: {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    zIndex: CONTENT,
+
+    '& img': {
+      height: 96,
+    },
+  },
+  paginationNext: {
+    right: PADDING_XXXL,
+
+    '& img': {
+      animation: 'arrow-bounce-prev 1s linear infinite',
+      height: 96,
+    },
+  },
+  paginationPrev: {
+    left: PADDING_XXXL,
+
+    '& img': {
+      animation: 'arrow-bounce-next 1s linear infinite',
+      height: 96,
     },
   },
   power: {
@@ -191,65 +233,85 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  handleModalClose: () => void;
   move: IRichMove;
+  pagination: IMovePagination;
 }
 
-const unstyledMoveView = ({ classes, move }: IOwnProps) => (
-  <Modal>
-    <div className={classes.contentWrapper}>
-      <div className={classes.titleWrapper} style={{ backgroundColor: getTypeColor(move.types.ownType) }}>
-        <div className={classes.titleContent}>
-          <div className={classes.type}>
-            <Tag
-              backgroundColor={getTypeColor(move.types.ownType)}
-              icon={getTypeIcon(move.types.ownType)}
-              label={getTypeName(move.types.ownType)}
-            />
-          </div>
-          <div className={classes.name}>{move.name}</div>
-          <div className={classes.pp}>
-            <div className={classes.ppBackground} />
-            {move.pp} / {move.pp}
-          </div>
-        </div>
+const unstyledMoveView = ({ classes, handleModalClose, move, pagination }: IOwnProps) => (
+  <Modal handleClose={handleModalClose}>
+    <>
+      <div className={classnames(classes.pagination, classes.paginationPrev)}>
+        {move.id !== pagination.prev.id && (
+          <Link className={classes.link} to={{ pathname: MOVES.replace(':id?', pagination.prev.id) }}>
+            <img src={prevArrow} />
+          </Link>
+        )}
       </div>
 
-      <CurvedWindow>
-        <div className={classes.contentContent}>
-          <div className={classes.mobileContent}>
-            <div className={classes.mobileType}>
+      <div className={classes.contentWrapper}>
+        <div className={classes.titleWrapper} style={{ backgroundColor: getTypeColor(move.types.ownType) }}>
+          <div className={classes.titleContent}>
+            <div className={classes.type}>
               <Tag
                 backgroundColor={getTypeColor(move.types.ownType)}
                 icon={getTypeIcon(move.types.ownType)}
                 label={getTypeName(move.types.ownType)}
               />
             </div>
-            <div className={classes.mobilePp}>
-              PP: {move.pp} / {move.pp}
+            <div className={classes.name}>{move.name}</div>
+            <div className={classes.pp}>
+              <div className={classes.ppBackground} />
+              {move.pp} / {move.pp}
             </div>
-          </div>
-          <div className={classes.contentTitle}>
-            <div className={classnames(classes.category, classes.titleElement)}>
-              <span className={classes.categoryLabel}>{getGameTranslation('category')}</span>
-              <span className={classes.categoryIcon}>
-                {move.category ? <CategoryIcon category={move.category} /> : '-'}
-              </span>
-            </div>
-            <div className={classnames(classes.power, classes.titleElement)}>
-              <span className={classes.powerLabel}>{getGameTranslation('power')}</span>
-              <span className={classes.powerValue}>{move.power ? move.power : '-'}</span>
-            </div>
-            <div className={classnames(classes.accuracy, classes.titleElement)}>
-              <span className={classes.accuracyLabel}>{getGameTranslation('accuracy')}</span>
-              <span className={classes.accuracyValue}>{move.accuracy ? `${move.accuracy}%` : '-'}</span>
-            </div>
-          </div>
-          <div className={classes.effectWrapper}>
-            <div className={classes.effectContent}>{move.effect}</div>
           </div>
         </div>
-      </CurvedWindow>
-    </div>
+
+        <CurvedWindow>
+          <div className={classes.contentContent}>
+            <div className={classes.mobileContent}>
+              <div className={classes.mobileType}>
+                <Tag
+                  backgroundColor={getTypeColor(move.types.ownType)}
+                  icon={getTypeIcon(move.types.ownType)}
+                  label={getTypeName(move.types.ownType)}
+                />
+              </div>
+              <div className={classes.mobilePp}>
+                PP: {move.pp} / {move.pp}
+              </div>
+            </div>
+            <div className={classes.contentTitle}>
+              <div className={classnames(classes.category, classes.titleElement)}>
+                <span className={classes.categoryLabel}>{getGameTranslation('category')}</span>
+                <span className={classes.categoryIcon}>
+                  {move.category ? <CategoryIcon category={move.category} /> : '-'}
+                </span>
+              </div>
+              <div className={classnames(classes.power, classes.titleElement)}>
+                <span className={classes.powerLabel}>{getGameTranslation('power')}</span>
+                <span className={classes.powerValue}>{move.power ? move.power : '-'}</span>
+              </div>
+              <div className={classnames(classes.accuracy, classes.titleElement)}>
+                <span className={classes.accuracyLabel}>{getGameTranslation('accuracy')}</span>
+                <span className={classes.accuracyValue}>{move.accuracy ? `${move.accuracy}%` : '-'}</span>
+              </div>
+            </div>
+            <div className={classes.effectWrapper}>
+              <div className={classes.effectContent}>{move.effect}</div>
+            </div>
+          </div>
+        </CurvedWindow>
+      </div>
+
+      <div className={classnames(classes.pagination, classes.paginationNext)}>
+        {move.id !== pagination.next.id && (
+          <Link className={classes.link} to={{ pathname: MOVES.replace(':id?', pagination.next.id) }}>
+            <img src={nextArrow} />
+          </Link>
+        )}
+      </div>
+    </>
   </Modal>
 );
 
