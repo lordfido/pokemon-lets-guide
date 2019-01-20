@@ -850,6 +850,8 @@ const pokemonImages: { [key: string]: string } = {
   '801': isDev() ? 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/801.png' : '/src/assets/images/pokemon-images/801.png',
   '802': isDev() ? 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/802.png' : '/src/assets/images/pokemon-images/802.png',
   '803': isDev() ? 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/803.png' : '/src/assets/images/pokemon-images/803.png',
+  '808': isDev() ? 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/808.png' : '/src/assets/images/pokemon-images/808.png',
+  '809': isDev() ? 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/809.png' : '/src/assets/images/pokemon-images/809.png',
 };
 
 export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP): string | undefined => pokemonImages[id];
