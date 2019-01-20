@@ -137,10 +137,10 @@ const unstyledMovesView = ({
             label: getGameTranslation('tm'),
             onClick: () => handleSortBy('tm'),
           },
-          {
-            label: getGameTranslation('probability'),
-            onClick: () => handleSortBy('probability'),
-          },
+          // {
+          //   label: getGameTranslation('probability'),
+          //   onClick: () => handleSortBy('probability'),
+          // },
           {
             label: '',
             style: {

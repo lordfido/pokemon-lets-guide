@@ -69,7 +69,7 @@ const unstyledMovesEntry = ({ classes, className, move }: IOwnProps) => (
     </TableCell>
 
     {/* Probability */}
-    <TableCell center>{move.probability ? `${move.probability}%` : '-'}</TableCell>
+    {/* <TableCell center>{move.probability ? `${move.probability}%` : '-'}</TableCell> */}
 
     {/* Quick Actions */}
     <TableCell center style={{ height: 'auto' }}>
