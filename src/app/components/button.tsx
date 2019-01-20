@@ -7,7 +7,6 @@ import { IButtonProps as ButtonProps } from '../modules/forms/form.models';
 import TouchableContent from './touchable-content';
 
 import { BORDER_RADIUS, PADDING_S, PADDING_XL } from '../../constants/styles/styles';
-import { WHITE } from '../../constants/styles/styles-colors';
 import { FONT_M, TEXT_BLACK } from '../../constants/styles/styles-fonts';
 import {
   BUTTON_BACKGROUND,
