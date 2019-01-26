@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { HEADER_SIZE, PADDING_S } from '../../../constants/styles/styles';
 import { BLACK, traslucentColor } from '../../../constants/styles/styles-colors';
@@ -11,6 +11,11 @@ import { DESKTOP, MOBILE_L } from '../../../constants/styles/styles-media-querie
 import { ISheet } from '../../root.models';
 
 const ITEM_PADDING = 10;
+
+const activeProps = {
+  backgroundColor: traslucentColor(BLACK, 0.5),
+  opacity: 1,
+};
 
 const sheet: ISheet = {
   disabled: {
@@ -51,8 +56,7 @@ const sheet: ISheet = {
 
       '&:active, &:focus, &:hover': {
         '& > *': {
-          backgroundColor: traslucentColor(BLACK, 0.5),
-          opacity: 1,
+          ...activeProps,
         },
       },
     },
@@ -76,6 +80,11 @@ const sheet: ISheet = {
       width: '100%',
     },
   },
+  itemActive: {
+    '& > *': {
+      ...activeProps,
+    },
+  },
 };
 
 interface IOwnProps {
@@ -87,9 +96,14 @@ interface IOwnProps {
 
 const unstyledHeaderItem = ({ classes, image, text, to }: IOwnProps) =>
   !!to ? (
-    <Link className={classes.item} to={{ pathname: to }} style={image ? { backgroundImage: `url(${image})` } : {}}>
+    <NavLink
+      activeClassName={classes.itemActive}
+      className={classes.item}
+      to={{ pathname: to }}
+      style={image ? { backgroundImage: `url(${image})` } : {}}
+    >
       {text && <span>{text}</span>}
-    </Link>
+    </NavLink>
   ) : (
     <span
       className={classnames(classes.item, classes.disabled)}

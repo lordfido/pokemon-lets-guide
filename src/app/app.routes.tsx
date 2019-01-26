@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import CalculatorWrapper from '../app/modules/calculator/calculator-wrapper';
+import LandingWrapper from '../app/modules/landing/landing-wrapper';
 import MoveWrapper from './modules/move/move-wrapper';
 import MovesWrapper from './modules/moves/moves-wrapper';
 import PokedexWrapper from './modules/pokedex/pokedex-wrapper';
@@ -104,10 +105,7 @@ export const POKEDEX: IRouteConfig = {
 export const HOME: IRouteConfig = {
   exact: true,
   path: routes.HOME,
-  render: ({ match }) => {
-    const { url } = match;
-    return <PokedexWrapper url={url} />;
-  },
+  render: () => <LandingWrapper />,
 };
 
 export default [CALCULATOR, MOVES_SEARCH, MOVE_DETAILS, MOVES, POKEDEX_SEARCH, POKEDEX, HOME];
