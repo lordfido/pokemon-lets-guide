@@ -73,6 +73,7 @@ interface IOwnProps {
   handleReset: () => void;
   handleSubmit: () => void;
   handleLoadMore?: () => void;
+  handleRedirectToMove: (moveId: string) => void;
 }
 
 const unstyledMovesView = ({
@@ -87,6 +88,7 @@ const unstyledMovesView = ({
   handleReset,
   handleSubmit,
   handleLoadMore,
+  handleRedirectToMove,
 }: IOwnProps) => (
   <>
     <Sidebar
@@ -150,7 +152,12 @@ const unstyledMovesView = ({
         ]}
       >
         {collection.map((move, index) => (
-          <MovesEntry key={index} className={classes.resultsEntry} move={move} />
+          <MovesEntry
+            key={index}
+            className={classes.resultsEntry}
+            move={move}
+            handleRedirectToMove={handleRedirectToMove}
+          />
         ))}
       </Table>
 

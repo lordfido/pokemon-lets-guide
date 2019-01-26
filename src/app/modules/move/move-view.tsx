@@ -236,14 +236,18 @@ interface IOwnProps {
   handleModalClose: () => void;
   move: IRichMove;
   pagination: IMovePagination;
+  referrer?: string;
 }
 
-const unstyledMoveView = ({ classes, handleModalClose, move, pagination }: IOwnProps) => (
+const unstyledMoveView = ({ classes, handleModalClose, referrer, move, pagination }: IOwnProps) => (
   <Modal handleClose={handleModalClose}>
     <>
       <div className={classnames(classes.pagination, classes.paginationPrev)}>
         {move.id !== pagination.prev.id && (
-          <Link className={classes.link} to={{ pathname: MOVES.replace(':id?', pagination.prev.id) }}>
+          <Link
+            className={classes.link}
+            to={{ pathname: MOVES.replace(':id?', pagination.prev.id), state: { referrer } }}
+          >
             <img src={prevArrow} />
           </Link>
         )}
@@ -306,7 +310,10 @@ const unstyledMoveView = ({ classes, handleModalClose, move, pagination }: IOwnP
 
       <div className={classnames(classes.pagination, classes.paginationNext)}>
         {move.id !== pagination.next.id && (
-          <Link className={classes.link} to={{ pathname: MOVES.replace(':id?', pagination.next.id) }}>
+          <Link
+            className={classes.link}
+            to={{ pathname: MOVES.replace(':id?', pagination.next.id), state: { referrer } }}
+          >
             <img src={nextArrow} />
           </Link>
         )}

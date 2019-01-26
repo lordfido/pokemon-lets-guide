@@ -48,16 +48,19 @@ export const MOVES_SEARCH: IRouteConfig = {
 export const MOVE_DETAILS: IRouteConfig = {
   exact: true,
   path: routes.MOVES,
-  render: ({ match }) => {
+  render: ({ location, match }) => {
     const {
       params: { id },
     } = match;
+
+    const { state } = location;
+
     if (!id) {
       return null;
     }
 
     // @ts-ignore
-    return <MoveWrapper id={id} />;
+    return <MoveWrapper id={id} referrer={state ? state.referrer : undefined} />;
   },
 };
 

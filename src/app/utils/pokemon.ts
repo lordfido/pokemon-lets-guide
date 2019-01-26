@@ -308,7 +308,7 @@ export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon =>
 };
 
 /**
- * Filter a pokemonList, showing only strong pokemon against
+ * Filter a `pokemonList`, showing only strong pokemon against provided types
  */
 export const strongAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonType>, pokemon: IPokemonWithBaseCP) => {
   const relations = getTypeRelations(providedTypes);
@@ -336,13 +336,13 @@ export const strongAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonT
 };
 
 /**
- * Get a Pokemon list that are strong against provided types
+ * Get a `pokemonList` that are strong against provided types
  */
 export const getExecutioners = (providedTypes: ReadonlyArray<PokemonType>, pokemonList: IPokemonWithBaseCP[]) =>
   pokemonList.filter(pokemon => strongAgainstProvidedTypes(providedTypes, pokemon));
 
 /**
- * Filter a pokemonList, showing only weak pokemon against
+ * Filter a `pokemonList`, showing only weak pokemon against
  */
 export const weakAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonType>, pokemon: IPokemonWithBaseCP) => {
   const relations = getTypeRelations(pokemon.types.ownTypes);
@@ -370,7 +370,7 @@ export const weakAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonTyp
 };
 
 /**
- * Get a Pokemon list that are weak against provided types
+ * Get a `pokemonList` that are weak against provided types
  */
 export const getVictims = (providedTypes: ReadonlyArray<PokemonType>, pokemonList: IPokemonWithBaseCP[]) =>
   pokemonList.filter(pokemon => weakAgainstProvidedTypes(providedTypes, pokemon));

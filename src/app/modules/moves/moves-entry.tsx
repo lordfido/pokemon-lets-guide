@@ -9,7 +9,6 @@ import CategoryIcon from '../../components/category-icon';
 import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
-import { MOVES } from '../../../constants/appRoutes';
 import { getTypeName } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
@@ -29,10 +28,11 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
+  handleRedirectToMove: (moveId: string) => void;
   move: IRichMove;
 }
 
-const unstyledMovesEntry = ({ classes, className, move }: IOwnProps) => (
+const unstyledMovesEntry = ({ classes, className, handleRedirectToMove, move }: IOwnProps) => (
   <TableRow className={className}>
     {/* Name */}
     <TableCell ellipsis={true}>{move.name}</TableCell>
@@ -81,7 +81,9 @@ const unstyledMovesEntry = ({ classes, className, move }: IOwnProps) => (
             className: classes.noMargin,
             id: `${move.id.toString()}-details`,
             label: getUiTranslation('moves-details'),
-            to: MOVES.replace(':id?', String(move.id)),
+            onClick: () => {
+              handleRedirectToMove(move.id);
+            },
             type: 'button',
           },
         ]}
