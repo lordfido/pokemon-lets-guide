@@ -306,3 +306,41 @@ export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon =>
     types,
   };
 };
+
+/**
+ * Get best Pokemon to fight against selected one
+ */
+export const getBetterRivals = (
+  pokemonList: IPokemonWithBaseCP[],
+  rival?: IPokemonWithBaseCP
+): IPokemonWithBaseCP[] => {
+  if (!rival) {
+    return pokemonList;
+  }
+
+  const relations = getTypeRelations(rival.types.ownTypes);
+  const strongTypes = relations.filter(relation => relation.effectiveness > 1);
+  const weakTypes = relations.filter(relation => relation.effectiveness < 1);
+
+  const isStrongAgainstRival = (pokemon: IPokemonWithBaseCP) => {
+    let isStrong = false;
+    pokemon.types.ownTypes.forEach(type => {
+      if (strongTypes.findIndex(t => t.id === type) >= 0) {
+        isStrong = true;
+      }
+    });
+    return isStrong;
+  };
+
+  const isNotWeakAgainstRival = (pokemon: IPokemonWithBaseCP) => {
+    let isWeak = false;
+    pokemon.types.ownTypes.forEach(type => {
+      if (weakTypes.findIndex(t => t.id === type) >= 0) {
+        isWeak = true;
+      }
+    });
+    return !isWeak;
+  };
+
+  return pokemonList.filter(isStrongAgainstRival).filter(isNotWeakAgainstRival);
+};

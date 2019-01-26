@@ -12,6 +12,7 @@ import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon/pokemon-stats';
 
 import { IPokedexAction, IPokedexState, IPokemon, pokedexInitialState } from './pokedex.models';
+import { log } from '../../../common/utils/logger';
 
 const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexState => {
   switch (action.type) {
@@ -103,13 +104,20 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
 
       // Filter list by strong against
       if (filters.strongAgainst.length) {
-        const relations = getTypeRelations(pokemon.types.ownTypes);
+        const relations = getTypeRelations(filters.strongAgainst);
+        const strongTypes = relations.filter(relation => relation.effectiveness > 1);
+        const weakTypes = relations.filter(relation => relation.effectiveness < 1);
 
         let shouldSkip = true;
-        filters.strongAgainst.forEach(type => {
-          const strongAgainst = relations.filter(relation => relation.id === type && relation.effectiveness < 1);
-          if (strongAgainst.length) {
+        strongTypes.forEach(type => {
+          if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
             shouldSkip = false;
+          }
+        });
+
+        weakTypes.forEach(type => {
+          if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
+            shouldSkip = true;
           }
         });
 
@@ -121,12 +129,23 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
       // Filter list by weak against
       if (filters.weakAgainst.length) {
         const relations = getTypeRelations(pokemon.types.ownTypes);
+        const weakAgainst = relations.filter(relation => relation.effectiveness > 1);
+        const strongAgainst = relations.filter(relation => relation.effectiveness < 1);
+
+        log(`Checking <${pokemon.id}|${pokemon.name}> against: `, relations);
 
         let shouldSkip = true;
-        filters.weakAgainst.forEach(type => {
-          const weakAgainst = relations.filter(relation => relation.id === type && relation.effectiveness > 1);
-          if (weakAgainst.length) {
+        weakAgainst.forEach(type => {
+          if (filters.weakAgainst.findIndex(t => t === type.id) >= 0) {
+            log(`One of its types is weak`, type.id);
             shouldSkip = false;
+          }
+        });
+
+        strongAgainst.forEach(type => {
+          if (filters.weakAgainst.findIndex(t => t === type.id) >= 0) {
+            log(`One of its types is strong`, type.id);
+            shouldSkip = true;
           }
         });
 

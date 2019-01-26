@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { log } from '../../../common/utils/logger';
 import { getRandomNumber } from '../../utils/numbers';
+import { filtersToString } from '../../utils/urls';
 
 import LandingView, { ISection } from './landing-view';
 
-import { getTypes, getPokemonOfType } from '../../../constants/pokemon/pokemon-types';
+import { POKEDEX_SEARCH } from '../../../constants/appRoutes';
+import { getPokemonOfType, getTypes, PokemonType } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 
 import { IRootState } from '../../root.models';
 import { getPokedex, getRawPokedex } from '../../root.reducer';
 import { GenericOutput, IOption } from '../forms/form.models';
-import { IPokemonWithBaseCP } from '../pokedex/pokedex.models';
+import { IPokedexFilters, IPokemonWithBaseCP, pokedexInitialState } from '../pokedex/pokedex.models';
 
 const availableTypes = getTypes();
 
@@ -72,14 +75,32 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
   };
 
   public handleHowToDefeatPokemon = (params: { id: string; value: GenericOutput }) => {
+    const { rawPokedex } = this.props;
     const pokemon = params.value as IOption;
 
-    log(`Calculating how to defeat <${pokemon.value}|${pokemon.label}>`);
+    const rival = rawPokedex.find(p => p.id === pokemon.id);
+
+    const strongAgainst = rival ? (rival.types.ownTypes as PokemonType[]) : ([] as PokemonType[]);
+
+    const filters: IPokedexFilters = {
+      ...pokedexInitialState.filters,
+      showAlolanForms: true,
+      showMegaevolutions: true,
+      strongAgainst,
+    };
+
+    this.setState({
+      redirectTo: POKEDEX_SEARCH.replace(':query', filtersToString(filters)),
+    });
   };
 
   public render() {
-    const { pokemonList } = this.props;
-    const { sections } = this.state;
+    const { rawPokedex } = this.props;
+    const { redirectTo, sections } = this.state;
+
+    if (redirectTo) {
+      return <Redirect to={{ pathname: redirectTo }} />;
+    }
 
     return (
       <LandingView
@@ -89,7 +110,7 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
         handleHowToDefeatPokemon={e => {
           this.handleHowToDefeatPokemon(e);
         }}
-        pokemonList={pokemonList}
+        pokemonList={rawPokedex}
         sections={sections}
       />
     );
