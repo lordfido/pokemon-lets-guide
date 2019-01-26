@@ -20,11 +20,6 @@ const sheet: ISheet = {
     position: 'relative',
     top: '50%',
     transform: 'translateY(-50%)',
-
-    [DESKTOP_L]: {
-      top: '25vh',
-      transform: 'none',
-    },
   },
   ctaField: {
     textAlign: 'center',

@@ -5,7 +5,7 @@ import { getRandomNumber } from '../../utils/numbers';
 
 import LandingView, { ISection } from './landing-view';
 
-import { getTypes } from '../../../constants/pokemon/pokemon-types';
+import { getTypes, getPokemonOfType } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 
 import { IRootState } from '../../root.models';
@@ -52,7 +52,7 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
       const newSections = randomTypes.map(typeIndex => {
         const selectedType = availableTypes[typeIndex];
         const backgroundColor = getTypeColor(selectedType.id);
-        const availablePokemon = rawPokedex.filter(p => p.types.ownTypes[0] === selectedType.id);
+        const availablePokemon = getPokemonOfType(selectedType.id, rawPokedex);
         const pokemon = availablePokemon[getRandomNumber(0, availablePokemon.length - 1)];
 
         return {
