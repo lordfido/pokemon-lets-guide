@@ -11,6 +11,7 @@ import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
 import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
+import { showStatsInPokedex } from '../../../constants/features';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -82,86 +83,95 @@ const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
       )}
     </TableCell>
 
-    {/* Base CP */}
-    <TableCell center>{pokemon.baseCP}</TableCell>
+    {showStatsInPokedex && (
+      <>
+        {/* Base CP */}
+        <TableCell center>{pokemon.baseCP}</TableCell>
 
-    {/* HP */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(HP_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[HP_ID]}
-    </TableCell>
+        {/* HP */}
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(HP_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[HP_ID]}
+        </TableCell>
 
-    {/* Attack */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(ATTACK_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[ATTACK_ID]}
-    </TableCell>
+        {/* Attack */}
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(ATTACK_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[ATTACK_ID]}
+        </TableCell>
 
-    {/* Defense */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(DEFENSE_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[DEFENSE_ID]}
-    </TableCell>
+        {/* Defense */}
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(DEFENSE_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[DEFENSE_ID]}
+        </TableCell>
 
-    {/* Speed */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(SPEED_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[SPEED_ID]}
-    </TableCell>
+        {/* Speed */}
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(SPEED_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[SPEED_ID]}
+        </TableCell>
 
-    {/* Special Defense */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[SPECIAL_DEFENSE_ID]}
-    </TableCell>
+        {/* Special Defense */}
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[SPECIAL_DEFENSE_ID]}
+        </TableCell>
 
-    {/* Special Attack */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[SPECIAL_ATTACK_ID]}
-    </TableCell>
+        {/* Special Attack */}
+        <TableCell
+          center
+          style={{
+            backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
+              .alpha(0.2)
+              .css(),
+            minWidth: 60,
+          }}
+        >
+          {pokemon.baseStats[SPECIAL_ATTACK_ID]}
+        </TableCell>
+      </>
+    )}
+
+    {/* Executioners */}
+    <TableCell center>{`${pokemon.extra.superiorityIndex} (${pokemon.extra.victims}/${
+      pokemon.extra.executioners
+    })`}</TableCell>
 
     {/* Quick Actions */}
     <TableCell center style={{ height: 'auto' }}>

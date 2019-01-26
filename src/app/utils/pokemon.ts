@@ -308,39 +308,69 @@ export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon =>
 };
 
 /**
- * Get best Pokemon to fight against selected one
+ * Filter a pokemonList, showing only strong pokemon against
  */
-export const getBetterRivals = (
-  pokemonList: IPokemonWithBaseCP[],
-  rival?: IPokemonWithBaseCP
-): IPokemonWithBaseCP[] => {
-  if (!rival) {
-    return pokemonList;
-  }
-
-  const relations = getTypeRelations(rival.types.ownTypes);
+export const strongAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonType>, pokemon: IPokemonWithBaseCP) => {
+  const relations = getTypeRelations(providedTypes);
   const strongTypes = relations.filter(relation => relation.effectiveness > 1);
   const weakTypes = relations.filter(relation => relation.effectiveness < 1);
 
-  const isStrongAgainstRival = (pokemon: IPokemonWithBaseCP) => {
-    let isStrong = false;
-    pokemon.types.ownTypes.forEach(type => {
-      if (strongTypes.findIndex(t => t.id === type) >= 0) {
-        isStrong = true;
-      }
-    });
-    return isStrong;
-  };
+  let shouldSkip = true;
+  strongTypes.forEach(type => {
+    if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = false;
+    }
+  });
 
-  const isNotWeakAgainstRival = (pokemon: IPokemonWithBaseCP) => {
-    let isWeak = false;
-    pokemon.types.ownTypes.forEach(type => {
-      if (weakTypes.findIndex(t => t.id === type) >= 0) {
-        isWeak = true;
-      }
-    });
-    return !isWeak;
-  };
+  weakTypes.forEach(type => {
+    if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = true;
+    }
+  });
 
-  return pokemonList.filter(isStrongAgainstRival).filter(isNotWeakAgainstRival);
+  if (shouldSkip) {
+    return false;
+  }
+
+  return true;
 };
+
+/**
+ * Get a Pokemon list that are strong against provided types
+ */
+export const getExecutioners = (providedTypes: ReadonlyArray<PokemonType>, pokemonList: IPokemonWithBaseCP[]) =>
+  pokemonList.filter(pokemon => strongAgainstProvidedTypes(providedTypes, pokemon));
+
+/**
+ * Filter a pokemonList, showing only weak pokemon against
+ */
+export const weakAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonType>, pokemon: IPokemonWithBaseCP) => {
+  const relations = getTypeRelations(pokemon.types.ownTypes);
+  const weakAgainst = relations.filter(relation => relation.effectiveness > 1);
+  const strongAgainst = relations.filter(relation => relation.effectiveness < 1);
+
+  let shouldSkip = true;
+  weakAgainst.forEach(type => {
+    if (providedTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = false;
+    }
+  });
+
+  strongAgainst.forEach(type => {
+    if (providedTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = true;
+    }
+  });
+
+  if (shouldSkip) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Get a Pokemon list that are weak against provided types
+ */
+export const getVictims = (providedTypes: ReadonlyArray<PokemonType>, pokemonList: IPokemonWithBaseCP[]) =>
+  pokemonList.filter(pokemon => weakAgainstProvidedTypes(providedTypes, pokemon));

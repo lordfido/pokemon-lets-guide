@@ -1,5 +1,11 @@
 import { sortBy } from '../../utils/arrays';
-import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
+import {
+  getExecutioners,
+  getSortedStats,
+  getVictims,
+  strongAgainstProvidedTypes,
+  weakAgainstProvidedTypes,
+} from '../../utils/pokemon';
 
 import {
   POKEDEX_CREATE,
@@ -12,7 +18,6 @@ import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon/pokemon-stats';
 
 import { IPokedexAction, IPokedexState, IPokemon, pokedexInitialState } from './pokedex.models';
-import { log } from '../../../common/utils/logger';
 
 const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexState => {
   switch (action.type) {
@@ -104,52 +109,18 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
 
       // Filter list by strong against
       if (filters.strongAgainst.length) {
-        const relations = getTypeRelations(filters.strongAgainst);
-        const strongTypes = relations.filter(relation => relation.effectiveness > 1);
-        const weakTypes = relations.filter(relation => relation.effectiveness < 1);
+        const isStrongAgainstFilteredTypes = strongAgainstProvidedTypes(filters.strongAgainst, pokemon);
 
-        let shouldSkip = true;
-        strongTypes.forEach(type => {
-          if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
-            shouldSkip = false;
-          }
-        });
-
-        weakTypes.forEach(type => {
-          if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
-            shouldSkip = true;
-          }
-        });
-
-        if (shouldSkip) {
+        if (!isStrongAgainstFilteredTypes) {
           return false;
         }
       }
 
       // Filter list by weak against
       if (filters.weakAgainst.length) {
-        const relations = getTypeRelations(pokemon.types.ownTypes);
-        const weakAgainst = relations.filter(relation => relation.effectiveness > 1);
-        const strongAgainst = relations.filter(relation => relation.effectiveness < 1);
+        const isWeakAgainstFilteredTypes = weakAgainstProvidedTypes(filters.weakAgainst, pokemon);
 
-        log(`Checking <${pokemon.id}|${pokemon.name}> against: `, relations);
-
-        let shouldSkip = true;
-        weakAgainst.forEach(type => {
-          if (filters.weakAgainst.findIndex(t => t === type.id) >= 0) {
-            log(`One of its types is weak`, type.id);
-            shouldSkip = false;
-          }
-        });
-
-        strongAgainst.forEach(type => {
-          if (filters.weakAgainst.findIndex(t => t === type.id) >= 0) {
-            log(`One of its types is strong`, type.id);
-            shouldSkip = true;
-          }
-        });
-
-        if (shouldSkip) {
+        if (!isWeakAgainstFilteredTypes) {
           return false;
         }
       }
@@ -216,6 +187,21 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
       }
 
       return true;
+    })
+    .map(pokemon => {
+      const executioners = getExecutioners(pokemon.types.ownTypes, collection).length;
+      const victims = getVictims(pokemon.types.ownTypes, collection).length;
+      const superiorityIndex = Math.round((victims / (executioners + victims)) * 100);
+
+      return {
+        ...pokemon,
+        extra: {
+          ...pokemon.extra,
+          executioners,
+          superiorityIndex,
+          victims,
+        },
+      };
     })
     .sort(sortBy(state.sort.sortBy, state.sort.order))
     .slice(pagination.first, isPaginated ? pagination.last : state.collection.length);

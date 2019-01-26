@@ -10,6 +10,7 @@ import Table from '../../components/table';
 import PokedexEntry from './pokedex-entry';
 import PokedexFilters from './pokedex-filters';
 
+import { showStatsInPokedex } from '../../../constants/features';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -131,63 +132,81 @@ const unstyledPokedexView = ({
           {
             label: getGameTranslation('type-2'),
           },
+          showStatsInPokedex
+            ? {
+                label: getGameTranslation('base-cp'),
+                onClick: () => handleSortBy('baseCP'),
+              }
+            : {},
+          showStatsInPokedex
+            ? {
+                label: getStatName(HP_ID),
+                onClick: () => handleSortBy(`baseStats.${HP_ID}`),
+                style: {
+                  backgroundColor: chroma(getStatColor(HP_ID))
+                    .alpha(0.3)
+                    .css(),
+                },
+              }
+            : {},
+          showStatsInPokedex
+            ? {
+                label: getStatName(ATTACK_ID),
+                onClick: () => handleSortBy(`baseStats.${ATTACK_ID}`),
+                style: {
+                  backgroundColor: chroma(getStatColor(ATTACK_ID))
+                    .alpha(0.3)
+                    .css(),
+                },
+              }
+            : {},
+          showStatsInPokedex
+            ? {
+                label: getStatName(DEFENSE_ID),
+                onClick: () => handleSortBy(`baseStats.${DEFENSE_ID}`),
+                style: {
+                  backgroundColor: chroma(getStatColor(DEFENSE_ID))
+                    .alpha(0.3)
+                    .css(),
+                },
+              }
+            : {},
+          showStatsInPokedex
+            ? {
+                label: getStatName(SPEED_ID),
+                onClick: () => handleSortBy(`baseStats.${SPEED_ID}`),
+                style: {
+                  backgroundColor: chroma(getStatColor(SPEED_ID))
+                    .alpha(0.3)
+                    .css(),
+                },
+              }
+            : {},
+          showStatsInPokedex
+            ? {
+                label: getStatName(SPECIAL_DEFENSE_ID),
+                onClick: () => handleSortBy(`baseStats.${SPECIAL_DEFENSE_ID}`),
+                style: {
+                  backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
+                    .alpha(0.3)
+                    .css(),
+                },
+              }
+            : {},
+          showStatsInPokedex
+            ? {
+                label: getStatName(SPECIAL_ATTACK_ID),
+                onClick: () => handleSortBy(`baseStats.${SPECIAL_ATTACK_ID}`),
+                style: {
+                  backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
+                    .alpha(0.3)
+                    .css(),
+                },
+              }
+            : {},
           {
-            label: getGameTranslation('base-cp'),
-            onClick: () => handleSortBy('baseCP'),
-          },
-          {
-            label: getStatName(HP_ID),
-            onClick: () => handleSortBy(`baseStats.${HP_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(HP_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(ATTACK_ID),
-            onClick: () => handleSortBy(`baseStats.${ATTACK_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(ATTACK_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(DEFENSE_ID),
-            onClick: () => handleSortBy(`baseStats.${DEFENSE_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(DEFENSE_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(SPEED_ID),
-            onClick: () => handleSortBy(`baseStats.${SPEED_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(SPEED_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(SPECIAL_DEFENSE_ID),
-            onClick: () => handleSortBy(`baseStats.${SPECIAL_DEFENSE_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(SPECIAL_ATTACK_ID),
-            onClick: () => handleSortBy(`baseStats.${SPECIAL_ATTACK_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
-                .alpha(0.3)
-                .css(),
-            },
+            label: 'Victims/Executioners',
+            onClick: () => handleSortBy('extra.superiorityIndex'),
           },
           {
             label: '',
