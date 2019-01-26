@@ -6,7 +6,7 @@ import { filtersToString } from '../../utils/urls';
 
 import LandingView, { ISection } from './landing-view';
 
-import { MOVES_SEARCH, POKEDEX_SEARCH } from '../../../constants/appRoutes';
+import { CALCULATOR, MOVES_SEARCH, POKEDEX_SEARCH } from '../../../constants/appRoutes';
 import { getPokemonOfType, getTypes, PokemonType } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 
@@ -37,12 +37,21 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
   };
 
   public componentDidMount() {
-    const randomTypes: [number, number, number, number] = [
-      getRandomNumber(0, availableTypes.length - 1),
-      getRandomNumber(0, availableTypes.length - 1),
-      getRandomNumber(0, availableTypes.length - 1),
-      getRandomNumber(0, availableTypes.length - 1),
-    ];
+    const randomTypes: number[] = [];
+
+    for (let x = 0; x < 3; x++) {
+      const generateRandomIndex = () => {
+        const newTypeIndex = getRandomNumber(0, availableTypes.length - 1);
+
+        if (randomTypes.findIndex(i => i === newTypeIndex) >= 0) {
+          generateRandomIndex();
+        } else {
+          randomTypes.push(newTypeIndex);
+        }
+      };
+
+      generateRandomIndex();
+    }
 
     this.setState({ randomTypes });
   }
@@ -67,6 +76,14 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
       this.setState({ sections: newSections });
     }
   }
+
+  public handleCalculate = (params: { id: string; value: GenericOutput }) => {
+    const pokemon = params.value as IOption;
+
+    this.setState({
+      redirectTo: CALCULATOR.replace(':id?', pokemon.value),
+    });
+  };
 
   public handleFindBestMoves = (params: { id: string; value: GenericOutput }) => {
     const { rawPokedex } = this.props;
@@ -116,6 +133,9 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
 
     return (
       <LandingView
+        handleCalculate={e => {
+          this.handleCalculate(e);
+        }}
         handleFindBestMoves={e => {
           this.handleFindBestMoves(e);
         }}

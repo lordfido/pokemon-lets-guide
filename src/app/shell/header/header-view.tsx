@@ -23,26 +23,34 @@ const sheet: ISheet = {
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  showLandingHeader?: boolean;
 }
 
-const unstyledHeaderView = ({ classes }: IOwnProps) => (
+const unstyledHeaderView = ({ classes, showLandingHeader }: IOwnProps) => (
   <header className={classes.wrapper}>
-    <HeaderItem image={require('../../../assets/images/home.png')} to={HOME} />
-    <HeaderItem
-      image={require('../../../assets/images/pokedex.png')}
-      text={getUiTranslation('header-pokedex')}
-      to={POKEDEX.replace(':id?', '')}
-    />
-    <HeaderItem
-      image={require('../../../assets/images/moves.png')}
-      text={getUiTranslation('header-moves')}
-      to={MOVES.replace(':id?', '')}
-    />
-    <HeaderItem
-      image={require('../../../assets/images/calculator.png')}
-      text={getUiTranslation('header-calculator')}
-      to={CALCULATOR.replace(':id?', '')}
-    />
+    {!showLandingHeader && (
+      <>
+        <HeaderItem image={require('../../../assets/images/home.png')} to={HOME} />
+        <HeaderItem
+          hoverEffect={true}
+          image={require('../../../assets/images/pokedex.png')}
+          text={getUiTranslation('header-pokedex')}
+          to={POKEDEX.replace(':id?', '')}
+        />
+        <HeaderItem
+          hoverEffect={true}
+          image={require('../../../assets/images/moves.png')}
+          text={getUiTranslation('header-moves')}
+          to={MOVES.replace(':id?', '')}
+        />
+        <HeaderItem
+          hoverEffect={true}
+          image={require('../../../assets/images/calculator.png')}
+          text={getUiTranslation('header-calculator')}
+          to={CALCULATOR.replace(':id?', '')}
+        />
+      </>
+    )}
   </header>
 );
 

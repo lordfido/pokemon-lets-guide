@@ -11,6 +11,7 @@ import { APP_BACKGROUND } from '../constants/styles/styles-skin';
 import { CONTENT } from '../constants/styles/styles-zindex';
 
 import { ISheet } from './root.models';
+import { WRAPPED_HEIGH, WRAPPED_WIDTH } from '../constants/styles/styles';
 
 const homeButtonSize = 80;
 
@@ -53,8 +54,8 @@ const sheet: ISheet = {
     width: '100%',
 
     [HD_DISPLAY]: {
-      maxHeight: 720,
-      maxWidth: 1280,
+      maxHeight: WRAPPED_HEIGH,
+      maxWidth: WRAPPED_WIDTH,
       position: 'relative',
       top: '50%',
       transform: 'translateY(-50%)',

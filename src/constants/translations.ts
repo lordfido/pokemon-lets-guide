@@ -80,7 +80,7 @@ export const uiTranslations: ITranslationsCollection = {
   // Landing
   'landing-calculate': [
     '',
-    'Calculate how is looking your Pokémon',
+    'Calculate how your Pokémon will look',
     '',
     'Calcula cómo quedará tu Pokémon',
     '',
@@ -99,21 +99,11 @@ export const uiTranslations: ITranslationsCollection = {
     '',
     '',
   ],
-  'landing-find-best-pokemon': [
-    '',
-    'Find the best Pokémon for a particular scenario',
-    '',
-    'Encuentra los mejores Pokémon para una situación particular',
-    '',
-    '',
-    '',
-    '',
-  ],
   'landing-how-to-defeat': [
     '',
-    'Is a fight being difficult? Find best Pokémon to defeat your rival',
+    'Find best Pokémon to defeat your rival',
     '',
-    '¿Se te resiste algún combate? Encuentra los mejores Pokémon para vencer a tu rival',
+    'Encuentra los mejores Pokémon para vencer a tu rival',
     '',
     '',
     '',

@@ -1,7 +1,7 @@
+import { WHITE } from '../../constants/styles/styles-colors';
 import { FONT_L } from '../../constants/styles/styles-fonts';
 import { MAX_DESKTOP_L } from '../../constants/styles/styles-media-queries';
 import { APP_BACKGROUND } from '../../constants/styles/styles-skin';
-import { WHITE } from '../../constants/styles/styles-colors';
 
 const getGoogleFonts = () => {
   const style = document.createElement('style');

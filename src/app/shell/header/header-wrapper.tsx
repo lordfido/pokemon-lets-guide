@@ -1,7 +1,14 @@
 import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 import HeaderView from './header-view';
 
-const HeaderWrapper = () => <HeaderView />;
+import { HOME } from '../../../constants/appRoutes';
 
-export default HeaderWrapper;
+type RouteProps = RouteComponentProps<{
+  location: any;
+}>;
+
+const HeaderWrapper = ({ location }: RouteProps) => <HeaderView showLandingHeader={location.pathname === HOME} />;
+
+export default withRouter(HeaderWrapper);
