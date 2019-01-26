@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { log } from '../../../common/utils/logger';
+import { areSimilarColors } from '../../utils/colors';
 import { getRandomNumber } from '../../utils/numbers';
 import { filtersToString } from '../../utils/urls';
 
@@ -42,8 +44,12 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
     for (let x = 0; x < 3; x++) {
       const generateRandomIndex = () => {
         const newTypeIndex = getRandomNumber(0, availableTypes.length - 1);
+        const type = availableTypes[newTypeIndex].id;
+        const isAnySimilarColor = randomTypes
+          .map(t => getTypeColor(availableTypes[t].id))
+          .findIndex(c => areSimilarColors(c, getTypeColor(type), 100));
 
-        if (randomTypes.findIndex(i => i === newTypeIndex) >= 0) {
+        if (isAnySimilarColor >= 0) {
           generateRandomIndex();
         } else {
           randomTypes.push(newTypeIndex);
