@@ -128,40 +128,36 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
       sections,
     } = this.props;
 
+    const commonProps: IDropdownOptions = {
+      id: '',
+      menuPlacement: 'top',
+      options: pokemonList.map(pokemon => ({
+        id: pokemon.id,
+        label: pokemon.name,
+        value: pokemon.id,
+      })),
+      type: 'dropdown',
+    };
+
     const howToDefeatPokemonField: IDropdownOptions = {
+      ...commonProps,
       id: 'howToDefeatPokemon',
       label: getUiTranslation('landing-how-to-defeat'),
       onChange: handleHowToDefeatPokemon,
-      options: pokemonList.map(pokemon => ({
-        id: pokemon.id,
-        label: pokemon.name,
-        value: pokemon.id,
-      })),
-      type: 'dropdown',
     };
 
     const bestMovesAgainstField: IDropdownOptions = {
+      ...commonProps,
       id: 'bestMovesAgainst',
       label: getUiTranslation('landing-find-best-moves'),
       onChange: handleFindBestMoves,
-      options: pokemonList.map(pokemon => ({
-        id: pokemon.id,
-        label: pokemon.name,
-        value: pokemon.id,
-      })),
-      type: 'dropdown',
     };
 
     const calculateField: IDropdownOptions = {
+      ...commonProps,
       id: 'calculate',
       label: getUiTranslation('landing-calculate-cta'),
       onChange: handleCalculate,
-      options: pokemonList.map(pokemon => ({
-        id: pokemon.id,
-        label: pokemon.name,
-        value: pokemon.id,
-      })),
-      type: 'dropdown',
     };
 
     return (

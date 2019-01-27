@@ -57,6 +57,7 @@ const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IO
               })
             : null
         }
+        menuPlacement={options.menuPlacement || 'auto'}
         isDisabled={options.isDisabled}
         isMulti={options.isMulti}
         onChange={onChangeProxy}
