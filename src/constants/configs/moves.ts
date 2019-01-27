@@ -28,7 +28,7 @@ export interface IMovesConfig {
 }
 
 const moves: IMovesConfig = {
-  showId: true,
+  showId: false,
   showName: true,
   showType: true,
 
@@ -37,8 +37,8 @@ const moves: IMovesConfig = {
   showPower: true,
 
   showPp: true,
-  showProbability: true,
-  showTm: true,
+  showProbability: false,
+  showTm: false,
 
   showActions: true,
 };
