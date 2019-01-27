@@ -10,7 +10,7 @@ import Table from '../../components/table';
 import PokedexEntry from './pokedex-entry';
 import PokedexFilters from './pokedex-filters';
 
-import { getAllPokedexConfig } from '../../../constants/configs';
+import { getAllPokedexConfig } from '../../../constants/configs/pokedex';
 import {
   ATTACK_ID,
   DEFENSE_ID,

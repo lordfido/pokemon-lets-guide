@@ -25,6 +25,7 @@ export const gameTranslations: ITranslationsCollection = {
   // Pokemon data
   'base-cp': ['', 'Base CP', '', 'PC Base', '', '', '', ''],
   'base-stats': ['', 'Base Stats', '', 'Estadísticas base', '', '', '', ''],
+  id: ['', 'ID', '', 'ID', '', '', '', ''],
   name: ['', 'Name', '', 'Nombre', '', '', '', ''],
   'pokedex-number': ['', 'Pokédex No.', '', 'Nº en la Pokédex:', '', '', '', ''],
   'type-1': ['', 'Type 1', '', 'Tipo 1', '', '', '', ''],
@@ -65,6 +66,7 @@ export const uiTranslations: ITranslationsCollection = {
   order: ['japanese', 'english', 'german', 'spanish', 'french', 'italian', 'korean', 'chinese'],
 
   'generic-no': ['', 'No', '', 'No', '', '', '', ''],
+  'generic-select': ['', 'Select...', '', 'Seleccionar...', '', '', '', ''],
   'generic-yes': ['', 'Yes', '', 'Si', '', '', '', ''],
 
   // Header

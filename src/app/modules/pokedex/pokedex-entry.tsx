@@ -11,7 +11,7 @@ import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
 import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
-import { IPokedexConfig } from '../../../constants/configs';
+import { IPokedexConfig } from '../../../constants/configs/pokedex';
 import {
   ATTACK_ID,
   DEFENSE_ID,

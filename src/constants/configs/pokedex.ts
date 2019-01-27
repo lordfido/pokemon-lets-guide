@@ -1,6 +1,6 @@
-import { getLocalStorage } from '../common/utils/localStorage';
+import { getLocalStorage } from '../../common/utils/localStorage';
 
-import { POKEDEX_MODULE } from './localStorage';
+import { POKEDEX_MODULE } from '../localStorage';
 
 export type PokedexConfigKeys =
   | 'showName'
