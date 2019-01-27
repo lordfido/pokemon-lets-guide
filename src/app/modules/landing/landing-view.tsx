@@ -11,7 +11,6 @@ import { CALCULATOR, MOVES, POKEDEX } from '../../../constants/appRoutes';
 import { getPokemonImage } from '../../../constants/pokemon/pokemon-images';
 import {
   FOOTER_SIZE_L,
-  HEADER_SIZE,
   PADDING_L,
   PADDING_M,
   PADDING_XXL,
@@ -49,7 +48,7 @@ const sheet: ISheet = {
   ctaWrapper: {
     display: 'inline-block',
     flex: `1 0 100%`,
-    minHeight: `calc(100vh - ${HEADER_SIZE}px)`,
+    minHeight: '100vh',
     padding: PADDING_L,
     textAlign: 'center',
     verticalAlign: 'top',
@@ -62,11 +61,11 @@ const sheet: ISheet = {
 
     [DESKTOP_L]: {
       flex: `1 0 25%`,
-      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L}px)`,
+      minHeight: `calc(100vh - ${FOOTER_SIZE_L}px)`,
     },
 
     [HD_DISPLAY]: {
-      minHeight: WRAPPED_HEIGH - HEADER_SIZE - FOOTER_SIZE_L,
+      minHeight: WRAPPED_HEIGH - FOOTER_SIZE_L,
     },
   },
   ctas: {
@@ -93,7 +92,7 @@ const sheet: ISheet = {
     transform: `rotate(90deg) translateX(35px) translateY(${PADDING_XXXL}px)`,
   },
   navigationPrev: {
-    top: HEADER_SIZE,
+    top: 0,
     transform: `rotate(-90deg) translateX(35px) translateY(${-PADDING_XXXL}px)`,
   },
   wrapper: {},
