@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { log } from '../../../common/utils/logger';
 import { areSimilarColors } from '../../utils/colors';
 import { getRandomNumber } from '../../utils/numbers';
 import { filtersToString } from '../../utils/urls';
@@ -11,6 +10,8 @@ import LandingView, { ISection } from './landing-view';
 import { CALCULATOR, MOVES_SEARCH, POKEDEX_SEARCH } from '../../../constants/appRoutes';
 import { getPokemonOfType, getTypes, PokemonType } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
+import { HEADER_SIZE } from '../../../constants/styles/styles';
+import getQuery, { TABLET_L } from '../../../constants/styles/styles-media-queries';
 
 import { IRootState } from '../../root.models';
 import { getPokedex, getRawPokedex } from '../../root.reducer';
@@ -18,6 +19,7 @@ import { GenericOutput, IOption } from '../forms/form.models';
 import { IMovesFilters, movesInitialState } from '../moves/moves.models';
 import { IPokedexFilters, IPokemonWithBaseCP, pokedexInitialState } from '../pokedex/pokedex.models';
 
+let scrollElement: HTMLElement;
 const availableTypes = getTypes();
 
 interface IStateProps {
@@ -26,6 +28,7 @@ interface IStateProps {
 }
 
 interface IOwnState {
+  currentSection: number;
   randomTypes: number[];
   redirectTo?: string;
   sections: ISection[];
@@ -33,10 +36,13 @@ interface IOwnState {
 
 class LandingWrapper extends React.Component<IStateProps, IOwnState> {
   public state = {
+    currentSection: 0,
     randomTypes: [],
     redirectTo: undefined,
     sections: [] as ISection[],
   };
+
+  public scrollTimeout: NodeJS.Timeout = setTimeout(() => ({}), 0);
 
   public componentDidMount() {
     const randomTypes: number[] = [];
@@ -60,6 +66,9 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
     }
 
     this.setState({ randomTypes });
+
+    scrollElement = document.querySelector('#app > div') as HTMLElement;
+    scrollElement.addEventListener('scroll', this.handleScroll);
   }
 
   public componentDidUpdate(prevProps: IStateProps) {
@@ -82,6 +91,38 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
       this.setState({ sections: newSections });
     }
   }
+
+  public componentWillUnmount() {
+    scrollElement.removeEventListener('scroll', this.handleScroll);
+  }
+
+  public handleScroll = (e: Event) => {
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      const {
+        // @ts-ignore
+        target: { scrollTop },
+      } = e;
+
+      const media = getQuery(TABLET_L);
+      const matchMedia = window.matchMedia(media);
+      const sectionScrollTop = window.innerHeight - HEADER_SIZE;
+      let currentSection = 0;
+
+      if (matchMedia.matches) {
+        const rounded = Math.round((scrollTop / sectionScrollTop) * 2);
+        if (rounded > 1) {
+          currentSection = 2;
+        } else {
+          currentSection = 0;
+        }
+      } else {
+        currentSection = Math.round(scrollTop / sectionScrollTop);
+      }
+
+      this.setState({ currentSection });
+    }, 500);
+  };
 
   public handleCalculate = (params: { id: string; value: GenericOutput }) => {
     const pokemon = params.value as IOption;
@@ -129,9 +170,45 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
     });
   };
 
+  public handleNavigateToPrevSection = () => {
+    const { currentSection } = this.state;
+
+    const elem = scrollElement;
+    const media = getQuery(TABLET_L);
+    const matchMedia = window.matchMedia(media);
+    const sectionToScroll = matchMedia.matches ? currentSection - 2 : currentSection - 1;
+
+    if (elem) {
+      const target = document.querySelector(`#landing-${sectionToScroll}`);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    }
+  };
+
+  public handleNavigateToNextSection = () => {
+    const { currentSection } = this.state;
+
+    const elem = scrollElement;
+    const media = getQuery(TABLET_L);
+    const matchMedia = window.matchMedia(media);
+    const sectionToScroll = matchMedia.matches ? currentSection + 2 : currentSection + 1;
+
+    if (elem) {
+      const target = document.querySelector(`#landing-${sectionToScroll}`);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    }
+  };
+
   public render() {
     const { rawPokedex } = this.props;
-    const { redirectTo, sections } = this.state;
+    const { currentSection, redirectTo, sections } = this.state;
 
     if (redirectTo) {
       return <Redirect to={{ pathname: redirectTo }} />;
@@ -148,6 +225,20 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
         handleHowToDefeatPokemon={e => {
           this.handleHowToDefeatPokemon(e);
         }}
+        handleNavigateToPrevSection={
+          currentSection > 0
+            ? () => {
+                this.handleNavigateToPrevSection();
+              }
+            : undefined
+        }
+        handleNavigateToNextSection={
+          currentSection < 2
+            ? () => {
+                this.handleNavigateToNextSection();
+              }
+            : undefined
+        }
         pokemonList={rawPokedex}
         sections={sections}
       />

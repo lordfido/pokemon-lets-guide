@@ -1,28 +1,30 @@
+import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import { getUiTranslation } from '../../utils/translations';
 
 import HeaderItem from '../../shell/header/header-item';
 import Field from '../forms/field';
+import PokemonPreview from '../pokemon/pokemon-preview';
 
 import { CALCULATOR, MOVES, POKEDEX } from '../../../constants/appRoutes';
 import { getPokemonImage } from '../../../constants/pokemon/pokemon-images';
 import {
-  FOOTER_SIZE,
   FOOTER_SIZE_L,
   HEADER_SIZE,
   PADDING_L,
   PADDING_M,
   PADDING_XXL,
+  PADDING_XXXL,
   WRAPPED_HEIGH,
 } from '../../../constants/styles/styles';
-import { DESKTOP_L, HD_DISPLAY, TABLET_L, TABLET_OR_LANDSCAPE } from '../../../constants/styles/styles-media-queries';
+import { FONT_XXL, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
+import { DESKTOP_L, HD_DISPLAY, TABLET_L } from '../../../constants/styles/styles-media-queries';
+import { CONTENT } from '../../../constants/styles/styles-zindex';
 
 import { ISheet } from '../../root.models';
 import { GenericOutput, IDropdownOptions } from '../forms/form.models';
 import { IPokemonWithBaseCP } from '../pokedex/pokedex.models';
-import PokemonPreview from '../pokemon/pokemon-preview';
-import { TEXT_WHITE, FONT_XXL } from '../../../constants/styles/styles-fonts';
 
 const sheet: ISheet = {
   ctaContent: {
@@ -47,15 +49,11 @@ const sheet: ISheet = {
   ctaWrapper: {
     display: 'inline-block',
     flex: `1 0 100%`,
-    minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE}px)`,
+    minHeight: `calc(100vh - ${HEADER_SIZE}px)`,
     padding: PADDING_L,
     textAlign: 'center',
     verticalAlign: 'top',
     width: '100%',
-
-    [TABLET_OR_LANDSCAPE]: {
-      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L}px)`,
-    },
 
     [TABLET_L]: {
       flex: `1 0 50%`,
@@ -64,6 +62,7 @@ const sheet: ISheet = {
 
     [DESKTOP_L]: {
       flex: `1 0 25%`,
+      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L})`,
     },
 
     [HD_DISPLAY]: {
@@ -73,6 +72,29 @@ const sheet: ISheet = {
   ctas: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  navigation: {
+    cursor: 'pointer',
+    left: '50%',
+    position: 'fixed',
+    textAlign: 'center',
+    zIndex: CONTENT,
+
+    [DESKTOP_L]: {
+      display: 'none',
+    },
+
+    '& img': {
+      margin: '0 auto',
+    },
+  },
+  navigationNext: {
+    bottom: 0,
+    transform: `rotate(90deg) translateX(35px) translateY(${PADDING_XXXL}px)`,
+  },
+  navigationPrev: {
+    top: HEADER_SIZE,
+    transform: `rotate(-90deg) translateX(35px) translateY(${-PADDING_XXXL}px)`,
   },
   wrapper: {},
 };
@@ -87,6 +109,8 @@ interface IOwnProps {
   handleCalculate: (params: { id: string; value: GenericOutput }) => void;
   handleFindBestMoves: (params: { id: string; value: GenericOutput }) => void;
   handleHowToDefeatPokemon: (params: { id: string; value: GenericOutput }) => void;
+  handleNavigateToPrevSection?: () => void;
+  handleNavigateToNextSection?: () => void;
   pokemonList: IPokemonWithBaseCP[];
   sections: ISection[];
 }
@@ -98,6 +122,8 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
       handleCalculate,
       handleFindBestMoves,
       handleHowToDefeatPokemon,
+      handleNavigateToPrevSection,
+      handleNavigateToNextSection,
       pokemonList,
       sections,
     } = this.props;
@@ -140,12 +166,23 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
 
     return (
       <div className={classes.wrapper}>
+        {handleNavigateToPrevSection && (
+          <span
+            className={classnames(classes.navigation, classes.navigationPrev)}
+            onClick={() => handleNavigateToPrevSection()}
+          >
+            <img src={require('../../../assets/images/move-next-arrow.png')} />
+          </span>
+        )}
+
         <div className={classes.ctas}>
           {sections &&
             sections.map(({ backgroundColor, pokemon }, index: number) => (
-              <div key={index} className={classes.ctaWrapper} style={{ backgroundColor }}>
+              <div key={index} id={`landing-${index}`} className={classes.ctaWrapper} style={{ backgroundColor }}>
                 <div className={classes.ctaContent}>
-                  {pokemon && <PokemonPreview className={classes.ctaImage} src={getPokemonImage(pokemon)} />}
+                  {pokemon && (
+                    <PokemonPreview className={classes.ctaImage} hard={true} src={getPokemonImage(pokemon)} />
+                  )}
 
                   {index === 0 && (
                     <>
@@ -186,6 +223,15 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
               </div>
             ))}
         </div>
+
+        {handleNavigateToNextSection && (
+          <span
+            className={classnames(classes.navigation, classes.navigationNext)}
+            onClick={() => handleNavigateToNextSection()}
+          >
+            <img src={require('../../../assets/images/move-next-arrow.png')} />
+          </span>
+        )}
       </div>
     );
   }

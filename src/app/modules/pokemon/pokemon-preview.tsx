@@ -44,12 +44,14 @@ interface IOwnProps {
   alt?: string;
   classes: { [key: string]: string };
   className?: string;
+  hard?: boolean;
   src?: string;
 }
 
-const unstyledPokemonPreview = ({ alt, classes, className, src }: IOwnProps) => (
+const unstyledPokemonPreview = ({ alt, classes, className, hard = false, src }: IOwnProps) => (
   <div className={classnames(classes.window, className)}>
-    {src && <Image className={classes.image} src={src} alt={alt} />}
+    {hard && src && <img className={classes.image} src={src} alt={alt} />}
+    {!hard && src && <Image className={classes.image} src={src} alt={alt} />}
   </div>
 );
 
