@@ -62,7 +62,7 @@ const sheet: ISheet = {
 
     [DESKTOP_L]: {
       flex: `1 0 25%`,
-      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L})`,
+      minHeight: `calc(100vh - ${HEADER_SIZE}px - ${FOOTER_SIZE_L}px)`,
     },
 
     [HD_DISPLAY]: {
