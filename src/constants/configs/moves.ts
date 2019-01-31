@@ -38,7 +38,7 @@ const moves: IMovesConfig = {
 
   showPp: true,
   showProbability: false,
-  showTm: false,
+  showTm: true,
 
   showActions: true,
 };

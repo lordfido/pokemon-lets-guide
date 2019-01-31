@@ -11,7 +11,7 @@ const OUTPUT_NAMES_FILE = './src/constants/moves/moves-names.ts';
 
 // WRITE TS FILE
 const movesList = [];
-const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, type }) => {
+const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, tm, type }) => {
   const lines = [
     '  {',
     `    accuracy: ${accuracy},`,
@@ -20,6 +20,7 @@ const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, type }
     `    id: '${id}',`,
     `    power: ${power},`,
     `    pp: ${pp},`,
+    `    tm: ${tm},`,
     `    type: '${type}',`,
     '  },',
   ];
@@ -140,7 +141,7 @@ fetch(SCRAP_URL)
       );
     });
 
-    // generateMovesMapTs();
+    generateMovesMapTs();
 
     Promise.all(translations).then(() => {
       generateMoveNamesTs();
