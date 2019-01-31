@@ -219,19 +219,19 @@ const unstyledPokedexView = ({
               : {},
             pokedexConfig.showSuperiorityIndex
               ? {
-                  label: 'Victims/Executioners',
+                  label: getUiTranslation('pokedex-superiority-index'),
                   onClick: () => handleSortBy('extra.superiorityIndex'),
                 }
               : {},
             pokedexConfig.showExecutioners
               ? {
-                  label: 'Executioners',
+                  label: getUiTranslation('pokedex-executioners'),
                   onClick: () => handleSortBy('extra.executioners'),
                 }
               : {},
             pokedexConfig.showVictims
               ? {
-                  label: 'Victims',
+                  label: getUiTranslation('pokedex-victims'),
                   onClick: () => handleSortBy('extra.victims'),
                 }
               : {},

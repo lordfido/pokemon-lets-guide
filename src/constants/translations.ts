@@ -125,7 +125,10 @@ export const uiTranslations: ITranslationsCollection = {
 
   // Pokédex
   'pokedex-details': ['', 'Details', '', 'Detalles', '', '', '', ''],
+  'pokedex-executioners': ['', 'Executioners', '', 'Verdugos', '', '', '', ''],
   'pokedex-load-more': ['', 'Load more', '', 'Ver más', '', '', '', ''],
+  'pokedex-superiority-index': ['', 'Superiority', '', 'Superioridad', '', '', '', ''],
+  'pokedex-victims': ['', 'Victims', '', 'Víctimas', '', '', '', ''],
 
   // Pokémon
   'pokemon-bars': ['', 'Bars', '', 'Barras', '', '', '', ''],
