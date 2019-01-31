@@ -1,6 +1,8 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 
+import { PRE_PRODUCTION } from '../src/constants/environment';
+
 import baseConfig, { imageOptimizedLoader, manifestPlugin } from './base.config';
 import { appConfig as devAppConfig, swConfig as devSwConfig } from './dev.config';
 
@@ -23,7 +25,7 @@ const appConfig: webpack.Configuration = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('pre'),
+        NODE_ENV: JSON.stringify(PRE_PRODUCTION),
       },
     }),
 
@@ -47,7 +49,7 @@ const swConfig: webpack.Configuration = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('pre'),
+        NODE_ENV: JSON.stringify(PRE_PRODUCTION),
       },
     }),
   ],

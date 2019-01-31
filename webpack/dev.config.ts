@@ -2,6 +2,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
+import { DEVELOPMENT } from '../src/constants/environment';
+
 import baseConfig, { imageLoader, manifestPlugin, paths, regex } from './base.config';
 
 export const appConfig: webpack.Configuration = {
@@ -40,7 +42,7 @@ export const appConfig: webpack.Configuration = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('dev'),
+        NODE_ENV: JSON.stringify(DEVELOPMENT),
       },
     }),
 
@@ -75,7 +77,7 @@ export const swConfig: webpack.Configuration = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('dev'),
+        NODE_ENV: JSON.stringify(DEVELOPMENT),
       },
     }),
   ],
