@@ -121,7 +121,7 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
       }
 
       this.setState({ currentSection });
-    }, 500);
+    }, 200);
   };
 
   public handleCalculate = (params: { id: string; value: GenericOutput }) => {
