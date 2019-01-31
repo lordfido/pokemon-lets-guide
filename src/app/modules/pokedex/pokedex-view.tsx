@@ -10,6 +10,7 @@ import Table from '../../components/table';
 import PokedexEntry from './pokedex-entry';
 import PokedexFilters from './pokedex-filters';
 
+import { getAllPokedexConfig } from '../../../constants/configs/pokedex';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -93,131 +94,179 @@ const unstyledPokedexView = ({
   handleReset,
   handleSubmit,
   handleLoadMore,
-}: IOwnProps) => (
-  <>
-    <Sidebar
-      render={isOpen => (
-        <PokedexFilters
-          classNames={{
-            form: classes.form,
-            formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
-          }}
-          pokemonList={pokemonList}
-          handlePokemonChange={handlePokemonChange}
-          filters={filters}
-          handleFilterChange={handleFilterChange}
-          handleReset={handleReset}
-          handleSubmit={handleSubmit}
-        />
-      )}
-    />
-    <div className={classes.results}>
-      <Table
-        headings={[
-          {
-            label: '#',
-            onClick: () => handleSortBy('id'),
-          },
-          {
-            label: '',
-          },
-          {
-            label: getGameTranslation('name'),
-            onClick: () => handleSortBy('name'),
-          },
-          {
-            label: getGameTranslation('type-1'),
-          },
-          {
-            label: getGameTranslation('type-2'),
-          },
-          {
-            label: getGameTranslation('base-cp'),
-            onClick: () => handleSortBy('baseCP'),
-          },
-          {
-            label: getStatName(HP_ID),
-            onClick: () => handleSortBy(`baseStats.${HP_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(HP_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(ATTACK_ID),
-            onClick: () => handleSortBy(`baseStats.${ATTACK_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(ATTACK_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(DEFENSE_ID),
-            onClick: () => handleSortBy(`baseStats.${DEFENSE_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(DEFENSE_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(SPEED_ID),
-            onClick: () => handleSortBy(`baseStats.${SPEED_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(SPEED_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(SPECIAL_DEFENSE_ID),
-            onClick: () => handleSortBy(`baseStats.${SPECIAL_DEFENSE_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: getStatName(SPECIAL_ATTACK_ID),
-            onClick: () => handleSortBy(`baseStats.${SPECIAL_ATTACK_ID}`),
-            style: {
-              backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
-                .alpha(0.3)
-                .css(),
-            },
-          },
-          {
-            label: '',
-            style: {
-              backgroundColor: 'transparent',
-            },
-          },
-        ]}
-      >
-        {collection.map((pokemon, index) => (
-          <PokedexEntry key={index} className={classes.resultsEntry} pokemon={pokemon} />
-        ))}
-      </Table>
+}: IOwnProps) => {
+  const pokedexConfig = getAllPokedexConfig();
 
-      {handleLoadMore && (
-        <Buttons
-          align="center"
-          options={[
-            {
-              id: 'load-more',
-              label: getUiTranslation('pokedex-load-more'),
-              onClick: handleLoadMore,
-              type: 'button',
-            },
+  return (
+    <>
+      <Sidebar
+        render={isOpen => (
+          <PokedexFilters
+            classNames={{
+              form: classes.form,
+              formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
+            }}
+            pokemonList={pokemonList}
+            handlePokemonChange={handlePokemonChange}
+            filters={filters}
+            handleFilterChange={handleFilterChange}
+            handleReset={handleReset}
+            handleSubmit={handleSubmit}
+          />
+        )}
+      />
+      <div className={classes.results}>
+        <Table
+          headings={[
+            pokedexConfig.showNationalNumber
+              ? {
+                  label: '#',
+                  onClick: () => handleSortBy('id'),
+                }
+              : {},
+            pokedexConfig.showSprite
+              ? {
+                  label: '',
+                }
+              : {},
+            pokedexConfig.showName
+              ? {
+                  label: getGameTranslation('name'),
+                  onClick: () => handleSortBy('name'),
+                }
+              : {},
+            pokedexConfig.showType1
+              ? {
+                  label: getGameTranslation('type-1'),
+                }
+              : {},
+            pokedexConfig.showType2
+              ? {
+                  label: getGameTranslation('type-2'),
+                }
+              : {},
+            pokedexConfig.showBaseStats
+              ? {
+                  label: getGameTranslation('base-cp'),
+                  onClick: () => handleSortBy('baseCP'),
+                }
+              : {},
+            pokedexConfig.showHp
+              ? {
+                  label: getStatName(HP_ID),
+                  onClick: () => handleSortBy(`baseStats.${HP_ID}`),
+                  style: {
+                    backgroundColor: chroma(getStatColor(HP_ID))
+                      .alpha(0.3)
+                      .css(),
+                  },
+                }
+              : {},
+            pokedexConfig.showAttack
+              ? {
+                  label: getStatName(ATTACK_ID),
+                  onClick: () => handleSortBy(`baseStats.${ATTACK_ID}`),
+                  style: {
+                    backgroundColor: chroma(getStatColor(ATTACK_ID))
+                      .alpha(0.3)
+                      .css(),
+                  },
+                }
+              : {},
+            pokedexConfig.showDefense
+              ? {
+                  label: getStatName(DEFENSE_ID),
+                  onClick: () => handleSortBy(`baseStats.${DEFENSE_ID}`),
+                  style: {
+                    backgroundColor: chroma(getStatColor(DEFENSE_ID))
+                      .alpha(0.3)
+                      .css(),
+                  },
+                }
+              : {},
+            pokedexConfig.showSpeed
+              ? {
+                  label: getStatName(SPEED_ID),
+                  onClick: () => handleSortBy(`baseStats.${SPEED_ID}`),
+                  style: {
+                    backgroundColor: chroma(getStatColor(SPEED_ID))
+                      .alpha(0.3)
+                      .css(),
+                  },
+                }
+              : {},
+            pokedexConfig.showSpecialDefense
+              ? {
+                  label: getStatName(SPECIAL_DEFENSE_ID),
+                  onClick: () => handleSortBy(`baseStats.${SPECIAL_DEFENSE_ID}`),
+                  style: {
+                    backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
+                      .alpha(0.3)
+                      .css(),
+                  },
+                }
+              : {},
+            pokedexConfig.showSpecialAttack
+              ? {
+                  label: getStatName(SPECIAL_ATTACK_ID),
+                  onClick: () => handleSortBy(`baseStats.${SPECIAL_ATTACK_ID}`),
+                  style: {
+                    backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
+                      .alpha(0.3)
+                      .css(),
+                  },
+                }
+              : {},
+            pokedexConfig.showSuperiorityIndex
+              ? {
+                  label: getUiTranslation('pokedex-superiority-index'),
+                  onClick: () => handleSortBy('extra.superiorityIndex'),
+                }
+              : {},
+            pokedexConfig.showExecutioners
+              ? {
+                  label: getUiTranslation('pokedex-executioners'),
+                  onClick: () => handleSortBy('extra.executioners'),
+                }
+              : {},
+            pokedexConfig.showVictims
+              ? {
+                  label: getUiTranslation('pokedex-victims'),
+                  onClick: () => handleSortBy('extra.victims'),
+                }
+              : {},
+            pokedexConfig.showActions
+              ? {
+                  label: '',
+                  style: {
+                    backgroundColor: 'transparent',
+                  },
+                }
+              : {},
           ]}
-        />
-      )}
-    </div>
-  </>
-);
+        >
+          {collection.map((pokemon, index) => (
+            <PokedexEntry key={index} className={classes.resultsEntry} config={pokedexConfig} pokemon={pokemon} />
+          ))}
+        </Table>
+
+        {handleLoadMore && (
+          <Buttons
+            align="center"
+            options={[
+              {
+                id: 'load-more',
+                label: getUiTranslation('pokedex-load-more'),
+                onClick: handleLoadMore,
+                type: 'button',
+              },
+            ]}
+          />
+        )}
+      </div>
+    </>
+  );
+};
 
 const PokedexView = injectSheet(sheet)(unstyledPokedexView);
 

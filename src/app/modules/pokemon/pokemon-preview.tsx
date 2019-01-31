@@ -1,9 +1,10 @@
+import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
 
 import Image from '../../components/image';
 
-import { pokedexWindowStyles, POKEDEX_WINDOW_MAX_WIDTH } from '../../../constants/styles/styles-common-rules';
+import { POKEDEX_WINDOW_MAX_WIDTH, pokedexWindowStyles } from '../../../constants/styles/styles-common-rules';
 import { DESKTOP, DESKTOP_L } from '../../../constants/styles/styles-media-queries';
 
 import { ISheet } from '../../root.models';
@@ -42,11 +43,16 @@ const sheet: ISheet = {
 interface IOwnProps {
   alt?: string;
   classes: { [key: string]: string };
+  className?: string;
+  hard?: boolean;
   src?: string;
 }
 
-const unstyledPokemonPreview = ({ classes, src, alt }: IOwnProps) => (
-  <div className={classes.window}>{src && <Image className={classes.image} src={src} alt={alt} />}</div>
+const unstyledPokemonPreview = ({ alt, classes, className, hard = false, src }: IOwnProps) => (
+  <div className={classnames(classes.window, className)}>
+    {hard && src && <img className={classes.image} src={src} alt={alt} />}
+    {!hard && src && <Image className={classes.image} src={src} alt={alt} />}
+  </div>
 );
 
 const PokemonPreview = injectSheet(sheet)(unstyledPokemonPreview);

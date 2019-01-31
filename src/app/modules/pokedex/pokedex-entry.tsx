@@ -11,6 +11,7 @@ import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
 import { CALCULATOR, POKEDEX } from '../../../constants/appRoutes';
+import { IPokedexConfig } from '../../../constants/configs/pokedex';
 import {
   ATTACK_ID,
   DEFENSE_ID,
@@ -42,150 +43,180 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
+  config: IPokedexConfig;
   pokemon: IPokemonWithBaseCP;
 }
 
-const unstyledPokedexEntry = ({ classes, className, pokemon }: IOwnProps) => (
+const unstyledPokedexEntry = ({ classes, className, config, pokemon }: IOwnProps) => (
   <TableRow className={className}>
     {/* National Number */}
-    <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>
+    {config.showNationalNumber && <TableCell center>{getPaddedId(String(pokemon.nationalNumber))}</TableCell>}
 
     {/* Sprite */}
-    <TableCell center>
-      <PokemonSprite pokemon={pokemon} className={classes.sprite} />
-    </TableCell>
+    {config.showSprite && (
+      <TableCell center>
+        <PokemonSprite pokemon={pokemon} className={classes.sprite} />
+      </TableCell>
+    )}
 
     {/* Name */}
-    <TableCell ellipsis={true}>{pokemon.name}</TableCell>
+    {config.showName && <TableCell ellipsis={true}>{pokemon.name}</TableCell>}
 
     {/* Type 1 */}
-    <TableCell center>
-      {pokemon.types.ownTypes[0] && (
-        <Tag
-          key={pokemon.types.ownTypes[0]}
-          label={getTypeName(pokemon.types.ownTypes[0])}
-          icon={getTypeIcon(pokemon.types.ownTypes[0])}
-          backgroundColor={getTypeColor(pokemon.types.ownTypes[0])}
-        />
-      )}
-    </TableCell>
+    {config.showType1 && (
+      <TableCell center>
+        {pokemon.types.ownTypes[0] && (
+          <Tag
+            key={pokemon.types.ownTypes[0]}
+            label={getTypeName(pokemon.types.ownTypes[0])}
+            icon={getTypeIcon(pokemon.types.ownTypes[0])}
+            backgroundColor={getTypeColor(pokemon.types.ownTypes[0])}
+          />
+        )}
+      </TableCell>
+    )}
 
     {/* Type 2 */}
-    <TableCell center>
-      {pokemon.types.ownTypes[1] && (
-        <Tag
-          key={pokemon.types.ownTypes[1]}
-          label={getTypeName(pokemon.types.ownTypes[1])}
-          icon={getTypeIcon(pokemon.types.ownTypes[1])}
-          backgroundColor={getTypeColor(pokemon.types.ownTypes[1])}
-        />
-      )}
-    </TableCell>
+    {config.showType2 && (
+      <TableCell center>
+        {pokemon.types.ownTypes[1] && (
+          <Tag
+            key={pokemon.types.ownTypes[1]}
+            label={getTypeName(pokemon.types.ownTypes[1])}
+            icon={getTypeIcon(pokemon.types.ownTypes[1])}
+            backgroundColor={getTypeColor(pokemon.types.ownTypes[1])}
+          />
+        )}
+      </TableCell>
+    )}
 
     {/* Base CP */}
-    <TableCell center>{pokemon.baseCP}</TableCell>
+    {config.showBaseStats && <TableCell center>{pokemon.baseCP}</TableCell>}
 
     {/* HP */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(HP_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[HP_ID]}
-    </TableCell>
+    {config.showHp && (
+      <TableCell
+        center
+        style={{
+          backgroundColor: chroma(getStatColor(HP_ID))
+            .alpha(0.2)
+            .css(),
+          minWidth: 60,
+        }}
+      >
+        {pokemon.baseStats[HP_ID]}
+      </TableCell>
+    )}
 
     {/* Attack */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(ATTACK_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[ATTACK_ID]}
-    </TableCell>
+    {config.showAttack && (
+      <TableCell
+        center
+        style={{
+          backgroundColor: chroma(getStatColor(ATTACK_ID))
+            .alpha(0.2)
+            .css(),
+          minWidth: 60,
+        }}
+      >
+        {pokemon.baseStats[ATTACK_ID]}
+      </TableCell>
+    )}
 
     {/* Defense */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(DEFENSE_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[DEFENSE_ID]}
-    </TableCell>
+    {config.showDefense && (
+      <TableCell
+        center
+        style={{
+          backgroundColor: chroma(getStatColor(DEFENSE_ID))
+            .alpha(0.2)
+            .css(),
+          minWidth: 60,
+        }}
+      >
+        {pokemon.baseStats[DEFENSE_ID]}
+      </TableCell>
+    )}
 
     {/* Speed */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(SPEED_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[SPEED_ID]}
-    </TableCell>
+    {config.showSpeed && (
+      <TableCell
+        center
+        style={{
+          backgroundColor: chroma(getStatColor(SPEED_ID))
+            .alpha(0.2)
+            .css(),
+          minWidth: 60,
+        }}
+      >
+        {pokemon.baseStats[SPEED_ID]}
+      </TableCell>
+    )}
 
     {/* Special Defense */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[SPECIAL_DEFENSE_ID]}
-    </TableCell>
+    {config.showSpecialDefense && (
+      <TableCell
+        center
+        style={{
+          backgroundColor: chroma(getStatColor(SPECIAL_DEFENSE_ID))
+            .alpha(0.2)
+            .css(),
+          minWidth: 60,
+        }}
+      >
+        {pokemon.baseStats[SPECIAL_DEFENSE_ID]}
+      </TableCell>
+    )}
 
     {/* Special Attack */}
-    <TableCell
-      center
-      style={{
-        backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
-          .alpha(0.2)
-          .css(),
-        minWidth: 60,
-      }}
-    >
-      {pokemon.baseStats[SPECIAL_ATTACK_ID]}
-    </TableCell>
+    {config.showSpecialAttack && (
+      <TableCell
+        center
+        style={{
+          backgroundColor: chroma(getStatColor(SPECIAL_ATTACK_ID))
+            .alpha(0.2)
+            .css(),
+          minWidth: 60,
+        }}
+      >
+        {pokemon.baseStats[SPECIAL_ATTACK_ID]}
+      </TableCell>
+    )}
+
+    {/* Superiority ratio */}
+    {config.showSuperiorityIndex && <TableCell center>{pokemon.extra.superiorityIndex}</TableCell>}
+
+    {/* Executioners */}
+    {config.showExecutioners && <TableCell center>{pokemon.extra.executioners}</TableCell>}
+
+    {/* Victims */}
+    {config.showVictims && <TableCell center>{pokemon.extra.victims}</TableCell>}
 
     {/* Quick Actions */}
-    <TableCell center style={{ height: 'auto' }}>
-      <Buttons
-        className={classnames(classes.fullWidth, classes.noMargin)}
-        align="left"
-        options={[
-          {
-            className: classes.noMargin,
-            id: `${pokemon.id.toString()}-details`,
-            label: getUiTranslation('pokedex-details'),
-            to: POKEDEX.replace(':id?', String(pokemon.id)),
-            type: 'button',
-          },
-          {
-            className: classes.noMargin,
-            id: `${pokemon.id.toString()}-calculator`,
-            label: getUiTranslation('header-calculator'),
-            to: CALCULATOR.replace(':id?', String(pokemon.id)),
-            type: 'button',
-          },
-        ]}
-      />
-    </TableCell>
+    {config.showActions && (
+      <TableCell center style={{ height: 'auto' }}>
+        <Buttons
+          className={classnames(classes.fullWidth, classes.noMargin)}
+          align="left"
+          options={[
+            {
+              className: classes.noMargin,
+              id: `${pokemon.id.toString()}-details`,
+              label: getUiTranslation('pokedex-details'),
+              to: POKEDEX.replace(':id?', String(pokemon.id)),
+              type: 'button',
+            },
+            {
+              className: classes.noMargin,
+              id: `${pokemon.id.toString()}-calculator`,
+              label: getUiTranslation('header-calculator'),
+              to: CALCULATOR.replace(':id?', String(pokemon.id)),
+              type: 'button',
+            },
+          ]}
+        />
+      </TableCell>
+    )}
   </TableRow>
 );
 

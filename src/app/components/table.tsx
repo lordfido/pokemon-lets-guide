@@ -171,7 +171,7 @@ interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
   readonly headings: Array<{
-    label: string;
+    label?: string;
     onClick?: (event: React.MouseEvent<HTMLTableHeaderCellElement>) => void;
     style?: React.CSSProperties;
   }>;
@@ -182,16 +182,18 @@ const unstyledTable = ({ children, classes, className, headings }: IOwnProps) =>
     <thead className={classes.tableHead}>
       <tr className={classnames(classes.tr, classes.row)}>
         {headings &&
-          headings.map((heading, index) => (
-            <th
-              key={index}
-              className={classnames(classes.th, classes.cell, { [classes.isClickable]: heading.onClick })}
-              onClick={heading.onClick}
-              style={heading.style}
-            >
-              {heading.label}
-            </th>
-          ))}
+          headings.map((heading, index) =>
+            typeof heading.label !== 'undefined' ? (
+              <th
+                key={index}
+                className={classnames(classes.th, classes.cell, { [classes.isClickable]: heading.onClick })}
+                onClick={heading.onClick}
+                style={heading.style}
+              >
+                {heading.label}
+              </th>
+            ) : null
+          )}
       </tr>
     </thead>
   );

@@ -11,6 +11,7 @@ import { formInputStyles } from '../../../constants/styles/styles-common-rules';
 
 import { ISheet } from '../../root.models';
 import { DropdownOutput, IDropdownOptions, IOption, MultiOutput } from './form.models';
+import { getUiTranslation } from '../../utils/translations';
 
 const sheet: ISheet = {
   field: {
@@ -57,12 +58,13 @@ const unstyledDropdown = ({ classes, className, options, onChange, onFocus }: IO
               })
             : null
         }
+        menuPlacement={options.menuPlacement || 'auto'}
         isDisabled={options.isDisabled}
         isMulti={options.isMulti}
         onChange={onChangeProxy}
         onFocus={onFocus}
         options={options.options}
-        placeholder={options.placeholder}
+        placeholder={options.placeholder || getUiTranslation('generic-select')}
         styles={{
           placeholder: (styles: React.CSSProperties) => ({
             ...styles,

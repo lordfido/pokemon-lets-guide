@@ -16,7 +16,7 @@ import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 import { ISheet } from '../../root.models';
 import { IRichPokemon } from '../pokedex/pokedex.models';
 
-const strengthsAndWeaknesses: CSSProperties = {
+const strengthsAndWeaknesses: CSSProperties<any> = {
   display: 'inline-block',
   textAlign: 'center',
   verticalAlign: 'top',

@@ -306,3 +306,71 @@ export const getRichPokemon = (basePokemon: IPokemonWithBaseCP): IRichPokemon =>
     types,
   };
 };
+
+/**
+ * Filter a `pokemonList`, showing only strong pokemon against provided types
+ */
+export const strongAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonType>, pokemon: IPokemonWithBaseCP) => {
+  const relations = getTypeRelations(providedTypes);
+  const strongTypes = relations.filter(relation => relation.effectiveness > 1);
+  const weakTypes = relations.filter(relation => relation.effectiveness < 1);
+
+  let shouldSkip = true;
+  strongTypes.forEach(type => {
+    if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = false;
+    }
+  });
+
+  weakTypes.forEach(type => {
+    if (pokemon.types.ownTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = true;
+    }
+  });
+
+  if (shouldSkip) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Get a `pokemonList` that are strong against provided types
+ */
+export const getExecutioners = (providedTypes: ReadonlyArray<PokemonType>, pokemonList: IPokemonWithBaseCP[]) =>
+  pokemonList.filter(pokemon => strongAgainstProvidedTypes(providedTypes, pokemon));
+
+/**
+ * Filter a `pokemonList`, showing only weak pokemon against
+ */
+export const weakAgainstProvidedTypes = (providedTypes: ReadonlyArray<PokemonType>, pokemon: IPokemonWithBaseCP) => {
+  const relations = getTypeRelations(pokemon.types.ownTypes);
+  const weakAgainst = relations.filter(relation => relation.effectiveness > 1);
+  const strongAgainst = relations.filter(relation => relation.effectiveness < 1);
+
+  let shouldSkip = true;
+  weakAgainst.forEach(type => {
+    if (providedTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = false;
+    }
+  });
+
+  strongAgainst.forEach(type => {
+    if (providedTypes.findIndex(t => t === type.id) >= 0) {
+      shouldSkip = true;
+    }
+  });
+
+  if (shouldSkip) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Get a `pokemonList` that are weak against provided types
+ */
+export const getVictims = (providedTypes: ReadonlyArray<PokemonType>, pokemonList: IPokemonWithBaseCP[]) =>
+  pokemonList.filter(pokemon => weakAgainstProvidedTypes(providedTypes, pokemon));

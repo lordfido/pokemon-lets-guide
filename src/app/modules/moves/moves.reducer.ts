@@ -1,5 +1,5 @@
 import { sortBy } from '../../utils/arrays';
-import { getTypeRelations } from '../../utils/pokemon';
+import { strongAgainstProvidedTypes, weakAgainstProvidedTypes } from '../../utils/pokemon-moves';
 
 import {
   MOVES_CREATE,
@@ -101,34 +101,18 @@ export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
 
       // Filter list by strong against
       if (filters.strongAgainst.length) {
-        const relations = getTypeRelations([move.types.ownType]);
+        const isStrongAgainstFilteredTypes = strongAgainstProvidedTypes(filters.strongAgainst, move);
 
-        let shouldSkip = true;
-        filters.strongAgainst.forEach(type => {
-          const strongAgainst = relations.filter(relation => relation.id === type && relation.effectiveness < 1);
-          if (strongAgainst.length) {
-            shouldSkip = false;
-          }
-        });
-
-        if (shouldSkip) {
+        if (!isStrongAgainstFilteredTypes) {
           return false;
         }
       }
 
       // Filter list by weak against
       if (filters.weakAgainst.length) {
-        const relations = getTypeRelations([move.types.ownType]);
+        const isWeakAgainstFilteredTypes = weakAgainstProvidedTypes(filters.weakAgainst, move);
 
-        let shouldSkip = true;
-        filters.weakAgainst.forEach(type => {
-          const weakAgainst = relations.filter(relation => relation.id === type && relation.effectiveness > 1);
-          if (weakAgainst.length) {
-            shouldSkip = false;
-          }
-        });
-
-        if (shouldSkip) {
+        if (!isWeakAgainstFilteredTypes) {
           return false;
         }
       }

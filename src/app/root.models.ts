@@ -24,5 +24,5 @@ export const createRootReducer = () =>
   });
 
 export interface ISheet {
-  [key: string]: CSSProperties;
+  [key: string]: CSSProperties<any>;
 }

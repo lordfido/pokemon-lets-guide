@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import CalculatorWrapper from '../app/modules/calculator/calculator-wrapper';
+import LandingWrapper from '../app/modules/landing/landing-wrapper';
 import MoveWrapper from './modules/move/move-wrapper';
 import MovesWrapper from './modules/moves/moves-wrapper';
 import PokedexWrapper from './modules/pokedex/pokedex-wrapper';
@@ -47,16 +48,19 @@ export const MOVES_SEARCH: IRouteConfig = {
 export const MOVE_DETAILS: IRouteConfig = {
   exact: true,
   path: routes.MOVES,
-  render: ({ match }) => {
+  render: ({ location, match }) => {
     const {
       params: { id },
     } = match;
+
+    const { state } = location;
+
     if (!id) {
       return null;
     }
 
     // @ts-ignore
-    return <MoveWrapper id={id} />;
+    return <MoveWrapper id={id} referrer={state ? state.referrer : undefined} />;
   },
 };
 
@@ -104,10 +108,7 @@ export const POKEDEX: IRouteConfig = {
 export const HOME: IRouteConfig = {
   exact: true,
   path: routes.HOME,
-  render: ({ match }) => {
-    const { url } = match;
-    return <PokedexWrapper url={url} />;
-  },
+  render: () => <LandingWrapper />,
 };
 
 export default [CALCULATOR, MOVES_SEARCH, MOVE_DETAILS, MOVES, POKEDEX_SEARCH, POKEDEX, HOME];

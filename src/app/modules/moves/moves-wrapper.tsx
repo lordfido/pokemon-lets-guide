@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { log } from '../../../common/utils/logger';
 import { updateCollection } from '../../utils/collections';
 import { filtersToString, stringToFilters } from '../../utils/urls';
 
@@ -49,12 +50,14 @@ type Props = IOwnProps & IStateProps & IDispatchProps;
 interface IOwnState {
   areFiltersOpen: boolean;
   redirectTo?: string;
+  referrer?: string;
 }
 
 class MovesWrapper extends React.Component<Props, IOwnState> {
   public state = {
     areFiltersOpen: false,
-    redirectTo: '',
+    redirectTo: undefined,
+    referrer: undefined,
   };
 
   public filters = movesInitialState.filters;
@@ -109,12 +112,17 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
     SortMoves({ sortBy, order });
   };
 
+  public handleRedirectToMove = (moveId: string) => {
+    this.setState({
+      redirectTo: MOVES.replace(':id?', moveId),
+      referrer: this.props.url,
+    });
+  };
+
   public handleMoveChange = (field: IFieldOutput) => {
     const option = field.value as DropdownOutput;
 
-    this.setState({
-      redirectTo: MOVES.replace(':id?', option ? option.value : ''),
-    });
+    this.handleRedirectToMove(option ? option.value : '');
   };
 
   public handleFilterChange = (field: IFieldOutput) => {
@@ -167,10 +175,11 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
 
   public render() {
     const { collection, filters, isModalOpen, movesList, pagination, url } = this.props;
-    const { redirectTo } = this.state;
+    const { referrer, redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
-      return <Redirect to={{ pathname: redirectTo }} />;
+      log(`Redirecting with this origin: ${referrer}`);
+      return <Redirect to={{ pathname: redirectTo, state: { referrer } }} />;
     }
 
     return (
@@ -199,6 +208,9 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
               }
             : undefined
         }
+        handleRedirectToMove={e => {
+          this.handleRedirectToMove(e);
+        }}
       />
     );
   }

@@ -14,6 +14,7 @@ const getMoveUrl = (move: IRichMove) => MOVES.replace(':id?', move.id);
 
 interface IOwnProps {
   id: string;
+  referrer?: string;
 }
 
 interface IStateProps {
@@ -25,11 +26,13 @@ type Props = IOwnProps & IStateProps;
 
 interface IOwnState {
   redirectTo?: string;
+  referrer?: string;
 }
 
 class MoveWrapper extends React.Component<Props, IOwnState> {
   public state = {
     redirectTo: undefined,
+    referrer: undefined,
   };
 
   public componentDidMount() {
@@ -39,7 +42,8 @@ class MoveWrapper extends React.Component<Props, IOwnState> {
   public componentDidUpdate() {
     if (this.state.redirectTo) {
       this.setState({
-        redirectTo: '',
+        redirectTo: undefined,
+        referrer: undefined,
       });
     }
   }
@@ -48,12 +52,18 @@ class MoveWrapper extends React.Component<Props, IOwnState> {
     document.addEventListener('keyup', this.handleKeyPress);
   }
 
+  public handleRedirectToMove = (moveId: string) => {
+    this.setState({
+      redirectTo: MOVES.replace(':id?', moveId),
+    });
+  };
+
   public handleKeyPress = (event: KeyboardEvent) => {
-    const { pagination } = this.props;
+    const { pagination, referrer } = this.props;
     const { keyCode } = event;
 
     event.preventDefault();
-    let redirectTo = '';
+    let redirectTo;
 
     switch (keyCode) {
       case 37: // left
@@ -72,22 +82,25 @@ class MoveWrapper extends React.Component<Props, IOwnState> {
     if (redirectTo) {
       this.setState({
         redirectTo,
+        referrer,
       });
     }
   };
 
   public handleModalClose = () => {
+    const { referrer } = this.props;
+
     this.setState({
-      redirectTo: MOVES.replace(':id?', ''),
+      redirectTo: referrer || MOVES.replace(':id?', ''),
     });
   };
 
   public render() {
-    const { move, pagination } = this.props;
+    const { move, pagination, referrer } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo) {
-      return <Redirect to={{ pathname: redirectTo }} />;
+      return <Redirect to={{ pathname: redirectTo, state: { referrer } }} />;
     }
 
     if (!move) {
@@ -101,6 +114,7 @@ class MoveWrapper extends React.Component<Props, IOwnState> {
         }}
         move={move}
         pagination={pagination}
+        referrer={referrer}
       />
     );
   }

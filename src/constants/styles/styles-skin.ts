@@ -8,10 +8,10 @@ import {
   GREY_LIGHT_4,
   GREY_LIGHT_5,
   GREY_LIGHT_6,
-  traslucentColor,
-  WHITE,
   ORANGE,
   ORANGE_DARK,
+  traslucentColor,
+  WHITE,
 } from './styles-colors';
 
 // App

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { HEADER_SIZE, PADDING_S } from '../../../constants/styles/styles';
 import { BLACK, traslucentColor } from '../../../constants/styles/styles-colors';
@@ -11,6 +11,11 @@ import { DESKTOP, MOBILE_L } from '../../../constants/styles/styles-media-querie
 import { ISheet } from '../../root.models';
 
 const ITEM_PADDING = 10;
+
+const activeProps = {
+  backgroundColor: traslucentColor(BLACK, 0.5),
+  opacity: 1,
+};
 
 const sheet: ISheet = {
   disabled: {
@@ -23,23 +28,36 @@ const sheet: ISheet = {
     },
   },
   item: {
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: HEADER_SIZE - ITEM_PADDING * 2,
     color: TEXT_WHITE,
     display: 'inline-block',
     fontSize: FONT_M,
     fontWeight: 700,
     height: HEADER_SIZE,
-    lineHeight: `${HEADER_SIZE - ITEM_PADDING * 2}px`,
     padding: `${ITEM_PADDING}px ${PADDING_S}px`,
-    textAlign: 'center',
-    transition: 'background-color 0.2s',
-    verticalAlign: 'top',
-    width: `calc((100% - ${HEADER_SIZE}px) / 3)`,
+    textDecoration: 'none',
 
     [MOBILE_L]: {
       padding: ITEM_PADDING,
+    },
+
+    '& span': {
+      display: 'inline-block',
+    },
+
+    '&, & span': {
+      lineHeight: `${HEADER_SIZE - ITEM_PADDING * 2}px`,
+      verticalAlign: 'top',
+    },
+  },
+  itemHover: {
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: HEADER_SIZE - ITEM_PADDING * 2,
+    textAlign: 'center',
+    transition: 'background-color 0.2s',
+    width: `calc((100% - ${HEADER_SIZE}px) / 3)`,
+
+    [MOBILE_L]: {
       width: 120,
     },
 
@@ -51,8 +69,7 @@ const sheet: ISheet = {
 
       '&:active, &:focus, &:hover': {
         '& > *': {
-          backgroundColor: traslucentColor(BLACK, 0.5),
-          opacity: 1,
+          ...activeProps,
         },
       },
     },
@@ -76,26 +93,56 @@ const sheet: ISheet = {
       width: '100%',
     },
   },
+  itemHoverActive: {
+    '& > *': {
+      ...activeProps,
+    },
+  },
+  itemInline: {},
+  itemInlineImage: {
+    height: HEADER_SIZE - ITEM_PADDING * 2,
+    marginRight: ITEM_PADDING,
+  },
 };
 
 interface IOwnProps {
   classes: { [key: string]: string };
+  hoverEffect?: boolean;
   image?: string;
   text?: string;
   to?: string;
 }
 
-const unstyledHeaderItem = ({ classes, image, text, to }: IOwnProps) =>
-  !!to ? (
-    <Link className={classes.item} to={{ pathname: to }} style={image ? { backgroundImage: `url(${image})` } : {}}>
-      {text && <span>{text}</span>}
-    </Link>
-  ) : (
+const unstyledHeaderItem = ({ classes, hoverEffect = false, image, text, to }: IOwnProps) => {
+  if (!hoverEffect) {
+    return (
+      <NavLink className={classnames(classes.item, classes.itemInline)} to={{ pathname: to }}>
+        <img className={classes.itemInlineImage} src={image} />
+        {text && <span>{text}</span>}
+      </NavLink>
+    );
+  }
+
+  if (!!to) {
+    return (
+      <NavLink
+        activeClassName={classes.itemHoverActive}
+        className={classnames(classes.item, classes.itemHover)}
+        to={{ pathname: to }}
+        style={image ? { backgroundImage: `url(${image})` } : {}}
+      >
+        {text && <span>{text}</span>}
+      </NavLink>
+    );
+  }
+
+  return (
     <span
-      className={classnames(classes.item, classes.disabled)}
+      className={classnames(classes.item, classes.itemHover, classes.disabled)}
       style={image ? { backgroundImage: `url(${image})` } : {}}
     />
   );
+};
 
 const HeaderItem = injectSheet(sheet)(unstyledHeaderItem);
 

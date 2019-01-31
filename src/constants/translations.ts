@@ -25,6 +25,7 @@ export const gameTranslations: ITranslationsCollection = {
   // Pokemon data
   'base-cp': ['', 'Base CP', '', 'PC Base', '', '', '', ''],
   'base-stats': ['', 'Base Stats', '', 'Estadísticas base', '', '', '', ''],
+  id: ['', 'ID', '', 'ID', '', '', '', ''],
   name: ['', 'Name', '', 'Nombre', '', '', '', ''],
   'pokedex-number': ['', 'Pokédex No.', '', 'Nº en la Pokédex:', '', '', '', ''],
   'type-1': ['', 'Type 1', '', 'Tipo 1', '', '', '', ''],
@@ -65,6 +66,7 @@ export const uiTranslations: ITranslationsCollection = {
   order: ['japanese', 'english', 'german', 'spanish', 'french', 'italian', 'korean', 'chinese'],
 
   'generic-no': ['', 'No', '', 'No', '', '', '', ''],
+  'generic-select': ['', 'Select...', '', 'Seleccionar...', '', '', '', ''],
   'generic-yes': ['', 'Yes', '', 'Si', '', '', '', ''],
 
   // Header
@@ -76,6 +78,39 @@ export const uiTranslations: ITranslationsCollection = {
   // Footer
   'footer-game-elements': ['', "Game elements' language", '', 'Idioma de los elementos del juego', '', '', '', ''],
   'footer-ui-elements': ['', "App's language", '', 'Idioma de la App', '', '', '', ''],
+
+  // Landing
+  'landing-calculate': [
+    '',
+    'Calculate how your Pokémon will look',
+    '',
+    'Calcula cómo quedará tu Pokémon',
+    '',
+    '',
+    '',
+    '',
+  ],
+  'landing-calculate-cta': ['', 'Calculate', '', 'Calcular', '', '', '', ''],
+  'landing-find-best-moves': [
+    '',
+    'Find the best moves against a particular Pokémon',
+    '',
+    'Encuentra los mejores movimientos contra un Pokémon en particular',
+    '',
+    '',
+    '',
+    '',
+  ],
+  'landing-how-to-defeat': [
+    '',
+    'Find best Pokémon to defeat your rival',
+    '',
+    'Encuentra los mejores Pokémon para vencer a tu rival',
+    '',
+    '',
+    '',
+    '',
+  ],
 
   // Calculator
   'calculator-empty-case': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],
@@ -90,7 +125,10 @@ export const uiTranslations: ITranslationsCollection = {
 
   // Pokédex
   'pokedex-details': ['', 'Details', '', 'Detalles', '', '', '', ''],
+  'pokedex-executioners': ['', 'Executioners', '', 'Verdugos', '', '', '', ''],
   'pokedex-load-more': ['', 'Load more', '', 'Ver más', '', '', '', ''],
+  'pokedex-superiority-index': ['', 'Superiority', '', 'Superioridad', '', '', '', ''],
+  'pokedex-victims': ['', 'Victims', '', 'Víctimas', '', '', '', ''],
 
   // Pokémon
   'pokemon-bars': ['', 'Bars', '', 'Barras', '', '', '', ''],

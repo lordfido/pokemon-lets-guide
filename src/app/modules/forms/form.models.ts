@@ -80,6 +80,7 @@ export interface IDropdownOptions extends ICommonFieldProps {
   colourStyles?: any;
   error?: string;
   isMulti?: boolean;
+  menuPlacement?: 'auto' | 'bottom' | 'top';
   placeholder?: string;
   defaultValue?: string[];
   options: IOption[];

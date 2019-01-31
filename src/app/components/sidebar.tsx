@@ -4,7 +4,14 @@ import injectSheet from 'react-jss';
 
 import { IButtonProps } from './button';
 
-import { FOOTER_SIZE_L, HEADER_SIZE, PADDING_L, PADDING_XL, PADDING_XXL } from '../../constants/styles/styles';
+import {
+  FOOTER_SIZE_L,
+  HEADER_SIZE,
+  PADDING_L,
+  PADDING_XL,
+  PADDING_XXL,
+  WRAPPED_HEIGH,
+} from '../../constants/styles/styles';
 import { DESKTOP_L, HD_DISPLAY } from '../../constants/styles/styles-media-queries';
 import { SIDEBAR_BACKDROP_BACKGROUND, SIDEBAR_BACKGROUND } from '../../constants/styles/styles-skin';
 import { BACKGROUND, SIDEBAR, SIDEBAR_BACKDROP } from '../../constants/styles/styles-zindex';
@@ -67,7 +74,7 @@ const sheet: ISheet = {
     },
 
     [HD_DISPLAY]: {
-      minHeight: `calc(720px - ${HEADER_SIZE}px - ${PADDING_XXL * 2}px - ${FOOTER_SIZE_L}px - 6px)`,
+      minHeight: `calc(${WRAPPED_HEIGH}px - ${HEADER_SIZE}px - ${PADDING_XXL * 2}px - ${FOOTER_SIZE_L}px - 6px)`,
     },
   },
   sidebarOpen: {

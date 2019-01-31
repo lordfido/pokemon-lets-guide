@@ -9,7 +9,7 @@ import CategoryIcon from '../../components/category-icon';
 import { TableCell, TableRow } from '../../components/table';
 import Tag from '../../components/tag';
 
-import { MOVES } from '../../../constants/appRoutes';
+import { IMovesConfig } from '../../../constants/configs/moves';
 import { getTypeName } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
 import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
@@ -29,64 +29,79 @@ const sheet: ISheet = {
 interface IOwnProps {
   classes: { [key: string]: string };
   className?: string;
+  config: IMovesConfig;
+  handleRedirectToMove: (moveId: string) => void;
   move: IRichMove;
 }
 
-const unstyledMovesEntry = ({ classes, className, move }: IOwnProps) => (
+const unstyledMovesEntry = ({ classes, className, config, handleRedirectToMove, move }: IOwnProps) => (
   <TableRow className={className}>
+    {/* Id */}
+    {config.showId && <TableCell>{move.id}</TableCell>}
+
     {/* Name */}
-    <TableCell ellipsis={true}>{move.name}</TableCell>
+    {config.showName && <TableCell ellipsis={true}>{move.name}</TableCell>}
 
     {/* Type */}
-    <TableCell center>
-      {move.types.ownType && (
-        <Tag
-          key={move.types.ownType}
-          label={getTypeName(move.types.ownType)}
-          icon={getTypeIcon(move.types.ownType)}
-          backgroundColor={getTypeColor(move.types.ownType)}
-        />
-      )}
-    </TableCell>
+    {config.showType && (
+      <TableCell center>
+        {move.types.ownType && (
+          <Tag
+            key={move.types.ownType}
+            label={getTypeName(move.types.ownType)}
+            icon={getTypeIcon(move.types.ownType)}
+            backgroundColor={getTypeColor(move.types.ownType)}
+          />
+        )}
+      </TableCell>
+    )}
 
     {/* Category */}
-    <TableCell center>
-      <CategoryIcon category={move.category} />
-    </TableCell>
+    {config.showCategory && (
+      <TableCell center>
+        <CategoryIcon category={move.category} />
+      </TableCell>
+    )}
 
     {/* Power */}
-    <TableCell center>{move.power ? `${move.power}` : '-'}</TableCell>
+    {config.showPower && <TableCell center>{move.power ? `${move.power}` : '-'}</TableCell>}
 
     {/* Accuracy */}
-    <TableCell center>{move.accuracy ? `${move.accuracy}%` : '-'}</TableCell>
+    {config.showAccuracy && <TableCell center>{move.accuracy ? `${move.accuracy}%` : '-'}</TableCell>}
 
     {/* PP */}
-    <TableCell center>{move.pp ? `${move.pp}` : '-'}</TableCell>
+    {config.showPp && <TableCell center>{move.pp ? `${move.pp}` : '-'}</TableCell>}
 
     {/* TM */}
-    <TableCell center>
-      <FontAwesomeIcon icon={move.tm ? ['far', 'check-square'] : ['far', 'square']} />
-    </TableCell>
+    {config.showTm && (
+      <TableCell center>
+        <FontAwesomeIcon icon={move.tm ? ['far', 'check-square'] : ['far', 'square']} />
+      </TableCell>
+    )}
 
     {/* Probability */}
-    {/* <TableCell center>{move.probability ? `${move.probability}%` : '-'}</TableCell> */}
+    {config.showProbability && <TableCell center>{move.probability ? `${move.probability}%` : '-'}</TableCell>}
 
     {/* Quick Actions */}
-    <TableCell center style={{ height: 'auto' }}>
-      <Buttons
-        className={classnames(classes.fullWidth, classes.noMargin)}
-        align="left"
-        options={[
-          {
-            className: classes.noMargin,
-            id: `${move.id.toString()}-details`,
-            label: getUiTranslation('moves-details'),
-            to: MOVES.replace(':id?', String(move.id)),
-            type: 'button',
-          },
-        ]}
-      />
-    </TableCell>
+    {config.showActions && (
+      <TableCell center style={{ height: 'auto' }}>
+        <Buttons
+          className={classnames(classes.fullWidth, classes.noMargin)}
+          align="left"
+          options={[
+            {
+              className: classes.noMargin,
+              id: `${move.id.toString()}-details`,
+              label: getUiTranslation('moves-details'),
+              onClick: () => {
+                handleRedirectToMove(move.id);
+              },
+              type: 'button',
+            },
+          ]}
+        />
+      </TableCell>
+    )}
   </TableRow>
 );
 

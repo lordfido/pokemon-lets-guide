@@ -1,5 +1,11 @@
 import { sortBy } from '../../utils/arrays';
-import { getSortedStats, getTypeRelations } from '../../utils/pokemon';
+import {
+  getExecutioners,
+  getSortedStats,
+  getVictims,
+  strongAgainstProvidedTypes,
+  weakAgainstProvidedTypes,
+} from '../../utils/pokemon';
 
 import {
   POKEDEX_CREATE,
@@ -103,34 +109,18 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
 
       // Filter list by strong against
       if (filters.strongAgainst.length) {
-        const relations = getTypeRelations(pokemon.types.ownTypes);
+        const isStrongAgainstFilteredTypes = strongAgainstProvidedTypes(filters.strongAgainst, pokemon);
 
-        let shouldSkip = true;
-        filters.strongAgainst.forEach(type => {
-          const strongAgainst = relations.filter(relation => relation.id === type && relation.effectiveness < 1);
-          if (strongAgainst.length) {
-            shouldSkip = false;
-          }
-        });
-
-        if (shouldSkip) {
+        if (!isStrongAgainstFilteredTypes) {
           return false;
         }
       }
 
       // Filter list by weak against
       if (filters.weakAgainst.length) {
-        const relations = getTypeRelations(pokemon.types.ownTypes);
+        const isWeakAgainstFilteredTypes = weakAgainstProvidedTypes(filters.weakAgainst, pokemon);
 
-        let shouldSkip = true;
-        filters.weakAgainst.forEach(type => {
-          const weakAgainst = relations.filter(relation => relation.id === type && relation.effectiveness > 1);
-          if (weakAgainst.length) {
-            shouldSkip = false;
-          }
-        });
-
-        if (shouldSkip) {
+        if (!isWeakAgainstFilteredTypes) {
           return false;
         }
       }
@@ -197,6 +187,21 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
       }
 
       return true;
+    })
+    .map(pokemon => {
+      const executioners = getExecutioners(pokemon.types.ownTypes, collection).length;
+      const victims = getVictims(pokemon.types.ownTypes, collection).length;
+      const superiorityIndex = Math.round((victims / (executioners + victims)) * 100);
+
+      return {
+        ...pokemon,
+        extra: {
+          ...pokemon.extra,
+          executioners,
+          superiorityIndex,
+          victims,
+        },
+      };
     })
     .sort(sortBy(state.sort.sortBy, state.sort.order))
     .slice(pagination.first, isPaginated ? pagination.last : state.collection.length);

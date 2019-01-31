@@ -9,6 +9,7 @@ import Table from '../../components/table';
 import MovesEntry from './moves-entry';
 import MovesFilters from './moves-filters';
 
+import { getAllMovesConfig } from '../../../constants/configs/moves';
 import { PADDING_M, PADDING_XXL } from '../../../constants/styles/styles';
 import { TEXT_DARK } from '../../../constants/styles/styles-fonts';
 import { DESKTOP_L } from '../../../constants/styles/styles-media-queries';
@@ -73,6 +74,7 @@ interface IOwnProps {
   handleReset: () => void;
   handleSubmit: () => void;
   handleLoadMore?: () => void;
+  handleRedirectToMove: (moveId: string) => void;
 }
 
 const unstyledMovesView = ({
@@ -87,89 +89,124 @@ const unstyledMovesView = ({
   handleReset,
   handleSubmit,
   handleLoadMore,
-}: IOwnProps) => (
-  <>
-    <Sidebar
-      className={classnames({ [classes.modalOpen]: isModalOpen })}
-      render={isOpen => (
-        <MovesFilters
-          classNames={{
-            form: classes.form,
-            formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
-          }}
-          movesList={movesList}
-          handleMoveChange={handleMoveChange}
-          filters={filters}
-          handleFilterChange={handleFilterChange}
-          handleReset={handleReset}
-          handleSubmit={handleSubmit}
-        />
-      )}
-    />
-    <div className={classnames(classes.results, { [classes.modalOpen]: isModalOpen })}>
-      <Table
-        headings={[
-          {
-            label: getGameTranslation('name'),
-            onClick: () => handleSortBy('name'),
-          },
-          {
-            label: getGameTranslation('type'),
-            onClick: () => handleSortBy('types.ownType'),
-          },
-          {
-            label: getGameTranslation('category'),
-            onClick: () => handleSortBy('category'),
-          },
-          {
-            label: getGameTranslation('power'),
-            onClick: () => handleSortBy('power'),
-          },
-          {
-            label: getGameTranslation('accuracy'),
-            onClick: () => handleSortBy('accuracy'),
-          },
-          {
-            label: getGameTranslation('pp'),
-            onClick: () => handleSortBy('pp'),
-          },
-          {
-            label: getGameTranslation('tm'),
-            onClick: () => handleSortBy('tm'),
-          },
-          // {
-          //   label: getGameTranslation('probability'),
-          //   onClick: () => handleSortBy('probability'),
-          // },
-          {
-            label: '',
-            style: {
-              backgroundColor: 'transparent',
-            },
-          },
-        ]}
-      >
-        {collection.map((move, index) => (
-          <MovesEntry key={index} className={classes.resultsEntry} move={move} />
-        ))}
-      </Table>
+  handleRedirectToMove,
+}: IOwnProps) => {
+  const movesConfig = getAllMovesConfig();
 
-      {handleLoadMore && (
-        <Buttons
-          align="center"
-          options={[
-            {
-              id: 'load-more',
-              label: getUiTranslation('moves-load-more'),
-              onClick: handleLoadMore,
-              type: 'button',
-            },
+  return (
+    <>
+      <Sidebar
+        className={classnames({ [classes.modalOpen]: isModalOpen })}
+        render={isOpen => (
+          <MovesFilters
+            classNames={{
+              form: classes.form,
+              formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
+            }}
+            movesList={movesList}
+            handleMoveChange={handleMoveChange}
+            filters={filters}
+            handleFilterChange={handleFilterChange}
+            handleReset={handleReset}
+            handleSubmit={handleSubmit}
+          />
+        )}
+      />
+      <div className={classnames(classes.results, { [classes.modalOpen]: isModalOpen })}>
+        <Table
+          headings={[
+            movesConfig.showId
+              ? {
+                  label: getGameTranslation('id'),
+                  onClick: () => handleSortBy('id'),
+                }
+              : {},
+            movesConfig.showName
+              ? {
+                  label: getGameTranslation('name'),
+                  onClick: () => handleSortBy('name'),
+                }
+              : {},
+            movesConfig.showType
+              ? {
+                  label: getGameTranslation('type'),
+                  onClick: () => handleSortBy('types.ownType'),
+                }
+              : {},
+            movesConfig.showCategory
+              ? {
+                  label: getGameTranslation('category'),
+                  onClick: () => handleSortBy('category'),
+                }
+              : {},
+            movesConfig.showPower
+              ? {
+                  label: getGameTranslation('power'),
+                  onClick: () => handleSortBy('power'),
+                }
+              : {},
+            movesConfig.showAccuracy
+              ? {
+                  label: getGameTranslation('accuracy'),
+                  onClick: () => handleSortBy('accuracy'),
+                }
+              : {},
+            movesConfig.showPp
+              ? {
+                  label: getGameTranslation('pp'),
+                  onClick: () => handleSortBy('pp'),
+                }
+              : {},
+            movesConfig.showTm
+              ? {
+                  label: getGameTranslation('tm'),
+                  onClick: () => handleSortBy('tm'),
+                }
+              : {},
+            movesConfig.showProbability
+              ? {
+                  label: getGameTranslation('probability'),
+                  onClick: () => handleSortBy('probability'),
+                }
+              : {},
+            movesConfig.showActions
+              ? {
+                  label: '',
+                  style: {
+                    backgroundColor: 'transparent',
+                  },
+                }
+              : {},
           ]}
-        />
-      )}
-    </div>
-  </>
-);
+        >
+          {collection.map((move, index) => (
+            <MovesEntry
+              key={index}
+              className={classes.resultsEntry}
+              config={movesConfig}
+              move={move}
+              handleRedirectToMove={handleRedirectToMove}
+            />
+          ))}
+        </Table>
+
+        {handleLoadMore && (
+          <Buttons
+            align="center"
+            options={[
+              {
+                id: 'load-more',
+                label: getUiTranslation('moves-load-more'),
+                onClick: handleLoadMore,
+                type: 'button',
+              },
+            ]}
+          />
+        )}
+      </div>
+    </>
+  );
+};
 
 const MovesView = injectSheet(sheet)(unstyledMovesView);
 
