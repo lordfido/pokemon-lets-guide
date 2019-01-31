@@ -302,7 +302,10 @@ const unstyledMoveView = ({ classes, handleModalClose, referrer, move, paginatio
               </div>
             </div>
             <div className={classes.effectWrapper}>
-              <div className={classes.effectContent}>{move.effect}</div>
+              <div className={classes.effectContent}>
+                {move.probability ? `(${move.probability}%) ` : ''}
+                {move.effect}
+              </div>
             </div>
           </div>
         </CurvedWindow>

@@ -11,7 +11,7 @@ const OUTPUT_NAMES_FILE = './src/constants/moves/moves-names.ts';
 
 // WRITE TS FILE
 const movesList = [];
-const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, tm, type }) => {
+const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, probability, tm, type }) => {
   const lines = [
     '  {',
     `    accuracy: ${accuracy},`,
@@ -20,6 +20,7 @@ const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, tm, ty
     `    id: '${id}',`,
     `    power: ${power},`,
     `    pp: ${pp},`,
+    `    probability: ${probability},`,
     `    tm: ${tm},`,
     `    type: '${type}',`,
     '  },',
