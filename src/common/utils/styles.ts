@@ -53,7 +53,7 @@ const getCSSAnimations = () => {
 
     @keyframes arrow-bounce-prev {
       0% {
-        width: 26px;
+        width: 28px;
         transform: translateX(10px);
       }
       50% {
@@ -61,14 +61,14 @@ const getCSSAnimations = () => {
         transform: translateX(0px);
       }
       100% {
-        width: 26px;
+        width: 28px;
         transform: translateX(10px);
       }
     }
 
     @keyframes arrow-bounce-next {
       0% {
-        width: 26px;
+        width: 28px;
         transform: translateX(-10px);
       }
       50% {
@@ -76,7 +76,7 @@ const getCSSAnimations = () => {
         transform: translateX(0px);
       }
       100% {
-        width: 26px;
+        width: 28px;
         transform: translateX(-10px);
       }
     }

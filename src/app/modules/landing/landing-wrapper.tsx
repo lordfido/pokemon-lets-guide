@@ -85,6 +85,7 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
         return {
           backgroundColor,
           pokemon,
+          type: selectedType.id,
         };
       }) as [ISection, ISection, ISection, ISection];
 

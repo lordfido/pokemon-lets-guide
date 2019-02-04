@@ -80,37 +80,10 @@ export const uiTranslations: ITranslationsCollection = {
   'footer-ui-elements': ['', "App's language", '', 'Idioma de la App', '', '', '', ''],
 
   // Landing
-  'landing-calculate': [
-    '',
-    'Calculate how your Pokémon will look',
-    '',
-    'Calcula cómo quedará tu Pokémon',
-    '',
-    '',
-    '',
-    '',
-  ],
+  'landing-calculate': ['', 'Hhow your Pokémon will look?', '', '¿Cómo quedará tu Pokémon?', '', '', '', ''],
   'landing-calculate-cta': ['', 'Calculate', '', 'Calcular', '', '', '', ''],
-  'landing-find-best-moves': [
-    '',
-    'Find the best moves against a particular Pokémon',
-    '',
-    'Encuentra los mejores movimientos contra un Pokémon en particular',
-    '',
-    '',
-    '',
-    '',
-  ],
-  'landing-how-to-defeat': [
-    '',
-    'Find best Pokémon to defeat your rival',
-    '',
-    'Encuentra los mejores Pokémon para vencer a tu rival',
-    '',
-    '',
-    '',
-    '',
-  ],
+  'landing-find-best-moves': ['', 'Best moves against...', '', 'Mejores movimientos contra...', '', '', '', ''],
+  'landing-how-to-defeat': ['', 'Best Pokémon to defeat...', '', 'Mejores Pokémon para vencer a...', '', '', '', ''],
 
   // Calculator
   'calculator-empty-case': ['', 'Select a Pokémon', '', 'Seleciona un Pokémon', '', '', '', ''],

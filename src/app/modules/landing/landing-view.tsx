@@ -9,6 +9,8 @@ import PokemonPreview from '../pokemon/pokemon-preview';
 
 import { CALCULATOR, MOVES, POKEDEX } from '../../../constants/appRoutes';
 import { getPokemonImage } from '../../../constants/pokemon/pokemon-images';
+import { PokemonType } from '../../../constants/pokemon/pokemon-types';
+import { getTypeIcon, getTypeWaterMarkStyles } from '../../../constants/pokemon/pokemon-types-icons';
 import {
   FOOTER_SIZE_L,
   PADDING_L,
@@ -18,7 +20,7 @@ import {
   WRAPPED_HEIGH,
 } from '../../../constants/styles/styles';
 import { FONT_XXL, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
-import { DESKTOP_L, HD_DISPLAY, TABLET_L } from '../../../constants/styles/styles-media-queries';
+import { DESKTOP_L, HD_DISPLAY, MOBILE_L, TABLET_L } from '../../../constants/styles/styles-media-queries';
 import { CONTENT } from '../../../constants/styles/styles-zindex';
 
 import { ISheet } from '../../root.models';
@@ -30,26 +32,43 @@ const sheet: ISheet = {
     position: 'relative',
     top: '50%',
     transform: 'translateY(-50%)',
+    zIndex: CONTENT,
   },
   ctaField: {
     textAlign: 'center',
   },
   ctaImage: {
     margin: PADDING_M,
-    maxWidth: `calc(100% - ${PADDING_M * 2}px)`,
+    maxWidth: `calc(80% - ${PADDING_M * 2}px)`,
     paddingTop: 0,
     width: 'auto',
+
+    [MOBILE_L]: {
+      maxWidth: `calc(100% - ${PADDING_M * 2}px)`,
+    },
   },
   ctaLabel: {
     color: TEXT_WHITE,
     fontSize: FONT_XXL,
+    lineHeight: 1.3,
     marginBottom: PADDING_M,
+  },
+  ctaType: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: CONTENT - 1,
+  },
+  ctaTypeIcon: {
+    opacity: 0.4,
+    position: 'absolute',
   },
   ctaWrapper: {
     display: 'inline-block',
     flex: `1 0 100%`,
     minHeight: '100vh',
     padding: PADDING_L,
+    position: 'relative',
     textAlign: 'center',
     verticalAlign: 'top',
     width: '100%',
@@ -101,6 +120,7 @@ const sheet: ISheet = {
 export interface ISection {
   backgroundColor: string;
   pokemon: IPokemonWithBaseCP;
+  type: PokemonType;
 }
 
 interface IOwnProps {
@@ -172,51 +192,81 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
 
         <div className={classes.ctas}>
           {sections &&
-            sections.map(({ backgroundColor, pokemon }, index: number) => (
-              <div key={index} id={`landing-${index}`} className={classes.ctaWrapper} style={{ backgroundColor }}>
-                <div className={classes.ctaContent}>
-                  {pokemon && (
-                    <PokemonPreview className={classes.ctaImage} hard={true} src={getPokemonImage(pokemon)} />
-                  )}
+            sections.map(({ backgroundColor, pokemon, type }, index: number) => {
+              const styles = getTypeWaterMarkStyles(type);
+              const doubledStyles = {
+                height: 200,
+                width: 200,
+              };
+              Object.keys(styles).forEach(key => {
+                // @ts-ignore
+                doubledStyles[key] = typeof styles[key] !== 'number' ? styles[key] : styles[key] * 2;
 
-                  {index === 0 && (
-                    <>
-                      <p className={classes.ctaLabel}>{howToDefeatPokemonField.label}</p>
-                      <HeaderItem
-                        image={require('../../../assets/images/pokedex.png')}
-                        text={getUiTranslation('header-pokedex')}
-                        to={POKEDEX.replace(':id?', '')}
-                      />
-                      <Field className={classes.ctaField} options={{ ...howToDefeatPokemonField, label: undefined }} />
-                    </>
-                  )}
+                if (key === 'width') {
+                  // @ts-ignore
+                  doubledStyles.height = styles[key] * 2;
+                }
+              });
 
-                  {index === 1 && (
-                    <>
-                      <p className={classes.ctaLabel}>{bestMovesAgainstField.label}</p>
-                      <HeaderItem
-                        image={require('../../../assets/images/moves.png')}
-                        text={getUiTranslation('header-moves')}
-                        to={MOVES.replace(':id?', '')}
-                      />
-                      <Field className={classes.ctaField} options={{ ...bestMovesAgainstField, label: undefined }} />
-                    </>
-                  )}
+              return (
+                <div key={index} id={`landing-${index}`} className={classes.ctaWrapper} style={{ backgroundColor }}>
+                  <div className={classes.ctaContent}>
+                    {pokemon && (
+                      <PokemonPreview className={classes.ctaImage} hard={true} src={getPokemonImage(pokemon)} />
+                    )}
 
-                  {index === 2 && (
-                    <>
-                      <p className={classes.ctaLabel}>{getUiTranslation('landing-calculate')}</p>
-                      <HeaderItem
-                        image={require('../../../assets/images/calculator.png')}
-                        text={getUiTranslation('header-calculator')}
-                        to={CALCULATOR.replace(':id?', '')}
-                      />
-                      <Field className={classes.ctaField} options={{ ...calculateField, label: undefined }} />
-                    </>
-                  )}
+                    {index === 0 && (
+                      <>
+                        <p className={classes.ctaLabel}>{howToDefeatPokemonField.label}</p>
+                        <HeaderItem
+                          image={require('../../../assets/images/pokedex.png')}
+                          text={getUiTranslation('header-pokedex')}
+                          to={POKEDEX.replace(':id?', '')}
+                        />
+                        <Field
+                          className={classes.ctaField}
+                          options={{ ...howToDefeatPokemonField, label: undefined }}
+                        />
+                      </>
+                    )}
+
+                    {index === 1 && (
+                      <>
+                        <p className={classes.ctaLabel}>{bestMovesAgainstField.label}</p>
+                        <HeaderItem
+                          image={require('../../../assets/images/moves.png')}
+                          text={getUiTranslation('header-moves')}
+                          to={MOVES.replace(':id?', '')}
+                        />
+                        <Field className={classes.ctaField} options={{ ...bestMovesAgainstField, label: undefined }} />
+                      </>
+                    )}
+
+                    {index === 2 && (
+                      <>
+                        <p className={classes.ctaLabel}>{getUiTranslation('landing-calculate')}</p>
+                        <HeaderItem
+                          image={require('../../../assets/images/calculator.png')}
+                          text={getUiTranslation('header-calculator')}
+                          to={CALCULATOR.replace(':id?', '')}
+                        />
+                        <Field className={classes.ctaField} options={{ ...calculateField, label: undefined }} />
+                      </>
+                    )}
+                  </div>
+                  <span
+                    className={classes.ctaType}
+                    style={{ height: doubledStyles.height, overflow: 'hidden', width: doubledStyles.width }}
+                  >
+                    <img
+                      className={classes.ctaTypeIcon}
+                      style={{ ...doubledStyles, height: 'auto', right: -doubledStyles.width / 4 }}
+                      src={getTypeIcon(type)}
+                    />
+                  </span>
                 </div>
-              </div>
-            ))}
+              );
+            })}
         </div>
 
         {handleNavigateToNextSection && (

@@ -12,8 +12,15 @@ import Tag from '../../components/tag';
 import { MOVES } from '../../../constants/appRoutes';
 import { getTypeName } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
-import { getTypeIcon } from '../../../constants/pokemon/pokemon-types-icons';
-import { BORDER_RADIUS, PADDING_M, PADDING_S, PADDING_XS, PADDING_XXXL } from '../../../constants/styles/styles';
+import { getTypeIcon, isIconRotated, getTypeWaterMarkStyles } from '../../../constants/pokemon/pokemon-types-icons';
+import {
+  BORDER_RADIUS,
+  PADDING_M,
+  PADDING_S,
+  PADDING_XL,
+  PADDING_XS,
+  PADDING_XXXL,
+} from '../../../constants/styles/styles';
 import {
   ACCURACY_LABEL,
   CATEGORY_LABEL,
@@ -24,7 +31,7 @@ import {
   WHITE,
 } from '../../../constants/styles/styles-colors';
 import { TEXT_WHITE } from '../../../constants/styles/styles-fonts';
-import { MAX_MOBILE_L, MOBILE_XL } from '../../../constants/styles/styles-media-queries';
+import { DESKTOP, MAX_MOBILE_L, MOBILE_XL, TABLET_OR_LANDSCAPE } from '../../../constants/styles/styles-media-queries';
 import { BACKGROUND, CONTENT } from '../../../constants/styles/styles-zindex';
 
 import { ISheet } from '../../root.models';
@@ -35,6 +42,8 @@ const nextArrow = require('../../../assets/images/move-next-arrow.png');
 
 const typeWidth = 80;
 const ppWidth = 100;
+
+const maxWindowWidth = 600;
 
 const sheet: ISheet = {
   accuracy: {},
@@ -58,6 +67,7 @@ const sheet: ISheet = {
     color: CATEGORY_LABEL,
   },
   contentContent: {
+    minHeight: 128,
     paddingTop: PADDING_M,
     width: '100%',
   },
@@ -70,8 +80,8 @@ const sheet: ISheet = {
   },
   contentWrapper: {
     margin: '0px auto',
-    marginTop: PADDING_XXXL,
-    maxWidth: 600,
+    marginTop: PADDING_XL,
+    maxWidth: maxWindowWidth,
     position: 'relative',
     textAlign: 'center',
   },
@@ -130,6 +140,10 @@ const sheet: ISheet = {
       animation: 'arrow-bounce-prev 1s linear infinite',
       height: 96,
     },
+
+    [DESKTOP]: {
+      right: `calc(50% - ${maxWindowWidth / 2 + 60}px)`,
+    },
   },
   paginationPrev: {
     left: PADDING_XXXL,
@@ -137,6 +151,10 @@ const sheet: ISheet = {
     '& img': {
       animation: 'arrow-bounce-next 1s linear infinite',
       height: 96,
+    },
+
+    [DESKTOP]: {
+      left: `calc(50% - ${maxWindowWidth / 2 + 60}px)`,
     },
   },
   power: {
@@ -222,6 +240,24 @@ const sheet: ISheet = {
       display: 'none',
     },
   },
+  typeIcon: {
+    opacity: 0.5,
+    position: 'absolute',
+    right: -12,
+  },
+  typeIconWrapper: {
+    display: 'none',
+    height: '100%',
+    left: 0,
+    overflow: 'hidden',
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+
+    [TABLET_OR_LANDSCAPE]: {
+      display: 'inline-block',
+    },
+  },
   windowBorder: {
     padding: PADDING_XS,
   },
@@ -268,6 +304,13 @@ const unstyledMoveView = ({ classes, handleModalClose, referrer, move, paginatio
               <div className={classes.ppBackground} />
               {move.pp} / {move.pp}
             </div>
+          </div>
+          <div className={classes.typeIconWrapper}>
+            <img
+              className={classnames(classes.typeIcon)}
+              src={getTypeIcon(move.types.ownType)}
+              style={getTypeWaterMarkStyles(move.types.ownType)}
+            />
           </div>
         </div>
 
