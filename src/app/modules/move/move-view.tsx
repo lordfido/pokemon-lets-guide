@@ -12,7 +12,7 @@ import Tag from '../../components/tag';
 import { MOVES } from '../../../constants/appRoutes';
 import { getTypeName } from '../../../constants/pokemon/pokemon-types';
 import { getTypeColor } from '../../../constants/pokemon/pokemon-types-color';
-import { getTypeIcon, isIconRotated, getTypeWaterMarkStyles } from '../../../constants/pokemon/pokemon-types-icons';
+import { getTypeIcon, getTypeWaterMarkStyles } from '../../../constants/pokemon/pokemon-types-icons';
 import {
   BORDER_RADIUS,
   PADDING_M,

@@ -1,6 +1,5 @@
 import { Types } from 'pokelab';
 import { CSSProperties } from 'react';
-import { TABLET_OR_LANDSCAPE } from '../styles/styles-media-queries';
 
 const typeIcons = {
   [Types.Bug]: require('../../assets/images/type-icons/bug.png'),
