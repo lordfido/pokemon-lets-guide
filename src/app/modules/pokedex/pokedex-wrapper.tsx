@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { updateCollection } from '../../utils/collections';
 import { stringToFilters } from '../../utils/urls';
 
 import PokedexView from './pokedex-view';

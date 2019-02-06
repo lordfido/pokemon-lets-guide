@@ -2,15 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { log } from '../../../common/utils/logger';
-import { updateCollection } from '../../utils/collections';
-import { filtersToString, stringToFilters } from '../../utils/urls';
+import { stringToFilters } from '../../utils/urls';
 
 import MovesView from './moves-view';
 
 import { getMoves, getMovesFilters, getMovesPagination, getMovesSortOptions, getRawMoves } from '../../root.reducer';
 import { filterMoves, loadMoreMoves, resetMovesFilters, sortMoves } from './moves.actions';
 
-import { MOVES, MOVES_SEARCH } from '../../../constants/appRoutes';
+import { MOVES } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
 import { IFieldOutput, IOption } from '../forms/form.models';
