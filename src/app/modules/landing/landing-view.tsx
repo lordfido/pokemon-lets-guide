@@ -54,19 +54,18 @@ const sheet: ISheet = {
     marginBottom: PADDING_M,
   },
   ctaType: {
+    opacity: 0.4,
     position: 'absolute',
     right: 0,
     top: 0,
+    transform: 'translate(25%, -25%)',
     zIndex: CONTENT - 1,
-  },
-  ctaTypeIcon: {
-    opacity: 0.4,
-    position: 'absolute',
   },
   ctaWrapper: {
     display: 'inline-block',
     flex: `1 0 100%`,
     minHeight: '100vh',
+    overflowX: 'hidden',
     padding: PADDING_L,
     position: 'relative',
     textAlign: 'center',
@@ -256,13 +255,14 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
                   </div>
                   <span
                     className={classes.ctaType}
-                    style={{ height: doubledStyles.height, overflow: 'hidden', width: doubledStyles.width }}
+                    style={{
+                      // @ts-ignore
+                      display: doubledStyles.display,
+                      height: doubledStyles.height,
+                      width: doubledStyles.width,
+                    }}
                   >
-                    <img
-                      className={classes.ctaTypeIcon}
-                      style={{ ...doubledStyles, height: 'auto', right: -doubledStyles.width / 4 }}
-                      src={getTypeIcon(type)}
-                    />
+                    <img style={{ width: doubledStyles.width }} src={getTypeIcon(type)} />
                   </span>
                 </div>
               );
