@@ -60,22 +60,27 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
     referrer: undefined,
   };
 
-  public filters = movesInitialState.filters;
+  public initialFilters = stringToFilters(this.props.query);
 
-  public componentDidMount() {
-    const { FilterMoves, query } = this.props;
+  public filters: IMovesFilters = movesInitialState.filters;
 
-    const urlFilters = stringToFilters(query);
-    const parsedFilters = Object.keys(movesInitialState.filters).map(key => ({
-      name: key,
+  constructor(props: Props) {
+    super(props);
+
+    Object.keys(movesInitialState.filters).forEach(key => {
       // @ts-ignore
-      value: urlFilters[key] || movesInitialState.filters[key],
-    }));
-
-    FilterMoves(parsedFilters);
+      this.filters[key] = this.initialFilters[key] || movesInitialState.filters[key];
+    });
   }
 
-  public componentDidUpdate(prevProps: Props) {
+  public componentDidMount() {
+    const { query } = this.props;
+
+    const urlFilters = stringToFilters(query);
+    this.applyFilters({ ...movesInitialState.filters, ...urlFilters });
+  }
+
+  public componentDidUpdate() {
     const { redirectTo } = this.state;
 
     if (redirectTo) {
@@ -83,20 +88,19 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
         redirectTo: '',
       });
     }
-
-    if (prevProps.url !== this.props.url) {
-      const { FilterMoves, query } = this.props;
-
-      const urlFilters = stringToFilters(query);
-      const parsedFilters = Object.keys(movesInitialState.filters).map(key => ({
-        name: key,
-        // @ts-ignore
-        value: urlFilters[key] || movesInitialState.filters[key],
-      }));
-
-      FilterMoves(parsedFilters);
-    }
   }
+
+  public applyFilters = (filters: IMovesFilters) => {
+    const { FilterMoves } = this.props;
+
+    const parsedFilters = Object.keys(filters).map(key => ({
+      name: key,
+      // @ts-ignore
+      value: filters[key],
+    }));
+
+    FilterMoves(parsedFilters);
+  };
 
   public handleSortBy = (sortBy: string) => {
     const { SortMoves, sort } = this.props;
@@ -141,7 +145,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
       newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
     } else {
       // @ts-ignore
-      newFilters[field.id] = updateCollection(prevFilter, field.value.map(s => (s.value ? s.value : s)));
+      newFilters[field.id] = field.value.map(s => (s.value ? s.value : s));
     }
 
     this.filters = newFilters;
@@ -156,10 +160,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   public handleSubmit = () => {
     const { filters } = this;
 
-    const redirectTo = filtersToString(filters);
-    this.setState({
-      redirectTo: redirectTo ? MOVES_SEARCH.replace(':query', redirectTo) : MOVES.replace(':id?', ''),
-    });
+    this.applyFilters(filters);
   };
 
   public handleLoadMore = () => {
@@ -169,7 +170,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public render() {
-    const { collection, filters, isModalOpen, movesList, pagination, url } = this.props;
+    const { collection, isModalOpen, movesList, pagination, url } = this.props;
     const { referrer, redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -183,7 +184,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
         isModalOpen={isModalOpen}
         handleSortBy={this.handleSortBy}
         movesList={movesList}
-        filters={filters}
+        filters={this.filters}
         handleFilterChange={e => {
           this.handleFilterChange(e);
         }}

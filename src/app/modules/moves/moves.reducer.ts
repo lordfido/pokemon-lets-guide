@@ -73,7 +73,7 @@ export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
     .filter(move => {
       // Filter list by name
       if (filters.nameOrId) {
-        if (new RegExp(filters.nameOrId).test(move.name) === false) {
+        if (new RegExp(filters.nameOrId.toLowerCase()).test(move.name.toLowerCase()) === false) {
           return false;
         }
       }
