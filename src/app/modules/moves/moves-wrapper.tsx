@@ -116,13 +116,6 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
     SortMoves({ sortBy, order });
   };
 
-  public handleRedirectToMove = (moveId: string) => {
-    this.setState({
-      redirectTo: MOVES.replace(':id?', moveId),
-      referrer: this.props.url,
-    });
-  };
-
   public handleFilterChange = (field: IFieldOutput) => {
     const { filters } = this;
 
@@ -201,9 +194,6 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
               }
             : undefined
         }
-        handleRedirectToMove={e => {
-          this.handleRedirectToMove(e);
-        }}
       />
     );
   }

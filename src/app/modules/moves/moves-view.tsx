@@ -73,7 +73,6 @@ interface IOwnProps {
   handleReset: () => void;
   handleSubmit: () => void;
   handleLoadMore?: () => void;
-  handleRedirectToMove: (moveId: string) => void;
 }
 
 const unstyledMovesView = ({
@@ -87,7 +86,6 @@ const unstyledMovesView = ({
   handleReset,
   handleSubmit,
   handleLoadMore,
-  handleRedirectToMove,
 }: IOwnProps) => {
   const movesConfig = getAllMovesConfig();
 
@@ -177,13 +175,7 @@ const unstyledMovesView = ({
           ]}
         >
           {collection.map((move, index) => (
-            <MovesEntry
-              key={index}
-              className={classes.resultsEntry}
-              config={movesConfig}
-              move={move}
-              handleRedirectToMove={handleRedirectToMove}
-            />
+            <MovesEntry key={index} className={classes.resultsEntry} config={movesConfig} move={move} />
           ))}
         </Table>
 
