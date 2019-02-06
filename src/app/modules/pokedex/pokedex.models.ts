@@ -78,6 +78,7 @@ export interface IPokedexFilters {
   // dropsCandies: StatId[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
+  nameOrNumber: string;
   showAlolanForms: boolean;
   showMegaevolutions: boolean;
   strongAgainst: PokemonType[];
@@ -104,6 +105,7 @@ export const pokedexInitialState: IPokedexState = {
     // dropsCandies: [],
     excludedTypes: [],
     includedTypes: [],
+    nameOrNumber: '',
     showAlolanForms: false,
     showMegaevolutions: false,
     strongAgainst: [],

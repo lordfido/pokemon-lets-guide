@@ -8,7 +8,14 @@ import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
 import { filtersEnabled } from '../../../constants/features';
-import { ICheckboxOptions, IDropdownOptions, IFieldOutput, IOption, IRangeOptions } from '../forms/form.models';
+import {
+  ICheckboxOptions,
+  IDropdownOptions,
+  IFieldOutput,
+  IOption,
+  IRangeOptions,
+  ITextOptions,
+} from '../forms/form.models';
 import { IPokedexFilters } from './pokedex.models';
 
 interface IOwnProps {
@@ -17,7 +24,6 @@ interface IOwnProps {
     formField: string;
   };
   pokemonList: IOption[];
-  handlePokemonChange: (field: IFieldOutput) => void;
   filters: IPokedexFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
@@ -27,7 +33,6 @@ interface IOwnProps {
 const PokedexFilters = ({
   classNames,
   pokemonList,
-  handlePokemonChange,
   filters,
   handleFilterChange,
   handleReset,
@@ -37,13 +42,11 @@ const PokedexFilters = ({
     {
       id: 'nameOrNumber',
       label: getUiTranslation('search-pokemon'),
-      onChange: (option: IFieldOutput) => {
-        handlePokemonChange(option);
-      },
+      onChange: handleFilterChange,
       options: pokemonList,
       placeholder: getUiTranslation('search-pokemon'),
-      type: 'dropdown',
-    } as IDropdownOptions,
+      type: 'text',
+    } as ITextOptions,
     {
       ...typesDropdown,
       defaultValue: filters.includedTypes,

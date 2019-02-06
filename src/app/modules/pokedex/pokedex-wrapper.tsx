@@ -18,7 +18,7 @@ import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from
 import { POKEDEX, POKEDEX_SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
-import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
+import { IFieldOutput, IOption } from '../forms/form.models';
 import { IPokedexFilters, IPokedexPagination, IPokemonWithBaseCP, pokedexInitialState } from './pokedex.models';
 
 interface IOwnProps {
@@ -114,14 +114,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
     SortPokedex({ sortBy, order });
   };
 
-  public handlePokemonChange = (field: IFieldOutput) => {
-    const option = field.value as DropdownOutput;
-
-    this.setState({
-      redirectTo: POKEDEX.replace(':id?', option ? option.value : ''),
-    });
-  };
-
   public handleFilterChange = (field: IFieldOutput) => {
     const { filters } = this;
 
@@ -131,7 +123,12 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
     // @ts-ignore
     const prevFilter = filters[field.id];
-    if (field.id === 'baseCP' || field.id === 'showAlolanForms' || field.id === 'showMegaevolutions') {
+    if (
+      field.id === 'baseCP' ||
+      field.id === 'nameOrNumber' ||
+      field.id === 'showAlolanForms' ||
+      field.id === 'showMegaevolutions'
+    ) {
       // @ts-ignore
       newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
     } else {
@@ -176,9 +173,6 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
         collection={collection}
         handleSortBy={this.handleSortBy}
         pokemonList={pokemonList}
-        handlePokemonChange={e => {
-          this.handlePokemonChange(e);
-        }}
         filters={filters}
         handleFilterChange={e => {
           this.handleFilterChange(e);

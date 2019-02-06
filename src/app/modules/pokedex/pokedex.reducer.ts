@@ -79,6 +79,13 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
 
   return collection
     .filter(pokemon => {
+      // Filter list by name
+      if (filters.nameOrNumber) {
+        if (new RegExp(filters.nameOrNumber).test(pokemon.name) === false) {
+          return false;
+        }
+      }
+
       // Filter list by included types
       if (filters.includedTypes.length) {
         let shouldShow = false;
