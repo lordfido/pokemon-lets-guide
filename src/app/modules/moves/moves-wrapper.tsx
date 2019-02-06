@@ -13,7 +13,7 @@ import { filterMoves, loadMoreMoves, resetMovesFilters, sortMoves } from './move
 import { MOVES, MOVES_SEARCH } from '../../../constants/appRoutes';
 
 import { IRootState } from '../../root.models';
-import { DropdownOutput, IFieldOutput, IOption } from '../forms/form.models';
+import { IFieldOutput, IOption } from '../forms/form.models';
 import { IMovesFilters, IMovesPagination, IRichMove, movesInitialState } from './moves.models';
 
 interface IOwnProps {
@@ -119,12 +119,6 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
     });
   };
 
-  public handleMoveChange = (field: IFieldOutput) => {
-    const option = field.value as DropdownOutput;
-
-    this.handleRedirectToMove(option ? option.value : '');
-  };
-
   public handleFilterChange = (field: IFieldOutput) => {
     const { filters } = this;
 
@@ -137,6 +131,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
     if (
       field.id === 'accuracy' ||
       field.id === 'category' ||
+      field.id === 'nameOrId' ||
       field.id === 'power' ||
       field.id === 'pp' ||
       field.id === 'probability' ||
@@ -188,9 +183,6 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
         isModalOpen={isModalOpen}
         handleSortBy={this.handleSortBy}
         movesList={movesList}
-        handleMoveChange={e => {
-          this.handleMoveChange(e);
-        }}
         filters={filters}
         handleFilterChange={e => {
           this.handleFilterChange(e);

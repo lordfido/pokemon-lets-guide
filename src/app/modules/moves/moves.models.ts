@@ -65,6 +65,7 @@ export interface IMovesFilters {
   // canBeLearntBy: string[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
+  nameOrId: string;
   power: [number, number];
   pp: [number, number];
   probability: [number, number];
@@ -97,6 +98,7 @@ export const movesInitialState: IMovesState = {
     category: undefined,
     excludedTypes: [],
     includedTypes: [],
+    nameOrId: '',
     power: [MIN_POWER_VALUE, MAX_POWER_VALUE],
     pp: [MIN_PP_VALUE, MAX_PP_VALUE],
     probability: [0, MAX_PROBABILITY_VALUE],

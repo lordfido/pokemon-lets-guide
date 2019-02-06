@@ -18,7 +18,14 @@ import {
 import { getMovesCategories } from '../../../constants/moves/moves-categories';
 import { getMovesCategoryName } from '../../../constants/moves/moves-categories-names';
 
-import { ICheckboxOptions, IDropdownOptions, IFieldOutput, IOption, IRangeOptions } from '../forms/form.models';
+import {
+  ICheckboxOptions,
+  IDropdownOptions,
+  IFieldOutput,
+  IOption,
+  IRangeOptions,
+  ITextOptions,
+} from '../forms/form.models';
 import { IMovesFilters } from './moves.models';
 
 interface IOwnProps {
@@ -27,33 +34,22 @@ interface IOwnProps {
     formField: string;
   };
   movesList: IOption[];
-  handleMoveChange: (field: IFieldOutput) => void;
   filters: IMovesFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
   handleSubmit: () => void;
 }
 
-const MovesFilters = ({
-  classNames,
-  movesList,
-  handleMoveChange,
-  filters,
-  handleFilterChange,
-  handleReset,
-  handleSubmit,
-}: IOwnProps) => {
+const MovesFilters = ({ classNames, movesList, filters, handleFilterChange, handleReset, handleSubmit }: IOwnProps) => {
   const fields = [
     {
       id: 'nameOrId',
       label: getUiTranslation('search-move'),
-      onChange: (option: IFieldOutput) => {
-        handleMoveChange(option);
-      },
+      onChange: handleFilterChange,
       options: movesList,
       placeholder: getUiTranslation('search-move'),
-      type: 'dropdown',
-    } as IDropdownOptions,
+      type: 'text',
+    } as ITextOptions,
     {
       defaultValue: filters.category,
       id: 'category',

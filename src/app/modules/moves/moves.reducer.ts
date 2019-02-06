@@ -71,6 +71,13 @@ export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
 
   return collection
     .filter(move => {
+      // Filter list by name
+      if (filters.nameOrId) {
+        if (new RegExp(filters.nameOrId).test(move.name) === false) {
+          return false;
+        }
+      }
+
       // Filter list by included types
       if (filters.includedTypes.length) {
         let shouldShow = false;
