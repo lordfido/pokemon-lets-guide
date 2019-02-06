@@ -81,7 +81,7 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
     .filter(pokemon => {
       // Filter list by name
       if (filters.nameOrNumber) {
-        if (new RegExp(filters.nameOrNumber).test(pokemon.name) === false) {
+        if (new RegExp(filters.nameOrNumber.toLowerCase()).test(pokemon.name.toLowerCase()) === false) {
           return false;
         }
       }

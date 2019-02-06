@@ -90,7 +90,7 @@ const PokedexFilters = ({
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
-      defaultValue: [filters.baseCP[0], filters.baseCP[1]],
+      defaultValue: [Number(filters.baseCP[0]), Number(filters.baseCP[1])],
       id: 'baseCP',
       label: getUiTranslation('search-base-cp'),
       onChange: handleFilterChange,
