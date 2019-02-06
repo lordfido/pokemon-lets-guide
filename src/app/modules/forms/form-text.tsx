@@ -8,12 +8,16 @@ import Space from '../../components/space';
 
 import { PADDING_L } from '../../../constants/styles/styles';
 import { formInputStyles } from '../../../constants/styles/styles-common-rules';
+import { TEXT_DARK } from '../../../constants/styles/styles-fonts';
 
 import { ISheet } from '../../root.models';
 import { ITextOptions, TextOutput } from './form.models';
 
 const sheet: ISheet = {
-  field: formInputStyles.field,
+  field: {
+    ...formInputStyles.field,
+    color: TEXT_DARK,
+  },
   fieldDisabled: formInputStyles.fieldDisabled,
   label: formInputStyles.label,
   textArea: {
@@ -62,6 +66,15 @@ const unstyledText = ({ classes, className, options, onChange, onFocus }: IOwnPr
           onChange={onChangeProxy}
           onFocus={onFocus}
           autoComplete="off"
+          {...(options.type === 'number'
+            ? {
+                max: options.maxLength,
+                min: options.minLength,
+              }
+            : {
+                maxLength: options.maxLength,
+                minLength: options.minLength,
+              })}
         />
       )}
 

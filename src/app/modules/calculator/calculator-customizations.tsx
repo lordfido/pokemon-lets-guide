@@ -18,7 +18,7 @@ import { DESKTOP } from '../../../constants/styles/styles-media-queries';
 import statsDropdown from '../pokedex/stats-dropdown';
 
 import { ISheet } from '../../root.models';
-import { IDropdownOptions, IFieldOutput, ISliderOptions } from '../forms/form.models';
+import { IDropdownOptions, IFieldOutput, ISliderOptions, ITextOptions } from '../forms/form.models';
 import { IPokemonStats } from '../pokedex/pokedex.models';
 
 export const MAX_HAPPINESS_VALUE = 255;
@@ -180,13 +180,14 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
     ];
 
     // Happiness
-    const happinessField: ISliderOptions = {
-      defaultValue: happiness,
+    const happinessField: ITextOptions = {
+      defaultValue: happiness.toString(),
       id: 'happiness',
       label: getGameTranslation('happiness'),
+      maxLength: MAX_HAPPINESS_VALUE,
+      minLength: 0,
       onChange: handleHappinessChange,
-      range: [0, MAX_HAPPINESS_VALUE],
-      type: 'slider',
+      type: 'number',
     };
 
     // Quick actions
@@ -239,16 +240,17 @@ class UnstyledCalculatorCustomizations extends React.Component<IOwnProps, IOwnSt
       handleCandiesChange({ id: field.id.replace('candies-', ''), value: field.value });
     };
 
-    const commonCandiesProps: ISliderOptions = {
+    const commonCandiesProps: ITextOptions = {
       id: '',
+      maxLength: MAX_CANDIES_VALUE,
+      minLength: 0,
       onChange: handleCandiesChangeProxy,
-      range: [0, MAX_CANDIES_VALUE],
-      type: 'slider',
+      type: 'number',
     };
 
-    const candiesFields: ISliderOptions[] = getStats().map(statId => ({
+    const candiesFields: ITextOptions[] = getStats().map(statId => ({
       ...commonCandiesProps,
-      defaultValue: candies[statId],
+      defaultValue: candies[statId].toString(),
       id: `candies-${statId}`,
       label: getGameTranslation(`candy-${statId}`),
     }));
