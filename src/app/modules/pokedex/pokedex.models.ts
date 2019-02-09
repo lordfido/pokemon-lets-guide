@@ -77,7 +77,7 @@ export type ShowOrHideFilter = 'hide' | 'show-only' | 'show-all';
 export interface IPokedexFilters {
   baseCP: [number, number];
   bestStats: StatId[];
-  // canLearnMove: StatId[];
+  canLearnMoves: string[];
   // dropsCandies: StatId[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
@@ -113,7 +113,7 @@ export const pokedexInitialState: IPokedexState = {
   filters: {
     baseCP: [0, MAX_BASE_CP_VALUE],
     bestStats: [],
-    // canLearnMoves: [],
+    canLearnMoves: [],
     // dropsCandies: [],
     excludedTypes: [],
     includedTypes: [],

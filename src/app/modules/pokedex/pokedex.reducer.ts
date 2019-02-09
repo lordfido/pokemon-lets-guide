@@ -19,6 +19,7 @@ import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon/pokemon-stats';
 
 import { IPokedexAction, IPokedexState, IPokemon, pokedexInitialState } from './pokedex.models';
+import { log } from '../../../common/utils/logger';
 
 const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexState => {
   switch (action.type) {
@@ -179,6 +180,26 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
         });
 
         if (!statMatches) {
+          return false;
+        }
+      }
+
+      // Filter list by learnable skills
+      if (filters.canLearnMoves.length) {
+        const relationsForThisPokemon = state.relations.find(r => r.pokemon === pokemon.id);
+
+        if (!relationsForThisPokemon) {
+          return false;
+        }
+
+        let shouldSkip = false;
+        filters.canLearnMoves.forEach(move => {
+          if (relationsForThisPokemon.moves.findIndex(m => m.id === move) < 0) {
+            shouldSkip = true;
+          }
+        });
+
+        if (shouldSkip) {
           return false;
         }
       }

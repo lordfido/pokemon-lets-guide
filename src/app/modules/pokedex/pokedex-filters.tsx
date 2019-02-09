@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getUiTranslation, getGameTranslation } from '../../utils/translations';
+import { getGameTranslation, getUiTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -17,6 +17,7 @@ interface IOwnProps {
     formField: string;
   };
   pokemonList: IOption[];
+  movesList: IOption[];
   filters: IPokedexFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
@@ -30,6 +31,7 @@ const PokedexFilters = ({
   handleFilterChange,
   handleReset,
   handleSubmit,
+  movesList,
 }: IOwnProps) => {
   const fields = [
     {
@@ -83,6 +85,14 @@ const PokedexFilters = ({
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
+      defaultValue: [],
+      id: 'canLearnMoves',
+      label: getUiTranslation('search-can-learn'),
+      onChange: handleFilterChange,
+      options: movesList,
+      type: 'multi',
+    } as IDropdownOptions,
+    {
       defaultValue: [Number(filters.baseCP[0]), Number(filters.baseCP[1])],
       id: 'baseCP',
       label: getUiTranslation('search-base-cp'),
@@ -96,16 +106,16 @@ const PokedexFilters = ({
       label: getUiTranslation('search-show-megaevolutions'),
       onChange: handleFilterChange,
       options: [
-        { id: 'show-all', value: 'show-all', label: getUiTranslation('search-show-all') },
+        { id: 'show-all', label: getUiTranslation('search-show-all'), value: 'show-all' },
         {
           id: 'hide',
-          value: 'hide',
           label: getUiTranslation('search-hide', getGameTranslation('forms-megaevolutions')),
+          value: 'hide',
         },
         {
           id: 'show-only',
-          value: 'show-only',
           label: getUiTranslation('search-show-only', getGameTranslation('forms-megaevolutions')),
+          value: 'show-only',
         },
       ],
       type: 'dropdown',
@@ -116,12 +126,12 @@ const PokedexFilters = ({
       label: getUiTranslation('search-show-alolan-forms'),
       onChange: handleFilterChange,
       options: [
-        { id: 'show-all', value: 'show-all', label: getUiTranslation('search-show-all') },
-        { id: 'hide', value: 'hide', label: getUiTranslation('search-hide', getGameTranslation('forms-alolan-forms')) },
+        { id: 'show-all', label: getUiTranslation('search-show-all'), value: 'show-all' },
+        { id: 'hide', label: getUiTranslation('search-hide', getGameTranslation('forms-alolan-forms')), value: 'hide' },
         {
           id: 'show-only',
-          value: 'show-only',
           label: getUiTranslation('search-show-only', getGameTranslation('forms-alolan-forms')),
+          value: 'show-only',
         },
       ],
       type: 'dropdown',

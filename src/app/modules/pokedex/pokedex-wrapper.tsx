@@ -10,6 +10,7 @@ import {
   getPokedexFilters,
   getPokedexPagination,
   getPokedexSortOptions,
+  getRawMoves,
   getRawPokedex,
 } from '../../root.reducer';
 import { filterPokedex, loadMorePokedex, resetPokedexFilters, sortPokedex } from './pokedex.actions';
@@ -30,6 +31,7 @@ interface IStateProps {
   filters: IPokedexFilters;
   pagination: IPokedexPagination;
   pokemonList: IOption[];
+  movesList: IOption[];
   sort: {
     sortBy: string;
     order: string;
@@ -167,7 +169,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public render() {
-    const { collection, url, pagination, pokemonList } = this.props;
+    const { collection, movesList, url, pagination, pokemonList } = this.props;
     const { redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -179,6 +181,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
         collection={collection}
         handleSortBy={this.handleSortBy}
         pokemonList={pokemonList}
+        movesList={movesList}
         filters={this.filters}
         handleFilterChange={e => {
           this.handleFilterChange(e);
@@ -204,6 +207,11 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 const mapStateToProps = (state: IRootState) => ({
   collection: getPokedex(state),
   filters: getPokedexFilters(state),
+  movesList: getRawMoves(state).map(move => ({
+    id: move.id,
+    label: move.name,
+    value: move.id,
+  })),
   pagination: getPokedexPagination(state),
   pokemonList: getRawPokedex(state).map(pokemon => ({
     id: pokemon.id,
