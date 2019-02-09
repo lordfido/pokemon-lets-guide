@@ -6,7 +6,9 @@ import {
   MOVES_LOAD_MORE,
   MOVES_RESET_FILTERS,
   MOVES_SORT,
+  MOVES_UPDATE_RELATIONS,
 } from '../../../constants/actionTypes';
+import { getPokemonMovesRelation } from '../../../constants/pokemon/pokemon-moves-relations';
 
 import { createMovesCollectionFromPokeLab } from './moves.models';
 
@@ -55,5 +57,33 @@ export const sortMoves: ActionCreator = (sort: ISort) => dispatch => {
       sort,
     },
     type: MOVES_SORT,
+  });
+};
+
+export const updateMovesRelations: ActionCreator = () => dispatch => {
+  const rawRelations = getPokemonMovesRelation();
+  const moves = createMovesCollectionFromPokeLab();
+
+  const relations = moves.map(move => {
+    const canBeLearntBy = rawRelations.filter(rel => rel.moves.find(m => m.id === move.id));
+
+    return {
+      move: move.id,
+      pokemon: canBeLearntBy.map(rel => {
+        const selectedMove = rel.moves.find(m => m.id === move.id);
+
+        return {
+          id: rel.pokemon,
+          level: selectedMove ? selectedMove.level : undefined,
+        };
+      }),
+    };
+  });
+
+  dispatch({
+    payload: {
+      relations,
+    },
+    type: MOVES_UPDATE_RELATIONS,
   });
 };

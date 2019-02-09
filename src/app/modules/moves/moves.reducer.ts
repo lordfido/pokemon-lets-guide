@@ -7,6 +7,7 @@ import {
   MOVES_LOAD_MORE,
   MOVES_RESET_FILTERS,
   MOVES_SORT,
+  MOVES_UPDATE_RELATIONS,
 } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
 
@@ -58,6 +59,12 @@ const reducer = (state = movesInitialState, action: IMovesAction): IMovesState =
       return {
         ...state,
         sort: action.payload.sort,
+      };
+
+    case MOVES_UPDATE_RELATIONS:
+      return {
+        ...state,
+        relations: action.payload.relations,
       };
 
     default:

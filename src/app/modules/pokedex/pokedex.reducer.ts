@@ -13,6 +13,7 @@ import {
   POKEDEX_LOAD_MORE,
   POKEDEX_RESET_FILTERS,
   POKEDEX_SORT,
+  POKEDEX_UPDATE_RELATIONS,
 } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon/pokemon-stats';
@@ -65,6 +66,12 @@ const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexS
       return {
         ...state,
         sort: action.payload.sort,
+      };
+
+    case POKEDEX_UPDATE_RELATIONS:
+      return {
+        ...state,
+        relations: action.payload.relations,
       };
 
     default:

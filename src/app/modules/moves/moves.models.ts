@@ -74,10 +74,16 @@ export interface IMovesFilters {
   weakAgainst: PokemonType[];
 }
 
+export interface IMovePokemonRelation {
+  move: string;
+  pokemon: number[];
+}
+
 export interface IMovesState {
   collection: IRichMove[];
   filters: IMovesFilters;
   pagination: IMovesPagination;
+  relations: IMovePokemonRelation[];
   sort: {
     sortBy: string;
     order: string;
@@ -102,6 +108,7 @@ export const movesInitialState: IMovesState = {
     first: 0,
     last: paginationSize,
   },
+  relations: [],
   sort: {
     order: 'asc',
     sortBy: 'name',
