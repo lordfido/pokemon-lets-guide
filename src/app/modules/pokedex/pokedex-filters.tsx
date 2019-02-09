@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getUiTranslation } from '../../utils/translations';
+import { getUiTranslation, getGameTranslation } from '../../utils/translations';
 
 import { IButtonProps } from '../../components/button';
 import Buttons from '../../components/buttons';
@@ -8,14 +8,7 @@ import statsDropdown from './stats-dropdown';
 import typesDropdown from './types-dropdown';
 
 import { filtersEnabled } from '../../../constants/features';
-import {
-  ICheckboxOptions,
-  IDropdownOptions,
-  IFieldOutput,
-  IOption,
-  IRangeOptions,
-  ITextOptions,
-} from '../forms/form.models';
+import { IDropdownOptions, IFieldOutput, IOption, IRangeOptions, ITextOptions } from '../forms/form.models';
 import { IPokedexFilters } from './pokedex.models';
 
 interface IOwnProps {
@@ -98,19 +91,41 @@ const PokedexFilters = ({
       type: 'range',
     } as IRangeOptions,
     {
-      defaultChecked: filters.showMegaevolutions,
+      defaultValue: [filters.showMegaevolutions],
       id: 'showMegaevolutions',
       label: getUiTranslation('search-show-megaevolutions'),
       onChange: handleFilterChange,
-      type: 'switch',
-    } as ICheckboxOptions,
+      options: [
+        { id: 'show-all', value: 'show-all', label: getUiTranslation('search-show-all') },
+        {
+          id: 'hide',
+          value: 'hide',
+          label: getUiTranslation('search-hide', getGameTranslation('forms-megaevolutions')),
+        },
+        {
+          id: 'show-only',
+          value: 'show-only',
+          label: getUiTranslation('search-show-only', getGameTranslation('forms-megaevolutions')),
+        },
+      ],
+      type: 'dropdown',
+    } as IDropdownOptions,
     {
-      defaultChecked: filters.showAlolanForms,
+      defaultValue: [filters.showAlolanForms],
       id: 'showAlolanForms',
       label: getUiTranslation('search-show-alolan-forms'),
       onChange: handleFilterChange,
-      type: 'switch',
-    } as ICheckboxOptions,
+      options: [
+        { id: 'show-all', value: 'show-all', label: getUiTranslation('search-show-all') },
+        { id: 'hide', value: 'hide', label: getUiTranslation('search-hide', getGameTranslation('forms-alolan-forms')) },
+        {
+          id: 'show-only',
+          value: 'show-only',
+          label: getUiTranslation('search-show-only', getGameTranslation('forms-alolan-forms')),
+        },
+      ],
+      type: 'dropdown',
+    } as IDropdownOptions,
   ];
   const buttons: IButtonProps[] = [
     {

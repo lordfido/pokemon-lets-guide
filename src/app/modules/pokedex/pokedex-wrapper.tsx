@@ -126,14 +126,18 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
     // @ts-ignore
     const prevFilter = filters[field.id];
-    if (
-      field.id === 'baseCP' ||
-      field.id === 'nameOrNumber' ||
-      field.id === 'showAlolanForms' ||
-      field.id === 'showMegaevolutions'
-    ) {
+
+    // Single values
+    if (field.id === 'baseCP' || field.id === 'nameOrNumber') {
       // @ts-ignore
       newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
+
+      // Dropdown
+    } else if (field.id === 'showAlolanForms' || field.id === 'showMegaevolutions') {
+      // @ts-ignore
+      newFilters[field.id] = field.value.value;
+
+      // Multi
     } else {
       // @ts-ignore
       newFilters[field.id] = field.value.map(s => (s.value ? s.value : s));

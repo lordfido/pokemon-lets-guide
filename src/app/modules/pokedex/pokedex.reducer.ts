@@ -184,13 +184,40 @@ export const getPokedex = (state: IPokedexState, isPaginated: boolean = true) =>
       }
 
       // Filter mega evolutions
-      if (!filters.showMegaevolutions && pokemon.isMega) {
-        return false;
+      switch (filters.showMegaevolutions) {
+        case 'hide':
+          if (pokemon.isMega) {
+            return false;
+          }
+          break;
+
+        case 'show-only':
+          if (!pokemon.isMega) {
+            return false;
+          }
+          break;
+
+        case 'show-all':
+        default:
+          break;
       }
 
       // Filter alolan forms
-      if (!filters.showAlolanForms && pokemon.isAlolan) {
-        return false;
+      switch (filters.showAlolanForms) {
+        case 'hide':
+          if (pokemon.isAlolan) {
+            return false;
+          }
+          break;
+
+        case 'show-only':
+          if (!pokemon.isAlolan) {
+            return false;
+          }
+          break;
+
+        case 'show-all':
+        default:
       }
 
       return true;

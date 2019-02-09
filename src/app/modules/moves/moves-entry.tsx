@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import * as React from 'react';
 import injectSheet from 'react-jss';
@@ -73,11 +72,7 @@ const unstyledMovesEntry = ({ classes, className, config, move }: IOwnProps) => 
     {config.showPp && <TableCell center>{move.pp ? `${move.pp}` : '-'}</TableCell>}
 
     {/* TM */}
-    {config.showTm && (
-      <TableCell center>
-        <FontAwesomeIcon icon={move.tm ? ['far', 'check-square'] : ['far', 'square']} />
-      </TableCell>
-    )}
+    {config.showTm && <TableCell center>{move.tm ? `${move.tm}` : '-'}</TableCell>}
 
     {/* Probability */}
     {config.showProbability && <TableCell center>{move.probability ? `${move.probability}%` : '-'}</TableCell>}

@@ -21,6 +21,8 @@ export const gameTranslations: ITranslationsCollection = {
 
   // Forms
   'forms-alolan': ['', 'Alolan', '', 'Alola', '', '', '', ''],
+  'forms-alolan-forms': ['', 'Alolan forms', '', 'formas Alola', '', '', '', ''],
+  'forms-megaevolutions': ['', 'Megaevolutions', '', 'Megaevoluciones', '', '', '', ''],
 
   // Pokemon data
   'base-cp': ['', 'Base CP', '', 'PC Base', '', '', '', ''],
@@ -140,13 +142,16 @@ export const uiTranslations: ITranslationsCollection = {
   'search-exclude-types': ['', 'Exclude types', '', 'Excluir tipos', '', '', '', ''],
   'search-filters-apply': ['', 'Search', '', 'Buscar', '', '', '', ''],
   'search-filters-reset': ['', 'Reset', '', 'Limpiar', '', '', '', ''],
+  'search-hide': ['', 'Hide :var:', '', 'Ocultar :var:', '', '', '', ''],
   'search-include-types': ['', 'Include types', '', 'Incluir tipos', '', '', '', ''],
   'search-move': ['', 'Move', '', 'Movimiento', '', '', '', ''],
   'search-pokemon': ['', 'Pokémon', '', 'Pokémon', '', '', '', ''],
   'search-select-some-stats': ['', 'Select some stats', '', 'Selecciona alguna estadística', '', '', '', ''],
   'search-select-some-types': ['', 'Select some types', '', 'Selecciona algún tipo', '', '', '', ''],
+  'search-show-all': ['', 'Show all', '', 'Mostrar todos', '', '', '', ''],
   'search-show-alolan-forms': ['', 'Show Alolan forms', '', 'Mostrar formas Alola', '', '', '', ''],
   'search-show-megaevolutions': ['', 'Show Megaevolutions', '', 'Mostrar Megaevoluciones', '', '', '', ''],
+  'search-show-only': ['', 'Show only :var:', '', 'Mostrar sólo :var:', '', '', '', ''],
   'search-show-tm': ['', 'Show TM moves', '', 'Mostrar movimientos MT', '', '', '', ''],
   'search-strong-against': ['', 'Strong against', '', 'Fuerte contra', '', '', '', ''],
   'search-weak-against': ['', 'Weak against', '', 'Débil contra', '', '', '', ''],

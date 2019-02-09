@@ -10,7 +10,6 @@ import {
   MAX_ACCURACY_VALUE,
   MAX_POWER_VALUE,
   MAX_PP_VALUE,
-  MAX_PROBABILITY_VALUE,
   MIN_POWER_VALUE,
   MIN_PP_VALUE,
 } from '../../../constants/moves/moves';
@@ -59,6 +58,8 @@ export interface IMovePagination {
   prev: IRichMove;
 }
 
+export type ShowOrHideFilter = 'hide' | 'show-only' | 'show-all';
+
 export interface IMovesFilters {
   accuracy: [number, number];
   category?: MovesCategory;
@@ -68,16 +69,8 @@ export interface IMovesFilters {
   nameOrId: string;
   power: [number, number];
   pp: [number, number];
-  probability: [number, number];
   strongAgainst: PokemonType[];
-  /**
-   * TODO
-   * By defaul all movements will be shown.
-   *
-   * If user enable this filter (checkbox), a switch appears
-   * so user can decide user show only MTs or only not-MTs movements
-   */
-  tm?: boolean;
+  showTm?: ShowOrHideFilter;
   weakAgainst: PokemonType[];
 }
 
@@ -101,9 +94,8 @@ export const movesInitialState: IMovesState = {
     nameOrId: '',
     power: [MIN_POWER_VALUE, MAX_POWER_VALUE],
     pp: [MIN_PP_VALUE, MAX_PP_VALUE],
-    probability: [0, MAX_PROBABILITY_VALUE],
     strongAgainst: [],
-    tm: undefined,
+    showTm: 'show-all',
     weakAgainst: [],
   },
   pagination: {

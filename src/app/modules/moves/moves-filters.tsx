@@ -11,21 +11,13 @@ import {
   MAX_ACCURACY_VALUE,
   MAX_POWER_VALUE,
   MAX_PP_VALUE,
-  MAX_PROBABILITY_VALUE,
   MIN_POWER_VALUE,
   MIN_PP_VALUE,
 } from '../../../constants/moves/moves';
 import { getMovesCategories } from '../../../constants/moves/moves-categories';
 import { getMovesCategoryName } from '../../../constants/moves/moves-categories-names';
 
-import {
-  ICheckboxOptions,
-  IDropdownOptions,
-  IFieldOutput,
-  IOption,
-  IRangeOptions,
-  ITextOptions,
-} from '../forms/form.models';
+import { IDropdownOptions, IFieldOutput, IOption, IRangeOptions, ITextOptions } from '../forms/form.models';
 import { IMovesFilters } from './moves.models';
 
 interface IOwnProps {
@@ -116,20 +108,29 @@ const MovesFilters = ({ classNames, movesList, filters, handleFilterChange, hand
       type: 'range',
     } as IRangeOptions,
     {
-      defaultValue: [filters.probability[0], filters.probability[1]],
-      id: 'probability',
-      label: getGameTranslation('probability'),
-      onChange: handleFilterChange,
-      range: [0, MAX_PROBABILITY_VALUE],
-      type: 'range',
-    } as IRangeOptions,
-    {
-      defaultChecked: filters.tm,
-      id: 'tm',
+      defaultValue: [filters.showTm],
+      id: 'showTm',
       label: getUiTranslation('search-show-tm'),
       onChange: handleFilterChange,
-      type: 'switch',
-    } as ICheckboxOptions,
+      options: [
+        {
+          id: 'show-all',
+          value: 'show-all',
+          label: getUiTranslation('search-show-all'),
+        },
+        {
+          id: 'hide',
+          value: 'hide',
+          label: getUiTranslation('search-hide', getGameTranslation('tm')),
+        },
+        {
+          id: 'show-only',
+          value: 'show-only',
+          label: getUiTranslation('search-show-only', getGameTranslation('tm')),
+        },
+      ],
+      type: 'dropdown',
+    } as IDropdownOptions,
   ];
   const buttons: IButtonProps[] = [
     {

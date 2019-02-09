@@ -71,6 +71,8 @@ export interface IPokemonPagination {
   prev: IPokemon;
 }
 
+export type ShowOrHideFilter = 'hide' | 'show-only' | 'show-all';
+
 export interface IPokedexFilters {
   baseCP: [number, number];
   bestStats: StatId[];
@@ -79,8 +81,8 @@ export interface IPokedexFilters {
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
   nameOrNumber: string;
-  showAlolanForms: boolean;
-  showMegaevolutions: boolean;
+  showAlolanForms: ShowOrHideFilter;
+  showMegaevolutions: ShowOrHideFilter;
   strongAgainst: PokemonType[];
   weakAgainst: PokemonType[];
   worstStats: StatId[];
@@ -106,8 +108,8 @@ export const pokedexInitialState: IPokedexState = {
     excludedTypes: [],
     includedTypes: [],
     nameOrNumber: '',
-    showAlolanForms: false,
-    showMegaevolutions: false,
+    showAlolanForms: 'show-all',
+    showMegaevolutions: 'show-all',
     strongAgainst: [],
     weakAgainst: [],
     worstStats: [],

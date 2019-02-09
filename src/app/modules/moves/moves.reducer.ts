@@ -78,6 +78,13 @@ export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
         }
       }
 
+      // Filter by category
+      if (typeof filters.category !== 'undefined' && filters.category) {
+        if (move.category !== filters.category) {
+          return false;
+        }
+      }
+
       // Filter list by included types
       if (filters.includedTypes.length) {
         let shouldShow = false;
@@ -145,21 +152,22 @@ export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
         }
       }
 
-      // Filter by probability
-      if (typeof filters.probability !== 'undefined') {
-        if (
-          move.probability &&
-          (move.probability < filters.probability[0] || move.probability > filters.probability[1])
-        ) {
-          return false;
-        }
-      }
+      // Filter by isTm
+      switch (filters.showTm) {
+        case 'hide':
+          if (move.tm) {
+            return false;
+          }
+          break;
 
-      // Filter by category
-      if (typeof filters.category !== 'undefined' && filters.category) {
-        if (move.category !== filters.category) {
-          return false;
-        }
+        case 'show-only':
+          if (!move.tm) {
+            return false;
+          }
+          break;
+
+        case 'show-all':
+        default:
       }
 
       return true;

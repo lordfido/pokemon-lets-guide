@@ -161,8 +161,6 @@ class LandingWrapper extends React.Component<IStateProps, IOwnState> {
 
     const filters: IPokedexFilters = {
       ...pokedexInitialState.filters,
-      showAlolanForms: true,
-      showMegaevolutions: true,
       strongAgainst,
     };
 

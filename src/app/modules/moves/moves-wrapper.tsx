@@ -124,17 +124,24 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
 
     // @ts-ignore
     const prevFilter = filters[field.id];
+
+    // Single value
     if (
       field.id === 'accuracy' ||
       field.id === 'category' ||
       field.id === 'nameOrId' ||
       field.id === 'power' ||
-      field.id === 'pp' ||
-      field.id === 'probability' ||
-      field.id === 'tm'
+      field.id === 'pp'
     ) {
       // @ts-ignore
       newFilters[field.id] = typeof field.value !== 'undefined' ? field.value : prevFilter;
+
+      // Dropdown
+    } else if (field.id === 'showTm') {
+      // @ts-ignore
+      newFilters[field.id] = field.value.value;
+
+      // Multi
     } else {
       // @ts-ignore
       newFilters[field.id] = field.value.map(s => (s.value ? s.value : s));
