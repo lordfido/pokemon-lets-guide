@@ -63,7 +63,7 @@ export type ShowOrHideFilter = 'hide' | 'show-only' | 'show-all';
 export interface IMovesFilters {
   accuracy: [number, number];
   category?: MovesCategory;
-  // canBeLearntBy: string[];
+  canBeLearntBy: string[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
   nameOrId: string;
@@ -76,7 +76,9 @@ export interface IMovesFilters {
 
 export interface IMovePokemonRelation {
   move: string;
-  pokemon: number[];
+  pokemon: Array<{
+    id: string;
+  }>;
 }
 
 export interface IMovesState {
@@ -94,14 +96,15 @@ export const movesInitialState: IMovesState = {
   collection: [],
   filters: {
     accuracy: [0, MAX_ACCURACY_VALUE],
+    canBeLearntBy: [],
     category: undefined,
     excludedTypes: [],
     includedTypes: [],
     nameOrId: '',
     power: [MIN_POWER_VALUE, MAX_POWER_VALUE],
     pp: [MIN_PP_VALUE, MAX_PP_VALUE],
-    strongAgainst: [],
     showTm: 'show-all',
+    strongAgainst: [],
     weakAgainst: [],
   },
   pagination: {

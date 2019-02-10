@@ -138,6 +138,26 @@ export const getMoves = (state: IMovesState, isPaginated: boolean = true) => {
         }
       }
 
+      // Filter list by learnable skills
+      if (filters.canBeLearntBy.length) {
+        const relationsForThisMove = state.relations.find(r => r.move === move.id);
+
+        if (!relationsForThisMove) {
+          return false;
+        }
+
+        let shouldSkip = false;
+        filters.canBeLearntBy.forEach(pokemon => {
+          if (relationsForThisMove.pokemon.findIndex(p => p.id === pokemon) < 0) {
+            shouldSkip = true;
+          }
+        });
+
+        if (shouldSkip) {
+          return false;
+        }
+      }
+
       // Filter by accuracy
       if (typeof filters.accuracy !== 'undefined') {
         if (move.accuracy && (move.accuracy < filters.accuracy[0] || move.accuracy > filters.accuracy[1])) {
