@@ -18,8 +18,8 @@
     }
   },
   "scripts": {
+    "move-pokemon-images": "ts-node ./scripts/move-pokemon-images.ts",
     "scrap-pokemon-images": "ts-node ./scrappers/pokemon-images.ts",
-    "move-pokemon-images": "node ./scripts/move-pokemon-images.js",
     "scrap-pokemon-sprites": "ts-node ./scrappers/pokemon-sprites.ts",
     "scrap-pokemon-descriptions": "",
     "scrap-pokemon-moves": "ts-node ./scrappers/pokemon-moves.ts",
@@ -87,6 +87,7 @@
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/jsdom": "^12.2.1",
     "@types/jss": "^9.5.7",
+    "@types/ncp": "^2.0.1",
     "@types/node": "^10.12.21",
     "@types/node-fetch": "^2.1.4",
     "@types/query-string": "^6.2.0",

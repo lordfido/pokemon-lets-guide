@@ -1,15 +1,15 @@
-const ncp = require('ncp').ncp;
+import { ncp } from 'ncp';
 
 const COMMON_PATH = 'src/assets/images/pokemon-images/';
 const SOURCE_PATH = `./${COMMON_PATH}`;
 const OUTPUT_PATH = `./dist/${COMMON_PATH}`;
 
-ncp.limit = 16;
-
-ncp(SOURCE_PATH, OUTPUT_PATH, function(err) {
+ncp(SOURCE_PATH, OUTPUT_PATH, err => {
   if (err) {
+    // tslint:disable:no-console
     return console.error(err);
   }
 
+  // tslint:disable:no-console
   console.log('Images have been moved!');
 });
