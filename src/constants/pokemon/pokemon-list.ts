@@ -1,6 +1,6 @@
 import { Pokedex } from 'pokelab';
 
-const pokemon = Pokedex.All;
+const pokemonList = Pokedex.All;
 
 /**
  * Only shows pokemon that are available in Pokemon Let's Go series, and remove its
@@ -12,4 +12,4 @@ const onlyPokemonLetsGo = (pokemon: Pokedex.Pokemon) =>
   // Remove partners
   (!pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false);
 
-export const getPokemonList = () => pokemon.filter(onlyPokemonLetsGo);
+export const getPokemonList = () => pokemonList.filter(onlyPokemonLetsGo);

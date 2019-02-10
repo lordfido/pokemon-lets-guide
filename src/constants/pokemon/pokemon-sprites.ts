@@ -189,4 +189,4 @@ const pokemonSprites: { [key: string]: string } = {
   '809': require('../../assets/images/pokemon-sprites/melmetal.png'),
 };
 
-export const getPokemonSprite = ({ id }: IPokemonWithBaseCP) => pokemonSprites[id] || '';
+export const getPokemonSprite = ({ id }: IPokemonWithBaseCP) => pokemonSprites[id] || "";

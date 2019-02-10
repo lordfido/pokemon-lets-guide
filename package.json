@@ -1,6 +1,6 @@
 {
   "name": "pokemon-lets-guide",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Pokémon Let's Guide",
   "description": "A Pokedex based in Pokémon Let's Go games",
   "main": "index.js",
@@ -20,7 +20,7 @@
   "scripts": {
     "scrap-pokemon-images": "node ./scrappers/pokemon-images.js",
     "move-pokemon-images": "node ./scripts/move-pokemon-images.js",
-    "scrap-pokemon-sprites": "node ./scrappers/pokemon-sprites.js",
+    "scrap-pokemon-sprites": "ts-node ./scrappers/pokemon-sprites.ts",
     "scrap-pokemon-descriptions": "",
     "scrap-moves": "node ./scrappers/moves.js",
     "scrap-pokemon-moves": "ts-node ./scrappers/pokemon-moves.ts",
@@ -99,6 +99,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/react-select": "^2.0.11",
     "@types/react-textarea-autosize": "^4.3.3",
+    "@types/request": "^2.48.1",
     "@types/uglifyjs-webpack-plugin": "^1.1.0",
     "@types/uuid": "^3.4.4",
     "@types/webpack": "^4.4.24",

@@ -1,10 +1,11 @@
 // @ts-ignore
-const fetch = require('node-fetch');
-const fs = require('fs');
-const jsdom = require('jsdom');
-const request = require('request');
-const Pokelab = require('pokelab');
-const pokeUtils = require('./utils.js');
+import fs from 'fs';
+import jsdom from 'jsdom';
+import fetch from 'node-fetch';
+import request from 'request';
+import { getVariantId, getVariantName } from '../src/app/utils/pokemon';
+
+import { getPokemonList } from '../src/constants/pokemon/pokemon-list';
 
 // CONSTANTS
 const SHOULD_DOWNLOAD_SPRITES = false;
@@ -12,34 +13,49 @@ const SCRAP_URL = 'https://rankedboost.com/pokemon-lets-go/pokedex/';
 const ELEMENT_TO_SCRAP = 'table.table-best-pokemon-pq';
 const IMAGES_DOWNLOAD_PATH = './src/assets/images/pokemon-sprites/';
 const OUTPUT_MAP_FILE = './src/constants/pokemon/pokemon-sprites.ts';
-const pokemonList = [];
+
+const pokemonList: Array<{
+  fileName: string;
+  id: string;
+}> = [];
 
 // Get map between IDs and fileNames
-Pokelab.Pokedex.All.filter(pokemon => !pokemon.variant || /Partner/.test(pokemon.variant) < 0).forEach(pokemon => {
+getPokemonList().forEach(pokemon => {
+  const { isAlolan, isMega, name, nationalNumber, variant } = pokemon;
+
+  const fileName = getVariantName({
+    isAlolan,
+    isMega,
+    name,
+    variant: 'megaVariant' in pokemon ? pokemon.megaVariant : variant,
+  })
+    .toLowerCase()
+    .replace(/\ /g, '-')
+    .replace("'", '')
+    .replace('.', '')
+    .replace('♂', 'm')
+    .replace('♀', 'f')
+    .concat('.png');
+
+  const id = getVariantId({
+    id: nationalNumber,
+    isAlolan,
+    isMega,
+    variant: 'megaVariant' in pokemon ? pokemon.megaVariant : variant,
+  });
+
+  // tslint:disable:no-console
+  console.log(`Adding URL for <${id}|${fileName}>`);
+
   pokemonList.push({
-    id: pokeUtils.getVariantId({
-      ...pokemon,
-      variant: pokemon.variant || pokemon.megaVariant,
-      id: pokeUtils.getPaddedId(pokemon.nationalNumber),
-    }),
-    fileName: pokeUtils
-      .getVariantName({
-        ...pokemon,
-        variant: pokemon.variant || pokemon.megaVariant,
-      })
-      .toLowerCase()
-      .replace(/\ /g, '-')
-      .replace("'", '')
-      .replace('.', '')
-      .replace('♂', 'm')
-      .replace('♀', 'f')
-      .concat('.png'),
+    fileName: /-alolan/.test(fileName) ? `alolan-${fileName.replace('-alolan', '')}` : fileName,
+    id,
   });
 });
 
 // WRITE TS FILE
-const pokemonSpritesMap = [];
-const addLineToTs = ({ id, fileName }) => {
+const pokemonSpritesMap: string[] = [];
+const addLineToTs = (id: string, fileName: string) => {
   pokemonSpritesMap.push(`  '${id}': require('${IMAGES_DOWNLOAD_PATH.replace('./src', '../..')}${fileName}'),`);
 };
 
@@ -52,7 +68,7 @@ const generateImageSpritesMapsTs = () => {
   const ending = [
     '};',
     '',
-    'export const getPokemonSprite = ({ id }: IPokemonWithBaseCP)?: string => pokemonSprites[id];',
+    "export const getPokemonSprite = ({ id }: IPokemonWithBaseCP) => pokemonSprites[id] || '';",
     '',
   ];
 
@@ -61,7 +77,7 @@ const generateImageSpritesMapsTs = () => {
 };
 
 // DOWNLOAD IMAGES
-const download = (url, fileName, callback) =>
+const download = (url: string, fileName: string, callback: () => void) =>
   SHOULD_DOWNLOAD_SPRITES
     ? request.head(url, () =>
         request(url)
@@ -70,7 +86,7 @@ const download = (url, fileName, callback) =>
       )
     : callback();
 
-const parseFileName = url => {
+const parseFileName = (url: string) => {
   const urlParts = url.split('/');
   const rawFileName = urlParts[urlParts.length - 1];
   const fileName = rawFileName.toLowerCase().replace('pokemon-lets-go-', '');
@@ -78,8 +94,8 @@ const parseFileName = url => {
   return fileName;
 };
 
-const downloadImages = array => {
-  const downloads = [];
+const downloadImages = (array: string[]) => {
+  const downloads: Array<Promise<string>> = [];
 
   array.forEach(image => {
     const fileName = parseFileName(image);
@@ -87,11 +103,12 @@ const downloadImages = array => {
     downloads.push(
       new Promise(resolve => {
         download(image, IMAGES_DOWNLOAD_PATH + fileName, () => {
+          // tslint:disable:no-console
           console.log('Image downloaded: ', fileName);
 
           const selectedPokemon = pokemonList.find(pokemon => pokemon.fileName === fileName);
           if (typeof selectedPokemon !== 'undefined') {
-            addLineToTs(selectedPokemon);
+            addLineToTs(selectedPokemon.id, selectedPokemon.fileName);
           }
 
           resolve(fileName);
@@ -101,22 +118,28 @@ const downloadImages = array => {
   });
 
   Promise.all(downloads).then(() => {
+    // tslint:disable:no-console
     console.log('All images have been downloaded');
     generateImageSpritesMapsTs();
 
+    // tslint:disable:no-console
     console.log('File has been generated: ', OUTPUT_MAP_FILE);
   });
 };
 
 // PARSE TABLE
-const getSprite = td => td.firstElementChild.firstElementChild.src;
+const getSprite = (td: Element) => {
+  if (td.firstElementChild && td.firstElementChild.firstElementChild) {
+    const elem = td.firstElementChild.firstElementChild as HTMLImageElement;
+    return elem.src;
+  }
 
-const parseRow = row => getSprite(row.firstElementChild);
+  return undefined;
+};
 
-const parseTable = table =>
-  Array.from(table.children[2].children)
-    // .splice(0, 24)
-    .map(parseRow);
+const parseRow = (row: Element) => (row.firstElementChild ? getSprite(row.firstElementChild) : undefined);
+
+const parseTable = (table: Element) => Array.from(table.children[2].children).map(parseRow);
 
 fetch(SCRAP_URL)
   .then(res => res.text())
@@ -125,7 +148,7 @@ fetch(SCRAP_URL)
     const document = dom.window.document;
 
     const table = document.querySelector(ELEMENT_TO_SCRAP);
-    const images = parseTable(table);
+    const images = table ? (parseTable(table).filter(img => !!img) as string[]) : [];
     downloadImages(images);
   })
   .catch(error => {
