@@ -102,6 +102,7 @@ const downloadMovesRelations = () => {
 
           const url = SCRAP_URL.replace(':pokemon-slug:', slug);
 
+          // tslint:disable:no-console
           console.log(`Fetching ${url}`);
 
           downloads.push(
@@ -133,6 +134,7 @@ const downloadMovesRelations = () => {
                 addLineToRelationsListTs(selectedPokemon.id, learnableMoves);
               })
               .catch(error => {
+                // tslint:disable:no-console
                 console.log('New error', url, error);
               })
           );
@@ -149,9 +151,11 @@ const downloadMovesRelations = () => {
   }
 
   Promise.all(timers).then(() => {
+    // tslint:disable:no-console
     console.log('All timers have been completed');
 
     generatePokemonMovesTs();
+    // tslint:disable:no-console
     console.log('File has been generated: ', OUTPUT_MAP_FILE);
   });
 };
