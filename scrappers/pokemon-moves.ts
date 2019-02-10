@@ -9,9 +9,10 @@ import { getMoveName } from '../src/constants/moves/moves-names';
 import { getPokemonList } from '../src/constants/pokemon/pokemon-list';
 
 const SCRAP_URL = 'https://rankedboost.com/pokemon-lets-go/:pokemon-slug:/';
-// @ts-ignore
 const ELEMENT_TO_SCRAP = 'RizzyTheGod';
 const OUTPUT_MAP_FILE = './src/constants/pokemon/pokemon-moves-relations.ts';
+const ROUNDS = 16;
+const TIMEOUT = 0.1; // Minutes
 
 const pokemonList = getPokemonList().map(pokemon => {
   const { name, nationalNumber, isAlolan, isMega, variant } = pokemon;
@@ -27,7 +28,6 @@ const pokemonList = getPokemonList().map(pokemon => {
   };
 });
 
-// @ts-ignore
 const moves = getMoves().map(({ id }) => ({
   id,
   name: getMoveName(id, Languages.All.findIndex(l => l === Languages.English)),
@@ -35,7 +35,6 @@ const moves = getMoves().map(({ id }) => ({
 
 // WRITE TS FILE
 const relationsList: string[] = [];
-// @ts-ignore
 const addLineToRelationsListTs = (pokemonId: string, learnableMoves: Array<{ id: string; level: number | void }>) => {
   const lines = [
     '  {',
@@ -47,7 +46,6 @@ const addLineToRelationsListTs = (pokemonId: string, learnableMoves: Array<{ id:
   relationsList.push(lines.join('\n'));
 };
 
-// @ts-ignore
 const generatePokemonMovesTs = () => {
   const beginning = [
     "import { IPokemonMovesRelation } from '../../app/modules/pokedex/pokedex.models';",
@@ -74,37 +72,88 @@ const parseTable = (table: Element) =>
     .slice(1)
     .map(parseRow);
 
-const getSlug = (s: string) => s.toLowerCase().replace(/\ /g, '-');
-pokemonList.slice(0, 1).forEach(({ id, name }) => {
-  const url = SCRAP_URL.replace(':pokemon-slug:', getSlug(name));
+const getSlug = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/\ /g, '-')
+    .replace("'", '')
+    .replace('♀', 'F')
+    .replace('♂', 'M');
 
-  fetch(url)
-    .then(res => res.text())
-    .then(body => {
-      const dom = new jsdom.JSDOM(body);
-      const document = dom.window.document;
+const downloadMovesRelations = () => {
+  const timers = [];
 
-      const tables = Array.from(document.getElementsByClassName(ELEMENT_TO_SCRAP)).slice(2, 4);
-      const rawMoves = tables[0];
-      const rawTms = tables[1];
+  const generateTimer = (index: number) =>
+    new Promise(resolveTimer => {
+      setTimeout(() => {
+        const timerNo = index + 1;
+        const idx = timerNo - 1;
+        const downloads: Array<Promise<void>> = [];
 
-      const parsedMoves = parseTable(rawMoves);
-      const parsedTms = parseTable(rawTms);
-      const learnableMoves = [...parsedMoves, ...parsedTms]
-        .map(move => {
-          const selectedMove = moves.find(m => m.name === move.name);
+        const portion = Math.round(pokemonList.length / ROUNDS);
+        const start = portion * idx;
+        const end = start + portion;
 
-          return selectedMove
-            ? {
-                id: selectedMove.id,
-                level: move.level,
-              }
-            : undefined;
-        })
-        .filter(m => typeof m !== 'undefined') as Array<{ id: string; level: number | void }>;
+        const arrayPortion = pokemonList.slice(start, end);
 
-      addLineToRelationsListTs(id, learnableMoves);
+        arrayPortion.forEach(selectedPokemon => {
+          const rawSlug = getSlug(selectedPokemon.name);
+          const slug = /alolan/.test(rawSlug) ? `alolan-${rawSlug.replace('-alolan', '')}` : rawSlug;
 
-      generatePokemonMovesTs();
+          const url = SCRAP_URL.replace(':pokemon-slug:', slug);
+
+          console.log(`Fetching ${url}`);
+
+          downloads.push(
+            fetch(url)
+              .then(res => res.text())
+              .then(body => {
+                const dom = new jsdom.JSDOM(body);
+                const document = dom.window.document;
+
+                const tables = Array.from(document.getElementsByClassName(ELEMENT_TO_SCRAP));
+                const rawMoves = tables.slice(tables.length - 2)[0];
+                const rawTms = tables.slice(tables.length - 2)[1];
+
+                const parsedMoves = parseTable(rawMoves);
+                const parsedTms = parseTable(rawTms);
+                const learnableMoves = [...parsedMoves, ...parsedTms]
+                  .map(move => {
+                    const selectedMove = moves.find(m => m.name === move.name);
+
+                    return selectedMove
+                      ? {
+                          id: selectedMove.id,
+                          level: move.level,
+                        }
+                      : undefined;
+                  })
+                  .filter(m => typeof m !== 'undefined') as Array<{ id: string; level: number | void }>;
+
+                addLineToRelationsListTs(selectedPokemon.id, learnableMoves);
+              })
+              .catch(error => {
+                console.log('New error', url, error);
+              })
+          );
+        });
+
+        Promise.all(downloads).then(() => {
+          resolveTimer();
+        });
+      }, TIMEOUT * 1000 * 60 * index);
     });
-});
+
+  for (let x = 0; x < ROUNDS; x++) {
+    timers.push(generateTimer(x));
+  }
+
+  Promise.all(timers).then(() => {
+    console.log('All timers have been completed');
+
+    generatePokemonMovesTs();
+    console.log('File has been generated: ', OUTPUT_MAP_FILE);
+  });
+};
+
+downloadMovesRelations();

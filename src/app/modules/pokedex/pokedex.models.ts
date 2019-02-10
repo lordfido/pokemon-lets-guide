@@ -136,16 +136,6 @@ export const pokedexInitialState: IPokedexState = {
 };
 
 /**
- * Only shows pokemon that are available in Pokemon Let's Go series, and remove its
- * variants (Pokemon partner (perfect IVs))
- */
-const onlyPokemonLetsGo = (pokemon: Pokedex.Pokemon) =>
-  // Pokemon Let's Go
-  (pokemon.nationalNumber <= 151 || pokemon.nationalNumber === 808 || pokemon.nationalNumber === 809) &&
-  // Remove partners
-  (!pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false);
-
-/**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
  */
 const createPokemonFromPokeLab = (pokemon: Pokedex.Pokemon): IPokemonWithBaseCP => {
@@ -205,6 +195,5 @@ const createPokemonFromPokeLab = (pokemon: Pokedex.Pokemon): IPokemonWithBaseCP 
 
 export const createPokemonCollectionFromPokeLab = (): IPokemonWithBaseCP[] =>
   getPokemonList()
-    .filter(onlyPokemonLetsGo)
     .map(createPokemonFromPokeLab)
     .sort(sortBy('id', 'asc'));
