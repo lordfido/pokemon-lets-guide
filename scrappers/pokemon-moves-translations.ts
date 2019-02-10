@@ -1,23 +1,23 @@
-const jsdom = require('jsdom');
-const fetch = require('node-fetch');
+import jsdom from 'jsdom';
+import fetch from 'node-fetch';
 
 const SCRAP_URL = 'https://pokemondb.net/move/:slug';
 const ELEMENT_TO_SCRAP = 'div.resp-scroll > table.vitals-table';
 
-const languageOrders = {
-  Japanese: 0,
-  English: 1,
-  German: 2,
-  Spanish: 3,
-  French: 4,
-  Italian: 5,
-  Korean: 6,
+const languageOrders: { [key: string]: number } = {
   Chinese: 7,
+  English: 1,
+  French: 4,
+  German: 2,
+  Italian: 5,
+  Japanese: 0,
+  Korean: 6,
+  Spanish: 3,
 };
 
-const parseTable = table => {
+const parseTable = (table: Element) => {
   const languages = Array.from(table.children[0].children);
-  const translations = {};
+  const translations: { [key: string]: string } = {};
 
   // Add detected translations
   languages.forEach(row => {
@@ -37,15 +37,25 @@ const parseTable = table => {
   return translations;
 };
 
-const parseName = name =>
+const parseName = (name: string) =>
   name
     .toLowerCase()
     .replace(/\ /g, '-')
     .replace(/\,/g, '')
     .replace(/\'/g, '');
 
-const getTranslations = (id, name) =>
+const getTranslations = (
+  id: string,
+  name: string | null
+): Promise<{
+  translationId: string;
+  translatedNames: { [key: string]: string };
+}> =>
   new Promise((resolve, reject) => {
+    if (!name) {
+      return reject({ error: 'No name for this translation', id, name });
+    }
+
     const slug = parseName(name);
     const url = SCRAP_URL.replace(':slug', slug);
 
@@ -56,14 +66,15 @@ const getTranslations = (id, name) =>
         const document = dom.window.document;
 
         const table = document.querySelector(ELEMENT_TO_SCRAP);
+        // tslint:disable:no-console
         console.log(`Scrapping table for <${id}:${slug}>`, !!table);
-        const translations = parseTable(table);
+        const translatedNames = table ? parseTable(table) : {};
 
-        resolve({ id, translations });
+        resolve({ translationId: id, translatedNames });
       })
       .catch(error => {
-        reject(error, id, name);
+        reject({ error, id, name });
       });
   });
 
-module.exports = getTranslations;
+export default getTranslations;

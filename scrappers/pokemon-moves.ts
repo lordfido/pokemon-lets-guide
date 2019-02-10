@@ -1,163 +1,169 @@
 import fs from 'fs';
 import jsdom from 'jsdom';
 import fetch from 'node-fetch';
-import { Languages } from 'pokelab';
-import { getVariantId, getVariantName } from '../src/app/utils/pokemon';
+import translate from './pokemon-moves-translations';
 
-import { getMoves } from '../src/constants/moves/moves-list';
-import { getMoveName } from '../src/constants/moves/moves-names';
-import { getPokemonList } from '../src/constants/pokemon/pokemon-list';
+import { IScrappedMove } from '../src/app/modules/moves/moves.models';
+import { getPaddedId } from '../src/app/utils/pokemon';
 
-const SCRAP_URL = 'https://rankedboost.com/pokemon-lets-go/:pokemon-slug:/';
-const ELEMENT_TO_SCRAP = 'RizzyTheGod';
-const OUTPUT_MAP_FILE = './src/constants/pokemon/pokemon-moves-relations.ts';
-const ROUNDS = 16;
-const TIMEOUT = 0.1; // Minutes
-
-const pokemonList = getPokemonList().map(pokemon => {
-  const { name, nationalNumber, isAlolan, isMega, variant } = pokemon;
-
-  return {
-    id: getVariantId({
-      id: nationalNumber,
-      isAlolan,
-      isMega,
-      variant: 'megaVariant' in pokemon ? pokemon.megaVariant : variant,
-    }),
-    name: getVariantName({ name, isAlolan, isMega, variant: 'megaVariant' in pokemon ? pokemon.megaVariant : variant }),
-  };
-});
-
-const moves = getMoves().map(({ id }) => ({
-  id,
-  name: getMoveName(id, Languages.All.findIndex(l => l === Languages.English)),
-}));
+const SCRAP_URL = 'https://pokemondb.net/move/all';
+const ELEMENT_TO_SCRAP = 'table#moves';
+const OUTPUT_MAP_FILE = './src/constants/moves/moves-list.ts';
+const OUTPUT_NAMES_FILE = './src/constants/moves/moves-names.ts';
 
 // WRITE TS FILE
-const relationsList: string[] = [];
-const addLineToRelationsListTs = (pokemonId: string, learnableMoves: Array<{ id: string; level: number | void }>) => {
+const movesList: string[] = [];
+const addLineToMoveListTs = ({ accuracy, category, effect, id, power, pp, probability, tm, type }: IScrappedMove) => {
   const lines = [
     '  {',
-    `    moves: [${learnableMoves.map(m => JSON.stringify(m)).join(', ')}],`,
-    `    pokemon: '${pokemonId}',`,
+    `    accuracy: ${accuracy},`,
+    `    category: ${category ? `'${category}'` : undefined},`,
+    `    effect: "${effect}",`,
+    `    id: '${id}',`,
+    `    power: ${power},`,
+    `    pp: ${pp},`,
+    `    probability: ${probability},`,
+    `    tm: ${tm},`,
+    `    type: '${type}',`,
     '  },',
   ];
 
-  relationsList.push(lines.join('\n'));
+  movesList.push(lines.join('\n'));
 };
 
-const generatePokemonMovesTs = () => {
+const generateMovesMapTs = () => {
   const beginning = [
-    "import { IPokemonMovesRelation } from '../../app/modules/pokedex/pokedex.models';",
+    "import { IScrappedMove } from '../../app/modules/moves/moves.models';",
     '',
-    'const relations: IPokemonMovesRelation[] = [',
+    'const moves: IScrappedMove[] = [',
   ];
-  const ending = ['];', '', 'export const getPokemonMovesRelation = () => relations;', ''];
+  const ending = ['];', '', 'export const getMoves = () => moves;', ''];
 
-  const content = [beginning.join('\n'), relationsList.join('\n'), ending.join('\n')].join('\n');
+  const content = [beginning.join('\n'), movesList.join('\n'), ending.join('\n')].join('\n');
   fs.writeFileSync(OUTPUT_MAP_FILE, content);
 };
 
-const parseRow = (row: Element) => {
-  const level = row.children[0].innerHTML;
+const moveNamesList: { [key: string]: string } = {};
+const generateMoveNamesTs = () => {
+  const beginning = [
+    'interface ITranslationsCollection {',
+    '  [token: string]: [string, string, string, string, string, string, string, string];',
+    '}',
+    '',
+    'const moveNames: ITranslationsCollection = {',
+  ];
+  const ending = [
+    '};',
+    '',
+    "export const getMoveName = (id: string, locale: number) => moveNames[id][locale] || '';",
+    '',
+  ];
 
-  return {
-    level: /TM/.test(level) ? undefined : Number(level),
-    name: row.children[1].innerHTML,
-  };
-};
-
-const parseTable = (table: Element) =>
-  Array.from(table.children[0].children)
-    .slice(1)
-    .map(parseRow);
-
-const getSlug = (s: string) =>
-  s
-    .toLowerCase()
-    .replace(/\ /g, '-')
-    .replace("'", '')
-    .replace('♀', 'F')
-    .replace('♂', 'M');
-
-const downloadMovesRelations = () => {
-  const timers = [];
-
-  const generateTimer = (index: number) =>
-    new Promise(resolveTimer => {
-      setTimeout(() => {
-        const timerNo = index + 1;
-        const idx = timerNo - 1;
-        const downloads: Array<Promise<void>> = [];
-
-        const portion = Math.round(pokemonList.length / ROUNDS);
-        const start = portion * idx;
-        const end = start + portion;
-
-        const arrayPortion = pokemonList.slice(start, end);
-
-        arrayPortion.forEach(selectedPokemon => {
-          const rawSlug = getSlug(selectedPokemon.name);
-          const slug = /alolan/.test(rawSlug) ? `alolan-${rawSlug.replace('-alolan', '')}` : rawSlug;
-
-          const url = SCRAP_URL.replace(':pokemon-slug:', slug);
-
-          // tslint:disable:no-console
-          console.log(`Fetching ${url}`);
-
-          downloads.push(
-            fetch(url)
-              .then(res => res.text())
-              .then(body => {
-                const dom = new jsdom.JSDOM(body);
-                const document = dom.window.document;
-
-                const tables = Array.from(document.getElementsByClassName(ELEMENT_TO_SCRAP));
-                const rawMoves = tables.slice(tables.length - 2)[0];
-                const rawTms = tables.slice(tables.length - 2)[1];
-
-                const parsedMoves = parseTable(rawMoves);
-                const parsedTms = parseTable(rawTms);
-                const learnableMoves = [...parsedMoves, ...parsedTms]
-                  .map(move => {
-                    const selectedMove = moves.find(m => m.name === move.name);
-
-                    return selectedMove
-                      ? {
-                          id: selectedMove.id,
-                          level: move.level,
-                        }
-                      : undefined;
-                  })
-                  .filter(m => typeof m !== 'undefined') as Array<{ id: string; level: number | void }>;
-
-                addLineToRelationsListTs(selectedPokemon.id, learnableMoves);
-              })
-              .catch(error => {
-                // tslint:disable:no-console
-                console.log('New error', url, error);
-              })
-          );
-        });
-
-        Promise.all(downloads).then(() => {
-          resolveTimer();
-        });
-      }, TIMEOUT * 1000 * 60 * index);
+  const sortedMoveNameList: string[] = [];
+  Object.keys(moveNamesList)
+    .sort()
+    .forEach(key => {
+      sortedMoveNameList.push(moveNamesList[key]);
     });
 
-  for (let x = 0; x < ROUNDS; x++) {
-    timers.push(generateTimer(x));
-  }
-
-  Promise.all(timers).then(() => {
-    // tslint:disable:no-console
-    console.log('All timers have been completed');
-
-    generatePokemonMovesTs();
-    // tslint:disable:no-console
-    console.log('File has been generated: ', OUTPUT_MAP_FILE);
-  });
+  const content = [beginning.join('\n'), sortedMoveNameList.join('\n'), ending.join('\n')].join('\n');
+  fs.writeFileSync(OUTPUT_NAMES_FILE, content);
 };
 
-downloadMovesRelations();
+const getLinkLabel = (td: Element) => td.firstElementChild && td.firstElementChild.innerHTML;
+
+const getImageTitle = (td: Element) => {
+  if (td.firstElementChild) {
+    const img = td.firstElementChild as HTMLImageElement;
+    return img.title;
+  }
+
+  return undefined;
+};
+
+const getNumber = (td: Element) => {
+  const rawContent = td.innerHTML;
+  const n = parseInt(rawContent, 10);
+
+  // @ts-ignore
+  // tslint:disable:triple-equals
+  return rawContent == n ? n : undefined;
+};
+
+const getTmNumber = (td: Element): number | undefined => {
+  const rawContent = td.innerHTML;
+  const filteredContent = rawContent ? rawContent.replace('TM', '') : undefined;
+  const n = filteredContent ? parseInt(filteredContent, 10) : undefined;
+
+  // @ts-ignore
+  // tslint:disable:triple-equals
+  return filteredContent == n ? n : undefined;
+};
+
+const getContent = (td: Element) => td.innerHTML;
+
+const parseRow = (row: Element) => ({
+  accuracy: getNumber(row.children[4]),
+  category: getImageTitle(row.children[2]) || undefined,
+  effect: getContent(row.children[7]),
+  name: getLinkLabel(row.children[0]),
+  power: getNumber(row.children[3]),
+  pp: getNumber(row.children[5]),
+  probability: getNumber(row.children[8]),
+  tm: getTmNumber(row.children[6]),
+  type: getLinkLabel(row.children[1]),
+});
+
+const parseTable = (table: Element) => Array.from(table.children[1].children).map(parseRow);
+
+fetch(SCRAP_URL)
+  .then(res => res.text())
+  .then(body => {
+    const dom = new jsdom.JSDOM(body);
+    const document = dom.window.document;
+
+    const table = document.querySelector(ELEMENT_TO_SCRAP);
+    const moves = table ? parseTable(table) : [];
+    const translations: Array<Promise<void>> = [];
+
+    moves.forEach((move, index) => {
+      const id = getPaddedId((index + 1).toString());
+      addLineToMoveListTs({ ...move, id });
+
+      // Generate a new promise for each skill move
+      translations.push(
+        translate(id, move.name)
+          .then(({ translationId, translatedNames }) => {
+            const lines = [
+              `  '${translationId}': ["${translatedNames['0']}", "${translatedNames['1']}", "${
+                translatedNames['2']
+              }", "${translatedNames['3']}", "${translatedNames['4']}", "${translatedNames['5']}", "${
+                translatedNames['6']
+              }", "${translatedNames['7']}"],`,
+            ];
+
+            moveNamesList[id] = lines.join('\n');
+          })
+          .catch((error: { error: string; id: string; name: string }) => {
+            // tslint:disable:no-console
+            console.error(`Translation for <${error.id}:${move.name}> failed: ${error.error}`);
+            const lines = [
+              `  '${error.id}': ["(${move.name})", "(${move.name})", "(${move.name})", "(${move.name})", "(${
+                move.name
+              })", "(${move.name})", "(${move.name})", "(${move.name})"],`,
+            ];
+
+            moveNamesList[error.id] = lines.join('\n');
+          })
+      );
+    });
+
+    generateMovesMapTs();
+
+    Promise.all(translations).then(() => {
+      generateMoveNamesTs();
+    });
+  })
+  .catch(error => {
+    throw Error(error);
+  });

@@ -223,7 +223,7 @@ export const getSuggestedIVs = (stats: IPokemonStats): IPokemonStats[] => {
 /**
  * Given an array of pokemon `Types`, will generate a map with all relations based on those types
  */
-export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
+export const getTypeRelations = (types: ReadonlyArray<string>) => {
   const relations: ITypeRelations[] = [];
 
   // Loop through each one of current pokemon's types
@@ -231,7 +231,7 @@ export const getTypeRelations = (types: ReadonlyArray<PokemonType>) => {
     // Loop through all available pokemon types
     Types.All.forEach(attackingType => {
       // Get the effectiveness of this combination
-      const effectiveness = Types.getEffectiveness(attackingType, defendingType);
+      const effectiveness = Types.getEffectiveness(attackingType, defendingType as PokemonType);
 
       // If relation is 1:1, go to the next one
       if (effectiveness === 1) {

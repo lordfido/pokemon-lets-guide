@@ -13,9 +13,9 @@ import {
   MIN_POWER_VALUE,
   MIN_PP_VALUE,
 } from '../../../constants/moves/moves';
-import { MovesCategory } from '../../../constants/moves/moves-categories';
+import { getMovesCategories, MovesCategory } from '../../../constants/moves/moves-categories';
 import { getMoveName } from '../../../constants/moves/moves-names';
-import { PokemonType } from '../../../constants/pokemon/pokemon-types';
+import { getTypes, PokemonType } from '../../../constants/pokemon/pokemon-types';
 
 import { ITypeRelations } from '../pokedex/pokedex.models';
 
@@ -30,8 +30,7 @@ interface IMoveTypeData {
 
 interface IMove {
   accuracy?: number;
-  category?: MovesCategory;
-  effect?: string;
+  effect: string;
   id: string;
   power?: number;
   pp?: number;
@@ -40,10 +39,13 @@ interface IMove {
 }
 
 export interface IScrappedMove extends IMove {
-  type: PokemonType;
+  category?: string;
+  name?: string | null;
+  type: string | null;
 }
 
 export interface IRichMove extends IMove {
+  category?: MovesCategory;
   name: string;
   types: IMoveTypeData;
 }
@@ -121,13 +123,25 @@ export const movesInitialState: IMovesState = {
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
  */
-const createMoveFromPokeLab = (move: IScrappedMove): IRichMove => {
+const createMoveFromPokeLab = (move: IScrappedMove): IRichMove | undefined => {
   const { type, ...rest } = move;
 
-  const relations = getTypeRelations([type]);
+  // No valid move type
+  const parsedTypes = getTypes();
+  if (!type || parsedTypes.findIndex(t => t.id === type) < 0) {
+    return undefined;
+  }
+
+  // No valid move category
+  const categories = getMovesCategories();
+  if (!rest.category || categories.findIndex(c => c === rest.category) < 0) {
+    return undefined;
+  }
+
+  const relations = type ? getTypeRelations([type]) : [];
 
   const types = {
-    ownType: type,
+    ownType: type as PokemonType,
     relations,
   };
 
@@ -135,10 +149,15 @@ const createMoveFromPokeLab = (move: IScrappedMove): IRichMove => {
 
   return {
     ...rest,
+    category: rest.category as MovesCategory,
     name: getMoveName(rest.id, locale),
     types,
   };
 };
 
 export const createMovesCollectionFromPokeLab = (): IRichMove[] =>
-  mockedMovessCollection.map(createMoveFromPokeLab).sort(sortBy('name', 'asc'));
+  mockedMovessCollection
+    .map(createMoveFromPokeLab)
+    .filter(m => !!m)
+    // @ts-ignore
+    .sort(sortBy('name', 'asc'));
