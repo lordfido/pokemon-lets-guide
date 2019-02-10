@@ -139,6 +139,8 @@ export const uiTranslations: ITranslationsCollection = {
   // Search
   'search-base-cp': ['', 'Base CP', '', 'PC base', '', '', '', ''],
   'search-best-stats': ['', 'Best stats', '', 'Mejores estadísitcas', '', '', '', ''],
+  'search-can-be-learnt-by': ['', 'Can be learnt by', '', 'Lo puede aprender', '', '', '', ''],
+  'search-can-learn': ['', 'Can learn', '', 'Puede aprender', '', '', '', ''],
   'search-exclude-types': ['', 'Exclude types', '', 'Excluir tipos', '', '', '', ''],
   'search-filters-apply': ['', 'Search', '', 'Buscar', '', '', '', ''],
   'search-filters-reset': ['', 'Reset', '', 'Limpiar', '', '', '', ''],
