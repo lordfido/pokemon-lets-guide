@@ -19,7 +19,6 @@ import { paginationSize } from '../../../constants/features';
 import { StatId } from '../../../constants/pokemon/pokemon-stats';
 
 import { IPokedexAction, IPokedexState, IPokemon, pokedexInitialState } from './pokedex.models';
-import { log } from '../../../common/utils/logger';
 
 const reducer = (state = pokedexInitialState, action: IPokedexAction): IPokedexState => {
   switch (action.type) {
