@@ -1,37 +1,41 @@
-// @ts-ignore
-const fetch = require('node-fetch');
-const fs = require('fs');
-const jsdom = require('jsdom');
-const request = require('request');
-const Pokelab = require('pokelab');
-const pokeUtils = require('./utils.js');
+import fs from 'fs';
+import request from 'request';
+import { getVariantId } from '../src/app/utils/pokemon';
+import { getPokemonList } from '../src/constants/pokemon/pokemon-list';
 
 // CONSTANTS
 const SHOULD_DOWNLOAD_IMAGES = false;
 const SCRAP_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/';
 const IMAGES_DOWNLOAD_PATH = '/src/assets/images/pokemon-images/';
 const OUTPUT_MAP_FILE = './src/constants/pokemon/pokemon-images.ts';
-const pokemonList = [];
 const ROUNDS = 16;
-const TIMEOUT = 1.5; // Minutes
+const TIMEOUT = 0.1; // Minutes
+
+const pokemonList: Array<{
+  fileName: string;
+  id: string;
+}> = [];
 
 // Get map between IDs and fileNames
-Pokelab.Pokedex.All.filter(pokemon => !pokemon.variant || /Partner/.test(pokemon.variant) < 0).forEach(pokemon => {
-  const id = pokeUtils.getVariantId({
-    ...pokemon,
-    variant: pokemon.variant || pokemon.megaVariant,
-    id: pokeUtils.getPaddedId(pokemon.nationalNumber),
+getPokemonList().forEach(pokemon => {
+  const { isAlolan, isMega, nationalNumber, variant } = pokemon;
+
+  const id = getVariantId({
+    id: nationalNumber,
+    isAlolan,
+    isMega,
+    variant: 'megaVariant' in pokemon ? pokemon.megaVariant : variant,
   });
 
   pokemonList.push({
-    id,
     fileName: id.concat('.png'),
+    id,
   });
 });
 
 // WRITE TS FILE
-const pokemonSpritesMap = [];
-const addLineToTs = ({ id, fileName }) => {
+const pokemonSpritesMap: string[] = [];
+const addLineToTs = (id: string, fileName: string) => {
   pokemonSpritesMap.push(`  '${id}': isDev() ? '${SCRAP_URL}${fileName}' : '${IMAGES_DOWNLOAD_PATH}${fileName}',`);
 };
 
@@ -45,7 +49,7 @@ const generateImagesMapTs = () => {
   const ending = [
     '};',
     '',
-    'export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP): string | undefined => pokemonImages[id];',
+    "export const getPokemonImage = ({ id }: IPokemon | IPokemonWithBaseCP) => pokemonImages[id] || '';",
     '',
   ];
 
@@ -54,7 +58,7 @@ const generateImagesMapTs = () => {
 };
 
 // DOWNLOAD IMAGES
-const download = (url, fileName, callback) =>
+const download = (url: string, fileName: string, callback: () => void) =>
   SHOULD_DOWNLOAD_IMAGES
     ? request.head(url, () =>
         request(url)
@@ -63,25 +67,28 @@ const download = (url, fileName, callback) =>
       )
     : callback();
 
-const downloadImages = pokemonList => {
+const downloadImages = () => {
   const timers = [];
 
+  // tslint:disable:no-console
   console.log('Starting script');
 
-  const generateTimer = index =>
+  const generateTimer = (index: number) =>
     new Promise(resolveTimer => {
+      // tslint:disable:no-console
       console.log(`Setting timer #${index + 1}`);
 
       setTimeout(
         () => {
           const timerNo = index + 1;
           const idx = timerNo - 1;
-          const downloads = [];
+          const downloads: Array<Promise<string>> = [];
 
-          const portion = parseInt(pokemonList.length / ROUNDS, 10);
+          const portion = Math.round(pokemonList.length / ROUNDS);
           const start = portion * idx;
           const end = start + portion;
 
+          // tslint:disable:no-console
           console.log(`Executting timer #${timerNo}, starts at <${start}>, finish at <${end}>`);
           const arrayPortion = pokemonList.slice(start, end);
 
@@ -91,9 +98,10 @@ const downloadImages = pokemonList => {
             downloads.push(
               new Promise(resolveDownload => {
                 download(image, IMAGES_DOWNLOAD_PATH + selectedPokemon.fileName, () => {
+                  // tslint:disable:no-console
                   console.log('Image downloaded: ', selectedPokemon.fileName);
 
-                  addLineToTs(selectedPokemon);
+                  addLineToTs(selectedPokemon.id, selectedPokemon.fileName);
                   resolveDownload(selectedPokemon.fileName);
                 });
               })
@@ -121,4 +129,4 @@ const downloadImages = pokemonList => {
   });
 };
 
-downloadImages(pokemonList);
+downloadImages();
