@@ -65,7 +65,7 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
 
   public initialFilters = stringToFilters(this.props.query);
 
-  public filters: IPokedexFilters = pokedexInitialState.filters;
+  public filters: IPokedexFilters = { ...pokedexInitialState.filters };
 
   constructor(props: Props) {
     super(props);
@@ -149,7 +149,9 @@ class PokedexWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleReset = () => {
-    this.filters = pokedexInitialState.filters;
+    this.props.ResetPokedexFilters();
+
+    this.filters = { ...pokedexInitialState.filters };
 
     this.setState({
       redirectTo: POKEDEX.replace(':id?', ''),

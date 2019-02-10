@@ -69,7 +69,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
 
   public initialFilters = stringToFilters(this.props.query);
 
-  public filters: IMovesFilters = movesInitialState.filters;
+  public filters: IMovesFilters = { ...movesInitialState.filters };
 
   constructor(props: Props) {
     super(props);
@@ -159,6 +159,10 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleReset = () => {
+    this.props.ResetMovesFilters();
+
+    this.filters = { ...movesInitialState.filters };
+
     this.setState({
       redirectTo: MOVES.replace(':id?', ''),
     });
