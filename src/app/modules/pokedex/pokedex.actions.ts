@@ -6,7 +6,9 @@ import {
   POKEDEX_LOAD_MORE,
   POKEDEX_RESET_FILTERS,
   POKEDEX_SORT,
+  POKEDEX_UPDATE_RELATIONS,
 } from '../../../constants/actionTypes';
+import { getPokemonMovesRelation } from '../../../constants/pokemon/pokemon-moves-relations';
 
 import { createPokemonCollectionFromPokeLab } from './pokedex.models';
 
@@ -55,5 +57,14 @@ export const sortPokedex: ActionCreator = (sort: ISort) => dispatch => {
       sort,
     },
     type: POKEDEX_SORT,
+  });
+};
+
+export const updatePokedexRelations: ActionCreator = () => dispatch => {
+  dispatch({
+    payload: {
+      relations: getPokemonMovesRelation(),
+    },
+    type: POKEDEX_UPDATE_RELATIONS,
   });
 };

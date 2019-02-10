@@ -68,6 +68,7 @@ interface IOwnProps {
   isModalOpen: boolean;
   handleSortBy: (key: string) => void;
   movesList: IOption[];
+  pokemonList: IOption[];
   filters: IMovesFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
@@ -81,6 +82,7 @@ const unstyledMovesView = ({
   isModalOpen,
   handleSortBy,
   movesList,
+  pokemonList,
   filters,
   handleFilterChange,
   handleReset,
@@ -100,6 +102,7 @@ const unstyledMovesView = ({
               formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
             }}
             movesList={movesList}
+            pokemonList={pokemonList}
             filters={filters}
             handleFilterChange={handleFilterChange}
             handleReset={handleReset}

@@ -1,10 +1,11 @@
 import { Pokedex, Stats } from 'pokelab';
 import { AnyAction } from 'redux';
 import { sortBy } from '../../utils/arrays';
-import { getCombatPoints, getPaddedId, getVariantId, getVariantName } from '../../utils/pokemon';
+import { getCombatPoints, getVariantId, getVariantName } from '../../utils/pokemon';
 
 import { PokedexActionType } from '../../../constants/actionTypes';
 import { paginationSize } from '../../../constants/features';
+import { getPokemonList } from '../../../constants/pokemon/pokemon-list';
 import { MAX_BASE_CP_VALUE, StatId } from '../../../constants/pokemon/pokemon-stats';
 import { PokemonType } from '../../../constants/pokemon/pokemon-types';
 
@@ -76,7 +77,7 @@ export type ShowOrHideFilter = 'hide' | 'show-only' | 'show-all';
 export interface IPokedexFilters {
   baseCP: [number, number];
   bestStats: StatId[];
-  // canLearnMove: StatId[];
+  canLearnMoves: string[];
   // dropsCandies: StatId[];
   excludedTypes: PokemonType[];
   includedTypes: PokemonType[];
@@ -88,10 +89,19 @@ export interface IPokedexFilters {
   worstStats: StatId[];
 }
 
+export interface IPokemonMovesRelation {
+  pokemon: string;
+  moves: Array<{
+    id: string;
+    level?: number;
+  }>;
+}
+
 export interface IPokedexState {
   collection: IPokemonWithBaseCP[];
   filters: IPokedexFilters;
   pagination: IPokedexPagination;
+  relations: IPokemonMovesRelation[];
   sort: {
     sortBy: string;
     order: string;
@@ -103,7 +113,7 @@ export const pokedexInitialState: IPokedexState = {
   filters: {
     baseCP: [0, MAX_BASE_CP_VALUE],
     bestStats: [],
-    // canLearnMoves: [],
+    canLearnMoves: [],
     // dropsCandies: [],
     excludedTypes: [],
     includedTypes: [],
@@ -118,21 +128,12 @@ export const pokedexInitialState: IPokedexState = {
     first: 0,
     last: paginationSize,
   },
+  relations: [],
   sort: {
     order: 'asc',
     sortBy: 'id',
   },
 };
-
-/**
- * Only shows pokemon that are available in Pokemon Let's Go series, and remove its
- * variants (Pokemon partner (perfect IVs))
- */
-const onlyPokemonLetsGo = (pokemon: Pokedex.Pokemon) =>
-  // Pokemon Let's Go
-  (pokemon.nationalNumber <= 151 || pokemon.nationalNumber === 808 || pokemon.nationalNumber === 809) &&
-  // Remove partners
-  (!pokemon.variant || new RegExp('Partner').test(pokemon.variant) === false);
 
 /**
  * Based on PokeLab's data, will generate a model that fits into Let's Guide requirements
@@ -163,9 +164,8 @@ const createPokemonFromPokeLab = (pokemon: Pokedex.Pokemon): IPokemonWithBaseCP 
   const { isAlolan, isMega, variant } = pokemon;
 
   // Get the ID
-  const rawId = getPaddedId(String(nationalNumber));
   const id = getVariantId({
-    id: rawId,
+    id: nationalNumber,
     isAlolan,
     isMega,
     variant: 'megaVariant' in pokemon ? pokemon.megaVariant : variant,
@@ -194,6 +194,6 @@ const createPokemonFromPokeLab = (pokemon: Pokedex.Pokemon): IPokemonWithBaseCP 
 };
 
 export const createPokemonCollectionFromPokeLab = (): IPokemonWithBaseCP[] =>
-  Pokedex.All.filter(onlyPokemonLetsGo)
+  getPokemonList()
     .map(createPokemonFromPokeLab)
     .sort(sortBy('id', 'asc'));

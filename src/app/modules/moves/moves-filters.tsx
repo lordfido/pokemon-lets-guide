@@ -26,13 +26,22 @@ interface IOwnProps {
     formField: string;
   };
   movesList: IOption[];
+  pokemonList: IOption[];
   filters: IMovesFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
   handleSubmit: () => void;
 }
 
-const MovesFilters = ({ classNames, movesList, filters, handleFilterChange, handleReset, handleSubmit }: IOwnProps) => {
+const MovesFilters = ({
+  classNames,
+  movesList,
+  pokemonList,
+  filters,
+  handleFilterChange,
+  handleReset,
+  handleSubmit,
+}: IOwnProps) => {
   const fields = [
     {
       id: 'nameOrId',
@@ -84,6 +93,14 @@ const MovesFilters = ({ classNames, movesList, filters, handleFilterChange, hand
       onChange: handleFilterChange,
     } as IDropdownOptions,
     {
+      defaultValue: [],
+      id: 'canBeLearntBy',
+      label: getUiTranslation('search-can-be-learnt-by'),
+      onChange: handleFilterChange,
+      options: pokemonList,
+      type: 'multi',
+    } as IDropdownOptions,
+    {
       defaultValue: [filters.accuracy[0], filters.accuracy[1]],
       id: 'accuracy',
       label: getGameTranslation('accuracy'),
@@ -115,18 +132,18 @@ const MovesFilters = ({ classNames, movesList, filters, handleFilterChange, hand
       options: [
         {
           id: 'show-all',
-          value: 'show-all',
           label: getUiTranslation('search-show-all'),
+          value: 'show-all',
         },
         {
           id: 'hide',
-          value: 'hide',
           label: getUiTranslation('search-hide', getGameTranslation('tm')),
+          value: 'hide',
         },
         {
           id: 'show-only',
-          value: 'show-only',
           label: getUiTranslation('search-show-only', getGameTranslation('tm')),
+          value: 'show-only',
         },
       ],
       type: 'dropdown',

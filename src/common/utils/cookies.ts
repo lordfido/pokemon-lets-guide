@@ -4,7 +4,11 @@ import { CookieName } from '../../constants/cookies';
  * Get the value of a cookie
  */
 export const getCookie = (name: CookieName) => {
-  const allCookies = document.cookie.split(';').map(c => {
+  if (typeof document === 'undefined' || !document.cookie) {
+    return undefined;
+  }
+
+  const allCookies = document.cookie.split(';').map((c: string) => {
     const cookie = c.split('=');
 
     return {

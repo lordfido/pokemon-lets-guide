@@ -75,6 +75,7 @@ interface IOwnProps {
   collection: IPokemonWithBaseCP[];
   handleSortBy: (key: string) => void;
   pokemonList: IOption[];
+  movesList: IOption[];
   filters: IPokedexFilters;
   handleFilterChange: (field: IFieldOutput) => void;
   handleReset: () => void;
@@ -92,6 +93,7 @@ const unstyledPokedexView = ({
   handleReset,
   handleSubmit,
   handleLoadMore,
+  movesList,
 }: IOwnProps) => {
   const pokedexConfig = getAllPokedexConfig();
 
@@ -105,6 +107,7 @@ const unstyledPokedexView = ({
               formField: classnames(classes.formField, { [classes.formFieldOpen]: isOpen }),
             }}
             pokemonList={pokemonList}
+            movesList={movesList}
             filters={filters}
             handleFilterChange={handleFilterChange}
             handleReset={handleReset}

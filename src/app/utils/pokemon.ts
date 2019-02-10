@@ -56,22 +56,24 @@ interface IVariantProps {
  * its avatar
  */
 interface IVariantIdProps extends IVariantProps {
-  id: string;
+  id: number;
 }
 export const getVariantId = ({ id, isAlolan, isMega, variant }: IVariantIdProps) => {
+  const rawId = getPaddedId(String(id));
+
   if (!isAlolan && !isMega && !variant) {
-    return id;
+    return rawId;
   }
 
   let option;
   // Alolan pokemon
   if (isAlolan) {
-    option = variantOptions.find(o => !!o.isExact && o.name === 'Alolan' && (!o.id || o.id === id));
+    option = variantOptions.find(o => !!o.isExact && o.name === 'Alolan' && (!o.id || o.id === rawId));
 
     // Megaevolutions
   } else if (isMega) {
     if (variant) {
-      option = variantOptions.find(o => !!o.isExact && o.name === variant && (!o.id || o.id === id));
+      option = variantOptions.find(o => !!o.isExact && o.name === variant && (!o.id || o.id === rawId));
     } else {
       option = { form: 'f2' };
     }
@@ -80,15 +82,17 @@ export const getVariantId = ({ id, isAlolan, isMega, variant }: IVariantIdProps)
   } else {
     option = variantOptions.find(
       o =>
-        !!variant && (!o.id || o.id === id) && ((!!o.isExact && o.name === variant) || new RegExp(o.name).test(variant))
+        !!variant &&
+        (!o.id || o.id === rawId) &&
+        ((!!o.isExact && o.name === variant) || new RegExp(o.name).test(variant))
     );
   }
 
   if (option && option.form) {
-    return `${id}_${option.form}`;
+    return `${rawId}_${option.form}`;
   }
 
-  return id;
+  return rawId;
 };
 
 /**

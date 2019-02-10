@@ -8,18 +8,10 @@ import { GAME_LANGUAGE, INSTALLATION_ID, UI_LANGUAGE } from '../../constants/coo
  * Get Installation ID
  */
 const getInstallationId = () => {
-  const allCookies = document.cookie.split(';').map(c => {
-    const cookie = c.split('=');
-    return {
-      name: cookie[0] ? cookie[0].trim() : '',
-      value: cookie[1] ? cookie[1].trim() : '',
-    };
-  });
+  const cookie = getCookie(INSTALLATION_ID) || '';
 
-  const installationId = allCookies.find(c => c.name === INSTALLATION_ID) || { name: INSTALLATION_ID, value: '' };
-
-  log(`Current InstallationId: ${installationId && installationId.value}`);
-  return installationId.value;
+  log(`Current InstallationId: ${cookie}`);
+  return cookie;
 };
 
 /**

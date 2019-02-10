@@ -11,8 +11,8 @@ import registerServiceWorker from './utils/service-worker';
 import AppView from './app-view';
 import routes from './app.routes';
 
-import { createMoves } from './modules/moves/moves.actions';
-import { createPokedex } from './modules/pokedex/pokedex.actions';
+import { createMoves, updateMovesRelations } from './modules/moves/moves.actions';
+import { createPokedex, updatePokedexRelations } from './modules/pokedex/pokedex.actions';
 
 import { restoreLastRoute } from '../constants/features';
 import { APP_FINISHED, APP_INIT } from '../constants/metrics/actions';
@@ -43,13 +43,15 @@ interface IStateProps {
 interface IDispatchProps {
   GetPokemon: () => void;
   GetMoves: () => void;
+  UpdatePokemonRelations: () => void;
+  UpdateMovesRelations: () => void;
 }
 
 type Props = IOwnProps & RouteProps & IStateProps & IDispatchProps;
 
 class AppWrapper extends React.Component<Props> {
   public componentDidMount() {
-    const { GetPokemon, GetMoves, lastRoute, history } = this.props;
+    const { GetPokemon, GetMoves, UpdatePokemonRelations, UpdateMovesRelations, lastRoute, history } = this.props;
 
     if (restoreLastRoute && lastRoute) {
       history.push({
@@ -66,9 +68,11 @@ class AppWrapper extends React.Component<Props> {
 
     // Get pokedex
     GetPokemon();
+    UpdatePokemonRelations();
 
     // Get moves
     GetMoves();
+    UpdateMovesRelations();
 
     const initTimer = analyticsApi.getTimer(APP_INIT);
     const renderTimer = new Date().getTime() - initTimer;
@@ -138,6 +142,8 @@ const mapStateToProps = (state: IRootState): IStateProps => {
 const mapDispatchToProps = {
   GetMoves: createMoves,
   GetPokemon: createPokedex,
+  UpdateMovesRelations: updateMovesRelations,
+  UpdatePokemonRelations: updatePokedexRelations,
 };
 
 const connectedApp = withRouter(

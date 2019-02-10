@@ -6,7 +6,14 @@ import { stringToFilters } from '../../utils/urls';
 
 import MovesView from './moves-view';
 
-import { getMoves, getMovesFilters, getMovesPagination, getMovesSortOptions, getRawMoves } from '../../root.reducer';
+import {
+  getMoves,
+  getMovesFilters,
+  getMovesPagination,
+  getMovesSortOptions,
+  getRawMoves,
+  getRawPokedex,
+} from '../../root.reducer';
 import { filterMoves, loadMoreMoves, resetMovesFilters, sortMoves } from './moves.actions';
 
 import { MOVES } from '../../../constants/appRoutes';
@@ -26,6 +33,7 @@ interface IStateProps {
   filters: IMovesFilters;
   pagination: IMovesPagination;
   movesList: IOption[];
+  pokemonList: IOption[];
   sort: {
     sortBy: string;
     order: string;
@@ -61,7 +69,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
 
   public initialFilters = stringToFilters(this.props.query);
 
-  public filters: IMovesFilters = movesInitialState.filters;
+  public filters: IMovesFilters = { ...movesInitialState.filters };
 
   constructor(props: Props) {
     super(props);
@@ -151,6 +159,10 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public handleReset = () => {
+    this.props.ResetMovesFilters();
+
+    this.filters = { ...movesInitialState.filters };
+
     this.setState({
       redirectTo: MOVES.replace(':id?', ''),
     });
@@ -169,7 +181,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
   };
 
   public render() {
-    const { collection, isModalOpen, movesList, pagination, url } = this.props;
+    const { collection, isModalOpen, movesList, pagination, pokemonList, url } = this.props;
     const { referrer, redirectTo } = this.state;
 
     if (redirectTo && redirectTo !== url) {
@@ -183,6 +195,7 @@ class MovesWrapper extends React.Component<Props, IOwnState> {
         isModalOpen={isModalOpen}
         handleSortBy={this.handleSortBy}
         movesList={movesList}
+        pokemonList={pokemonList}
         filters={this.filters}
         handleFilterChange={e => {
           this.handleFilterChange(e);
@@ -214,6 +227,11 @@ const mapStateToProps = (state: IRootState) => ({
     value: move.id,
   })),
   pagination: getMovesPagination(state),
+  pokemonList: getRawPokedex(state).map(pokemon => ({
+    id: pokemon.id,
+    label: pokemon.name,
+    value: pokemon.id,
+  })),
   sort: getMovesSortOptions(state),
 });
 
