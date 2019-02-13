@@ -241,7 +241,7 @@ const sheet: ISheet = {
     },
   },
   typeIcon: {
-    opacity: 0.5,
+    opacity: 0.35,
     position: 'absolute',
     right: -12,
   },
