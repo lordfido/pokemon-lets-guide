@@ -3,6 +3,7 @@ export const BACKGROUND = -1;
 export const CURVED_WINDOW = 5;
 
 export const CONTENT = 10;
+export const LANDING_NAVIGATION = 11;
 
 export const SIDEBAR = 20;
 export const SIDEBAR_BACKDROP = SIDEBAR - 1;

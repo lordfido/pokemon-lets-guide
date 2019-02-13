@@ -3,6 +3,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { getUiTranslation } from '../../utils/translations';
 
+import PokemonTypeIcon from '../../components/pokemon-type-icon';
 import HeaderItem from '../../shell/header/header-item';
 import Field from '../forms/field';
 import PokemonPreview from '../pokemon/pokemon-preview';
@@ -10,7 +11,7 @@ import PokemonPreview from '../pokemon/pokemon-preview';
 import { CALCULATOR, MOVES, POKEDEX } from '../../../constants/appRoutes';
 import { getPokemonImage } from '../../../constants/pokemon/pokemon-images';
 import { PokemonType } from '../../../constants/pokemon/pokemon-types';
-import { getTypeIcon, getTypeWaterMarkStyles } from '../../../constants/pokemon/pokemon-types-icons';
+import { getTypeWaterMarkStyles } from '../../../constants/pokemon/pokemon-types-icons';
 import {
   FOOTER_SIZE_L,
   PADDING_L,
@@ -21,7 +22,7 @@ import {
 } from '../../../constants/styles/styles';
 import { FONT_XXL, TEXT_WHITE } from '../../../constants/styles/styles-fonts';
 import { DESKTOP_L, HD_DISPLAY, MOBILE_L, TABLET_L } from '../../../constants/styles/styles-media-queries';
-import { CONTENT } from '../../../constants/styles/styles-zindex';
+import { CONTENT, LANDING_NAVIGATION } from '../../../constants/styles/styles-zindex';
 
 import { ISheet } from '../../root.models';
 import { GenericOutput, IDropdownOptions } from '../forms/form.models';
@@ -95,7 +96,7 @@ const sheet: ISheet = {
     left: '50%',
     position: 'fixed',
     textAlign: 'center',
-    zIndex: CONTENT,
+    zIndex: LANDING_NAVIGATION,
 
     [DESKTOP_L]: {
       display: 'none',
@@ -257,12 +258,12 @@ class UnstyledLandingView extends React.Component<IOwnProps> {
                     className={classes.ctaType}
                     style={{
                       // @ts-ignore
-                      display: doubledStyles.display,
+                      // display: doubledStyles.display,
                       height: doubledStyles.height,
                       width: doubledStyles.width,
                     }}
                   >
-                    <img style={{ width: doubledStyles.width }} src={getTypeIcon(type)} />
+                    <PokemonTypeIcon type={type} style={{ width: doubledStyles.width }} />
                   </span>
                 </div>
               );

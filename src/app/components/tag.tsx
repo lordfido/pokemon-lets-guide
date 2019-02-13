@@ -19,6 +19,9 @@ const sheet: ISheet = {
     width: SIZE_M,
     zIndex: 2,
   },
+  iconImage: {
+    filter: 'invert(1)',
+  },
   label: {
     borderRadius: BORDER_RADIUS,
     display: 'inline-block',
@@ -68,7 +71,11 @@ export interface ITagProps {
 
 const unstyledTag = ({ backgroundColor, classes, className, icon, label, large = true, style }: ITagProps) => (
   <span className={classnames(classes.wrapper, className)} style={style}>
-    {icon && <img className={classes.icon} style={{ backgroundColor, opacity: 1 }} src={icon} />}
+    {icon && (
+      <span className={classes.icon} style={{ backgroundColor, opacity: 1 }}>
+        <img className={classes.iconImage} src={icon} />
+      </span>
+    )}
     <span
       className={classnames(classes.label, icon ? classes.labelWithIcon : undefined, large ? classes.large : undefined)}
       style={{ backgroundColor }}
